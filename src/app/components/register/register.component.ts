@@ -13,17 +13,23 @@ export class RegisterComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getState().subscribe(
+      data => this.state = data
+    );
   }
 
-  PrevState() : void
-  {
+  prev() {
     --this.state;
+  }
+
+  next() {
+    ++this.state;
   }
 
   NextState() : void
   {
     ++this.state;
 
-    //this.api.state = this.state;
+    this.api.setState(this.state);
   }
 }

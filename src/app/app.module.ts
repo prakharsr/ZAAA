@@ -20,6 +20,7 @@ import { TemplateSelectorItemComponent } from './components/template-selector-it
 import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
+import { CoUsersComponent } from './components/co-users/co-users.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { WindowService } from './services/window.service';
     TemplateSelectorComponent,
     RegisterComponent,
     ProfileEditComponent,
-    TemplateSelectorItemComponent
+    TemplateSelectorItemComponent,
+    CoUsersComponent
   ],
   imports: [
     NgbModule.forRoot(),

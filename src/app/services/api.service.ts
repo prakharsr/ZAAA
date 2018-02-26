@@ -113,7 +113,7 @@ export class ApiService {
 
   get plans() : Observable<Plan[]> {
 
-    let base = this.get('/get/plans');
+    let base = this.get('/plans');
 
     let result = base.pipe(
       map(data => {
@@ -141,14 +141,16 @@ export class ApiService {
     ]);
   }
 
-  get state() : number {
-    return 0;
+  getState() : Observable<number> {
+    return this.get('/user/state');
   }
 
-  set state(state: number) {}
+  setState(state: number) : Observable<any> {
+    return this.post('/user/state', { state: state });
+  }
 
   setPlan(plan: Plan, payment: string) : Observable<any> {
-    return this.post('/user/set/plan', { planID: plan.id, paymentID: payment });
+    return this.post('/user/plan', { planID: plan.id, paymentID: payment });
   }
 
   verifyOtp(otp: string) : Observable<any> {
