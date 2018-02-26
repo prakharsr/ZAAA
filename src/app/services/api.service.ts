@@ -84,10 +84,28 @@ export class ApiService {
     return request;
   }
 
-  login(email: string, password: string): boolean {
-    this.authToken = "ABC";
+  login(emailOrPhone: string, password: string): Observable<any> {
+    
+    let base : Observable<any>;
 
-    return true;
+    if (emailOrPhone.indexOf('@') != -1) {
+      base = this.post("/user/login", { email: emailOrPhone, password: password });
+    }
+    else base = this.post("/user/login", { phone: emailOrPhone, password: password });
+
+    const request = base.pipe(
+      map(data => {
+        if (data.success) {
+          this.authToken = data.token;
+
+          data.token = '';
+        }
+
+        return data;
+      })
+    );
+
+    return request;
   }
 
   logout() {

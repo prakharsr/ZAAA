@@ -12,6 +12,9 @@ export class PhoneVerifyComponent implements OnInit {
   number: string;
   otp: string;
 
+  sendError : string;
+  verifyError: string;
+
   @Output() done = new EventEmitter();
 
   constructor(private api: ApiService) { }
@@ -21,27 +24,47 @@ export class PhoneVerifyComponent implements OnInit {
 
   sendOtp() : void
   {
+    this.sendError = '';
+
     this.api.setMobile(this.number).subscribe(
       data => {
         if (data.success) {
           this.otpSent = true;
         }
-        else console.log(data);
+        else {
+          console.log(data);
+
+          this.sendError = data.msg;
+        }
       },
-      err => console.log(err)
+      err => {
+        console.log(err)
+
+        this.sendError = 'Connection failed';
+      }
     )
   }
 
   verifyOtp() : void
   {
+    this.verifyError = '';
+
     this.api.verifyOtp(this.otp).subscribe(
       data => {
         if (data.success) {
           this.done.emit();
         }
-        else console.log(data);
+        else {
+          console.log(data);
+
+          this.verifyError = data.msg;
+        }
       },
-      err => console.log(err)
+      err => {
+        console.log(err)
+
+        this.verifyError = 'Connection failed';
+      }
     );
   }
 }

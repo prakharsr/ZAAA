@@ -26,10 +26,12 @@
       <br>
     </div>
 
-    <!-- <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="remember">
-      <label class="form-check-label" for="remember">Remember Me</label>
-    </div> -->
+    <div *ngIf="error" class="text-danger">
+      {{error}}
+      
+      <br>
+    </div>
+
     <br>
     <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
  </form>

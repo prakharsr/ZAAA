@@ -8,6 +8,14 @@
       <input type="tel" [(ngModel)]="number" required class="form-control" id="phone" name="phone" placeholder="Enter phone number">
     </div>
 
+    <div *ngIf="sendError" class="text-danger">
+      <br>
+
+      {{sendError}}
+      
+      <br>
+    </div>
+
     <div class="text-right">
       <button type="submit" class="btn btn-primary" [disabled]="!number || otpSent">Send Code</button>
     </div>
@@ -19,6 +27,15 @@
       <input type="text" [(ngModel)]="otp" required class="form-control" name="otp" id="otp" placeholder="Enter OTP">
       <small class="form-text text-muted">Enter the Verification code received on your mobile.</small>
     </div>
+
+    <div *ngIf="verifyError" class="text-danger">
+      <br>
+
+      {{verifyError}}
+      
+      <br>
+    </div>
+
     <br>
     <button type="submit" class="btn btn-success" [disabled]="!otp">Verify Code</button>
 </form>
