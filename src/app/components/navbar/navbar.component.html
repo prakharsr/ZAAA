@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-sm navbar-dark">
   <div class="container">
       <a class="navbar-brand" routerLink="/">Zenedo</a>
-      <button class="navbar-toggler" (click)="isNavbarCollapsed = !isNavbarCollapsed" type="button">
+      <button class="navbar-toggler" (click)="toggleNavbar()" type="button">
           <span class="navbar-toggler-icon"></span>
       </button>
   
       <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/profileEdit">Edit Profile</a>
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/profileEdit">Edit Profile</a>
             </li>
         </ul>
         <ul class="navbar-nav" *ngIf="api.isLoggedIn">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/" (click)="api.logout()">Logout</a>
+                <a class="nav-link" routerLink="/" (click)="api.logout();collapseNavbar()">Logout</a>
             </li>
         </ul>
         <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a>
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/register">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/login">Login</a>
             </li>
         </ul>
       </div>

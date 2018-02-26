@@ -15,4 +15,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  collapseNavbar() {
+    this.isNavbarCollapsed = true;
+  }
+
+  toggleNavbar() {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
 }

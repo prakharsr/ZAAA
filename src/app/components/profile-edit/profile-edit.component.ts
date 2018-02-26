@@ -8,7 +8,7 @@ import { UserProfile } from '../../models/userProfile';
 })
 export class ProfileEditComponent implements OnInit {
 
-  profile: UserProfile;
+  profile: UserProfile = new UserProfile("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 
   constructor() { }
 

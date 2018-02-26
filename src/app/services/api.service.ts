@@ -62,14 +62,8 @@ export class ApiService {
     else return this.http.post(this.baseUrl + url, body);
   }
 
-  signup(email: string, password: string) : Observable<any>
-  {
-    const base = this.post('/user/signup', {
-      email: email,
-      password: password
-    });
-
-    const request = base.pipe(
+  private extractToken(base: Observable<any>) : Observable<any> {
+    return base.pipe(
       map(data => {
         if (data.success) {
           this.authToken = data.token;
@@ -80,8 +74,16 @@ export class ApiService {
         return data;
       })
     );
+  }
 
-    return request;
+  signup(email: string, password: string) : Observable<any>
+  {
+    const base = this.post('/user/signup', {
+      email: email,
+      password: password
+    });
+
+    return this.extractToken(base);
   }
 
   login(emailOrPhone: string, password: string): Observable<any> {
@@ -93,19 +95,7 @@ export class ApiService {
     }
     else base = this.post("/user/login", { phone: emailOrPhone, password: password });
 
-    const request = base.pipe(
-      map(data => {
-        if (data.success) {
-          this.authToken = data.token;
-
-          data.token = '';
-        }
-
-        return data;
-      })
-    );
-
-    return request;
+    return this.extractToken(base);
   }
 
   logout() {
