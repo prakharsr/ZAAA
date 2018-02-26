@@ -1,0 +1,17 @@
+<br><br>
+
+<div class="row">
+  <div class="col-md">
+    <app-template-selector-item name="Invoice" [templates]="templates" (templateChanged)="invoiceTemplate = $event"></app-template-selector-item>
+  </div>
+  <div class="col-md">
+    <app-template-selector-item name="Release Order" [templates]="templates" (templateChanged)="releaseOrderTemplate = $event"></app-template-selector-item>
+  </div>
+  <div class="col-md">
+    <app-template-selector-item name="Payment Receipt" [templates]="templates" (templateChanged)="paymentReceiptTemplate = $event"></app-template-selector-item>
+  </div>
+</div>
+
+<div class="text-center">
+  <button class="btn btn-success" (click)="submit()">Submit</button>
+</div>

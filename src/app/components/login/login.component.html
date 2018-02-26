@@ -1,0 +1,35 @@
+<h2 class="text-center">Login</h2>
+<br>
+
+<form (ngSubmit)="submit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="emailPhone">Email address or Phone</label>
+      <input type="text" class="form-control" id="emailPhone" placeholder="Enter email or phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+    </div>
+
+    <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
+      <div *ngIf="emailOrPhoneField.errors.required">
+        Email or Phone is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+    </div>
+
+    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+      <div *ngIf="passwordField.errors.required">
+        Password is required.
+      </div>
+      <br>
+    </div>
+
+    <!-- <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="remember">
+      <label class="form-check-label" for="remember">Remember Me</label>
+    </div> -->
+    <br>
+    <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
+ </form>

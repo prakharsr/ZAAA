@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <div class="container">
+      <a class="navbar-brand" routerLink="/">Zenedo</a>
+      <button class="navbar-toggler" (click)="isNavbarCollapsed = !isNavbarCollapsed" type="button">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/profileEdit">Edit Profile</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="api.isLoggedIn">
+            <li class="nav-item">
+                <a class="nav-link" href="#" (click)="api.logout()">Logout</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/login">Login</a>
+            </li>
+        </ul>
+      </div>
+  </div>
+</nav>
