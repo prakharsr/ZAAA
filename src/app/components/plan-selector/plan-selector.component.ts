@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ApplicationRef } from '@angular/core';
 import { Plan } from '../../models/plan';
 import { ApiService } from '../../services/api.service';
 import { RazorPayService } from '../../services/razorpay.service';
@@ -17,7 +17,8 @@ export class PlanSelectorComponent implements OnInit {
   @Output() done = new EventEmitter();
 
   constructor(private api: ApiService,
-    private razorPay: RazorPayService) { }
+    private razorPay: RazorPayService,
+    private appRef: ApplicationRef) { }
 
   ngOnInit() {
     this.api.plans.subscribe(data => this.plans = data);
@@ -39,7 +40,11 @@ export class PlanSelectorComponent implements OnInit {
           this.paid = true;
 
           this.api.setPlan(plan, response.razorpay_payment_id).subscribe(
-            data => this.done.emit(),
+            data => {
+              this.done.emit();
+              
+              this.appRef.tick();
+            },
             err => alert("Plan was not saved.\n\nContact support with reference no: " + response.razorpay_payment_id)
           );
         });

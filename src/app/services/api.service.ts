@@ -62,6 +62,15 @@ export class ApiService {
     else return this.http.post(this.baseUrl + url, body);
   }
 
+  private get(url: string) : Observable<any> {
+
+    if (this.authToken)
+    {
+        return this.http.get(this.baseUrl + url, { headers: { Authorization: this.authToken }});
+    }
+    else return this.http.get(this.baseUrl + url);
+  }
+
   private extractToken(base: Observable<any>) : Observable<any> {
     return base.pipe(
       map(data => {
@@ -103,12 +112,26 @@ export class ApiService {
   }
 
   get plans() : Observable<Plan[]> {
-    return of([
-      new Plan("Trial", 0, 2, 1, "One month trial"),
-      new Plan("Silver", 5000, 2, 1, "Small agencies"),
-      new Plan("Gold", 10000, 5, 2, "Most popular"),
-      new Plan("Platinum", 15000, 10, 3, "Maximum value"),
-    ]);
+
+    let base = this.get('/get/plans');
+
+    let result = base.pipe(
+      map(data => {
+        let arr : Plan[] = [];
+
+        data.plans.forEach(element => {
+          let plan = new Plan(element.name, element.cost, element.maxUsers, element.maxAdmins);
+
+          plan.id = element._id;
+
+          arr.push(plan);
+        });
+
+        return arr;
+      })
+    );
+
+    return result;
   }
 
   get templates() : Observable<Template[]> {
@@ -125,7 +148,7 @@ export class ApiService {
   set state(state: number) {}
 
   setPlan(plan: Plan, payment: string) : Observable<any> {
-    return this.post('/user/plan', { planID: plan.id, paymentID: payment });
+    return this.post('/user/set/plan', { planID: plan.id, paymentID: payment });
   }
 
   verifyOtp(otp: string) : Observable<any> {
