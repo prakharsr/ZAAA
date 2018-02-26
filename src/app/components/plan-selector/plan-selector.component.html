@@ -12,7 +12,7 @@
         <ul class="features">
           <li><strong>{{plan.maxUsers}}</strong> Users</li>
           <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
-        </ul><a class="selectPlan" (click)="selectPlan(plan)">Select Plan</a>
+        </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan)">Select Plan</a>
       </div>
     </div>
   </div>

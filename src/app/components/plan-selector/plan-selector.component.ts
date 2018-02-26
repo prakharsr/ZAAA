@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 export class PlanSelectorComponent implements OnInit {
 
   plans: Plan[];
+  paid: boolean;
 
   @Output() done = new EventEmitter();
 
@@ -24,15 +25,23 @@ export class PlanSelectorComponent implements OnInit {
 
   selectPlan(plan: Plan)
   {
+    if (this.paid)
+      return;
+
     if (plan.cost != 0) {
       this.razorPay.initPay("8527852352",
         "mathew.sachin@outlook.com",
         plan.cost,
         "ZAAA " + plan.name,
         response => {
-          alert(response.razorpay_payment_id);
+          console.log(response.razorpay_payment_id);
 
-          this.done.emit();
+          this.paid = true;
+
+          this.api.setPlan(plan, response.razorpay_payment_id).subscribe(
+            data => this.done.emit(),
+            err => alert("Plan was not saved.\n\nContact support with reference no: " + response.razorpay_payment_id)
+          );
         });
     }
     else this.done.emit();

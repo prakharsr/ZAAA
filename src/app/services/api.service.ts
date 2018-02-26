@@ -124,7 +124,9 @@ export class ApiService {
 
   set state(state: number) {}
 
-  set plan(plan: Plan) { }
+  setPlan(plan: Plan, payment: string) : Observable<any> {
+    return this.post('/user/plan', { planID: plan.id, paymentID: payment });
+  }
 
   verifyOtp(otp: string) : Observable<any> {
     return this.post('/user/verify/mobile', { code: otp });
