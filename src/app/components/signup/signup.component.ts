@@ -26,6 +26,8 @@ export class SignupComponent implements OnInit {
     this.api.signup(this.email, this.password).subscribe(
       data => {
         if (data.success) {
+          this.api.sendVerificationMail();
+
           this.done.emit();
         }
         else {

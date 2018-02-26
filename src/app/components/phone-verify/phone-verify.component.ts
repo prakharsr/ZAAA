@@ -21,15 +21,27 @@ export class PhoneVerifyComponent implements OnInit {
 
   sendOtp() : void
   {
-    this.api.sendOtp(this.number);
-
-    this.otpSent = true;
+    this.api.setMobile(this.number).subscribe(
+      data => {
+        if (data.success) {
+          this.otpSent = true;
+        }
+        else console.log(data);
+      },
+      err => console.log(err)
+    )
   }
 
   verifyOtp() : void
   {
-    this.api.verifyOtp(this.otp);
-
-    this.done.emit();
+    this.api.verifyOtp(this.otp).subscribe(
+      data => {
+        if (data.success) {
+          this.done.emit();
+        }
+        else console.log(data);
+      },
+      err => console.log(err)
+    );
   }
 }

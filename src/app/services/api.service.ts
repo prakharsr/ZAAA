@@ -118,10 +118,8 @@ export class ApiService {
 
   set plan(plan: Plan) { }
 
-  sendOtp(number: string) { }
-
-  verifyOtp(otp: string) : boolean {
-    return false;
+  verifyOtp(otp: string) : Observable<any> {
+    return this.post('/user/verify/mobile', { code: otp });
   }
 
   setTemplates(invoiceTemplate: Template,
@@ -129,6 +127,10 @@ export class ApiService {
     paymentReceiptTemplate: Template) {}
 
   sendVerificationMail() : Observable<any> {
-    return this.post();
+    return this.post('/user/verify/email', {});
+  }
+
+  setMobile(phone: string) : Observable<any> {
+    return this.post('/user/mobile', { phone: phone });
   }
 }
