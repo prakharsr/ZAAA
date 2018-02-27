@@ -14,6 +14,9 @@ export class PlanSelectorComponent implements OnInit {
   plans: Plan[];
   paid: boolean;
 
+  private email: string;
+  private phone: string;
+
   @Output() done = new EventEmitter();
 
   constructor(private api: ApiService,
@@ -21,7 +24,20 @@ export class PlanSelectorComponent implements OnInit {
     private appRef: ApplicationRef) { }
 
   ngOnInit() {
-    this.api.plans.subscribe(data => this.plans = data);
+    this.api.plans.subscribe(data => {
+      this.plans = [];
+
+      data.plans.forEach(element => {
+        let plan = new Plan(element.name, element.cost, element.maxUsers, element.maxAdmins);
+
+        plan.id = element._id;
+
+        this.plans.push(plan);
+      });
+
+      this.email = data.email;
+      this.phone = data.phone;
+    });
   }
 
   selectPlan(plan: Plan)
@@ -30,8 +46,8 @@ export class PlanSelectorComponent implements OnInit {
       return;
 
     if (plan.cost != 0) {
-      this.razorPay.initPay("8527852352",
-        "mathew.sachin@outlook.com",
+      this.razorPay.initPay(this.phone,
+        this.email,
         plan.cost,
         "ZAAA " + plan.name,
         response => {

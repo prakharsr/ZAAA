@@ -111,27 +111,8 @@ export class ApiService {
     this.authToken = '';
   }
 
-  get plans() : Observable<Plan[]> {
-
-    let base = this.get('/plans');
-
-    let result = base.pipe(
-      map(data => {
-        let arr : Plan[] = [];
-
-        data.plans.forEach(element => {
-          let plan = new Plan(element.name, element.cost, element.maxUsers, element.maxAdmins);
-
-          plan.id = element._id;
-
-          arr.push(plan);
-        });
-
-        return arr;
-      })
-    );
-
-    return result;
+  get plans() : Observable<any> {
+    return this.get('/plans');
   }
 
   get templates() : Observable<Template[]> {
