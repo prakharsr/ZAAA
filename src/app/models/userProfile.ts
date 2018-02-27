@@ -1,20 +1,27 @@
 export class UserProfile {
-    constructor(public name: string,
-        public designation: string,
-        public firmName: string,
-        public registeredAddress: string,
-        public officeAddress: string,
-        public landlineNo: string,
-        public fax: string,
-        public website: string,
-        public panNo : string,
-        public gstNo : string,
-        public bankAccountName : string,
-        public bankAccountNo : string,
-        public bankName : string,
-        public bankIfsc : string,
-        public bankBranchAddress : string,
-        public bankAccountType : string) { }
+    name: string;
+    designation: string;
+    firmName: string;
+    registeredAddress: string;
+    officeAddress: string;
+    landlineNo: string;
+    fax: string;
+    website: string;
+    panNo : string;
+    gstNo : string;
+    bankAccountName : string;
+    bankAccountNo : string;
+    bankName : string;
+    bankIfsc : string;
+    bankBranchAddress : string;
+    bankAccountType : string;
+
+    tagline : string;
+    nickname : string;
+    state : string;
+    facebook : string;
+    twitter: string;
+    other: string;
 
     id: string;
 }

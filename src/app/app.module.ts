@@ -21,6 +21,7 @@ import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { CoUsersComponent } from './components/co-users/co-users.component';
+import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CoUsersComponent } from './components/co-users/co-users.component';
     RegisterComponent,
     ProfileEditComponent,
     TemplateSelectorItemComponent,
-    CoUsersComponent
+    CoUsersComponent,
+    ProfileViewComponent
   ],
   imports: [
     NgbModule.forRoot(),

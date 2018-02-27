@@ -1,4 +1,4 @@
-<h2 class="text-center">Profile</h2>
+<h2>Personal Details</h2>
 <br>
 
 <form (ngSubmit)="submit()" #profileForm="ngForm">
@@ -27,6 +27,9 @@
       </div>
       <br>
     </div>
+    
+    <h2>Business Details</h2>
+    <br>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="firmName">Firm Name</label>
@@ -36,6 +39,30 @@
     <div *ngIf="firmNameField.invalid && (firmNameField.dirty || firmNameField.touched)" class="text-danger">
       <div *ngIf="firmNameField.errors.required">
         Firm Name is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="tagline">Tag Line</label>
+      <input type="text" class="form-control col-md-9" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" required #taglineField="ngModel">
+    </div>
+
+    <div *ngIf="taglineField.invalid && (taglineField.dirty || taglineField.touched)" class="text-danger">
+      <div *ngIf="taglineField.errors.required">
+        Tagline is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Display / Nickname</label>
+      <input type="text" class="form-control col-md-9" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" required #nicknameField="ngModel">
+    </div>
+
+    <div *ngIf="nicknameField.invalid && (nicknameField.dirty || nicknameField.touched)" class="text-danger">
+      <div *ngIf="nicknameField.errors.required">
+        Nickname is empty or invalid.
       </div>
       <br>
     </div>
@@ -65,6 +92,18 @@
     </div>
 
     <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">State</label>
+      <input type="text" class="form-control col-md-9" id="state" name="state" placeholder="Enter State" [(ngModel)]="profile.state" required #stateField="ngModel">
+    </div>
+
+    <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
+      <div *ngIf="stateField.errors.required">
+        State is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="landlineNo">Landline Number</label>
       <input type="number" class="form-control col-md-9" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" required #landlineNoField="ngModel">
     </div>
@@ -75,7 +114,6 @@
       </div>
       <br>
     </div>
-
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="fax">Fax</label>
@@ -100,7 +138,7 @@
       </div>
       <br>
     </div>
-    
+
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="panNo">PAN Number</label>
       <input type="number" class="form-control col-md-9" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" required #panNoField="ngModel">
@@ -123,7 +161,7 @@
         GST Number is empty or invalid.
       </div>
       <br>
-    </div>   
+    </div> 
     
     <br><br><hr><br><br>
 
@@ -192,10 +230,40 @@
       <br>
     </div>
 
+    <h2>Social</h2>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Facebook</label>
+      <input type="text" class="form-control col-md-9" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" required #facebookField="ngModel">
+    </div>
+
+    <div *ngIf="facebookField.invalid && (facebookField.dirty || facebookField.touched)" class="text-danger">
+      <div *ngIf="facebookField.errors.required">
+        Facebook Link is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Twitter</label>
+      <input type="text" class="form-control col-md-9" id="twitter" name="twitter" placeholder="Enter Twitter Link" [(ngModel)]="profile.twitter" required #twitterField="ngModel">
+    </div>
+
+    <div *ngIf="twitterField.invalid && (twitterField.dirty || twitterField.touched)" class="text-danger">
+      <div *ngIf="twitterField.errors.required">
+        Twitter Link is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Others</label>
+      <input type="text" class="form-control col-md-9" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" required #otherField="ngModel">
+    </div>
+
     <!-- Bank Account Type -->
     <!-- Attachment -->
-    <!-- Social -->
 
     <br>
     <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
- </form>
+  </form>
