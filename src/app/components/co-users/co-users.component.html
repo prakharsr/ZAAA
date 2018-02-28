@@ -1,3 +1,15 @@
-<h2>Co-Users</h2>
+<div *ngIf="adding">
+    <h2>Add New Co-User</h2>
+    <br>
+    <app-new-co-user (done)="added($event)" (cancel)="adding = false"></app-new-co-user>
+</div>
 
-<button class="btn btn-primary" (click)="addNew()">Add New</button>
+<div *ngIf="!adding">
+    <h2>Co-Users</h2>
+    <br>
+    <button class="btn btn-primary" (click)="addNew()">Add New</button>
+
+    <div *ngFor="let coUser of coUsers">
+        {{ coUser.email }} - {{ coUser.phone }}
+    </div>
+</div>

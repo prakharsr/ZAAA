@@ -22,6 +22,7 @@ import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { CoUsersComponent } from './components/co-users/co-users.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
+import { NewCoUserComponent } from './components/new-co-user/new-co-user.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +37,9 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
     RegisterComponent,
     ProfileEditComponent,
     TemplateSelectorItemComponent,
+    NewCoUserComponent,
     CoUsersComponent,
-    ProfileViewComponent
+    ProfileViewComponent   
   ],
   imports: [
     NgbModule.forRoot(),
