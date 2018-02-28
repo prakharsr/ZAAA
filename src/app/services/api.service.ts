@@ -118,7 +118,7 @@ export class ApiService {
   }
 
   get coUsers() : Observable<any> {
-    return this.get('/user/co-user');
+    return this.get('/user/co_user');
   }
 
   createCoUser(name: string, email: string, phone: string, password: string) : Observable<any> {
