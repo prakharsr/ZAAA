@@ -66,13 +66,6 @@
   </div>
 
   <br>
-
-  <div class="text-danger" *ngIf="error">
-    {{error}}
-
-    <br><br>
-  </div>
-
   <br>
 
   <h3>Roles</h3>
@@ -157,6 +150,12 @@
   
   <br>
   <br>
+
+  <div class="text-danger" *ngIf="error">
+    {{error}}
+
+    <br><br>
+  </div>
 
   <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid || password != cpassword">Add</button>
   <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
