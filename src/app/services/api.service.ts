@@ -10,6 +10,7 @@ import { Template } from '../models/template';
 import { User } from '../models/user';
 
 import { WindowService } from './window.service';
+import { UserRoles } from '../models/userRoles';
 
 @Injectable()
 export class ApiService {
@@ -85,9 +86,10 @@ export class ApiService {
     );
   }
 
-  signup(email: string, password: string) : Observable<any>
+  signup(name: string, email: string, password: string) : Observable<any>
   {
     const base = this.post('/user/signup', {
+      name: name,
       email: email,
       password: password
     });
@@ -111,27 +113,21 @@ export class ApiService {
     this.authToken = '';
   }
 
-  get plans() : Observable<Plan[]> {
+  get plans() : Observable<any> {
+    return this.get('/plans');
+  }
 
-    let base = this.get('/plans');
+  get coUsers() : Observable<any> {
+    return this.get('/user/co_user');
+  }
 
-    let result = base.pipe(
-      map(data => {
-        let arr : Plan[] = [];
-
-        data.plans.forEach(element => {
-          let plan = new Plan(element.name, element.cost, element.maxUsers, element.maxAdmins);
-
-          plan.id = element._id;
-
-          arr.push(plan);
-        });
-
-        return arr;
-      })
-    );
-
-    return result;
+  createCoUser(name: string, email: string, phone: string, password: string) : Observable<any> {
+    return this.post('/user/co_user', {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password
+    });
   }
 
   get templates() : Observable<Template[]> {
@@ -167,5 +163,19 @@ export class ApiService {
 
   setMobile(phone: string) : Observable<any> {
     return this.post('/user/mobile', { phone: phone });
+  }
+
+  setRoles(coUserId : string, roles : UserRoles) : Observable<any> {
+    return this.post('/user/role', { 
+      id: coUserId,
+      release_order: roles.release_order,
+      invoice: roles.invoice,
+      payment_receipts: roles.payment_receipts,
+      accounts: roles.accounts,
+      reports: roles.reports,
+      media_house: roles.media_house,
+      clients: roles.clients,
+      executives: roles.executives 
+    });
   }
 }

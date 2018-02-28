@@ -1,0 +1,163 @@
+<form (ngSubmit)="submit()" #newCoUserForm="ngForm">
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="name">Name</label>
+    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter name" [(ngModel)]="name" required #nameField="ngModel">
+  </div>
+
+  <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+    <div *ngIf="nameField.errors.required">
+      Name is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="email">Email address</label>
+    <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+  </div>
+
+  <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+    <div *ngIf="emailField.errors.required">
+      Email is required.
+    </div>
+    <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      Invalid Email.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="phone">Phone Number</label>
+    <input type="number" class="form-control col-md-9" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="phone" required #phoneField="ngModel">
+  </div>
+
+  <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
+    <div *ngIf="phoneField.errors.required">
+      Phone Number is empty or invalid.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="password">Password</label>
+    <input type="password" class="form-control col-md-9" id="password" name="password" placeholder="Enter Password" [(ngModel)]="password" required #passwordField="ngModel">
+  </div>
+
+  <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+    <div *ngIf="passwordField.errors.required">
+      Password is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="cpassword">Confirm Password</label>
+    <input type="password" class="form-control col-md-9" id="cpassword" name="cpassword" placeholder="Confirm Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
+  </div>
+
+  <div *ngIf="cpasswordField.invalid && (cpasswordField.dirty || cpasswordField.touched)" class="text-danger">
+    <div *ngIf="cpasswordField.errors.required">
+      Password confirmation is required.
+    </div>
+  </div>
+  <div *ngIf="password != cpassword" class="text-danger">
+    Passwords don't match.
+  </div>
+
+  <br>
+
+  <div class="text-danger" *ngIf="error">
+    {{error}}
+
+    <br><br>
+  </div>
+
+  <br>
+
+  <h3>Roles</h3>
+
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Release Order</label>
+
+    <select class="form-control col-md-9" name="release_order" [(ngModel)]="roles.release_order">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Invoice</label>
+
+    <select class="form-control col-md-9" name="invoice" [(ngModel)]="roles.invoice">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Payment Receipts</label>
+
+    <select class="form-control col-md-9" name="payment_receipts" [(ngModel)]="roles.payment_receipts">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div> 
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Accounts</label>
+
+    <select class="form-control col-md-9" name="accounts" [(ngModel)]="roles.accounts">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Reports</label>
+
+    <select class="form-control col-md-9" name="reports" [(ngModel)]="roles.reports">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>
+  <h4>Directory Access</h4>
+
+  <br>
+
+  <div class="form-check">
+    <input [(ngModel)]="roles.media_house" name="media_house" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Media House
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input [(ngModel)]="roles.clients" name="clients" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Clients
+    </label>
+  </div>
+  
+  <div class="form-check">
+    <input [(ngModel)]="roles.executives" name="executives" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Executives
+    </label>
+  </div>
+  
+  <br>
+  <br>
+
+  <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid || password != cpassword">Add</button>
+  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+</form>

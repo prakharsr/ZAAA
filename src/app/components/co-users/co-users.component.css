@@ -1,0 +1,14 @@
+.fa {
+    margin-right: 10px;
+}
+
+.co-user {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px 0;
+}
+
+.co-user:hover {
+    background-color: lightgray;
+}

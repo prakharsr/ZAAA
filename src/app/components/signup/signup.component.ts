@@ -7,6 +7,7 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  name: string;
   email: string;
   password: string;
   cpassword: string;
@@ -23,7 +24,7 @@ export class SignupComponent implements OnInit {
   {
     this.error = '';
 
-    this.api.signup(this.email, this.password).subscribe(
+    this.api.signup(this.name, this.email, this.password).subscribe(
       data => {
         if (data.success) {
           this.api.sendVerificationMail();
