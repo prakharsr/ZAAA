@@ -4,7 +4,7 @@ export class UserRoles {
     payment_receipts = 0;
     accounts = 0;
     reports = 0;
-    media_house : boolean;
-    clients : boolean;
-    executives : boolean;
+    media_house = false;
+    clients = false;
+    executives = false;
 }

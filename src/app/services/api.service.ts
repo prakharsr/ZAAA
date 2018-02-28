@@ -10,6 +10,7 @@ import { Template } from '../models/template';
 import { User } from '../models/user';
 
 import { WindowService } from './window.service';
+import { UserRoles } from '../models/userRoles';
 
 @Injectable()
 export class ApiService {
@@ -121,7 +122,7 @@ export class ApiService {
   }
 
   createCoUser(name: string, email: string, phone: string, password: string) : Observable<any> {
-    return this.post('/user/co-user', {
+    return this.post('/user/co_user', {
       name: name,
       email: email,
       phone: phone,
@@ -164,4 +165,17 @@ export class ApiService {
     return this.post('/user/mobile', { phone: phone });
   }
 
+  setRoles(coUserId : string, roles : UserRoles) : Observable<any> {
+    return this.post('/user/role', { 
+      id: coUserId,
+      release_order: roles.release_order,
+      invoice: roles.invoice,
+      payment_receipts: roles.payment_receipts,
+      accounts: roles.accounts,
+      reports: roles.reports,
+      media_house: roles.media_house,
+      clients: roles.clients,
+      executives: roles.executives 
+    });
+  }
 }

@@ -17,7 +17,6 @@ export class NewCoUserComponent implements OnInit {
   cpassword: string;
   roles = new UserRoles();
 
-
   @Output() done = new EventEmitter<CoUser>();
   @Output() cancel = new EventEmitter<boolean>();
 
@@ -35,7 +34,13 @@ export class NewCoUserComponent implements OnInit {
 
           coUser.id = data.msg;
 
-          this.done.emit(coUser);
+          this.api.setRoles(coUser.id, this.roles).subscribe(d => {
+            if (data.success) {
+              coUser.roles = this.roles;
+
+              this.done.emit(coUser);
+            }
+          });
         }
       }
     );

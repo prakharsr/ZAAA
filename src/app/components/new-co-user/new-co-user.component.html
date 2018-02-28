@@ -89,8 +89,6 @@
     </select>
   </div>
 
-  <br>
-
   <div class="form-group form-row">
     <label class="col-form-label col-md-3">Invoice</label>
 
@@ -101,8 +99,6 @@
     </select>
   </div>
 
-  <br>
-
   <div class="form-group form-row">
     <label class="col-form-label col-md-3">Payment Receipts</label>
 
@@ -111,9 +107,7 @@
       <option [value]="1">View</option>
       <option [value]="2">Create</option>      
     </select>
-  </div>
-
-  <br>  
+  </div> 
 
   <div class="form-group form-row">
     <label class="col-form-label col-md-3">Accounts</label>
@@ -125,8 +119,6 @@
     </select>
   </div>
 
-  <br>
-
   <div class="form-group form-row">
     <label class="col-form-label col-md-3">Reports</label>
 
@@ -137,6 +129,33 @@
     </select>
   </div>
 
+  <br>
+  <h4>Directory Access</h4>
+
+  <br>
+
+  <div class="form-check">
+    <input [(ngModel)]="roles.media_house" name="media_house" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Media House
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input [(ngModel)]="roles.clients" name="clients" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Clients
+    </label>
+  </div>
+  
+  <div class="form-check">
+    <input [(ngModel)]="roles.executives" name="executives" class="form-check-input" type="checkbox" value="">
+    <label class="form-check-label">
+      Executives
+    </label>
+  </div>
+  
+  <br>
   <br>
 
   <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid || password != cpassword">Add</button>
