@@ -1,4 +1,7 @@
 export class CoUser {
-    constructor(public email: string,
+    constructor(public name: string,
+        public email: string,
         public phone: string) {}
+
+    id: string;
 }

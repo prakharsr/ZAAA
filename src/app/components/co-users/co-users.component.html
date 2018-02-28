@@ -9,7 +9,11 @@
     <br>
     <button class="btn btn-primary" (click)="addNew()">Add New</button>
 
-    <div *ngFor="let coUser of coUsers">
-        {{ coUser.email }} - {{ coUser.phone }}
+    <div *ngFor="let coUser of coUsers" class="co-user">
+        <h5>{{coUser.name}}</h5>
+        <span class="fa fa-envelope"></span> {{ coUser.email }}
+        <br>
+        <span class="fa fa-phone"></span> {{ coUser.phone }}
+        <br>
     </div>
 </div>

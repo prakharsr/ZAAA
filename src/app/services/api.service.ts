@@ -85,9 +85,10 @@ export class ApiService {
     );
   }
 
-  signup(email: string, password: string) : Observable<any>
+  signup(name: string, email: string, password: string) : Observable<any>
   {
     const base = this.post('/user/signup', {
+      name: name,
       email: email,
       password: password
     });
@@ -113,6 +114,19 @@ export class ApiService {
 
   get plans() : Observable<any> {
     return this.get('/plans');
+  }
+
+  get coUsers() : Observable<any> {
+    return this.get('/user/co-user');
+  }
+
+  createCoUser(name: string, email: string, phone: string, password: string) : Observable<any> {
+    return this.post('/user/co-user', {
+      name: name,
+      email: email,
+      phone: phone,
+      password: password
+    });
   }
 
   get templates() : Observable<Template[]> {
@@ -149,4 +163,5 @@ export class ApiService {
   setMobile(phone: string) : Observable<any> {
     return this.post('/user/mobile', { phone: phone });
   }
+
 }
