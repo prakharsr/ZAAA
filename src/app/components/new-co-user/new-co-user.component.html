@@ -1,8 +1,8 @@
 <form (ngSubmit)="submit()" #newCoUserForm="ngForm">
 
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" [(ngModel)]="name" required #nameField="ngModel">
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="name">Name</label>
+    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter name" [(ngModel)]="name" required #nameField="ngModel">
   </div>
 
   <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
@@ -12,9 +12,9 @@
     <br>
   </div>
 
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="email">Email address</label>
+    <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
@@ -27,9 +27,9 @@
     <br>
   </div>
 
-  <div class="form-group">
-    <label for="phone">Phone Number</label>
-    <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="phone" required #phoneField="ngModel">
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="phone">Phone Number</label>
+    <input type="number" class="form-control col-md-9" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="phone" required #phoneField="ngModel">
   </div>
 
   <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
@@ -39,9 +39,9 @@
     <br>
   </div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" [(ngModel)]="password" required #passwordField="ngModel">
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="password">Password</label>
+    <input type="password" class="form-control col-md-9" id="password" name="password" placeholder="Enter Password" [(ngModel)]="password" required #passwordField="ngModel">
   </div>
 
   <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
@@ -51,9 +51,9 @@
     <br>
   </div>
 
-  <div class="form-group">
-    <label for="cpassword">Confirm Password</label>
-    <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3" for="cpassword">Confirm Password</label>
+    <input type="password" class="form-control col-md-9" id="cpassword" name="cpassword" placeholder="Confirm Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
   </div>
 
   <div *ngIf="cpasswordField.invalid && (cpasswordField.dirty || cpasswordField.touched)" class="text-danger">
