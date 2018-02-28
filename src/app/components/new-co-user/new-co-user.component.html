@@ -72,6 +72,73 @@
 
     <br><br>
   </div>
+
+  <br>
+
+  <h3>Roles</h3>
+
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Release Order</label>
+
+    <select class="form-control col-md-9" name="release_order" [(ngModel)]="roles.release_order">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Invoice</label>
+
+    <select class="form-control col-md-9" name="invoice" [(ngModel)]="roles.invoice">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Payment Receipts</label>
+
+    <select class="form-control col-md-9" name="payment_receipts" [(ngModel)]="roles.payment_receipts">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>  
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Accounts</label>
+
+    <select class="form-control col-md-9" name="accounts" [(ngModel)]="roles.accounts">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-form-label col-md-3">Reports</label>
+
+    <select class="form-control col-md-9" name="reports" [(ngModel)]="roles.reports">
+      <option [value]="0">Block</option>
+      <option [value]="1">View</option>
+      <option [value]="2">Create</option>      
+    </select>
+  </div>
+
+  <br>
+
   <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid || password != cpassword">Add</button>
   <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
 </form>

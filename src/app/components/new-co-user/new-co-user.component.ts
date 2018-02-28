@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CoUser } from '../../models/coUser';
 import { ApiService } from '../../services/api.service';
+import { UserRoles } from '../../models/userRoles';
 
 @Component({
   selector: 'app-new-co-user',
@@ -14,6 +15,7 @@ export class NewCoUserComponent implements OnInit {
   phone: string;
   password: string;
   cpassword: string;
+  roles = new UserRoles();
 
 
   @Output() done = new EventEmitter<CoUser>();
