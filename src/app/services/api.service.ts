@@ -12,6 +12,8 @@ import { User } from '../models/user';
 import { WindowService } from './window.service';
 import { UserRoles } from '../models/userRoles';
 
+import { environment } from '../../environments/environment';
+
 @Injectable()
 export class ApiService {
 
@@ -52,24 +54,22 @@ export class ApiService {
 
   constructor(private http: HttpClient, private windowService: WindowService) { }
 
-  private baseUrl = "http://localhost:8080/api";
-
   private post(url: string, body: any) : Observable<any> {
 
     if (this.authToken)
     {
-        return this.http.post(this.baseUrl + url, body, { headers: { Authorization: this.authToken }});
+        return this.http.post(environment.apiUrl + url, body, { headers: { Authorization: this.authToken }});
     }
-    else return this.http.post(this.baseUrl + url, body);
+    else return this.http.post(environment.apiUrl + url, body);
   }
 
   private get(url: string) : Observable<any> {
 
     if (this.authToken)
     {
-        return this.http.get(this.baseUrl + url, { headers: { Authorization: this.authToken }});
+        return this.http.get(environment.apiUrl + url, { headers: { Authorization: this.authToken }});
     }
-    else return this.http.get(this.baseUrl + url);
+    else return this.http.get(environment.apiUrl + url);
   }
 
   private extractToken(base: Observable<any>) : Observable<any> {
