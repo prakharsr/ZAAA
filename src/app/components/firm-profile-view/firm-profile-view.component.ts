@@ -1,18 +1,18 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { UserProfile } from '../../models/userProfile';
+import { Firm } from '../../models/firm';
 import { routerAnimation } from '../../animations';
 
 @Component({
-  selector: 'app-profile-view',
+  selector: 'app-firm-profile-view',
   animations: [routerAnimation],
-  templateUrl: './profile-view.component.html',
-  styleUrls: ['./profile-view.component.css']
+  templateUrl: './firm-profile-view.component.html',
+  styleUrls: ['./firm-profile-view.component.css']
 })
-export class ProfileViewComponent implements OnInit {
+export class FirmProfileViewComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  profile : UserProfile = new UserProfile();
+  profile = new Firm();
 
   constructor() { }
 

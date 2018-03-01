@@ -9,6 +9,8 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
 import { CoUsersComponent } from './components/co-users/co-users.component';
 import { TemplateSelectorComponent } from './components/template-selector/template-selector.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
+import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "profile/edit", component: ProfileEditComponent },
   { path: "profile", component: ProfileViewComponent },
+  { path: "firm", component: FirmProfileViewComponent },
+  { path: "firm/edit", component: FirmProfileEditComponent },
   { path: 'coUsers', component: CoUsersComponent },
   { path: 'templates', component: TemplateSelectorComponent },
   { path: 'dashboard', component: DashboardComponent }

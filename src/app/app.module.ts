@@ -26,6 +26,8 @@ import { CoUsersComponent } from './components/co-users/co-users.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { NewCoUserComponent } from './components/new-co-user/new-co-user.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
+import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NewCoUserComponent,
     CoUsersComponent,
     ProfileViewComponent,
-    DashboardComponent   
+    DashboardComponent,
+    FirmProfileViewComponent,
+    FirmProfileEditComponent
   ],
   imports: [
     NgbModule.forRoot(),

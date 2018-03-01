@@ -1,6 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { UserProfile } from '../../models/userProfile';
-import { IfscService } from '../../services/ifsc.service';
 import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
 
@@ -16,24 +15,9 @@ export class ProfileEditComponent implements OnInit {
 
   profile: UserProfile = new UserProfile();
 
-  constructor(private ifscService: IfscService, private api: ApiService) { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
-  }
-
-  ifscChanged() {
-    if (this.profile.bankIfsc.length == 11) {
-      this.ifscService.getData(this.profile.bankIfsc).subscribe(
-        data => {
-          this.profile.bankName = data.BANK;
-          this.profile.bankBranchAddress = data.ADDRESS;
-        }
-      );
-    }
-    else {
-      this.profile.bankName = '';
-      this.profile.bankBranchAddress = '';
-    }
   }
 
   uploadProfilePicture(files: FileList) {
