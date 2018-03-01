@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
 import { routerAnimation } from '../../animations';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   state: number = 0;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private winRef: WindowService) { }
 
   ngOnInit() { }
 
@@ -24,6 +24,6 @@ export class RegisterComponent implements OnInit {
   }
 
   GoToDashboard() : void {
-    this.router.navigateByUrl('dashboard');
+    this.winRef.window.location.pathname = '/dashboard';
   }
 }
