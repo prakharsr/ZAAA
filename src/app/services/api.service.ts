@@ -39,10 +39,6 @@ export class ApiService {
     return false;
   }
 
-  get loggedInUser() : User {
-    return new User("Mathew Sachin", "Mathew.Sachin@outlook.com", "8527852352");
-  }
-
   private set authToken(authToken: string) {
     if (!authToken) {
       this._authToken = '';
@@ -186,6 +182,10 @@ export class ApiService {
       clients: roles.clients,
       executives: roles.executives 
     });
+  }
+
+  getUser() : Observable<any> {
+    return this.get('/user/profile');
   }
 
   getUserProfile() : Observable<UserProfile> {

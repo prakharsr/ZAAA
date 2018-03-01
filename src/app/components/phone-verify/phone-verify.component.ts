@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-phone-verify',
@@ -15,29 +16,34 @@ export class PhoneVerifyComponent implements OnInit {
   sendError : string;
   verifyError: string;
 
-  @Output() done = new EventEmitter();
-
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
+    this.api.getUser().subscribe(data => {
+      if (!this.number && data.success && data.user.phone) {
+        this.number = data.user.phone;
+      }
+    });
   }
 
   sendOtp() : void
   {
     this.sendError = '';
+    this.otpSent = true;
 
     this.api.setMobile(this.number).subscribe(
       data => {
-        if (data.success) {
-          this.otpSent = true;
-        }
-        else {
+        if (!data.success) {
+          this.otpSent = false;
+
           console.log(data);
 
           this.sendError = data.msg;
         }
       },
       err => {
+        this.otpSent = false;
+
         console.log(err)
 
         this.sendError = 'Connection failed';
@@ -52,7 +58,7 @@ export class PhoneVerifyComponent implements OnInit {
     this.api.verifyOtp(this.otp).subscribe(
       data => {
         if (data.success) {
-          this.done.emit();
+          this.router.navigateByUrl('/dashboard');
         }
         else {
           console.log(data);
