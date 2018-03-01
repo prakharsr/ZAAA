@@ -9,6 +9,7 @@ import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -61,7 +62,8 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
     ApiService,
     WindowService,
     RazorPayService,
-    IfscService
+    IfscService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
