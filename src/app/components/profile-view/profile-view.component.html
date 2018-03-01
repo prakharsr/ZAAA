@@ -1,4 +1,6 @@
-<a class="btn btn-primary" routerLink="/profile/edit">Edit</a>
+<div style="float:right">
+  <a class="btn btn-primary" routerLink="/profile/edit">Edit</a>
+</div>
 
 <h2>Personal Details</h2>
 <div class="row detailView">
@@ -14,15 +16,15 @@
 <h2>Social Details</h2>
 <div class="row detailView">
   <div class="col-md-3">Facebook</div>
-  <div class="col-md-9">{{profile.facebook}}</div>
+  <div class="col-md-9"><a href="{{profile.facebook}}" target="_blank">{{profile.facebook}}</a></div>
 </div>
 
 <div class="row detailView">
   <div class="col-md-3">Twitter</div>
-  <div class="col-md-9">{{profile.twitter}}</div>
+  <div class="col-md-9"><a href="{{profile.twitter}}" target="_blank">{{profile.twitter}}</a></div>
 </div>
 
 <div class="row detailView">
   <div class="col-md-3">Others</div>
-  <div class="col-md-9">{{profile.other}}</div>
+  <div class="col-md-9"><a href="{{profile.other}}" target="_blank">{{profile.other}}</a></div>
 </div>

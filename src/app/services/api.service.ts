@@ -13,6 +13,7 @@ import { WindowService } from './window.service';
 import { UserRoles } from '../models/userRoles';
 
 import { environment } from '../../environments/environment';
+import { UserProfile } from '../models/userProfile';
 
 @Injectable()
 export class ApiService {
@@ -183,6 +184,38 @@ export class ApiService {
       media_house: roles.media_house,
       clients: roles.clients,
       executives: roles.executives 
+    });
+  }
+
+  getUserProfile() : Observable<UserProfile> {
+    let base = this.get('/user/profile');
+
+    let result = base.pipe(
+      map(data => {
+        let profile = new UserProfile();
+
+        if (data.success) {
+          profile.name = data.user.name;
+          profile.designation = data.user.designation;
+          profile.facebook = data.user.Socials.facebook;
+          profile.twitter = data.user.Socials.twitter;
+          profile.other = data.user.Socials.other;
+        }
+
+        return profile;
+      })
+    );
+
+    return result;
+  }
+
+  setUserProfile(userProfile: UserProfile) {
+    this.post('/user/profile', {
+      name: userProfile.name,
+      designation: userProfile.designation,
+      fb: userProfile.facebook,
+      twitter: userProfile.twitter,
+      other: userProfile.other
     });
   }
 }

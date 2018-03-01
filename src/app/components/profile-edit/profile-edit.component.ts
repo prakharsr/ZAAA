@@ -13,11 +13,12 @@ export class ProfileEditComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  profile: UserProfile = new UserProfile();
+  profile: UserProfile;
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getUserProfile().subscribe(data => this.profile = data);
   }
 
   uploadProfilePicture(files: FileList) {
@@ -32,5 +33,7 @@ export class ProfileEditComponent implements OnInit {
     );
   }
 
-  submit() {}
+  submit() {
+    this.api.setUserProfile(this.profile);
+  }
 }
