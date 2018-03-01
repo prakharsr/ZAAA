@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { routerAnimation } from '../../animations';
 
 @Component({
   selector: 'app-login',
+  animations: [routerAnimation],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   emailOrPhone: string;
   password: string;

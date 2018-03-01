@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { UserProfile } from '../../models/userProfile';
 import { IfscService } from '../../services/ifsc.service';
+import { routerAnimation } from '../../animations';
 
 @Component({
   selector: 'app-profile-edit',
+  animations: [routerAnimation],
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent implements OnInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile: UserProfile = new UserProfile();
 

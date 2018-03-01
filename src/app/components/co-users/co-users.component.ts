@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { CoUser } from '../../models/coUser';
 import { ApiService } from '../../services/api.service';
+import { routerAnimation } from '../../animations';
 
 @Component({
   selector: 'app-co-users',
+  animations: [routerAnimation],
   templateUrl: './co-users.component.html',
   styleUrls: ['./co-users.component.css']
 })
 export class CoUsersComponent implements OnInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   adding: boolean;
 

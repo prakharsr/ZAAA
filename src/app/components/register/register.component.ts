@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { routerAnimation } from '../../animations';
 
 @Component({
   selector: 'app-register',
+  animations: [routerAnimation],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   state: number = 0;
 
