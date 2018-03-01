@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
+import { IfscService } from './services/ifsc.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -53,7 +54,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   providers: [
     ApiService,
     WindowService,
-    RazorPayService
+    RazorPayService,
+    IfscService
   ],
   bootstrap: [AppComponent]
 })

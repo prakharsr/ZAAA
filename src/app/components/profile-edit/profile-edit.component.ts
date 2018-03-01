@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfile } from '../../models/userProfile';
+import { IfscService } from '../../services/ifsc.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -10,9 +11,24 @@ export class ProfileEditComponent implements OnInit {
 
   profile: UserProfile = new UserProfile();
 
-  constructor() { }
+  constructor(private ifscService: IfscService) { }
 
   ngOnInit() {
+  }
+
+  ifscChanged() {
+    if (this.profile.bankIfsc.length == 11) {
+      this.ifscService.getData(this.profile.bankIfsc).subscribe(
+        data => {
+          this.profile.bankName = data.BANK;
+          this.profile.bankBranchAddress = data.ADDRESS;
+        }
+      );
+    }
+    else {
+      this.profile.bankName = '';
+      this.profile.bankBranchAddress = '';
+    }
   }
 
   submit() {}

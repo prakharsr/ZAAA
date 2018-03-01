@@ -194,6 +194,18 @@
     </div>
 
     <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankIfsc">IFSC</label>
+      <input type="text" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required #bankIfscField="ngModel" (input)="ifscChanged()">
+    </div>
+
+    <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
+      <div *ngIf="bankIfscField.errors.required">
+        IFSC is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="bankName">Bank Name</label>
       <input type="text" class="form-control col-md-9" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="profile.bankName" required #bankNameField="ngModel">
     </div>
@@ -204,19 +216,6 @@
       </div>
       <br>
     </div>
-
-    <div class="form-group form-row">
-      <label class="col-md-3 col-form-label" for="bankIfsc">IFSC</label>
-      <input type="number" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required #bankIfscField="ngModel">
-    </div>
-
-    <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
-      <div *ngIf="bankIfscField.errors.required">
-        IFSC is empty or invalid.
-      </div>
-      <br>
-    </div>
-
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="bankBranchAddress">Bank Branch Address</label>
