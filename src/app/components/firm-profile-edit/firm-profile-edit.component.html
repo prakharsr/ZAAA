@@ -206,5 +206,18 @@
     <!-- Bank Account Type -->
 
     <br>
+
+    <div class="text-danger" *ngIf="error">
+      {{error}}
+  
+      <br><br>
+    </div>
+
+    <div class="text-success" *ngIf="success">
+      Firm Profile updated successfully
+  
+      <br><br>
+    </div>
+
     <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
   </form>

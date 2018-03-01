@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Firm } from '../../models/firm';
 import { routerAnimation } from '../../animations';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-firm-profile-view',
@@ -14,9 +15,10 @@ export class FirmProfileViewComponent implements OnInit {
 
   profile = new Firm();
 
-  constructor() { }
+  constructor(private api: ApiService) {
+  }
 
   ngOnInit() {
-    this.profile.name = "Yash";
+    this.api.getFirmProfile().subscribe(data => this.profile = data);
   }
 }

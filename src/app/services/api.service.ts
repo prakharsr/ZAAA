@@ -14,6 +14,7 @@ import { UserRoles } from '../models/userRoles';
 
 import { environment } from '../../environments/environment';
 import { UserProfile } from '../models/userProfile';
+import { Firm } from '../models/firm';
 
 @Injectable()
 export class ApiService {
@@ -219,6 +220,30 @@ export class ApiService {
       fb: userProfile.facebook,
       twitter: userProfile.twitter,
       other: userProfile.other
+    });
+  }
+
+  getFirmProfile() : Observable<Firm> {
+    let base = this.get('/firm/profile');
+
+    let result = base.pipe(
+      map(data => {
+        let profile = new Firm();
+
+        if (data.success) {
+          profile.name = data.firm.FirmName;
+        }
+
+        return profile;
+      })
+    );
+
+    return result;
+  }
+
+  setFirmProfile(firm: Firm) : Observable<any> {
+    return this.post('/firm/profile', {
+      name: firm.name
     });
   }
 }
