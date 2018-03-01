@@ -4,6 +4,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ApiService } from './services/api.service';
+import { RazorPayService } from './services/razorpay.service';
+import { WindowService } from './services/window.service';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -16,13 +20,10 @@ import { TemplateSelectorComponent } from './components/template-selector/templa
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { TemplateSelectorItemComponent } from './components/template-selector-item/template-selector-item.component';
-
-import { ApiService } from './services/api.service';
-import { RazorPayService } from './services/razorpay.service';
-import { WindowService } from './services/window.service';
 import { CoUsersComponent } from './components/co-users/co-users.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { NewCoUserComponent } from './components/new-co-user/new-co-user.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NewCoUserComponent } from './components/new-co-user/new-co-user.compone
     TemplateSelectorItemComponent,
     NewCoUserComponent,
     CoUsersComponent,
-    ProfileViewComponent   
+    ProfileViewComponent,
+    DashboardComponent   
   ],
   imports: [
     NgbModule.forRoot(),

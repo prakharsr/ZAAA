@@ -8,15 +8,17 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { CoUsersComponent } from './components/co-users/co-users.component';
 import { TemplateSelectorComponent } from './components/template-selector/template-selector.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "profileEdit", component: ProfileEditComponent },
-  { path: "profileView", component: ProfileViewComponent },
+  { path: "profile/edit", component: ProfileEditComponent },
+  { path: "profile", component: ProfileViewComponent },
   { path: 'coUsers', component: CoUsersComponent },
-  { path: 'templates', component: TemplateSelectorComponent }
+  { path: 'templates', component: TemplateSelectorComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];
 
 @NgModule({

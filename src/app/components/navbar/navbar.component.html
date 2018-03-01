@@ -8,16 +8,7 @@
       <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto" *ngIf="api.isLoggedIn">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/profileEdit">Edit Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/profileView">View Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/coUsers">Co-Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/templates">Templates</a>
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/dashboard">Dashboard</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
