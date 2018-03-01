@@ -7,7 +7,7 @@
 <div *ngIf="!adding">
     <h2>Co-Users</h2>
     <br>
-    <button class="btn btn-primary" (click)="addNew()">Add New</button>
+    <button class="btn btn-primary" *ngIf="admin" (click)="addNew()">Add New</button>
 
     <div *ngFor="let coUser of coUsers" class="co-user">
         <h5>{{coUser.name}}</h5>

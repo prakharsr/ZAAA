@@ -14,6 +14,7 @@ export class CoUsersComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   adding: boolean;
+  admin: boolean;
 
   coUsers: CoUser[] = [];
 
@@ -29,6 +30,12 @@ export class CoUsersComponent implements OnInit {
         this.coUsers.push(coUser);
       });
     });
+
+    this.api.getUser().subscribe(data => {
+      if (data.success) {
+        this.admin = data.user.isAdmin;
+      }
+    })
   }
 
   addNew() {

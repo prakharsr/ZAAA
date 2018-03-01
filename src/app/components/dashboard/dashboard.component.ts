@@ -1,5 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { routerAnimation } from '../../animations';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,18 @@ import { routerAnimation } from '../../animations';
 })
 export class DashboardComponent implements OnInit {
 
+  admin: boolean;
+
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getUser().subscribe(data => {
+      if (data.success) {
+        this.admin = data.user.isAdmin;
+      }
+    })
   }
 
 }

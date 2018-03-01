@@ -1,4 +1,9 @@
 <a class="btn btn-primary" routerLink="/profile">User Profile</a>
 <a class="btn btn-success" routerLink="/firm">Firm Profile</a>
 <a class="btn btn-warning" routerLink="/coUsers">Co-Users</a>
-<a class="btn btn-info" routerLink="/templates">Templates</a>
+
+<br><br>
+
+<div *ngIf="admin">
+    <a class="btn btn-info" routerLink="/templates">Templates</a>
+</div>

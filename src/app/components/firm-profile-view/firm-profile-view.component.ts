@@ -11,6 +11,8 @@ import { ApiService } from '../../services/api.service';
 })
 export class FirmProfileViewComponent implements OnInit {
 
+  admin: boolean;
+
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile = new Firm();
@@ -20,5 +22,11 @@ export class FirmProfileViewComponent implements OnInit {
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
+
+    this.api.getUser().subscribe(data => {
+      if (data.success) {
+        this.admin = data.user.isAdmin;
+      }
+    })
   }
 }
