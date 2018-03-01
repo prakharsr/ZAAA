@@ -27,6 +27,6 @@ export class FirmProfileViewComponent implements OnInit {
       if (data.success) {
         this.admin = data.user.isAdmin;
       }
-    })
+    });
   }
 }

@@ -11,6 +11,7 @@ import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PhoneVerifyGuardService } from './services/phone-verify-guard.service';
+import { AdminGuardService } from './services/admin-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -65,7 +66,8 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
     RazorPayService,
     IfscService,
     AuthGuardService,
-    PhoneVerifyGuardService
+    PhoneVerifyGuardService,
+    AdminGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -15,18 +15,19 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
 import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.component';
+import { AdminGuardService } from './services/admin-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuardService] },
-  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
+  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
   { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
   { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
-  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
+  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
   { path: 'coUsers', component: CoUsersComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
-  { path: 'templates', component: TemplateSelectorComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
+  { path: 'templates', component: TemplateSelectorComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] }
 ];
 
