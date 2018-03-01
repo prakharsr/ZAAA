@@ -6,7 +6,7 @@
       </button>
   
       <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" *ngIf="api.isLoggedIn">
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/profileEdit">Edit Profile</a>
             </li>
@@ -16,7 +16,11 @@
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/coUsers">Co-Users</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/templates">Templates</a>
+            </li>
         </ul>
+        <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
         <ul class="navbar-nav" *ngIf="api.isLoggedIn">
             <li class="nav-item">
                 <a class="nav-link" routerLink="/" (click)="api.logout();collapseNavbar()">Logout</a>

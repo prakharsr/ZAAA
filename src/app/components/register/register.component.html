@@ -1,7 +1,3 @@
-<button (click)="prev()" class="btn btn-primary" *ngIf="state != 0">Previous</button>
-<button (click)="next()" class="btn btn-primary" *ngIf="state != 3">Next</button>
-
 <app-signup *ngIf="state == 0" (done)="NextState()"></app-signup>
 <app-phone-verify *ngIf="state == 1" (done)="NextState()"></app-phone-verify>
-<app-plan-selector *ngIf="state == 2" (done)="NextState()"></app-plan-selector>
-<app-template-selector *ngIf="state == 3"></app-template-selector>
+<app-plan-selector *ngIf="state == 2"></app-plan-selector>

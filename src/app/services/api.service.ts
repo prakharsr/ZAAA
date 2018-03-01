@@ -137,14 +137,6 @@ export class ApiService {
     ]);
   }
 
-  getState() : Observable<number> {
-    return this.get('/user/state');
-  }
-
-  setState(state: number) : Observable<any> {
-    return this.post('/user/state', { state: state });
-  }
-
   setPlan(plan: Plan, payment: string) : Observable<any> {
     return this.post('/user/plan', { planID: plan.id, paymentID: payment });
   }

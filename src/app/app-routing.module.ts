@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { CoUsersComponent } from './components/co-users/co-users.component';
+import { TemplateSelectorComponent } from './components/template-selector/template-selector.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "profileEdit", component: ProfileEditComponent },
   { path: "profileView", component: ProfileViewComponent },
-  { path: 'coUsers', component: CoUsersComponent } 
+  { path: 'coUsers', component: CoUsersComponent },
+  { path: 'templates', component: TemplateSelectorComponent }
 ];
 
 @NgModule({
