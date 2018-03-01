@@ -1,8 +1,15 @@
-<h2>Personal Details</h2>
-<br>
+<form>
+  <div class="form-group">
+    <label>Choose Profile Picture</label>
+    <input type="file" (change)="uploadProfilePicture($event.target.files)">
+  </div>
+</form>
 
 <form (ngSubmit)="submit()" #profileForm="ngForm">
-    <div class="form-group form-row">
+  <h2>Personal Details</h2>
+  <br>
+
+  <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="name">Name</label>
       <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter name" [(ngModel)]="profile.name" required #nameField="ngModel">
     </div>

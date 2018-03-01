@@ -54,11 +54,15 @@ export class ApiService {
 
   constructor(private http: HttpClient, private windowService: WindowService) { }
 
+  private get headers() {
+    return { headers: { Authorization: this.authToken }};
+  }
+
   private post(url: string, body: any) : Observable<any> {
 
     if (this.authToken)
     {
-        return this.http.post(environment.apiUrl + url, body, { headers: { Authorization: this.authToken }});
+        return this.http.post(environment.apiUrl + url, body, this.headers);
     }
     else return this.http.post(environment.apiUrl + url, body);
   }
@@ -67,9 +71,20 @@ export class ApiService {
 
     if (this.authToken)
     {
-        return this.http.get(environment.apiUrl + url, { headers: { Authorization: this.authToken }});
+        return this.http.get(environment.apiUrl + url, this.headers);
     }
     else return this.http.get(environment.apiUrl + url);
+  }
+
+  private fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
+    const formData = new FormData();
+    formData.append(key, fileToUpload, fileToUpload.name);
+
+    return this.http.post(environment.apiUrl + url, formData, this.headers);
+  }
+
+  uploadProfilePicture(fileToUpload: File) : Observable<any> {
+    return this.fileUpload("/user/image", "userImage", fileToUpload);
   }
 
   private extractToken(base: Observable<any>) : Observable<any> {
