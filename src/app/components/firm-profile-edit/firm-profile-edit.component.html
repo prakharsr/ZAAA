@@ -16,26 +16,12 @@
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="tagline">Tag Line</label>
-      <input type="text" class="form-control col-md-9" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" required #taglineField="ngModel">
-    </div>
-
-    <div *ngIf="taglineField.invalid && (taglineField.dirty || taglineField.touched)" class="text-danger">
-      <div *ngIf="taglineField.errors.required">
-        Tagline is empty or invalid.
-      </div>
-      <br>
+      <input type="text" class="form-control col-md-9" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="nickname">Display / Nickname</label>
-      <input type="text" class="form-control col-md-9" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" required #nicknameField="ngModel">
-    </div>
-
-    <div *ngIf="nicknameField.invalid && (nicknameField.dirty || nicknameField.touched)" class="text-danger">
-      <div *ngIf="nicknameField.errors.required">
-        Nickname is empty or invalid.
-      </div>
-      <br>
+      <input type="text" class="form-control col-md-9" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
     </div>
 
     <div class="form-group form-row">
@@ -52,62 +38,27 @@
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="officeAddress">Office Address</label>
-      <input type="text" class="form-control col-md-9" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress" required #officeAddressField="ngModel">
-    </div>
-
-    <div *ngIf="officeAddressField.invalid && (officeAddressField.dirty || officeAddressField.touched)" class="text-danger">
-      <div *ngIf="officeAddressField.errors.required">
-        Office Address is required.
-      </div>
-      <br>
+      <input type="text" class="form-control col-md-9" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress" #officeAddressField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="nickname">State</label>
-      <input type="text" class="form-control col-md-9" id="state" name="state" placeholder="Enter State" [(ngModel)]="profile.state" required #stateField="ngModel">
-    </div>
-
-    <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
-      <div *ngIf="stateField.errors.required">
-        State is empty or invalid.
-      </div>
-      <br>
+      <input type="text" class="form-control col-md-9" id="state" name="state" placeholder="Enter State" [(ngModel)]="profile.state" #stateField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="landlineNo">Landline Number</label>
-      <input type="number" class="form-control col-md-9" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" required #landlineNoField="ngModel">
-    </div>
-
-    <div *ngIf="landlineNoField.invalid && (landlineNoField.dirty || landlineNoField.touched)" class="text-danger">
-      <div *ngIf="landlineNoField.errors.required">
-        Landline Number is empty or invalid.
-      </div>
-      <br>
+      <input type="number" class="form-control col-md-9" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="fax">Fax</label>
-      <input type="number" class="form-control col-md-9" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" required #faxField="ngModel">
-    </div>
-
-    <div *ngIf="faxField.invalid && (faxField.dirty || faxField.touched)" class="text-danger">
-      <div *ngIf="faxField.errors.required">
-        Fax is empty or invalid.
-      </div>
-      <br>
+      <input type="number" class="form-control col-md-9" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="website">Website</label>
-      <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" required #websiteField="ngModel">
-    </div>
-
-    <div *ngIf="websiteField.invalid && (websiteField.dirty || websiteField.touched)" class="text-danger">
-      <div *ngIf="websiteField.errors.required">
-        Website is empty or invalid.
-      </div>
-      <br>
+      <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
     </div>
 
     <div class="form-group form-row">
