@@ -65,7 +65,16 @@ export class PlanSelectorComponent implements OnInit {
           );
         });
     }
-    else this.done.emit();
+    else {
+      this.paid = true;
+      
+      this.api.setPlan(plan, '').subscribe(
+        data => {
+          this.done.emit();
+        },
+        err => alert("Plan was not saved.")
+      );
+    }
   }
 
 }
