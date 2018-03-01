@@ -14,6 +14,8 @@ export class ProfileEditComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile: UserProfile;
+  error: string;
+  success: boolean;
 
   constructor(private api: ApiService) { }
 
@@ -34,6 +36,25 @@ export class ProfileEditComponent implements OnInit {
   }
 
   submit() {
-    this.api.setUserProfile(this.profile);
+    this.error = '';
+    this.success = false;
+
+    this.api.setUserProfile(this.profile).subscribe(
+      data => {
+        if (data.success) {
+          this.success = true;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = 'Connection failed';
+      }
+    );
   }
 }

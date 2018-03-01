@@ -197,9 +197,12 @@ export class ApiService {
         if (data.success) {
           profile.name = data.user.name;
           profile.designation = data.user.designation;
-          profile.facebook = data.user.Socials.facebook;
-          profile.twitter = data.user.Socials.twitter;
-          profile.other = data.user.Socials.other;
+
+          if (data.user.Socials) {
+            profile.facebook = data.user.Socials.fb;
+            profile.twitter = data.user.Socials.twitter;
+            profile.other = data.user.Socials.other;
+          }
         }
 
         return profile;
@@ -209,8 +212,8 @@ export class ApiService {
     return result;
   }
 
-  setUserProfile(userProfile: UserProfile) {
-    this.post('/user/profile', {
+  setUserProfile(userProfile: UserProfile) : Observable<any> {
+    return this.post('/user/profile', {
       name: userProfile.name,
       designation: userProfile.designation,
       fb: userProfile.facebook,
