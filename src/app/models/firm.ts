@@ -14,7 +14,7 @@ export class Firm {
     bankName : string;
     bankIfsc : string;
     bankBranchAddress : string;
-    bankAccountType : string;
+    bankAccountType: 'Savings' | 'Current' = 'Savings';
 
     tagline : string;
     nickname : string;

@@ -203,7 +203,13 @@
       <br>
     </div>
 
-    <!-- Bank Account Type -->
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankAccountType">Bank Branch Address</label>
+      <select class="form-control col-md-9" id="bankAccountType" name="bankAccountType" [(ngModel)]="profile.bankAccountType">
+        <option value="Current">Current</option>
+        <option value="Savings">Savings</option>
+      </select>
+    </div>
 
     <br>
 
