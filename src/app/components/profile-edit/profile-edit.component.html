@@ -195,12 +195,15 @@
 
     <div class="form-group form-row">
       <label class="col-md-3 col-form-label" for="bankIfsc">IFSC</label>
-      <input type="text" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required #bankIfscField="ngModel" (input)="ifscChanged()">
+      <input type="text" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required minlength="11" maxlength="11" #bankIfscField="ngModel" (input)="ifscChanged()">
     </div>
 
     <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
       <div *ngIf="bankIfscField.errors.required">
-        IFSC is empty or invalid.
+        IFSC is required.
+      </div>
+      <div *ngIf="bankIfscField.errors.minlength || bankIfscField.errors.maxlength">
+        IFSC should have 11 characters.
       </div>
       <br>
     </div>
