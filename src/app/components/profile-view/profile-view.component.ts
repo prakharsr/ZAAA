@@ -14,17 +14,10 @@ export class ProfileViewComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile : UserProfile;
-  admin: boolean;
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
     this.api.getUserProfile().subscribe(data => this.profile = data);
-
-    this.api.getUser().subscribe(data => {
-      if (data.success) {
-        this.admin = data.user.isAdmin;
-      }
-    });
   }
 }

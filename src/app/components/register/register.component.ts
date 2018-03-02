@@ -34,8 +34,6 @@ export class RegisterComponent implements OnInit {
     this.api.signup(this.name, this.email, this.password).subscribe(
       data => {
         if (data.success) {
-          this.api.sendVerificationMail();
-
           this.GoToDashboard();
         }
         else {
