@@ -17,6 +17,8 @@ export class TemplateSelectorComponent implements OnInit {
   releaseOrderTemplate: Template;
   paymentReceiptTemplate: Template;
 
+  jurisdiction: string;
+
   templates: Template[];
 
   @Output() done = new EventEmitter();

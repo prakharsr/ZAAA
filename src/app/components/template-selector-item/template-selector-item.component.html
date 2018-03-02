@@ -10,6 +10,15 @@
 
   <br><br>
 
+  <form>
+    <div class="form-group">
+      <label for="tnc">Terms and Conditions</label>
+      <input type="text" class="form-control" name="tnc" id="tnc" [(ngModel)]="tnc" placeholder="Enter Terms and Conditions">
+    </div>
+  </form>
+
+  <br>
+
   <button class="btn btn-primary" [disabled]="selectedIndex == 0" (click)="PrevTemplate()">Previous</button>
       
   <button class="btn btn-primary" [disabled]="selectedIndex == templates.length - 1" (click)="NextTemplate()">Next</button>

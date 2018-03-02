@@ -2,6 +2,15 @@
 <h2 class="text-center">Select Templates</h2>
 <br><br>
 
+<form>
+  <div class="form-group form-row">
+    <label for="jurisdiction" class="col-md-3 col-form-label">Jurisdiction</label>
+    <input type="text" class="form-control col-md-9" name="jurisdiction" id="jurisdiction" [(ngModel)]="jurisdiction" placeholder="Enter jurisdiction">
+  </div>
+</form>
+
+<br><br>
+
 <div class="row">
   <div class="col-md">
     <app-template-selector-item name="Invoice" [templates]="templates" (templateChanged)="invoiceTemplate = $event"></app-template-selector-item>
