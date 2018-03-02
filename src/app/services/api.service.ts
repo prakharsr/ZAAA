@@ -82,7 +82,7 @@ export class ApiService {
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {
-    return this.fileUpload("/user/image", "userImage", fileToUpload);
+    return this.fileUpload("/user/image", "user", fileToUpload);
   }
 
   private extractToken(base: Observable<any>) : Observable<any> {
@@ -198,6 +198,7 @@ export class ApiService {
         if (data.success) {
           profile.name = data.user.name;
           profile.designation = data.user.designation;
+          profile.photo = data.user.photo;
 
           if (data.user.Socials) {
             profile.facebook = data.user.Socials.fb;

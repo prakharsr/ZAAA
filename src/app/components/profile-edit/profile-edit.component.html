@@ -48,32 +48,40 @@
         <label class="col-md-3 col-form-label" for="nickname">Others</label>
         <input type="text" class="form-control col-md-9" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
       </div>
-    
-      <br>
-      
-      <div class="text-danger" *ngIf="error">
-        {{error}}
-    
-        <br><br>
-      </div>
-
-      <div class="text-success" *ngIf="success">
-        Profile updated successfully
-    
-        <br><br>
-      </div>
-
-      <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
     </form>
+
+    <br>
   </div>
   <div class="col-md-4">
       <h3>Profile Picture</h3>
+
+      <br>
       
-      <img src="" class="img-responsive">
+      <img [src]="profile.photo" class="img-responsive max-w-200">
+      
+      <br><br>
       
       <label for="file-upload" class="file-upload">
           Upload
       </label>
       <input type="file" id="file-upload" (change)="uploadProfilePicture($event.target.files)"/>
+
+      <br>
   </div>
 </div>
+
+<br>
+      
+<div class="text-danger" *ngIf="error">
+  {{error}}
+
+  <br><br>
+</div>
+
+<div class="text-success" *ngIf="success">
+  Profile updated successfully
+
+  <br><br>
+</div>
+
+<button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>

@@ -5,5 +5,7 @@ export class UserProfile {
     twitter: string;
     other: string;
 
+    photo: string;
+
     id: string;
 }
