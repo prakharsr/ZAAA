@@ -7,33 +7,32 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 @Injectable()
-export class AdminGuardService implements CanActivate {
+export class PlanGuardService implements CanActivate {
 
   constructor(private api: ApiService, private router: Router) { }
 
-  private goToDashboard() {
-    this.router.navigateByUrl('/dashboard');
+  private goToPlan() {
+    this.router.navigateByUrl('/plan');
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {\
 
-    console.log('admin guard');
+    console.log('plan guard');
 
-    return this.api.getUser().pipe(
+    return this.api.getFirm().pipe(
       map(data => {
-        const result = data.success && data.user.isAdmin;
+        const result = data.success && data.firm.plan != null;
 
         if (!result) {
-          this.goToDashboard();
+          this.goToPlan();
         }
 
         return result;
-      },
+      }),
       catchError(err => {
-        this.goToDashboard();
+        this.goToPlan();
 
         return of(false);
-      }))
-    );
+      }));
   }
 }

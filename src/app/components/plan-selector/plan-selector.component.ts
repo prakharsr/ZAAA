@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Plan } from '../../models/plan';
 import { ApiService } from '../../services/api.service';
 import { RazorPayService } from '../../services/razorpay.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-plan-selector',
@@ -17,11 +19,11 @@ export class PlanSelectorComponent implements OnInit {
   private email: string;
   private phone: string;
 
-  @Output() done = new EventEmitter();
-
   constructor(private api: ApiService,
     private razorPay: RazorPayService,
-    private appRef: ApplicationRef) { }
+    private appRef: ApplicationRef,
+    private router: Router,
+    private winRef: WindowService) { }
 
   ngOnInit() {
     this.api.plans.subscribe(data => {
@@ -57,7 +59,8 @@ export class PlanSelectorComponent implements OnInit {
 
           this.api.setPlan(plan, response.razorpay_payment_id).subscribe(
             data => {
-              this.done.emit();
+              // redirect
+              this.winRef.window.location.pathname = '/dashboard';
               
               this.appRef.tick();
             },
@@ -70,7 +73,7 @@ export class PlanSelectorComponent implements OnInit {
       
       this.api.setPlan(plan, '').subscribe(
         data => {
-          this.done.emit();
+          this.router.navigateByUrl('/dashboard');
         },
         err => alert("Plan was not saved.")
       );

@@ -223,6 +223,11 @@ export class ApiService {
     });
   }
 
+  
+  getFirm() : Observable<any> {
+    return this.get('/firm/profile');
+  }
+
   getFirmProfile() : Observable<Firm> {
     let base = this.get('/firm/profile');
 

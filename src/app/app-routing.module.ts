@@ -16,19 +16,22 @@ import { FirmProfileViewComponent } from './components/firm-profile-view/firm-pr
 import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.component';
 import { AdminGuardService } from './services/admin-guard.service';
+import { PlanSelectorComponent } from './components/plan-selector/plan-selector.component';
+import { PlanGuardService } from './services/plan-guard.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuardService] },
-  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
-  { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
-  { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
-  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
-  { path: 'coUsers', component: CoUsersComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] },
-  { path: 'templates', component: TemplateSelectorComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, AdminGuardService] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService] }
+  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: 'coUsers', component: CoUsersComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuardService, AdminGuardService] }
 ];
 
 @NgModule({

@@ -12,6 +12,7 @@ import { IfscService } from './services/ifsc.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PhoneVerifyGuardService } from './services/phone-verify-guard.service';
 import { AdminGuardService } from './services/admin-guard.service';
+import { PlanGuardService } from './services/plan-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -20,7 +21,6 @@ import { HomeComponent } from './components/home/home.component';
 import { PlanSelectorComponent } from './components/plan-selector/plan-selector.component';
 import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
 import { TemplateSelectorComponent } from './components/template-selector/template-selector.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
@@ -40,7 +40,6 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
     PlanSelectorComponent,
     PhoneVerifyComponent,
     LoginComponent,
-    SignupComponent,
     TemplateSelectorComponent,
     RegisterComponent,
     ProfileEditComponent,
@@ -67,7 +66,8 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
     IfscService,
     AuthGuardService,
     PhoneVerifyGuardService,
-    AdminGuardService
+    AdminGuardService,
+    PlanGuardService
   ],
   bootstrap: [AppComponent]
 })

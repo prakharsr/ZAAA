@@ -13,17 +13,41 @@ export class RegisterComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  state: number = 0;
+  name: string;
+  email: string;
+  password: string;
+  cpassword: string;
+  error: string;
 
   constructor(private api: ApiService, private winRef: WindowService) { }
 
   ngOnInit() { }
 
-  NextState() : void {
-    ++this.state;
-  }
-
   GoToDashboard() : void {
     this.winRef.window.location.pathname = '/dashboard';
+  }
+
+  submit()
+  {
+    this.error = '';
+
+    this.api.signup(this.name, this.email, this.password).subscribe(
+      data => {
+        if (data.success) {
+          this.api.sendVerificationMail();
+
+          this.GoToDashboard();
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        this.error = "Connection failed";
+        console.log(err);
+      }
+    );
   }
 }
