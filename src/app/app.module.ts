@@ -33,6 +33,7 @@ import { FirmProfileViewComponent } from './components/firm-profile-view/firm-pr
 import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component
     FirmProfileViewComponent,
     FirmProfileEditComponent,
     ChangePswComponent,
-    ForgotPswComponent
+    ForgotPswComponent,
+    NotFoundComponent
   ],
   imports: [
     NgbModule.forRoot(),

@@ -20,6 +20,7 @@ import { PlanSelectorComponent } from './components/plan-selector/plan-selector.
 import { PlanGuardService } from './services/plan-guard.service';
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuardService, AdminGuardService] },
-  { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuardService] }
+  { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuardService] },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
