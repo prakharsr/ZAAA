@@ -179,10 +179,6 @@ export class ApiService {
     releaseOrderTemplate: Template,
     paymentReceiptTemplate: Template) {}
 
-  sendVerificationMail() : Observable<any> {
-    return this.post('/user/verify/email', {});
-  }
-
   setMobile(phone: string) : Observable<any> {
     return this.post('/user/mobile', { phone: phone });
   }
