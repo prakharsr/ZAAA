@@ -289,4 +289,11 @@ export class ApiService {
       accountType: firm.bankAccountType
     });
   }
+
+  changePassword(oldPassword: string, newPassord: string) : Observable<any> {
+    return this.post('/user/changePassword', {
+      oldPassword: oldPassword,
+      newPassord: newPassord
+    });
+  }
 }

@@ -48,5 +48,10 @@
 
       <br><br>
     </div>
+    <div class="text-success" *ngIf="success">
+      Password changed successfully.
+
+      <br><br>
+    </div>
     <button type="submit" class="btn btn-success" [disabled]="!changePswForm.form.valid || password != cpassword">Change</button>
  </form>
