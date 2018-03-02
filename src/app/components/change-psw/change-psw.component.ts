@@ -11,6 +11,7 @@ export class ChangePswComponent implements OnInit {
   oldPassword: string;
   password: string;
   cpassword: string;
+  error: string;
 
   constructor(private api: ApiService) { }
 

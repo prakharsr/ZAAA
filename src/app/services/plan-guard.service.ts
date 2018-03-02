@@ -15,7 +15,7 @@ export class PlanGuardService implements CanActivate {
     this.router.navigateByUrl('/plan');
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {\
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
 
     console.log('plan guard');
 

@@ -12,6 +12,8 @@ export class TemplateSelectorItemComponent implements OnInit {
 
   @Input() name: string;
 
+  tnc: string;
+
   @Output() templateChanged = new EventEmitter<Template>();
 
   private _templates;
