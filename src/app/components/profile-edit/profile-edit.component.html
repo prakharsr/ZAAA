@@ -70,10 +70,25 @@
       
       <br><br>
       
-      <label for="file-upload" class="file-upload">
+      <label for="profile-upload" class="file-upload">
           Upload
       </label>
-      <input type="file" id="file-upload" (change)="uploadProfilePicture($event.target.files)"/>
+      <input type="file" id="profile-upload" (change)="uploadProfilePicture($event.target.files)"/>
+
+      <br><br>
+
+      <h3>Signature</h3>
+
+      <br>
+      
+      <img [src]="profile.sign" class="img-fluid max-w-200">
+      
+      <br><br>
+      
+      <label for="sign-upload" class="file-upload">
+          Upload
+      </label>
+      <input type="file" id="sign-upload" (change)="uploadSign($event.target.files)"/>
 
       <br>
   </div>

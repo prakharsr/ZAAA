@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h2>Personal Details</h2>
+    <h3>Personal Details</h3>
     <div class="row detailView">
       <div class="col-md-3">Name</div>
       <div class="col-md-9">{{profile.name}}</div>
@@ -15,7 +15,7 @@
       <div class="col-md-9">{{profile.designation}}</div>
     </div>
 
-    <h2>Social Details</h2>
+    <h3>Social Details</h3>
     <div class="row detailView">
       <div class="col-md-3">Facebook</div>
       <div class="col-md-9"><a href="{{profile.facebook}}" target="_blank">{{profile.facebook}}</a></div>
@@ -32,6 +32,10 @@
     </div>
   </div>
   <div class="col-md-4">
+    <h3>Profile Picture</h3>
     <img [src]="profile.photo" class="img-fluid max-w-200">
+
+    <h3>Signature</h3>
+    <img [src]="profile.sign" class="img-fluid max-w-200">
   </div>
 </div>

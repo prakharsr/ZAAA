@@ -49,6 +49,31 @@ export class ProfileEditComponent implements OnInit {
     );
   }
 
+  uploadSign(files: FileList) {
+    this.error = '';
+    this.success = '';
+
+    this.api.uploadSign(files.item(0)).subscribe(
+      data => {
+        if (data.success) {
+          this.success = 'Signature uploaded successfully';
+
+          this.profile.sign = environment.uploadsBaseUrl + data.photo;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
+    );
+  }
+
   submit() {
     this.error = '';
     this.success = '';

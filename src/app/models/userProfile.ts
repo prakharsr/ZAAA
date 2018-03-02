@@ -6,6 +6,7 @@ export class UserProfile {
     other: string;
 
     photo: string;
+    sign: string;
 
     id: string;
 }

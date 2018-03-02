@@ -94,6 +94,10 @@ export class ApiService {
     return this.fileUpload("/user/image", "user", fileToUpload);
   }
 
+  uploadSign(fileToUpload: File) : Observable<any> {
+    return this.fileUpload("/user/sign", "sign", fileToUpload);
+  }
+
   private extractToken(base: Observable<any>) : Observable<any> {
     return base.pipe(
       map(data => {
@@ -210,6 +214,10 @@ export class ApiService {
 
           if (data.user.photo) {
             profile.photo = environment.uploadsBaseUrl + data.user.photo;
+          }
+
+          if (data.user.signature) {
+            profile.sign = environment.uploadsBaseUrl + data.user.signature;
           }
 
           if (data.user.Socials) {
