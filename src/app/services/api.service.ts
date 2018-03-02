@@ -248,6 +248,11 @@ export class ApiService {
     });
   }
 
+  resetPsw(email: string): Observable<any> {
+    return this.post('/user/resetpassword', {
+      email: email
+    });
+  }
   
   getFirm() : Observable<any> {
     return this.get('/firm/profile');

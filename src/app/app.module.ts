@@ -32,6 +32,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
 import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
+import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ChangePswComponent } from './components/change-psw/change-psw.component
     DashboardComponent,
     FirmProfileViewComponent,
     FirmProfileEditComponent,
-    ChangePswComponent
+    ChangePswComponent,
+    ForgotPswComponent
   ],
   imports: [
     NgbModule.forRoot(),

@@ -1,0 +1,36 @@
+<div class="text-center">
+  <h2>Forgot Password</h2>
+  <small>A password reset email will be sent to your email account.</small>
+</div>
+<br>
+
+<form (ngSubmit)="submit()" #forgotPswForm="ngForm">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+  </div>
+
+  <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+    <div *ngIf="emailField.errors.required">
+      Email is required.
+    </div>
+    <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      Invalid Email.
+    </div>
+    <br>
+  </div>
+
+  <div *ngIf="error" class="text-danger">
+    {{error}}
+    
+    <br>
+  </div>
+  <div *ngIf="success" class="text-success">
+    Password Reset Email sent.
+    
+    <br>
+  </div>
+
+  <br>
+  <button class="btn btn-success" [disabled]="!forgotPswForm.form.valid">Send Reset Email</button>
+ </form>

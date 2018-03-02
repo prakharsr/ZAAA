@@ -19,11 +19,13 @@ import { AdminGuardService } from './services/admin-guard.service';
 import { PlanSelectorComponent } from './components/plan-selector/plan-selector.component';
 import { PlanGuardService } from './services/plan-guard.service';
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
+import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
+  { path: 'forgotPassword', component: ForgotPswComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuardService] },
   { path: "profile/edit", component: ProfileEditComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
