@@ -1,3 +1,10 @@
+<br>
+
+<ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+<ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+<br>
+
 <form (ngSubmit)="submit()" #profileForm="ngForm">   
     <h2>Business Details</h2>
     <br>
@@ -163,18 +170,6 @@
     </div>
 
     <br>
-
-    <div class="text-danger" *ngIf="error">
-      {{error}}
-  
-      <br><br>
-    </div>
-
-    <div class="text-success" *ngIf="success">
-      Firm Profile updated successfully
-  
-      <br><br>
-    </div>
 
     <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
   </form>

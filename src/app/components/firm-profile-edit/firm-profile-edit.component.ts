@@ -16,7 +16,7 @@ export class FirmProfileEditComponent implements OnInit {
 
   profile = new Firm();
   error: string;
-  success: boolean;
+  success: string;
 
   constructor(private ifscService: IfscService, private api: ApiService) { }
 
@@ -41,12 +41,12 @@ export class FirmProfileEditComponent implements OnInit {
 
   submit() {
     this.error = '';
-    this.success = false;
+    this.success = '';
 
     this.api.setFirmProfile(this.profile).subscribe(
       data => {
         if (data.success) {
-          this.success = true;
+          this.success = 'Firm Profile updated successfully';
         }
         else {
           console.log(data);

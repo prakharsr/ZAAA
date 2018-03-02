@@ -241,6 +241,24 @@ export class ApiService {
 
         if (data.success) {
           profile.name = data.firm.FirmName;
+          profile.tagline = data.firm.TagLine;
+          profile.nickname = data.firm.DisplayName;
+          profile.fax = data.firm.Fax;
+          profile.landlineNo = data.firm.Landline;
+          profile.website = data.firm.Website;
+          profile.panNo = data.firm.PanNo;
+          profile.gstNo = data.firm.GSTIN;
+
+          if (data.firm.BankDetails) {
+            let bank = data.firm.BankDetails;
+
+            profile.bankAccountName = bank.AccountName;
+            profile.bankAccountNo = bank.AccountNo;
+            profile.bankName = bank.BankName;
+            profile.bankIfsc = bank.IFSC;
+            profile.bankBranchAddress = bank.BranchAddress;
+            profile.bankAccountType = bank.AccountType;
+          }
         }
 
         return profile;
@@ -252,7 +270,23 @@ export class ApiService {
 
   setFirmProfile(firm: Firm) : Observable<any> {
     return this.post('/firm/profile', {
-      name: firm.name
+      name: firm.name,
+      tagline: firm.tagline,
+      displayName: firm.nickname,
+      registeredAddress: firm.registeredAddress,
+      officeAddress: firm.officeAddress,
+      fax: firm.fax,
+      landline: firm.landlineNo,
+      website: firm.website,
+      pan: firm.panNo,
+      gst: firm.gstNo,
+
+      accountName: firm.bankAccountName,
+      accountNo: firm.bankAccountNo,
+      ifsc: firm.bankIfsc,
+      bankName: firm.bankName,
+      bankAddress: firm.bankBranchAddress,
+      accountType: firm.bankAccountType
     });
   }
 }
