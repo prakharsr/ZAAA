@@ -3,6 +3,7 @@ import { IfscService } from '../../services/ifsc.service';
 import { routerAnimation } from '../../animations';
 import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-firm-profile-edit',
@@ -37,6 +38,31 @@ export class FirmProfileEditComponent implements OnInit {
       this.profile.bankName = '';
       this.profile.bankBranchAddress = '';
     }
+  }
+
+  uploadLogo(files: FileList) {
+    this.error = '';
+    this.success = '';
+
+    this.api.uploadFirmLogo(files.item(0)).subscribe(
+      data => {
+        if (data.success) {
+          this.success = 'Logo uploaded successfully';
+
+          this.profile.logo = environment.uploadsBaseUrl + data.photo;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
+    );
   }
 
   submit() {

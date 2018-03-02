@@ -62,34 +62,34 @@
     <br>
   </div>
   <div class="col-md-4">
-      <h3>Profile Picture</h3>
+    <h3>Profile Picture</h3>
 
-      <br>
-      
-      <img [src]="profile.photo" class="img-fluid max-w-200">
-      
-      <br><br>
-      
-      <label for="profile-upload" class="file-upload">
-          Upload
-      </label>
-      <input type="file" id="profile-upload" (change)="uploadProfilePicture($event.target.files)"/>
+    <br>
+    
+    <img [src]="profile.photo" class="img-fluid max-w-200">
+    
+    <br><br>
+    
+    <label for="profile-upload" class="file-upload">
+        Upload
+    </label>
+    <input type="file" id="profile-upload" class="hidden-file" (change)="uploadProfilePicture($event.target.files)"/>
 
-      <br><br>
+    <br><br>
 
-      <h3>Signature</h3>
+    <h3>Signature</h3>
 
-      <br>
-      
-      <img [src]="profile.sign" class="img-fluid max-w-200">
-      
-      <br><br>
-      
-      <label for="sign-upload" class="file-upload">
-          Upload
-      </label>
-      <input type="file" id="sign-upload" (change)="uploadSign($event.target.files)"/>
+    <br>
+    
+    <img [src]="profile.sign" class="img-fluid max-w-200">
+    
+    <br><br>
+    
+    <label for="sign-upload" class="file-upload">
+        Upload
+    </label>
+    <input type="file" id="sign-upload" class="hidden-file" (change)="uploadSign($event.target.files)"/>
 
-      <br>
+    <br>
   </div>
 </div>

@@ -97,6 +97,10 @@ export class ApiService {
   uploadSign(fileToUpload: File) : Observable<any> {
     return this.fileUpload("/user/sign", "sign", fileToUpload);
   }
+  
+  uploadFirmLogo(fileToUpload: File) : Observable<any> {
+    return this.fileUpload("/firm/logo", "logo", fileToUpload);
+  }
 
   private extractToken(base: Observable<any>) : Observable<any> {
     return base.pipe(
@@ -265,6 +269,10 @@ export class ApiService {
           profile.website = data.firm.Website;
           profile.panNo = data.firm.PanNo;
           profile.gstNo = data.firm.GSTIN;
+
+          if (data.firm.LogoURL) {
+            profile.logo = environment.uploadsBaseUrl + data.firm.LogoURL;
+          }
 
           if (data.firm.BankDetails) {
             let bank = data.firm.BankDetails;

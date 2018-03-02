@@ -20,5 +20,7 @@ export class Firm {
     nickname : string;
     state : string;
 
+    logo: string;
+
     id: string;
 }
