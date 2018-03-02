@@ -11,6 +11,7 @@ import { UserRoles } from '../../models/userRoles';
 export class NewCoUserComponent implements OnInit {
 
   name: string;
+  designation: string;
   email: string;
   phone: string;
   password: string;
@@ -34,7 +35,7 @@ export class NewCoUserComponent implements OnInit {
       data => {
         if (data.success)
         {
-          let coUser = new CoUser(this.name, this.email, this.phone);
+          let coUser = new CoUser(this.name, this.designation, this.email, this.phone);
 
           coUser.id = data.msg;
 

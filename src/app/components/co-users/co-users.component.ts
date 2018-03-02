@@ -23,7 +23,7 @@ export class CoUsersComponent implements OnInit {
   ngOnInit() {
     this.api.coUsers.subscribe(data => {
       data.co_users.forEach(element => {
-        let coUser = new CoUser(element.name, element.email, element.phone);
+        let coUser = new CoUser(element.name, element.designation, element.email, element.phone);
 
         coUser.id = element._id;
 
