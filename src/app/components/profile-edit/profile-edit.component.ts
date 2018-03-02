@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { UserProfile } from '../../models/userProfile';
 import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile-edit',
@@ -15,7 +16,7 @@ export class ProfileEditComponent implements OnInit {
 
   profile: UserProfile;
   error: string;
-  success: boolean;
+  success: string;
 
   constructor(private api: ApiService) { }
 
@@ -24,25 +25,38 @@ export class ProfileEditComponent implements OnInit {
   }
 
   uploadProfilePicture(files: FileList) {
+    this.error = '';
+    this.success = '';
+
     this.api.uploadProfilePicture(files.item(0)).subscribe(
       data => {
         if (data.success) {
-          alert('uploaded');
+          this.success = 'Profile Photo uploaded successfully';
+
+          this.profile.photo = environment.uploadsBaseUrl + data.photo;
         }
-        else console.log(data);
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
       },
-      err => console.log(err)
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
     );
   }
 
   submit() {
     this.error = '';
-    this.success = false;
+    this.success = '';
 
     this.api.setUserProfile(this.profile).subscribe(
       data => {
         if (data.success) {
-          this.success = true;
+          this.success = 'Profile Updated Successfully';
         }
         else {
           console.log(data);

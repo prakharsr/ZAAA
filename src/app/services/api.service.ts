@@ -198,7 +198,10 @@ export class ApiService {
         if (data.success) {
           profile.name = data.user.name;
           profile.designation = data.user.designation;
-          profile.photo = data.user.photo;
+
+          if (data.user.photo) {
+            profile.photo = environment.uploadsBaseUrl + data.user.photo;
+          }
 
           if (data.user.Socials) {
             profile.facebook = data.user.Socials.fb;
