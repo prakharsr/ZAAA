@@ -1,0 +1,52 @@
+<h2 class="text-center">Change Password</h2>
+<br>
+
+<form (ngSubmit)="submit()" #changePswForm="ngForm">
+
+    <div class="form-group">
+      <label for="oldPassword">Old Password</label>
+      <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Enter Old Password" [(ngModel)]="oldPassword" required #oldPasswordField="ngModel">
+    </div>
+  
+    <div *ngIf="oldPasswordField.invalid && (oldPasswordField.dirty || oldPasswordField.touched)" class="text-danger">
+      <div *ngIf="oldPasswordField.errors.required">
+        Old Password is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="password">New Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password" [(ngModel)]="password" required #passwordField="ngModel">
+    </div>
+
+    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+      <div *ngIf="passwordField.errors.required">
+        New Password is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="cpassword">Confirm New Password</label>
+      <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm New Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
+    </div>
+
+    <div *ngIf="cpasswordField.invalid && (cpasswordField.dirty || cpasswordField.touched)" class="text-danger">
+      <div *ngIf="cpasswordField.errors.required">
+        New Password confirmation is required.
+      </div>
+    </div>
+    <div *ngIf="password != cpassword" class="text-danger">
+      Passwords don't match.
+    </div>
+
+    <br>
+
+    <div class="text-danger" *ngIf="error">
+      {{error}}
+
+      <br><br>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!changePswForm.form.valid || password != cpassword">Change</button>
+ </form>

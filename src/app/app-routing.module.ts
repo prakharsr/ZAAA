@@ -18,6 +18,7 @@ import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.com
 import { AdminGuardService } from './services/admin-guard.service';
 import { PlanSelectorComponent } from './components/plan-selector/plan-selector.component';
 import { PlanGuardService } from './services/plan-guard.service';
+import { ChangePswComponent } from './components/change-psw/change-psw.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'coUsers', component: CoUsersComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
-  { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuardService, AdminGuardService] }
+  { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuardService, AdminGuardService] },
+  { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

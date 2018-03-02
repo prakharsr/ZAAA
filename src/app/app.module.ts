@@ -31,6 +31,7 @@ import { NewCoUserComponent } from './components/new-co-user/new-co-user.compone
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
 import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
+import { ChangePswComponent } from './components/change-psw/change-psw.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
     ProfileViewComponent,
     DashboardComponent,
     FirmProfileViewComponent,
-    FirmProfileEditComponent
+    FirmProfileEditComponent,
+    ChangePswComponent
   ],
   imports: [
     NgbModule.forRoot(),
