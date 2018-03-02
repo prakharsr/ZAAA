@@ -15,6 +15,7 @@ import { UserRoles } from '../models/userRoles';
 import { environment } from '../../environments/environment';
 import { UserProfile } from '../models/userProfile';
 import { Firm } from '../models/firm';
+import { CoUser } from '../models/coUser';
 
 @Injectable()
 export class ApiService {
@@ -72,6 +73,14 @@ export class ApiService {
         return this.http.get(environment.apiUrl + url, this.headers);
     }
     else return this.http.get(environment.apiUrl + url);
+  }
+
+  private delete(url: string) : Observable<any> {
+    return this.http.delete(environment.apiUrl + url, this.headers);
+  }
+
+  deleteCoUser(coUser: CoUser) : Observable<any> {
+    return this.delete('/user/co_user/' + coUser.id);
   }
 
   private fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {

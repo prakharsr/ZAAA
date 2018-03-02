@@ -47,4 +47,14 @@ export class CoUsersComponent implements OnInit {
 
     this.adding = false;
   }
+
+  delete(coUser: CoUser) {
+    this.api.deleteCoUser(coUser).subscribe(
+      data => {
+        if (data.success) {
+          this.coUsers = this.coUsers.filter(h => h.id !== coUser.id);
+        }
+      }
+    );
+  }
 }

@@ -10,6 +10,7 @@
     <button class="btn btn-primary" *ngIf="admin" (click)="addNew()">Add New</button>
 
     <div *ngFor="let coUser of coUsers" class="co-user">
+        <button class="btn btn-danger" *ngIf="admin" (click)="delete(coUser)" style="float:right">Delete</button>
         <h5>{{coUser.name}}</h5>
         <span class="fa fa-envelope"></span> {{ coUser.email }}
         <br>
