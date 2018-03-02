@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { routerAnimation } from '../../animations';
-import { WindowService } from '../../services/window.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,12 +19,12 @@ export class RegisterComponent implements OnInit {
   cpassword: string;
   error: string;
 
-  constructor(private api: ApiService, private winRef: WindowService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() { }
 
   GoToDashboard() : void {
-    this.winRef.window.location.pathname = '/dashboard';
+    this.router.navigateByUrl('/dashboard');
   }
 
   submit()
