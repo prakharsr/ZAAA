@@ -1,10 +1,20 @@
-<a class="btn btn-primary" routerLink="/profile">User Profile</a>
-<a class="btn btn-success" routerLink="/firm">Firm Profile</a>
-<a class="btn btn-warning" routerLink="/coUsers">Co-Users</a>
-<a class="btn btn-danger" routerLink="/changePassword">Change Password</a>
-
+<h2 class="text-center">Dashboard</h2>
 <br><br>
 
-<div *ngIf="admin">
-    <a class="btn btn-info" routerLink="/templates">Templates</a>
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="btn btn-primary" routerLink="/profile"><span class="fa fa-user-circle"></span> User Profile</a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="btn btn-success" routerLink="/firm"><span class="fa fa-building"></span> Firm Profile</a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="btn btn-warning" routerLink="/coUsers"><span class="fa fa-users"></span> Co-Users</a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="admin">
+        <a class="btn btn-info" routerLink="/templates"><span class="fa fa-file-alt"></span> Templates</a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+        <a class="btn btn-danger" routerLink="/changePassword"><span class="fa fa-key"></span> Change Password</a>
+    </div>
 </div>

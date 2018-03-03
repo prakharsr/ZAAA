@@ -14,7 +14,7 @@ export class ProfileEditComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  profile: UserProfile;
+  profile = new UserProfile();
   error: string;
   success: string;
 
