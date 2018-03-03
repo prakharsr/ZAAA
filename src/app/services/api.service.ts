@@ -318,10 +318,10 @@ export class ApiService {
     });
   }
 
-  changePassword(oldPassword: string, newPassord: string) : Observable<any> {
+  changePassword(oldPassword: string, newPassword: string) : Observable<any> {
     return this.post('/user/changePassword', {
       oldPassword: oldPassword,
-      newPassord: newPassord
+      newPassword: newPassword
     });
   }
 }
