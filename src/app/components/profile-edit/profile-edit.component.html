@@ -56,6 +56,11 @@
       
       <br>
 
+      <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+      <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+      <br>
+
       <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
     </form>
 
