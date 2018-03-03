@@ -1,13 +1,7 @@
-<div *ngIf="adding">
-    <h2>Add New Co-User</h2>
-    <br>
-    <app-new-co-user (done)="added($event)" (cancel)="adding = false"></app-new-co-user>
-</div>
-
-<div *ngIf="!adding">
+<div>
     <h2>Co-Users</h2>
     <br>
-    <button class="btn btn-primary" *ngIf="admin" (click)="addNew()"><span class="fa fa-plus"></span> Add New</button>
+    <a class="btn btn-primary" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span> Add New</a>
 
     <div *ngFor="let coUser of coUsers" class="co-user">
         <button class="btn btn-danger" *ngIf="admin" (click)="delete(coUser)" style="float:right"><span class="fa fa-trash-alt"></span> Delete</button>

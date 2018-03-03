@@ -13,7 +13,6 @@ export class CoUsersComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  adding: boolean;
   admin: boolean;
 
   coUsers: CoUser[] = [];
@@ -36,16 +35,6 @@ export class CoUsersComponent implements OnInit {
         this.admin = data.user.isAdmin;
       }
     })
-  }
-
-  addNew() {
-    this.adding = true;
-  }
-
-  added(coUser: CoUser) {
-    this.coUsers.push(coUser);
-
-    this.adding = false;
   }
 
   delete(coUser: CoUser) {

@@ -1,14 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { CoUser } from '../../models/coUser';
 import { ApiService } from '../../services/api.service';
 import { UserRoles } from '../../models/userRoles';
+import { routerAnimation } from '../../animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-co-user',
+  animations: [routerAnimation],
   templateUrl: './new-co-user.component.html',
   styleUrls: ['./new-co-user.component.css']
 })
 export class NewCoUserComponent implements OnInit {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
 
   name: string;
   designation: string;
@@ -20,12 +25,13 @@ export class NewCoUserComponent implements OnInit {
 
   error: string;
 
-  @Output() done = new EventEmitter<CoUser>();
-  @Output() cancel = new EventEmitter<boolean>();
-
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  private navigateBack() {
+    this.router.navigateByUrl('/coUsers');
   }
 
   submit() {
@@ -43,7 +49,7 @@ export class NewCoUserComponent implements OnInit {
             if (d.success) {
               coUser.roles = this.roles;
 
-              this.done.emit(coUser);
+              this.navigateBack();
             }
             else {
               console.log(d);
@@ -72,6 +78,6 @@ export class NewCoUserComponent implements OnInit {
   }
 
   onCancel() {
-    this.cancel.emit(false);
+    this.navigateBack();
   }
 }
