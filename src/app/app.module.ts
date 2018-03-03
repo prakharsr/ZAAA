@@ -35,6 +35,7 @@ import { ChangePswComponent } from './components/change-psw/change-psw.component
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RoleControlComponent } from './components/role-control/role-control.component';
+import { RoleEditComponent } from './components/role-edit/role-edit.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RoleControlComponent } from './components/role-control/role-control.com
     ChangePswComponent,
     ForgotPswComponent,
     NotFoundComponent,
-    RoleControlComponent
+    RoleControlComponent,
+    RoleEditComponent
   ],
   imports: [
     NgbModule.forRoot(),

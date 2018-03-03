@@ -4,7 +4,10 @@
     <a class="btn btn-primary" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span> Add New</a>
 
     <div *ngFor="let coUser of coUsers" class="co-user">
-        <button class="btn btn-danger" *ngIf="admin" (click)="delete(coUser)" style="float:right"><span class="fa fa-trash-alt"></span> Delete</button>
+        <div *ngIf="admin" style="float:right">
+            <a class="btn btn-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
+            <button class="btn btn-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span> Delete</button>
+        </div>
         <h5>{{coUser.name}}</h5>
         <span class="fa fa-envelope"></span> {{ coUser.email }}
         <br>
