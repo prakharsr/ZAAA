@@ -34,6 +34,7 @@ import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-pr
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RoleControlComponent } from './components/role-control/role-control.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     FirmProfileEditComponent,
     ChangePswComponent,
     ForgotPswComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RoleControlComponent
   ],
   imports: [
     NgbModule.forRoot(),

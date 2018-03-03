@@ -1,0 +1,92 @@
+<br>
+<br>
+
+<div class="row">
+  <div class="col-md-4">
+    <h4>Directory Access</h4>
+
+    <br>
+  
+    <div class="form-check">
+      <input [(ngModel)]="roles.media_house" name="media_house" class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label">
+        Media House
+      </label>
+    </div>
+  
+    <div class="form-check">
+      <input [(ngModel)]="roles.clients" name="clients" class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label">
+        Clients
+      </label>
+    </div>
+    
+    <div class="form-check">
+      <input [(ngModel)]="roles.executives" name="executives" class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label">
+        Executives
+      </label>
+    </div>
+
+    <br>
+    <br>
+  </div>
+  <div class="col-md-8">
+    <h4>Roles</h4>
+
+    <br>
+  
+    <div class="form-group form-row">
+      <label class="col-form-label col-md-3">Release Order</label>
+  
+      <select class="form-control col-md-9" name="release_order" [(ngModel)]="roles.release_order">
+        <option [value]="0">Block</option>
+        <option [value]="1">View</option>
+        <option [value]="2">Create</option>      
+      </select>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-form-label col-md-3">Invoice</label>
+  
+      <select class="form-control col-md-9" name="invoice" [(ngModel)]="roles.invoice">
+        <option [value]="0">Block</option>
+        <option [value]="1">View</option>
+        <option [value]="2">Create</option>      
+      </select>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-form-label col-md-3">Payment Receipts</label>
+  
+      <select class="form-control col-md-9" name="payment_receipts" [(ngModel)]="roles.payment_receipts">
+        <option [value]="0">Block</option>
+        <option [value]="1">View</option>
+        <option [value]="2">Create</option>      
+      </select>
+    </div> 
+  
+    <div class="form-group form-row">
+      <label class="col-form-label col-md-3">Accounts</label>
+  
+      <select class="form-control col-md-9" name="accounts" [(ngModel)]="roles.accounts">
+        <option [value]="0">Block</option>
+        <option [value]="1">View</option>
+        <option [value]="2">Create</option>      
+      </select>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-form-label col-md-3">Reports</label>
+  
+      <select class="form-control col-md-9" name="reports" [(ngModel)]="roles.reports">
+        <option [value]="0">Block</option>
+        <option [value]="1">View</option>
+        <option [value]="2">Create</option>      
+      </select>
+    </div>
+
+    <br>
+    <br>
+  </div>
+</div>

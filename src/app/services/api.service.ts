@@ -197,6 +197,34 @@ export class ApiService {
     });
   }
 
+  getRoles(coUserId: string) : Observable<UserRoles> {
+    let base = this.get('/user/role/' + coUserId);
+
+    return base.pipe(
+      map(data => {
+        let roles = new UserRoles();
+
+        if (data.success) {
+          roles.release_order = data.msg.Release_order;
+          roles.invoice = data.msg.Invoice;
+          roles.payment_receipts = data.msg.Payment_receipts;
+          roles.accounts = data.msg.Accounts;
+          roles.reports = data.msg.Reports;
+
+          if (data.msg.directory) {
+            let dir = data.msg.directory;
+
+            roles.media_house = dir.media_house;
+            roles.clients = dir.clients;
+            roles.executives = dir.executives;
+          }
+        }
+
+        return roles;
+      })
+    );
+  }
+
   getUser() : Observable<any> {
     return this.get('/user/profile');
   }
