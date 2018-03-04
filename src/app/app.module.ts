@@ -9,10 +9,12 @@ import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
-import { AuthGuardService } from './services/auth-guard.service';
-import { PhoneVerifyGuardService } from './services/phone-verify-guard.service';
-import { AdminGuardService } from './services/admin-guard.service';
-import { PlanGuardService } from './services/plan-guard.service';
+
+import { AuthGuard } from './guards/auth-guard.service';
+import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
+import { AdminGuard } from './guards/admin-guard.service';
+import { PlanGuard } from './guards/plan-guard.service';
+import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -74,10 +76,11 @@ import { RoleEditComponent } from './components/role-edit/role-edit.component';
     WindowService,
     RazorPayService,
     IfscService,
-    AuthGuardService,
-    PhoneVerifyGuardService,
-    AdminGuardService,
-    PlanGuardService
+    AuthGuard,
+    PhoneVerifyGuard,
+    AdminGuard,
+    PlanGuard,
+    CanDeactiveGuard
   ],
   bootstrap: [AppComponent]
 })

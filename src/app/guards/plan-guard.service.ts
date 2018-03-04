@@ -1,39 +1,38 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationExtras } from '@angular/router';
-import { ApiService } from './api.service';
+import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 @Injectable()
-export class PhoneVerifyGuardService implements CanActivate {
+export class PlanGuard implements CanActivate {
 
   constructor(private api: ApiService, private router: Router) { }
 
-  private goToMobileVerify() {
-    this.router.navigateByUrl('/verify/mobile');
+  private goToPlan() {
+    this.router.navigateByUrl('/plan');
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
 
-    console.log('phone guard');
+    console.log('plan guard');
 
-    return this.api.getUser().pipe(
+    return this.api.getFirm().pipe(
       map(data => {
-        const result = data.success && data.user.phone && data.user.mobile_verified;
+        const result = data.success && data.firm.plan != null;
 
         if (!result) {
-          this.goToMobileVerify();
+          this.goToPlan();
         }
 
         return result;
-      },
+      }),
       catchError(err => {
-        this.goToMobileVerify();
+        this.goToPlan();
 
         return of(false);
-      }))
-    );
+      }));
   }
 }
