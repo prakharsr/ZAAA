@@ -9,21 +9,22 @@ import { PlanGuard } from './guards/plan-guard.service';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ProfileViewComponent } from './components/profile-view/profile-view.component';
 import { CoUsersComponent } from './components/co-users/co-users.component';
-import { TemplateSelectorComponent } from './components/template-selector/template-selector.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
-import { FirmProfileEditComponent } from './components/firm-profile-edit/firm-profile-edit.component';
 import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.component';
-import { PlanSelectorComponent } from './components/plan-selector/plan-selector.component';
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { NewCoUserComponent } from './components/new-co-user/new-co-user.component';
-import { RoleEditComponent } from './components/role-edit/role-edit.component';
 import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
+
+import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
+import { NewCoUserComponent } from './admin/new-co-user/new-co-user.component';
+import { ProfileEditComponent } from './admin/profile-edit/profile-edit.component';
+import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
+import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
+import { RoleEditComponent } from './admin/role-edit/role-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
