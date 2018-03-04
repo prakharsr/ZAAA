@@ -11,11 +11,11 @@ export class CanDeactiveGuard implements CanDeactivate<CanComponentDeactivate> {
   canDeactivate(component: CanComponentDeactivate,
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-      let result = component.canDeactivate ? component.canDeactivate() : true;
+      // let result = component.canDeactivate ? component.canDeactivate() : true;
 
-      if (!result) {
-        return this.dialog.confirm("Discard changes?");
-      }
+      // if (!result) {
+      //   return this.dialog.confirm("Discard changes?");
+      // }
 
       return true;
   }
