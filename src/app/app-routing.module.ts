@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPswComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuardService] },
-  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
+  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuardService, PhoneVerifyGuardService, PlanGuardService] },
   { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AdminGuardService, PhoneVerifyGuardService, PlanGuardService] },
