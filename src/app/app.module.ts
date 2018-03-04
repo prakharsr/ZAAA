@@ -9,6 +9,7 @@ import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
+import { DialogService } from './services/dialog.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
@@ -76,6 +77,7 @@ import { RoleEditComponent } from './components/role-edit/role-edit.component';
     WindowService,
     RazorPayService,
     IfscService,
+    DialogService,
     AuthGuard,
     PhoneVerifyGuard,
     AdminGuard,

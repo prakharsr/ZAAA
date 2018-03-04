@@ -1,9 +1,11 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
 import { IfscService } from '../../services/ifsc.service';
 import { routerAnimation } from '../../animations';
 import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
+import { NgForm } from '@angular/forms';
+import { CanComponentDeactivate } from '../../guards/canComponentDeactivate';
 
 @Component({
   selector: 'app-firm-profile-edit',
@@ -11,9 +13,11 @@ import { environment } from '../../../environments/environment';
   templateUrl: './firm-profile-edit.component.html',
   styleUrls: ['./firm-profile-edit.component.css']
 })
-export class FirmProfileEditComponent implements OnInit {
+export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
+
+  @ViewChild('profileForm') profileForm: NgForm;
 
   profile = new Firm();
   error: string;
@@ -23,6 +27,10 @@ export class FirmProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
+  }
+
+  canDeactivate() {
+    return !this.profileForm.dirty;
   }
 
   ifscChanged() {
