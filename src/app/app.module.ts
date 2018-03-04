@@ -3,18 +3,6 @@ import { BaseModule } from './base.module';
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './/app-routing.module';
 
-import { ApiService } from './services/api.service';
-import { RazorPayService } from './services/razorpay.service';
-import { WindowService } from './services/window.service';
-import { IfscService } from './services/ifsc.service';
-import { DialogService } from './services/dialog.service';
-
-import { AuthGuard } from './guards/auth-guard.service';
-import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
-import { AdminGuard } from './guards/admin-guard.service';
-import { PlanGuard } from './guards/plan-guard.service';
-import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -50,18 +38,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppRoutingModule,
     AdminModule
   ],
-  providers: [
-    ApiService,
-    WindowService,
-    RazorPayService,
-    IfscService,
-    DialogService,
-    AuthGuard,
-    PhoneVerifyGuard,
-    AdminGuard,
-    PlanGuard,
-    CanDeactiveGuard
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
