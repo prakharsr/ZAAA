@@ -12,6 +12,8 @@ export class Firm {
     panNo : string;
     gstNo : string;
 
+    incDate: Date;
+
     bankAccountName : string;
     bankAccountNo : string;
     bankName : string;

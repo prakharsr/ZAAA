@@ -304,6 +304,8 @@ export class ApiService {
           profile.phone = data.firm.Mobile;
           profile.email = data.firm.Email;
 
+          profile.incDate = data.firm.IncorporationDate;
+
           if (data.firm.LogoURL) {
             profile.logo = environment.uploadsBaseUrl + data.firm.LogoURL;
           }
@@ -339,6 +341,8 @@ export class ApiService {
       website: firm.website,
       pan: firm.panNo,
       gst: firm.gstNo,
+
+      incorporationDate: firm.incDate,
 
       email: firm.email,
       mobile: firm.phone,

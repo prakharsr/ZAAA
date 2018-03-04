@@ -51,13 +51,13 @@
       </div>
     
       <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="nickname">State</label>
-        <input type="text" class="form-control col-md-9" id="state" name="state" placeholder="Enter State" [(ngModel)]="profile.state" #stateField="ngModel">
+        <label class="col-md-3 col-form-label" for="incDate">Incorporation Date</label>
+        <input type="date" class="form-control col-md-9" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
       </div>
 
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
+      <div class="form-group form-row">
+        <label class="col-md-3 col-form-label" for="email">Email address</label>
+        <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
       </div>
     
       <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
@@ -70,9 +70,9 @@
         <br>
       </div>
 
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" [(ngModel)]="profile.phone" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
+      <div class="form-group form-row">
+        <label class="col-md-3 col-form-label" for="phone">Phone Number</label>
+        <input type="tel" [(ngModel)]="profile.phone" required class="form-control col-md-9" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
       </div>
 
       <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
