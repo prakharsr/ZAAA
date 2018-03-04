@@ -301,6 +301,9 @@ export class ApiService {
           profile.registeredAddress = data.firm.RegisteredAddress;
           profile.officeAddress = data.firm.OfficeAddress;
 
+          profile.phone = data.firm.Mobile;
+          profile.email = data.firm.Email;
+
           if (data.firm.LogoURL) {
             profile.logo = environment.uploadsBaseUrl + data.firm.LogoURL;
           }
@@ -336,6 +339,9 @@ export class ApiService {
       website: firm.website,
       pan: firm.panNo,
       gst: firm.gstNo,
+
+      email: firm.email,
+      mobile: firm.phone,
 
       accountName: firm.bankAccountName,
       accountNo: firm.bankAccountNo,

@@ -6,6 +6,9 @@ export class Firm {
     fax: string;
     website: string;
 
+    email: string;
+    phone: string;
+
     panNo : string;
     gstNo : string;
 
