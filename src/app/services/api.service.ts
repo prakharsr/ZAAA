@@ -151,9 +151,10 @@ export class ApiService {
     return this.get('/user/co_user');
   }
 
-  createCoUser(name: string, email: string, phone: string, password: string) : Observable<any> {
+  createCoUser(name: string, designation: string, email: string, phone: string, password: string) : Observable<any> {
     return this.post('/user/co_user', {
       name: name,
+      designation: designation,
       email: email,
       phone: phone,
       password: password

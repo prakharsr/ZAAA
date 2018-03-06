@@ -45,7 +45,7 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
   submit() {
     this.error = '';
 
-    this.api.createCoUser(this.name, this.email, this.phone, this.password).subscribe(
+    this.api.createCoUser(this.name, this.designation, this.email, this.phone, this.password).subscribe(
       data => {
         if (data.success)
         {
