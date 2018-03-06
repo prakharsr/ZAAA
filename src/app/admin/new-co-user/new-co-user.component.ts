@@ -24,7 +24,6 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
   email: string;
   phone: string;
   password: string;
-  cpassword: string;
   roles = new UserRoles();
 
   error: string;

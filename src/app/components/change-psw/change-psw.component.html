@@ -27,20 +27,6 @@
       <br>
     </div>
 
-    <div class="form-group">
-      <label for="cpassword">Confirm New Password</label>
-      <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm New Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
-    </div>
-
-    <div *ngIf="cpasswordField.invalid && (cpasswordField.dirty || cpasswordField.touched)" class="text-danger">
-      <div *ngIf="cpasswordField.errors.required">
-        New Password confirmation is required.
-      </div>
-    </div>
-    <div *ngIf="password != cpassword" class="text-danger">
-      Passwords don't match.
-    </div>
-
     <br>
 
     <div class="text-danger" *ngIf="error">
@@ -53,5 +39,5 @@
 
       <br><br>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="!changePswForm.form.valid || password != cpassword">Change</button>
+    <button type="submit" class="btn btn-success" [disabled]="!changePswForm.form.valid">Change</button>
  </form>
