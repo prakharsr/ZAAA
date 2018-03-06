@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { CoUser } from '../../models/coUser';
 import { ApiService } from '../../services/api.service';
 import { routerAnimation } from '../../animations';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-co-users',
@@ -17,7 +18,7 @@ export class CoUsersComponent implements OnInit {
 
   coUsers: CoUser[] = [];
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private dialog: DialogService) { }
 
   ngOnInit() {
     this.api.coUsers.subscribe(data => {
@@ -38,11 +39,19 @@ export class CoUsersComponent implements OnInit {
   }
 
   delete(coUser: CoUser) {
-    this.api.deleteCoUser(coUser).subscribe(
-      data => {
-        if (data.success) {
-          this.coUsers = this.coUsers.filter(h => h.id !== coUser.id);
+    this.dialog.confirm("Are you sure want to delete this Co-User?").subscribe(
+      confirm => {
+        if (!confirm) {
+          return;
         }
+
+        this.api.deleteCoUser(coUser).subscribe(
+          data => {
+            if (data.success) {
+              this.coUsers = this.coUsers.filter(h => h.id !== coUser.id);
+            }
+          }
+        );
       }
     );
   }
