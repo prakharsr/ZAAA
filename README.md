@@ -1,6 +1,7 @@
-# ZAAA
-Zenedo Advertising Agency Alliance
+# AAMan
 
-![Logo](src/assets/zenedo.jpeg)
+Advertising Agency Manager
+
+![Logo](src/assets/logo.jpg)
 
 A complete system to manage advertising agencies.
