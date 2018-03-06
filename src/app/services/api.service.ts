@@ -189,10 +189,7 @@ export class ApiService {
       release_order: roles.release_order,
       invoice: roles.invoice,
       payment_receipts: roles.payment_receipts,
-      accounts: roles.accounts,
-      media_house: roles.media_house,
-      clients: roles.clients,
-      executives: roles.executives 
+      accounts: roles.accounts
     });
   }
 
@@ -208,14 +205,6 @@ export class ApiService {
           roles.invoice = data.msg.Invoice;
           roles.payment_receipts = data.msg.Payment_receipts;
           roles.accounts = data.msg.Accounts;
-
-          if (data.msg.directory) {
-            let dir = data.msg.directory;
-
-            roles.media_house = dir.media_house;
-            roles.clients = dir.clients;
-            roles.executives = dir.executives;
-          }
         }
 
         return roles;
