@@ -6,7 +6,7 @@
 <br>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-6">
     <h3>Personal Details</h3>
     <div class="row detailView">
       <div class="col-md-3">Name</div>
@@ -18,7 +18,7 @@
       <div class="col-md-9">{{profile.designation}}</div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <h3>Profile Picture</h3>
 
     <br>
@@ -30,10 +30,9 @@
     <label for="profile-upload" class="file-upload">
         Upload
     </label>
-    <input type="file" id="profile-upload" class="hidden-file" (change)="uploadProfilePicture($event.target.files)"/>
-
-    <br><br>
-
+    <input type="file" id="profile-upload" class="hidden-file" (change)="uploadProfilePicture($event.target.files)"/>  
+  </div>
+  <div class="col-md-3">
     <h3>Signature</h3>
 
     <br>
@@ -46,7 +45,5 @@
         Upload
     </label>
     <input type="file" id="sign-upload" class="hidden-file" (change)="uploadSign($event.target.files)"/>
-
-    <br>
   </div>
 </div>

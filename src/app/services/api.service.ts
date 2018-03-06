@@ -191,7 +191,6 @@ export class ApiService {
       invoice: roles.invoice,
       payment_receipts: roles.payment_receipts,
       accounts: roles.accounts,
-      reports: roles.reports,
       media_house: roles.media_house,
       clients: roles.clients,
       executives: roles.executives 
@@ -210,7 +209,6 @@ export class ApiService {
           roles.invoice = data.msg.Invoice;
           roles.payment_receipts = data.msg.Payment_receipts;
           roles.accounts = data.msg.Accounts;
-          roles.reports = data.msg.Reports;
 
           if (data.msg.directory) {
             let dir = data.msg.directory;
