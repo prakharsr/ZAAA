@@ -1,6 +1,9 @@
-<div>
-  <a class="btn btn-primary" routerLink="/profile/edit"><span class="fa fa-pencil-alt"></span> Edit</a>
-</div>
+<br>
+
+<ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+<ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+<br>
 
 <div class="row">
   <div class="col-md-8">
@@ -14,28 +17,36 @@
       <div class="col-md-3">Designation</div>
       <div class="col-md-9">{{profile.designation}}</div>
     </div>
-
-    <h3>Social Details</h3>
-    <div class="row detailView">
-      <div class="col-md-3">Facebook</div>
-      <div class="col-md-9"><a href="{{profile.facebook}}" target="_blank">{{profile.facebook}}</a></div>
-    </div>
-
-    <div class="row detailView">
-      <div class="col-md-3">Twitter</div>
-      <div class="col-md-9"><a href="{{profile.twitter}}" target="_blank">{{profile.twitter}}</a></div>
-    </div>
-
-    <div class="row detailView">
-      <div class="col-md-3">Others</div>
-      <div class="col-md-9"><a href="{{profile.other}}" target="_blank">{{profile.other}}</a></div>
-    </div>
   </div>
   <div class="col-md-4">
     <h3>Profile Picture</h3>
+
+    <br>
+    
     <img [src]="profile.photo" class="img-fluid max-w-200">
+    
+    <br><br>
+    
+    <label for="profile-upload" class="file-upload">
+        Upload
+    </label>
+    <input type="file" id="profile-upload" class="hidden-file" (change)="uploadProfilePicture($event.target.files)"/>
+
+    <br><br>
 
     <h3>Signature</h3>
+
+    <br>
+    
     <img [src]="profile.sign" class="img-fluid max-w-200">
+    
+    <br><br>
+    
+    <label for="sign-upload" class="file-upload">
+        Upload
+    </label>
+    <input type="file" id="sign-upload" class="hidden-file" (change)="uploadSign($event.target.files)"/>
+
+    <br>
   </div>
 </div>

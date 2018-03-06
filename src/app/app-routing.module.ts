@@ -21,7 +21,6 @@ import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 
 import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
 import { NewCoUserComponent } from './admin/new-co-user/new-co-user.component';
-import { ProfileEditComponent } from './admin/profile-edit/profile-edit.component';
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
 import { RoleEditComponent } from './admin/role-edit/role-edit.component';
@@ -32,7 +31,6 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPswComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuard] },
-  { path: "profile/edit", component: ProfileEditComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard], canDeactivate: [CanDeactiveGuard] },
   { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard], canDeactivate: [CanDeactiveGuard] },
