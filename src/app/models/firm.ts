@@ -24,6 +24,10 @@ export class Firm {
     tagline : string;
     nickname : string;
     state : string;
+    
+    facebook : string;
+    twitter: string;
+    other: string;
 
     logo: string;
 

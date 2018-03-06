@@ -197,6 +197,25 @@
           <option value="Savings">Savings</option>
         </select>
       </div>
+      
+      <br>
+      <h3>Social</h3>
+      <br>
+    
+      <div class="form-group form-row">
+        <label class="col-md-3 col-form-label" for="nickname">Facebook</label>
+        <input type="text" class="form-control col-md-9" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
+      </div>
+    
+      <div class="form-group form-row">
+        <label class="col-md-3 col-form-label" for="nickname">Twitter</label>
+        <input type="text" class="form-control col-md-9" id="twitter" name="twitter" placeholder="Enter Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
+      </div>
+    
+      <div class="form-group form-row">
+        <label class="col-md-3 col-form-label" for="nickname">Others</label>
+        <input type="text" class="form-control col-md-9" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
+      </div>
     
       <br>
 

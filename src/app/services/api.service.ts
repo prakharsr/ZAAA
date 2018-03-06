@@ -248,12 +248,6 @@ export class ApiService {
           if (data.user.signature) {
             profile.sign = environment.uploadsBaseUrl + data.user.signature;
           }
-
-          if (data.user.Socials) {
-            profile.facebook = data.user.Socials.fb;
-            profile.twitter = data.user.Socials.twitter;
-            profile.other = data.user.Socials.other;
-          }
         }
 
         return profile;
@@ -266,10 +260,7 @@ export class ApiService {
   setUserProfile(userProfile: UserProfile) : Observable<any> {
     return this.post('/user/profile', {
       name: userProfile.name,
-      designation: userProfile.designation,
-      fb: userProfile.facebook,
-      twitter: userProfile.twitter,
-      other: userProfile.other
+      designation: userProfile.designation
     });
   }
 
@@ -321,6 +312,12 @@ export class ApiService {
             profile.bankBranchAddress = bank.BranchAddress;
             profile.bankAccountType = bank.AccountType;
           }
+
+          if (data.firm.Socials) {
+            profile.facebook = data.firm.Socials.fb;
+            profile.twitter = data.firm.Socials.twitter;
+            profile.other = data.firm.Socials.other;
+          }
         }
 
         return profile;
@@ -353,7 +350,11 @@ export class ApiService {
       ifsc: firm.bankIfsc,
       bankName: firm.bankName,
       bankAddress: firm.bankBranchAddress,
-      accountType: firm.bankAccountType
+      accountType: firm.bankAccountType,
+
+      fb: firm.facebook,
+      twitter: firm.twitter,
+      other: firm.other
     });
   }
 
