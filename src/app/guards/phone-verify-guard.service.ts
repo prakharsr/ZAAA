@@ -17,8 +17,6 @@ export class PhoneVerifyGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
 
-    console.log('phone guard');
-
     return this.api.getUser().pipe(
       map(data => {
         const result = data.success && data.user.phone && data.user.mobile_verified;

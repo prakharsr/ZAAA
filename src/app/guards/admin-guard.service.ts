@@ -17,8 +17,6 @@ export class AdminGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
 
-    console.log('admin guard');
-
     return this.api.getUser().pipe(
       map(data => {
         const result = data.success && data.user.isAdmin;

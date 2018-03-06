@@ -23,7 +23,6 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
   designation: string;
   email: string;
   phone: string;
-  password: string;
   roles = new UserRoles();
 
   error: string;
@@ -44,7 +43,7 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
   submit() {
     this.error = '';
 
-    this.api.createCoUser(this.name, this.designation, this.email, this.phone, this.password).subscribe(
+    this.api.createCoUser(this.name, this.designation, this.email, this.phone).subscribe(
       data => {
         if (data.success)
         {

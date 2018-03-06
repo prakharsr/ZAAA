@@ -17,8 +17,6 @@ export class PlanGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
 
-    console.log('plan guard');
-
     return this.api.getFirm().pipe(
       map(data => {
         const result = data.success && data.firm.plan != null;
