@@ -116,10 +116,9 @@ export class ApiService {
     );
   }
 
-  signup(name: string, email: string, password: string) : Observable<any>
+  signup(email: string, password: string) : Observable<any>
   {
     const base = this.post('/user/signup', {
-      name: name,
       email: email,
       password: password
     });

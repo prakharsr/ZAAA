@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  name: string;
   email: string;
   password: string;
   acceptTnC: boolean;
@@ -31,7 +30,7 @@ export class RegisterComponent implements OnInit {
   {
     this.error = '';
 
-    this.api.signup(this.name, this.email, this.password).subscribe(
+    this.api.signup(this.email, this.password).subscribe(
       data => {
         if (data.success) {
           this.GoToDashboard();
