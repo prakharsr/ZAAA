@@ -1,7 +1,8 @@
 <div>
     <h2>Co-Users</h2>
     <br>
-    <a class="btn btn-primary" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span> Add New</a>
+
+    <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
 
     <div *ngFor="let coUser of coUsers" class="co-user">
         <div *ngIf="admin" style="float:right">

@@ -17,3 +17,36 @@
     padding: 6px 12px;
     cursor: pointer;
 }
+
+.fab {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition:.3s;
+    background-color:#F44336;
+    z-index: 10;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    cursor: pointer;
+    display: block;
+}
+
+.fab .fa {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 8px);
+}
+
+.fab:hover {
+    transform: scale(1.1);
+}
+
+.fab:focus {
+    outline: none;
+}
