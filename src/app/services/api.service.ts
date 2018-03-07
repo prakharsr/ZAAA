@@ -116,14 +116,12 @@ export class ApiService {
     );
   }
 
-  signup(email: string, password: string) : Observable<any>
+  signup(name: string, email: string) : Observable<any>
   {
-    const base = this.post('/user/signup', {
-      email: email,
-      password: password
+    return this.post('/user/signup', {
+      name: name,
+      email: email
     });
-
-    return this.extractToken(base);
   }
 
   login(emailOrPhone: string, password: string): Observable<any> {

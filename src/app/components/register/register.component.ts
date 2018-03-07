@@ -13,8 +13,8 @@ export class RegisterComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
+  name: string;
   email: string;
-  password: string;
   acceptTnC: boolean;
   error: string;
 
@@ -22,18 +22,18 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() { }
 
-  GoToDashboard() : void {
-    this.router.navigateByUrl('/dashboard');
+  GoToLogin() : void {
+    this.router.navigateByUrl('/login');
   }
 
   submit()
   {
     this.error = '';
 
-    this.api.signup(this.email, this.password).subscribe(
+    this.api.signup(this.name, this.email).subscribe(
       data => {
         if (data.success) {
-          this.GoToDashboard();
+          this.GoToLogin();
         }
         else {
           console.log(data);

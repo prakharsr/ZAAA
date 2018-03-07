@@ -4,6 +4,18 @@
 
 <form (ngSubmit)="submit()" #signUpForm="ngForm">  
   <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+  </div>
+
+  <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+    <div *ngIf="nameField.errors.required">
+      Name is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group">
     <label for="email">Email address</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
   </div>
@@ -14,18 +26,6 @@
     </div>
     <div *ngIf="!emailField.errors.required && emailField.errors.email">
       Invalid Email.
-    </div>
-    <br>
-  </div>
-
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" [(ngModel)]="password" required #passwordField="ngModel">
-  </div>
-
-  <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
-    <div *ngIf="passwordField.errors.required">
-      Password is required.
     </div>
     <br>
   </div>
