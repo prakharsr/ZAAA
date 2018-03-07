@@ -10,12 +10,10 @@ import { Template } from '../models/template';
 import { User } from '../models/user';
 
 import { WindowService } from './window.service';
-import { UserRoles } from '../models/userRoles';
 
 import { environment } from '../../environments/environment';
 import { UserProfile } from '../models/userProfile';
 import { Firm } from '../models/firm';
-import { CoUser } from '../models/coUser';
 
 @Injectable()
 export class ApiService {
@@ -79,10 +77,6 @@ export class ApiService {
     return this.http.delete(environment.apiUrl + url, this.headers);
   }
 
-  deleteCoUser(coUser: CoUser) : Observable<any> {
-    return this.delete('/user/co_user/' + coUser.id);
-  }
-
   fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
     const formData = new FormData();
     formData.append(key, fileToUpload, fileToUpload.name);
@@ -118,10 +112,12 @@ export class ApiService {
 
   signup(name: string, email: string) : Observable<any>
   {
-    return this.post('/user/signup', {
+    const base = this.post('/user/signup', {
       name: name,
       email: email
     });
+
+    return this.extractToken(base);
   }
 
   login(emailOrPhone: string, password: string): Observable<any> {
@@ -142,19 +138,6 @@ export class ApiService {
 
   get plans() : Observable<any> {
     return this.get('/plans');
-  }
-
-  get coUsers() : Observable<any> {
-    return this.get('/user/co_user');
-  }
-
-  createCoUser(name: string, designation: string, email: string, phone: string) : Observable<any> {
-    return this.post('/user/co_user', {
-      name: name,
-      designation: designation,
-      email: email,
-      phone: phone
-    });
   }
 
   get templates() : Observable<Template[]> {
@@ -178,35 +161,6 @@ export class ApiService {
 
   setMobile(phone: string) : Observable<any> {
     return this.post('/user/mobile', { phone: phone });
-  }
-
-  setRoles(coUserId : string, roles : UserRoles) : Observable<any> {
-    return this.post('/user/role', { 
-      id: coUserId,
-      release_order: roles.release_order,
-      invoice: roles.invoice,
-      payment_receipts: roles.payment_receipts,
-      accounts: roles.accounts
-    });
-  }
-
-  getRoles(coUserId: string) : Observable<UserRoles> {
-    let base = this.get('/user/role/' + coUserId);
-
-    return base.pipe(
-      map(data => {
-        let roles = new UserRoles();
-
-        if (data.success) {
-          roles.release_order = data.msg.Release_order;
-          roles.invoice = data.msg.Invoice;
-          roles.payment_receipts = data.msg.Payment_receipts;
-          roles.accounts = data.msg.Accounts;
-        }
-
-        return roles;
-      })
-    );
   }
 
   getUser() : Observable<any> {

@@ -1,8 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { CoUser } from '../../models/coUser';
-import { ApiService } from '../../services/api.service';
+import { CoUser } from '../coUser';
 import { routerAnimation } from '../../animations';
 import { DialogService } from '../../services/dialog.service';
+import { CoUserApiService } from '../co-user-api.service';
 
 @Component({
   selector: 'app-co-users',
@@ -18,7 +18,7 @@ export class CoUsersComponent implements OnInit {
 
   coUsers: CoUser[] = [];
 
-  constructor(private api: ApiService, private dialog: DialogService) { }
+  constructor(private api: CoUserApiService, private dialog: DialogService) { }
 
   ngOnInit() {
     this.api.coUsers.subscribe(data => {

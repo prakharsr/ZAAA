@@ -1,11 +1,11 @@
 import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
-import { CoUser } from '../../models/coUser';
-import { ApiService } from '../../services/api.service';
-import { UserRoles } from '../../models/userRoles';
+import { CoUser } from '../coUser';
+import { UserRoles } from '../userRoles';
 import { routerAnimation } from '../../animations';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { CanComponentDeactivate } from '../../guards/canComponentDeactivate';
+import { CoUserApiService } from '../co-user-api.service';
 
 @Component({
   selector: 'app-new-co-user',
@@ -27,7 +27,7 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
 
   error: string;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: CoUserApiService, private router: Router) { }
 
   ngOnInit() {
   }

@@ -22,8 +22,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() { }
 
-  GoToLogin() : void {
-    this.router.navigateByUrl('/login');
+  GoToDashboard() : void {
+    this.router.navigateByUrl('/dashboard');
   }
 
   submit()
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
     this.api.signup(this.name, this.email).subscribe(
       data => {
         if (data.success) {
-          this.GoToLogin();
+          this.GoToDashboard();
         }
         else {
           console.log(data);
