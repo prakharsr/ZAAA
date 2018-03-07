@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirClient } from '../../models/dirClient';
+import { DirClient } from '../dirClient';
 
 @Component({
   selector: 'app-dir-client',

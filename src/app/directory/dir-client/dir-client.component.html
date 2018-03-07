@@ -124,7 +124,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="name">Name</label>
-    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter PAN Number" [(ngModel)]="client.name" required #nameField="ngModel">
+    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter PAN Number" [(ngModel)]="client.contactPerson.name" required #nameField="ngModel">
   </div>
 
   <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
@@ -136,7 +136,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="designation">Designation</label>
-    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="client.designation" required #designationField="ngModel">
+    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="client.contactPerson.designation" required #designationField="ngModel">
   </div>
 
   <div *ngIf="designationField.invalid && (designationField.dirty || designationField.touched)" class="text-danger">
@@ -148,7 +148,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="department">Department</label>
-    <input type="text" class="form-control col-md-9" id="department" name="department" placeholder="Enter Department" [(ngModel)]="client.department" required #departmentField="ngModel">
+    <input type="text" class="form-control col-md-9" id="department" name="department" placeholder="Enter Department" [(ngModel)]="client.contactPerson.department" required #departmentField="ngModel">
   </div>
 
   <div *ngIf="departmentField.invalid && (departmentField.dirty || departmentField.touched)" class="text-danger">
@@ -160,7 +160,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="mobileNo">Mobile Number</label>
-    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="client.mobileNo" required #mobileNoField="ngModel">
+    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="client.contactPerson.mobileNo" required #mobileNoField="ngModel">
   </div>
 
   <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
@@ -172,7 +172,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="email">Email</label>
-    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter Email" [(ngModel)]="client.email" required #emailField="ngModel">
+    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter Email" [(ngModel)]="client.contactPerson.email" required #emailField="ngModel">
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
@@ -186,7 +186,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="dob">Date of birth</label>
-    <input type="text" class="form-control col-md-9" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="client.dob" required #dobField="ngModel">
+    <input type="text" class="form-control col-md-9" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="client.contactPerson.dob" required #dobField="ngModel">
   </div>
 
   <div *ngIf="dobField.invalid && (dobField.dirty || dobField.touched)" class="text-danger">
@@ -198,7 +198,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="anniversaryDate">Anniversary Date</label>
-    <input type="text" class="form-control col-md-9" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="client.anniversaryDate" required #anniversaryDateField="ngModel">
+    <input type="text" class="form-control col-md-9" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="client.contactPerson.anniversaryDate" required #anniversaryDateField="ngModel">
   </div>
 
   <div *ngIf="anniversaryDateField.invalid && (anniversaryDateField.dirty || anniversaryDateField.touched)" class="text-danger">

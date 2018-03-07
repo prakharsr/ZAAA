@@ -97,7 +97,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="person">Person</label>
-    <input type="text" class="form-control col-md-9" id="person" name="person" placeholder="Enter Person" [(ngModel)]="mediaHouse.person" required #personField="ngModel">
+    <input type="text" class="form-control col-md-9" id="person" name="person" placeholder="Enter Person" [(ngModel)]="mediaHouse.scheduling.person" required #personField="ngModel">
   </div>
 
   <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
@@ -109,7 +109,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="designation">Designation</label>
-    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.designation" required #designationField="ngModel">
+    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.scheduling.designation" required #designationField="ngModel">
   </div>
 
   <div *ngIf="designationField.invalid && (designationField.dirty || designationField.touched)" class="text-danger">
@@ -121,7 +121,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="mobileNo">Mobile Number</label>
-    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="mediaHouse.mobileNo" required #mobileNoField="ngModel">
+    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="mediaHouse.scheduling.mobileNo" required #mobileNoField="ngModel">
   </div>
 
   <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
@@ -133,7 +133,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="deskExtension">Desk Extension</label>
-    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.deskExtension" required #deskExtensionField="ngModel">
+    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.scheduling.deskExtension" required #deskExtensionField="ngModel">
   </div>
 
   <div *ngIf="deskExtensionField.invalid && (deskExtensionField.dirty || deskExtensionField.touched)" class="text-danger">
@@ -145,7 +145,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="email">E-mail</label>
-    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.email" required #emailField="ngModel">
+    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.scheduling.email" required #emailField="ngModel">
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirMediaHouse } from '../../models/dirMediaHouse';
+import { DirMediaHouse } from '../dirMediaHouse';
 
 @Component({
   selector: 'app-dir-media-house',

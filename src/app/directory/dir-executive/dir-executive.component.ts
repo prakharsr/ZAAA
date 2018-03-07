@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirExecutive } from '../../models/dirExecutive';
+import { DirExecutive } from '../dirExecutive';
 
 @Component({
   selector: 'app-dir-executive',
@@ -16,5 +16,7 @@ export class DirExecutiveComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  submit() {}
 
 }
