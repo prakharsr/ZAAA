@@ -10,13 +10,13 @@
   <br>
 
   <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="orgName">Organisation Name</label>
-    <input type="text" class="form-control col-md-9" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
+    <label class="col-md-3 col-form-label" for="orgName">Organisation / Individual Name</label>
+    <input type="text" class="form-control col-md-9" id="orgName" name="orgName" placeholder="Enter Organisation / Individual Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
   </div>
 
   <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
     <div *ngIf="orgNameField.errors.required">
-      Organisation Name is required.
+      Organisation / Individual Name is required.
     </div>
     <br>
   </div>
@@ -35,89 +35,37 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="nickName">Nick Name</label>
-    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="client.nickName" required #nickNameField="ngModel">
-  </div>
-
-  <div *ngIf="nickNameField.invalid && (nickNameField.dirty || nickNameField.touched)" class="text-danger">
-    <div *ngIf="nickNameField.errors.required">
-      Nick Name is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="client.nickName" #nickNameField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="category">Category / Type</label>
-    <input type="text" class="form-control col-md-9" id="category" name="category" placeholder="Enter Category" [(ngModel)]="client.category" required #categoryField="ngModel">
-  </div>
-
-  <div *ngIf="categoryField.invalid && (categoryField.dirty || categoryField.touched)" class="text-danger">
-    <div *ngIf="categoryField.errors.required">
-      category / type is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="category" name="category" placeholder="Enter Category" [(ngModel)]="client.category" #categoryField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="address">Address</label>
-    <input type="text" class="form-control col-md-9" id="address" name="address" placeholder="Enter Address" [(ngModel)]="client.address" required #addressField="ngModel">
+    <input type="text" class="form-control col-md-9" id="address" name="address" placeholder="Enter Address" [(ngModel)]="client.address" #addressField="ngModel">
   </div>
-
-  <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
-    <div *ngIf="addressField.errors.required">
-      Address is required.
-    </div>
-    <br>
-  </div>
-
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="landLine">Landline</label>
-    <input type="text" class="form-control col-md-9" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" required #landLineField="ngModel">
+    <input type="text" class="form-control col-md-9" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
   </div>
-
-  <div *ngIf="landLineField.invalid && (landLineField.dirty || landLineField.touched)" class="text-danger">
-    <div *ngIf="landLineField.errors.required">
-      Land Line is required.
-    </div>
-    <br>
-  </div>
-
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="website">Website</label>
-    <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="client.website" required #websiteField="ngModel">
+    <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="client.website" #websiteField="ngModel">
   </div>
-
-  <div *ngIf="websiteField.invalid && (websiteField.dirty || websiteField.touched)" class="text-danger">
-    <div *ngIf="websiteField.errors.required">
-      Website is required.
-    </div>
-    <br>
-  </div>
-
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="panNo">PAN Number</label>
-    <input type="text" class="form-control col-md-9" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="client.panNo" required #panNoField="ngModel">
-  </div>
-
-  <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
-    <div *ngIf="panNoField.errors.required">
-      PAN Number is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="client.panNo" #panNoField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="gstNo">GST Number</label>
-    <input type="text" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="client.gstNo" required #gstNoField="ngModel">
-  </div>
-
-  <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-    <div *ngIf="gstNoField.errors.required">
-      GST Number is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
   </div>
 
   <h3>Contact Person</h3>
@@ -136,26 +84,12 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="designation">Designation</label>
-    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="client.contactPerson.designation" required #designationField="ngModel">
-  </div>
-
-  <div *ngIf="designationField.invalid && (designationField.dirty || designationField.touched)" class="text-danger">
-    <div *ngIf="designationField.errors.required">
-      Designation is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="client.contactPerson.designation" #designationField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="department">Department</label>
-    <input type="text" class="form-control col-md-9" id="department" name="department" placeholder="Enter Department" [(ngModel)]="client.contactPerson.department" required #departmentField="ngModel">
-  </div>
-
-  <div *ngIf="departmentField.invalid && (departmentField.dirty || departmentField.touched)" class="text-danger">
-    <div *ngIf="departmentField.errors.required">
-      Department is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="department" name="department" placeholder="Enter Department" [(ngModel)]="client.contactPerson.department" #departmentField="ngModel">
   </div>
 
   <div class="form-group form-row">
@@ -172,12 +106,15 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="email">Email</label>
-    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter Email" [(ngModel)]="client.contactPerson.email" required #emailField="ngModel">
+    <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter Email" [(ngModel)]="client.contactPerson.email" required #emailField="ngModel" email>
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
     <div *ngIf="emailField.errors.required">
       Email is required.
+    </div>
+    <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      Invalid Email.
     </div>
     <br>
   </div>
@@ -186,26 +123,12 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="dob">Date of birth</label>
-    <input type="text" class="form-control col-md-9" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="client.contactPerson.dob" required #dobField="ngModel">
-  </div>
-
-  <div *ngIf="dobField.invalid && (dobField.dirty || dobField.touched)" class="text-danger">
-    <div *ngIf="dobField.errors.required">
-      Date of birth is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="client.contactPerson.dob" #dobField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="anniversaryDate">Anniversary Date</label>
-    <input type="text" class="form-control col-md-9" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="client.contactPerson.anniversaryDate" required #anniversaryDateField="ngModel">
-  </div>
-
-  <div *ngIf="anniversaryDateField.invalid && (anniversaryDateField.dirty || anniversaryDateField.touched)" class="text-danger">
-    <div *ngIf="anniversaryDateField.errors.required">
-      Anniversary Date is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="client.contactPerson.anniversaryDate" #anniversaryDateField="ngModel">
   </div>
 
   <br>

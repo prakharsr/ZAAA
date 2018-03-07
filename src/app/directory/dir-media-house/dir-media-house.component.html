@@ -35,14 +35,7 @@
     
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="nickName">Nick Name</label>
-    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" required #nickNameField="ngModel">
-  </div>
-
-  <div *ngIf="nickNameField.invalid && (nickNameField.dirty || nickNameField.touched)" class="text-danger">
-    <div *ngIf="nickNameField.errors.required">
-      Nick Name is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
   </div>
 
   <div class="form-group form-row">
@@ -83,14 +76,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="officeLandLine">Office Landline</label>
-    <input type="text" class="form-control col-md-9" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" required #officeLandLineField="ngModel">
-  </div>
-
-  <div *ngIf="officeLandLineField.invalid && (officeLandLineField.dirty || officeLandLineField.touched)" class="text-danger">
-    <div *ngIf="officeLandLineField.errors.required">
-      Office Landline is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
   </div>
 
   <h4>Scheduling</h4>
@@ -109,14 +95,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="designation">Designation</label>
-    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.scheduling.designation" required #designationField="ngModel">
-  </div>
-
-  <div *ngIf="designationField.invalid && (designationField.dirty || designationField.touched)" class="text-danger">
-    <div *ngIf="designationField.errors.required">
-      Designation is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.scheduling.designation" #designationField="ngModel">
   </div>
 
   <div class="form-group form-row">
@@ -133,24 +112,20 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="deskExtension">Desk Extension</label>
-    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.scheduling.deskExtension" required #deskExtensionField="ngModel">
-  </div>
-
-  <div *ngIf="deskExtensionField.invalid && (deskExtensionField.dirty || deskExtensionField.touched)" class="text-danger">
-    <div *ngIf="deskExtensionField.errors.required">
-      Desk Extension is required.
-    </div>
-    <br>
+    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.scheduling.deskExtension" #deskExtensionField="ngModel">
   </div>
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="email">E-mail</label>
-    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.scheduling.email" required #emailField="ngModel">
+    <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.scheduling.email" required #emailField="ngModel" email>
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
     <div *ngIf="emailField.errors.required">
       Email is required.
+    </div>
+    <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      Invalid Email.
     </div>
     <br>
   </div>
