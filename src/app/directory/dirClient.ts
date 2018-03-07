@@ -8,15 +8,15 @@ export class DirClient {
     website: string;
     panNo: string;
     gstNo: string;
-    contactPerson: {
-        name: string;
-        designation: string;
-        department: string;
-        mobileNo: string;
-        email: string;
-        photo: string;
-        dob: string;
-        anniversaryDate: string;
+    contactPerson = {
+        name: "",
+        designation: "",
+        department: "",
+        mobileNo: "",
+        email: "",
+        photo: "",
+        dob: "",
+        anniversaryDate: ""
     }
 
 }

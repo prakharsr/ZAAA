@@ -124,7 +124,7 @@
 
   <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="name">Name</label>
-    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter PAN Number" [(ngModel)]="client.contactPerson.name" required #nameField="ngModel">
+    <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter Name" [(ngModel)]="client.contactPerson.name" required #nameField="ngModel">
   </div>
 
   <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
