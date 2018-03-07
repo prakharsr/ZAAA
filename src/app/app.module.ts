@@ -36,9 +36,9 @@ import { DirectoryModule } from './directory/directory.module';
   ],
   imports: [
     BaseModule,
-    AppRoutingModule,
     AdminModule,
-    DirectoryModule
+    DirectoryModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

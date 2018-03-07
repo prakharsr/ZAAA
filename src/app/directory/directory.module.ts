@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
+import { DirRoutingModule } from './dir-routing.module';
 
 import { DirApiService } from './dir-api.service';
 
@@ -9,7 +10,8 @@ import { DirMediaHouseComponent } from './dir-media-house/dir-media-house.compon
 
 @NgModule({
   imports: [
-    BaseModule
+    BaseModule,
+    DirRoutingModule
   ],
   declarations: [
     DirClientComponent,
