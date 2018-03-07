@@ -1,3 +1,12 @@
+<ng-template #modalContent let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Enter Billing Details</h4>
+  </div>
+  <div class="modal-body">
+    <app-billing-details (done)="c('Submit'); billingDetails($event)"></app-billing-details>
+  </div>
+</ng-template>
+
 <br><br>
 <div class="text-center">
   <h2>Select Plan</h2>
@@ -6,19 +15,19 @@
 <br>
 
 <div class="planContainer">
-    <div *ngFor="let plan of plans" class="plan">
-      <div class="titleContainer">
-        <div class="title">{{plan.name}}</div>
-        <div class="price">
-          <p>₹ {{plan.cost | number}} </p> <span>/ year</span>
-        </div>
-      </div>
-      <div class="infoContainer">
-        <!-- <div class="p desc"><em>{{plan.description}}</em></div> -->
-        <ul class="features">
-          <li><strong>{{plan.maxUsers}}</strong> Users</li>
-          <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
-        </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan)">Select Plan</a>
+  <div *ngFor="let plan of plans" class="plan">
+    <div class="titleContainer">
+      <div class="title">{{plan.name}}</div>
+      <div class="price">
+        <p>₹ {{plan.cost | number}} </p> <span>/ year</span>
       </div>
     </div>
+    <div class="infoContainer">
+      <!-- <div class="p desc"><em>{{plan.description}}</em></div> -->
+      <ul class="features">
+        <li><strong>{{plan.maxUsers}}</strong> Users</li>
+        <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
+      </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan, modalContent)">Select Plan</a>
+    </div>
   </div>
+</div>

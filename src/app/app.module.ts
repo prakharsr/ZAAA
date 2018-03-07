@@ -31,7 +31,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     FirmProfileViewComponent,
     ChangePswComponent,
     ForgotPswComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     BaseModule,

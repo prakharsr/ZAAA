@@ -1,0 +1,46 @@
+<form (ngSubmit)="submit()" #billingDetailsForm="ngForm">
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="firmName">Firm Name</label>
+    <input type="text" class="form-control col-md-9" id="firmName" name="firmName" placeholder="Enter Firm Name" [(ngModel)]="firmName" required #firmNameField="ngModel">
+  </div>
+
+  <div *ngIf="firmNameField.invalid && (firmNameField.dirty || firmNameField.touched)" class="text-danger">
+    <div *ngIf="firmNameField.errors.required">
+      Firm Name is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="billingAddress">Billing Address</label>
+    <input type="text" class="form-control col-md-9" id="billingAddress" name="billingAddress" placeholder="Enter Billing Address" [(ngModel)]="billingAddress" required #billingAddressField="ngModel">
+  </div>
+
+  <div *ngIf="billingAddressField.invalid && (billingAddressField.dirty || billingAddressField.touched)" class="text-danger">
+    <div *ngIf="billingAddressField.errors.required">
+      Billing Address is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="gstNo">GST Number</label>
+    <input type="number" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="gstNo" required #gstNoField="ngModel">
+  </div>
+
+  <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
+    <div *ngIf="gstNoField.errors.required">
+      GST Number is empty or invalid.
+    </div>
+    <br>
+  </div>
+
+  <div *ngIf="error" class="text-danger">
+    {{error}}
+    
+    <br>
+  </div>
+
+  <br>
+  <button class="btn btn-success" [disabled]="!billingDetailsForm.form.valid">Submit</button>
+</form>

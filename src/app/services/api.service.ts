@@ -147,8 +147,19 @@ export class ApiService {
     ]);
   }
 
-  setPlan(plan: Plan, payment: string) : Observable<any> {
-    return this.post('/user/plan', { planID: plan.id, paymentID: payment });
+  setPlan(plan: Plan,
+    payment: string,
+    firmName: string,
+    billingAddress: string,
+    gstNo: string) : Observable<any> {
+
+    return this.post('/user/plan', {
+      planID: plan.id,
+      paymentID: payment,
+      firmName: firmName,
+      billingAddress: billingAddress,
+      gstNo: gstNo
+    });
   }
 
   verifyOtp(otp: string) : Observable<any> {
