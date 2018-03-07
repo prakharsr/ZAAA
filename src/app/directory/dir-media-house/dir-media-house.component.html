@@ -1,0 +1,168 @@
+<br>
+
+<ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+<ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+<br>
+
+<form (ngSubmit)="submit()" #dirForm="ngForm">
+  <h2>Media House</h2>
+  <br>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="orgName">Organisation Name</label>
+    <input type="text" class="form-control col-md-9" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
+  </div>
+
+  <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
+    <div *ngIf="orgNameField.errors.required">
+      Organisation Name is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="pubName">Publication Name</label>
+    <input type="text" class="form-control col-md-9" id="pubName" name="pubName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
+  </div>
+
+  <div *ngIf="pubNameField.invalid && (pubNameField.dirty || pubNameField.touched)" class="text-danger">
+    <div *ngIf="pubNameField.errors.required">
+      Publication Name is required.
+    </div>
+    <br>
+  </div>
+    
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="nickName">Nick Name</label>
+    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" required #nickNameField="ngModel">
+  </div>
+
+  <div *ngIf="nickNameField.invalid && (nickNameField.dirty || nickNameField.touched)" class="text-danger">
+    <div *ngIf="nickNameField.errors.required">
+      Nick Name is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="mediaType">Media Type</label>
+    <input type="text" class="form-control col-md-9" id="mediaType" name="mediaType" placeholder="Enter Media Type" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+  </div>
+
+  <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
+    <div *ngIf="mediaTypeField.errors.required">
+      Media type is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="edition">Edition</label>
+    <input type="text" class="form-control col-md-9" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.edition" required #editionField="ngModel">
+  </div>
+
+  <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
+    <div *ngIf="editionField.errors.required">
+      Edition is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="address">Address</label>
+    <input type="text" class="form-control col-md-9" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address" required #addressField="ngModel">
+  </div>
+
+  <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
+    <div *ngIf="addressField.errors.required">
+      Address is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="officeLandLine">Office Landline</label>
+    <input type="text" class="form-control col-md-9" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" required #officeLandLineField="ngModel">
+  </div>
+
+  <div *ngIf="officeLandLineField.invalid && (officeLandLineField.dirty || officeLandLineField.touched)" class="text-danger">
+    <div *ngIf="officeLandLineField.errors.required">
+      Office Landline is required.
+    </div>
+    <br>
+  </div>
+
+  <h4>Scheduling</h4>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="person">Person</label>
+    <input type="text" class="form-control col-md-9" id="person" name="person" placeholder="Enter Person" [(ngModel)]="mediaHouse.person" required #personField="ngModel">
+  </div>
+
+  <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
+    <div *ngIf="personField.errors.required">
+      Person is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="designation">Designation</label>
+    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.designation" required #designationField="ngModel">
+  </div>
+
+  <div *ngIf="designationField.invalid && (designationField.dirty || designationField.touched)" class="text-danger">
+    <div *ngIf="designationField.errors.required">
+      Designation is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="mobileNo">Mobile Number</label>
+    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="mediaHouse.mobileNo" required #mobileNoField="ngModel">
+  </div>
+
+  <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
+    <div *ngIf="mobileNoField.errors.required">
+      Mobile Number is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="deskExtension">Desk Extension</label>
+    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.deskExtension" required #deskExtensionField="ngModel">
+  </div>
+
+  <div *ngIf="deskExtensionField.invalid && (deskExtensionField.dirty || deskExtensionField.touched)" class="text-danger">
+    <div *ngIf="deskExtensionField.errors.required">
+      Desk Extension is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="email">E-mail</label>
+    <input type="text" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.email" required #emailField="ngModel">
+  </div>
+
+  <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+    <div *ngIf="emailField.errors.required">
+      Email is required.
+    </div>
+    <br>
+  </div>
+
+  <!-- Assign Ad Type, Assign Edition -->
+
+  <br>
+
+  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+  <br>
+
+  <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+</form>

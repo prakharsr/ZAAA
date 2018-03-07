@@ -57,7 +57,7 @@ export class ApiService {
     return { headers: { Authorization: this.authToken }};
   }
 
-  private post(url: string, body: any) : Observable<any> {
+  post(url: string, body: any) : Observable<any> {
 
     if (this.authToken)
     {
@@ -66,7 +66,7 @@ export class ApiService {
     else return this.http.post(environment.apiUrl + url, body);
   }
 
-  private get(url: string) : Observable<any> {
+  get(url: string) : Observable<any> {
 
     if (this.authToken)
     {
@@ -75,7 +75,7 @@ export class ApiService {
     else return this.http.get(environment.apiUrl + url);
   }
 
-  private delete(url: string) : Observable<any> {
+  delete(url: string) : Observable<any> {
     return this.http.delete(environment.apiUrl + url, this.headers);
   }
 
@@ -83,7 +83,7 @@ export class ApiService {
     return this.delete('/user/co_user/' + coUser.id);
   }
 
-  private fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
+  fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
     const formData = new FormData();
     formData.append(key, fileToUpload, fileToUpload.name);
 
