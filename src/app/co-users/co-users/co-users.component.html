@@ -1,8 +1,10 @@
-<br>
-<div class="container">
-  <h2>Co-Users</h2>
-  <br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Co-Users</h1>
+    </div>
+</div>
 
+<div class="container">
   <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
 
   <div *ngFor="let coUser of coUsers" class="card mb-4">
