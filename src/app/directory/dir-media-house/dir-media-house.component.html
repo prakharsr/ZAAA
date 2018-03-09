@@ -92,57 +92,60 @@
 
       <br><br>
 
-      <div *ngFor="let item of mediaHouse.scheduling" class="mb-5">
-        <div class="form-group">
-          <label for="person">Person</label>
-          <input type="text" class="form-control" id="person" name="person" placeholder="Enter Person" [(ngModel)]="item.person" required #personField="ngModel">
-        </div>
-
-        <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
-          <div *ngIf="personField.errors.required">
-            Person is required.
+      <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
+        <div class="card-header">#{{i + 1}}</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="person">Person</label>
+            <input type="text" class="form-control" id="person" name="person" placeholder="Enter Person" [(ngModel)]="item.person" required #personField="ngModel">
           </div>
-          <br>
-        </div>
 
-        <div class="form-group">
-          <label for="designation">Designation</label>
-          <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-        </div>
-
-        <div class="form-group">
-          <label for="mobileNo">Mobile Number</label>
-          <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-        </div>
-
-        <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
-          <div *ngIf="mobileNoField.errors.required">
-            Mobile Number is required.
+          <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
+            <div *ngIf="personField.errors.required">
+              Person is required.
+            </div>
+            <br>
           </div>
-          <br>
-        </div>
 
-        <div class="form-group">
-          <label for="deskExtension">Desk Extension</label>
-          <input type="text" class="form-control" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="item.email" required #emailField="ngModel" email>
-        </div>
-
-        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-          <div *ngIf="emailField.errors.required">
-            Email is required.
+          <div class="form-group">
+            <label for="designation">Designation</label>
+            <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="item.designation" #designationField="ngModel">
           </div>
-          <div *ngIf="!emailField.errors.required && emailField.errors.email">
-            Invalid Email.
-          </div>
-          <br>
-        </div>
 
-        <!-- Assign Ad Type, Assign Edition -->
+          <div class="form-group">
+            <label for="mobileNo">Mobile Number</label>
+            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+          </div>
+
+          <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
+            <div *ngIf="mobileNoField.errors.required">
+              Mobile Number is required.
+            </div>
+            <br>
+          </div>
+
+          <div class="form-group">
+            <label for="deskExtension">Desk Extension</label>
+            <input type="text" class="form-control" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="item.email" required #emailField="ngModel" email>
+          </div>
+
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+            <div *ngIf="emailField.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="!emailField.errors.required && emailField.errors.email">
+              Invalid Email.
+            </div>
+            <br>
+          </div>
+
+          <!-- Assign Ad Type, Assign Edition -->
+        </div>
       </div>
     </div>
   </div>
