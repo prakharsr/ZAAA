@@ -1,8 +1,9 @@
-<h2 class="text-center">Change Password</h2>
 <br>
+<div class="container">
+  <h2 class="text-center">Change Password</h2>
+  <br>
 
-<form (ngSubmit)="submit()" #changePswForm="ngForm">
-
+  <form (ngSubmit)="submit()" #changePswForm="ngForm">
     <div class="form-group">
       <label for="oldPassword">Old Password</label>
       <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Enter Old Password" [(ngModel)]="oldPassword" required #oldPasswordField="ngModel">
@@ -40,4 +41,5 @@
       <br><br>
     </div>
     <button type="submit" class="btn btn-success" [disabled]="!changePswForm.form.valid">Change</button>
- </form>
+  </form>
+</div>
