@@ -5,5 +5,8 @@ export class UserProfile {
     photo: string;
     sign: string;
 
+    email: string;
+    contact: string;
+
     id: string;
 }

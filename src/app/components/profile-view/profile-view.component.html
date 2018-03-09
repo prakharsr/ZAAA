@@ -29,6 +29,22 @@
           </li>
         </ul>
       </div>
+      <div class="card mb-5">
+          <div class="card-header">Login Details</div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div>Email</div>
+              <div>{{profile.email}}</div>
+            </li>
+            <li class="list-group-item">
+              <div>Contact</div>
+              <div>{{profile.contact}}</div>
+            </li>
+          </ul>
+          <div class="card-body">
+            <a class="btn btn-danger" routerLink="/changePassword"><span class="fa fa-lg fa-key"></span> Change Password</a>
+          </div>
+        </div>
     </div>
     <div class="col-xl-3">
       <div class="card mb-5">

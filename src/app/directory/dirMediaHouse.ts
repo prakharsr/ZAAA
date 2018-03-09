@@ -10,11 +10,11 @@ export class DirMediaHouse {
 }
 
 export class MediaHouseScheduling {
-    person: "",
-    designation: "",
-    mobileNo: "",
-    deskExtension: "",
-    email: "",
-    assignAdType: 'Single',
-    assignEdition: 'Single'
+    person: "";
+    designation: "";
+    mobileNo: "";
+    deskExtension: "";
+    email: "";
+    assignAdType: 'Single';
+    assignEdition: 'Single';
 }

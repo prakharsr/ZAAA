@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators/map';
 
 import { Plan } from '../models/plan';
 import { Template } from '../models/template';
-import { User } from '../models/user';
 
 import { WindowService } from './window.service';
 
@@ -188,6 +187,8 @@ export class ApiService {
         if (data.success) {
           profile.name = data.user.name;
           profile.designation = data.user.designation;
+          profile.contact = data.user.phone;
+          profile.email = data.user.email;
 
           if (data.user.photo) {
             profile.photo = environment.uploadsBaseUrl + data.user.photo;

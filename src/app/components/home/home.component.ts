@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
-  constructor(private api: ApiService) { }
+  constructor(public api: ApiService) { }
 
   ngOnInit() {
   }
