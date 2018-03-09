@@ -1,31 +1,32 @@
-<br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Templates</h1>
+    </div>
+</div>
+
 <div class="container">
-<br><br>
-<h2 class="text-center">Select Templates</h2>
-<br><br>
+  <form>
+    <div class="form-group form-row">
+      <label for="jurisdiction" class="col-md-3 col-form-label">Jurisdiction</label>
+      <input type="text" class="form-control col-md-9" name="jurisdiction" id="jurisdiction" [(ngModel)]="jurisdiction" placeholder="Enter jurisdiction">
+    </div>
+  </form>
 
-<form>
-  <div class="form-group form-row">
-    <label for="jurisdiction" class="col-md-3 col-form-label">Jurisdiction</label>
-    <input type="text" class="form-control col-md-9" name="jurisdiction" id="jurisdiction" [(ngModel)]="jurisdiction" placeholder="Enter jurisdiction">
-  </div>
-</form>
+  <br><br>
 
-<br><br>
+  <div class="row">
+    <div class="col-lg">
+      <app-template-selector-item name="Invoice" [templates]="templates" (templateChanged)="invoiceTemplate = $event"></app-template-selector-item>
+    </div>
+    <div class="col-lg">
+      <app-template-selector-item name="Release Order" [templates]="templates" (templateChanged)="releaseOrderTemplate = $event"></app-template-selector-item>
+    </div>
+    <div class="col-lg">
+      <app-template-selector-item name="Payment Receipt" [templates]="templates" (templateChanged)="paymentReceiptTemplate = $event"></app-template-selector-item>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-lg">
-    <app-template-selector-item name="Invoice" [templates]="templates" (templateChanged)="invoiceTemplate = $event"></app-template-selector-item>
+  <div class="text-center">
+    <button class="btn btn-success" (click)="submit()">Submit</button>
   </div>
-  <div class="col-lg">
-    <app-template-selector-item name="Release Order" [templates]="templates" (templateChanged)="releaseOrderTemplate = $event"></app-template-selector-item>
-  </div>
-  <div class="col-lg">
-    <app-template-selector-item name="Payment Receipt" [templates]="templates" (templateChanged)="paymentReceiptTemplate = $event"></app-template-selector-item>
-  </div>
-</div>
-
-<div class="text-center">
-  <button class="btn btn-success" (click)="submit()">Submit</button>
-</div>
 </div>
