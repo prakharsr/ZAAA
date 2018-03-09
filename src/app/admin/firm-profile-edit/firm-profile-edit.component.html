@@ -244,10 +244,10 @@
     
     <br><br>
     
-    <label for="logo-upload" class="file-upload">
+    <label for="logo-upload" class="btn btn-outline-info">
         Upload
     </label>
-    <input type="file" id="logo-upload" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
+    <input type="file" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
 
     <br>
   </div>

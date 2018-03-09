@@ -30,10 +30,10 @@
     
     <br><br>
     
-    <label for="profile-upload" class="file-upload">
+    <label for="profile-upload" class="btn btn-outline-info">
         Upload
     </label>
-    <input type="file" id="profile-upload" class="hidden-file" (change)="uploadProfilePicture($event.target.files)"/>  
+    <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>  
   </div>
   <div class="col-xl-3">
     <h3>Signature</h3>
@@ -44,10 +44,10 @@
     
     <br><br>
     
-    <label for="sign-upload" class="file-upload">
+    <label for="sign-upload" class="btn btn-outline-info">
         Upload
     </label>
-    <input type="file" id="sign-upload" class="hidden-file" (change)="uploadSign($event.target.files)"/>
+    <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
   </div>
 </div>
 </div>
