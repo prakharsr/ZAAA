@@ -22,6 +22,10 @@ export class DirMediaHouseComponent implements OnInit {
     this.mediaHouse.scheduling.push(new MediaHouseScheduling());
   }
 
+  removeScheduling(i: number) {
+    this.mediaHouse.scheduling.splice(i, 1);
+  }
+
   submit() {}
 
 }
