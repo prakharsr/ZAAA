@@ -1,44 +1,46 @@
-<br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Login</h1>
+  </div>
+</div>
+
 <div class="container">
-<h2 class="text-center">Login</h2>
-<br>
-
-<form (ngSubmit)="submit()" #loginForm="ngForm">
-  <div class="form-group">
-    <label for="emailPhone">Email address or Phone</label>
-    <input type="text" class="form-control" id="emailPhone" placeholder="Enter email or phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
-  </div>
-
-  <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
-    <div *ngIf="emailOrPhoneField.errors.required">
-      Email or Phone is required.
+  <form (ngSubmit)="submit()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="emailPhone">Email address or Phone</label>
+      <input type="text" class="form-control" id="emailPhone" placeholder="Enter email or phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
     </div>
-    <br>
-  </div>
 
-  <div class="form-group">
-      <p style="float:right"><a routerLink="/forgotPassword">Forgot Password</a></p>
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
-  </div>
-
-  <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
-    <div *ngIf="passwordField.errors.required">
-      Password is required.
+    <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
+      <div *ngIf="emailOrPhoneField.errors.required">
+        Email or Phone is required.
+      </div>
+      <br>
     </div>
-    <br>
-  </div>
 
-  <div *ngIf="error" class="text-danger">
-    {{error}}
-    
+    <div class="form-group">
+        <p style="float:right"><a routerLink="/forgotPassword">Forgot Password</a></p>
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+    </div>
+
+    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+      <div *ngIf="passwordField.errors.required">
+        Password is required.
+      </div>
+      <br>
+    </div>
+
+    <div *ngIf="error" class="text-danger">
+      {{error}}
+      
+      <br>
+    </div>
+
     <br>
-  </div>
+    <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
+  </form>
 
   <br>
-  <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-</form>
-
-<br>
-<p>Don't have an account, create <a routerLink="/register">one</a>.</p>
+  <p>Don't have an account, create <a routerLink="/register">one</a>.</p>
 </div>
