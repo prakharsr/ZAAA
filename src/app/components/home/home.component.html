@@ -4,8 +4,10 @@
     <p class="lead">Advertising Agency Manager</p>
     <hr class="my-4">
     <p>A complete solution for Advertising Agencies.</p>
+    <br>
     <p class="lead">
-      <a class="btn btn-primary btn-lg" routerLink="/register">Register</a>
+      <a class="btn btn-info btn-lg" *ngIf="api.isLoggedIn" routerLink="/dashboard">Dashboard</a>
+      <a class="btn btn-info btn-lg" *ngIf="!api.isLoggedIn" routerLink="/register">Register</a>
     </p>
   </div>
 </div>
