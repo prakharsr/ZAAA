@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { WindowService } from '../../services/window.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Firm } from '../../models/firm';
 
 @Component({
   selector: 'app-plan-selector',
@@ -18,6 +19,7 @@ export class PlanSelectorComponent implements OnInit {
   paid: boolean;
 
   private selectedPlan: Plan;
+  private firm: Firm;
 
   private email: string;
   private phone: string;
@@ -44,11 +46,11 @@ export class PlanSelectorComponent implements OnInit {
       this.email = data.email;
       this.phone = data.phone;
     });
+
+    this.api.getFirmProfile().subscribe(data => this.firm = data);
   }
 
-  billingDetails(param: { firmName: string, billingAddress: string, gstNo: string }) {
-    console.log(param);
-
+  private openPay(firmName: string, billingAddress: string, gstNo: string) {
     this.razorPay.initPay(this.phone,
       this.email,
       this.selectedPlan.cost,
@@ -60,9 +62,9 @@ export class PlanSelectorComponent implements OnInit {
 
         this.api.setPlan(this.selectedPlan,
           response.razorpay_payment_id,
-          param.firmName,
-          param.billingAddress,
-          param.gstNo
+          firmName,
+          billingAddress,
+          gstNo
         ).subscribe(
           data => {
             // redirect
@@ -75,6 +77,10 @@ export class PlanSelectorComponent implements OnInit {
       });
   }
 
+  billingDetails(param: { firmName: string, billingAddress: string, gstNo: string }) {
+    this.openPay(param.firmName, param.billingAddress, param.gstNo);
+  }
+
   selectPlan(plan: Plan, modalContent)
   {
     if (this.paid)
@@ -83,7 +89,12 @@ export class PlanSelectorComponent implements OnInit {
     if (plan.cost != 0) {
       this.selectedPlan = plan;
 
-      this.modalService.open(modalContent);
+      if (this.firm && this.firm.name && this.firm.registeredAddress && this.firm.gstNo) {
+        this.openPay(this.firm.name, this.firm.registeredAddress, this.firm.gstNo);
+      }
+      else {
+        this.modalService.open(modalContent);
+      }
     }
     else {
       this.paid = true;
