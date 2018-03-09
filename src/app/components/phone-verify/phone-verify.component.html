@@ -1,10 +1,11 @@
-<br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Verify Phone Number</h1>
+  </div>
+</div>
+
 <div class="container">
-<h2 class="text-center">Verify Phone Number</h2>
-
-<br>
-
-<form (ngSubmit)="sendOtp()" #phoneNumberForm="ngForm">
+  <form (ngSubmit)="sendOtp()" #phoneNumberForm="ngForm">
     <div class="form-group">
       <label for="phone">Phone Number</label>
       <input type="tel" [(ngModel)]="number" required class="form-control" id="phone" name="phone" placeholder="Enter phone number">
@@ -21,9 +22,9 @@
     <div class="text-right">
       <button type="submit" class="btn btn-primary" [disabled]="!number || otpSent">Send Code</button>
     </div>
-</form>
+  </form>
 
-<form *ngIf="otpSent" (ngSubmit)="verifyOtp()" #otpForm="ngForm">
+  <form *ngIf="otpSent" (ngSubmit)="verifyOtp()" #otpForm="ngForm">
     <div class="form-group">
       <label for="otp">Verification Code</label>
       <input type="text" [(ngModel)]="otp" required class="form-control" name="otp" id="otp" placeholder="Enter OTP">
@@ -40,5 +41,5 @@
 
     <br>
     <button type="submit" class="btn btn-success" [disabled]="!otp">Verify Code</button>
-</form>
+  </form>
 </div>

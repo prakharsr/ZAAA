@@ -1,5 +1,10 @@
-<br>
-<div class="container">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Select Plan</h1>
+    <p class="lead">The Trial plan is available for a period of 1 month.</p>
+  </div>
+</div>
+
 <ng-template #modalContent let-c="close">
   <div class="modal-header">
     <h4 class="modal-title">Enter Billing Details</h4>
@@ -7,29 +12,23 @@
   <div class="modal-body">
     <app-billing-details (done)="c('Submit'); billingDetails($event)"></app-billing-details>
   </div>
-</ng-template>
+</ng-template>  
 
-<br><br>
-<div class="text-center">
-  <h2>Select Plan</h2>
-  <small>The Trial plan is available for a period of 1 month.</small>
-</div>
-<br>
-
-<div class="planContainer">
-  <div *ngFor="let plan of plans" class="plan">
-    <div class="titleContainer bg-info">
-      <div class="title">{{plan.name}}</div>
-      <div class="price">
-        <p>₹ {{plan.cost | number}} </p> <span>/ year</span>
+<div class="container">
+  <div class="planContainer">
+    <div *ngFor="let plan of plans" class="plan">
+      <div class="titleContainer bg-info">
+        <div class="title">{{plan.name}}</div>
+        <div class="price">
+          <p>₹ {{plan.cost | number}} </p> <span>/ year</span>
+        </div>
+      </div>
+      <div class="infoContainer">
+        <ul class="features">
+          <li><strong>{{plan.maxUsers}}</strong> Users</li>
+          <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
+        </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan, modalContent)">Select Plan</a>
       </div>
     </div>
-    <div class="infoContainer">
-      <ul class="features">
-        <li><strong>{{plan.maxUsers}}</strong> Users</li>
-        <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
-      </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan, modalContent)">Select Plan</a>
-    </div>
   </div>
-</div>
 </div>
