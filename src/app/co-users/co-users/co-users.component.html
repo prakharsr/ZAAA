@@ -1,19 +1,21 @@
 <div>
-    <h2>Co-Users</h2>
-    <br>
+  <h2>Co-Users</h2>
+  <br>
 
-    <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
+  <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
 
-    <div *ngFor="let coUser of coUsers" class="co-user">
-        <div *ngIf="admin" style="float:right">
-            <a class="btn btn-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
-            <button class="btn btn-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span> Delete</button>
-        </div>
-        <h5>{{coUser.name}}</h5>
-        <h6>{{coUser.designation}}</h6>
-        <span class="fa fa-envelope"></span> {{ coUser.email }}
-        <br>
-        <span class="fa fa-phone"></span> {{ coUser.phone }}
-        <br>
+  <div *ngFor="let coUser of coUsers" class="card mb-4">
+    <div class="card-header">{{coUser.name}}</div>
+    <div class="card-body">
+      <div *ngIf="admin" style="float:right">
+        <a class="btn btn-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
+        <button class="btn btn-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span></button>
+      </div>
+      <h6>{{coUser.designation}}</h6>
+      <span class="fa fa-envelope mr-3"></span> {{ coUser.email }}
+      <br>
+      <span class="fa fa-phone mr-3"></span> {{ coUser.phone }}
+      <br>
     </div>
+  </div>
 </div>
