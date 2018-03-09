@@ -21,7 +21,6 @@ import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
-import { FieldTestComponent } from './field-test/field-test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,7 +35,6 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
-  { path: 'dtest', component: FieldTestComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
