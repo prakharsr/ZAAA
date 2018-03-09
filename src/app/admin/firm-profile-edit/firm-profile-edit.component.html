@@ -5,258 +5,238 @@
 </div>
 
 <div class="container">
-<div *ngIf="error || success">
-  <br>
+  <div *ngIf="error || success">
+    <br>
 
-  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-  <br>
-</div>
-
-<div class="row">
-  <div class="col-lg-7">
-    <form (ngSubmit)="submit()" #profileForm="ngForm">   
-      <h2>Business Details</h2>
-      <br>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="firmName">Firm Name</label>
-        <input type="text" class="form-control col-md-9" id="firmName" name="firmName" placeholder="Enter Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
-      </div>
-    
-      <div *ngIf="firmNameField.invalid && (firmNameField.dirty || firmNameField.touched)" class="text-danger">
-        <div *ngIf="firmNameField.errors.required">
-          Firm Name is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="tagline">Tag Line</label>
-        <input type="text" class="form-control col-md-9" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="nickname">Display / Nickname</label>
-        <input type="text" class="form-control col-md-9" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="registeredAddress">Registered Address</label>
-        <input type="text" class="form-control col-md-9" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress" required #registeredAddressField="ngModel">
-      </div>
-    
-      <div *ngIf="registeredAddressField.invalid && (registeredAddressField.dirty || registeredAddressField.touched)" class="text-danger">
-        <div *ngIf="registeredAddressField.errors.required">
-          Registered Address is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="officeAddress">Office Address</label>
-        <input type="text" class="form-control col-md-9" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress" #officeAddressField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="incDate">Incorporation Date</label>
-        <input type="date" class="form-control col-md-9" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
-      </div>
-
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="email">Email address</label>
-        <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
-      </div>
-    
-      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-        <div *ngIf="emailField.errors.required">
-          Email is required.
-        </div>
-        <div *ngIf="!emailField.errors.required && emailField.errors.email">
-          Invalid Email.
-        </div>
-        <br>
-      </div>
-
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="phone">Phone Number</label>
-        <input type="tel" [(ngModel)]="profile.phone" required class="form-control col-md-9" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
-      </div>
-
-      <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
-        <div *ngIf="phoneField.errors.required">
-          Phone Number is empty or invalid.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="landlineNo">Landline Number</label>
-        <input type="number" class="form-control col-md-9" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="fax">Fax</label>
-        <input type="number" class="form-control col-md-9" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="website">Website</label>
-        <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="panNo">PAN Number</label>
-        <input type="number" class="form-control col-md-9" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" required #panNoField="ngModel">
-      </div>
-    
-      <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
-        <div *ngIf="panNoField.errors.required">
-          PAN Number is empty or invalid.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="gstNo">GST Number</label>
-        <input type="number" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="profile.gstNo" required #gstNoField="ngModel">
-      </div>
-    
-      <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-        <div *ngIf="gstNoField.errors.required">
-          GST Number is empty or invalid.
-        </div>
-        <br>
-      </div> 
-      
-      <br><br>
-    
-      <h2>Bank Account Details</h2>
-    
-      <br>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankAccountName">Account Name</label>
-        <input type="text" class="form-control col-md-9" id="bankAccountName" name="bankAccountName" placeholder="Enter Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
-      </div>
-    
-      <div *ngIf="bankAccountNameField.invalid && (bankAccountNameField.dirty || bankAccountNameField.touched)" class="text-danger">
-        <div *ngIf="bankAccountNameField.errors.required">
-          Account Name is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankAccountNo">Account Number</label>
-        <input type="number" class="form-control col-md-9" id="bankAccountNo" name="bankAccountNo" placeholder="Enter Bank Account NUmber" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
-      </div>
-    
-      <div *ngIf="bankAccountNoField.invalid && (bankAccountNoField.dirty || bankAccountNoField.touched)" class="text-danger">
-        <div *ngIf="bankAccountNoField.errors.required">
-          Account Number is empty or invalid.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankIfsc">IFSC</label>
-        <input type="text" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required minlength="11" maxlength="11" #bankIfscField="ngModel" (input)="ifscChanged()">
-      </div>
-    
-      <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
-        <div *ngIf="bankIfscField.errors.required">
-          IFSC is required.
-        </div>
-        <div *ngIf="bankIfscField.errors.minlength || bankIfscField.errors.maxlength">
-          IFSC should have 11 characters.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankName">Bank Name</label>
-        <input type="text" class="form-control col-md-9" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="profile.bankName" required #bankNameField="ngModel">
-      </div>
-    
-      <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
-        <div *ngIf="bankNameField.errors.required">
-          Bank Name is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankBranchAddress">Bank Branch Address</label>
-        <input type="text" class="form-control col-md-9" id="bankBranchAddress" name="bankBranchAddress" placeholder="Enter Bank Branch Address" [(ngModel)]="profile.bankBranchAddress" required #bankBranchAddressField="ngModel">
-      </div>
-    
-      <div *ngIf="bankBranchAddressField.invalid && (bankBranchAddressField.dirty || bankBranchAddressField.touched)" class="text-danger">
-        <div *ngIf="bankBranchAddressField.errors.required">
-          Bank Branch Address is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="bankAccountType">Bank Branch Address</label>
-        <select class="form-control col-md-9" id="bankAccountType" name="bankAccountType" [(ngModel)]="profile.bankAccountType">
-          <option value="Current">Current</option>
-          <option value="Savings">Savings</option>
-        </select>
-      </div>
-      
-      <br><br>
-
-      <h2>Social</h2>
-
-      <br>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="nickname">Facebook</label>
-        <input type="text" class="form-control col-md-9" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="nickname">Twitter</label>
-        <input type="text" class="form-control col-md-9" id="twitter" name="twitter" placeholder="Enter Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
-      </div>
-    
-      <div class="form-group form-row">
-        <label class="col-md-3 col-form-label" for="nickname">Others</label>
-        <input type="text" class="form-control col-md-9" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
-      </div>
-
-      <br>
-    
-      <div *ngIf="error || success">      
-        <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-        <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-      
-        <br>
-      </div>
-    
-      <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
-
-      <br><br><br>
-    </form>
-  </div>
-  <div class="col-lg-4 offset-1">
-    <h2>Logo</h2>
+    <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+    <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
 
     <br>
-    
-    <img [src]="profile.logo" class="img-fluid max-w-200">
+  </div>
+
+  <form (ngSubmit)="submit()" #profileForm="ngForm">   
+    <h2>Business Details</h2>
+    <br>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="firmName">Firm Name</label>
+      <input type="text" class="form-control col-md-9" id="firmName" name="firmName" placeholder="Enter Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
+    </div>
+  
+    <div *ngIf="firmNameField.invalid && (firmNameField.dirty || firmNameField.touched)" class="text-danger">
+      <div *ngIf="firmNameField.errors.required">
+        Firm Name is required.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="tagline">Tag Line</label>
+      <input type="text" class="form-control col-md-9" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Display / Nickname</label>
+      <input type="text" class="form-control col-md-9" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="registeredAddress">Registered Address</label>
+      <input type="text" class="form-control col-md-9" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress" required #registeredAddressField="ngModel">
+    </div>
+  
+    <div *ngIf="registeredAddressField.invalid && (registeredAddressField.dirty || registeredAddressField.touched)" class="text-danger">
+      <div *ngIf="registeredAddressField.errors.required">
+        Registered Address is required.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="officeAddress">Office Address</label>
+      <input type="text" class="form-control col-md-9" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress" #officeAddressField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="incDate">Incorporation Date</label>
+      <input type="date" class="form-control col-md-9" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="email">Email address</label>
+      <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
+    </div>
+  
+    <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+      <div *ngIf="emailField.errors.required">
+        Email is required.
+      </div>
+      <div *ngIf="!emailField.errors.required && emailField.errors.email">
+        Invalid Email.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="phone">Phone Number</label>
+      <input type="tel" [(ngModel)]="profile.phone" required class="form-control col-md-9" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
+    </div>
+
+    <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
+      <div *ngIf="phoneField.errors.required">
+        Phone Number is empty or invalid.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="landlineNo">Landline Number</label>
+      <input type="number" class="form-control col-md-9" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="fax">Fax</label>
+      <input type="number" class="form-control col-md-9" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="website">Website</label>
+      <input type="text" class="form-control col-md-9" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="panNo">PAN Number</label>
+      <input type="number" class="form-control col-md-9" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" required #panNoField="ngModel">
+    </div>
+  
+    <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
+      <div *ngIf="panNoField.errors.required">
+        PAN Number is empty or invalid.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="gstNo">GST Number</label>
+      <input type="number" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="profile.gstNo" required #gstNoField="ngModel">
+    </div>
+  
+    <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
+      <div *ngIf="gstNoField.errors.required">
+        GST Number is empty or invalid.
+      </div>
+      <br>
+    </div> 
     
     <br><br>
+  
+    <h2>Bank Account Details</h2>
+  
+    <br>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankAccountName">Account Name</label>
+      <input type="text" class="form-control col-md-9" id="bankAccountName" name="bankAccountName" placeholder="Enter Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
+    </div>
+  
+    <div *ngIf="bankAccountNameField.invalid && (bankAccountNameField.dirty || bankAccountNameField.touched)" class="text-danger">
+      <div *ngIf="bankAccountNameField.errors.required">
+        Account Name is required.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankAccountNo">Account Number</label>
+      <input type="number" class="form-control col-md-9" id="bankAccountNo" name="bankAccountNo" placeholder="Enter Bank Account NUmber" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
+    </div>
+  
+    <div *ngIf="bankAccountNoField.invalid && (bankAccountNoField.dirty || bankAccountNoField.touched)" class="text-danger">
+      <div *ngIf="bankAccountNoField.errors.required">
+        Account Number is empty or invalid.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankIfsc">IFSC</label>
+      <input type="text" class="form-control col-md-9" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required minlength="11" maxlength="11" #bankIfscField="ngModel" (input)="ifscChanged()">
+    </div>
+  
+    <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
+      <div *ngIf="bankIfscField.errors.required">
+        IFSC is required.
+      </div>
+      <div *ngIf="bankIfscField.errors.minlength || bankIfscField.errors.maxlength">
+        IFSC should have 11 characters.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankName">Bank Name</label>
+      <input type="text" class="form-control col-md-9" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="profile.bankName" required #bankNameField="ngModel">
+    </div>
+  
+    <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
+      <div *ngIf="bankNameField.errors.required">
+        Bank Name is required.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankBranchAddress">Bank Branch Address</label>
+      <input type="text" class="form-control col-md-9" id="bankBranchAddress" name="bankBranchAddress" placeholder="Enter Bank Branch Address" [(ngModel)]="profile.bankBranchAddress" required #bankBranchAddressField="ngModel">
+    </div>
+  
+    <div *ngIf="bankBranchAddressField.invalid && (bankBranchAddressField.dirty || bankBranchAddressField.touched)" class="text-danger">
+      <div *ngIf="bankBranchAddressField.errors.required">
+        Bank Branch Address is required.
+      </div>
+      <br>
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="bankAccountType">Bank Branch Address</label>
+      <select class="form-control col-md-9" id="bankAccountType" name="bankAccountType" [(ngModel)]="profile.bankAccountType">
+        <option value="Current">Current</option>
+        <option value="Savings">Savings</option>
+      </select>
+    </div>
     
-    <label for="logo-upload" class="btn btn-outline-info">
-        Upload
-    </label>
-    <input type="file" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
+    <br><br>
+
+    <h2>Social</h2>
 
     <br>
-  </div>
-</div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Facebook</label>
+      <input type="text" class="form-control col-md-9" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Twitter</label>
+      <input type="text" class="form-control col-md-9" id="twitter" name="twitter" placeholder="Enter Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
+    </div>
+  
+    <div class="form-group form-row">
+      <label class="col-md-3 col-form-label" for="nickname">Others</label>
+      <input type="text" class="form-control col-md-9" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
+    </div>
+
+    <br>
+  
+    <div *ngIf="error || success">      
+      <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+      <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+    
+      <br>
+    </div>
+  
+    <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
+
+    <br><br><br>
+  </form>
 </div>

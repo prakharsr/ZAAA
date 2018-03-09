@@ -5,6 +5,15 @@
 </div>
 
 <div class="container">
+<div *ngIf="error || success">
+  <br>
+
+  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
+  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
+
+  <br>
+</div>
+
 <button class="fab bg-info" *ngIf="admin" routerLink="/firm/edit"><span class="fa fa-pencil-alt"></span></button>
 
 <div class="row">
@@ -120,6 +129,13 @@
       <div class="card-header">Logo</div>
       <div class="card-body text-center">
         <img [src]="profile.logo" class="img-fluid max-w-200">
+        
+        <br><br>
+        
+        <label for="logo-upload" *ngIf="admin" class="btn btn-outline-info">
+            Upload
+        </label>
+        <input type="file" *ngIf="admin" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
       </div>
     </div>
   </div>
