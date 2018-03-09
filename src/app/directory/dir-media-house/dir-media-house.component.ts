@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirMediaHouse } from '../dirMediaHouse';
+import { DirMediaHouse, MediaHouseScheduling } from '../dirMediaHouse';
 
 @Component({
   selector: 'app-dir-media-house',
@@ -15,6 +15,11 @@ export class DirMediaHouseComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.mediaHouse.scheduling = [new MediaHouseScheduling()];
+  }
+
+  addScheduling() {
+    this.mediaHouse.scheduling.push(new MediaHouseScheduling());
   }
 
   submit() {}

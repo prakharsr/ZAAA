@@ -6,131 +6,146 @@
 <br>
 
 <form (ngSubmit)="submit()" #dirForm="ngForm">
-  <h2>Media House</h2>
-  <br>
+  <div class="row">
+    <div class="col-md">
+      <h2>Media House</h2>
+      <br>
 
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="orgName">Organisation Name</label>
-    <input type="text" class="form-control col-md-9" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
-  </div>
-
-  <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
-    <div *ngIf="orgNameField.errors.required">
-      Organisation Name is required.
-    </div>
-    <br>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="pubName">Publication Name</label>
-    <input type="text" class="form-control col-md-9" id="pubName" name="pubName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
-  </div>
-
-  <div *ngIf="pubNameField.invalid && (pubNameField.dirty || pubNameField.touched)" class="text-danger">
-    <div *ngIf="pubNameField.errors.required">
-      Publication Name is required.
-    </div>
-    <br>
-  </div>
+      <div class="form-group">
+        <label for="orgName">Organisation Name</label>
+        <input type="text" class="form-control" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
+      </div>
     
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="nickName">Nick Name</label>
-    <input type="text" class="form-control col-md-9" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="mediaType">Media Type</label>
-    <input type="text" class="form-control col-md-9" id="mediaType" name="mediaType" placeholder="Enter Media Type" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
-  </div>
-
-  <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
-    <div *ngIf="mediaTypeField.errors.required">
-      Media type is required.
+      <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
+        <div *ngIf="orgNameField.errors.required">
+          Organisation Name is required.
+        </div>
+        <br>
+      </div>
+    
+      <div class="form-group">
+        <label for="pubName">Publication Name</label>
+        <input type="text" class="form-control" id="pubName" name="pubName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
+      </div>
+    
+      <div *ngIf="pubNameField.invalid && (pubNameField.dirty || pubNameField.touched)" class="text-danger">
+        <div *ngIf="pubNameField.errors.required">
+          Publication Name is required.
+        </div>
+        <br>
+      </div>
+        
+      <div class="form-group">
+        <label for="nickName">Nick Name</label>
+        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
+      </div>
+    
+      <div class="form-group">
+        <label for="mediaType">Media Type</label>
+        <input type="text" class="form-control" id="mediaType" name="mediaType" placeholder="Enter Media Type" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+      </div>
+    
+      <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
+        <div *ngIf="mediaTypeField.errors.required">
+          Media type is required.
+        </div>
+        <br>
+      </div>
+    
+      <div class="form-group">
+        <label for="edition">Edition</label>
+        <input type="text" class="form-control" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.edition" required #editionField="ngModel">
+      </div>
+    
+      <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
+        <div *ngIf="editionField.errors.required">
+          Edition is required.
+        </div>
+        <br>
+      </div>
+    
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address" required #addressField="ngModel">
+      </div>
+    
+      <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
+        <div *ngIf="addressField.errors.required">
+          Address is required.
+        </div>
+        <br>
+      </div>
+    
+      <div class="form-group">
+        <label for="officeLandLine">Office Landline</label>
+        <input type="text" class="form-control" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+      </div>
+    
+      <br>
     </div>
-    <br>
-  </div>
+    <div class="col-md">
+      <br>
+      <h4>Scheduling</h4>
+      <br>
 
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="edition">Edition</label>
-    <input type="text" class="form-control col-md-9" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.edition" required #editionField="ngModel">
-  </div>
+      <button (click)="addScheduling()" class="btn btn-secondary">Add More</button>
 
-  <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
-    <div *ngIf="editionField.errors.required">
-      Edition is required.
+      <br><br>
+
+      <div *ngFor="let item of mediaHouse.scheduling" class="mb-5">
+        <div class="form-group">
+          <label for="person">Person</label>
+          <input type="text" class="form-control" id="person" name="person" placeholder="Enter Person" [(ngModel)]="item.person" required #personField="ngModel">
+        </div>
+
+        <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
+          <div *ngIf="personField.errors.required">
+            Person is required.
+          </div>
+          <br>
+        </div>
+
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="mobileNo">Mobile Number</label>
+          <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+        </div>
+
+        <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
+          <div *ngIf="mobileNoField.errors.required">
+            Mobile Number is required.
+          </div>
+          <br>
+        </div>
+
+        <div class="form-group">
+          <label for="deskExtension">Desk Extension</label>
+          <input type="text" class="form-control" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="item.email" required #emailField="ngModel" email>
+        </div>
+
+        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+          <div *ngIf="emailField.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="!emailField.errors.required && emailField.errors.email">
+            Invalid Email.
+          </div>
+          <br>
+        </div>
+
+        <!-- Assign Ad Type, Assign Edition -->
+      </div>
     </div>
-    <br>
   </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="address">Address</label>
-    <input type="text" class="form-control col-md-9" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address" required #addressField="ngModel">
-  </div>
-
-  <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
-    <div *ngIf="addressField.errors.required">
-      Address is required.
-    </div>
-    <br>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="officeLandLine">Office Landline</label>
-    <input type="text" class="form-control col-md-9" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
-  </div>
-
-  <h4>Scheduling</h4>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="person">Person</label>
-    <input type="text" class="form-control col-md-9" id="person" name="person" placeholder="Enter Person" [(ngModel)]="mediaHouse.scheduling.person" required #personField="ngModel">
-  </div>
-
-  <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
-    <div *ngIf="personField.errors.required">
-      Person is required.
-    </div>
-    <br>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="designation">Designation</label>
-    <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="mediaHouse.scheduling.designation" #designationField="ngModel">
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="mobileNo">Mobile Number</label>
-    <input type="text" class="form-control col-md-9" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="mediaHouse.scheduling.mobileNo" required #mobileNoField="ngModel">
-  </div>
-
-  <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
-    <div *ngIf="mobileNoField.errors.required">
-      Mobile Number is required.
-    </div>
-    <br>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="deskExtension">Desk Extension</label>
-    <input type="text" class="form-control col-md-9" id="deskExtension" name="deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="mediaHouse.scheduling.deskExtension" #deskExtensionField="ngModel">
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="email">E-mail</label>
-    <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="mediaHouse.scheduling.email" required #emailField="ngModel" email>
-  </div>
-
-  <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-    <div *ngIf="emailField.errors.required">
-      Email is required.
-    </div>
-    <div *ngIf="!emailField.errors.required && emailField.errors.email">
-      Invalid Email.
-    </div>
-    <br>
-  </div>
-
-  <!-- Assign Ad Type, Assign Edition -->
 
   <br>
 

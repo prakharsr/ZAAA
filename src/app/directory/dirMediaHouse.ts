@@ -6,13 +6,15 @@ export class DirMediaHouse {
     edition: string;
     address: string;
     officeLandLine: string;
-    scheduling = {
-        person: "",
-        designation: "",
-        mobileNo: "",
-        deskExtension: "",
-        email: "",
-        assignAdType: 'Single',
-        assignEdition: 'Single'
-    }
+    scheduling: MediaHouseScheduling[];
+}
+
+export class MediaHouseScheduling {
+    person: "",
+    designation: "",
+    mobileNo: "",
+    deskExtension: "",
+    email: "",
+    assignAdType: 'Single',
+    assignEdition: 'Single'
 }
