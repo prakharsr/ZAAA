@@ -9,123 +9,119 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h3>Business Details</h3>
-    <div class="detailView">
-      <div>Firm Name</div>
-      <div>{{profile.name}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Tag Line</div>
-      <div>{{profile.tagline}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Display / NickName</div>
-      <div>{{profile.nickname}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Registered Address</div>
-      <div>{{profile.registeredAddress}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Office Address</div>
-      <div>{{profile.officeAddress}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Incorporation Date</div>
-      <div>{{profile.incDate | date}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Email</div>
-      <div>{{profile.email}}</div>
-    </div>
-
-    <div class="detailView">
-      <div>Phone</div>
-      <div>{{profile.phone}}</div>
-    </div>
-
-    <div class="detailView">
-      <div>LandLine Number</div>
-      <div>{{profile.landlineNo}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Fax</div>
-      <div>{{profile.fax}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Website</div>
-      <div>{{profile.website}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Pan No.</div>
-      <div>{{profile.panNo}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>GST No.</div>
-      <div>{{profile.gstNo}}</div>
-    </div>
-    
-    <h3>Bank Details</h3>
-    <div class="detailView">
-      <div>Account Name</div>
-      <div>{{profile.bankAccountName}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Account No.</div>
-      <div>{{profile.bankAccountNo}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Bank Name</div>
-      <div>{{profile.bankName}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>IFSC</div>
-      <div>{{profile.bankIfsc}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Branch Address</div>
-      <div>{{profile.bankBranchAddress}}</div>
-    </div>
-    
-    <div class="detailView">
-      <div>Account Type</div>
-      <div>{{profile.bankAccountType}}</div>
+    <div class="card mb-5">
+      <div class="card-header">Business Details</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div>Firm Name</div>
+          <div>{{profile.name}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Tag Line</div>
+          <div>{{profile.tagline}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Display / NickName</div>
+          <div>{{profile.nickname}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Registered Address</div>
+          <div>{{profile.registeredAddress}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Office Address</div>
+          <div>{{profile.officeAddress}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Incorporation Date</div>
+          <div>{{profile.incDate | date}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Email</div>
+          <div>{{profile.email}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Phone</div>
+          <div>{{profile.phone}}</div>
+        </li>        
+        <li class="list-group-item">
+          <div>LandLine Number</div>
+          <div>{{profile.landlineNo}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Fax</div>
+          <div>{{profile.fax}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Website</div>
+          <div>{{profile.website}}</div>
+        </li>
+        <li class="list-group-item">
+          <div>Pan No.</div>
+          <div>{{profile.panNo}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>GST No.</div>
+          <div>{{profile.gstNo}}</div>
+        </li>
+      </ul>
     </div>
 
-    <h3>Social Details</h3>
-    <div class="detailView">
-      <div>Facebook</div>
-      <div><a href="{{profile.facebook}}" target="_blank">{{profile.facebook}}</a></div>
+    <div class="card mb-5">
+      <div class="card-header">Bank Details</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div>Account Name</div>
+          <div>{{profile.bankAccountName}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>Account No.</div>
+          <div>{{profile.bankAccountNo}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>Bank Name</div>
+          <div>{{profile.bankName}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>IFSC</div>
+          <div>{{profile.bankIfsc}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>Branch Address</div>
+          <div>{{profile.bankBranchAddress}}</div>
+        </li>    
+        <li class="list-group-item">
+          <div>Account Type</div>
+          <div>{{profile.bankAccountType}}</div>
+        </li>
+      </ul>
     </div>
 
-    <div class="detailView">
-      <div>Twitter</div>
-      <div><a href="{{profile.twitter}}" target="_blank">{{profile.twitter}}</a></div>
-    </div>
-
-    <div class="detailView">
-      <div>Others</div>
-      <div><a href="{{profile.other}}" target="_blank">{{profile.other}}</a></div>
+    <div class="card mb-5">
+      <div class="card-header">Social Details</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div>Facebook</div>
+          <div><a href="{{profile.facebook}}" target="_blank">{{profile.facebook}}</a></div>
+        </li>    
+        <li class="list-group-item">
+          <div>Twitter</div>
+          <div><a href="{{profile.twitter}}" target="_blank">{{profile.twitter}}</a></div>
+        </li>    
+        <li class="list-group-item">
+          <div>Others</div>
+          <div><a href="{{profile.other}}" target="_blank">{{profile.other}}</a></div>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="col-md-4">
-    <h3>Logo</h3>
-    <br>
-    <img [src]="profile.logo" class="img-fluid max-w-200">
+    <div class="card mb-5">
+      <div class="card-header">Logo</div>
+      <div class="card-body text-center">
+        <img [src]="profile.logo" class="img-fluid max-w-200">
+      </div>
+    </div>
   </div>
 </div>
 </div>
