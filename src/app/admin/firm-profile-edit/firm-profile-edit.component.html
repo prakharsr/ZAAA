@@ -1,4 +1,9 @@
-<br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Edit Firm Profile</h1>
+  </div>
+</div>
+
 <div class="container">
 <div *ngIf="error || success">
   <br>
@@ -10,7 +15,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-8">
+  <div class="col-lg-7">
     <form (ngSubmit)="submit()" #profileForm="ngForm">   
       <h2>Business Details</h2>
       <br>
@@ -125,11 +130,11 @@
         <br>
       </div> 
       
-      <br><br><hr><br><br>
+      <br><br>
     
       <h2>Bank Account Details</h2>
     
-      <br><br>
+      <br>
     
       <div class="form-group form-row">
         <label class="col-md-3 col-form-label" for="bankAccountName">Account Name</label>
@@ -202,8 +207,10 @@
         </select>
       </div>
       
-      <br>
-      <h3>Social</h3>
+      <br><br>
+
+      <h2>Social</h2>
+
       <br>
     
       <div class="form-group form-row">
@@ -235,8 +242,8 @@
       <br><br><br>
     </form>
   </div>
-  <div class="col-lg-4">
-    <h3>Logo</h3>
+  <div class="col-lg-4 offset-1">
+    <h2>Logo</h2>
 
     <br>
     
