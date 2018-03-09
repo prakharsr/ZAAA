@@ -4,6 +4,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './/app-routing.module';
 import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from './co-users/co-users.module';
+import { DynamicFormsModule } from './dynamic-forms/dynamic-forms.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +18,7 @@ import { FirmProfileViewComponent } from './components/firm-profile-view/firm-pr
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FieldTestComponent } from './field-test/field-test.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     FirmProfileViewComponent,
     ChangePswComponent,
     ForgotPswComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FieldTestComponent
   ],
   imports: [
     BaseModule,
+    DynamicFormsModule,
     AdminModule,
     DirectoryModule,
     CoUsersModule,
