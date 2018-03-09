@@ -20,6 +20,9 @@
   <div class="form-group">
     <label for="email">Email address</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+    <small class="form-text text-muted">
+      <br>An auto-generated password will be sent to this Email.<br>
+    </small>
   </div>
 
   <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">

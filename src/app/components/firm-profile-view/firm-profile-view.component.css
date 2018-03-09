@@ -1,3 +1,9 @@
 .list-group-item div:first-child {
-    font-weight: 600;
+    font-style: italic;
+    display: inline-block;
+    width: 250px;
+}
+
+.list-group-item div:last-child {
+    display: inline;
 }
