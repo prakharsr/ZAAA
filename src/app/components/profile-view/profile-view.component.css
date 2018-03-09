@@ -1,8 +1,4 @@
-.detailView {
-    margin-top: 20px;
-}
-
-.detailView div:first-child {
+.list-group-item div:first-child {
     font-weight: 600;
 }
 

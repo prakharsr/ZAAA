@@ -16,44 +16,49 @@
 
   <div class="row">
     <div class="col-xl-6">
-      <h3>Personal Details</h3>
-      <div class="detailView">
-        <div>Name</div>
-        <div>{{profile.name}}</div>
-      </div>
-
-      <div class="detailView">
-        <div>Designation</div>
-        <div>{{profile.designation}}</div>
+      <div class="card mb-5">
+        <div class="card-header">Personal Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div>Name</div>
+            <div>{{profile.name}}</div>
+          </li>
+          <li class="list-group-item">
+            <div>Designation</div>
+            <div>{{profile.designation}}</div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-xl-3">
-      <h3>Profile Picture</h3>
-
-      <br>
-      
-      <img [src]="profile.photo" class="img-fluid max-w-200">
-      
-      <br><br>
-      
-      <label for="profile-upload" class="btn btn-outline-info">
-          Upload
-      </label>
-      <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>  
+      <div class="card mb-5">
+        <div class="card-header">Profile Picture</div>
+        <div class="card-body">
+          <img [src]="profile.photo" class="img-fluid max-w-200">
+    
+          <br><br>
+          
+          <label for="profile-upload" class="btn btn-outline-info">
+              Upload
+          </label>
+          <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
+        </div>
+      </div>
     </div>
     <div class="col-xl-3">
-      <h3>Signature</h3>
-
-      <br>
+      <div class="card mb-5">
+        <div class="card-header">Signature</div>
+        <div class="card-body">
+          <img [src]="profile.sign" class="img-fluid max-w-200">
       
-      <img [src]="profile.sign" class="img-fluid max-w-200">
-      
-      <br><br>
-      
-      <label for="sign-upload" class="btn btn-outline-info">
-          Upload
-      </label>
-      <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
+          <br><br>
+          
+          <label for="sign-upload" class="btn btn-outline-info">
+              Upload
+          </label>
+          <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
+        </div>
+      </div>
     </div>
   </div>
 </div>
