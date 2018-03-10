@@ -51,4 +51,9 @@
         right: 30px;
         bottom: 30px;
     }
+
+    .fab .fa {
+        top: calc(50% - 7px);
+        left: calc(50% - 7px);
+    }
 }
