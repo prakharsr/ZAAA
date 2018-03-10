@@ -9,10 +9,11 @@ import { DirClientComponent } from './clients/dir-client/dir-client.component';
 import { ClientListComponent } from './clients/client-list/client-list.component';
 import { ClientDetailsComponent } from './clients/client-details/client-details.component';
 
+import { ExecutiveApiService } from './executives/executive-api.service';
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 
+import { MediaHouseApiService } from './media-houses/media-house-api.service';
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
-import { ExecutiveApiService } from './executives/executive-api.service';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ExecutiveApiService } from './executives/executive-api.service';
   ],
   providers: [
     ClientApiService,
-    ExecutiveApiService
+    ExecutiveApiService,
+    MediaHouseApiService
   ]
 })
 export class DirectoryModule { }

@@ -12,7 +12,6 @@ export class DirClientComponent implements OnInit {
 
   client = new DirClient();
   error: string;
-  success: string;
 
   id: string;
 
@@ -34,11 +33,15 @@ export class DirClientComponent implements OnInit {
     });
   }
 
+  private goBack() {
+    this.router.navigateByUrl('/dir/clients');
+  }
+
   private createClient() {
     this.api.createClient(this.client).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Client created successfully';
+          this.goBack();
         }
         else {
           this.error = data.msg;
@@ -56,7 +59,7 @@ export class DirClientComponent implements OnInit {
     this.api.editClient(this.client).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Client updated successfully';
+          this.goBack();
         }
         else {
           this.error = data.msg;
@@ -72,12 +75,15 @@ export class DirClientComponent implements OnInit {
 
   submit () {
     this.error = '';
-    this.success = '';
 
     if (this.edit) {
       this.editClient();
     }
     else this.createClient();
+  }
+
+  cancel() {
+    this.goBack();
   }
 
 }

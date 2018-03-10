@@ -7,7 +7,11 @@
 <div class="card mb-3" *ngFor="let client of clients">
   <div class="card-body">
     <div class="row">
-      <div class="col"><a [routerLink]="['/dir/clients', client.id]">{{client.orgName}}</a></div>
+      <div class="col">
+        <a [routerLink]="['/dir/clients', client.id]">{{client.orgName}}</a>
+        <br>
+        <small>{{client.contactPerson.name}}</small>
+      </div>
       <div class="col-auto">
         <button class="btn btn-outline-danger" (click)="deleteClient(client)"><span class="fa fa-trash-alt"></span></button>
       </div>

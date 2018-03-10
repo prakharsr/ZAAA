@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirMediaHouse } from './media-houses/dirMediaHouse';
+import { DirMediaHouse } from './dirMediaHouse';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class OldApiService {
+export class MediaHouseApiService {
 
   constructor(private api: ApiService) { }
 
