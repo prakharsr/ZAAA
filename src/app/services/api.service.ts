@@ -63,6 +63,15 @@ export class ApiService {
     else return this.http.post(environment.apiUrl + url, body);
   }
 
+  patch(url: string, body: any) : Observable<any> {
+
+    if (this.authToken)
+    {
+        return this.http.patch(environment.apiUrl + url, body, this.headers);
+    }
+    else return this.http.patch(environment.apiUrl + url, body);
+  }
+
   get(url: string) : Observable<any> {
 
     if (this.authToken)

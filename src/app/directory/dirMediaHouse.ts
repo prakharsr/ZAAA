@@ -7,6 +7,8 @@ export class DirMediaHouse {
     address: string;
     officeLandLine: string;
     scheduling: MediaHouseScheduling[];
+
+    id: string;
 }
 
 export class MediaHouseScheduling {

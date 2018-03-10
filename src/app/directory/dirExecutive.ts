@@ -9,4 +9,6 @@ export class DirExecutive {
     photo: string;
     dob: string;
     anniversaryDate: string;
+
+    id: string;
 }
