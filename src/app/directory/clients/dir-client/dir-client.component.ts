@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DirClient } from '../dirClient';
-import { DirApiService } from '../../dir-api.service';
+import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class DirClientComponent implements OnInit {
 
   edit = false;
 
-  constructor(private api: DirApiService,
+  constructor(private api: ClientApiService,
     private route: ActivatedRoute,
     private router: Router) { }
 

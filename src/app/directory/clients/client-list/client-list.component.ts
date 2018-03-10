@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DirClient } from '../dirClient';
-import { DirApiService } from '../../dir-api.service';
+import { ClientApiService } from '../client-api.service';
 import { DialogService } from '../../../services/dialog.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class ClientListComponent implements OnInit {
 
   clients: DirClient[] = [];
 
-  constructor(private api: DirApiService, private dialog: DialogService) { }
+  constructor(private api: ClientApiService, private dialog: DialogService) { }
 
   ngOnInit() {
     this.api.getClients().subscribe(data => this.clients = data);

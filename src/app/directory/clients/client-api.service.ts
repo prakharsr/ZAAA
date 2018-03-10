@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirClient } from './clients/dirClient';
-import { DirExecutive } from './executives/dirExecutive';
-import { DirMediaHouse } from './media-houses/dirMediaHouse';
+import { DirClient } from './dirClient';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class DirApiService {
+export class ClientApiService {
 
   constructor(private api: ApiService) { }
 
@@ -103,13 +101,4 @@ export class DirApiService {
   deleteClient(client: DirClient) : Observable<any> {
     return this.api.delete('/user/client/' + client.id);
   }
-
-  deleteExecutive(executive: DirExecutive) : Observable<any> {
-    return this.api.delete('/user/executive/' + executive.id);
-  }
-
-  deleteMediaHouse(mediaHouse: DirMediaHouse) : Observable<any> {
-    return this.api.delete('/user/mediahouse/' + mediaHouse.id);
-  }
-
 }
