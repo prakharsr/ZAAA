@@ -1,0 +1,20 @@
+<button class="fab" routerLink="/dir/executives/new"><span class="fa fa-plus"></span></button>
+
+<p *ngIf="executives.length == 0" class="text-muted">
+  No Executives
+</p>
+
+<div class="card mb-3" *ngFor="let executive of executives">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <a [routerLink]="['/dir/executives', executive.id]">{{executive.orgName}}</a>
+        <br>
+        <small>{{executive.contactPerson.name}}</small>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-danger" (click)="deleteExecutive(executive)"><span class="fa fa-trash-alt"></span></button>
+      </div>
+    </div>
+  </div>
+</div>
