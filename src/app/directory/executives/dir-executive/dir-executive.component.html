@@ -1,14 +1,8 @@
-<br>
-
-<ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-<ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-<br>
-
 <form (ngSubmit)="submit()" #dirForm="ngForm">
   <div class="row">
     <div class="col-md">
-      <h2>Executive</h2>
+      <h2 *ngIf="edit">Edit Executive</h2>
+      <h2 *ngIf="!edit">Add Executive</h2>
       <br>
     
       <div class="form-group">
@@ -96,12 +90,12 @@
     </div>
   </div>
 
-  <br>
-
-  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-  <br>
+  <div *ngIf="error" class="text-danger">
+    {{error}}
+    
+    <br>
+  </div>
 
   <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
 </form>
