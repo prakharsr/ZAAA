@@ -26,6 +26,8 @@ export class ExecutiveApiService {
   private bodyToExecutive(body: any) : DirExecutive {
     let executive = new DirExecutive();
 
+    executive.id = body._id;
+
     executive.orgName = body.OrganizationName;
     executive.companyName = body.CompanyName;
     executive.executiveName = body.ExecutiveName;

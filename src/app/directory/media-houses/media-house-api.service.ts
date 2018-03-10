@@ -9,6 +9,22 @@ export class MediaHouseApiService {
 
   constructor(private api: ApiService) { }
 
+  createMediaHouse(mediaHouse: DirMediaHouse) : Observable<any> {
+    let scheduling = [];
+
+    mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+
+    return this.api.post('/user/mediahouse', {
+      organizationName: mediaHouse.orgName,
+      publicationName: mediaHouse.pubName,
+      nickName: mediaHouse.nickName,
+      edition: mediaHouse.edition,
+      address: mediaHouse.address,
+      officeLandline: mediaHouse.officeLandLine,
+      scheduling: scheduling
+    });
+  }
+
   private bodyToScheduling(body: any) : MediaHouseScheduling {
     let scheduling = new MediaHouseScheduling();
     
@@ -34,6 +50,8 @@ export class MediaHouseApiService {
   private bodyToMediaHouse(body: any) : DirMediaHouse {
     let mediaHouse = new DirMediaHouse();
 
+    mediaHouse.id = body._id;
+
     mediaHouse.orgName = body.OrganizationName;
     mediaHouse.pubName = body.PublicationName;
     mediaHouse.nickName = body.NickName;
@@ -53,6 +71,26 @@ export class MediaHouseApiService {
     }
 
     return mediaHouse;
+  }
+
+  editMediaHouse(mediaHouse: DirMediaHouse) : Observable<any> {
+    let scheduling = [];
+
+    mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+
+    return this.api.patch('/user/mediahouse/' + mediaHouse.id, {
+      id: mediaHouse.id,
+
+      OrganizationName: mediaHouse.orgName,
+      PublicationName: mediaHouse.pubName,
+      NickName: mediaHouse.nickName,
+      MediaType: mediaHouse.mediaType,
+      Edition: mediaHouse.edition,
+      Address: mediaHouse.address,
+      OfficeLandline: mediaHouse.officeLandLine,
+
+      scheduling: scheduling
+    })
   }
 
   getMediaHouse(id: string) : Observable<DirMediaHouse> {
