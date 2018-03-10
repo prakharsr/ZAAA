@@ -17,6 +17,4 @@ export class MediaHouseScheduling {
     mobileNo: "";
     deskExtension: "";
     email: "";
-    assignAdType: 'Single';
-    assignEdition: 'Single';
 }
