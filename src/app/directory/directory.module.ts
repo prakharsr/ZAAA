@@ -12,6 +12,7 @@ import { ClientDetailsComponent } from './clients/client-details/client-details.
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
+import { ExecutiveApiService } from './executives/executive-api.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media
     ClientDetailsComponent
   ],
   providers: [
-    ClientApiService
+    ClientApiService,
+    ExecutiveApiService
   ]
 })
 export class DirectoryModule { }

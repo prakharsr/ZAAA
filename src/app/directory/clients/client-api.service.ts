@@ -10,11 +10,7 @@ export class ClientApiService {
   constructor(private api: ApiService) { }
 
   createClient(client: DirClient) : Observable<any> {
-    return this.api.post('/user/client', this.clientToBody(client));
-  }
-
-  private clientToBody(client: DirClient) {
-    return {
+    return this.api.post('/user/client', {
       organizationName: client.orgName,
       companyName: client.companyName,
       nickName: client.nickName,
@@ -33,7 +29,7 @@ export class ClientApiService {
         DateOfBirth: client.contactPerson.dob,
         Anniversary: client.contactPerson.anniversaryDate
       }
-    }
+    });
   }
 
   private bodyToClient(data: any) : DirClient {
@@ -69,11 +65,27 @@ export class ClientApiService {
   }
 
   editClient(client: DirClient) : Observable<any> {
-    let body = this.clientToBody(client);
-
-    body['id'] = client.id;
-
-    return this.api.patch('/user/client', body);
+    return this.api.patch('/user/client', {
+      id: client.id,
+      OrganizationName: client.orgName,
+      CompanyName: client.companyName,
+      NickName: client.nickName,
+      CategoryType: client.category,
+      AddressState: client.address,
+      Landline: client.landLine,
+      Website: client.website,
+      PanNO: client.panNo,
+      GSTNo: client.gstNo,
+      ContactPerson: {
+        Name: client.contactPerson.name,
+        Designation: client.contactPerson.designation,
+        Department: client.contactPerson.department,
+        MobileNo: client.contactPerson.mobileNo,
+        EmailId: client.contactPerson.email,
+        DateOfBirth: client.contactPerson.dob,
+        Anniversary: client.contactPerson.anniversaryDate
+      }
+    });
   }
 
   getClient(id: string) : Observable<DirClient> {

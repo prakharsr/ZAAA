@@ -4,7 +4,7 @@
   No Clients
 </p>
 
-<div class="card mb-5" *ngFor="let client of clients">
+<div class="card mb-3" *ngFor="let client of clients">
   <div class="card-body">
     <div class="row">
       <div class="col"><a [routerLink]="['/dir/clients', client.id]">{{client.orgName}}</a></div>
