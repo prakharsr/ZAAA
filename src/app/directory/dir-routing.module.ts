@@ -15,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'clients', component: ClientListComponent },
       { path: 'clients/new', component: DirClientComponent },
+      { path: 'clients/edit/:id', component: DirClientComponent },
       { path: 'clients/:id', component: ClientDetailsComponent },
       { path: 'executives', component: DirExecutiveComponent },
       { path: 'media_houses', component: DirMediaHouseComponent },

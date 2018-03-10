@@ -8,7 +8,8 @@
 <form (ngSubmit)="submit()" #dirForm="ngForm">
   <div class="row">
     <div class="col-md">
-      <h2>Client</h2>
+      <h2 *ngIf="edit">Edit Client</h2>
+      <h2 *ngIf="!edit">Add Client</h2>
       <br>
     
       <div class="form-group">
