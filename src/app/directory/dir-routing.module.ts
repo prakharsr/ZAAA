@@ -13,10 +13,15 @@ const routes: Routes = [
     path: 'dir',
     component: DirComponent,
     children: [
-      { path: 'clients', component: ClientListComponent },
-      { path: 'clients/new', component: DirClientComponent },
-      { path: 'clients/edit/:id', component: DirClientComponent },
-      { path: 'clients/:id', component: ClientDetailsComponent },
+      {
+        path: 'clients',
+        children: [          
+          { path: '', component: ClientListComponent },
+          { path: 'new', component: DirClientComponent },
+          { path: 'edit/:id', component: DirClientComponent },
+          { path: ':id', component: ClientDetailsComponent },
+        ]
+      },
       { path: 'executives', component: DirExecutiveComponent },
       { path: 'media_houses', component: DirMediaHouseComponent },
       { path: '', redirectTo: 'clients', pathMatch: 'full' }
