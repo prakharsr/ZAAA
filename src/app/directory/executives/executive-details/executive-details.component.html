@@ -1,0 +1,72 @@
+<button class="fab bg-info" [routerLink]="['/dir/executives/edit', id]"><span class="fa fa-pencil-alt"></span></button>
+
+<div class="row">
+  <div class="col-lg">
+    <div class="card mb-3">
+      <div class="card-header">Executive</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Organization Name</div>
+            <div class="col-md-8">{{executive.orgName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Company Name</div>
+            <div class="col-md-8">{{executive.companyName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Executive Name</div>
+            <div class="col-md-8">{{executive.executiveName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Designation</div>
+            <div class="col-md-8">{{executive.designation}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Department</div>
+            <div class="col-md-8">{{executive.department}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Mobile</div>
+            <div class="col-md-8">{{executive.mobileNo}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Email</div>
+            <div class="col-md-8">{{executive.email}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg">
+    <div class="card mb-3">
+      <div class="card-header">Personal Details</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Date of Birth</div>
+            <div class="col-md-8">{{executive.dob}}</div>
+          </div>
+        </li>        
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Anniversary</div>
+            <div class="col-md-8">{{executive.anniversaryDate}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

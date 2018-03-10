@@ -9,6 +9,7 @@ import { ClientDetailsComponent } from './clients/client-details/client-details.
 
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 import { ExecutiveListComponent } from './executives/executive-list/executive-list.component';
+import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
 
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
 
@@ -31,7 +32,8 @@ const routes: Routes = [
         children: [
           { path: '', component: ExecutiveListComponent },
           { path: 'new', component: DirExecutiveComponent },
-          { path: 'edit/:id', component: DirExecutiveComponent }
+          { path: 'edit/:id', component: DirExecutiveComponent },
+          { path: ':id', component: ExecutiveDetailsComponent }
         ]
       },
       { path: 'media_houses', component: DirMediaHouseComponent },

@@ -12,6 +12,7 @@ import { ClientDetailsComponent } from './clients/client-details/client-details.
 import { ExecutiveApiService } from './executives/executive-api.service';
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 import { ExecutiveListComponent } from './executives/executive-list/executive-list.component';
+import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
 
 import { MediaHouseApiService } from './media-houses/media-house-api.service';
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
@@ -28,7 +29,8 @@ import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media
     DirComponent,
     ClientListComponent,
     ClientDetailsComponent,
-    ExecutiveListComponent
+    ExecutiveListComponent,
+    ExecutiveDetailsComponent
   ],
   providers: [
     ClientApiService,
