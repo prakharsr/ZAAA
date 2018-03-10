@@ -85,11 +85,16 @@
     </div>
     <div class="col-md">
       <br>
-      <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
-      <br>
 
-      <button (click)="addScheduling()" class="btn btn-outline-info"><span class="fa fa-plus"></span> Add More</button>
-
+      <div class="row">
+        <div class="col">
+          <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
+        </div>
+        <div class="col-auto">
+          <button (click)="addScheduling()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+        </div>
+      </div>
+      
       <br><br>
 
       <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">

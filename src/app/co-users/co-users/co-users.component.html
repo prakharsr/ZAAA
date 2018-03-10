@@ -10,15 +10,21 @@
   <div *ngFor="let coUser of coUsers" class="card mb-4">
     <div class="card-header">{{coUser.name}}</div>
     <div class="card-body">
-      <div *ngIf="admin" style="float:right">
-        <a class="btn btn-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
-        <button class="btn btn-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span></button>
+      <div class="row">
+        <div class="col-md">
+          <h6>{{coUser.designation}}</h6>
+          <span class="fa fa-envelope mr-3"></span> {{ coUser.email }}
+          <br>
+          <span class="fa fa-phone mr-3"></span> {{ coUser.phone }}
+          <br><br>
+        </div>
+        <div *ngIf="admin" class="col-md-auto">
+          <div>
+            <a class="btn btn-outline-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
+            <button class="btn btn-outline-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span></button>
+          </div>
+        </div>
       </div>
-      <h6>{{coUser.designation}}</h6>
-      <span class="fa fa-envelope mr-3"></span> {{ coUser.email }}
-      <br>
-      <span class="fa fa-phone mr-3"></span> {{ coUser.phone }}
-      <br>
     </div>
   </div>
 </div>
