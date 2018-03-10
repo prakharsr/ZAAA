@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirClient } from './dirClient';
-import { DirExecutive } from './dirExecutive';
-import { DirMediaHouse } from './dirMediaHouse';
+import { DirClient } from './clients/dirClient';
+import { DirExecutive } from './executives/dirExecutive';
+import { DirMediaHouse } from './media-houses/dirMediaHouse';
 import { map } from 'rxjs/operators';
 
 @Injectable()

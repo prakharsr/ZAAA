@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DirClient } from '../dirClient';
-import { DirApiService } from '../dir-api.service';
+import { DirApiService } from '../../dir-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

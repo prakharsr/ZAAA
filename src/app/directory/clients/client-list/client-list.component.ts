@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DirClient } from '../dirClient';
-import { DirApiService } from '../dir-api.service';
-import { DialogService } from '../../services/dialog.service';
+import { DirApiService } from '../../dir-api.service';
+import { DialogService } from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-client-list',
