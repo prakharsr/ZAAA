@@ -1,0 +1,16 @@
+<button class="fab" routerLink="/dir/clients/new"><span class="fa fa-plus"></span></button>
+
+<p *ngIf="clients.length == 0" class="text-muted">
+  No Clients
+</p>
+
+<div class="card mb-5" *ngFor="let client of clients">
+  <div class="card-body">
+    <div class="row">
+      <div class="col"><a [routerLink]="['/dir/clients', client.id]">{{client.orgName}}</a></div>
+      <div class="col-auto">
+        <button class="btn btn-outline-danger" (click)="deleteClient(client)"><span class="fa fa-trash-alt"></span></button>
+      </div>
+    </div>
+  </div>
+</div>

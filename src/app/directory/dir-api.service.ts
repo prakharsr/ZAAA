@@ -41,6 +41,8 @@ export class DirApiService {
   private bodyToClient(data: any) : DirClient {
     let client = new DirClient();
 
+    client.id = data._id;
+
     client.orgName = data.OrganizationName;
     client.companyName = data.CompanyName;
     client.nickName = data.NickName;
@@ -74,6 +76,12 @@ export class DirApiService {
     body['id'] = client.id;
 
     return this.api.patch('/user/client', body);
+  }
+
+  getClient(id: string) : Observable<DirClient> {
+    return this.api.get('/user/client/' + id).pipe(
+      map(data => data.success ? this.bodyToClient(data.client) : new DirClient())
+    );
   }
 
   getClients() : Observable<DirClient[]> {

@@ -8,6 +8,8 @@ import { DirClientComponent } from './dir-client/dir-client.component';
 import { DirExecutiveComponent } from './dir-executive/dir-executive.component';
 import { DirMediaHouseComponent } from './dir-media-house/dir-media-house.component';
 import { DirComponent } from './dir/dir.component';
+import { ClientListComponent } from './client-list/client-list.component';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { DirComponent } from './dir/dir.component';
     DirClientComponent,
     DirExecutiveComponent,
     DirMediaHouseComponent,
-    DirComponent
+    DirComponent,
+    ClientListComponent,
+    ClientDetailsComponent
   ],
   providers: [
     DirApiService
