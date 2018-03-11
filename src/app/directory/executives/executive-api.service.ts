@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { DirExecutive } from './dirExecutive';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ExecutiveApiService {
@@ -35,7 +36,11 @@ export class ExecutiveApiService {
     executive.department = body.Department;
     executive.mobileNo = body.MobileNo;
     executive.email = body.EmailId;
-    executive.photo = body.Photo;
+
+    if (body.Photo) {
+      executive.photo = environment.uploadsBaseUrl + body.Photo;
+    }
+
     executive.dob = body.DateOfBirth;
     executive.anniversaryDate = body.Anniversary;
 
@@ -81,6 +86,10 @@ export class ExecutiveApiService {
 
   deleteExecutive(executive: DirExecutive) : Observable<any> {
     return this.api.delete('/user/executive/' + executive.id);
+  }
+
+  uploadProfilePicture(id: string, fileToUpload: File) : Observable<any> {
+    return this.api.fileUpload("/user/executive/picture/" + id, "executive", fileToUpload);
   }
 
 }

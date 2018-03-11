@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { DirClient } from './dirClient';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class ClientApiService {
@@ -58,7 +59,9 @@ export class ClientApiService {
       client.contactPerson.dob = person.DateOfBirth;
       client.contactPerson.anniversaryDate = person.Anniversary;
 
-      client.contactPerson.photo = person.Photo;
+      if (person.Photo) {
+        client.contactPerson.photo = environment.uploadsBaseUrl + person.Photo;
+      }
     }
 
     return client;
@@ -112,5 +115,9 @@ export class ClientApiService {
 
   deleteClient(client: DirClient) : Observable<any> {
     return this.api.delete('/user/client/' + client.id);
+  }
+
+  uploadProfilePicture(id: string, fileToUpload: File) : Observable<any> {
+    return this.api.fileUpload("/user/client/picture/" + id, "client", fileToUpload);
   }
 }
