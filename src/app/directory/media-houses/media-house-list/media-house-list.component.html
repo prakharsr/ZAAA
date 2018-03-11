@@ -1,3 +1,20 @@
-<p>
-  media-house-list works!
+<button class="fab" routerLink="/dir/media_houses/new"><span class="fa fa-plus"></span></button>
+
+<p *ngIf="mediaHouses.length == 0" class="text-muted">
+  No Clients
 </p>
+
+<div class="card mb-3" *ngFor="let mediaHouse of mediaHouses">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.orgName}}</a>
+        <br>
+        <small>{{mediaHouse.contactPerson.name}}</small>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-outline-danger" (click)="deleteMediaHouse(mediaHouse)"><span class="fa fa-trash-alt"></span></button>
+      </div>
+    </div>
+  </div>
+</div>

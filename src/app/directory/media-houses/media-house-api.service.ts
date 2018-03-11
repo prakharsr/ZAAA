@@ -78,7 +78,7 @@ export class MediaHouseApiService {
 
     mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
 
-    return this.api.patch('/user/mediahouse/' + mediaHouse.id, {
+    return this.api.patch('/user/mediahouse/', {
       id: mediaHouse.id,
 
       OrganizationName: mediaHouse.orgName,

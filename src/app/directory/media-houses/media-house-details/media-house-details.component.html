@@ -1,3 +1,90 @@
-<p>
-  media-house-details works!
-</p>
+<button class="fab bg-info" [routerLink]="['/dir/media_houses/edit', id]"><span class="fa fa-pencil-alt"></span></button>
+
+<div class="row">
+  <div class="col-lg">
+    <div class="card mb-3">
+      <div class="card-header">Media House</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Organization Name</div>
+            <div class="col-md-8">{{mediaHouse.orgName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Publisher Name</div>
+            <div class="col-md-8">{{mediaHouse.pubName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Nick Name</div>
+            <div class="col-md-8">{{mediaHouse.nickName}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Media Type</div>
+            <div class="col-md-8">{{mediaHouse.mediaType}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Edition</div>
+            <div class="col-md-8">{{mediaHouse.edition}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Address</div>
+            <div class="col-md-8">{{mediaHouse.address}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Office Landline</div>
+            <div class="col-md-8">{{mediaHouse.officeLandLine}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg">
+    <div class="card mb-3" *ngFor="let scheduling of mediaHouse.scheduling; index as i">
+      <div class="card-header">Scheduling #{{i + 1}}</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Person</div>
+            <div class="col-md-8">{{scheduling.person}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Designation</div>
+            <div class="col-md-8">{{scheduling.designation}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Desk Extension</div>
+            <div class="col-md-8">{{scheduling.deskExtension}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Mobile</div>
+            <div class="col-md-8">{{scheduling.mobileNo}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Email</div>
+            <div class="col-md-8">{{scheduling.email}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,8 @@
-<br>
-
-<ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-<ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-<br>
-
 <form (ngSubmit)="submit()" #dirForm="ngForm">
   <div class="row">
     <div class="col-md">
-      <h2>Media House</h2>
+      <h2 *ngIf="edit">Edit Media House</h2>
+      <h2 *ngIf="!edit">Add Media House</h2>
       <br>
 
       <div class="form-group">
@@ -91,7 +85,7 @@
           <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
         </div>
         <div class="col-auto">
-          <button (click)="addScheduling()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+          <button type="button" (click)="addScheduling()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
         </div>
       </div>
       
@@ -99,7 +93,7 @@
 
       <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
         <div class="card-header">
-          <button class="btn btn-outline-danger float-right" (click)="removeScheduling(i)"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)"><span class="fa fa-trash-alt"></span></button>
           #{{i + 1}}
         </div>
         <div class="card-body">
@@ -158,12 +152,12 @@
     </div>
   </div>
 
-  <br>
-
-  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-  <br>
+  <div *ngIf="error" class="text-danger">
+    {{error}}
+    
+    <br><br>
+  </div>
 
   <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
 </form>
