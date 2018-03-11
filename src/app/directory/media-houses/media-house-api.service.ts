@@ -60,15 +60,15 @@ export class MediaHouseApiService {
     mediaHouse.address = body.Address;
     mediaHouse.officeLandLine = body.OfficeLandline;
 
-    if (body.Scheduling) {
-      let scheduling : MediaHouseScheduling[] = [];
+    let scheduling : MediaHouseScheduling[] = [];
 
+    if (body.Scheduling) {
       body.Scheduling.forEach(element => {
         scheduling.push(this.bodyToScheduling(element));
       });
-
-      mediaHouse.scheduling = scheduling;
     }
+
+    mediaHouse.scheduling = scheduling;
 
     return mediaHouse;
   }
@@ -76,7 +76,9 @@ export class MediaHouseApiService {
   editMediaHouse(mediaHouse: DirMediaHouse) : Observable<any> {
     let scheduling = [];
 
-    mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+    if (mediaHouse.scheduling) {
+      mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+    }
 
     return this.api.patch('/user/mediahouse/', {
       id: mediaHouse.id,
@@ -89,7 +91,7 @@ export class MediaHouseApiService {
       Address: mediaHouse.address,
       OfficeLandline: mediaHouse.officeLandLine,
 
-      scheduling: scheduling
+      Scheduling: scheduling
     })
   }
 
