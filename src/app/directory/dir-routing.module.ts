@@ -12,6 +12,8 @@ import { ExecutiveListComponent } from './executives/executive-list/executive-li
 import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
 
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
+import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
+import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
 
 const routes: Routes = [
   {
@@ -36,7 +38,15 @@ const routes: Routes = [
           { path: ':id', component: ExecutiveDetailsComponent }
         ]
       },
-      { path: 'media_houses', component: DirMediaHouseComponent },
+      {
+        path: 'media_houses',
+        children: [
+          { path: '', component: MediaHouseListComponent },
+          { path: 'new', component: DirMediaHouseComponent },
+          { path: 'edit/:id', component: DirMediaHouseComponent },
+          { path: ':id', component: MediaHouseDetailsComponent }
+        ]
+      },
       { path: '', redirectTo: 'clients', pathMatch: 'full' }
     ]
   }

@@ -16,6 +16,8 @@ import { ExecutiveDetailsComponent } from './executives/executive-details/execut
 
 import { MediaHouseApiService } from './media-houses/media-house-api.service';
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
+import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
+import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media
     ClientListComponent,
     ClientDetailsComponent,
     ExecutiveListComponent,
-    ExecutiveDetailsComponent
+    ExecutiveDetailsComponent,
+    MediaHouseListComponent,
+    MediaHouseDetailsComponent
   ],
   providers: [
     ClientApiService,
