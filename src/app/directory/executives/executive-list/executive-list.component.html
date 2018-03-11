@@ -10,7 +10,7 @@
       <div class="col">
         <a [routerLink]="['/dir/executives', executive.id]">{{executive.orgName}}</a>
         <br>
-        <small>{{executive.contactPerson.name}}</small>
+        <small>{{executive.executiveName}}</small>
       </div>
       <div class="col-auto">
         <button class="btn btn-outline-danger" (click)="deleteExecutive(executive)"><span class="fa fa-trash-alt"></span></button>

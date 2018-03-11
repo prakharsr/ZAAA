@@ -9,8 +9,6 @@
     <div class="row">
       <div class="col">
         <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.orgName}}</a>
-        <br>
-        <small>{{mediaHouse.contactPerson.name}}</small>
       </div>
       <div class="col-auto">
         <button class="btn btn-outline-danger" (click)="deleteMediaHouse(mediaHouse)"><span class="fa fa-trash-alt"></span></button>
