@@ -34,7 +34,7 @@ export class DirExecutiveComponent implements OnInit {
   }
 
   private goBack() {
-    this.router.navigateByUrl('/dir/executives');
+    this.router.navigateByUrl(this.edit ? '/dir/executives/' + this.id : '/dir/executives');
   }
 
   private createExecutive() {

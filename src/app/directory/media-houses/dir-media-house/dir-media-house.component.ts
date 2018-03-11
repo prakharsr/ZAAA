@@ -44,7 +44,7 @@ export class DirMediaHouseComponent implements OnInit {
   }
   
   private goBack() {
-    this.router.navigateByUrl('/dir/media_houses');
+    this.router.navigateByUrl(this.edit ? '/dir/media_houses/' + this.id : '/dir/media_houses');
   }
 
   private createMediaHouse() {

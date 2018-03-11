@@ -34,7 +34,7 @@ export class DirClientComponent implements OnInit {
   }
 
   private goBack() {
-    this.router.navigateByUrl('/dir/clients');
+    this.router.navigateByUrl(this.edit ? '/dir/clients/' + this.id : '/dir/clients');
   }
 
   private createClient() {
