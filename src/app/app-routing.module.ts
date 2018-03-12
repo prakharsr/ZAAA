@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
-  { path: 'rateCard', component: CreateRateCardComponent }
+  { path: 'rateCard', component: CreateRateCardComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

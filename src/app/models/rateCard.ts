@@ -16,12 +16,7 @@ export class RateCard {
     covered: Covered[] = [];
     remarks: Remark[] = [];
 
-    mainCategory: 'Property' | 'Education' | 'Medical' | 'Women' | 'Real Estate' = 'Property';
-    subCategory1 = "";
-    subCategory2 = "";
-    subCategory3 = "";
-    subCategory4 = "";
-    subCategory5 = "";
+    categories: Category[];
     
     unit: 'Words' | 'Sqcm' | 'Sec' = 'Words';
     position: 'Classified' | 'Back Page' | '1st Page' | 'Jacket' | 'Prime Time' = 'Classified' ;
@@ -64,4 +59,8 @@ export class Covered {
 
 export class Remark {
     remark = "";
+}
+
+export class Category {
+    constructor(public name: string, public subcategories: Category[] = []) {}
 }

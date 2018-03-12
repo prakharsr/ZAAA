@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Premium, Covered, Remark } from '../../models/rateCard';
+import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category } from '../../models/rateCard';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -12,7 +12,11 @@ export class CreateRateCardComponent implements OnInit {
 
   rateCard = new RateCard();
 
+  noneCategory = new Category('None');
+
   ngOnInit() {
+    this.rateCard.categories = [this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory];
+
     this.rateCard.fixSizes = [new FixSize()];
     this.rateCard.schemes = [new Scheme()];
     this.rateCard.premiums = [new Premium()];
@@ -20,9 +24,7 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.remarks = [new Remark()];
   }
 
-  get mediaTypes() {
-    return ['Print', 'Air', 'Electronic'];
-  }
+  mediaTypes =['Print', 'Air', 'Electronic'];
 
   get adTypes() {
     switch (this.rateCard.mediaType) {
@@ -39,13 +41,9 @@ export class CreateRateCardComponent implements OnInit {
     return [];
   }
 
-  get rateCardTypes() {
-    return ['Regional', 'Corporate', 'Local'];
-  }
+  rateCardTypes = ['Regional', 'Corporate', 'Local'];
 
-  get periods() {
-    return ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
-  }
+  periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
 
   get units() {
     let result = [];
@@ -69,6 +67,23 @@ export class CreateRateCardComponent implements OnInit {
 
     return result;
   }
+  
+  categories = [
+    new Category('Property'),
+    new Category('Education'),
+    new Category('Medical', [
+      new Category('Surgery', [
+        new Category('Chutiap', [
+          new Category('Heart Surgery', [
+            new Category('Transplant')
+          ])
+        ]),
+        new Category('Randaap')
+      ])
+    ]),
+    new Category('Women'),
+    new Category('Real Estate')
+  ];
 
   addFixSize() {
     this.rateCard.fixSizes.push(new FixSize());

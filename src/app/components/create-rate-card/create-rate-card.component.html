@@ -115,105 +115,26 @@
 
   <div class="form-row">
     <div class="col-md-3">
-      Main Category
+      Categories
     </div>
     <div class="col-md-9">
       <div class="form-group">
-        <select class="form-control" name="mainCategory" [(ngModel)]="rateCard.mainCategory" id="mainCategory" #mainCategoryField required>
-          <option>Property</option>
-          <option>Education</option>
-          <option>Medical</option>
-          <option>Women</option>
-          <option>Real Estate</option>
+        <select class="form-control" name="category1" [(ngModel)]="rateCard.categories[0]" id="category1" required>
+          <option [ngValue]="noneCategory">None</option>
+          <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
+        </select>
+      </div>
+
+      <div *ngFor="let category of rateCard.categories; index as i" class="form-group">
+        <select class="form-control" *ngIf="i != 0 && rateCard.categories[i - 1] && rateCard.categories[i - 1].subcategories.length" name="category{{i + 1}}" [(ngModel)]="rateCard.categories[i]" id="category{{i + 1}}">
+          <option [ngValue]="noneCategory">None</option>
+          <option *ngFor="let item of rateCard.categories[i - 1].subcategories" [ngValue]="item">{{item.name}}</option>
         </select>
       </div>
     </div>
   </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Sub Category 1
-    </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="subCategory1" [(ngModel)]="rateCard.subCategory1" id="subCategory1" #subCategory1Field required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Sub Category 2
-    </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="subCategory2" [(ngModel)]="rateCard.subCategory2" id="subCategory2" #subCategory2Field required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Sub Category 3
-    </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="subCategory3" [(ngModel)]="rateCard.subCategory3" id="subCategory3" #subCategory3Field required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Sub Category 4
-    </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="subCategory4" [(ngModel)]="rateCard.subCategory4" id="subCategory4" #subCategory4Field required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Sub Category 5
-    </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="subCategory5" [(ngModel)]="rateCard.subCategory5" id="subCategory5" #subCategory5Field required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-  </div>
+
+  {{rateCard.categories | json}}
   
   <div class="form-row">
     <div class="col-md-3">
