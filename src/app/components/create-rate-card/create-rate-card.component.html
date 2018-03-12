@@ -474,7 +474,7 @@
   
   <div class="form-row">
     <div class="col">
-      <h4>Remark ({{rateCard.remarks.length}})</h4>
+      <h4>Remarks ({{rateCard.remarks.length}})</h4>
       <br>
     </div>
     <div class="col-auto">
@@ -482,24 +482,23 @@
     </div>
   </div>
   
-  <div *ngFor="let item of rateCard.remarks; index as i" class="card mb-4">
-    <div class="card-header">
-      <button type="button" class="btn btn-outline-danger float-right" (click)="removeRemark(i)"><span class="fa fa-trash-alt"></span></button>
-      #{{i + 1}}
-    </div>
-    <div class="card-body">
-      <div class="form-group">
-        <label for="remark">Remark</label>
-        <input type="number" class="form-control" id="remark-{{i}}" name="remark-{{i}}" placeholder="Enter Remark" [(ngModel)]="item.remark" required #remarkField="ngModel">
-      </div>
-      
-      <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
-        <div *ngIf="remarkField.errors.required">
-          Remark is required.
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let item of rateCard.remarks; index as i">
+        <div class="form-row">
+            <label class="col-auto col-form-label">#{{i + 1}}</label>
+            <input type="number" class="form-control col mx-3" id="remark-{{i}}" name="remark-{{i}}" placeholder="Enter Remark" [(ngModel)]="item.remark" required #remarkField="ngModel">
+            <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeRemark(i)"><span class="fa fa-trash-alt"></span></button>
         </div>
-        <br>
-      </div>
-    </div>
-  </div> 
+
+        <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
+          <div *ngIf="remarkField.errors.required">
+            Remark is required.
+          </div>
+          <br>
+        </div>
+      </li>
+    </ul>
+  </div>
   
 </div>
