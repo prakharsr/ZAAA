@@ -24,7 +24,17 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.remarks = [new Remark()];
   }
 
-  mediaTypes =['Print', 'Air', 'Electronic'];
+  mediaTypes = ['Print', 'Air', 'Electronic'];
+
+  get mediaType() {
+    return this.rateCard.mediaType;
+  }
+
+  set mediaType(mediaType: string) {
+    this.rateCard.mediaType = mediaType;
+
+    this.rateCard.adType = this.adTypes[0];
+  }
 
   get adTypes() {
     switch (this.rateCard.mediaType) {

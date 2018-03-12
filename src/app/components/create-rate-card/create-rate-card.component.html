@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-9">
       <div class="form-group">
-        <select class="form-control" name="mediaType" [(ngModel)]="rateCard.mediaType" id="mediaType" #mediaTypeField required>
+        <select class="form-control" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField required>
           <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
         </select>
       </div>

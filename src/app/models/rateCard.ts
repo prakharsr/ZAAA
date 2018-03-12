@@ -1,14 +1,14 @@
 export class RateCard {
-    mediaType: 'Air' | 'Print' | 'Electronic' = 'Air';
-    adType: 'Text Classified' | 'Display' | 'Display Classified' | 'RJ Mentions' | 'Radio Commercials' | 'Sponsorship Tags' | 'Road Block' | 'VJ Mentions' | 'Banner' | 'Scroll' | 'Commercial' = 'Text Classified';
-    rateCardType: 'Regional' | 'Corporate' | 'Local' = 'Regional';
+    mediaType = "";
+    adType = "";
+    rateCardType = "";
     
     mediaHouseName = "";
     pullOutName = "";
     specPullOutName = "";
     bookingEdition = "";
     
-    freqPeriod: 'Daily' | 'Weekly' | 'BiWeekly' | 'Monthly' = 'Daily';
+    freqPeriod = "";
     
     fixSizes: FixSize[] = [];
     schemes: Scheme[] = [];
@@ -18,9 +18,9 @@ export class RateCard {
 
     categories: Category[];
     
-    unit: 'Words' | 'Sqcm' | 'Sec' = 'Words';
-    position: 'Classified' | 'Back Page' | '1st Page' | 'Jacket' | 'Prime Time' = 'Classified' ;
-    hue: "Colored" | "Black & White" = "Colored" ;
+    unit = "";
+    position = "";
+    hue: "";
     
     minLength = 0;
     minWidth = 0;
@@ -30,7 +30,7 @@ export class RateCard {
     taxIncluded = "";
     taxRate = "";
     validFrom = "";
-    validTill ="";
+    validTill = "";
     
     rate = 0;
 }
