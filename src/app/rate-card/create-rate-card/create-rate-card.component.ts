@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category } from '../../models/rateCard';
+import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category } from '../rateCard';
 
 @Component({
   selector: 'app-create-rate-card',

@@ -20,7 +20,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
-import { CreateRateCardComponent } from './components/create-rate-card/create-rate-card.component';
+import { CreateRateCardComponent } from './rate-card/create-rate-card/create-rate-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
