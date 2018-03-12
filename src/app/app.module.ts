@@ -17,6 +17,7 @@ import { FirmProfileViewComponent } from './components/firm-profile-view/firm-pr
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CreateRateCardComponent } from './components/create-rate-card/create-rate-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     FirmProfileViewComponent,
     ChangePswComponent,
     ForgotPswComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreateRateCardComponent
   ],
   imports: [
     BaseModule,

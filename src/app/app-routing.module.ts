@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
+import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,11 +17,10 @@ import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.com
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
-
 import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
+import { CreateRateCardComponent } from './components/create-rate-card/create-rate-card.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +35,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
+  { path: 'rateCard', component: CreateRateCardComponent }
   { path: '**', component: NotFoundComponent }
 ];
 
