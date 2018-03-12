@@ -7,75 +7,57 @@
 <!-- Validation -->
 
 <div class="container">
-  <div class="form-row">
-    <div class="col-md-3">
-      Media Type
-    </div>
-    <div class="col-md-9">
+  <div class="form-row">    
+    <div class="col-md">
       <div class="form-group">
+        <label>Media Type</label>
         <select class="form-control" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField required>
           <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
         </select>
       </div>
     </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Ad Type
-    </div>
-    <div class="col-md-9">
+    <div class="col-md">
       <div class="form-group">
+        <label>Ad Type</label>
         <select class="form-control" name="adType" [(ngModel)]="rateCard.adType" id="adType" #adTypeField required>
           <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
         </select>
       </div>
     </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Rate Card Type
-    </div>
-    <div class="col-md-9">
+    <div class="col-md">
       <div class="form-group">
+        <label>Rate Card Type</label>
         <select class="form-control" name="rateCardType" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField required>
           <option *ngFor="let item of rateCardTypes" [value]="item">{{item}}</option>
         </select>
       </div>
     </div>
   </div>
-  
+
+  <br>
   <h3>Booking Center</h3>
   <br>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Media House Name
-    </div>
-    <div class="col-md-9">
+    <div class="col-md">
       <div class="form-group">
+        <label>Media House Name</label>
         <input type="text" class="form-control" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel">
       </div>
     </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="col-md-3">
-      Edition
-    </div>
-    <div class="col-md-9">
+    <div class="col-md">
       <div class="form-group">
+        <label>Edition</label>
         <input type="text" class="form-control" id="bookingEdition" placeholder="Enter Edition" [(ngModel)]="rateCard.bookingEdition" name="bookingEdition" required #bookingEditionField="ngModel">
       </div>
     </div>
   </div>
   
-  <div class="form-row">
-    <div class="col-md-3">
+  <div class="form-group form-row">
+    <label class="col-md-3 col-form-label">
       Pullout Name
-    </div>
-    <div class="col-md-9">
+    </label>
+    <div class="col-md">
       <div class="form-group">
         <select class="form-control" name="pullOutName" [(ngModel)]="rateCard.pullOutName" id="pullOutName" #pullOutNameField required>
           <option>1</option>
@@ -84,19 +66,14 @@
         </select>
       </div>
     </div>
-  </div>
-  
-  <div class="form-row" *ngIf="rateCard.pullOutName == 'Others'">
-    <div class="col-md-3">
-      Special Pullout Name
-    </div>
-    <div class="col-md-9">
+    <div class="col-md" *ngIf="rateCard.pullOutName == 'Others'">
       <div class="form-group">
         <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="rateCard.specPullOutName" name="specPullOutName" required #specPullOutNameField="ngModel">
       </div>
     </div>
   </div>
   
+  <br>
   <h3>Frequency</h3>
   <br>
 
@@ -117,6 +94,7 @@
     </div>
   </div>
 
+  <br>
   <h3>Categories</h3>
   <br>
 
@@ -171,9 +149,7 @@
   <br>
 
   <div class="form-row">
-    <div class="col-md-3">
-      Rate
-    </div>
+    <label class="col-md-3 col-form-label">Rate</label>
     <div class="col col-md-5">
       <div class="form-group">
         <input type="text" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
@@ -189,9 +165,7 @@
   </div>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Position
-    </div>
+    <label class="col-md-3 col-form-label">Position</label>
     <div class="col-md-9">
       <div class="form-group">
         <select class="form-control" name="position" [(ngModel)]="rateCard.position" id="position" #positionField required>
@@ -202,9 +176,7 @@
   </div>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Hue
-    </div>
+    <label class="col-md-3 col-form-label">Hue</label>
     <div class="col-md-9">
       <div class="form-group">
         <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField required>
@@ -216,9 +188,7 @@
   </div>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Minimum Size Limit
-    </div>
+    <label class="col-md-3 col-form-label">Minimum Size Limit</label>
     <div class="col">
       <div class="form-group">
         <input type="number" class="form-control" id="minLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
@@ -233,9 +203,7 @@
   </div>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Maximum Size Limit
-    </div>
+    <label class="col-md-3 col-form-label">Maximum Size Limit</label>
     <div class="col">
       <div class="form-group">
         <input type="number" class="form-control" id="maxLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
@@ -422,12 +390,10 @@
     </div>
   </div>
   
-  <div class="form-row">
-    <div class="col-md-3">
-      Tax
-    </div>
+  <div class="row">
+    <label class="col-md-3 col-form-label">Tax</label>
     <div class="col-auto">
-      <div class="form-check">
+      <div class="form-check col-form-label">
         <input type="checkbox" class="form-check-input" id="taxIncluded" name="taxIncluded" [(ngModel)]="rateCard.taxIncluded" required #taxIncludedField="ngModel">
         <label class="form-check-label" for="acceptTnC">Included</label>
       </div>
@@ -440,17 +406,15 @@
   </div>
   
   <div class="form-row">
-    <div class="col-md-3">
-      Validity
-    </div>
-    <label class="col-auto form-text">From</label>
-    <div class="col">
+    <label class="col-md-3 col-form-label">Validity</label>
+    <label class="col-auto col-form-label">From</label>
+    <div class="col-sm">
       <div class="form-group">        
         <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
       </div>
     </div>
-    <label class="col-auto form-text">Till</label>
-    <div class="col">
+    <label class="col-auto col-form-label">Till</label>
+    <div class="col-sm">
       <div class="form-group">
         <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
       </div>
