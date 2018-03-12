@@ -1,11 +1,13 @@
 import {UserRoles} from './userRoles';
 
 export class CoUser {
-    constructor(public name: string,
-        public designation: string,
-        public email: string,
-        public phone: string) {}
+    name: string;
+    designation: string;
+    email: string;
+    phone: string;
+    
+    isAdmin: boolean;
 
-    roles: UserRoles;
+    roles = new UserRoles();
     id: string;
 }

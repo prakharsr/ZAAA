@@ -7,8 +7,24 @@
 <div class="container">
   <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
 
+  <div>
+    <small class="text-muted">{{coUsers.length}} USERS</small>
+  </div>
+
+  <br>
+
   <div *ngFor="let coUser of coUsers" class="card mb-4">
-    <div class="card-header">{{coUser.name}}</div>
+    <div class="card-header">
+      <div class="row">
+        <div class="col">{{coUser.name}}</div>
+        <div class="col-auto" *ngIf="coUser.isAdmin">
+          <small class="text-muted">ADMIN</small>
+        </div>
+        <div class="col-auto" *ngIf="myId == coUser.id">
+          <small class="text-muted">SELF</small>
+        </div>
+      </div>
+    </div>
     <div class="card-body">
       <div class="row">
         <div class="col-md">
@@ -18,7 +34,7 @@
           <span class="fa fa-phone mr-3"></span> {{ coUser.phone }}
           <br><br>
         </div>
-        <div *ngIf="admin" class="col-md-auto">
+        <div *ngIf="admin && myId != coUser.id && !coUser.isAdmin" class="col-md-auto">
           <div>
             <a class="btn btn-outline-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
             <button class="btn btn-outline-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span></button>

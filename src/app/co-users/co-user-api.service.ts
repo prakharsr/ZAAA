@@ -11,16 +11,40 @@ export class CoUserApiService {
 
   constructor(private api: ApiService) { }
 
-  get coUsers() : Observable<any> {
-    return this.api.get('/user/co_user');
+  get coUsers() : Observable<CoUser[]> {
+    return this.api.get('/user/co_user').pipe(
+      map(data => {
+        let coUsers: CoUser[] = [];
+
+        if (data.success) {
+          data.co_users.forEach(element => {
+            let coUser = new CoUser();
+
+            coUser.name = element.name;
+            coUser.designation = element.designation;
+            coUser.email = element.email;
+            coUser.phone = element.phone;
+
+            coUser.isAdmin = element.isAdmin;
+
+            coUser.id = element._id;
+
+            coUsers.push(coUser);
+          });
+        }
+
+        return coUsers;
+      })
+    );
   }
 
-  createCoUser(name: string, designation: string, email: string, phone: string) : Observable<any> {
+  createCoUser(coUser: CoUser) : Observable<any> {
     return this.api.post('/user/co_user', {
-      name: name,
-      designation: designation,
-      email: email,
-      phone: phone
+      name: coUser.name,
+      designation: coUser.designation,
+      email: coUser.email,
+      phone: coUser.phone,
+      isAdmin: coUser.isAdmin
     });
   }
 

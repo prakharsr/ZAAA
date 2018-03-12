@@ -15,25 +15,19 @@ export class CoUsersComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   admin: boolean;
+  myId: string;
 
   coUsers: CoUser[] = [];
 
   constructor(private api: CoUserApiService, private dialog: DialogService) { }
 
   ngOnInit() {
-    this.api.coUsers.subscribe(data => {
-      data.co_users.forEach(element => {
-        let coUser = new CoUser(element.name, element.designation, element.email, element.phone);
-
-        coUser.id = element._id;
-
-        this.coUsers.push(coUser);
-      });
-    });
+    this.api.coUsers.subscribe(data => this.coUsers = data);
 
     this.api.getUser().subscribe(data => {
       if (data.success) {
         this.admin = data.user.isAdmin;
+        this.myId = data.user._id;
       }
     })
   }

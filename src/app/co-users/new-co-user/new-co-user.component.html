@@ -8,7 +8,7 @@
   <form (ngSubmit)="submit()" #newCoUserForm="ngForm">
     <div class="form-group form-row">
       <label class="col-form-label col-md-3" for="name">Name</label>
-      <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter name" [(ngModel)]="name" required #nameField="ngModel">
+      <input type="text" class="form-control col-md-9" id="name" name="name" placeholder="Enter name" [(ngModel)]="coUser.name" required #nameField="ngModel">
     </div>
 
     <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
@@ -20,12 +20,12 @@
 
     <div class="form-group form-row">
       <label class="col-form-label col-md-3" for="designation">Designation</label>
-      <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="designation" #designationField="ngModel">
+      <input type="text" class="form-control col-md-9" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="coUser.designation" #designationField="ngModel">
     </div>
 
     <div class="form-group form-row">
       <label class="col-form-label col-md-3" for="email">Email address</label>
-      <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+      <input type="email" class="form-control col-md-9" id="email" name="email" placeholder="Enter email" [(ngModel)]="coUser.email" required #emailField="ngModel" email>
     </div>
 
     <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
@@ -40,7 +40,7 @@
 
     <div class="form-group form-row">
       <label class="col-form-label col-md-3" for="phone">Phone Number</label>
-      <input type="number" class="form-control col-md-9" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="phone" required #phoneField="ngModel">
+      <input type="number" class="form-control col-md-9" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="coUser.phone" required #phoneField="ngModel">
     </div>
 
     <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
@@ -54,7 +54,14 @@
     <h4>Roles</h4>
     <br>
 
-    <app-role-control [(roles)]="roles"></app-role-control>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="isAdmin" name="isAdmin" [(ngModel)]="coUser.isAdmin">
+      <label class="form-check-label" for="isAdmin">Is Admin</label>
+    </div>
+    
+    <br>      
+
+    <app-role-control *ngIf="!coUser.isAdmin" [(roles)]="coUser.roles"></app-role-control>
 
     <br>
 
