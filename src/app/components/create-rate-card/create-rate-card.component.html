@@ -1,6 +1,6 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Create Rate card</h1>
+    <h1 class="display-4">Create Rate Card</h1>
   </div>
 </div>
 
@@ -29,8 +29,6 @@
         <select class="form-control" name="adType" [(ngModel)]="rateCard.adType" id="adType" #adTypeField required>
           <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
         </select>
-
-        {{rateCard.adType}}
       </div>
     </div>
   </div>
@@ -49,6 +47,7 @@
   </div>
   
   <h3>Booking Center</h3>
+  <br>
   
   <div class="form-row">
     <div class="col-md-3">
@@ -89,63 +88,98 @@
   
   <div class="form-row" *ngIf="rateCard.pullOutName == 'Others'">
     <div class="col-md-3">
-      Pullout Name
+      Special Pullout Name
     </div>
     <div class="col-md-9">
       <div class="form-group">
-        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="specPullOutName" name="specPullOutName" required #specPullOutNameField="ngModel">
+        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="rateCard.specPullOutName" name="specPullOutName" required #specPullOutNameField="ngModel">
       </div>
     </div>
   </div>
   
   <h3>Frequency</h3>
-  
+  <br>
+
   <div class="form-row">
-    <div class="col-md-3">
-      Period
-    </div>
-    <div class="col-md-9">
+    <div class="col-sm">
       <div class="form-group">
+        <label>Period</label>
         <select class="form-control" name="freqPeriod" [(ngModel)]="rateCard.freqPeriod" id="freqPeriod" #freqPeriodField required>
           <option *ngFor="let item of periods" [value]="item">{{item}}</option>
         </select>
       </div>
     </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <label>Remark</label>
+        <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="rateCard.freqRemark" name="freqRemark" required #freqRemarkField="ngModel">
+      </div>
+    </div>
   </div>
+
+  <h3>Categories</h3>
+  <br>
 
   <div class="form-row">
-    <div class="col-md-3">
-      Categories
+    <div class="form-group col">
+      <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required>
+        <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
+      </select>
     </div>
-    <div class="col-md-9">
-      <div class="form-group">
-        <select class="form-control" name="category1" [(ngModel)]="rateCard.categories[0]" id="category1" required>
-          <option [ngValue]="noneCategory">None</option>
-          <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
 
-      <div *ngFor="let category of rateCard.categories; index as i" class="form-group">
-        <select class="form-control" *ngIf="i != 0 && rateCard.categories[i - 1] && rateCard.categories[i - 1].subcategories.length" name="category{{i + 1}}" [(ngModel)]="rateCard.categories[i]" id="category{{i + 1}}">
-          <option [ngValue]="noneCategory">None</option>
-          <option *ngFor="let item of rateCard.categories[i - 1].subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
+    <div class="w-100 d-block d-sm-none"></div>
+
+    <div class="form-group col" *ngIf="category1 && category1.subcategories.length">
+      <select class="form-control" name="category2" [(ngModel)]="category2" id="category2">
+        <option *ngFor="let item of category1.subcategories" [ngValue]="item">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="w-100 d-block d-md-none"></div>
+
+    <div class="form-group col" *ngIf="category2 && category2.subcategories.length">
+      <select class="form-control" name="category3" [(ngModel)]="category3" id="category3">
+        <option *ngFor="let item of category2.subcategories" [ngValue]="item">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
+
+    <div class="form-group col" *ngIf="category3 && category3.subcategories.length">
+      <select class="form-control" name="category4" [(ngModel)]="category4" id="category4">
+        <option *ngFor="let item of category3.subcategories" [ngValue]="item">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="w-100 d-block d-md-none"></div>
+
+    <div class="form-group col" *ngIf="category4 && category4.subcategories.length">
+      <select class="form-control" name="category5" [(ngModel)]="category5" id="category5">
+        <option *ngFor="let item of category4.subcategories" [ngValue]="item">{{item.name}}</option>
+      </select>
+    </div>
+
+    <div class="w-100 d-block d-sm-none"></div>
+
+    <div class="form-group col" *ngIf="category5 && category5.subcategories.length">
+      <select class="form-control" name="category6" [(ngModel)]="category6" id="category6">
+        <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
+      </select>
     </div>
   </div>
 
-  {{rateCard.categories | json}}
-  
+  <br>
+
   <div class="form-row">
     <div class="col-md-3">
       Rate
     </div>
-    <div class="col-md-5">
+    <div class="col col-md-5">
       <div class="form-group">
         <input type="text" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col col-md-4">
       <div class="form-group">
         <select class="form-control" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField required>
           <option *ngFor="let item of units" [value]="item">{{item}}</option>
@@ -220,6 +254,7 @@
   <div class="form-row">
     <div class="col">
       <h4>Fix Size ({{rateCard.fixSizes.length}})</h4>
+      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addFixSize()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
@@ -232,40 +267,46 @@
       #{{i + 1}}
     </div>
     <div class="card-body">
-      <div class="form-group">
-        <label for="length">Length</label>
-        <input type="number" class="form-control" id="length-{{i}}" name="length-{{i}}" placeholder="Enter Length" [(ngModel)]="item.length" required #lengthField="ngModel">
-      </div>
-      
-      <div *ngIf="lengthField.invalid && (lengthField.dirty || lengthField.touched)" class="text-danger">
-        <div *ngIf="lengthField.errors.required">
-          Length is required.
+      <div class="form-row">
+        <div class="col-md">
+          <div class="form-group">
+            <label for="length">Length</label>
+            <input type="number" class="form-control" id="length-{{i}}" name="length-{{i}}" placeholder="Enter Length" [(ngModel)]="item.length" required #lengthField="ngModel">
+          </div>
+          
+          <div *ngIf="lengthField.invalid && (lengthField.dirty || lengthField.touched)" class="text-danger">
+            <div *ngIf="lengthField.errors.required">
+              Length is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="width">Width</label>
-        <input type="number" class="form-control" id="width-{{i}}" name="width-{{i}}" placeholder="Enter Width" [(ngModel)]="item.width" required #widthField="ngModel">
-      </div>
-      
-      <div *ngIf="widthField.invalid && (widthField.dirty || widthField.touched)" class="text-danger">
-        <div *ngIf="widthField.errors.required">
-          Width is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="width">Width</label>
+            <input type="number" class="form-control" id="width-{{i}}" name="width-{{i}}" placeholder="Enter Width" [(ngModel)]="item.width" required #widthField="ngModel">
+          </div>
+          
+          <div *ngIf="widthField.invalid && (widthField.dirty || widthField.touched)" class="text-danger">
+            <div *ngIf="widthField.errors.required">
+              Width is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="amount">Amount</label>
-        <input type="number" class="form-control" id="amount-{{i}}" name="amount-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.amount" required #amountField="ngModel">
-      </div>
-      
-      <div *ngIf="amountField.invalid && (amountField.dirty || amountField.touched)" class="text-danger">
-        <div *ngIf="amountField.errors.required">
-          Amount is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount-{{i}}" name="amount-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.amount" required #amountField="ngModel">
+          </div>
+          
+          <div *ngIf="amountField.invalid && (amountField.dirty || amountField.touched)" class="text-danger">
+            <div *ngIf="amountField.errors.required">
+              Amount is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
       </div>
     </div>
   </div>
@@ -275,6 +316,7 @@
   <div class="form-row">
     <div class="col">
       <h4>Scheme ({{rateCard.schemes.length}})</h4>
+      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addScheme()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
@@ -287,40 +329,46 @@
       #{{i + 1}}
     </div>
     <div class="card-body">
-      <div class="form-group">
-        <label for="paid">Paid</label>
-        <input type="number" class="form-control" id="paid-{{i}}" name="paid-{{i}}" placeholder="Enter Paid" [(ngModel)]="item.paid" required #paidField="ngModel">
-      </div>
-      
-      <div *ngIf="paidField.invalid && (paidField.dirty || paidField.touched)" class="text-danger">
-        <div *ngIf="paidField.errors.required">
-          Paid is required.
+      <div class="form-row">
+        <div class="col-md">
+          <div class="form-group">
+            <label for="paid">Paid</label>
+            <input type="number" class="form-control" id="paid-{{i}}" name="paid-{{i}}" placeholder="Enter Paid" [(ngModel)]="item.paid" required #paidField="ngModel">
+          </div>
+          
+          <div *ngIf="paidField.invalid && (paidField.dirty || paidField.touched)" class="text-danger">
+            <div *ngIf="paidField.errors.required">
+              Paid is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="free">Free</label>
-        <input type="number" class="form-control" id="free-{{i}}" name="free-{{i}}" placeholder="Enter Free" [(ngModel)]="item.free" required #freeField="ngModel">
-      </div>
-      
-      <div *ngIf="freeField.invalid && (freeField.dirty || freeField.touched)" class="text-danger">
-        <div *ngIf="freeField.errors.required">
-          Free is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="free">Free</label>
+            <input type="number" class="form-control" id="free-{{i}}" name="free-{{i}}" placeholder="Enter Free" [(ngModel)]="item.free" required #freeField="ngModel">
+          </div>
+          
+          <div *ngIf="freeField.invalid && (freeField.dirty || freeField.touched)" class="text-danger">
+            <div *ngIf="freeField.errors.required">
+              Free is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="timelimit">Time Limit</label>
-        <input type="number" class="form-control" id="timelimit-{{i}}" name="timelimit-{{i}}" placeholder="Enter Time limit" [(ngModel)]="item.timelimit" required #timeLimitField="ngModel">
-      </div>
-      
-      <div *ngIf="timeLimitField.invalid && (timeLimitField.dirty || timeLimitField.touched)" class="text-danger">
-        <div *ngIf="timeLimitField.errors.required">
-          Time Limit is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="timelimit">Time Limit</label>
+            <input type="number" class="form-control" id="timelimit-{{i}}" name="timelimit-{{i}}" placeholder="Enter Time limit" [(ngModel)]="item.timelimit" required #timeLimitField="ngModel">
+          </div>
+          
+          <div *ngIf="timeLimitField.invalid && (timeLimitField.dirty || timeLimitField.touched)" class="text-danger">
+            <div *ngIf="timeLimitField.errors.required">
+              Time Limit is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
       </div>
     </div>
   </div>
@@ -330,6 +378,7 @@
   <div class="form-row">
     <div class="col">
       <h4>Premium ({{rateCard.premiums.length}})</h4>
+      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addPremium()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
@@ -342,28 +391,33 @@
       #{{i + 1}}
     </div>
     <div class="card-body">
-      <div class="form-group">
-        <label for="premiumType">Type</label>
-        <input type="number" class="form-control" id="premiumType-{{i}}" name="premiumType-{{i}}" placeholder="Enter Paid" [(ngModel)]="item.premiumType" required #premTypeField="ngModel">
-      </div>
-      
-      <div *ngIf="premTypeField.invalid && (premTypeField.dirty || premTypeField.touched)" class="text-danger">
-        <div *ngIf="premTypeField.errors.required">
-          Type is required.
+      <div class="form-row">
+        <div class="col-md">
+          <div class="form-group">
+            <label for="premiumType">Type</label>
+            <input type="number" class="form-control" id="premiumType-{{i}}" name="premiumType-{{i}}" placeholder="Enter Type" [(ngModel)]="item.premiumType" required #premTypeField="ngModel">
+          </div>
+          
+          <div *ngIf="premTypeField.invalid && (premTypeField.dirty || premTypeField.touched)" class="text-danger">
+            <div *ngIf="premTypeField.errors.required">
+              Type is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="premAmount">Amount</label>
-        <input type="number" class="form-control" id="premAmount-{{i}}" name="premAmount-{{i}}" placeholder="Enter Free" [(ngModel)]="item.premAmount" required #premAmountField="ngModel">
-      </div>
-      
-      <div *ngIf="premAmountField.invalid && (premAmountField.dirty || premAmountField.touched)" class="text-danger">
-        <div *ngIf="premAmountField.errors.required">
-          Amount is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="premAmount">Amount</label>
+            <input type="number" class="form-control" id="premAmount-{{i}}" name="premAmount-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.premAmount" required #premAmountField="ngModel">
+          </div>
+          
+          <div *ngIf="premAmountField.invalid && (premAmountField.dirty || premAmountField.touched)" class="text-danger">
+            <div *ngIf="premAmountField.errors.required">
+              Amount is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
       </div>
     </div>
   </div>
@@ -380,7 +434,7 @@
     </div>
     <div class="col">
       <div class="form-group">
-        <input type="number" class="form-control" id="maxLength" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxWidthField="ngModel">
+        <input type="number" class="form-control" [disabled]="!rateCard.taxIncluded" id="maxLength" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxWidthField="ngModel">
       </div>
     </div>
   </div>
@@ -392,13 +446,13 @@
     <label class="col-auto form-text">From</label>
     <div class="col">
       <div class="form-group">        
-        <input type="date" class="form-control" id="validFrom" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
+        <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
       </div>
     </div>
     <label class="col-auto form-text">Till</label>
     <div class="col">
       <div class="form-group">
-        <input type="date" class="form-control" id="validFrom" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
+        <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
       </div>
     </div>
   </div>
@@ -408,6 +462,7 @@
   <div class="form-row">
     <div class="col">
       <h4>Covered ({{rateCard.covered.length}})</h4>
+      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addCovered()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
@@ -420,28 +475,33 @@
       #{{i + 1}}
     </div>
     <div class="card-body">
-      <div class="form-group">
-        <label for="covMediaHouse">MediaHouse</label>
-        <input type="number" class="form-control" id="covMediaHouse-{{i}}" name="covMediaHouse-{{i}}" placeholder="Enter Media House" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
-      </div>
-      
-      <div *ngIf="covMediaHouseField.invalid && (covMediaHouseField.dirty || covMediaHouseField.touched)" class="text-danger">
-        <div *ngIf="covMediaHouseField.errors.required">
-          Media House is required.
+      <div class="form-row">
+        <div class="col-md">
+          <div class="form-group">
+            <label for="covMediaHouse">Media House</label>
+            <input type="number" class="form-control" id="covMediaHouse-{{i}}" name="covMediaHouse-{{i}}" placeholder="Enter Media House" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
+          </div>
+          
+          <div *ngIf="covMediaHouseField.invalid && (covMediaHouseField.dirty || covMediaHouseField.touched)" class="text-danger">
+            <div *ngIf="covMediaHouseField.errors.required">
+              Media House is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
-      </div>
-      
-      <div class="form-group">
-        <label for="covEdition">Amount</label>
-        <input type="number" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
-      </div>
-      
-      <div *ngIf="covEditionField.invalid && (covEditionField.dirty || covEditionField.touched)" class="text-danger">
-        <div *ngIf="covEditionField.errors.required">
-          Edition is required.
+        <div class="col-md">
+          <div class="form-group">
+            <label for="covEdition">Amount</label>
+            <input type="number" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
+          </div>
+          
+          <div *ngIf="covEditionField.invalid && (covEditionField.dirty || covEditionField.touched)" class="text-danger">
+            <div *ngIf="covEditionField.errors.required">
+              Edition is required.
+            </div>
+            <br>
+          </div>
         </div>
-        <br>
       </div>
     </div>
   </div>
@@ -451,6 +511,7 @@
   <div class="form-row">
     <div class="col">
       <h4>Remark ({{rateCard.remarks.length}})</h4>
+      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addRemark()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>

@@ -9,6 +9,7 @@ export class RateCard {
     bookingEdition = "";
     
     freqPeriod = "";
+    freqRemark = "";
     
     fixSizes: FixSize[] = [];
     schemes: Scheme[] = [];
@@ -16,7 +17,7 @@ export class RateCard {
     covered: Covered[] = [];
     remarks: Remark[] = [];
 
-    categories: Category[];
+    categories: string[];
     
     unit = "";
     position = "";

@@ -11,17 +11,18 @@ export class CreateRateCardComponent implements OnInit {
   constructor() { }
 
   rateCard = new RateCard();
-
-  noneCategory = new Category('None');
+  selectedCategories: Category[] = [null, null, null, null, null, null];
 
   ngOnInit() {
-    this.rateCard.categories = [this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory, this.noneCategory];
-
     this.rateCard.fixSizes = [new FixSize()];
     this.rateCard.schemes = [new Scheme()];
     this.rateCard.premiums = [new Premium()];
     this.rateCard.covered = [new Covered()];
     this.rateCard.remarks = [new Remark()];
+
+    this.mediaType = this.mediaTypes[0];
+    this.rateCard.rateCardType = this.rateCardTypes[0];
+    this.rateCard.freqPeriod = this.periods[0];
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -83,17 +84,53 @@ export class CreateRateCardComponent implements OnInit {
     new Category('Education'),
     new Category('Medical', [
       new Category('Surgery', [
-        new Category('Chutiap', [
+        new Category('C', [
           new Category('Heart Surgery', [
-            new Category('Transplant')
+            new Category('Transplant', [
+              new Category('Deepest')
+            ])
           ])
         ]),
-        new Category('Randaap')
+        new Category('R', [
+          new Category('S', [
+            new Category('Deepest')
+          ])
+        ])
       ])
     ]),
     new Category('Women'),
     new Category('Real Estate')
   ];
+
+  getCategory(index: number) {
+    return this.selectedCategories[index];
+  }
+
+  setCategory(index: number, category: Category) {
+    if (this.selectedCategories[index] == category) {
+      return;
+    }
+
+    this.selectedCategories[index] = category;
+
+    for (let i = index + 1; i < this.rateCard.categories.length; ++i) {
+      this.setCategory(i, null);
+    }
+  }
+
+  get category1() { return this.getCategory(0); }
+  get category2() { return this.getCategory(1); }
+  get category3() { return this.getCategory(2); }
+  get category4() { return this.getCategory(3); }
+  get category5() { return this.getCategory(4); }
+  get category6() { return this.getCategory(5); }
+
+  set category1(category: Category) { this.setCategory(0, category); }
+  set category2(category: Category) { this.setCategory(1, category); }
+  set category3(category: Category) { this.setCategory(2, category); }
+  set category4(category: Category) { this.setCategory(3, category); }
+  set category5(category: Category) { this.setCategory(4, category); }
+  set category6(category: Category) { this.setCategory(5, category); }
 
   addFixSize() {
     this.rateCard.fixSizes.push(new FixSize());
