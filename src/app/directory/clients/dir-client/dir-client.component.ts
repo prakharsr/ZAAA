@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirClient } from '../dirClient';
+import { DirClient, ContactPerson } from '../dirClient';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -31,6 +31,7 @@ export class DirClientComponent implements OnInit {
         this.api.getClient(this.id).subscribe(data => this.client = data);
       }
     });
+    this.client.contactpersons = [new ContactPerson()];
   }
 
   private goBack() {
@@ -84,6 +85,13 @@ export class DirClientComponent implements OnInit {
 
   cancel() {
     this.goBack();
+  }
+
+  addContactPerson(){
+    this.client.contactpersons.push(new ContactPerson());
+  }
+  removeContactPerson(i: number){
+    this.client.contactpersons.splice(i, 1);
   }
 
 }

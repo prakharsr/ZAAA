@@ -8,16 +8,18 @@ export class DirClient {
     website: string;
     panNo: string;
     gstNo: string;
-    contactPerson = {
-        name: "",
-        designation: "",
-        department: "",
-        mobileNo: "",
-        email: "",
-        photo: "",
-        dob: "",
-        anniversaryDate: ""
-    }
-
     id: string;
+    contactpersons: ContactPerson[] = []; 
+}
+
+export class ContactPerson {
+    name = "";
+    designation = "";
+    department = "";
+    mobileNo = "";
+    email = "";
+    photo = "";
+    dob = "";
+    anniversaryDate = "";
+    personLandLine = "";
 }

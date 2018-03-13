@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirClient } from './dirClient';
+import { DirClient, ContactPerson } from './dirClient';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
@@ -11,6 +11,10 @@ export class ClientApiService {
   constructor(private api: ApiService) { }
 
   createClient(client: DirClient) : Observable<any> {
+    let contactPersons = [];
+
+    client.contactpersons.forEach(element => contactPersons.push(this.contactPersonToBody(element)));
+
     return this.api.post('/user/client', {
       organizationName: client.orgName,
       companyName: client.companyName,
@@ -21,16 +25,36 @@ export class ClientApiService {
       website: client.website,
       panNo: client.panNo,
       gstin: client.gstNo,
-      contactPerson: {
-        Name: client.contactPerson.name,
-        Designation: client.contactPerson.designation,
-        Department: client.contactPerson.department,
-        MobileNo: client.contactPerson.mobileNo,
-        EmailId: client.contactPerson.email,
-        DateOfBirth: client.contactPerson.dob,
-        Anniversary: client.contactPerson.anniversaryDate
-      }
+      contactPerson: contactPersons
     });
+  }
+
+  private bodyToContactPerson(body: any) : ContactPerson {
+    return {
+      name: body.Name,
+      designation: body.Designation,
+      department: body.Department,
+      mobileNo: body.MobileNo,
+      email: body.EmailId,
+      dob: body.DateOfBirth,
+      anniversaryDate: body.Anniversary,
+      photo: body.Photo,
+      personLandLine: body.Landline
+    };
+  }
+
+  private contactPersonToBody(contactPerson: ContactPerson) {
+    return {
+      Name: contactPerson.name,
+      Designation: contactPerson.designation,
+      Department: contactPerson.department,
+      MobileNo: contactPerson.mobileNo,
+      EmailId: contactPerson.email,
+      DateOfBirth: contactPerson.dob,
+      Anniversary: contactPerson.anniversaryDate,
+      Photo: contactPerson.photo,
+      Landline: contactPerson.personLandLine
+    }
   }
 
   private bodyToClient(data: any) : DirClient {
@@ -47,27 +71,25 @@ export class ClientApiService {
     client.website = data.Website;
     client.panNo = data.PanNO;
     client.gstNo = data.GSTNo;
-    
+
+    let contactPersons : ContactPerson[] = [];
+
     if (data.ContactPerson) {
-      let person = data.ContactPerson;
-
-      client.contactPerson.name = person.Name;
-      client.contactPerson.designation = person.Designation;
-      client.contactPerson.department = person.Department;
-      client.contactPerson.mobileNo = person.MobileNo;
-      client.contactPerson.email = person.EmailId;
-      client.contactPerson.dob = person.DateOfBirth;
-      client.contactPerson.anniversaryDate = person.Anniversary;
-
-      if (person.Photo) {
-        client.contactPerson.photo = environment.uploadsBaseUrl + person.Photo;
-      }
+      data.ContactPerson.forEach(element => {
+        contactPersons.push(this.bodyToContactPerson(element));
+      });
     }
+
+    client.contactpersons = contactPersons;
 
     return client;
   }
 
   editClient(client: DirClient) : Observable<any> {
+    let contactPersons = [];
+
+    client.contactpersons.forEach(element => contactPersons.push(this.contactPersonToBody(element)));
+
     return this.api.patch('/user/client', {
       id: client.id,
       OrganizationName: client.orgName,
@@ -79,15 +101,7 @@ export class ClientApiService {
       Website: client.website,
       PanNO: client.panNo,
       GSTNo: client.gstNo,
-      ContactPerson: {
-        Name: client.contactPerson.name,
-        Designation: client.contactPerson.designation,
-        Department: client.contactPerson.department,
-        MobileNo: client.contactPerson.mobileNo,
-        EmailId: client.contactPerson.email,
-        DateOfBirth: client.contactPerson.dob,
-        Anniversary: client.contactPerson.anniversaryDate
-      }
+      ContactPerson: contactPersons
     });
   }
 
