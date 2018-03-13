@@ -16,6 +16,7 @@ export class RateCard {
     premiums: Premium[] = [];
     covered: Covered[] = [];
     remarks: Remark[] = [];
+    taxes: Tax[] = [];
 
     categories: string[];
     
@@ -27,11 +28,9 @@ export class RateCard {
     minWidth = 0;
     maxLength = 0;
     maxWidth = 0; 
-    
-    taxIncluded = "";
-    taxRate = "";
-    validFrom = "";
-    validTill = "";
+
+    validFrom: Date;
+    validTill: Date;
     
     rate = 0;
 }
@@ -60,6 +59,11 @@ export class Covered {
 
 export class Remark {
     remark = "";
+}
+
+export class Tax {
+    included = true;
+    rate = 0;
 }
 
 export class Category {

@@ -7,6 +7,7 @@
 <!-- Validation -->
 
 <div class="container">
+  <form (ngSubmit)="submit()" #rateCardForm="ngForm">
   <div class="form-row">    
     <div class="col-md">
       <div class="form-group">
@@ -68,7 +69,7 @@
     </div>
     <div class="col-md" *ngIf="rateCard.pullOutName == 'Others'">
       <div class="form-group">
-        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="rateCard.specPullOutName" name="specPullOutName" required #specPullOutNameField="ngModel">
+        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="rateCard.specPullOutName" name="specPullOutName" #specPullOutNameField="ngModel">
       </div>
     </div>
   </div>
@@ -206,7 +207,7 @@
     <label class="col-md-3 col-form-label">Maximum Size Limit</label>
     <div class="col">
       <div class="form-group">
-        <input type="number" class="form-control" id="maxLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
+        <input type="number" class="form-control" id="minLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
       </div>
     </div>
     <div class="col-auto form-text">&times;</div>
@@ -218,16 +219,16 @@
   </div>
   
   <!-- fixsize -->
-  
+  <br>
   <div class="form-row">
     <div class="col">
       <h4>Fix Size ({{rateCard.fixSizes.length}})</h4>
-      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addFixSize()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
     </div>
   </div>
+  <br>
   
   <div *ngFor="let item of rateCard.fixSizes; index as i" class="card mb-4">
     <div class="card-header">
@@ -280,16 +281,16 @@
   </div>
   
   <!-- Schemes -->
-  
+  <br>
   <div class="form-row">
     <div class="col">
       <h4>Scheme ({{rateCard.schemes.length}})</h4>
-      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addScheme()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
     </div>
   </div>
+  <br>
   
   <div *ngFor="let item of rateCard.schemes; index as i" class="card mb-4">
     <div class="card-header">
@@ -341,17 +342,17 @@
     </div>
   </div>
   
-  <!-- premium -->
-  
+  <!-- Premium -->
+  <br>
   <div class="form-row">
     <div class="col">
       <h4>Premium ({{rateCard.premiums.length}})</h4>
-      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addPremium()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
     </div>
   </div>
+  <br>
   
   <div *ngFor="let item of rateCard.premiums; index as i" class="card mb-4">
     <div class="card-header">
@@ -394,15 +395,40 @@
     <label class="col-md-3 col-form-label">Tax</label>
     <div class="col-auto">
       <div class="form-check col-form-label">
-        <input type="checkbox" class="form-check-input" id="taxIncluded" name="taxIncluded" [(ngModel)]="rateCard.taxIncluded" required #taxIncludedField="ngModel">
+        <input type="checkbox" class="form-check-input" id="taxIncluded" name="taxIncluded" [(ngModel)]="rateCard.taxIncluded" #taxIncludedField="ngModel">
         <label class="form-check-label" for="acceptTnC">Included</label>
       </div>
     </div>
     <div class="col">
       <div class="form-group">
-        <input type="number" class="form-control" [disabled]="!rateCard.taxIncluded" id="maxLength" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxWidthField="ngModel">
+        <input type="number" class="form-control" [disabled]="!rateCard.taxIncluded" id="taxVal" placeholder="Enter Tax" [(ngModel)]="rateCard.taxRate" name="taxVal" #taxValField="ngModel">
       </div>
     </div>
+  </div>
+
+  <!-- Tax -->  
+  <br>
+  <div class="form-row">
+    <div class="col">
+      <h4>Taxes ({{rateCard.taxes.length}})</h4>
+    </div>
+    <div class="col-auto">
+      <button type="button" (click)="addTax()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+    </div>
+  </div>
+  <br>
+  
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let tax of rateCard.taxes; index as i">
+        <div class="form-row">
+          <input type="checkbox" class="col-auto form-check-input" id="taxIncluded-{{i}}" name="taxIncluded-{{i}}" [(ngModel)]="tax.included" #taxIncludedField="ngModel">
+          <label class="col-auto col-form-label">#{{i + 1}}</label>
+          <input type="number" class="form-control col mx-3" [disabled]="!tax.included" id="taxVal-{{i}}" placeholder="Enter Tax" [(ngModel)]="tax.rate" name="taxVal-{{i}}" #taxValField="ngModel">
+          <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeTax(i)"><span class="fa fa-trash-alt"></span></button>
+        </div>
+      </li>
+    </ul>
   </div>
   
   <div class="form-row">
@@ -422,16 +448,16 @@
   </div>
   
   <!-- Covered -->
-  
+  <br>
   <div class="form-row">
     <div class="col">
       <h4>Covered ({{rateCard.covered.length}})</h4>
-      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addCovered()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
     </div>
   </div>
+  <br>
   
   <div *ngFor="let item of rateCard.covered; index as i" class="card mb-4">
     <div class="card-header">
@@ -470,17 +496,17 @@
     </div>
   </div>
   
-  <!-- Remarks -->
-  
+  <!-- Remarks -->  
+  <br>
   <div class="form-row">
     <div class="col">
       <h4>Remarks ({{rateCard.remarks.length}})</h4>
-      <br>
     </div>
     <div class="col-auto">
       <button type="button" (click)="addRemark()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
     </div>
   </div>
+  <br>
   
   <div class="card">
     <ul class="list-group list-group-flush">
@@ -500,5 +526,14 @@
       </li>
     </ul>
   </div>
-  
+
+  <br><br>
+
+  <div *ngIf="error">
+    {{error}}
+    <br><br>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+</form>
 </div>

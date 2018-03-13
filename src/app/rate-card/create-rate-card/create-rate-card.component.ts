@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category } from '../rateCard';
+import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rateCard';
+import { RateCardApiService } from '../rate-card-api.service';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -8,10 +9,11 @@ import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category } from '.
 })
 export class CreateRateCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: RateCardApiService) { }
 
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
+  error: string;
 
   ngOnInit() {
     this.rateCard.fixSizes = [new FixSize()];
@@ -19,6 +21,7 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.premiums = [new Premium()];
     this.rateCard.covered = [new Covered()];
     this.rateCard.remarks = [new Remark()];
+    this.rateCard.taxes = [new Tax()];
 
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
@@ -113,7 +116,7 @@ export class CreateRateCardComponent implements OnInit {
 
     this.selectedCategories[index] = category;
 
-    for (let i = index + 1; i < this.rateCard.categories.length; ++i) {
+    for (let i = index + 1; i < this.selectedCategories.length; ++i) {
       this.setCategory(i, null);
     }
   }
@@ -160,7 +163,6 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.covered.push(new Covered());
   }
 
-
   removeCovered(i: number) {
     this.rateCard.covered.splice(i, 1);
   }
@@ -169,8 +171,44 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.remarks.push(new Remark());
   }
 
-
   removeRemark(i: number) {
     this.rateCard.remarks.splice(i, 1);
+  }
+
+  addTax() {
+    this.rateCard.taxes.push(new Tax());
+  }
+
+  removeTax(i: number) {
+    this.rateCard.taxes.splice(i, 1);
+  }
+
+  submit() {
+    this.error = '';
+    this.rateCard.categories = [];
+
+    this.selectedCategories.forEach(element => {
+      if (element) {
+        this.rateCard.categories.push(element.name);
+      }
+    });
+
+    this.api.createRateCard(this.rateCard).subscribe(
+      data => {
+        if (data.success) {
+          this.error = 'Success';
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = 'Connection failed';
+      }
+    );
   }
 }
