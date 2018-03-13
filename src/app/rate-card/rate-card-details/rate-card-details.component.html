@@ -128,7 +128,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Validity</div>
-              <div class="col-md-8">{{ratecard.vaiidFrom | date}} to {{ratecard.validTill | date}}</div>
+              <div class="col-md-8">{{ratecard.validFrom | date}} to {{ratecard.validTill | date}}</div>
             </div>
           </li>
         </ul>
@@ -141,20 +141,97 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Width</div>
-              <div class="col-md-8">{{ratecard.width}}</div>
+              <div class="col-md-8">{{fixSize.width}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Length</div>
-              <div class="col-md-8">{{ratecard.length}}</div>
+              <div class="col-md-8">{{fixSize.length}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Amount</div>
-              <div class="col-md-8">{{ratecard.amount}}</div>
+              <div class="col-md-8">{{fixSize.amount}}</div>
             </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg">
+      <div class="card mb-3" *ngFor="let scheme of ratecard.schemes; index as i">
+        <div class="card-header">Scheme #{{i}}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Paid</div>
+              <div class="col-md-8">{{scheme.paid}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Free</div>
+              <div class="col-md-8">{{scheme.Free}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Time Limit</div>
+              <div class="col-md-8">{{scheme.timeLimit}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="card mb-3" *ngFor="let tax of ratecard.taxes; index as i">
+        <div class="card-header">Tax #{{i}}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Included</div>
+              <div class="col-md-8">{{tax.included}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Rate</div>
+              <div class="col-md-8">{{tax.rate}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg">
+      <div class="card mb-3" *ngFor="let cov of ratecard.covered; index as i">
+        <div class="card-header">Covered #{{i}}</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Media House</div>
+              <div class="col-md-8">{{scheme.covMediaHouse}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Edition</div>
+              <div class="col-md-8">{{scheme.covEdition}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="card mb-3">
+        <div class="card-header">Remarks</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let remark of ratecard.remarks">
+            {{remark.remark}}
           </li>
         </ul>
       </div>

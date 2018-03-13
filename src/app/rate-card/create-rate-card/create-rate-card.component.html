@@ -466,8 +466,8 @@
         </div>
         <div class="col-md">
           <div class="form-group">
-            <label for="covEdition">Amount</label>
-            <input type="number" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
+            <label for="covEdition">Edition</label>
+            <input type="number" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Edition" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
           </div>
           
           <div *ngIf="covEditionField.invalid && (covEditionField.dirty || covEditionField.touched)" class="text-danger">
