@@ -1,0 +1,29 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Rate Cards</h1>
+  </div>
+</div>
+
+<div class="container">
+  <button class="fab" routerLink="/ratecards/new"><span class="fa fa-plus"></span></button>
+
+  <p *ngIf="ratecards.length == 0" class="text-muted">
+    No Rate Cards
+  </p>
+
+  <div class="card mb-3" *ngFor="let ratecard of ratecards">
+    <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          {{ratecard.pullOutName}}<br>
+          {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
+          {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)"><span class="fa fa-trash-alt"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
