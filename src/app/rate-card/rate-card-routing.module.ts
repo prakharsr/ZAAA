@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RateCardListComponent } from './rate-card-list/rate-card-list.component';
 import { CreateRateCardComponent } from './create-rate-card/create-rate-card.component';
+import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.component';
 
 const routes: Routes = [
   {
@@ -10,8 +11,8 @@ const routes: Routes = [
     children:  [          
       { path: '', component: RateCardListComponent },
       { path: 'new', component: CreateRateCardComponent },
-      // { path: 'edit/:id', component: DirClientComponent },
-      // { path: ':id', component: ClientDetailsComponent },
+      { path: 'edit/:id', component: CreateRateCardComponent },
+      { path: ':id', component: RateCardDetailsComponent },
     ]
   }
 ];
