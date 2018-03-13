@@ -21,6 +21,7 @@
           {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
         </div>
         <div class="col-auto">
+          <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
           <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)"><span class="fa fa-trash-alt"></span></button>
         </div>
       </div>

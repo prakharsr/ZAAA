@@ -30,8 +30,8 @@ export class DirClientComponent implements OnInit {
 
         this.api.getClient(this.id).subscribe(data => this.client = data);
       }
+      else this.client.contactpersons = [new ContactPerson()];
     });
-    this.client.contactpersons = [new ContactPerson()];
   }
 
   private goBack() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rateCard';
 import { RateCardApiService } from '../rate-card-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -9,13 +10,16 @@ import { RateCardApiService } from '../rate-card-api.service';
 })
 export class CreateRateCardComponent implements OnInit {
 
-  constructor(private api: RateCardApiService) { }
+  edit = false;
+  id: string;
+
+  constructor(private api: RateCardApiService, private route: ActivatedRoute, private router: Router) { }
 
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
   error: string;
 
-  ngOnInit() {
+  private initNew() {
     this.rateCard.fixSizes = [new FixSize()];
     this.rateCard.schemes = [new Scheme()];
     this.rateCard.premiums = [new Premium()];
@@ -25,7 +29,33 @@ export class CreateRateCardComponent implements OnInit {
 
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
-    this.rateCard.freqPeriod = this.periods[0];
+    this.rateCard.freqPeriod = this.periods[0]; 
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      if (params.has('id')) {
+        this.id = params.get('id');
+
+        this.edit = true;
+
+        this.api.getRateCard(this.id).subscribe(data => {
+          this.rateCard = data;
+
+          // reconstruct selected categories
+        });
+      }
+      else if (params.has('copy')) {
+        this.api.getRateCard(params.get('copy')).subscribe(data => {
+          this.rateCard = data;
+        })
+      }
+      else this.initNew();
+    });
+  }
+
+  private goBack() {
+    this.router.navigateByUrl(this.edit ? '/ratecards/' + this.id : '/ratecards');
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -183,20 +213,11 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.taxes.splice(i, 1);
   }
 
-  submit() {
-    this.error = '';
-    this.rateCard.categories = [];
-
-    this.selectedCategories.forEach(element => {
-      if (element) {
-        this.rateCard.categories.push(element.name);
-      }
-    });
-
+  private createRateCard() {
     this.api.createRateCard(this.rateCard).subscribe(
       data => {
         if (data.success) {
-          this.error = 'Success';
+          this.goBack();
         }
         else {
           console.log(data);
@@ -210,5 +231,43 @@ export class CreateRateCardComponent implements OnInit {
         this.error = 'Connection failed';
       }
     );
+  }
+
+  private editRateCard() {
+    this.api.editRateCard(this.rateCard).subscribe(
+      data => {
+        if (data.success) {
+          this.goBack();
+        }
+        else {
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = 'Connection failed';
+      }
+    )
+  }
+
+  submit () {
+    this.error = '';
+    this.rateCard.categories = [];
+
+    this.selectedCategories.forEach(element => {
+      if (element) {
+        this.rateCard.categories.push(element.name);
+      }
+    });
+
+    if (this.edit) {
+      this.editRateCard();
+    }
+    else this.createRateCard();
+  }
+
+  cancel() {
+    this.goBack();
   }
 }
