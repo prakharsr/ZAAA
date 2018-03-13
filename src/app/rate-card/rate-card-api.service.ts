@@ -162,7 +162,7 @@ export class RateCardApiService {
     }
 
     if (body.FixSize) {
-      let fixSizes : {Width: string, Length: string, Amount: number}[] = body.FixSize;
+      let fixSizes : {Width: number, Length: number, Amount: number}[] = body.FixSize;
 
       fixSizes.forEach(element => {
         rateCard.fixSizes.push({
@@ -174,7 +174,7 @@ export class RateCardApiService {
     }
 
     if (body.Scheme) {
-      let schemes : {paid: string, Free: string, TimeLimit: string}[] = body.Scheme;
+      let schemes : {paid: number, Free: number, TimeLimit: number}[] = body.Scheme;
 
       schemes.forEach(element => {
         rateCard.schemes.push({
@@ -186,7 +186,7 @@ export class RateCardApiService {
     }
 
     if (body.Premium) {
-      let premiums : {Type: string, Amount: string}[] = body.Premium;
+      let premiums : {Type: string, Amount: number}[] = body.Premium;
 
       premiums.forEach(element => {
         rateCard.premiums.push({

@@ -61,16 +61,16 @@
     </label>
     <div class="col-md">
       <div class="form-group">
-        <select class="form-control" name="pullOutName" [(ngModel)]="rateCard.pullOutName" id="pullOutName" #pullOutNameField required>
+        <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField required>
           <option>1</option>
           <option>2</option>
-          <option>Others</option>
+          <option>{{others}}</option>
         </select>
       </div>
     </div>
-    <div class="col-md" *ngIf="rateCard.pullOutName == 'Others'">
+    <div class="col-md" *ngIf="dropdownPullOutName == others">
       <div class="form-group">
-        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="rateCard.specPullOutName" name="specPullOutName" #specPullOutNameField="ngModel">
+        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" name="specPullOutName" #specPullOutNameField="ngModel">
       </div>
     </div>
   </div>
@@ -91,7 +91,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Remark</label>
-        <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="rateCard.freqRemark" name="freqRemark" required #freqRemarkField="ngModel">
+        <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="rateCard.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
       </div>
     </div>
   </div>
@@ -182,7 +182,7 @@
     <div class="col-md-9">
       <div class="form-group">
         <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField required>
-          <option>Colored</option>
+          <option selected>Colored</option>
           <option>Black &amp; White</option>
         </select>
       </div>

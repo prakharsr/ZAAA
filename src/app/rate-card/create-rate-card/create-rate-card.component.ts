@@ -13,6 +13,11 @@ export class CreateRateCardComponent implements OnInit {
   edit = false;
   id: string;
 
+  others = "Others";
+
+  dropdownPullOutName: string;
+  customPullOutName: string;
+
   constructor(private api: RateCardApiService, private route: ActivatedRoute, private router: Router) { }
 
   rateCard = new RateCard();
@@ -29,7 +34,7 @@ export class CreateRateCardComponent implements OnInit {
 
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
-    this.rateCard.freqPeriod = this.periods[0]; 
+    this.rateCard.freqPeriod = this.periods[0];
   }
 
   ngOnInit() {
@@ -41,6 +46,9 @@ export class CreateRateCardComponent implements OnInit {
 
         this.api.getRateCard(this.id).subscribe(data => {
           this.rateCard = data;
+
+          this.dropdownPullOutName = this.others;
+          this.customPullOutName = this.rateCard.pullOutName;
 
           // reconstruct selected categories
         });
@@ -260,6 +268,8 @@ export class CreateRateCardComponent implements OnInit {
         this.rateCard.categories.push(element.name);
       }
     });
+
+    this.rateCard.pullOutName = this.dropdownPullOutName == this.others ? this.customPullOutName : this.dropdownPullOutName;
 
     if (this.edit) {
       this.editRateCard();

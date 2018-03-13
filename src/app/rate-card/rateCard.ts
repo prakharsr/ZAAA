@@ -5,7 +5,6 @@ export class RateCard {
     
     mediaHouseName = "";
     pullOutName = "";
-    specPullOutName = "";
     bookingEdition = "";
     
     freqPeriod = "";
@@ -38,20 +37,20 @@ export class RateCard {
 }
 
 export class FixSize {
-    width = "";
-    length = "";
+    width = 0;
+    length = 0;
     amount = 0;
 }
 
 export class Scheme {
-    paid = "";
-    Free = "";
-    timeLimit = "";
+    paid = 0;
+    Free = 0;
+    timeLimit = 0;
 }
 
 export class Premium {
     premType = "";
-    premAmount = "";
+    premAmount = 0;
 }
 
 export class Covered {
