@@ -33,6 +33,8 @@ export class RateCard {
     validTill: Date;
     
     rate = 0;
+
+    id: string;
 }
 
 export class FixSize {
