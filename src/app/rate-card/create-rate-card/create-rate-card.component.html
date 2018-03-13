@@ -207,13 +207,13 @@
     <label class="col-md-3 col-form-label">Maximum Size Limit</label>
     <div class="col">
       <div class="form-group">
-        <input type="number" class="form-control" id="minLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
+        <input type="number" class="form-control" id="maxLength" placeholder="Enter Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
       </div>
     </div>
     <div class="col-auto form-text">&times;</div>
     <div class="col">
       <div class="form-group">
-        <input type="number" class="form-control" id="maxLength" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxWidthField="ngModel">
+        <input type="number" class="form-control" id="maxWidth" placeholder="Enter Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
       </div>
     </div>
   </div>
@@ -379,7 +379,7 @@
         <div class="col-md">
           <div class="form-group">
             <label for="premiumType">Type</label>
-            <input type="number" class="form-control" id="premiumType-{{i}}" name="premiumType-{{i}}" placeholder="Enter Type" [(ngModel)]="item.premiumType" required #premTypeField="ngModel">
+            <input type="text" class="form-control" id="premiumType-{{i}}" name="premiumType-{{i}}" placeholder="Enter Type" [(ngModel)]="item.premType" required #premTypeField="ngModel">
           </div>
           
           <div *ngIf="premTypeField.invalid && (premTypeField.dirty || premTypeField.touched)" class="text-danger">
@@ -454,7 +454,7 @@
         <div class="col-md">
           <div class="form-group">
             <label for="covMediaHouse">Media House</label>
-            <input type="number" class="form-control" id="covMediaHouse-{{i}}" name="covMediaHouse-{{i}}" placeholder="Enter Media House" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
+            <input type="text" class="form-control" id="covMediaHouse-{{i}}" name="covMediaHouse-{{i}}" placeholder="Enter Media House" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
           </div>
           
           <div *ngIf="covMediaHouseField.invalid && (covMediaHouseField.dirty || covMediaHouseField.touched)" class="text-danger">
@@ -467,7 +467,7 @@
         <div class="col-md">
           <div class="form-group">
             <label for="covEdition">Edition</label>
-            <input type="number" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Edition" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
+            <input type="text" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Edition" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
           </div>
           
           <div *ngIf="covEditionField.invalid && (covEditionField.dirty || covEditionField.touched)" class="text-danger">
@@ -498,7 +498,7 @@
       <li class="list-group-item" *ngFor="let item of rateCard.remarks; index as i">
         <div class="form-row">
             <label class="col-auto col-form-label">#{{i + 1}}</label>
-            <input type="number" class="form-control col mx-3" id="remark-{{i}}" name="remark-{{i}}" placeholder="Enter Remark" [(ngModel)]="item.remark" required #remarkField="ngModel">
+            <input type="text" class="form-control col mx-3" id="remark-{{i}}" name="remark-{{i}}" placeholder="Enter Remark" [(ngModel)]="item.remark" required #remarkField="ngModel">
             <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeRemark(i)"><span class="fa fa-trash-alt"></span></button>
         </div>
 
