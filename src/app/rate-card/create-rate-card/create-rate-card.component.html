@@ -217,6 +217,22 @@
       </div>
     </div>
   </div>
+
+  <div class="form-row">
+    <label class="col-md-3 col-form-label">Validity</label>
+    <label class="col-auto col-form-label">From</label>
+    <div class="col-sm">
+      <div class="form-group">        
+        <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
+      </div>
+    </div>
+    <label class="col-auto col-form-label">Till</label>
+    <div class="col-sm">
+      <div class="form-group">
+        <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
+      </div>
+    </div>
+  </div>
   
   <!-- fixsize -->
   <br>
@@ -390,21 +406,6 @@
       </div>
     </div>
   </div>
-  
-  <div class="row">
-    <label class="col-md-3 col-form-label">Tax</label>
-    <div class="col-auto">
-      <div class="form-check col-form-label">
-        <input type="checkbox" class="form-check-input" id="taxIncluded" name="taxIncluded" [(ngModel)]="rateCard.taxIncluded" #taxIncludedField="ngModel">
-        <label class="form-check-label" for="acceptTnC">Included</label>
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <input type="number" class="form-control" [disabled]="!rateCard.taxIncluded" id="taxVal" placeholder="Enter Tax" [(ngModel)]="rateCard.taxRate" name="taxVal" #taxValField="ngModel">
-      </div>
-    </div>
-  </div>
 
   <!-- Tax -->  
   <br>
@@ -429,22 +430,6 @@
         </div>
       </li>
     </ul>
-  </div>
-  
-  <div class="form-row">
-    <label class="col-md-3 col-form-label">Validity</label>
-    <label class="col-auto col-form-label">From</label>
-    <div class="col-sm">
-      <div class="form-group">        
-        <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
-      </div>
-    </div>
-    <label class="col-auto col-form-label">Till</label>
-    <div class="col-sm">
-      <div class="form-group">
-        <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
-      </div>
-    </div>
   </div>
   
   <!-- Covered -->
