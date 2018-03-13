@@ -37,7 +37,7 @@ export class ClientDetailsComponent implements OnInit {
         if (data.success) {
           this.success = 'Profile Photo uploaded successfully';
 
-          this.client.contactPerson.photo = environment.uploadsBaseUrl + data.photo;
+          this.client.contactpersons[0].photo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);

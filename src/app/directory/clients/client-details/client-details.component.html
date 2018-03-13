@@ -63,62 +63,62 @@
     </div>
   </div>
   <div class="col-lg">
-    <div class="card mb-3">
-      <div class="card-header">Contact Person</div>
+    <div class="card mb-3" *ngFor="let contactPerson of client.contactpersons; index as i">
+      <div class="card-header">Contact Person {{i + 1}}</div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Name</div>
-            <div class="col-md-8">{{client.contactPerson.name}}</div>
+            <div class="col-md-8">{{contactPerson.name}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Designation</div>
-            <div class="col-md-8">{{client.contactPerson.designation}}</div>
+            <div class="col-md-8">{{contactPerson.designation}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Department</div>
-            <div class="col-md-8">{{client.contactPerson.department}}</div>
+            <div class="col-md-8">{{contactPerson.department}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Mobile</div>
-            <div class="col-md-8">{{client.contactPerson.mobileNo}}</div>
+            <div class="col-md-8">{{contactPerson.mobileNo}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Email</div>
-            <div class="col-md-8">{{client.contactPerson.email}}</div>
+            <div class="col-md-8">{{contactPerson.email}}</div>
           </div>
         </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Date of Birth</div>
-            <div class="col-md-8">{{client.contactPerson.dob | date}}</div>
+            <div class="col-md-8">{{contactPerson.dob | date}}</div>
           </div>
         </li>        
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Anniversary</div>
-            <div class="col-md-8">{{client.contactPerson.anniversaryDate | date}}</div>
+            <div class="col-md-8">{{contactPerson.anniversaryDate | date}}</div>
           </div>
         </li>
       </ul>
       <div class="card-header">Profile Picture</div>
       <div class="card-body text-center">
-        <img [src]="client.contactPerson.photo" class="img-fluid max-w-200">
+        <img [src]="contactPerson.photo" class="img-fluid max-w-200">
   
         <br><br>
         
-        <label for="profile-upload" class="btn btn-outline-info">
+        <label for="profile-upload-{{i}}" class="btn btn-outline-info">
             Upload
         </label>
-        <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
+        <input type="file" id="profile-upload-{{i}}" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
 
         <div *ngIf="error || success">
           <br>

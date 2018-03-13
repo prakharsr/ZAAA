@@ -330,7 +330,7 @@
         <div class="col-md">
           <div class="form-group">
             <label for="free">Free</label>
-            <input type="number" class="form-control" id="free-{{i}}" name="free-{{i}}" placeholder="Enter Free" [(ngModel)]="item.free" required #freeField="ngModel">
+            <input type="number" class="form-control" id="free-{{i}}" name="free-{{i}}" placeholder="Enter Free" [(ngModel)]="item.Free" required #freeField="ngModel">
           </div>
           
           <div *ngIf="freeField.invalid && (freeField.dirty || freeField.touched)" class="text-danger">
@@ -343,7 +343,7 @@
         <div class="col-md">
           <div class="form-group">
             <label for="timelimit">Time Limit</label>
-            <input type="number" class="form-control" id="timelimit-{{i}}" name="timelimit-{{i}}" placeholder="Enter Time limit" [(ngModel)]="item.timelimit" required #timeLimitField="ngModel">
+            <input type="number" class="form-control" id="timelimit-{{i}}" name="timelimit-{{i}}" placeholder="Enter Time limit" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
           </div>
           
           <div *ngIf="timeLimitField.invalid && (timeLimitField.dirty || timeLimitField.touched)" class="text-danger">

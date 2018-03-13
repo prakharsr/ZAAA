@@ -10,7 +10,9 @@
       <div class="col">
         <a [routerLink]="['/dir/clients', client.id]">{{client.orgName}}</a>
         <br>
-        <small>{{client.contactPerson.name}}</small>
+        <div *ngFor="let contactPerson of client.contactpersons">
+          <small>{{contactPerson.name}}</small>
+        </div>
       </div>
       <div class="col-auto">
         <button class="btn btn-outline-danger" (click)="deleteClient(client)"><span class="fa fa-trash-alt"></span></button>
