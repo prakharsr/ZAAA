@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DirClient } from '../dirClient';
 import { ClientApiService } from '../client-api.service';
 import { DialogService } from '../../../services/dialog.service';
+import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -12,10 +20,30 @@ export class ClientListComponent implements OnInit {
 
   clients: DirClient[] = [];
 
-  constructor(private api: ClientApiService, private dialog: DialogService) { }
+  query: string;
+  searchFailed = false;
+
+  constructor(private api: ClientApiService, private dialog: DialogService, private router: Router) { }
 
   ngOnInit() {
     this.api.getClients().subscribe(data => this.clients = data);
+  }
+
+  search = (text: Observable<string>) =>
+    text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term =>
+        this.api.searchClients(term)
+          .do(() => this.searchFailed = false)
+          .catch(() => {
+            this.searchFailed = true;
+            return of([]);
+          }));
+
+  formatter = (result: DirClient) => result.orgName;
+
+  inputFormatter = (result: DirClient) => {
+    this.router.navigateByUrl('/dir/clients/' + result.id);
   }
 
   deleteClient(client: DirClient) {

@@ -127,6 +127,22 @@ export class ClientApiService {
     );
   }
 
+  searchClients(query: string) : Observable<DirClient[]> {
+    return this.api.get('/user/clients/' + query).pipe(
+      map(data => {
+        let clients : DirClient[] = [];
+
+        if (data.success) {
+          data.clients.forEach(element => {
+            clients.push(this.bodyToClient(element));            
+          });
+        }
+
+        return clients;
+      })
+    );
+  }
+
   deleteClient(client: DirClient) : Observable<any> {
     return this.api.delete('/user/client/' + client.id);
   }
