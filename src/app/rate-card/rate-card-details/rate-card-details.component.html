@@ -130,7 +130,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="ratecard.mediaType == 'Print'">
+    <div class="col-lg-6" *ngIf="ratecard.mediaType == 'Print' && ratecard.fixSizes.length">
       <div class="card mb-3" *ngFor="let fixSize of ratecard.fixSizes; index as i">
         <div class="card-header">Fix Size #{{i + 1}}</div>
         <ul class="list-group list-group-flush">
@@ -155,7 +155,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6"*ngIf="ratecard.schemes.length">
       <div class="card mb-3" *ngFor="let scheme of ratecard.schemes; index as i">
         <div class="card-header">Scheme #{{i + 1}}</div>
         <ul class="list-group list-group-flush">
@@ -180,7 +180,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6"*ngIf="ratecard.taxes.length">
       <div class="card mb-3" *ngFor="let tax of ratecard.taxes; index as i">
         <div class="card-header">Tax #{{i + 1}}</div>
         <ul class="list-group list-group-flush">
@@ -199,7 +199,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6"*ngIf="ratecard.covered.length">
       <div class="card mb-3" *ngFor="let cov of ratecard.covered; index as i">
         <div class="card-header">Covered #{{i + 1}}</div>
         <ul class="list-group list-group-flush">
@@ -218,7 +218,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" *ngIf="ratecard.remarks.length">
       <div class="card mb-3">
         <div class="card-header">Remarks</div>
         <ul class="list-group list-group-flush">
@@ -228,7 +228,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" *ngIf="ratecard.premiums.length">
       <div class="card mb-3" *ngFor="let premium of ratecard.premiums; index as i">
         <div class="card-header">Premium #{{i + 1}}</div>
         <ul class="list-group list-group-flush">
