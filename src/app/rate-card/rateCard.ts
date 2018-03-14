@@ -21,7 +21,7 @@ export class RateCard {
     
     unit = "";
     position = "";
-    hue: "";
+    hue = "";
     
     minLength = 0;
     minWidth = 0;

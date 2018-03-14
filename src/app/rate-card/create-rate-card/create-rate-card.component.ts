@@ -35,6 +35,9 @@ export class CreateRateCardComponent implements OnInit {
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
     this.rateCard.freqPeriod = this.periods[0];
+    this.rateCard.unit = this.units[0];
+    this.rateCard.position = this.positions[0];
+    this.rateCard.hue = this.hues[0];
   }
 
   ngOnInit() {
@@ -67,6 +70,8 @@ export class CreateRateCardComponent implements OnInit {
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
+
+  hues = ['Colored', 'Black & White'];
 
   get mediaType() {
     return this.rateCard.mediaType;
