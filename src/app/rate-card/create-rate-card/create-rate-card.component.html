@@ -13,7 +13,7 @@
     <div class="col-md">
       <div class="form-group">
         <label>Media Type</label>
-        <select class="form-control" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField required>
+        <select class="form-control" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
           <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -21,7 +21,7 @@
     <div class="col-md">
       <div class="form-group">
         <label>Ad Type</label>
-        <select class="form-control" name="adType" [(ngModel)]="rateCard.adType" id="adType" #adTypeField required>
+        <select class="form-control" name="adType" [(ngModel)]="rateCard.adType" id="adType" #adTypeField="ngModel" required>
           <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -29,7 +29,7 @@
     <div class="col-md">
       <div class="form-group">
         <label>Rate Card Type</label>
-        <select class="form-control" name="rateCardType" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField required>
+        <select class="form-control" name="rateCardType" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField="ngModel" required>
           <option *ngFor="let item of rateCardTypes" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -61,7 +61,7 @@
     </label>
     <div class="col-md">
       <div class="form-group">
-        <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField required>
+        <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
           <option>1</option>
           <option>2</option>
           <option>{{others}}</option>
@@ -83,7 +83,7 @@
     <div class="col-sm">
       <div class="form-group">
         <label>Period</label>
-        <select class="form-control" name="freqPeriod" [(ngModel)]="rateCard.freqPeriod" id="freqPeriod" #freqPeriodField required>
+        <select class="form-control" name="freqPeriod" [(ngModel)]="rateCard.freqPeriod" id="freqPeriod" #freqPeriodField="ngModel" required>
           <option *ngFor="let item of periods" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -159,7 +159,7 @@
     </div>
     <div class="col col-md-4">
       <div class="form-group">
-        <select class="form-control" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField required>
+        <select class="form-control" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField="ngModel" required>
           <option *ngFor="let item of units" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -170,7 +170,7 @@
     <label class="col-md-3 col-form-label">Position</label>
     <div class="col-md-9">
       <div class="form-group">
-        <select class="form-control" name="position" [(ngModel)]="rateCard.position" id="position" #positionField required>
+        <select class="form-control" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
           <option *ngFor="let item of positions" [value]="item">{{item}}</option>
         </select>
       </div>
@@ -181,7 +181,7 @@
     <label class="col-md-3 col-form-label">Hue</label>
     <div class="col-md-9">
       <div class="form-group">
-        <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField required>
+        <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
           <option selected>Colored</option>
           <option>Black &amp; White</option>
         </select>
