@@ -69,6 +69,22 @@ export class ExecutiveApiService {
     );
   }
 
+  searchExecutives(query: string) : Observable<DirExecutive[]> {
+    return this.api.get('/user/executives/' + query).pipe(
+      map(data => {
+        let executives : DirExecutive[] = [];
+
+        if (data.success) {
+          data.executives.forEach(element => {
+            executives.push(this.bodyToExecutive(element));            
+          });
+        }
+
+        return executives;
+      })
+    );
+  }
+
   editExecutive(executive: DirExecutive) : Observable<any> {
     return this.api.patch('/user/executive', {
       id: executive.id,

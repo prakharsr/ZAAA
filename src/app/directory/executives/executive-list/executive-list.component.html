@@ -1,5 +1,9 @@
 <button class="fab" routerLink="/dir/executives/new"><span class="fa fa-plus"></span></button>
 
+<div class="form-group">
+  <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultFormatter]="formatter" [inputFormatter]="inputFormatter" />
+</div>
+
 <p *ngIf="executives.length == 0" class="text-muted">
   No Executives
 </p>

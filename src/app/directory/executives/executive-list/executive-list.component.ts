@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DirExecutive } from '../dirExecutive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { DialogService } from '../../../services/dialog.service';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/switchMap';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-executive-list',
@@ -12,10 +20,30 @@ export class ExecutiveListComponent implements OnInit {
 
   executives: DirExecutive[] = [];
 
-  constructor(private api: ExecutiveApiService, private dialog: DialogService) { }
+  query: string;
+  searchFailed = false;
+
+  constructor(private api: ExecutiveApiService, private dialog: DialogService, private router: Router) { }
 
   ngOnInit() {
     this.api.getExecutives().subscribe(data => this.executives = data);
+  }
+
+  search = (text: Observable<string>) =>
+    text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term =>
+        this.api.searchExecutives(term)
+          .do(() => this.searchFailed = false)
+          .catch(() => {
+            this.searchFailed = true;
+            return of([]);
+          }));
+
+  formatter = (result: DirExecutive) => result.executiveName;
+
+  inputFormatter = (result: DirExecutive) => {
+    this.router.navigateByUrl('/dir/executives/' + result.id);
   }
 
   deleteExecutive(executive: DirExecutive) {
