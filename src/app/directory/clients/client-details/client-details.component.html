@@ -31,12 +31,6 @@
         </li>
         <li class="list-group-item">
           <div class="row">
-            <div class="col-md-4">Address</div>
-            <div class="col-md-8">{{client.address}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
             <div class="col-md-4">Landline</div>
             <div class="col-md-8">{{client.landLine}}</div>
           </div>
@@ -57,6 +51,26 @@
           <div class="row">
             <div class="col-md-4">GSTIN</div>
             <div class="col-md-8">{{client.gstNo}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header">Address</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{client.address.address}}
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">City</div>
+            <div class="col-md-8">{{client.address.city}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">State</div>
+            <div class="col-md-8">{{client.address.state}}</div>
           </div>
         </li>
       </ul>

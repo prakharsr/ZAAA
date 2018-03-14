@@ -38,12 +38,7 @@
         <label for="category">Category / Type</label>
         <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category" [(ngModel)]="client.category" #categoryField="ngModel">
       </div>
-    
-      <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="client.address" #addressField="ngModel">
-      </div>
-    
+
       <div class="form-group">
         <label for="landLine">Landline</label>
         <input type="text" class="form-control" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
@@ -63,6 +58,48 @@
         <label for="gstNo">GST Number</label>
         <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
       </div>
+
+      <br>
+
+      <h3 class="mb-3">Address</h3>
+    
+      <div class="form-group">
+        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="client.address.address" required #addressField="ngModel">
+      </div>
+    
+      <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
+        <div *ngIf="addressField.errors.required">
+          Address is required.
+        </div>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" [(ngModel)]="client.address.city" required #cityField="ngModel">
+      </div>
+    
+      <div *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)" class="text-danger">
+        <div *ngIf="cityField.errors.required">
+          City is required.
+        </div>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="state">State</label>
+        <select class="form-control" id="state" name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
+          <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
+        </select>
+      </div>
+    
+      <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
+        <div *ngIf="stateField.errors.required">
+          State is required.
+        </div>
+        <br>
+      </div>
+
       <br>
     </div>
 

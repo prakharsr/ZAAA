@@ -3,7 +3,11 @@ export class DirClient {
     companyName: string;
     nickName: string;
     category: string;
-    address: string;
+    address = {
+        address: "",
+        city: "",
+        state: ""
+    };
     landLine: string;
     website: string;
     panNo: string;

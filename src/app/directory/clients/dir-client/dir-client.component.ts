@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DirClient, ContactPerson } from '../dirClient';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StateApiService } from '../../../state-api.service';
 
 @Component({
   selector: 'app-dir-client',
@@ -19,7 +20,8 @@ export class DirClientComponent implements OnInit {
 
   constructor(private api: ClientApiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public stateApi: StateApiService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

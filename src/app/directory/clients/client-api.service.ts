@@ -20,7 +20,7 @@ export class ClientApiService {
       companyName: client.companyName,
       nickName: client.nickName,
       categoryType: client.category,
-      addressState: client.address,
+      address: client.address,
       landline: client.landLine,
       website: client.website,
       panNo: client.panNo,
@@ -66,7 +66,7 @@ export class ClientApiService {
     client.companyName = data.CompanyName;
     client.nickName = data.NickName;
     client.category = data.CategoryType;
-    client.address = data.AddressState;
+    client.address = data.Address;
     client.landLine = data.Landline;
     client.website = data.Website;
     client.panNo = data.PanNO;
@@ -96,7 +96,7 @@ export class ClientApiService {
       CompanyName: client.companyName,
       NickName: client.nickName,
       CategoryType: client.category,
-      AddressState: client.address,
+      Address: client.address,
       Landline: client.landLine,
       Website: client.website,
       PanNO: client.panNo,
