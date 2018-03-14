@@ -97,30 +97,32 @@
               <div class="col-md-8">{{ratecard.rate}} per {{ratecard.unit}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
-            <div class="row">
-              <div class="col-md-4">Position</div>
-              <div class="col-md-8">{{ratecard.position}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
-            <div class="row">
-              <div class="col-md-4">Hue</div>
-              <div class="col-md-8">{{ratecard.hue}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
-            <div class="row">
-              <div class="col-md-4">Minimum Size</div>
-              <div class="col-md-8">{{ratecard.minLength}} x {{ratecard.minWidth}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
-            <div class="row">
-              <div class="col-md-4">Maximum Size</div>
-              <div class="col-md-8">{{ratecard.maxLength}} x {{ratecard.maxWidth}}</div>
-            </div>
-          </li>
+          <ng-container *ngIf="ratecard.mediaType == 'Print'">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">Position</div>
+                <div class="col-md-8">{{ratecard.position}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">Hue</div>
+                <div class="col-md-8">{{ratecard.hue}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">Minimum Size</div>
+                <div class="col-md-8">{{ratecard.minLength}} x {{ratecard.minWidth}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-4">Maximum Size</div>
+                <div class="col-md-8">{{ratecard.maxLength}} x {{ratecard.maxWidth}}</div>
+              </div>
+            </li>
+          </ng-container>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Validity</div>
