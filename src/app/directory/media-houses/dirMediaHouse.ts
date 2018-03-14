@@ -3,8 +3,12 @@ export class DirMediaHouse {
     pubName: string;
     nickName: string;
     mediaType: string;
-    edition: string;
-    address: string;
+    address = {
+        edition: "",
+        address: "",
+        city: "",
+        state: ""
+    };
     officeLandLine: string;
     scheduling: MediaHouseScheduling[];
 

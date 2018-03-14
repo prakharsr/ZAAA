@@ -36,7 +36,11 @@
     
       <div class="form-group">
         <label for="mediaType">Media Type</label>
-        <input type="text" class="form-control" id="mediaType" name="mediaType" placeholder="Enter Media Type" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+        <select class="form-control" id="mediaType" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+          <option>Print</option>
+          <option>Air</option>
+          <option>Electronic</option>
+        </select>
       </div>
     
       <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
@@ -47,20 +51,16 @@
       </div>
     
       <div class="form-group">
-        <label for="edition">Edition</label>
-        <input type="text" class="form-control" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.edition" required #editionField="ngModel">
+        <label for="officeLandLine">Office Landline</label>
+        <input type="text" class="form-control" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
       </div>
     
-      <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
-        <div *ngIf="editionField.errors.required">
-          Edition is required.
-        </div>
-        <br>
-      </div>
+      <br>
+
+      <h3 class="mb-3">Address</h3>
     
       <div class="form-group">
-        <label for="address">Address</label>
-        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address" required #addressField="ngModel">
+        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address.address" required #addressField="ngModel">
       </div>
     
       <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
@@ -69,12 +69,45 @@
         </div>
         <br>
       </div>
-    
+
       <div class="form-group">
-        <label for="officeLandLine">Office Landline</label>
-        <input type="text" class="form-control" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" [(ngModel)]="mediaHouse.address.city" required #cityField="ngModel">
       </div>
     
+      <div *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)" class="text-danger">
+        <div *ngIf="cityField.errors.required">
+          City is required.
+        </div>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="state">State</label>
+        <select class="form-control" id="state" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
+          <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
+        </select>
+      </div>
+    
+      <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
+        <div *ngIf="stateField.errors.required">
+          State is required.
+        </div>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="edition">Edition</label>
+        <input type="text" class="form-control" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
+      </div>
+    
+      <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
+        <div *ngIf="editionField.errors.required">
+          Edition is required.
+        </div>
+        <br>
+      </div>
+
       <br>
     </div>
     <div class="col-md">

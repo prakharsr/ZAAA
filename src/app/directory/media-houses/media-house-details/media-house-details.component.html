@@ -32,7 +32,7 @@
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Edition</div>
-            <div class="col-md-8">{{mediaHouse.edition}}</div>
+            <div class="col-md-8">{{mediaHouse.address.edition}}</div>
           </div>
         </li>
         <li class="list-group-item">
@@ -45,6 +45,32 @@
           <div class="row">
             <div class="col-md-4">Office Landline</div>
             <div class="col-md-8">{{mediaHouse.officeLandLine}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header">Address</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{mediaHouse.address.address}}
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">City</div>
+            <div class="col-md-8">{{mediaHouse.address.city}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">State</div>
+            <div class="col-md-8">{{mediaHouse.address.state}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Edition</div>
+            <div class="col-md-8">{{mediaHouse.address.edition}}</div>
           </div>
         </li>
       </ul>

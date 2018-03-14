@@ -18,7 +18,7 @@ export class MediaHouseApiService {
       organizationName: mediaHouse.orgName,
       publicationName: mediaHouse.pubName,
       nickName: mediaHouse.nickName,
-      edition: mediaHouse.edition,
+      mediaType: mediaHouse.mediaType,
       address: mediaHouse.address,
       officeLandline: mediaHouse.officeLandLine,
       scheduling: scheduling
@@ -56,7 +56,6 @@ export class MediaHouseApiService {
     mediaHouse.pubName = body.PublicationName;
     mediaHouse.nickName = body.NickName;
     mediaHouse.mediaType = body.MediaType;
-    mediaHouse.edition = body.Edition;
     mediaHouse.address = body.Address;
     mediaHouse.officeLandLine = body.OfficeLandline;
 
@@ -87,7 +86,6 @@ export class MediaHouseApiService {
       PublicationName: mediaHouse.pubName,
       NickName: mediaHouse.nickName,
       MediaType: mediaHouse.mediaType,
-      Edition: mediaHouse.edition,
       Address: mediaHouse.address,
       OfficeLandline: mediaHouse.officeLandLine,
 
