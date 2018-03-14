@@ -254,6 +254,22 @@ export class RateCardApiService {
     );
   }
 
+  searchRateCards(query: string) : Observable<RateCard[]> {
+    return this.api.get('/user/ratecards/' + query).pipe(
+      map(data => {
+        let ratecards : RateCard[] = [];
+
+        if (data.success) {
+          data.ratecards.forEach(element => {
+            ratecards.push(this.bodyToRateCard(element));
+          });
+        }
+
+        return ratecards;
+      })
+    );
+  }
+
   editRateCard(rateCard: RateCard): Observable<any> {
     let fixSizes = [],
       schemes = [],
