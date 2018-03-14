@@ -44,7 +44,7 @@
     <div class="col-md">
       <div class="form-group">
         <label>Media House Name</label>
-        <input type="text" class="form-control" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel">
+        <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel">
       </div>
     </div>
     <div class="col-md">

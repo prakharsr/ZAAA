@@ -97,25 +97,25 @@
               <div class="col-md-8">{{ratecard.rate}} per {{ratecard.unit}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="rateCard.mediaType == 'Print'">
+          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
             <div class="row">
               <div class="col-md-4">Position</div>
               <div class="col-md-8">{{ratecard.position}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="rateCard.mediaType == 'Print'">
+          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
             <div class="row">
               <div class="col-md-4">Hue</div>
               <div class="col-md-8">{{ratecard.hue}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="rateCard.mediaType == 'Print'">
+          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
             <div class="row">
               <div class="col-md-4">Minimum Size</div>
               <div class="col-md-8">{{ratecard.minLength}} x {{ratecard.minWidth}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="rateCard.mediaType == 'Print'">
+          <li class="list-group-item" *ngIf="ratecard.mediaType == 'Print'">
             <div class="row">
               <div class="col-md-4">Maximum Size</div>
               <div class="col-md-8">{{ratecard.maxLength}} x {{ratecard.maxWidth}}</div>
@@ -130,7 +130,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="rateCard.mediaType == 'Print'">
+    <div class="col-lg-6" *ngIf="ratecard.mediaType == 'Print'">
       <div class="card mb-3" *ngFor="let fixSize of ratecard.fixSizes; index as i">
         <div class="card-header">Fix Size #{{i + 1}}</div>
         <ul class="list-group list-group-flush">

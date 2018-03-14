@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rateCard';
 import { RateCardApiService } from '../rate-card-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -38,6 +44,13 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.unit = this.units[0];
     this.rateCard.position = this.positions[0];
     this.rateCard.hue = this.hues[0];
+  }
+
+  searchMediaHouse = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.api.searchMediaHouseNames(term))
+      .catch(() => of([]));
   }
 
   ngOnInit() {
