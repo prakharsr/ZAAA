@@ -40,8 +40,6 @@ export class RateCardListComponent implements OnInit {
             return of([]);
           }));
 
-  formatter = (result: RateCard) => result.mediaHouseName;
-
   inputFormatter = (result: RateCard) => {
     this.router.navigateByUrl('/dir/ratecards/' + result.id);
   }

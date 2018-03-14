@@ -1,7 +1,15 @@
 <button class="fab" routerLink="/dir/clients/new"><span class="fa fa-plus"></span></button>
 
+<ng-template #rt let-r="result">
+  {{r.orgName}}
+  <br>
+  <div *ngFor="let contactPerson of r.contactpersons">
+    <small>{{contactPerson.name}}</small>
+  </div>
+</ng-template>
+
 <div class="form-group">
-  <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultFormatter]="formatter" [inputFormatter]="inputFormatter" />
+  <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
 </div>
 
 <p *ngIf="clients.length == 0" class="text-muted">

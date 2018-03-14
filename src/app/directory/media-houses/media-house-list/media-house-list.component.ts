@@ -40,8 +40,6 @@ export class MediaHouseListComponent implements OnInit {
             return of([]);
           }));
 
-  formatter = (result: DirMediaHouse) => result.orgName;
-
   inputFormatter = (result: DirMediaHouse) => {
     this.router.navigateByUrl('/dir/media_houses/' + result.id);
   }

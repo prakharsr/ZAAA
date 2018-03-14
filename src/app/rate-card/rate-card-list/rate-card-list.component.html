@@ -4,11 +4,19 @@
   </div>
 </div>
 
+<ng-template #rt let-r="result">
+  {{r.mediaHouseName}}
+  <br>
+  {{r.pullOutName}}<br>
+  {{r.mediaType}} - {{r.adType}} - {{r.rateCardType}}<br>
+  {{r.freqPeriod}} - {{r.freqRemark}}
+</ng-template>
+
 <div class="container">
   <button class="fab" routerLink="/ratecards/new"><span class="fa fa-plus"></span></button>
 
   <div class="form-group">
-    <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultFormatter]="formatter" [inputFormatter]="inputFormatter" />
+    <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
   </div>
 
   <p *ngIf="ratecards.length == 0" class="text-muted">

@@ -40,8 +40,6 @@ export class ClientListComponent implements OnInit {
             return of([]);
           }));
 
-  formatter = (result: DirClient) => result.orgName;
-
   inputFormatter = (result: DirClient) => {
     this.router.navigateByUrl('/dir/clients/' + result.id);
   }

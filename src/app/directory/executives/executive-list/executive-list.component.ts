@@ -40,8 +40,6 @@ export class ExecutiveListComponent implements OnInit {
             return of([]);
           }));
 
-  formatter = (result: DirExecutive) => result.executiveName;
-
   inputFormatter = (result: DirExecutive) => {
     this.router.navigateByUrl('/dir/executives/' + result.id);
   }
