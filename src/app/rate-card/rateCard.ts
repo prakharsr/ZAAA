@@ -32,6 +32,7 @@ export class RateCard {
     validTill: Date;
     
     rate = 0;
+    global: boolean;
 
     id: string;
 }

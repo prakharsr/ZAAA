@@ -104,6 +104,7 @@ export class RateCardApiService {
     let rateCard = new RateCard();
 
     rateCard.id = body._id;
+    rateCard.global = body.global;
 
     rateCard.mediaType = body.MediaType;
     rateCard.adType = body.AdType;

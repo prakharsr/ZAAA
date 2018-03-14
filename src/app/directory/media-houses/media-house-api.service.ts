@@ -51,6 +51,7 @@ export class MediaHouseApiService {
     let mediaHouse = new DirMediaHouse();
 
     mediaHouse.id = body._id;
+    mediaHouse.global = body.global;
 
     mediaHouse.orgName = body.OrganizationName;
     mediaHouse.pubName = body.PublicationName;

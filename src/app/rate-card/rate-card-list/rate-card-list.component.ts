@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 export class RateCardListComponent implements OnInit {
 
   ratecards: RateCard[] = [];
+  globalRateCards: RateCard[] = [];
 
   query: string;
   searchFailed = false;
@@ -27,6 +28,8 @@ export class RateCardListComponent implements OnInit {
 
   ngOnInit() {
     this.api.getRateCards().subscribe(data => this.ratecards = data);
+
+    this.api.getRateCards(true).subscribe(data => this.globalRateCards = data);
   }
 
   search = (text: Observable<string>) =>

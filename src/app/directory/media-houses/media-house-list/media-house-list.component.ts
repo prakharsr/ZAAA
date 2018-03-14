@@ -19,6 +19,7 @@ import { Observable } from 'rxjs/Observable';
 export class MediaHouseListComponent implements OnInit {
 
   mediaHouses: DirMediaHouse[] = [];
+  globalMediaHouses: DirMediaHouse[] = [];
 
   query: string;
   searchFailed = false;
@@ -27,6 +28,7 @@ export class MediaHouseListComponent implements OnInit {
 
   ngOnInit() {
     this.api.getMediaHouses().subscribe(data => this.mediaHouses = data);
+    this.api.getMediaHouses(true).subscribe(data => this.globalMediaHouses = data);
   }
 
   search = (text: Observable<string>) =>

@@ -12,6 +12,8 @@ export class DirMediaHouse {
     officeLandLine: string;
     scheduling: MediaHouseScheduling[];
 
+    global: boolean;
+
     id: string;
 }
 

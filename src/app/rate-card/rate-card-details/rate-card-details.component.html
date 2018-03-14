@@ -5,7 +5,7 @@
 </div>
 
 <div class="container">
-  <button class="fab bg-info" [routerLink]="['/ratecards/edit', id]"><span class="fa fa-pencil-alt"></span></button>
+  <button *ngIf="!ratecard.global" class="fab bg-info" [routerLink]="['/ratecards/edit', id]"><span class="fa fa-pencil-alt"></span></button>
 
   <div class="row">
     <div class="col-lg-6">
