@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DirMediaHouse, MediaHouseScheduling } from '../dirMediaHouse';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StateApiService } from '../../../state-api.service';
+import { StateApiService } from '../../../services/state-api.service';
 
 @Component({
   selector: 'app-dir-media-house',

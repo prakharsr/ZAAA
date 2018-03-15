@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { WindowService } from '../../services/window.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Firm } from '../../models/firm';
+import { Address } from '../../models/address';
 
 @Component({
   selector: 'app-plan-selector',
@@ -50,7 +51,7 @@ export class PlanSelectorComponent implements OnInit {
     this.api.getFirmProfile().subscribe(data => this.firm = data);
   }
 
-  private openPay(firmName: string, billingAddress: string, gstNo: string) {
+  private openPay(firmName: string, billingAddress: Address, gstNo: string) {
     this.razorPay.initPay(this.phone,
       this.email,
       this.selectedPlan.cost,
@@ -77,7 +78,7 @@ export class PlanSelectorComponent implements OnInit {
       });
   }
 
-  billingDetails(param: { firmName: string, billingAddress: string, gstNo: string }) {
+  billingDetails(param: { firmName: string, billingAddress: Address, gstNo: string }) {
     this.openPay(param.firmName, param.billingAddress, param.gstNo);
   }
 
@@ -99,7 +100,7 @@ export class PlanSelectorComponent implements OnInit {
     else {
       this.paid = true;
       
-      this.api.setPlan(plan, '', '', '', '').subscribe(
+      this.api.setPlan(plan, '', '', new Address(), '').subscribe(
         data => {
           this.router.navigateByUrl('/dashboard');
         },

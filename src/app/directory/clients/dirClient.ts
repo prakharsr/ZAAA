@@ -1,13 +1,11 @@
+import { Address } from "../../models/address";
+
 export class DirClient {
     orgName: string;
     companyName: string;
     nickName: string;
     category: string;
-    address = {
-        address: "",
-        city: "",
-        state: ""
-    };
+    address = new Address();
     landLine: string;
     website: string;
     panNo: string;

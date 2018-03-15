@@ -13,6 +13,7 @@ import { WindowService } from './window.service';
 import { environment } from '../../environments/environment';
 import { UserProfile } from '../models/userProfile';
 import { Firm } from '../models/firm';
+import { Address } from '../models/address';
 
 @Injectable()
 export class ApiService {
@@ -158,7 +159,7 @@ export class ApiService {
   setPlan(plan: Plan,
     payment: string,
     firmName: string,
-    billingAddress: string,
+    billingAddress: Address,
     gstNo: string) : Observable<any> {
 
     return this.post('/user/plan', {

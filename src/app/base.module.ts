@@ -11,7 +11,7 @@ import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
 import { DialogService } from './services/dialog.service';
-import { StateApiService } from './state-api.service';
+import { StateApiService } from './services/state-api.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';

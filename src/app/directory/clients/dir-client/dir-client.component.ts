@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DirClient, ContactPerson } from '../dirClient';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StateApiService } from '../../../state-api.service';
+import { StateApiService } from '../../../services/state-api.service';
 
 @Component({
   selector: 'app-dir-client',

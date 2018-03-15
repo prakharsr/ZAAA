@@ -1,7 +1,9 @@
+import { Address } from "./address";
+
 export class Firm {
     name: string;
-    registeredAddress: string;
-    officeAddress: string;
+    registeredAddress = new Address();
+    officeAddress = new Address();
     landlineNo: string;
     fax: string;
     website: string;
@@ -23,7 +25,6 @@ export class Firm {
 
     tagline : string;
     nickname : string;
-    state : string;
     
     facebook : string;
     twitter: string;

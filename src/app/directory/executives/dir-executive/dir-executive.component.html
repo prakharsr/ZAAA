@@ -82,6 +82,18 @@
         <label for="dob">Date of Birth</label>
         <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="executive.dob" #dobField="ngModel">
       </div>
+
+      <!-- <div class="form-group">
+        <label class="mr-3">Date of Birth:</label>
+        <span *ngIf="dobModel">{{dobModel.day}}-{{dobModel.month}}-{{dobModel.year}}</span>
+        <span *ngIf="!dobModel">dd-MM-yyyy</span>
+        <ng-template #dobPopContent>
+          <ngb-datepicker name="dobPicker" #dp [(ngModel)]="dobModel" (select)="dobPopover.close()"></ngb-datepicker>
+        </ng-template>
+        <button type="button" class="btn btn-outline-secondary ml-3" [ngbPopover]="dobPopContent" #dobPopover="ngbPopover" popoverTitle="Select Date of Birth">
+          <span class="fa fa-calendar"></span>
+        </button>
+      </div> -->
     
       <div class="form-group">
         <label for="anniversaryDate">Anniversary Date</label>
