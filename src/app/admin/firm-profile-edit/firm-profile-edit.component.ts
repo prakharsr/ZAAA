@@ -48,6 +48,12 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
     }
   }
 
+  copyAddress() {
+    this.profile.officeAddress.address = this.profile.registeredAddress.address;
+    this.profile.officeAddress.city = this.profile.registeredAddress.city;
+    this.profile.officeAddress.state = this.profile.registeredAddress.state;
+  }
+
   submit() {
     this.error = '';
 

@@ -74,6 +74,9 @@
 
         <h3 class="my-5 text-muted">Office Address</h3>
 
+        <button type="button" class="btn btn-warning btn-sm" (click)="copyAddress()">Copy from Above</button>
+        <br><br>
+
         <div class="form-group">
           <input type="text" class="form-control" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
         </div>
