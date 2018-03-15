@@ -46,11 +46,26 @@
         <label>Media House Name</label>
         <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel">
       </div>
+
+      <div *ngIf="mediaHouseNameField.invalid && (mediaHouseNameField.dirty || mediaHouseNameField.touched)" class="text-danger">
+        <div *ngIf="mediaHouseNameField.errors.required">
+          Media House Name is required.
+        </div>
+        <br>
+      </div>
     </div>
+
     <div class="col-md">
       <div class="form-group">
         <label>Edition</label>
         <input type="text" class="form-control" id="bookingEdition" placeholder="Enter Edition" [(ngModel)]="rateCard.bookingEdition" name="bookingEdition" required #bookingEditionField="ngModel">
+      </div>
+
+      <div *ngIf="bookingEditionField.invalid && (bookingEditionField.dirty || bookingEditionField.touched)" class="text-danger">
+        <div *ngIf="bookingEditionField.errors.required">
+          Booking Edition is required.
+        </div>
+        <br>
       </div>
     </div>
   </div>
@@ -67,10 +82,24 @@
           <option>{{others}}</option>
         </select>
       </div>
+
+      <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
+        <div *ngIf="pullOutNameField.errors.required">
+        Pullout Name is required.
+        </div>
+        <br>
+      </div>
     </div>
     <div class="col-md" *ngIf="dropdownPullOutName == others">
       <div class="form-group">
-        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" name="specPullOutName" #specPullOutNameField="ngModel">
+        <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+      </div>
+
+      <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
+        <div *ngIf="specPullOutNameField.errors.required">
+          Pullout Name is required.
+        </div>
+        <br>
       </div>
     </div>
   </div>
@@ -87,6 +116,13 @@
           <option *ngFor="let item of periods" [value]="item">{{item}}</option>
         </select>
       </div>
+
+      <div *ngIf="freqPeriodField.invalid && (freqPeriodField.dirty || freqPeriodField.touched)" class="text-danger">
+        <div *ngIf="freqPeriodField.errors.required">
+          Free is required.
+        </div>
+        <br>
+      </div>
     </div>
     <div class="col-sm">
       <div class="form-group">
@@ -102,7 +138,7 @@
 
   <div class="form-row">
     <div class="form-group col">
-      <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required>
+      <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel">
         <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
       </select>
     </div>
@@ -146,6 +182,14 @@
         <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
       </select>
     </div>
+    
+  </div>
+
+  <div *ngIf="category1Field.invalid && (category1Field.dirty || category1Field.touched)" class="text-danger">
+    <div *ngIf="category1Field.errors.required">
+      Category is required.
+    </div>
+    <br>
   </div>
 
   <br>
@@ -155,6 +199,13 @@
     <div class="col col-md-5">
       <div class="form-group">
         <input type="text" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
+      </div>
+
+      <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
+        <div *ngIf="rateField.errors.required">
+          Rate is required.
+        </div>
+        <br>
       </div>
     </div>
     <div class="col col-md-4">
@@ -175,6 +226,14 @@
             <option *ngFor="let item of positions" [value]="item">{{item}}</option>
           </select>
         </div>
+
+        <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
+          <div *ngIf="positionField.errors.required">
+            Position is required.
+          </div>
+          <br>
+        </div>
+
       </div>
     </div>
     
@@ -187,6 +246,13 @@
             <option>Black &amp; White</option>
           </select>
         </div>
+
+        <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
+          <div *ngIf="hueField.errors.required">
+            Hue is required.
+          </div>
+          <br>
+        </div>
       </div>
     </div>
     
@@ -196,12 +262,28 @@
         <div class="form-group">
           <input type="number" class="form-control" id="minLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
         </div>
+
+        <div *ngIf="minLengthField.invalid && (minLengthField.dirty || minLengthField.touched)" class="text-danger">
+          <div *ngIf="minLengthField.errors.required">
+            Minimum Length is required.
+          </div>
+          <br>
+        </div>
+
       </div>
       <div class="col-auto form-text">&times;</div>
       <div class="col">
         <div class="form-group">
           <input type="number" class="form-control" id="minWidth" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.minWidth" name="minWidth" required #minWidthField="ngModel">
         </div>
+
+        <div *ngIf="minWidthField.invalid && (minWidthField.dirty || minWidthField.touched)" class="text-danger">
+          <div *ngIf="minWidthField.errors.required">
+            Minimum Width is required.
+          </div>
+          <br>
+        </div>
+
       </div>
     </div>
     
@@ -211,12 +293,28 @@
         <div class="form-group">
           <input type="number" class="form-control" id="maxLength" placeholder="Enter Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
         </div>
+
+        <div *ngIf="maxLengthField.invalid && (maxLengthField.dirty || maxLengthField.touched)" class="text-danger">
+          <div *ngIf="maxLengthField.errors.required">
+            Maximum Length is required.
+          </div>
+          <br>
+        </div>
+
       </div>
       <div class="col-auto form-text">&times;</div>
       <div class="col">
         <div class="form-group">
           <input type="number" class="form-control" id="maxWidth" placeholder="Enter Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
         </div>
+
+        <div *ngIf="maxWidthField.invalid && (maxWidthField.dirty || maxWidthField.touched)" class="text-danger">
+          <div *ngIf="maxWidthField.errors.required">
+            Max Width is required.
+          </div>
+          <br>
+        </div>
+
       </div>
     </div>
   </div>
@@ -227,12 +325,28 @@
       <div class="form-group">        
         <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
       </div>
+
+      <div *ngIf="validFromField.invalid && (validFromField.dirty || validFromField.touched)" class="text-danger">
+        <div *ngIf="validFromField.errors.required">
+          Valid From is required.
+        </div>
+        <br>
+      </div>
+
     </div>
     <label class="col-auto col-form-label">to</label>
     <div class="col-sm">
       <div class="form-group">
         <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
       </div>
+
+      <div *ngIf="validTillField.invalid && (validTillField.dirty || validTillField.touched)" class="text-danger">
+        <div *ngIf="validTillField.errors.required">
+          Valid Till is required.
+        </div>
+        <br>
+      </div>
+
     </div>
   </div>
   
@@ -508,6 +622,7 @@
         </div>
 
         <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
+          <br>
           <div *ngIf="remarkField.errors.required">
             Remark is required.
           </div>
