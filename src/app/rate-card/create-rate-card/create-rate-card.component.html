@@ -136,6 +136,10 @@
   <h3>Categories</h3>
   <br>
 
+  <div class="form-group">
+    <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="resultFormatter" [inputFormatter]="inputFormatter" />
+  </div>
+
   <div class="form-row">
     <div class="form-group col">
       <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel">

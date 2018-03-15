@@ -69,5 +69,9 @@ export class Tax {
 }
 
 export class Category {
-    constructor(public name: string, public subcategories: Category[] = []) {}
+    constructor(public name: string, public subcategories: Category[] = []) {
+        subcategories.forEach(elememt => elememt.parent = this);
+    }
+
+    parent: Category;
 }

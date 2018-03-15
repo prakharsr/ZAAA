@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -18,6 +19,7 @@ export class CreateRateCardComponent implements OnInit {
 
   edit = false;
   id: string;
+  query: string;
 
   others = "Others";
 
@@ -76,11 +78,83 @@ export class CreateRateCardComponent implements OnInit {
     }
   }
 
+  findSubCategories(category: Category, query: string): Category[] {
+    let result : Category[] = [];
+
+    if (category.name.toLowerCase().indexOf(query.toLowerCase()) != -1) {
+      result.push(category);
+    }
+
+    if (category.subcategories) {
+      category.subcategories.forEach(subCategory => {
+        this.findSubCategories(subCategory, query).forEach(a => result.push(a));
+      });
+    }
+
+    return result;
+  }
+
+  findCategories(query: string): Category[]  {
+    let result : Category[] = [];
+
+    if (query) {
+      this.categories.forEach(element => {
+        this.findSubCategories(element, query).forEach(a => result.push(a));
+      });
+    }
+
+    return result;
+
+  }
+
+  searchCategories = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .pipe(
+        map(term => this.findCategories(term))
+      )
+      .catch(() => of([]));
+  }
+
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
       .switchMap(term => this.api.searchMediaHouseNames(term))
       .catch(() => of([]));
+  }
+
+  inputFormatter = (result: Category) => {
+    let stack : Category[] = [];
+
+    while (result) {
+      stack.push(result);
+      result = result.parent;
+    }
+
+    let i = 0;
+
+    while (stack.length) {
+      this.setCategory(i, stack.pop());
+
+      ++i;
+    }
+  }
+
+  resultFormatter = (result: Category) => {
+    let stack : Category[] = [];
+
+    while (result) {
+      stack.push(result);
+      result = result.parent;
+    }
+
+    let formatted = stack.pop().name;
+
+    while (stack.length) {
+      formatted += " > " + stack.pop().name;
+    }
+
+    return formatted;
   }
 
   ngOnInit() {
