@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { RateCard, FixSize, Remark } from './rateCard';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class RateCardApiService {
@@ -256,19 +257,23 @@ export class RateCardApiService {
   }
 
   searchRateCards(query: string) : Observable<RateCard[]> {
-    return this.api.get('/user/ratecards/' + query).pipe(
-      map(data => {
-        let ratecards : RateCard[] = [];
+    if (query) {
+      return this.api.get('/user/ratecards/' + query).pipe(
+        map(data => {
+          let ratecards : RateCard[] = [];
 
-        if (data.success) {
-          data.ratecards.forEach(element => {
-            ratecards.push(this.bodyToRateCard(element));
-          });
-        }
+          if (data.success) {
+            data.ratecards.forEach(element => {
+              ratecards.push(this.bodyToRateCard(element));
+            });
+          }
 
-        return ratecards;
-      })
-    );
+          return ratecards;
+        })
+      );
+    }
+    
+    return of([]);
   }
 
   editRateCard(rateCard: RateCard): Observable<any> {

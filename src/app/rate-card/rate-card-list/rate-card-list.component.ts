@@ -44,7 +44,7 @@ export class RateCardListComponent implements OnInit {
           }));
 
   inputFormatter = (result: RateCard) => {
-    this.router.navigateByUrl('/dir/ratecards/' + result.id);
+    this.router.navigateByUrl('/ratecards/' + result.id);
   }
 
   deleteRateCard(ratecard: RateCard) {

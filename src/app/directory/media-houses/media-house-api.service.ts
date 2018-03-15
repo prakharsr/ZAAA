@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { DirMediaHouse, MediaHouseScheduling } from './dirMediaHouse';
 import { map } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class MediaHouseApiService {
@@ -117,19 +118,23 @@ export class MediaHouseApiService {
   }
 
   searchMediaHouses(query: string) : Observable<DirMediaHouse[]> {
-    return this.api.get('/user/mediahouses/' + query).pipe(
-      map(data => {
-        let mediaHouses : DirMediaHouse[] = [];
+    if (query) {
+      return this.api.get('/user/mediahouses/' + query).pipe(
+        map(data => {
+          let mediaHouses : DirMediaHouse[] = [];
 
-        if (data.success) {
-          data.mediahouses.forEach(element => {
-            mediaHouses.push(this.bodyToMediaHouse(element));            
-          });
-        }
+          if (data.success) {
+            data.mediahouses.forEach(element => {
+              mediaHouses.push(this.bodyToMediaHouse(element));            
+            });
+          }
 
-        return mediaHouses;
-      })
-    );
+          return mediaHouses;
+        })
+      );
+    }
+
+    return of([]);
   }
 
   deleteMediaHouse(mediaHouse: DirMediaHouse) : Observable<any> {
