@@ -279,7 +279,7 @@ export class ApiService {
           if (data.firm.Socials) {
             profile.facebook = data.firm.Socials.fb;
             profile.twitter = data.firm.Socials.twitter;
-            profile.other = data.firm.Socials.other;
+            profile.other = data.firm.Socials.Others;
           }
         }
 
