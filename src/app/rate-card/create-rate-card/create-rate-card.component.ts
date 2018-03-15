@@ -46,6 +46,36 @@ export class CreateRateCardComponent implements OnInit {
     this.rateCard.hue = this.hues[0];
   }
 
+  private initEdit(data: RateCard) {
+    this.rateCard = data;
+
+    this.dropdownPullOutName = this.others;
+    this.customPullOutName = this.rateCard.pullOutName;
+
+    this.buildCategoryTree();
+  }
+
+  private buildCategoryTree() {
+    let c : Category = this.categories.find(p => p.name == this.rateCard.categories[0]);
+
+    if (c) {
+      this.category1 = c;
+
+      let i = 1;
+
+      while (i < this.rateCard.categories.length && c.subcategories.length > 0) {
+        c = c.subcategories.find(p => p.name == this.rateCard.categories[i]);
+
+        if (c) {
+          this.setCategory(i, c);
+
+          ++i;
+        }
+        else break;
+      }
+    }
+  }
+
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
@@ -60,19 +90,10 @@ export class CreateRateCardComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getRateCard(this.id).subscribe(data => {
-          this.rateCard = data;
-
-          this.dropdownPullOutName = this.others;
-          this.customPullOutName = this.rateCard.pullOutName;
-
-          // reconstruct selected categories
-        });
+        this.api.getRateCard(this.id).subscribe(data => this.initEdit(data));
       }
       else if (params.has('copy')) {
-        this.api.getRateCard(params.get('copy')).subscribe(data => {
-          this.rateCard = data;
-        })
+        this.api.getRateCard(params.get('copy')).subscribe(data => this.initEdit(data))
       }
       else this.initNew();
     });
