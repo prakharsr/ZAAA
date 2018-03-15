@@ -5,15 +5,6 @@
 </div>
 
 <div class="container">
-  <div *ngIf="error || success">
-    <br>
-
-    <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-    <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-    <br>
-  </div>
-
   <form (ngSubmit)="submit()" #profileForm="ngForm">
     <div class="row">
       <div class="col-md-6">
@@ -41,23 +32,65 @@
           <label for="nickname">Display / Nickname</label>
           <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
         </div>
-      
+              
+        <h3 class="my-5 text-muted">Registered Address</h3>
+
         <div class="form-group">
-          <label for="registeredAddress">Registered Address</label>
-          <input type="text" class="form-control" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress" required #registeredAddressField="ngModel">
+          <input type="text" class="form-control" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
         </div>
       
         <div *ngIf="registeredAddressField.invalid && (registeredAddressField.dirty || registeredAddressField.touched)" class="text-danger">
           <div *ngIf="registeredAddressField.errors.required">
-            Registered Address is required.
+              Registered Address is required.
           </div>
           <br>
         </div>
       
         <div class="form-group">
-          <label for="officeAddress">Office Address</label>
-          <input type="text" class="form-control" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress" #officeAddressField="ngModel">
+          <label for="registeredCity">City</label>
+          <input type="text" class="form-control" id="registeredCity" name="registeredCity" placeholder="Enter City" [(ngModel)]="profile.registeredAddress.city" required #registeredCityField="ngModel">
         </div>
+      
+        <div *ngIf="registeredCityField.invalid && (registeredCityField.dirty || registeredCityField.touched)" class="text-danger">
+          <div *ngIf="registeredCityField.errors.required">
+            City is required.
+          </div>
+          <br>
+        </div>
+      
+        <div class="form-group">
+          <label for="registeredState">State</label>
+          <select class="form-control" id="registeredState" name="registeredState" [(ngModel)]="profile.registeredAddress.state" required #registeredStateField="ngModel">
+            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+      
+        <div *ngIf="registeredStateField.invalid && (registeredStateField.dirty || registeredStateField.touched)" class="text-danger">
+          <div *ngIf="registeredStateField.errors.required">
+            State is required.
+          </div>
+          <br>
+        </div>
+
+        <h3 class="my-5 text-muted">Office Address</h3>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
+        </div>
+      
+        <div class="form-group">
+          <label for="officeCity">City</label>
+          <input type="text" class="form-control" id="officeCity" name="officeCity" placeholder="Enter City" [(ngModel)]="profile.officeAddress.city" #officeCityField="ngModel">
+        </div>
+      
+        <div class="form-group">
+          <label for="officeState">State</label>
+          <select class="form-control" id="officeState" name="officeState" [(ngModel)]="profile.officeAddress.state" #officeStateField="ngModel">
+            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+
+        <br><br><br>
       
         <div class="form-group">
           <label for="incDate">Incorporation Date</label>
@@ -234,10 +267,9 @@
 
     <br>
   
-    <div *ngIf="error || success">      
-      <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-      <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-    
+    <div *ngIf="error">
+      <ngb-alert type="danger" (close)="error = null">{{ error }}</ngb-alert>
+      
       <br>
     </div>
   

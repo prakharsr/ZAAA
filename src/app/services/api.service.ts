@@ -249,8 +249,12 @@ export class ApiService {
           profile.website = data.firm.Website;
           profile.panNo = data.firm.PanNo;
           profile.gstNo = data.firm.GSTIN;
-          profile.registeredAddress = data.firm.RegisteredAddress;
-          profile.officeAddress = data.firm.OfficeAddress;
+
+          if (data.firm.RegisteredAddress)
+            profile.registeredAddress = data.firm.RegisteredAddress;
+          
+          if (data.firm.OfficeAddress)
+            profile.officeAddress = data.firm.OfficeAddress;
 
           profile.phone = data.firm.Mobile;
           profile.email = data.firm.Email;

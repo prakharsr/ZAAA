@@ -5,6 +5,8 @@ import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
 import { CanComponentDeactivate } from '../../guards/canComponentDeactivate';
+import { StateApiService } from '../../services/state-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-firm-profile-edit',
@@ -20,9 +22,8 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
 
   profile = new Firm();
   error: string;
-  success: string;
 
-  constructor(private ifscService: IfscService, private api: ApiService) { }
+  constructor(private ifscService: IfscService, private api: ApiService, public stateApi: StateApiService, private router: Router) { }
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
@@ -49,12 +50,11 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
 
   submit() {
     this.error = '';
-    this.success = '';
 
     this.api.setFirmProfile(this.profile).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Firm Profile updated successfully';
+          this.router.navigateByUrl('/firm');
         }
         else {
           console.log(data);

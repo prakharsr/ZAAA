@@ -41,18 +41,6 @@
         </li>
         <li class="list-group-item">
           <div class="row">
-            <div class="col-md-4">Registered Address</div>
-            <div class="col-md-8">{{profile.registeredAddress}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Office Address</div>
-            <div class="col-md-8">{{profile.officeAddress}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
             <div class="col-md-4">Incorporation Date</div>
             <div class="col-md-8">{{profile.incDate | date}}</div>
           </div>
@@ -97,6 +85,48 @@
           <div class="row">
             <div class="col-md-4">GST No.</div>
             <div class="col-md-8">{{profile.gstNo}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card mb-5">
+      <div class="card-header">Registered Address</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{profile.registeredAddress.address}}
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">City</div>
+            <div class="col-md-8">{{profile.registeredAddress.city}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">State</div>
+            <div class="col-md-8">{{profile.registeredAddress.state}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card mb-5">
+      <div class="card-header">Office Address</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          {{profile.officeAddress.address}}
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">City</div>
+            <div class="col-md-8">{{profile.officeAddress.city}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">State</div>
+            <div class="col-md-8">{{profile.officeAddress.state}}</div>
           </div>
         </li>
       </ul>
