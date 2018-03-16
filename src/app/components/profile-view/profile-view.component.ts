@@ -15,6 +15,7 @@ export class ProfileViewComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile = new UserProfile();
+  isAdmin: boolean;
   error: string;
   success: string;
 
@@ -22,6 +23,12 @@ export class ProfileViewComponent implements OnInit {
 
   ngOnInit() {
     this.api.getUserProfile().subscribe(data => this.profile = data);
+
+    this.api.getUser().subscribe(data => {
+      if (data.success) {
+        this.isAdmin = data.user.isAdmin;
+      }
+    });
   }
 
   uploadProfilePicture(files: FileList) {
