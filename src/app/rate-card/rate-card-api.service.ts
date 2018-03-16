@@ -209,8 +209,8 @@ export class RateCardApiService {
       });
     }
 
-    body.validFrom = body.ValidFrom;
-    body.validTill = body.ValidTill;
+    rateCard.validFrom = body.ValidFrom;
+    rateCard.validTill = body.ValidTill;
 
     if (body.Covered) {
       let covered : {mediaHouse: string, EditionArea: string}[] = body.Covered;

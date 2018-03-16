@@ -185,12 +185,12 @@
 
         <div class="form-group">
           <label for="dob">Date of birth</label>
-          <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="item.dob" #dobField="ngModel">
+          <input type="date" class="form-control" id="dob-{{i}}" name="dob-{{i}}" placeholder="Enter DOB" [(ngModel)]="item.dob" #dobField="ngModel">
         </div>
   
         <div class="form-group">
           <label for="anniversaryDate">Anniversary Date</label>
-          <input type="date" class="form-control" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
+          <input type="date" class="form-control" id="anniversaryDate-{{i}}" name="anniversaryDate-{{i}}" placeholder="Enter Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
         </div>
 
         <!-- Assign Ad Type, Assign Edition -->
