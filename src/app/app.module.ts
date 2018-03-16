@@ -5,6 +5,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
+import { SuperAdminModule } from './super-admin/super-admin.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,6 +19,7 @@ import { FirmProfileViewComponent } from './components/firm-profile-view/firm-pr
 import { ChangePswComponent } from './components/change-psw/change-psw.component';
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     FirmProfileViewComponent,
     ChangePswComponent,
     ForgotPswComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BaseModule,
@@ -40,6 +43,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     DirectoryModule,
     CoUsersModule,
     RateCardModule,
+    SuperAdminModule,
     AppRoutingModule
   ],
   providers: [],

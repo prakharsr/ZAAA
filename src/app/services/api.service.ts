@@ -223,9 +223,16 @@ export class ApiService {
     });
   }
 
-  resetPsw(email: string): Observable<any> {
-    return this.post('/user/resetpassword', {
+  forgotPsw(email: string): Observable<any> {
+    return this.post('/user/forgotPassword', {
       email: email
+    });
+  }
+
+  resetPsw(token: string, password: string): Observable<any> {
+    return this.post('/user/resetPassword', {
+      token: token,
+      password: password
     });
   }
   

@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-forgot-psw',
-  templateUrl: './forgot-psw.component.html',
-  styleUrls: ['./forgot-psw.component.css']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css']
 })
-export class ForgotPswComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
 
-  email: string;
+  password: string;
+  token: string;
   error: string;
   success: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.token = params.get('token');
+    });
   }
 
   submit() {
     this.success = false;
     this.error = '';
 
-    this.api.forgotPsw(this.email).subscribe(
+    this.api.resetPsw(this.token, this.password).subscribe(
       data => {
         if (data.success) {
           this.success = true;

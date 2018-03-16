@@ -20,6 +20,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
+  { path: 'reset_password/:token', component: ResetPasswordComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

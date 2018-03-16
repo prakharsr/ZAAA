@@ -1,0 +1,24 @@
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <ngb-tabset type="pills" orientation="horizontal">
+        <ngb-tab *ngFor="let category of categories" title="{{category.name}}" (click)="selectedCategories[0] = category">
+          <ng-template ngbTabContent></ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+    <div class="col-md" *ngIf="selectedCategories[0]">
+      <ngb-tabset type="pills" orientation="horizontal">
+        <ngb-tab *ngFor="let category of selectedCategories[0].subcategories" title="{{category.name}}" (click)="selectedCategories[1] = category">
+          <ng-template ngbTabContent></ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+    <div class="col-md"></div>
+    <div class="col-md"></div>
+    <div class="col-md"></div>
+    <div class="col-md"></div>
+  </div>
+</div>
