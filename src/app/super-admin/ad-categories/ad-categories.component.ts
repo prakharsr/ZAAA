@@ -38,4 +38,16 @@ export class AdCategoriesComponent implements OnInit {
   
   selectedCategories: Category[] = [null, null, null, null, null, null];
 
+  setCategory(index: number, category: Category) {
+    if (this.selectedCategories[index] == category) {
+      return;
+    }
+
+    this.selectedCategories[index] = category;
+
+    for (let i = index + 1; i < this.selectedCategories.length; ++i) {
+      this.setCategory(i, null);
+    }
+  }
+
 }
