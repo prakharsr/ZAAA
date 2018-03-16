@@ -50,4 +50,17 @@ export class AdCategoriesComponent implements OnInit {
     }
   }
 
+  inputText : string[] = [null, null, null, null, null, null];
+
+  addCategory(index: number) {
+    if (index == 0) {
+      this.categories.push(new Category(this.inputText[index]));
+    }
+    else {
+      this.selectedCategories[index - 1].subcategories.push(new Category(this.inputText[index]));
+    }
+
+    this.inputText[index] = null;
+  }
+
 }

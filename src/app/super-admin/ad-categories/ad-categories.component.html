@@ -1,24 +1,37 @@
-<br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Manage Categories</h1>
+    </div>
+  </div>
 
 <div class="container">
   <div class="row">
     <div class="col-md">
-      <button class="nav-link" *ngFor="let category of categories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[0] == category" (click)="setCategory(0, category)">{{category.name}}</button>
+      <form class="form-row" (ngSubmit)="addCategory(0)" #category1Form="ngForm">
+        <div class="col">
+          <input [(ngModel)]="inputText[0]" class="form-control" name="category1" required>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-outline-info" [disabled]="!category1Form.form.valid"><span class="fa fa-plus"></span></button>
+        </div>
+      </form>
+      <br>
+      <button *ngFor="let category of categories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[0] == category" (click)="setCategory(0, category)">{{category.name}}</button>
     </div>
-    <div class="col-md" *ngIf="selectedCategories[0]">
-      <button class="nav-link" *ngFor="let category of selectedCategories[0].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[1] == category" (click)="setCategory(1, category)">{{category.name}}</button>
-    </div>
-    <div class="col-md" *ngIf="selectedCategories[1]">
-      <button class="nav-link" *ngFor="let category of selectedCategories[1].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[2] == category" (click)="setCategory(2, category)">{{category.name}}</button>
-    </div>
-    <div class="col-md" *ngIf="selectedCategories[2]">
-      <button class="nav-link" *ngFor="let category of selectedCategories[2].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[3] == category" (click)="setCategory(3, category)">{{category.name}}</button>
-    </div>
-    <div class="col-md" *ngIf="selectedCategories[3]">
-      <button class="nav-link" *ngFor="let category of selectedCategories[3].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[4] == category" (click)="setCategory(4, category)">{{category.name}}</button>
-    </div>
-    <div class="col-md" *ngIf="selectedCategories[4]">
-      <button class="nav-link" *ngFor="let category of selectedCategories[4].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[5] == category" (click)="setCategory(5, category)">{{category.name}}</button>
-    </div>
+
+    <ng-container *ngFor="let selectedCategory of selectedCategories; index as i">
+      <div class="col-md" *ngIf="i != 0 && selectedCategories[i - 1] != null ">
+        <form class="form-row" (ngSubmit)="addCategory(i)" #categoryForm="ngForm">
+          <div class="col">
+            <input [(ngModel)]="inputText[i]" class="form-control" name="category-{{i}}" required>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-outline-info" [disabled]="!categoryForm.form.valid"><span class="fa fa-plus"></span></button>
+          </div>
+        </form>
+        <br>
+        <button *ngFor="let category of selectedCategories[i - 1].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategory == category" (click)="setCategory(i, category)">{{category.name}}</button>
+      </div>
+    </ng-container>
   </div>
 </div>
