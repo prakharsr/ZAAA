@@ -54,13 +54,17 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
     this.profile.officeAddress.state = this.profile.registeredAddress.state;
   }
 
+  private goBack() {
+    this.router.navigateByUrl('/firm');
+  }
+
   submit() {
     this.error = '';
 
     this.api.setFirmProfile(this.profile).subscribe(
       data => {
         if (data.success) {
-          this.router.navigateByUrl('/firm');
+          this.goBack();
         }
         else {
           console.log(data);
@@ -74,5 +78,9 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
         this.error = 'Connection failed';
       }
     );
+  }
+
+  cancel() {
+    this.goBack();
   }
 }
