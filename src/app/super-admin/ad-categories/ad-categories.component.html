@@ -3,34 +3,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of categories" [class.active]="selectedCategories[0] == category" (click)="setCategory(0, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of categories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[0] == category" (click)="setCategory(0, category)">{{category.name}}</button>
     </div>
     <div class="col-md" *ngIf="selectedCategories[0]">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of selectedCategories[0].subcategories" [class.active]="selectedCategories[1] == category" (click)="setCategory(1, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of selectedCategories[0].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[1] == category" (click)="setCategory(1, category)">{{category.name}}</button>
     </div>
     <div class="col-md" *ngIf="selectedCategories[1]">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of selectedCategories[1].subcategories" [class.active]="selectedCategories[2] == category" (click)="setCategory(2, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of selectedCategories[1].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[2] == category" (click)="setCategory(2, category)">{{category.name}}</button>
     </div>
     <div class="col-md" *ngIf="selectedCategories[2]">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of selectedCategories[2].subcategories" [class.active]="selectedCategories[3] == category" (click)="setCategory(3, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of selectedCategories[2].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[3] == category" (click)="setCategory(3, category)">{{category.name}}</button>
     </div>
     <div class="col-md" *ngIf="selectedCategories[3]">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of selectedCategories[3].subcategories" [class.active]="selectedCategories[4] == category" (click)="setCategory(4, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of selectedCategories[3].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[4] == category" (click)="setCategory(4, category)">{{category.name}}</button>
     </div>
     <div class="col-md" *ngIf="selectedCategories[4]">
-      <div class="nav flex-column nav-pills">
-        <a class="nav-link" *ngFor="let category of selectedCategories[4].subcategories" [class.active]="selectedCategories[5] == category" (click)="setCategory(5, category)">{{category.name}}</a>
-      </div>
+      <button class="nav-link" *ngFor="let category of selectedCategories[4].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[5] == category" (click)="setCategory(5, category)">{{category.name}}</button>
     </div>
   </div>
 </div>
