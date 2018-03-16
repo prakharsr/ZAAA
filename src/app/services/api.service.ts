@@ -164,6 +164,7 @@ export class ApiService {
 
     return this.post('/user/plan', {
       planID: plan.id,
+      cost: plan.cost,
       paymentID: payment,
       firmName: firmName,
       billingAddress: billingAddress,
