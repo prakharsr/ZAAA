@@ -126,7 +126,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Validity</div>
-              <div class="col-md-8">{{ratecard.validFrom | date}} to {{ratecard.validTill | date}}</div>
+              <div class="col-md-8">{{(ratecard.validFrom | date) || '--'}} to {{(ratecard.validTill | date) || '--'}}</div>
             </div>
           </li>
         </ul>

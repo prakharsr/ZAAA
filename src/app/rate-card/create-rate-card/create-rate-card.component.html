@@ -327,30 +327,14 @@
     <label class="col-md-3 col-form-label">Validity</label>
     <div class="col-sm">
       <div class="form-group">        
-        <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" required #validFromField="ngModel">
+        <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" #validFromField="ngModel">
       </div>
-
-      <div *ngIf="validFromField.invalid && (validFromField.dirty || validFromField.touched)" class="text-danger">
-        <div *ngIf="validFromField.errors.required">
-          Valid From is required.
-        </div>
-        <br>
-      </div>
-
     </div>
     <label class="col-auto col-form-label">to</label>
     <div class="col-sm">
       <div class="form-group">
-        <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" required #validTillField="ngModel">
+        <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" #validTillField="ngModel">
       </div>
-
-      <div *ngIf="validTillField.invalid && (validTillField.dirty || validTillField.touched)" class="text-danger">
-        <div *ngIf="validTillField.errors.required">
-          Valid Till is required.
-        </div>
-        <br>
-      </div>
-
     </div>
   </div>
   
