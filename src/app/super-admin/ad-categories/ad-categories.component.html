@@ -16,7 +16,13 @@
         </div>
       </form>
       <br>
-      <button *ngFor="let category of categories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategories[0] == category" (click)="setCategory(0, category)">{{category.name}}</button>
+      <div class="list-group">
+        <button *ngFor="let category of categories" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" [class.active]="selectedCategories[0] == category" (click)="setCategory(0, category)">
+          {{category.name}}
+
+          <button class="btn btn-danger btn-sm" (click)="deleteCategory(0, category)"><span class="fa fa-trash-alt"></span></button>
+        </button>
+      </div>
     </div>
 
     <ng-container *ngFor="let selectedCategory of selectedCategories; index as i">
@@ -30,7 +36,13 @@
           </div>
         </form>
         <br>
-        <button *ngFor="let category of selectedCategories[i - 1].subcategories" class="btn btn-default btn-block" [class.btn-primary]="selectedCategory == category" (click)="setCategory(i, category)">{{category.name}}</button>
+        <div class="list-group">
+          <button *ngFor="let category of selectedCategories[i - 1].subcategories" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" [class.active]="selectedCategory == category" (click)="setCategory(i, category)">
+            {{category.name}}
+
+            <button class="btn btn-danger btn-sm" (click)="deleteCategory(i, category)"><span class="fa fa-trash-alt"></span></button>
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>

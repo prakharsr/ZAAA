@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../rate-card/rateCard';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-ad-categories',
@@ -8,7 +9,7 @@ import { Category } from '../../rate-card/rateCard';
 })
 export class AdCategoriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: DialogService) { }
 
   ngOnInit() {
   }
@@ -61,6 +62,27 @@ export class AdCategoriesComponent implements OnInit {
     }
 
     this.inputText[index] = null;
+  }
+
+  deleteCategory(index: number, category: Category) {
+    this.dialog.confirm("Are you sure want to delete this category?").subscribe(
+      confirm => {
+        if (!confirm) {
+          return;
+        }
+
+        if (index == 0) {
+          this.categories.splice(this.categories.indexOf(category), 1);
+        }
+        else {
+          let arr = this.selectedCategories[index - 1].subcategories;
+
+          arr.splice(arr.indexOf(category, 1));          
+        }
+
+        this.setCategory(index, null);
+      }
+    );
   }
 
 }
