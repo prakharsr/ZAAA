@@ -11,7 +11,7 @@
 
     <div class="form-group">
       <label for="publicationName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseInputFormatter" [inputFormatter]="mediaHouseResultFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseInputFormatter" [inputFormatter]="mediaHouseResultFormatter">
     </div>
     
     <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
@@ -186,7 +186,7 @@
     
     <div class="form-group">
       <label for="adTotal">Total No of Ad</label>
-      <input type="text" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="releaseorder.adTotal" required #adTotalField="ngModel">
+      <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="releaseorder.adTotal" required #adTotalField="ngModel">
     </div>
     
     <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
@@ -222,7 +222,7 @@
     
     <div class="form-group">
       <label for="publicationDiscount">Publication Discount</label>
-      <input type="text" class="form-control" id="publicationDiscount" name="publicationDiscount" placeholder="Enter Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+      <input type="number" class="form-control" id="publicationDiscount" name="publicationDiscount" placeholder="Enter Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
     </div>
     
     <div *ngIf="publicationDiscountField.invalid && (publicationDiscountField.dirty || publicationDiscountField.touched)" class="text-danger">
@@ -234,7 +234,7 @@
     
     <div class="form-group">
       <label for="agencyDiscount1">Agency Discount 1</label>
-      <input type="text" class="form-control" id="agencyDiscount1" name="agencyDiscount1" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+      <input type="number" class="form-control" id="agencyDiscount1" name="agencyDiscount1" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
     </div>
     
     <div *ngIf="agencyDiscount1Field.invalid && (agencyDiscount1Field.dirty || agencyDiscount1Field.touched)" class="text-danger">
@@ -246,7 +246,7 @@
 
     <div class="form-group">
       <label for="agencyDiscount2">Agency Discount 2</label>
-      <input type="text" class="form-control" id="agencyDiscount2" name="agencyDiscount2" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+      <input type="number" class="form-control" id="agencyDiscount2" name="agencyDiscount2" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
     </div>
     
     <div *ngIf="agencyDiscount2Field.invalid && (agencyDiscount2Field.dirty || agencyDiscount2Field.touched)" class="text-danger">
@@ -258,7 +258,7 @@
 
     <div class="form-group">
       <label for="taxAmount">Tax Amount</label>
-      <input type="text" class="form-control" id="taxAmount" name="taxAmount" placeholder="Enter Tax Amount" [(ngModel)]="releaseorder.taxAmount" required #taxAmountField="ngModel">
+      <input type="number" class="form-control" id="taxAmount" name="taxAmount" placeholder="Enter Tax Amount" [(ngModel)]="releaseorder.taxAmount" required #taxAmountField="ngModel">
     </div>
     
     <div *ngIf="taxAmountField.invalid && (taxAmountField.dirty || taxAmountField.touched)" class="text-danger">
@@ -270,7 +270,7 @@
 
     <div class="form-group">
       <label for="netAmountFigures">Net Amount in Figures</label>
-      <input type="text" class="form-control" id="netAmountFigures" name="netAmountFigures" placeholder="Enter Net Amount in Figures" [(ngModel)]="releaseorder.netAmountFigures" required #netAmountFiguresField="ngModel">
+      <input type="number" class="form-control" id="netAmountFigures" name="netAmountFigures" placeholder="Enter Net Amount in Figures" [(ngModel)]="releaseorder.netAmountFigures" required #netAmountFiguresField="ngModel">
     </div>
     
     <div *ngIf="netAmountFiguresField.invalid && (netAmountFiguresField.dirty || netAmountFiguresField.touched)" class="text-danger">
@@ -318,7 +318,7 @@
 
     <div class="form-group">
       <label for="paymentDetails">Payment Details</label>
-      <input type="number" class="form-control" id="paymentDetails" name="paymentDetails" placeholder="Enter Payment Details" [(ngModel)]="releaseorder.paymentDetails" required #paymentDetailsField="ngModel">
+      <input type="text" class="form-control" id="paymentDetails" name="paymentDetails" placeholder="Enter Payment Details" [(ngModel)]="releaseorder.paymentDetails" required #paymentDetailsField="ngModel">
     </div>
     
     <div *ngIf="paymentDetailsField.invalid && (paymentDetailsField.dirty || paymentDetailsField.touched)" class="text-danger">
@@ -334,7 +334,7 @@
 
     <div class="form-group">
       <label for="executiveName">Executive Name</label>
-      <input type="number" class="form-control" id="executiveName" name="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" required #executiveNameField="ngModel">
+      <input type="text" class="form-control" id="executiveName" name="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" required #executiveNameField="ngModel">
     </div>
     
     <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
