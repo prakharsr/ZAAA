@@ -14,6 +14,7 @@ import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
 import { DirClient } from '../../directory/clients/dirClient';
 import { DirExecutive } from '../../directory/executives/dirExecutive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
+import { StateApiService } from '../../services/state-api.service';
 
 @Component({
   selector: 'app-release-order',
@@ -29,12 +30,19 @@ export class ReleaseOrderComponent implements OnInit {
     private router: Router,
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
-    private executiveApi: ExecutiveApiService) { }
+    private executiveApi: ExecutiveApiService,
+    public stateApi: StateApiService) { }
 
   ngOnInit() {
   }
 
-  cancel() {}
+  private goToList() {
+    this.router.navigateByUrl('/releaseorders');
+  }
+
+  cancel() {
+    this.goToList();
+  }
 
   submit() {}
 
