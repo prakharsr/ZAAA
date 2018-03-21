@@ -83,7 +83,7 @@
 
     <div class="form-group">
       <label for="clientName">Name</label>
-      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Enter Name" [(ngModel)]="releaseorder.clientName" required #clientNameField="ngModel">
+      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="releaseorder.clientName" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientInputFormatter" [inputFormatter]="clientResultFormatter">
     </div>
     
     <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">

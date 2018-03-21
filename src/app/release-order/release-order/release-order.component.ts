@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
 import { ClientApiService } from '../../directory/clients/client-api.service';
 import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
+import { DirClient } from '../../directory/clients/dirClient';
 
 @Component({
   selector: 'app-release-order',
@@ -51,4 +52,21 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
+
+  searchClient = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.clientApi.searchClients(term))
+      .catch(() => of([]));
+  }
+
+  clientInputFormatter = (result: DirClient) => {
+    this.releaseorder.clientAddress = result.address.address;
+    this.releaseorder.clientCity = result.address.city;
+    this.releaseorder.clientState = result.address.state;
+
+    return result.orgName;
+  }
+
+  clientResultFormatter = (result: DirClient) => result.orgName;
 }
