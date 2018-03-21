@@ -5,7 +5,7 @@ import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
 
 const routes: Routes = [
-  { path: 'releaseorders', component: ReleaseOrderListComponent }
+  { path: 'releaseorders', component: ReleaseOrderListComponent },
   { path: 'releaseorders/new', component: ReleaseOrderComponent }
 ];
 
