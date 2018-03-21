@@ -44,7 +44,7 @@
     <div class="col-md">
       <div class="form-group">
         <label>Media House Name</label>
-        <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel">
+        <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="rateCard.mediaHouseName" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseFormatter" [inputFormatter]="mediaHouseFormatter">
       </div>
 
       <div *ngIf="mediaHouseNameField.invalid && (mediaHouseNameField.dirty || mediaHouseNameField.touched)" class="text-danger">
@@ -137,7 +137,7 @@
   <br>
 
   <div class="form-group">
-    <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="resultFormatter" [inputFormatter]="inputFormatter" />
+    <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
   </div>
 
   <div class="form-row">

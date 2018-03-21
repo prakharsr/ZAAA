@@ -9,6 +9,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
+import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
+import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -26,7 +28,10 @@ export class CreateRateCardComponent implements OnInit {
   dropdownPullOutName: string;
   customPullOutName: string;
 
-  constructor(private api: RateCardApiService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private api: RateCardApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private mediaHouseApi: MediaHouseApiService) { }
 
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
@@ -119,11 +124,13 @@ export class CreateRateCardComponent implements OnInit {
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => this.api.searchMediaHouseNames(term))
+      .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
       .catch(() => of([]));
   }
 
-  inputFormatter = (result: Category) => {
+  mediaHouseFormatter = (result: DirMediaHouse) => result.orgName;
+
+  categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];
 
     while (result) {
@@ -140,7 +147,7 @@ export class CreateRateCardComponent implements OnInit {
     }
   }
 
-  resultFormatter = (result: Category) => {
+  categoryResultFormatter = (result: Category) => {
     let stack : Category[] = [];
 
     while (result) {

@@ -367,20 +367,4 @@ export class RateCardApiService {
       Covered: covered
     });
   }
-
-  searchMediaHouseNames(query: string) : Observable<string[]> {
-    return this.api.get('/user/mediahouses/' + query).pipe(
-      map(data => {
-        let mediaHouseNames : string[] = [];
-
-        if (data.success && data.mediahouses) {
-          data.mediahouses.forEach(element => {
-            mediaHouseNames.push(element.OrganizationName);
-          });
-        }
-
-        return mediaHouseNames;
-      })
-    );
-  }
 }

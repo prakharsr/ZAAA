@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 import { RateCardRoutingModule } from './rate-card-routing.module';
+import { DirectoryModule } from '../directory/directory.module';
 
 import { RateCardApiService } from './rate-card-api.service';
 
@@ -11,6 +12,7 @@ import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.
 @NgModule({
   imports: [
     BaseModule,
+    DirectoryModule,
     RateCardRoutingModule
   ],
   declarations: [

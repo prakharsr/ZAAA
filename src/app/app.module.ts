@@ -20,6 +20,7 @@ import { ChangePswComponent } from './components/change-psw/change-psw.component
 import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ReleaseOrderModule } from './release-order/release-order.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     DirectoryModule,
     CoUsersModule,
     RateCardModule,
+    ReleaseOrderModule,
     SuperAdminModule,
     AppRoutingModule
   ],

@@ -1,0 +1,383 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Release Order</h1>
+  </div>
+</div>
+
+<div class="container">  
+  <form (ngSubmit)="submit()" #roForm="ngForm">
+    <h3>Publication Details</h3>
+    <br>
+
+    <div class="form-group">
+      <label for="publicationName">Name</label>
+      <input type="text" class="form-control" id="publicationName" name="publicationName" placeholder="Enter Name" [(ngModel)]="releaseorder.publicationName" required #publicationNameField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
+      <div *ngIf="publicationNameField.errors.required">
+        Publication Name is required.
+      </div>
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="publicationEdition">Edition</label>
+      <input type="text" class="form-control" id="publicationEdition" name="publicationEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationEditionField.invalid && (publicationEditionField.dirty || publicationEditionField.touched)" class="text-danger">
+      <div *ngIf="publicationEditionField.errors.required">
+        Edition Name is required.
+      </div>
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="publicationAddress">Address</label>
+      <input type="text" class="form-control" id="publicationAddress" name="publicationAddress" placeholder="Enter Address" [(ngModel)]="releaseorder.publicationAddress" required #publicationAddressField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationAddressField.invalid && (publicationAddressField.dirty || publicationAddressField.touched)" class="text-danger">
+      <div *ngIf="publicationAddressField.errors.required">
+        Address is required.
+      </div>
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="publicationCity">City</label>
+      <input type="text" class="form-control" id="publicationCity" name="publicationCity" placeholder="Enter City" [(ngModel)]="releaseorder.publicationCity" required #publicationCityField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationCityField.invalid && (publicationCityField.dirty || publicationCityField.touched)" class="text-danger">
+      <div *ngIf="publicationCityField.errors.required">
+        City Name is required.
+      </div>
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="publicationState">State</label>
+      <input type="text" class="form-control" id="publicationState" name="publicationState" placeholder="Enter State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationStateField.invalid && (publicationStateField.dirty || publicationStateField.touched)" class="text-danger">
+      <div *ngIf="publicationStateField.errors.required">
+        State is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="publicationGSTIN">GST No</label>
+      <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required #publicationGSTINField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
+      <div *ngIf="publicationGSTINField.errors.required">
+        GST is required.
+      </div>
+      <br>
+    </div>
+    
+    <br>
+    <h3>Client Details</h3>
+    <br>
+
+    <div class="form-group">
+      <label for="clientName">Name</label>
+      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Enter Name" [(ngModel)]="releaseorder.clientName" required #clientNameField="ngModel">
+    </div>
+    
+    <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
+      <div *ngIf="clientNameField.errors.required">
+        Name is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="clientCity">City</label>
+      <input type="text" class="form-control" id="clientCity" name="clientCity" placeholder="Enter City" [(ngModel)]="releaseorder.clientCity" required #clientCityField="ngModel">
+    </div>
+    
+    <div *ngIf="clientCityField.invalid && (clientCityField.dirty || clientCityField.touched)" class="text-danger">
+      <div *ngIf="clientCityField.errors.required">
+        City is required.
+      </div>
+      <br>
+    </div>
+    <div class="form-group">
+      <label for="clientState">State</label>
+      <input type="text" class="form-control" id="clientState" name="clientState" placeholder="Enter State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+    </div>
+    
+    <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
+      <div *ngIf="clientStateField.errors.required">
+        State is required.
+      </div>
+      <br>
+    </div>
+    
+    <!-- Ad Details -->
+
+    <br>
+    <h3>Ad Details</h3>
+    <br>
+    
+    <!-- hue -->
+    
+    <div class="form-group">
+      <label for="adSize">Size</label>
+      <input type="text" class="form-control" id="adSize" name="adSize" placeholder="Enter Size" [(ngModel)]="releaseorder.adSize" required #adSizeField="ngModel">
+    </div>
+    
+    <div *ngIf="adSizeField.invalid && (adSizeField.dirty || adSizeField.touched)" class="text-danger">
+      <div *ngIf="adSizeField.errors.required">
+        Size is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adTotalSpace">Total Space</label>
+      <input type="text" class="form-control" id="adTotalSpace" name="adTotalSpace" placeholder="Enter Total Space" [(ngModel)]="releaseorder.adTotalSpace" required #adTotalSpaceField="ngModel">
+    </div>
+    
+    <div *ngIf="adTotalSpaceField.invalid && (adTotalSpaceField.dirty || adTotalSpaceField.touched)" class="text-danger">
+      <div *ngIf="adTotalSpaceField.errors.required">
+        Total Space is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adEdition">Edition</label>
+      <input type="text" class="form-control" id="adEdition" name="adEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
+    </div>
+    
+    <div *ngIf="adEditionField.invalid && (adEditionField.dirty || adEditionField.touched)" class="text-danger">
+      <div *ngIf="adEditionField.errors.required">
+        Edition is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adPosition">Position</label>
+      <input type="text" class="form-control" id="adPosition" name="adPosition" placeholder="Enter Position" [(ngModel)]="releaseorder.adPosition" required #adPositionField="ngModel">
+    </div>
+    
+    <div *ngIf="adPositionField.invalid && (adPositionField.dirty || adPositionField.touched)" class="text-danger">
+      <div *ngIf="adPositionField.errors.required">
+        Position is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adScheme">Ad Scheme</label>
+      <input type="text" class="form-control" id="adScheme" name="adScheme" placeholder="Enter Ad Scheme" [(ngModel)]="releaseorder.adScheme" required #adSchemeField="ngModel">
+    </div>
+    
+    <div *ngIf="adSchemeField.invalid && (adSchemeField.dirty || adSchemeField.touched)" class="text-danger">
+      <div *ngIf="adSchemeField.errors.required">
+        Ad Scheme is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adTotal">Total No of Ad</label>
+      <input type="text" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="releaseorder.adTotal" required #adTotalField="ngModel">
+    </div>
+    
+    <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
+      <div *ngIf="adTotalField.errors.required">
+        Total Number of Ad is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="insertionDate">Insertion Date</label>
+      <input type="date" class="form-control" id="insertionDate" name="insertionDate" placeholder="Enter Insertion Date" [(ngModel)]="releaseorder.insertionDate" required #insertionDateField="ngModel">
+    </div>
+    
+    <div *ngIf="insertionDateField.invalid && (insertionDateField.dirty || insertionDateField.touched)" class="text-danger">
+      <div *ngIf="insertionDateField.errors.required">
+        Insertion Date is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="adGrossAmount">Ad Gross Amount</label>
+      <input type="text" class="form-control" id="adGrossAmount" name="adGrossAmount" placeholder="Enter Gross Amount" [(ngModel)]="releaseorder.adGrossAmount" required #adGrossAmountField="ngModel">
+    </div>
+    
+    <div *ngIf="adGrossAmountField.invalid && (adGrossAmountField.dirty || adGrossAmountField.touched)" class="text-danger">
+      <div *ngIf="adGrossAmountField.errors.required">
+        Ad Gross Amount is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="publicationDiscount">Publication Discount</label>
+      <input type="text" class="form-control" id="publicationDiscount" name="publicationDiscount" placeholder="Enter Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+    </div>
+    
+    <div *ngIf="publicationDiscountField.invalid && (publicationDiscountField.dirty || publicationDiscountField.touched)" class="text-danger">
+      <div *ngIf="publicationDiscountField.errors.required">
+        Publication Discount is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="agencyDiscount1">Agency Discount 1</label>
+      <input type="text" class="form-control" id="agencyDiscount1" name="agencyDiscount1" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+    </div>
+    
+    <div *ngIf="agencyDiscount1Field.invalid && (agencyDiscount1Field.dirty || agencyDiscount1Field.touched)" class="text-danger">
+      <div *ngIf="agencyDiscount1Field.errors.required">
+        Agency Discount 1 is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="agencyDiscount2">Agency Discount 2</label>
+      <input type="text" class="form-control" id="agencyDiscount2" name="agencyDiscount2" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+    </div>
+    
+    <div *ngIf="agencyDiscount2Field.invalid && (agencyDiscount2Field.dirty || agencyDiscount2Field.touched)" class="text-danger">
+      <div *ngIf="agencyDiscount2Field.errors.required">
+        Agency Discount 2 is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="taxAmount">Tax Amount</label>
+      <input type="text" class="form-control" id="taxAmount" name="taxAmount" placeholder="Enter Tax Amount" [(ngModel)]="releaseorder.taxAmount" required #taxAmountField="ngModel">
+    </div>
+    
+    <div *ngIf="taxAmountField.invalid && (taxAmountField.dirty || taxAmountField.touched)" class="text-danger">
+      <div *ngIf="taxAmountField.errors.required">
+        Tax Amount is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="netAmountFigures">Net Amount in Figures</label>
+      <input type="text" class="form-control" id="netAmountFigures" name="netAmountFigures" placeholder="Enter Net Amount in Figures" [(ngModel)]="releaseorder.netAmountFigures" required #netAmountFiguresField="ngModel">
+    </div>
+    
+    <div *ngIf="netAmountFiguresField.invalid && (netAmountFiguresField.dirty || netAmountFiguresField.touched)" class="text-danger">
+      <div *ngIf="netAmountFiguresField.errors.required">
+        Net Amount is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="netAmountWords">Net Amount in Words</label>
+      <input type="text" class="form-control" id="netAmountWords" name="netAmountWords" placeholder="Enter Net Amount in Words" [(ngModel)]="releaseorder.netAmountWords" required #netAmountWordsField="ngModel">
+    </div>
+    
+    <div *ngIf="netAmountWordsField.invalid && (netAmountWordsField.dirty || netAmountWordsField.touched)" class="text-danger">
+      <div *ngIf="netAmountWordsField.errors.required">
+        Net Amount in words is required.
+      </div>
+      <br>
+    </div>
+    
+    <div class="form-group">
+      <label for="caption">Caption</label>
+      <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="releaseorder.caption" required #captionField="ngModel">
+    </div>
+    
+    <div *ngIf="captionField.invalid && (captionField.dirty || captionField.touched)" class="text-danger">
+      <div *ngIf="captionField.errors.required">
+        Caption is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="remark">Remark</label>
+      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" required #remarkField="ngModel">
+    </div>
+    
+    <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
+      <div *ngIf="remarkField.errors.required">
+       Remark is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="paymentDetails">Payment Details</label>
+      <input type="number" class="form-control" id="paymentDetails" name="paymentDetails" placeholder="Enter Payment Details" [(ngModel)]="releaseorder.paymentDetails" required #paymentDetailsField="ngModel">
+    </div>
+    
+    <div *ngIf="paymentDetailsField.invalid && (paymentDetailsField.dirty || paymentDetailsField.touched)" class="text-danger">
+      <div *ngIf="paymentDetailsField.errors.required">
+        Payment Details is required.
+      </div>
+      <br>
+    </div>
+
+    <br>
+    <h3>Other Details</h3>
+    <br>
+
+    <div class="form-group">
+      <label for="executiveName">Executive Name</label>
+      <input type="number" class="form-control" id="executiveName" name="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" required #executiveNameField="ngModel">
+    </div>
+    
+    <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
+      <div *ngIf="executiveNameField.errors.required">
+        Executive Name is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="otherCharges">Other Charges</label>
+      <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Other Charges" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
+    </div>
+    
+    <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
+      <div *ngIf="paymentDetailsField.errors.required">
+        Other Charges is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="clientPayment">Client Payment </label>
+      <input type="number" class="form-control" id="clientPayment" name="clientPayment" placeholder="Enter Client Payment" [(ngModel)]="releaseorder.clientPayment" required #clientPaymentField="ngModel">
+    </div>
+    
+    <div *ngIf="clientPaymentField.invalid && (clientPaymentField.dirty || clientPaymentField.touched)" class="text-danger">
+      <div *ngIf="clientPaymentField.errors.required">
+        Client Payment is required.
+      </div>
+      <br>
+    </div>
+
+    <br>
+
+    <div *ngIf="error" class="text-danger">
+      {{error}}
+      
+      <br><br>
+    </div>
+    
+    <button type="submit" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>
+    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+  </form>
+  
+</div>
