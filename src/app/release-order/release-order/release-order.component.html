@@ -210,7 +210,7 @@
     
     <div class="form-group">
       <label for="adGrossAmount">Ad Gross Amount</label>
-      <input type="text" class="form-control" id="adGrossAmount" name="adGrossAmount" placeholder="Enter Gross Amount" [(ngModel)]="releaseorder.adGrossAmount" required #adGrossAmountField="ngModel">
+      <input type="number" class="form-control" id="adGrossAmount" name="adGrossAmount" placeholder="Enter Gross Amount" [(ngModel)]="releaseorder.adGrossAmount" required #adGrossAmountField="ngModel">
     </div>
     
     <div *ngIf="adGrossAmountField.invalid && (adGrossAmountField.dirty || adGrossAmountField.touched)" class="text-danger">
@@ -334,7 +334,7 @@
 
     <div class="form-group">
       <label for="executiveName">Executive Name</label>
-      <input type="text" class="form-control" id="executiveName" name="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" required #executiveNameField="ngModel">
+      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveFormatter" [inputFormatter]="executiveFormatter">
     </div>
     
     <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">

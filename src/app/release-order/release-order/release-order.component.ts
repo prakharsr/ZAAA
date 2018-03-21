@@ -12,6 +12,8 @@ import { MediaHouseApiService } from '../../directory/media-houses/media-house-a
 import { ClientApiService } from '../../directory/clients/client-api.service';
 import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
 import { DirClient } from '../../directory/clients/dirClient';
+import { DirExecutive } from '../../directory/executives/dirExecutive';
+import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 
 @Component({
   selector: 'app-release-order',
@@ -26,7 +28,8 @@ export class ReleaseOrderComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private mediaHouseApi: MediaHouseApiService,
-    private clientApi: ClientApiService) { }
+    private clientApi: ClientApiService,
+    private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
   }
@@ -69,4 +72,13 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   clientResultFormatter = (result: DirClient) => result.orgName;
+
+  searchExecutive = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.executiveApi.searchExecutives(term))
+      .catch(() => of([]));
+  }
+
+  executiveFormatter = (result: DirExecutive) => result.executiveName;
 }

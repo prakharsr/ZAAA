@@ -31,7 +31,7 @@ export class ReleaseOrder {
     adScheme = ""
     adTotal = 0;
     insertionDate = "";
-    adGrossAmount = "";
+    adGrossAmount = 0;
     publicationDiscount = 0;
     agencyDiscount1 = 0;
     agencyDiscount2 = 0;
