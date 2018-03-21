@@ -11,7 +11,7 @@
 
     <div class="form-group">
       <label for="publicationName">Name</label>
-      <input type="text" class="form-control" id="publicationName" name="publicationName" placeholder="Enter Name" [(ngModel)]="releaseorder.publicationName" required #publicationNameField="ngModel">
+      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseInputFormatter" [inputFormatter]="mediaHouseResultFormatter">
     </div>
     
     <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">

@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ReleaseOrder } from '../releaseOrder';
+import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
+import { ClientApiService } from '../../directory/clients/client-api.service';
+import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
 
 @Component({
   selector: 'app-release-order',
@@ -11,7 +22,10 @@ export class ReleaseOrderComponent implements OnInit {
   releaseorder = new ReleaseOrder();
   error: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private mediaHouseApi: MediaHouseApiService,
+    private clientApi: ClientApiService) { }
 
   ngOnInit() {
   }
@@ -19,4 +33,22 @@ export class ReleaseOrderComponent implements OnInit {
   cancel() {}
 
   submit() {}
+
+  searchMediaHouse = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
+      .catch(() => of([]));
+  }
+
+  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+    this.releaseorder.publicationEdition = result.address.edition;
+    this.releaseorder.publicationAddress = result.address.address;
+    this.releaseorder.publicationCity = result.address.city;
+    this.releaseorder.publicationState = result.address.state;
+
+    return result.orgName;
+  }
+
+  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
 }
