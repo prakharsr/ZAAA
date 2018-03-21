@@ -53,4 +53,24 @@ export class ReleaseOrderApiService {
       })
     )
   }
+
+  searchReleaseOrders(query: string) : Observable<ReleaseOrder[]> {
+    if (query) {
+      return this.api.get('/user/releaseorders/' + query).pipe(
+        map(data => {
+          let releaseOrders : ReleaseOrder[] = [];
+
+          if (data.success) {
+            data.releaseOrders.forEach(element => {
+              releaseOrders.push(this.bodyToReleaseOrder(element));
+            });
+          }
+
+          return releaseOrders;
+        })
+      );
+    }
+    
+    return of([]);
+  }
 }
