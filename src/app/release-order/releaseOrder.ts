@@ -1,5 +1,6 @@
 export class ReleaseOrder {
-    date = "";
+    id: string;
+    date: Date;
     realeaseOrderNO= "";
     agencyName = "";
     agencyAdress = "";
@@ -30,7 +31,7 @@ export class ReleaseOrder {
     adPosition = "";
     adScheme = ""
     adTotal = 0;
-    insertionDate = "";
+    insertionDate: Date;
     adGrossAmount = 0;
     publicationDiscount = 0;
     agencyDiscount1 = 0;
