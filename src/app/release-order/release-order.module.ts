@@ -6,6 +6,7 @@ import { ReleaseOrderRoutingModule } from './release-order-routing.module';
 import { ReleaseOrderApiService } from './release-order-api.service';
 
 import { ReleaseOrderComponent } from './release-order/release-order.component';
+import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ReleaseOrderComponent } from './release-order/release-order.component';
     ReleaseOrderApiService
   ],
   declarations: [
-    ReleaseOrderComponent
+    ReleaseOrderComponent,
+    ReleaseOrderListComponent
   ]
 })
 export class ReleaseOrderModule { }

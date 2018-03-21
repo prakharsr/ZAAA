@@ -1,0 +1,27 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Release Orders</h1>
+  </div>
+</div>
+
+<div class="container">
+  <button class="fab" routerLink="/releaseorders/new"><span class="fa fa-plus"></span></button>
+
+  <br>
+  <p *ngIf="releaseOrders.length == 0" class="text-muted">
+    No Release Orders
+  </p>
+
+  <div class="card mb-3" *ngFor="let releaseOrder of releaseOrders">
+    <div class="card-header"><a [routerLink]="['/releaseorders', releaseOrder.id]">RELEASE ORDER NO</a></div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-danger" (click)="deleteReleaseOrder(releaseOrder)"><span class="fa fa-trash-alt"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
