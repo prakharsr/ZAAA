@@ -15,6 +15,7 @@ import { DirClient } from '../../directory/clients/dirClient';
 import { DirExecutive } from '../../directory/executives/dirExecutive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { StateApiService } from '../../services/state-api.service';
+import { ReleaseOrderApiService } from '../release-order-api.service';
 
 @Component({
   selector: 'app-release-order',
@@ -25,26 +26,83 @@ export class ReleaseOrderComponent implements OnInit {
 
   releaseorder = new ReleaseOrder();
   error: string;
+  edit = false;
+  id: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
+    private api: ReleaseOrderApiService,
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
     private executiveApi: ExecutiveApiService,
     public stateApi: StateApiService) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      if (params.has('id')) {
+        this.id = params.get('id');
+
+        this.edit = true;
+
+        this.api.getReleaseOrder(this.id).subscribe(data => this.releaseorder = data);
+      }
+    });
   }
 
-  private goToList() {
-    this.router.navigateByUrl('/releaseorders');
+  private goBack() {
+    this.router.navigateByUrl(this.edit ? '/releaseorders/' + this.id : '/releaseorders');
   }
 
   cancel() {
-    this.goToList();
+    this.goBack();
   }
 
-  submit() {}
+  private createReleaseOrder() {
+    this.api.createReleaseOrder(this.releaseorder).subscribe(
+      data => {
+        if (data.success) {
+          this.goBack();
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = 'Connection failed';
+      }
+    );
+  }
+
+  private editReleaseOrder() {
+    this.api.editReleaseOrder(this.releaseorder).subscribe(
+      data => {
+        if (data.success) {
+          this.goBack();
+        }
+        else {
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = 'Connection failed';
+      }
+    )
+  }
+
+  submit () {
+    this.error = '';
+
+    if (this.edit) {
+      this.editReleaseOrder();
+    }
+    else this.createReleaseOrder();
+  }
 
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
@@ -54,10 +112,12 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   mediaHouseInputFormatter = (result: DirMediaHouse) => {
-    this.releaseorder.publicationEdition = result.address.edition;
-    this.releaseorder.publicationAddress = result.address.address;
-    this.releaseorder.publicationCity = result.address.city;
-    this.releaseorder.publicationState = result.address.state;
+    if (result.address) {
+      this.releaseorder.publicationEdition = result.address.edition;
+      this.releaseorder.publicationAddress = result.address.address;
+      this.releaseorder.publicationCity = result.address.city;
+      this.releaseorder.publicationState = result.address.state;
+    }
 
     return result.orgName;
   }

@@ -3,10 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
+import { ReleaseOrderDetailsComponent } from './release-order-details/release-order-details.component';
 
 const routes: Routes = [
-  { path: 'releaseorders', component: ReleaseOrderListComponent },
-  { path: 'releaseorders/new', component: ReleaseOrderComponent }
+  {
+    path: 'releaseorders',
+    children: [
+      { path: '', component: ReleaseOrderListComponent },
+      { path: 'new', component: ReleaseOrderComponent },
+      { path: "edit/:id", component: ReleaseOrderComponent },
+      { path: ':id', component: ReleaseOrderDetailsComponent }
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RateCard } from '../rateCard';
 import { RateCardApiService } from '../rate-card-api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rate-card-details',
@@ -14,8 +14,7 @@ export class RateCardDetailsComponent implements OnInit {
   id: string;
 
   constructor(private api: RateCardApiService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

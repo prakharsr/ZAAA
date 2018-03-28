@@ -7,6 +7,7 @@ import { ReleaseOrderApiService } from './release-order-api.service';
 
 import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
+import { ReleaseOrderDetailsComponent } from './release-order-details/release-order-details.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ReleaseOrderListComponent } from './release-order-list/release-order-li
   ],
   declarations: [
     ReleaseOrderComponent,
-    ReleaseOrderListComponent
+    ReleaseOrderListComponent,
+    ReleaseOrderDetailsComponent
   ]
 })
 export class ReleaseOrderModule { }

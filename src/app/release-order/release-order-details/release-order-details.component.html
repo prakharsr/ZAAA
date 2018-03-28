@@ -1,0 +1,62 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Release Orders</h1>
+  </div>
+</div>
+
+<div class="container">
+  <button class="fab bg-info" [routerLink]="['/releaseorders/edit', id]"><span class="fa fa-pencil-alt"></span></button>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Release Order</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Media Type</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Ad Type</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Rate Card Type</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Booking Center</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Media House Name</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Edition</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Pullout Name</div>
+              <div class="col-md-8">{{releaseOrder.id}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

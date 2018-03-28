@@ -1,6 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Release Order</h1>
+    <h1 class="display-4" *ngIf="!edit">Create Release Order</h1>
+    <h1 class="display-4" *ngIf="edit">Edit Release Order</h1>
   </div>
 </div>
 
@@ -11,7 +12,7 @@
 
     <div class="form-group">
       <label for="publicationName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseInputFormatter" [inputFormatter]="mediaHouseResultFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
     </div>
     
     <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
@@ -88,7 +89,7 @@
 
     <div class="form-group">
       <label for="clientName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="releaseorder.clientName" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientInputFormatter" [inputFormatter]="clientResultFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="releaseorder.clientName" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
     </div>
     
     <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
