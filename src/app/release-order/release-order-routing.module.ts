@@ -11,6 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ReleaseOrderListComponent },
       { path: 'new', component: ReleaseOrderComponent },
+      { path: 'fromRateCard/:rateCard', component: ReleaseOrderComponent },
       { path: "edit/:id", component: ReleaseOrderComponent },
       { path: ':id', component: ReleaseOrderDetailsComponent }
     ]

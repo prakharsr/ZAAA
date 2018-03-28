@@ -16,6 +16,8 @@ import { DirExecutive } from '../../directory/executives/dirExecutive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { StateApiService } from '../../services/state-api.service';
 import { ReleaseOrderApiService } from '../release-order-api.service';
+import { RateCard } from '../../rate-card/rateCard';
+import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 
 @Component({
   selector: 'app-release-order',
@@ -35,6 +37,7 @@ export class ReleaseOrderComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
     private executiveApi: ExecutiveApiService,
+    private rateCardApi: RateCardApiService,
     public stateApi: StateApiService) { }
 
   ngOnInit() {
@@ -46,7 +49,16 @@ export class ReleaseOrderComponent implements OnInit {
 
         this.api.getReleaseOrder(this.id).subscribe(data => this.releaseorder = data);
       }
+      else if (params.has('rateCard')) {
+        this.rateCardApi.getRateCard(params.get('rateCard')).subscribe(data => this.initFromRateCard(data));
+      }
     });
+  }
+
+  private initFromRateCard(rateCard: RateCard) {
+    this.releaseorder.adType = rateCard.adType;
+    this.releaseorder.adHue = rateCard.hue;
+    this.releaseorder.adPosition = rateCard.position;
   }
 
   private goBack() {
