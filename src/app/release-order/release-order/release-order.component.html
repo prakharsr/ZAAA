@@ -12,7 +12,7 @@
 
     <div class="form-group">
       <label for="publicationName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="releaseorder.publicationName" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
     </div>
     
     <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
@@ -89,7 +89,7 @@
 
     <div class="form-group">
       <label for="clientName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="releaseorder.clientName" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
     </div>
     
     <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
@@ -354,7 +354,7 @@
 
     <div class="form-group">
       <label for="executiveName">Executive Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="releaseorder.executiveName" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveFormatter" [inputFormatter]="executiveFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveFormatter" [inputFormatter]="executiveFormatter">
     </div>
     
     <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
@@ -399,5 +399,4 @@
     <button type="submit" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>
     <button class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
-  
 </div>

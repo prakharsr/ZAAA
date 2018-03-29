@@ -37,4 +37,6 @@ export class ReleaseOrderListComponent implements OnInit {
     });
   }
 
+  sendMsg() {}
+
 }

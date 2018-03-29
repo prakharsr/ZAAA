@@ -110,6 +110,10 @@ export class ReleaseOrderComponent implements OnInit {
   submit () {
     this.error = '';
 
+    this.releaseorder.publicationName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
+    this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
+
     if (this.edit) {
       this.editReleaseOrder();
     }
@@ -123,6 +127,8 @@ export class ReleaseOrderComponent implements OnInit {
       .catch(() => of([]));
   }
 
+  mediaHouse;
+
   mediaHouseInputFormatter = (result: DirMediaHouse) => {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
@@ -135,6 +141,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
+
+  client;
 
   searchClient = (text: Observable<string>) => {
     return text.debounceTime(300)
@@ -152,6 +160,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   clientResultFormatter = (result: DirClient) => result.orgName;
+
+  executive;
 
   searchExecutive = (text: Observable<string>) => {
     return text.debounceTime(300)
