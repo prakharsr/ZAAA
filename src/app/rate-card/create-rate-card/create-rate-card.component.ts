@@ -121,6 +121,8 @@ export class CreateRateCardComponent implements OnInit {
       .catch(() => of([]));
   }
 
+  mediaHouse;
+
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
@@ -382,6 +384,8 @@ export class CreateRateCardComponent implements OnInit {
   submit () {
     this.error = '';
     this.rateCard.categories = [];
+
+    this.rateCard.mediaHouseName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
 
     this.selectedCategories.forEach(element => {
       if (element) {
