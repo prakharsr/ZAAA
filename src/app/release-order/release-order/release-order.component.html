@@ -72,13 +72,16 @@
     </div>
     
     <div class="form-group">
-      <label for="publicationGSTIN">GST No</label>
-      <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required #publicationGSTINField="ngModel">
+      <label for="publicationGSTIN">GSTIN</label>
+      <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
     </div>
     
     <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
       <div *ngIf="publicationGSTINField.errors.required">
-        GST is required.
+        GSTIN is required.
+      </div>
+      <div *ngIf="publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength">
+        GSTIN should be 15 characters long.
       </div>
       <br>
     </div>

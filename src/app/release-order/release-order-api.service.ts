@@ -77,4 +77,8 @@ export class ReleaseOrderApiService {
     
     return of([]);
   }
+
+  sendMail() {
+    return this.api.post('/user/releaseorders/email', {});
+  }
 }

@@ -12,13 +12,16 @@
   </div>
 
   <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="gstNo">GST Number</label>
-    <input type="number" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="gstNo" required #gstNoField="ngModel">
+    <label class="col-md-3 col-form-label" for="gstNo">GSTIN</label>
+    <input type="text" class="form-control col-md-9" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
   </div>
 
   <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
     <div *ngIf="gstNoField.errors.required">
-      GST Number is empty or invalid.
+      GSTIN is required.
+    </div>
+    <div *ngIf="gstNoField.errors.minlength || gstNoField.errors.maxlength">
+      GSTIN should be 15 characters long.
     </div>
     <br>
   </div>
