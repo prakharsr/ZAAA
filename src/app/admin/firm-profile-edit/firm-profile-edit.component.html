@@ -144,12 +144,15 @@
       
         <div class="form-group">
           <label for="panNo">PAN Number</label>
-          <input type="number" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" required #panNoField="ngModel">
+          <input type="text" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
         </div>
       
         <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
           <div *ngIf="panNoField.errors.required">
-            PAN Number is empty or invalid.
+            PAN Number is required.
+          </div>
+          <div *ngIf="panNoField.errors.minlength || panNoField.errors.maxlength">
+            PAN Number should be 10 characters long.
           </div>
           <br>
         </div>
