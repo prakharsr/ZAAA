@@ -47,7 +47,11 @@ export class ReleaseOrderComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getReleaseOrder(this.id).subscribe(data => this.releaseorder = data);
+        this.api.getReleaseOrder(this.id).subscribe(data => {
+          if (data) {
+            this.releaseorder = data;
+          }
+        });
       }
       else if (params.has('rateCard')) {
         this.rateCardApi.getRateCard(params.get('rateCard')).subscribe(data => this.initFromRateCard(data));
@@ -56,9 +60,11 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private initFromRateCard(rateCard: RateCard) {
-    this.releaseorder.adType = rateCard.adType;
-    this.releaseorder.adHue = rateCard.hue;
-    this.releaseorder.adPosition = rateCard.position;
+    if (rateCard) {
+      this.releaseorder.adType = rateCard.adType;
+      this.releaseorder.adHue = rateCard.hue;
+      this.releaseorder.adPosition = rateCard.position;
+    }
   }
 
   private goBack() {

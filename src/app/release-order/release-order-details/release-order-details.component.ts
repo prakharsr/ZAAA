@@ -11,16 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ReleaseOrderDetailsComponent implements OnInit {
 
   releaseOrder = new ReleaseOrder();
-  id: string;
 
   constructor(private api: ReleaseOrderApiService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      this.api.getReleaseOrder(this.id).subscribe(data => this.releaseOrder = data);
+    this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
+      this.releaseOrder = data.releaseOrder;
     });
   }
 }

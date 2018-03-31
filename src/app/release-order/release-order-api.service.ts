@@ -34,7 +34,7 @@ export class ReleaseOrderApiService {
 
   getReleaseOrder(id: string): Observable<ReleaseOrder> {
     return this.api.get('/user/releaseorder/' + id).pipe(
-      map(data => data.success ? this.bodyToReleaseOrder(data.releaseOrder) : new ReleaseOrder())
+      map(data => data.success ? this.bodyToReleaseOrder(data.releaseOrder) : null)
     );
   }
 
