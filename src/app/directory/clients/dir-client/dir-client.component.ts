@@ -32,7 +32,7 @@ export class DirClientComponent implements OnInit {
 
         this.api.getClient(this.id).subscribe(data => {
           if (data) {
-            this.client = data
+            this.client = data;
           }
         });
       }

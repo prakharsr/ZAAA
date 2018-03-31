@@ -14,17 +14,14 @@ export class ExecutiveDetailsComponent implements OnInit {
   executive = new DirExecutive();
   error: string;
   success: string;
-  id: string;
 
   constructor(private api: ExecutiveApiService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      this.api.getExecutive(this.id).subscribe(data => this.executive = data);
+    this.route.data.subscribe((data: { executive: DirExecutive }) => {
+      this.executive = data.executive;
     });
   }
 
@@ -32,7 +29,7 @@ export class ExecutiveDetailsComponent implements OnInit {
     this.error = '';
     this.success = '';
 
-    this.api.uploadProfilePicture(this.id, files.item(0)).subscribe(
+    this.api.uploadProfilePicture(this.executive.id, files.item(0)).subscribe(
       data => {
         if (data.success) {
           this.success = 'Profile Photo uploaded successfully';

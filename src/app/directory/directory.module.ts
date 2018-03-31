@@ -14,6 +14,7 @@ import { ExecutiveApiService } from './executives/executive-api.service';
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 import { ExecutiveListComponent } from './executives/executive-list/executive-list.component';
 import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
+import { ExecutiveResolver } from './executives/executive-resolver.service';
 
 import { MediaHouseApiService } from './media-houses/media-house-api.service';
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
@@ -41,7 +42,8 @@ import { MediaHouseDetailsComponent } from './media-houses/media-house-details/m
     ClientApiService,
     ExecutiveApiService,
     MediaHouseApiService,
-    ClientResolver
+    ClientResolver,
+    ExecutiveResolver
   ]
 })
 export class DirectoryModule { }

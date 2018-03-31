@@ -50,7 +50,7 @@ export class ExecutiveApiService {
 
   getExecutive(id: string) : Observable<DirExecutive> {
     return this.api.get('/user/executive/' + id).pipe(
-      map(data => data.success ? this.bodyToExecutive(data.executive) : new DirExecutive())
+      map(data => data.success ? this.bodyToExecutive(data.executive) : null)
     );
   }
 
