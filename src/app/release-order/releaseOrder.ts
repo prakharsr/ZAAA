@@ -1,7 +1,7 @@
 export class ReleaseOrder {
     id: string;
     date: Date;
-    realeaseOrderNO= "";
+    releaseOrderNO = "";
     agencyName = "";
     agencyAdress = "";
     agencyGSTIN = "";

@@ -13,7 +13,7 @@
   </p>
 
   <div class="card mb-3" *ngFor="let releaseOrder of releaseOrders">
-    <div class="card-header"><a [routerLink]="['/releaseorders', releaseOrder.id]">RELEASE ORDER NO</a></div>
+    <div class="card-header"><a [routerLink]="['/releaseorders', releaseOrder.id]">{{releaseOrder.releaseOrderNO}}</a></div>
     <div class="card-body">
       <div class="row">
         <div class="col">

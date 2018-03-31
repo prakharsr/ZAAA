@@ -194,12 +194,12 @@
       
         <div class="form-group">
           <label for="bankAccountNo">Account Number</label>
-          <input type="number" class="form-control" id="bankAccountNo" name="bankAccountNo" placeholder="Enter Bank Account NUmber" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
+          <input type="text" class="form-control" id="bankAccountNo" name="bankAccountNo" placeholder="Enter Bank Account Number" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
         </div>
       
         <div *ngIf="bankAccountNoField.invalid && (bankAccountNoField.dirty || bankAccountNoField.touched)" class="text-danger">
           <div *ngIf="bankAccountNoField.errors.required">
-            Account Number is empty or invalid.
+            Account Number is required.
           </div>
           <br>
         </div>

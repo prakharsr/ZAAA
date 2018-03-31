@@ -1,6 +1,6 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Release Orders</h1>
+    <h1 class="display-4">Release Order: {{releaseOrder.releaseOrderNO}}</h1>
   </div>
 </div>
 
@@ -10,49 +10,210 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="card mb-3">
-        <div class="card-header">Release Order</div>
+        <div class="card-header">Publication Details</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Media Type</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Type</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate Card Type</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Booking Center</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Media House Name</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{releaseOrder.publicationName}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Edition</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
+              <div class="col-md-8">{{releaseOrder.publicationEdition}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Pullout Name</div>
-              <div class="col-md-8">{{releaseOrder.id}}</div>
+              <div class="col-md-4">Adress</div>
+              <div class="col-md-8">{{releaseOrder.publicationAddress}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">City</div>
+              <div class="col-md-8">{{releaseOrder.publicationCity}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">State</div>
+              <div class="col-md-8">{{releaseOrder.publicationState}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">GSTIN</div>
+              <div class="col-md-8">{{releaseOrder.publicationGSTIN}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Client Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{releaseOrder.clientName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Address</div>
+              <div class="col-md-8">{{releaseOrder.clientAddress}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">City</div>
+              <div class="col-md-8">{{releaseOrder.clientCity}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">State</div>
+              <div class="col-md-8">{{releaseOrder.clientState}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Ad Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Size</div>
+              <div class="col-md-8">{{releaseOrder.adSize}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Total Space</div>
+              <div class="col-md-8">{{releaseOrder.adTotalSpace}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Edition</div>
+              <div class="col-md-8">{{releaseOrder.adEdition}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Position</div>
+              <div class="col-md-8">{{releaseOrder.adPosition}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Ad Scheme</div>
+              <div class="col-md-8">{{releaseOrder.adScheme}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Total No of Ads</div>
+              <div class="col-md-8">{{releaseOrder.adTotal}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Insertion Date</div>
+              <div class="col-md-8">{{releaseOrder.insertionDate | date}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Ad Gross Amount</div>
+              <div class="col-md-8">{{releaseOrder.adGrossAmount}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Publication Discount</div>
+              <div class="col-md-8">{{releaseOrder.publicationDiscount}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Agency Discount 1</div>
+              <div class="col-md-8">{{releaseOrder.agencyDiscount1}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Agency Discount 2</div>
+              <div class="col-md-8">{{releaseOrder.agencyDiscount2}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Tax Amount</div>
+              <div class="col-md-8">{{releaseOrder.taxAmount}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Net Amount in Figures</div>
+              <div class="col-md-8">{{releaseOrder.netAmountFigures}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Net Amount in Words</div>
+              <div class="col-md-8">{{releaseOrder.netAmountWords}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Caption</div>
+              <div class="col-md-8">{{releaseOrder.caption}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Remark</div>
+              <div class="col-md-8">{{releaseOrder.remark}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Payment Details</div>
+              <div class="col-md-8">{{releaseOrder.paymentDetails}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Other Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Executive Name</div>
+              <div class="col-md-8">{{releaseOrder.executiveName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Other Charges</div>
+              <div class="col-md-8">{{releaseOrder.otherCharges}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Client Payment</div>
+              <div class="col-md-8">{{releaseOrder.clientPayment}}</div>
             </div>
           </li>
         </ul>
