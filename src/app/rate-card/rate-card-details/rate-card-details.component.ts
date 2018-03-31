@@ -17,10 +17,8 @@ export class RateCardDetailsComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      this.api.getRateCard(this.id).subscribe(data => this.ratecard = data);
+    this.route.data.subscribe((data: { rateCard: RateCard }) => {
+      this.ratecard = data.rateCard;
     });
   }
 
