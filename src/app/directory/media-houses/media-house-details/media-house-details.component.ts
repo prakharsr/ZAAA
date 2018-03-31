@@ -18,10 +18,8 @@ export class MediaHouseDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      this.api.getMediaHouse(this.id).subscribe(data => this.mediaHouse = data);
+    this.route.data.subscribe((data: { mediaHouse: DirMediaHouse }) => {
+      this.mediaHouse = data.mediaHouse;
     });
   }
 

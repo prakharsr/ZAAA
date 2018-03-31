@@ -32,7 +32,11 @@ export class DirMediaHouseComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getMediaHouse(this.id).subscribe(data => this.mediaHouse = data);
+        this.api.getMediaHouse(this.id).subscribe(data => {
+          if (data) {
+            this.mediaHouse = data;
+          }
+        });
       }
       else this.mediaHouse.mediaType = 'Print';
     });

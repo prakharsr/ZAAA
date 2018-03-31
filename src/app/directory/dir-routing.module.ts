@@ -6,16 +6,17 @@ import { DirComponent } from './dir/dir.component';
 import { DirClientComponent } from './clients/dir-client/dir-client.component';
 import { ClientListComponent } from './clients/client-list/client-list.component';
 import { ClientDetailsComponent } from './clients/client-details/client-details.component';
+import { ClientResolver } from './clients/client-resolver.service';
 
 import { DirExecutiveComponent } from './executives/dir-executive/dir-executive.component';
 import { ExecutiveListComponent } from './executives/executive-list/executive-list.component';
 import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
+import { ExecutiveResolver } from './executives/executive-resolver.service';
 
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
 import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
 import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
-import { ClientResolver } from './clients/client-resolver.service';
-import { ExecutiveResolver } from './executives/executive-resolver.service';
+import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
 
 const routes: Routes = [
   {
@@ -58,7 +59,13 @@ const routes: Routes = [
           { path: '', component: MediaHouseListComponent },
           { path: 'new', component: DirMediaHouseComponent },
           { path: 'edit/:id', component: DirMediaHouseComponent },
-          { path: ':id', component: MediaHouseDetailsComponent }
+          {
+            path: ':id',
+            component: MediaHouseDetailsComponent,
+            resolve: {
+              mediaHouse: MediaHouseResolver
+            }
+          }
         ]
       },
       { path: '', redirectTo: 'clients', pathMatch: 'full' }

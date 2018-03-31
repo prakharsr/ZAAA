@@ -20,6 +20,7 @@ import { MediaHouseApiService } from './media-houses/media-house-api.service';
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
 import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
 import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
+import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { MediaHouseDetailsComponent } from './media-houses/media-house-details/m
     ExecutiveApiService,
     MediaHouseApiService,
     ClientResolver,
-    ExecutiveResolver
+    ExecutiveResolver,
+    MediaHouseResolver
   ]
 })
 export class DirectoryModule { }
