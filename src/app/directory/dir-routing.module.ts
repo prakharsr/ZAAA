@@ -14,6 +14,7 @@ import { ExecutiveDetailsComponent } from './executives/executive-details/execut
 import { DirMediaHouseComponent } from './media-houses/dir-media-house/dir-media-house.component';
 import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
 import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
+import { ClientResolver } from './clients/client-resolver.service';
 
 const routes: Routes = [
   {
@@ -26,7 +27,13 @@ const routes: Routes = [
           { path: '', component: ClientListComponent },
           { path: 'new', component: DirClientComponent },
           { path: 'edit/:id', component: DirClientComponent },
-          { path: ':id', component: ClientDetailsComponent },
+          {
+            path: ':id',
+            component: ClientDetailsComponent,
+            resolve: {
+              client: ClientResolver
+            }
+          },
         ]
       },
       {

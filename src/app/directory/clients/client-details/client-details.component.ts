@@ -12,7 +12,6 @@ import { environment } from '../../../../environments/environment';
 export class ClientDetailsComponent implements OnInit {
 
   client = new DirClient();
-  id: string;
   success: string;
   error: string;
 
@@ -21,10 +20,8 @@ export class ClientDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-
-      this.api.getClient(this.id).subscribe(data => this.client = data);
+    this.route.data.subscribe((data: { client: DirClient }) => {
+      this.client = data.client;
     });
   }
 
@@ -32,7 +29,7 @@ export class ClientDetailsComponent implements OnInit {
     this.error = '';
     this.success = '';
 
-    this.api.uploadProfilePicture(this.id, files.item(0)).subscribe(
+    this.api.uploadProfilePicture(this.client.id, files.item(0)).subscribe(
       data => {
         if (data.success) {
           this.success = 'Profile Photo uploaded successfully';

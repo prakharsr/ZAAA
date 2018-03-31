@@ -108,7 +108,7 @@ export class ClientApiService {
 
   getClient(id: string) : Observable<DirClient> {
     return this.api.get('/user/client/' + id).pipe(
-      map(data => data.success ? this.bodyToClient(data.client) : new DirClient())
+      map(data => data.success ? this.bodyToClient(data.client) : null)
     );
   }
 

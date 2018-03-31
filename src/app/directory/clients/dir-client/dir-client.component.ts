@@ -30,7 +30,11 @@ export class DirClientComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getClient(this.id).subscribe(data => this.client = data);
+        this.api.getClient(this.id).subscribe(data => {
+          if (data) {
+            this.client = data
+          }
+        });
       }
       else this.client.contactpersons = [new ContactPerson()];
     });

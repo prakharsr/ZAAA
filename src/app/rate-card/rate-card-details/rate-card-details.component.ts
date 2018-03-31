@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 export class RateCardDetailsComponent implements OnInit {
 
   ratecard = new RateCard();
-  id: string;
 
   constructor(private api: RateCardApiService,
     private route: ActivatedRoute) { }

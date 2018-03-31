@@ -54,12 +54,14 @@ export class CreateRateCardComponent implements OnInit {
   }
 
   private initEdit(data: RateCard) {
-    this.rateCard = data;
+    if (data) {
+      this.rateCard = data;
 
-    this.dropdownPullOutName = this.others;
-    this.customPullOutName = this.rateCard.pullOutName;
+      this.dropdownPullOutName = this.others;
+      this.customPullOutName = this.rateCard.pullOutName;
 
-    this.buildCategoryTree();
+      this.buildCategoryTree();
+    }
   }
 
   private buildCategoryTree() {
