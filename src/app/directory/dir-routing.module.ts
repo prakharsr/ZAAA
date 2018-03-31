@@ -18,10 +18,13 @@ import { MediaHouseListComponent } from './media-houses/media-house-list/media-h
 import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
 import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
 
+import { AuthGuard } from '../guards/auth-guard.service';
+
 const routes: Routes = [
   {
     path: 'dir',
     component: DirComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'clients',

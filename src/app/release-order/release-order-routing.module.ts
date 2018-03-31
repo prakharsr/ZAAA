@@ -5,9 +5,12 @@ import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
 import { ReleaseOrderDetailsComponent } from './release-order-details/release-order-details.component';
 
+import { AuthGuard } from '../guards/auth-guard.service';
+
 const routes: Routes = [
   {
     path: 'releaseorders',
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: ReleaseOrderListComponent },
       { path: 'new', component: ReleaseOrderComponent },
