@@ -4,7 +4,7 @@ import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
 
 const routes: Routes = [
   {
-    path: 'superadmin',
+    path: '',
     children: [
       { path: 'categories', component: AdCategoriesComponent }
     ]

@@ -24,6 +24,10 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'superadmin',
+    loadChildren: 'app/super-admin/super-admin.module#SuperAdminModule'
+  },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPswComponent },

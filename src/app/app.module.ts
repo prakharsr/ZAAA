@@ -5,7 +5,6 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
-import { SuperAdminModule } from './super-admin/super-admin.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -21,6 +20,8 @@ import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ReleaseOrderModule } from './release-order/release-order.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,13 +40,14 @@ import { ReleaseOrderModule } from './release-order/release-order.module';
     ResetPasswordComponent
   ],
   imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
     BaseModule,
     AdminModule,
     DirectoryModule,
     CoUsersModule,
     RateCardModule,
     ReleaseOrderModule,
-    SuperAdminModule,
     AppRoutingModule
   ],
   providers: [],

@@ -22,11 +22,9 @@ import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
+    HttpClientModule
   ],
   providers: [
     ApiService,
@@ -44,11 +42,9 @@ import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
   declarations: [],
   exports: [
     CommonModule,
-    BrowserModule,
     NgbModule,
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule
+    HttpClientModule
   ]
 })
 export class BaseModule { }
