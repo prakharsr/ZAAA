@@ -20,7 +20,7 @@ export class StateApiService {
       "Jharkhand",
       "Karnataka",
       "Kerala",
-      "Madya Pradesh",
+      "Madhya Pradesh",
       "Maharashtra",
       "Manipur",
       "Meghalaya",
