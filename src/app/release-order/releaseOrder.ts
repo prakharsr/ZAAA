@@ -1,3 +1,9 @@
+export class Insertion {
+    date: string;
+    time: string;
+    marked: boolean;
+}
+
 export class ReleaseOrder {
     id: string;
     date: Date;
@@ -31,7 +37,7 @@ export class ReleaseOrder {
     adPosition = "";
     adScheme = ""
     adTotal = 0;
-    insertionDate: Date;
+    insertions: Insertion[] = [];
     adGrossAmount = 0;
     publicationDiscount = 0;
     agencyDiscount1 = 0;

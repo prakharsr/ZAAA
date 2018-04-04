@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrder } from '../releaseOrder';
+import { ReleaseOrder, Insertion } from '../releaseOrder';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -56,6 +56,9 @@ export class ReleaseOrderComponent implements OnInit {
       else if (params.has('rateCard')) {
         this.rateCardApi.getRateCard(params.get('rateCard')).subscribe(data => this.initFromRateCard(data));
       }
+      else {
+        this.releaseorder.insertions = [new Insertion()];
+      }
     });
   }
 
@@ -81,6 +84,14 @@ export class ReleaseOrderComponent implements OnInit {
 
   cancel() {
     this.goBack();
+  }
+
+  addInsertion() {
+    this.releaseorder.insertions.push(new Insertion());
+  }
+
+  removeInsertion(i: number) {
+    this.releaseorder.insertions.splice(i, 1);
   }
 
   private createReleaseOrder() {

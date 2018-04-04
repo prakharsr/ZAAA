@@ -138,13 +138,12 @@
       </div>
       <br>
     </div>
-    
-    <!-- Ad Details -->
 
     <br>
     <h3>Ad Details</h3>
     <br>
     
+    <!-- ad type -->
     <!-- hue -->
     
     <div class="form-group">
@@ -215,18 +214,6 @@
     <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
       <div *ngIf="adTotalField.errors.required">
         Total Number of Ad is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label for="insertionDate">Insertion Date</label>
-      <input type="date" class="form-control" id="insertionDate" name="insertionDate" placeholder="Enter Insertion Date" [(ngModel)]="releaseorder.insertionDate" required #insertionDateField="ngModel">
-    </div>
-    
-    <div *ngIf="insertionDateField.invalid && (insertionDateField.dirty || insertionDateField.touched)" class="text-danger">
-      <div *ngIf="insertionDateField.errors.required">
-        Insertion Date is required.
       </div>
       <br>
     </div>
@@ -350,6 +337,50 @@
       </div>
       <br>
     </div>
+
+    <br>
+    <div class="form-row">
+      <div class="col">
+        <h4>Insertions ({{releaseorder.insertions.length}})</h4>
+      </div>
+      <div class="col-auto">
+        <button type="button" (click)="addInsertion()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+      </div>
+    </div>
+    <br>
+    
+    <div *ngFor="let item of releaseorder.insertions; index as i" class="card mb-4">
+      <div class="card-header">
+        <button type="button" class="btn btn-outline-danger float-right" (click)="removeInsertion(i)"><span class="fa fa-trash-alt"></span></button>
+        #{{i + 1}}
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="insertionDate-{{i}}">Date</label>
+          <input type="date" class="form-control" id="insertionDate-{{i}}" name="insertionDate-{{i}}" placeholder="Enter Insertion Date" [(ngModel)]="item.date" required #insertionDateField="ngModel">
+        </div>
+        
+        <div *ngIf="insertionDateField.invalid && (insertionDateField.dirty || insertionDateField.touched)" class="text-danger">
+          <div *ngIf="insertionDateField.errors.required">
+            Date is required.
+          </div>
+          <br>
+        </div>
+
+        <div class="form-group">
+          <label for="insertionTime-{{i}}">Time</label>
+          <input type="date" class="form-control" id="insertionTime-{{i}}" name="insertionTime-{{i}}" placeholder="Enter Insertion Date" [(ngModel)]="item.time" required #insertionTimeField="ngModel">
+        </div>
+        
+        <div *ngIf="insertionTimeField.invalid && (insertionTimeField.dirty || insertionTimeField.touched)" class="text-danger">
+          <div *ngIf="insertionTimeField.errors.required">
+            Time is required.
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <br>
 
     <br>
     <h3>Other Details</h3>
