@@ -227,9 +227,7 @@ export class CreateRateCardComponent implements OnInit {
     if (this.rateCard.adType == 'Text Classified') {
       result.push('Words');
     }
-
-    result.push('Sqcm');
-    result.push('sec');
+    else result.push(this.rateCard.mediaType == 'Print' ? 'Sqcm' : 'sec');
 
     return result;
   }
