@@ -27,6 +27,7 @@ import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 export class ReleaseOrderComponent implements OnInit {
 
   releaseorder = new ReleaseOrder();
+  query: string;
   error: string;
   edit = false;
   id: string;

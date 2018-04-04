@@ -131,8 +131,14 @@ export class CreateRateCardComponent implements OnInit {
       .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
       .catch(() => of([]));
   }
-
-  mediaHouseFormatter = (result: DirMediaHouse) => result.orgName;
+  
+  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+    this.rateCard.bookingEdition = result.address.edition;
+    
+    return result.orgName;
+  }
+  
+  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
 
   categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];
