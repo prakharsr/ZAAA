@@ -22,7 +22,8 @@ export class MediaHouseApiService {
       mediaType: mediaHouse.mediaType,
       address: mediaHouse.address,
       officeLandline: mediaHouse.officeLandLine,
-      scheduling: scheduling
+      scheduling: scheduling,
+      GSTIN: mediaHouse.GSTIN
     });
   }
 
@@ -60,6 +61,7 @@ export class MediaHouseApiService {
     mediaHouse.mediaType = body.MediaType;
     mediaHouse.address = body.Address;
     mediaHouse.officeLandLine = body.OfficeLandline;
+    mediaHouse.GSTIN = body.GSTIN;
 
     let scheduling : MediaHouseScheduling[] = [];
 
@@ -90,6 +92,7 @@ export class MediaHouseApiService {
       MediaType: mediaHouse.mediaType,
       Address: mediaHouse.address,
       OfficeLandline: mediaHouse.officeLandLine,
+      GSTIN: mediaHouse.GSTIN,
 
       Scheduling: scheduling
     })
