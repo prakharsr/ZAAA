@@ -64,6 +64,14 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
+
+      this.mediaHouseApi.searchMediaHouses(rateCard.mediaHouseName).subscribe(data => {
+        if (data && data.length > 0) {
+          this.mediaHouse = data[0];
+
+          this.initMediaHouse(this.mediaHouse);
+        }
+      });
     }
   }
 
@@ -135,13 +143,18 @@ export class ReleaseOrderComponent implements OnInit {
 
   mediaHouse;
 
-  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+  initMediaHouse(result: DirMediaHouse) {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
       this.releaseorder.publicationAddress = result.address.address;
       this.releaseorder.publicationCity = result.address.city;
       this.releaseorder.publicationState = result.address.state;
+      this.releaseorder.publicationGSTIN = result.GSTIN;
     }
+  }
+
+  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+    this.initMediaHouse(result);
 
     return result.orgName;
   }
