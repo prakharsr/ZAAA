@@ -142,9 +142,37 @@
     <br>
     <h3>Ad Details</h3>
     <br>
+
+    <div class="form-group">
+      <label for="adType">Ad Type</label>
+      <input type="text" class="form-control" id="adType" name="adType" placeholder="Enter Ad Type" [(ngModel)]="releaseorder.adType" required #adTypeField="ngModel">
+    </div>
     
-    <!-- ad type -->
-    <!-- hue -->
+    <div *ngIf="adTypeField.invalid && (adTypeField.dirty || adTypeField.touched)" class="text-danger">
+      <div *ngIf="adTypeField.errors.required">
+        Ad Type is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-row">
+      <label class="col-md-3 col-form-label">Hue</label>
+      <div class="col-md-9">
+        <div class="form-group">
+          <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+            <option selected>Colored</option>
+            <option>Black &amp; White</option>
+          </select>
+        </div>
+
+        <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
+          <div *ngIf="hueField.errors.required">
+            Hue is required.
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
     
     <div class="form-group">
       <label for="adSize">Size</label>
