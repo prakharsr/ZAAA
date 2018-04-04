@@ -138,7 +138,7 @@ export class CreateRateCardComponent implements OnInit {
     return result.orgName;
   }
   
-  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
+  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName + " - " + result.address.edition;
 
   categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];

@@ -328,7 +328,7 @@ export class ReleaseOrderComponent implements OnInit {
     return result.orgName;
   }
 
-  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName;
+  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName + " - " + result.address.edition;
 
   client;
 
