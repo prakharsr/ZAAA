@@ -31,7 +31,13 @@ const routes: Routes = [
         children: [          
           { path: '', component: ClientListComponent },
           { path: 'new', component: DirClientComponent },
-          { path: 'edit/:id', component: DirClientComponent },
+          {
+            path: 'edit/:id',
+            component: DirClientComponent,
+            resolve: {
+              client: ClientResolver
+            }
+          },
           {
             path: ':id',
             component: ClientDetailsComponent,
@@ -46,7 +52,13 @@ const routes: Routes = [
         children: [
           { path: '', component: ExecutiveListComponent },
           { path: 'new', component: DirExecutiveComponent },
-          { path: 'edit/:id', component: DirExecutiveComponent },
+          {
+            path: 'edit/:id',
+            component: DirExecutiveComponent,
+            resolve: {
+              executive: ExecutiveResolver
+            }
+          },
           {
             path: ':id',
             component: ExecutiveDetailsComponent,
@@ -61,7 +73,13 @@ const routes: Routes = [
         children: [
           { path: '', component: MediaHouseListComponent },
           { path: 'new', component: DirMediaHouseComponent },
-          { path: 'edit/:id', component: DirMediaHouseComponent },
+          {
+            path: 'edit/:id',
+            component: DirMediaHouseComponent,
+            resolve: {
+              mediaHouse: MediaHouseResolver
+            }
+          },
           {
             path: ':id',
             component: MediaHouseDetailsComponent,

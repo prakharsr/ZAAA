@@ -61,20 +61,20 @@
       </div>
       <br>
     </div>
-  
+    
+    <div class="form-group">
+      <label>Media Type</label>
+      <select class="form-control" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+        <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
+      </select>
+    </div>
+
     <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
       <div *ngIf="mediaTypeField.errors.required">
         Media type is required.
       </div>
       <br>
     </div>
-    
-        <div class="form-group">
-          <label>Media Type</label>
-          <select class="form-control" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
-            <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
-          </select>
-      </div>
 
     <br>
     <h3>Client Details</h3>

@@ -181,10 +181,14 @@ export class CreateRateCardComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getRateCard(this.id).subscribe(data => this.initEdit(data));
+        this.route.data.subscribe((data: { rateCard: RateCard }) => {
+          this.initEdit(data.rateCard);
+        });
       }
       else if (params.has('copy')) {
-        this.api.getRateCard(params.get('copy')).subscribe(data => this.initEdit(data))
+        this.route.data.subscribe((data: { rateCard: RateCard }) => {
+          this.initEdit(data.rateCard);
+        });
       }
       else this.initNew();
     });

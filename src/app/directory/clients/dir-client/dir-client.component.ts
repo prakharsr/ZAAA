@@ -26,15 +26,13 @@ export class DirClientComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
-        this.id = params.get('id');
-
         this.edit = true;
 
-        this.api.getClient(this.id).subscribe(data => {
-          if (data) {
-            this.client = data;
-          }
+        this.route.data.subscribe((data: { client: DirClient }) => {
+          this.client = data.client;
         });
+
+        this.id = params.get('id');
       }
       else this.client.contactpersons = [new ContactPerson()];
     });

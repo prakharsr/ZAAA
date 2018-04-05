@@ -16,8 +16,20 @@ const routes: Routes = [
     children:  [          
       { path: '', component: RateCardListComponent },
       { path: 'new', component: CreateRateCardComponent },
-      { path: 'new/:copy', component: CreateRateCardComponent },
-      { path: 'edit/:id', component: CreateRateCardComponent },
+      {
+        path: 'new/:copy',
+        component: CreateRateCardComponent,
+        resolve: {
+          rateCard: RateCardResolver
+        }
+      },
+      {
+        path: 'edit/:id',
+        component: CreateRateCardComponent,
+        resolve: {
+          rateCard: RateCardResolver
+        }
+      },
       {
         path: ':id',
         component: RateCardDetailsComponent,

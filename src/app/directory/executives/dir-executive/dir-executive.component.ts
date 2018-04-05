@@ -30,10 +30,8 @@ export class DirExecutiveComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getExecutive(this.id).subscribe(data => {
-          if (data) {
-            this.executive = data;
-          }
+        this.route.data.subscribe((data: { executive: DirExecutive }) => {
+          this.executive = data.executive;
         });
       }
     });

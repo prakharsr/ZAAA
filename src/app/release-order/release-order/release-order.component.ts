@@ -51,10 +51,17 @@ export class ReleaseOrderComponent implements OnInit {
 
         this.edit = true;
 
-        this.api.getReleaseOrder(this.id).subscribe(data => {
-          if (data) {
-            this.releaseorder = data;
-          }
+        this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
+          this.releaseorder = data.releaseOrder;
+
+          this.buildCategoryTree([
+            this.releaseorder.adCategory1,
+            this.releaseorder.adCategory2,
+            this.releaseorder.adCategory3,
+            this.releaseorder.adCategory4,
+            this.releaseorder.adCategory5,
+            this.releaseorder.adCategory6
+          ]);
         });
       }
       else if (params.has('rateCard')) {
@@ -72,7 +79,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
 
-      this.buildCategoryTree(rateCard);
+      this.buildCategoryTree(rateCard.categories);
 
       this.mediaHouseApi.searchMediaHouses(rateCard.mediaHouseName).subscribe(data => {
         if (data && data.length > 0) {
@@ -84,16 +91,16 @@ export class ReleaseOrderComponent implements OnInit {
     }
   }
 
-  private buildCategoryTree(rateCard: RateCard) {
-    let c : Category = this.categories.find(p => p.name == rateCard.categories[0]);
+  private buildCategoryTree(categories: string[]) {
+    let c : Category = this.categories.find(p => p.name == categories[0]);
 
     if (c) {
       this.category1 = c;
 
       let i = 1;
 
-      while (i < rateCard.categories.length && c.subcategories.length > 0) {
-        c = c.subcategories.find(p => p.name == rateCard.categories[i]);
+      while (i < categories.length && c.subcategories.length > 0) {
+        c = c.subcategories.find(p => p.name == categories[i]);
 
         if (c) {
           this.setCategory(i, c);
