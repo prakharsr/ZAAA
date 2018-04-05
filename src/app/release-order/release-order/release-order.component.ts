@@ -310,7 +310,35 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.publicationEdition = result.address.edition;
       this.releaseorder.publicationState = result.address.state;
       this.releaseorder.publicationGSTIN = result.GSTIN;
+      this.mediaType = result.mediaType;
     }
+  }
+
+  get mediaType() {
+    return this.releaseorder.mediaType;
+  }
+
+  set mediaType(mediaType: string) {
+    this.releaseorder.mediaType = mediaType;
+
+    this.releaseorder.adType = this.adTypes[0];
+  }
+
+  mediaTypes = ['Print', 'Air', 'Electronic'];
+
+  get adTypes() {
+    switch (this.releaseorder.mediaType) {
+      case 'Print':
+        return ['Text Classified', 'Display', 'Display Classified'];
+
+      case 'Air':
+        return ['RJ Mentions', 'Radio Commercials', 'Sponsorship Tags', 'Road Block'];
+
+      case 'Electronic':
+        return ['VJ Mentions', 'Banner', 'Scroll', 'Commercials'];
+    }
+
+    return [];
   }
 
   mediaHouseInputFormatter = (result: DirMediaHouse) => {

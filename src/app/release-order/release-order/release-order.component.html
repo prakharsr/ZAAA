@@ -61,7 +61,21 @@
       </div>
       <br>
     </div>
+  
+    <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
+      <div *ngIf="mediaTypeField.errors.required">
+        Media type is required.
+      </div>
+      <br>
+    </div>
     
+        <div class="form-group">
+          <label>Media Type</label>
+          <select class="form-control" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+            <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
+          </select>
+      </div>
+
     <br>
     <h3>Client Details</h3>
     <br>
@@ -112,15 +126,10 @@
     <br>
 
     <div class="form-group">
-      <label for="adType">Ad Type</label>
-      <input type="text" class="form-control" id="adType" name="adType" placeholder="Enter Ad Type" [(ngModel)]="releaseorder.adType" required #adTypeField="ngModel">
-    </div>
-    
-    <div *ngIf="adTypeField.invalid && (adTypeField.dirty || adTypeField.touched)" class="text-danger">
-      <div *ngIf="adTypeField.errors.required">
-        Ad Type is required.
-      </div>
-      <br>
+      <label>Ad Type</label>
+      <select class="form-control" name="adType" [(ngModel)]="releaseorder.adType" id="adType" #adTypeField="ngModel" required>
+        <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
+      </select>
     </div>
 
     <br>

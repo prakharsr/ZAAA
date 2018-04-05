@@ -17,6 +17,7 @@ export class ReleaseOrder {
     publicationEdition = "";
     publicationState = "";
     publicationGSTIN = "";
+    mediaType = "";
     clientName = "";
     clientState = "";
     clientGSTIN = "";
