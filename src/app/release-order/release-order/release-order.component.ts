@@ -18,6 +18,7 @@ import { StateApiService } from '../../services/state-api.service';
 import { ReleaseOrderApiService } from '../release-order-api.service';
 import { RateCard, Category } from '../../rate-card/rateCard';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
 @Component({
   selector: 'app-release-order',
@@ -237,14 +238,6 @@ export class ReleaseOrderComponent implements OnInit {
     this.goBack();
   }
 
-  addInsertion() {
-    this.releaseorder.insertions.push(new Insertion());
-  }
-
-  removeInsertion(i: number) {
-    this.releaseorder.insertions.splice(i, 1);
-  }
-
   private createReleaseOrder() {
     this.api.createReleaseOrder(this.releaseorder).subscribe(
       data => {
@@ -359,4 +352,35 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   executiveFormatter = (result: DirExecutive) => result.executiveName;
+
+  currentInsertionDate: NgbDate[];
+
+  insertions: NgbDate[] = [];
+
+  addInsertion(date: NgbDate) {
+    const index = this.findInsertion(date);
+
+    if (index == -1) {
+      this.insertions.push(date);
+    }
+    else this.removeInsertion(index);
+  }
+
+  removeInsertion(i: number) {
+    this.insertions.splice(i, 1);
+  }
+
+  findInsertion(date: NgbDate): number {
+    return this.insertions.findIndex(element => element.day == date.day
+      && element.month == date.month
+      && element.year == date.year);
+  }
+
+  isSelected(date: NgbDate) {
+    return this.findInsertion(date) != -1;
+  }
+
+  insertionMarkDisabled(date: NgbDate, current: {month: number}) {
+    return date.month !== current.month;
+  }
 }
