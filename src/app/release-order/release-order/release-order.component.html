@@ -32,30 +32,6 @@
       </div>
       <br>
     </div>
-    
-    <div class="form-group">
-      <label for="publicationAddress">Address</label>
-      <input type="text" class="form-control" id="publicationAddress" name="publicationAddress" placeholder="Enter Address" [(ngModel)]="releaseorder.publicationAddress" required #publicationAddressField="ngModel">
-    </div>
-    
-    <div *ngIf="publicationAddressField.invalid && (publicationAddressField.dirty || publicationAddressField.touched)" class="text-danger">
-      <div *ngIf="publicationAddressField.errors.required">
-        Address is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label for="publicationCity">City</label>
-      <input type="text" class="form-control" id="publicationCity" name="publicationCity" placeholder="Enter City" [(ngModel)]="releaseorder.publicationCity" required #publicationCityField="ngModel">
-    </div>
-    
-    <div *ngIf="publicationCityField.invalid && (publicationCityField.dirty || publicationCityField.touched)" class="text-danger">
-      <div *ngIf="publicationCityField.errors.required">
-        City Name is required.
-      </div>
-      <br>
-    </div>
 
     <div class="form-group">
       <label for="publicationState">State</label>
@@ -103,29 +79,6 @@
     </div>
 
     <div class="form-group">
-      <label for="clientAddress">Address</label>
-      <input type="text" class="form-control" id="clientAddress" name="clientAddress" placeholder="Enter Address" [(ngModel)]="releaseorder.clientAddress" required #clientAddressField="ngModel">
-    </div>
-    
-    <div *ngIf="clientAddressField.invalid && (clientAddressField.dirty || clientAddressField.touched)" class="text-danger">
-      <div *ngIf="clientAddressField.errors.required">
-        Address is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label for="clientCity">City</label>
-      <input type="text" class="form-control" id="clientCity" name="clientCity" placeholder="Enter City" [(ngModel)]="releaseorder.clientCity" required #clientCityField="ngModel">
-    </div>
-    
-    <div *ngIf="clientCityField.invalid && (clientCityField.dirty || clientCityField.touched)" class="text-danger">
-      <div *ngIf="clientCityField.errors.required">
-        City is required.
-      </div>
-      <br>
-    </div>
-    <div class="form-group">
       <label for="clientState">State</label>
       <select class="form-control" id="clientState" name="clientState" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
         <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
@@ -135,6 +88,21 @@
     <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
       <div *ngIf="clientStateField.errors.required">
         State is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="clientGSTIN">GSTIN</label>
+      <input type="text" class="form-control" id="clientGSTIN" name="clientGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.clientGSTIN" required minlength="15" maxlength="15" #clientGSTINField="ngModel">
+    </div>
+    
+    <div *ngIf="clientGSTINField.invalid && (clientGSTINField.dirty || clientGSTINField.touched)" class="text-danger">
+      <div *ngIf="clientGSTINField.errors.required">
+        GSTIN is required.
+      </div>
+      <div *ngIf="clientGSTINField.errors.minlength || clientGSTINField.errors.maxlength">
+        GSTIN should be 15 characters long.
       </div>
       <br>
     </div>

@@ -308,8 +308,6 @@ export class ReleaseOrderComponent implements OnInit {
   initMediaHouse(result: DirMediaHouse) {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
-      this.releaseorder.publicationAddress = result.address.address;
-      this.releaseorder.publicationCity = result.address.city;
       this.releaseorder.publicationState = result.address.state;
       this.releaseorder.publicationGSTIN = result.GSTIN;
     }
@@ -333,9 +331,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   clientInputFormatter = (result: DirClient) => {
-    this.releaseorder.clientAddress = result.address.address;
-    this.releaseorder.clientCity = result.address.city;
     this.releaseorder.clientState = result.address.state;
+    this.releaseorder.clientGSTIN = result.gstNo;
 
     return result.orgName;
   }

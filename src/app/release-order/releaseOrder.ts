@@ -15,14 +15,11 @@ export class ReleaseOrder {
     signature = "";
     publicationName = "";
     publicationEdition = "";
-    publicationAddress = "";
-    publicationCity = "";
     publicationState = "";
     publicationGSTIN = "";
     clientName = "";
-    clientAddress = "";
-    clientCity = "";
     clientState = "";
+    clientGSTIN = "";
     adType = "";
     adCategory1 = "";
     adCategory2 = "";
