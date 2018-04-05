@@ -119,7 +119,7 @@
 
       <div *ngIf="freqPeriodField.invalid && (freqPeriodField.dirty || freqPeriodField.touched)" class="text-danger">
         <div *ngIf="freqPeriodField.errors.required">
-          Free is required.
+          Period is required.
         </div>
         <br>
       </div>
@@ -202,12 +202,12 @@
     <label class="col-md-3 col-form-label">Rate</label>
     <div class="col col-md-5">
       <div class="form-group">
-        <input type="text" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
+        <input type="number" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
       </div>
 
       <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
         <div *ngIf="rateField.errors.required">
-          Rate is required.
+          Rate is empty or invalid.
         </div>
         <br>
       </div>
