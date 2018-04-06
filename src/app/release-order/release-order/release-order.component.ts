@@ -348,8 +348,6 @@ export class ReleaseOrderComponent implements OnInit {
     switch (this.releaseorder.mediaType) {
 
       case 'Air':
-        return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-
       case 'Electronic':
         return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
     }
