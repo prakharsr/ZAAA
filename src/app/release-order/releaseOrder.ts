@@ -22,6 +22,8 @@ export class ReleaseOrder {
     clientState = "";
     clientGSTIN = "";
     adType = "";
+    rate = 0;
+    unit = "";
     adCategory1 = "";
     adCategory2 = "";
     adCategory3 = "";
