@@ -35,6 +35,7 @@ export class ReleaseOrder {
     adTotalSpace = "";
     adEdition = "";
     adPosition = "";
+    adTime = ""
     adScheme = ""
     adTotal = 0;
     insertions: Insertion[] = [];

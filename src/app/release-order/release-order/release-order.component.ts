@@ -62,6 +62,7 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.releaseorder.insertions = [new Insertion()];
+        this.releaseorder.adTime = this.adTimes[0];
       }
     });
   }
@@ -338,6 +339,19 @@ export class ReleaseOrderComponent implements OnInit {
 
       case 'Electronic':
         return ['VJ Mentions', 'Banner', 'Scroll', 'Commercials'];
+    }
+
+    return [];
+  }
+
+  get adTimes() {
+    switch (this.releaseorder.mediaType) {
+
+      case 'Air':
+        return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
+
+      case 'Electronic':
+        return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
     }
 
     return [];
