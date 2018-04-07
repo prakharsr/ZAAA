@@ -73,6 +73,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.insertions = [new Insertion()];
 
         this.selectedSize = this.customSize;
+        this.releaseorder.adTime = this.adTimes[0];
       }
     });
   }
@@ -80,6 +81,8 @@ export class ReleaseOrderComponent implements OnInit {
   private initFromRateCard(rateCard: RateCard) {
     if (rateCard) {
       this.releaseorder.adType = rateCard.adType;
+      this.releaseorder.rate = rateCard.rate;
+      this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
 
@@ -355,6 +358,28 @@ export class ReleaseOrderComponent implements OnInit {
     }
 
     return [];
+  }
+
+  get adTimes() {
+    switch (this.releaseorder.mediaType) {
+
+      case 'Air':
+      case 'Electronic':
+        return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
+    }
+
+    return [];
+  }
+
+  get units() {
+    let result = [];
+
+    if (this.releaseorder.adType == 'Text Classified') {
+      result.push('Words');
+    }
+    else result.push(this.releaseorder.mediaType == 'Print' ? 'Sqcm' : 'sec');
+
+    return result;
   }
 
   mediaHouseInputFormatter = (result: DirMediaHouse) => {

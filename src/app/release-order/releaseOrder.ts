@@ -22,6 +22,8 @@ export class ReleaseOrder {
     clientState = "";
     clientGSTIN = "";
     adType = "";
+    rate = 0;
+    unit = "";
     adCategory1 = "";
     adCategory2 = "";
     adCategory3 = "";
@@ -33,6 +35,7 @@ export class ReleaseOrder {
     adTotalSpace = "";
     adEdition = "";
     adPosition = "";
+    adTime = ""
     adScheme = ""
     adTotal = 0;
     insertions: Insertion[] = [];

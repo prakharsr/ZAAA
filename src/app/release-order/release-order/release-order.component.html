@@ -132,6 +132,29 @@
       </select>
     </div>
 
+    <div class="form-row">
+      <label class="col-md-3 col-form-label">Rate</label>
+      <div class="col col-md-5">
+        <div class="form-group">
+          <input type="number" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+        </div>
+  
+        <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
+          <div *ngIf="rateField.errors.required">
+            Rate is empty or invalid.
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="col col-md-4">
+        <div class="form-group">
+          <select class="form-control" name="unit" [(ngModel)]="releaseorder.unit" id="unit" #unitField="ngModel" required>
+            <option *ngFor="let item of units" [value]="item">{{item}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <br>
     <h3>Categories</h3>
     <br>
@@ -298,6 +321,13 @@
         Position is required.
       </div>
       <br>
+    </div>
+
+    <div class="form-group" *ngIf="releaseorder.mediaType != 'Print' ">
+      <label>Ad Time</label>
+      <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
+        <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
+      </select>
     </div>
     
     <div class="form-group">
