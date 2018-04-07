@@ -87,6 +87,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.mediaType = this.mediaTypes[0];
         this.releaseorder.adHue = 'Colored';
         this.releaseorder.unit = this.units[0];
+        this.releaseorder.adPosition = this.positions[0];
         this.releaseorder.adTime = this.adTimes[0];
       }
     });
@@ -399,6 +400,16 @@ export class ReleaseOrderComponent implements OnInit {
 
   get adTimes() {
     return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
+  }
+
+  get positions() {
+    let result = ['Classified', 'Back Page', 'Jacket', 'Prime Time'];
+
+    for (let i = 1; i <= 8; ++i) {
+      result.push('Page ' + i);
+    }
+
+    return result;
   }
 
   get units() {

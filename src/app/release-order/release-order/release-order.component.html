@@ -340,17 +340,23 @@
       </div>
       <br>
     </div>
-    
-    <div class="form-group">
-      <label for="adPosition">Position</label>
-      <input type="text" class="form-control" id="adPosition" name="adPosition" placeholder="Enter Position" [(ngModel)]="releaseorder.adPosition" required #adPositionField="ngModel">
-    </div>
-    
-    <div *ngIf="adPositionField.invalid && (adPositionField.dirty || adPositionField.touched)" class="text-danger">
-      <div *ngIf="adPositionField.errors.required">
-        Position is required.
+
+    <div class="form-row" *ngIf="releaseorder.mediaType == 'Print'">
+      <label class="col-md-3 col-form-label">Position</label>
+      <div class="col-md-9">
+        <div class="form-group">
+          <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+            <option *ngFor="let item of positions" [value]="item">{{item}}</option>
+          </select>
+        </div>
+
+        <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
+          <div *ngIf="positionField.errors.required">
+            Position is required.
+          </div>
+          <br>
+        </div>
       </div>
-      <br>
     </div>
 
     <div class="form-group" *ngIf="releaseorder.mediaType != 'Print' ">
