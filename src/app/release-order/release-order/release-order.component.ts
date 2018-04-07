@@ -16,7 +16,7 @@ import { DirExecutive } from '../../directory/executives/dirExecutive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { StateApiService } from '../../services/state-api.service';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { RateCard, Category } from '../../rate-card/rateCard';
+import { RateCard, Category, FixSize } from '../../rate-card/rateCard';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
@@ -62,6 +62,8 @@ export class ReleaseOrderComponent implements OnInit {
             this.releaseorder.adCategory5,
             this.releaseorder.adCategory6
           ]);
+
+          this.selectedSize = this.customSize;
         });
       }
       else if (params.has('rateCard')) {
@@ -69,6 +71,8 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.releaseorder.insertions = [new Insertion()];
+
+        this.selectedSize = this.customSize;
       }
     });
   }
@@ -78,6 +82,11 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
+
+      if (rateCard.fixSizes.length > 0) {
+        this.fixSizes = rateCard.fixSizes;
+        this.selectedSize = this.fixSizes[0];
+      }
 
       this.buildCategoryTree(rateCard.categories);
 
@@ -415,4 +424,13 @@ export class ReleaseOrderComponent implements OnInit {
   insertionMarkDisabled(date: NgbDate, current: {month: number}) {
     return date.month !== current.month;
   }
+
+  fixSizes: FixSize[] = [];
+
+  customSize: FixSize = { amount: -1, width: -1, length: -1 }
+
+  selectedSize: FixSize;
+
+  customSizeL = 0;
+  customSizeW = 0;
 }

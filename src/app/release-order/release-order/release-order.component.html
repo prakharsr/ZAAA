@@ -217,17 +217,52 @@
       </div>
     </div>
     
+    <br>
+    <h4>Size</h4>
+    <br>
+
     <div class="form-group">
-      <label for="adSize">Size</label>
-      <input type="text" class="form-control" id="adSize" name="adSize" placeholder="Enter Size" [(ngModel)]="releaseorder.adSize" required #adSizeField="ngModel">
+      <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
+        <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
+        <option [ngValue]="customSize">Custom</option>
+      </select>
     </div>
-    
-    <div *ngIf="adSizeField.invalid && (adSizeField.dirty || adSizeField.touched)" class="text-danger">
-      <div *ngIf="adSizeField.errors.required">
-        Size is required.
+
+    <div class="form-row" *ngIf="selectedSize == customSize">
+      <div class="col">
+        <div class="form-group">
+          <input type="number" class="form-control" id="customL" placeholder="Enter Minimum Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+        </div>
+
+        <div *ngIf="customLField.invalid && (customLField.dirty || customLField.touched)" class="text-danger">
+          <div *ngIf="customLField.errors.required">
+            Length is required.
+          </div>
+          <br>
+        </div>
       </div>
-      <br>
+      <div class="col-auto form-text">&times;</div>
+      <div class="col">
+        <div class="form-group">
+          <input type="number" class="form-control" id="customW" placeholder="Enter Minimum Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+        </div>
+
+        <div *ngIf="customWField.invalid && (customWField.dirty || customWField.touched)" class="text-danger">
+          <div *ngIf="customWField.errors.required">
+            Width is required.
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
+
+    <div>
+      Total Space =
+      <span *ngIf="selectedSize == customSize">{{customSizeL * customSizeW}}</span>
+      <span *ngIf="selectedSize != customSize">{{selectedSize.length * selectedSize.width}}</span>
+    </div>
+
+    <br><br>
     
     <div class="form-group">
       <label for="adTotalSpace">Total Space</label>
