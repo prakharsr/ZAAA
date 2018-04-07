@@ -37,7 +37,8 @@ export class ReleaseOrder {
     adEdition = "";
     adPosition = "";
     adTime = ""
-    adScheme = ""
+    adSchemePaid = 0;
+    adSchemeFree = 0;
     adTotal = 0;
     insertions: Insertion[] = [];
     adGrossAmount = 0;

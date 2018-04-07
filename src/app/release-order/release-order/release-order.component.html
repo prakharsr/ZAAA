@@ -254,7 +254,7 @@
     <div class="form-row" *ngIf="selectedSize == customSize">
       <div class="col">
         <div class="form-group">
-          <input type="number" class="form-control" id="customL" placeholder="Enter Minimum Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+          <input type="number" class="form-control" id="customL" placeholder="Enter Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
         </div>
 
         <div *ngIf="customLField.invalid && (customLField.dirty || customLField.touched)" class="text-danger">
@@ -267,7 +267,7 @@
       <div class="col-auto form-text">&times;</div>
       <div class="col">
         <div class="form-group">
-          <input type="number" class="form-control" id="customW" placeholder="Enter Minimum Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+          <input type="number" class="form-control" id="customW" placeholder="Enter Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
         </div>
 
         <div *ngIf="customWField.invalid && (customWField.dirty || customWField.touched)" class="text-danger">
@@ -286,18 +286,48 @@
     </div>
 
     <br><br>
-    
+
+    <br>
+    <h4>Scheme</h4>
+    <br>
+
     <div class="form-group">
-      <label for="adTotalSpace">Total Space</label>
-      <input type="text" class="form-control" id="adTotalSpace" name="adTotalSpace" placeholder="Enter Total Space" [(ngModel)]="releaseorder.adTotalSpace" required #adTotalSpaceField="ngModel">
+      <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
+        <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}</option>
+        <option [ngValue]="customScheme">Custom</option>
+      </select>
     </div>
-    
-    <div *ngIf="adTotalSpaceField.invalid && (adTotalSpaceField.dirty || adTotalSpaceField.touched)" class="text-danger">
-      <div *ngIf="adTotalSpaceField.errors.required">
-        Total Space is required.
+
+    <div class="form-row" *ngIf="selectedScheme == customScheme">
+      <div class="col">
+        <div class="form-group">
+          <label>Paid</label>
+          <input type="number" class="form-control" id="customPaid" placeholder="Enter Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
+        </div>
+
+        <div *ngIf="customPaidField.invalid && (customPaidField.dirty || customPaidField.touched)" class="text-danger">
+          <div *ngIf="customPaidField.errors.required">
+            Paid is required.
+          </div>
+          <br>
+        </div>
       </div>
-      <br>
+      <div class="col">
+        <div class="form-group">
+          <label>Free</label>
+          <input type="number" class="form-control" id="customFree" placeholder="Enter Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
+        </div>
+
+        <div *ngIf="customFreeField.invalid && (customFreeField.dirty || customFreeField.touched)" class="text-danger">
+          <div *ngIf="customFreeField.errors.required">
+            Free is required.
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
+
+    <br><br>
     
     <div class="form-group">
       <label for="adEdition">Edition</label>

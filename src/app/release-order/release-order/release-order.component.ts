@@ -16,7 +16,7 @@ import { DirExecutive } from '../../directory/executives/dirExecutive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { StateApiService } from '../../services/state-api.service';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { RateCard, Category, FixSize } from '../../rate-card/rateCard';
+import { RateCard, Category, FixSize, Scheme } from '../../rate-card/rateCard';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
@@ -67,6 +67,11 @@ export class ReleaseOrderComponent implements OnInit {
           this.selectedSize = this.customSize;
           this.customSizeL = this.releaseorder.adSizeL;
           this.customSizeW = this.releaseorder.adSizeW;
+
+          // edit only as custom scheme
+          this.selectedScheme = this.customScheme;
+          this.customFree = this.releaseorder.adSchemeFree;
+          this.customPaid = this.releaseorder.adSchemePaid;
         });
       }
       else if (params.has('rateCard')) {
@@ -76,6 +81,8 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.insertions = [new Insertion()];
 
         this.selectedSize = this.customSize;
+        this.selectedScheme = this.customScheme;
+
         this.releaseorder.adTime = this.adTimes[0];
       }
     });
@@ -92,6 +99,11 @@ export class ReleaseOrderComponent implements OnInit {
       if (rateCard.fixSizes.length > 0) {
         this.fixSizes = rateCard.fixSizes;
         this.selectedSize = this.fixSizes[0];
+      }
+
+      if (rateCard.schemes.length > 0) {
+        this.schemes = rateCard.schemes;
+        this.selectedScheme = this.schemes[0];
       }
 
       this.buildCategoryTree(rateCard.categories);
@@ -321,6 +333,15 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSizeW = this.selectedSize.width;
     }
 
+    if (this.selectedScheme == this.customScheme) {
+      this.releaseorder.adSchemeFree = this.customFree;
+      this.releaseorder.adSchemePaid = this.customPaid;
+    }
+    else {
+      this.releaseorder.adSchemeFree = this.selectedScheme.Free;
+      this.releaseorder.adSchemePaid = this.selectedScheme.paid;
+    }
+
     if (this.edit) {
       this.editReleaseOrder();
     }
@@ -470,4 +491,13 @@ export class ReleaseOrderComponent implements OnInit {
 
   customSizeL = 0;
   customSizeW = 0;
+
+  schemes: Scheme[] = [];
+
+  customScheme: Scheme = { paid: 1, Free: 0, timeLimit: 0 }
+
+  selectedScheme: Scheme;
+
+  customPaid = 1;
+  customFree = 0;
 }
