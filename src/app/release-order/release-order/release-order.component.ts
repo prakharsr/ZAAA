@@ -84,6 +84,10 @@ export class ReleaseOrderComponent implements OnInit {
         this.selectedScheme = this.customScheme;
 
         this.releaseorder.adTime = this.adTimes[0];
+        this.mediaType = this.mediaTypes[0];
+        this.releaseorder.adHue = 'Colored';
+        this.releaseorder.unit = this.units[0];
+        this.releaseorder.adTime = this.adTimes[0];
       }
     });
   }
@@ -394,14 +398,7 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   get adTimes() {
-    switch (this.releaseorder.mediaType) {
-
-      case 'Air':
-      case 'Electronic':
-        return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-    }
-
-    return [];
+    return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
   }
 
   get units() {
@@ -456,7 +453,17 @@ export class ReleaseOrderComponent implements OnInit {
 
   insertions: NgbDate[] = [];
 
+  insertionErr;
+
   addInsertion(date: NgbDate) {
+    this.insertionErr = '';
+
+    if (this.insertions.length >= this.releaseorder.adTotal) {
+      this.insertionErr = 'Total No of Ads reached';
+
+      return;
+    }
+
     const index = this.findInsertion(date);
 
     if (index == -1) {
@@ -466,6 +473,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   removeInsertion(i: number) {
+    this.insertionErr = '';
+
     this.insertions.splice(i, 1);
   }
 

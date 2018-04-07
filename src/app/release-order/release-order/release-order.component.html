@@ -361,18 +361,6 @@
     </div>
     
     <div class="form-group">
-      <label for="adScheme">Ad Scheme</label>
-      <input type="text" class="form-control" id="adScheme" name="adScheme" placeholder="Enter Ad Scheme" [(ngModel)]="releaseorder.adScheme" required #adSchemeField="ngModel">
-    </div>
-    
-    <div *ngIf="adSchemeField.invalid && (adSchemeField.dirty || adSchemeField.touched)" class="text-danger">
-      <div *ngIf="adSchemeField.errors.required">
-        Ad Scheme is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
       <label for="adTotal">Total No of Ad</label>
       <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="releaseorder.adTotal" required #adTotalField="ngModel">
     </div>
@@ -527,6 +515,8 @@
                     [dayTemplate]="insertionTemplate"
                     (select)="addInsertion($event)"></ngb-datepicker>
     
+    <br><br>
+    <p class="text-danger" *ngIf="insertionErr">{{insertionErr}}</p>
     <br>
 
     <br>
