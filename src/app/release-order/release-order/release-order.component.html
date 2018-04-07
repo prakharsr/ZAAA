@@ -280,9 +280,7 @@
     </div>
 
     <div>
-      Total Space =
-      <span *ngIf="selectedSize == customSize">{{customSizeL * customSizeW}}</span>
-      <span *ngIf="selectedSize != customSize">{{selectedSize.length * selectedSize.width}}</span>
+      Total Space = {{totalSpace}}
     </div>
 
     <br><br>
@@ -377,18 +375,11 @@
       </div>
       <br>
     </div>
-    
-    <div class="form-group">
-      <label for="adGrossAmount">Ad Gross Amount</label>
-      <input type="number" class="form-control" id="adGrossAmount" name="adGrossAmount" placeholder="Enter Gross Amount" [(ngModel)]="releaseorder.adGrossAmount" required #adGrossAmountField="ngModel">
+
+    <div>
+      Gross Amount = {{grossAmount}}
     </div>
-    
-    <div *ngIf="adGrossAmountField.invalid && (adGrossAmountField.dirty || adGrossAmountField.touched)" class="text-danger">
-      <div *ngIf="adGrossAmountField.errors.required">
-        Ad Gross Amount is required.
-      </div>
-      <br>
-    </div>
+    <br>
     
     <div class="form-group">
       <label for="publicationDiscount">Publication Discount</label>
@@ -438,17 +429,10 @@
       <br>
     </div>
 
-    <div class="form-group">
-      <label for="netAmountFigures">Net Amount in Figures</label>
-      <input type="number" class="form-control" id="netAmountFigures" name="netAmountFigures" placeholder="Enter Net Amount in Figures" [(ngModel)]="releaseorder.netAmountFigures" required #netAmountFiguresField="ngModel">
+    <div>
+      Net Amount = {{netAmount}}
     </div>
-    
-    <div *ngIf="netAmountFiguresField.invalid && (netAmountFiguresField.dirty || netAmountFiguresField.touched)" class="text-danger">
-      <div *ngIf="netAmountFiguresField.errors.required">
-        Net Amount is required.
-      </div>
-      <br>
-    </div>
+    <br>
 
     <div class="form-group">
       <label for="netAmountWords">Net Amount in Words</label>

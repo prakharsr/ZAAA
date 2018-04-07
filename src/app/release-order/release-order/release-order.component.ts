@@ -520,4 +520,30 @@ export class ReleaseOrderComponent implements OnInit {
 
   customPaid = 1;
   customFree = 0;
+
+  get totalSpace() {
+    if (this.selectedSize == this.customSize) {
+      return this.customSizeL * this.customSizeW;
+    }
+    else return this.selectedSize.length * this.selectedSize.width;
+  }
+
+  get grossAmount() {
+    if (this.selectedSize == this.customSize) {
+      return (this.releaseorder.rate * this.totalSpace) * this.releaseorder.adTotal;
+    }
+    else {
+      return this.selectedSize.amount * this.releaseorder.adTotal;
+    }
+  }
+
+  get netAmount() {
+    let amount = this.grossAmount;
+
+    amount -= (this.releaseorder.publicationDiscount * amount / 100);
+    amount -= (this.releaseorder.agencyDiscount1 * amount / 100);
+    amount -= (this.releaseorder.agencyDiscount2 * amount / 100);
+
+    return amount;
+  }
 }
