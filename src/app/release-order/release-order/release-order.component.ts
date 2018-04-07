@@ -309,6 +309,15 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
 
+    if (this.selectedSize == this.customSize) {
+      this.releaseorder.adSizeL = this.customSizeL;
+      this.releaseorder.adSizeW = this.customSizeW;
+    }
+    else {
+      this.releaseorder.adSizeL = this.selectedSize.length;
+      this.releaseorder.adSizeW = this.selectedSize.width;
+    }
+
     if (this.edit) {
       this.editReleaseOrder();
     }

@@ -31,7 +31,8 @@ export class ReleaseOrder {
     adCategory5 = "";
     adCategory6 = "";
     adHue = "";
-    adSize = "";
+    adSizeL = 0;
+    adSizeW = 0;
     adTotalSpace = "";
     adEdition = "";
     adPosition = "";
