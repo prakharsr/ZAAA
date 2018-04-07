@@ -63,7 +63,10 @@ export class ReleaseOrderComponent implements OnInit {
             this.releaseorder.adCategory6
           ]);
 
+          // edit only as custom size
           this.selectedSize = this.customSize;
+          this.customSizeL = this.releaseorder.adSizeL;
+          this.customSizeW = this.releaseorder.adSizeW;
         });
       }
       else if (params.has('rateCard')) {
