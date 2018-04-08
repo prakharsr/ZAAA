@@ -674,6 +674,43 @@ export class ReleaseOrderComponent implements OnInit {
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
 
   paymentTypes = ['Cash', 'Cheque', 'NEFT'];
+
+  addMediaHouse() {
+    let obj = new DirMediaHouse();
+
+    obj.orgName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    obj.address.edition = this.releaseorder.publicationEdition;
+    obj.address.state = this.releaseorder.publicationState;
+    obj.GSTIN = this.releaseorder.publicationGSTIN;
+    obj.mediaType = this.releaseorder.mediaType;
+
+    this.mediaHouseApi.createMediaHouse(obj).subscribe(data => {
+      // handle
+    });
+  }
+
+  addClient() {
+    let obj = new DirClient();
+
+    obj.orgName = this.client.orgName ? this.client.orgName : this.client;
+    obj.address.state = this.releaseorder.clientState;
+    obj.gstNo = this.releaseorder.clientGSTIN;
+    
+    this.clientApi.createClient(obj).subscribe(data => {
+      // handle
+    });
+  }
+  
+  addExecutive() {
+    let obj = new DirExecutive();
+
+    obj.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
+    obj.orgName = this.releaseorder.executiveOrg;
+    
+    this.executiveApi.createExecutive(obj).subscribe(data => {
+      // handle
+    });
+  }
 }
 
 class TaxValues
