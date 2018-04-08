@@ -216,6 +216,8 @@
             Upload
         </label>
         <input type="file" *ngIf="admin" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
+
+        <button *ngIf="admin" class="btn btn-danger mb-2" (click)="removeLogo()"><span class="fa fa-trash-alt"></span></button>
       </div>
     </div>
   </div>

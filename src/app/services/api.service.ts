@@ -97,12 +97,24 @@ export class ApiService {
     return this.fileUpload("/user/image", "user", fileToUpload);
   }
 
+  deleteProfilePicture() : Observable<any> {
+    return this.delete('/user/image');
+  }
+
   uploadSign(fileToUpload: File) : Observable<any> {
     return this.fileUpload("/user/sign", "sign", fileToUpload);
+  }
+
+  deleteSign() : Observable<any> {
+    return this.delete('/user/sign');
   }
   
   uploadFirmLogo(fileToUpload: File) : Observable<any> {
     return this.fileUpload("/firm/logo", "logo", fileToUpload);
+  }
+
+  deleteFirmLogo() : Observable<any> {
+    return this.delete('/firm/logo');
   }
 
   private extractToken(base: Observable<any>) : Observable<any> {
