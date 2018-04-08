@@ -55,7 +55,7 @@ export class ReleaseOrderApiService {
   }
 
   deleteReleaseOrder(releaseOrder: ReleaseOrder) {
-    return this.api.delete('/user/releaseorders/' + releaseOrder.id);
+    return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
   searchReleaseOrders(query: string) : Observable<ReleaseOrder[]> {

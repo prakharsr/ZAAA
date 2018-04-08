@@ -603,7 +603,7 @@ export class ReleaseOrderComponent implements OnInit {
     amount -= (this.releaseorder.agencyDiscount1 * amount / 100);
     amount -= (this.releaseorder.agencyDiscount2 * amount / 100);
 
-    return amount;
+    return Math.ceil(amount);
   }
 
   adCountMultiplier = 0;
