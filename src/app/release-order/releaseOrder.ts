@@ -1,7 +1,12 @@
+import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
+
 export class Insertion {
-    date: string;
-    time: string;
-    marked: boolean;
+    constructor(public date: NgbDate, public marked = false) {}
+}
+
+export class TaxValues
+{
+  constructor(public primary: number, public secondary = 0) {}
 }
 
 export class ReleaseOrder {
@@ -41,14 +46,21 @@ export class ReleaseOrder {
     adCategory6 = "";
     
     adHue = "";
+
     adSizeL = 0;
     adSizeW = 0;
-    adTotalSpace = "";
+    adSizeCustom = false;
+    adSizeAmount = 0;
+    
+    adTotalSpace = 0;
+    
     adEdition = "";
     adPosition = "";
     adTime = ""
+    
     adSchemePaid = 0;
     adSchemeFree = 0;
+    
     adTotal = 0;
     
     insertions: Insertion[] = [];
@@ -59,7 +71,7 @@ export class ReleaseOrder {
     agencyDiscount1 = 0;
     agencyDiscount2 = 0;
     
-    taxAmount = 0;
+    taxAmount = new TaxValues(0);
     taxIncluded = false;
     
     netAmountFigures = 0;

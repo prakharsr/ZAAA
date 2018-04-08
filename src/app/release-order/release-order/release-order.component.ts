@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrder, Insertion } from '../releaseOrder';
+import { ReleaseOrder, Insertion, TaxValues } from '../releaseOrder';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -66,8 +66,6 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private initNew() {
-    this.releaseorder.insertions = [new Insertion()];
-
     this.selectedSize = this.customSize;
     this.selectedScheme = this.customScheme;
 
@@ -95,18 +93,27 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.adCategory6
       ]);
 
-      // edit only as custom size
-      this.selectedSize = this.customSize;
-      this.customSizeL = this.releaseorder.adSizeL;
-      this.customSizeW = this.releaseorder.adSizeW;
+      if (this.releaseorder.adSizeCustom) {
+        this.selectedSize = this.customSize;
+        this.customSizeL = this.releaseorder.adSizeL;
+        this.customSizeW = this.releaseorder.adSizeW;
+      }
+      else {
+        this.fixSizes = [{
+          amount: this.releaseorder.adSizeAmount,
+          length: this.releaseorder.adSizeL,
+          width: this.releaseorder.adSizeW
+        }];
+
+        this.selectedSize = this.fixSizes[0];
+      }
 
       // edit only as custom scheme
       this.selectedScheme = this.customScheme;
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
-      // this is totally wrong
-      this.selectedTax = this.taxes[0];
+      this.selectedTax = this.releaseorder.taxAmount;
     });
   }
 
@@ -341,10 +348,13 @@ export class ReleaseOrderComponent implements OnInit {
   submit () {
     this.error = '';
 
-    this.releaseorder.adTotal = this.totalAds;
+    this.releaseorder.adTotal = this.availableAds;
+    this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
     this.releaseorder.netAmountFigures = this.netAmount;
     this.releaseorder.netAmountWords = this.amountToWords(this.netAmount);
+
+    this.releaseorder.taxAmount = this.selectedTax;
     
     if (this.selectedCategories[0]) {
       this.releaseorder.adCategory1 = this.selectedCategories[0].name;
@@ -372,10 +382,13 @@ export class ReleaseOrderComponent implements OnInit {
     if (this.selectedSize == this.customSize) {
       this.releaseorder.adSizeL = this.customSizeL;
       this.releaseorder.adSizeW = this.customSizeW;
+      this.releaseorder.adSizeCustom = true;
     }
     else {
       this.releaseorder.adSizeL = this.selectedSize.length;
       this.releaseorder.adSizeW = this.selectedSize.width;
+      this.releaseorder.adSizeAmount = this.selectedSize.amount;
+      this.releaseorder.adSizeCustom = false;
     }
 
     if (this.selectedScheme == this.customScheme) {
@@ -511,8 +524,6 @@ export class ReleaseOrderComponent implements OnInit {
 
   currentInsertionDate: NgbDate[];
 
-  insertions: NgbDate[] = [];
-
   insertionErr;
 
   addInsertion(date: NgbDate) {
@@ -521,13 +532,13 @@ export class ReleaseOrderComponent implements OnInit {
     const index = this.findInsertion(date);
 
     if (index == -1) {
-      if (this.insertions.length >= this.availableAds) {
+      if (this.releaseorder.insertions.length >= this.availableAds) {
         this.insertionErr = 'Total No of Ads reached';
   
         return;
       }
 
-      this.insertions.push(date);
+      this.releaseorder.insertions.push(new Insertion(date));
     }
     else this.removeInsertion(index);
   }
@@ -535,13 +546,13 @@ export class ReleaseOrderComponent implements OnInit {
   removeInsertion(i: number) {
     this.insertionErr = '';
 
-    this.insertions.splice(i, 1);
+    this.releaseorder.insertions.splice(i, 1);
   }
 
   findInsertion(date: NgbDate): number {
-    return this.insertions.findIndex(element => element.day == date.day
-      && element.month == date.month
-      && element.year == date.year);
+    return this.releaseorder.insertions.findIndex(element => element.date.day == date.day
+      && element.date.month == date.month
+      && element.date.year == date.year);
   }
 
   isSelected(date: NgbDate) {
@@ -723,9 +734,4 @@ export class ReleaseOrderComponent implements OnInit {
       // handle
     });
   }
-}
-
-class TaxValues
-{
-  constructor(public primary: number, public secondary = 0) {}
 }
