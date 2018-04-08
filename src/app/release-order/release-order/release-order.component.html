@@ -465,18 +465,6 @@
       <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
     </div>
 
-    <div class="form-group">
-      <label for="paymentDetails">Payment Details</label>
-      <input type="text" class="form-control" id="paymentDetails" name="paymentDetails" placeholder="Enter Payment Details" [(ngModel)]="releaseorder.paymentDetails" required #paymentDetailsField="ngModel">
-    </div>
-    
-    <div *ngIf="paymentDetailsField.invalid && (paymentDetailsField.dirty || paymentDetailsField.touched)" class="text-danger">
-      <div *ngIf="paymentDetailsField.errors.required">
-        Payment Details is required.
-      </div>
-      <br>
-    </div>
-
     <br>
     <div class="form-row">
       <div class="col">
@@ -505,7 +493,70 @@
     <br>
 
     <br>
-    <h3>Other Details</h3>
+    <h3>Payment Details</h3>
+    <br>
+
+    <div class="form-group">
+      <label>Type</label>
+      <select class="form-control" name="paymentType" [(ngModel)]="releaseorder.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+        <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="releaseorder.paymentType != 'Cash'">
+      <div class="form-group">
+        <label for="paymentDate">Date</label>
+        <input type="date" class="form-control" id="paymentDate" name="paymentDate" placeholder="Enter Date" [(ngModel)]="releaseorder.paymentDate" required #paymentDateField="ngModel">
+      </div>
+      
+      <div *ngIf="paymentDateField.invalid && (paymentDateField.dirty || paymentDateField.touched)" class="text-danger">
+        <div *ngIf="paymentDateField.errors.required">
+          Date is required.
+        </div>
+        <br>
+      </div>
+
+      <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
+        <div class="form-group">
+          <label for="paymentCheque">Cheque No</label>
+          <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter Cheque No" [(ngModel)]="releaseorder.paymentCheque" required #paymentChequeField="ngModel">
+        </div>
+        
+        <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
+          <div *ngIf="paymentChequeField.errors.required">
+            Cheque No is required.
+          </div>
+          <br>
+        </div>
+      </ng-container>
+
+      <div class="form-group">
+        <label for="paymentAmount">Amount</label>
+        <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="releaseorder.paymentAmount" required #paymentAmountField="ngModel">
+      </div>
+      
+      <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
+        <div *ngIf="paymentAmountField.errors.required">
+          Amount is required.
+        </div>
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="bankName">Bank Name</label>
+        <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="releaseorder.paymentBankName" required #bankNameField="ngModel">
+      </div>
+      
+      <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
+        <div *ngIf="bankNameField.errors.required">
+          Bank Name is required.
+        </div>
+        <br>
+      </div>
+    </ng-container>
+
+    <br>
+    <h3>Executive Details</h3>
     <br>
 
     <div class="form-group">
@@ -531,6 +582,10 @@
       </div>
       <br>
     </div>
+
+    <br>
+    <h3>Other Details</h3>
+    <br>
 
     <div class="form-row">
       <label class="col-form-label col-md-3">Other Charges</label>

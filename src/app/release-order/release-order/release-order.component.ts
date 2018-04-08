@@ -51,47 +51,62 @@ export class ReleaseOrderComponent implements OnInit {
 
         this.edit = true;
 
-        this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
-          this.releaseorder = data.releaseOrder;
-
-          this.buildCategoryTree([
-            this.releaseorder.adCategory1,
-            this.releaseorder.adCategory2,
-            this.releaseorder.adCategory3,
-            this.releaseorder.adCategory4,
-            this.releaseorder.adCategory5,
-            this.releaseorder.adCategory6
-          ]);
-
-          // edit only as custom size
-          this.selectedSize = this.customSize;
-          this.customSizeL = this.releaseorder.adSizeL;
-          this.customSizeW = this.releaseorder.adSizeW;
-
-          // edit only as custom scheme
-          this.selectedScheme = this.customScheme;
-          this.customFree = this.releaseorder.adSchemeFree;
-          this.customPaid = this.releaseorder.adSchemePaid;
-        });
+        this.initFromReleaseOrder();
+      }
+      else if (params.has('copy')) {
+        this.initFromReleaseOrder();
       }
       else if (params.has('rateCard')) {
         this.rateCardApi.getRateCard(params.get('rateCard')).subscribe(data => this.initFromRateCard(data));
       }
       else {
-        this.releaseorder.insertions = [new Insertion()];
-
-        this.selectedSize = this.customSize;
-        this.selectedScheme = this.customScheme;
-
-        this.releaseorder.adTime = this.adTimes[0];
-        this.mediaType = this.mediaTypes[0];
-        this.releaseorder.adHue = 'Colored';
-        this.releaseorder.unit = this.units[0];
-        this.releaseorder.adPosition = this.positions[0];
-        this.releaseorder.adTime = this.adTimes[0];
-        this.selectedTax = this.taxes[0];
-        this.releaseorder.otherChargesType = this.otherChargesTypes[0];
+        this.initNew();
       }
+    });
+  }
+
+  private initNew() {
+    this.releaseorder.insertions = [new Insertion()];
+
+    this.selectedSize = this.customSize;
+    this.selectedScheme = this.customScheme;
+
+    this.releaseorder.adTime = this.adTimes[0];
+    this.mediaType = this.mediaTypes[0];
+    this.releaseorder.adHue = 'Colored';
+    this.releaseorder.unit = this.units[0];
+    this.releaseorder.adPosition = this.positions[0];
+    this.releaseorder.adTime = this.adTimes[0];
+    this.selectedTax = this.taxes[0];
+    this.releaseorder.otherChargesType = this.otherChargesTypes[0];
+    this.releaseorder.paymentType = this.paymentTypes[0];
+  }
+
+  private initFromReleaseOrder() {
+    this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
+      this.releaseorder = data.releaseOrder;
+
+      this.buildCategoryTree([
+        this.releaseorder.adCategory1,
+        this.releaseorder.adCategory2,
+        this.releaseorder.adCategory3,
+        this.releaseorder.adCategory4,
+        this.releaseorder.adCategory5,
+        this.releaseorder.adCategory6
+      ]);
+
+      // edit only as custom size
+      this.selectedSize = this.customSize;
+      this.customSizeL = this.releaseorder.adSizeL;
+      this.customSizeW = this.releaseorder.adSizeW;
+
+      // edit only as custom scheme
+      this.selectedScheme = this.customScheme;
+      this.customFree = this.releaseorder.adSchemeFree;
+      this.customPaid = this.releaseorder.adSchemePaid;
+
+      // this is totally wrong
+      this.selectedTax = this.taxes[0];
     });
   }
 
@@ -641,6 +656,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
+
+  paymentTypes = ['Cash', 'Cheque', 'NEFT'];
 }
 
 class TaxValues

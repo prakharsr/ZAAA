@@ -15,6 +15,13 @@ const routes: Routes = [
     children: [
       { path: '', component: ReleaseOrderListComponent },
       { path: 'new', component: ReleaseOrderComponent },
+      {
+        path: 'new/:copy',
+        component: ReleaseOrderComponent,
+        resolve: {
+          releaseOrder: ReleaseOrderResolver
+        }
+      },
       { path: 'fromRateCard/:rateCard', component: ReleaseOrderComponent },
       {
         path: "edit/:id",
