@@ -52,6 +52,7 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
     this.profile.officeAddress.address = this.profile.registeredAddress.address;
     this.profile.officeAddress.city = this.profile.registeredAddress.city;
     this.profile.officeAddress.state = this.profile.registeredAddress.state;
+    this.profile.officeAddress.pincode = this.profile.registeredAddress.pincode;
   }
 
   private goBack() {
