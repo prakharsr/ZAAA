@@ -319,7 +319,10 @@ export class ReleaseOrderComponent implements OnInit {
     this.error = '';
 
     this.releaseorder.adTotal = this.totalAds;
-
+    this.releaseorder.adGrossAmount = this.grossAmount;
+    this.releaseorder.netAmountFigures = this.netAmount;
+    this.releaseorder.netAmountWords = this.amountToWords(this.netAmount);
+    
     this.releaseorder.adCategory1 = this.selectedCategories[0].name;
     this.releaseorder.adCategory2 = this.selectedCategories[1].name;
     this.releaseorder.adCategory3 = this.selectedCategories[2].name;
@@ -369,8 +372,11 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.publicationEdition = result.address.edition;
       this.releaseorder.publicationState = result.address.state;
       this.releaseorder.publicationGSTIN = result.GSTIN;
-      this.mediaType = result.mediaType;
+
+      this.releaseorder.adEdition = result.address.edition;
     }
+
+    this.mediaType = result.mediaType;
   }
 
   get mediaType() {
@@ -559,5 +565,39 @@ export class ReleaseOrderComponent implements OnInit {
     return (this.selectedScheme == this.customScheme
       ? (this.customPaid + this.customFree) : (this.selectedScheme.paid + this.selectedScheme.Free))
       * this.adCountMultiplier;
+  }
+
+  amountToWords(num) {
+    let a = [
+      '',
+      'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ',
+      'Ten ',
+      'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '
+    ];
+    
+    let b = [
+      '', '',
+      'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
+    ];
+    
+    let c = ['Crore ', 'Lakh ', 'Thousand ', 'Hundred '];
+  
+    if ((num = num.toString()).length > 9)
+      return 'overflow';
+
+    let n : any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    
+    if (!n)
+      return;
+      
+    let str = '';
+
+    for (let i = 0; i < 4; ++i) {
+      str += (n[i + 1] != 0) ? (a[Number(n[i + 1])] || b[n[i + 1][0]] + ' ' + a[n[i + 1][1]]) + c[i] : '';
+    }
+
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only' : '';
+    
+    return str;
   }
 }

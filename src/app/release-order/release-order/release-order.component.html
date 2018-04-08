@@ -364,9 +364,11 @@
       </select>
     </div>
     
-    <div class="form-group form-row">
+    <div class="form-row">
       <label for="adTotal" class="col-form-label col-3">Total No of Ads</label>
-      <input type="number" class="form-control col" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
+      <div class="col">
+        <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
+      </div>
       <span class="col form-text">&times; {{selectedScheme == customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
     </div>
     
@@ -377,6 +379,7 @@
       <br>
     </div>
 
+    <br>
     <div>
       Gross Amount = {{grossAmount}}
     </div>
@@ -435,40 +438,19 @@
     </div>
     <br>
 
-    <div class="form-group">
-      <label for="netAmountWords">Net Amount in Words</label>
-      <input type="text" class="form-control" id="netAmountWords" name="netAmountWords" placeholder="Enter Net Amount in Words" [(ngModel)]="releaseorder.netAmountWords" required #netAmountWordsField="ngModel">
+    <div>
+      Net Amount in Words = {{amountToWords(netAmount)}}
     </div>
-    
-    <div *ngIf="netAmountWordsField.invalid && (netAmountWordsField.dirty || netAmountWordsField.touched)" class="text-danger">
-      <div *ngIf="netAmountWordsField.errors.required">
-        Net Amount in words is required.
-      </div>
-      <br>
-    </div>
+    <br>
     
     <div class="form-group">
       <label for="caption">Caption</label>
-      <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="releaseorder.caption" required #captionField="ngModel">
-    </div>
-    
-    <div *ngIf="captionField.invalid && (captionField.dirty || captionField.touched)" class="text-danger">
-      <div *ngIf="captionField.errors.required">
-        Caption is required.
-      </div>
-      <br>
+      <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
     </div>
 
     <div class="form-group">
       <label for="remark">Remark</label>
-      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" required #remarkField="ngModel">
-    </div>
-    
-    <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
-      <div *ngIf="remarkField.errors.required">
-       Remark is required.
-      </div>
-      <br>
+      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
     </div>
 
     <div class="form-group">
