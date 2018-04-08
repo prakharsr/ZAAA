@@ -46,7 +46,7 @@
     
       <div class="form-group">
         <label for="mobileNo">Mobile Number</label>
-        <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="executive.mobileNo" required #mobileNoField="ngModel">
+        <input type="tel" class="form-control" pattern="^((\+91)|0|)\d{10}$" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="executive.mobileNo" required #mobileNoField="ngModel">
       </div>
     
       <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">

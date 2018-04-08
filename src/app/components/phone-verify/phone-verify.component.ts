@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './phone-verify.component.html',
   styleUrls: ['./phone-verify.component.css']
 })
+
 export class PhoneVerifyComponent implements OnInit {
 
   otpSent : boolean;
