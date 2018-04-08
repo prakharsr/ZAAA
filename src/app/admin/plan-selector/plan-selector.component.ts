@@ -68,10 +68,12 @@ export class PlanSelectorComponent implements OnInit {
           gstNo
         ).subscribe(
           data => {
-            // redirect
-            this.winRef.window.location.pathname = '/dashboard';
-            
-            this.appRef.tick();
+            this.api.generatePaymentInvoice().subscribe(data => {
+              // redirect
+              this.winRef.window.location.pathname = '/dashboard';
+              
+              this.appRef.tick();
+            });
           },
           err => alert("Plan was not saved.\n\nContact support with reference no: " + response.razorpay_payment_id)
         );
