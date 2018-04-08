@@ -318,6 +318,8 @@ export class ReleaseOrderComponent implements OnInit {
   submit () {
     this.error = '';
 
+    this.releaseorder.adTotal = this.totalAds;
+
     this.releaseorder.adCategory1 = this.selectedCategories[0].name;
     this.releaseorder.adCategory2 = this.selectedCategories[1].name;
     this.releaseorder.adCategory3 = this.selectedCategories[2].name;
@@ -469,15 +471,15 @@ export class ReleaseOrderComponent implements OnInit {
   addInsertion(date: NgbDate) {
     this.insertionErr = '';
 
-    if (this.insertions.length >= this.releaseorder.adTotal) {
-      this.insertionErr = 'Total No of Ads reached';
-
-      return;
-    }
-
     const index = this.findInsertion(date);
 
     if (index == -1) {
+      if (this.insertions.length >= this.availableAds) {
+        this.insertionErr = 'Total No of Ads reached';
+  
+        return;
+      }
+
       this.insertions.push(date);
     }
     else this.removeInsertion(index);
@@ -530,10 +532,10 @@ export class ReleaseOrderComponent implements OnInit {
 
   get grossAmount() {
     if (this.selectedSize == this.customSize) {
-      return (this.releaseorder.rate * this.totalSpace) * this.releaseorder.adTotal;
+      return (this.releaseorder.rate * this.totalSpace) * this.totalAds;
     }
     else {
-      return this.selectedSize.amount * this.releaseorder.adTotal;
+      return this.selectedSize.amount * this.totalAds;
     }
   }
 
@@ -545,5 +547,17 @@ export class ReleaseOrderComponent implements OnInit {
     amount -= (this.releaseorder.agencyDiscount2 * amount / 100);
 
     return amount;
+  }
+
+  adCountMultiplier = 0;
+
+  get totalAds() {
+    return this.adCountMultiplier * (this.selectedScheme == this.customScheme ? this.customPaid : this.selectedScheme.paid);
+  }
+
+  get availableAds() {
+    return (this.selectedScheme == this.customScheme
+      ? (this.customPaid + this.customFree) : (this.selectedScheme.paid + this.selectedScheme.Free))
+      * this.adCountMultiplier;
   }
 }

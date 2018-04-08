@@ -364,9 +364,10 @@
       </select>
     </div>
     
-    <div class="form-group">
-      <label for="adTotal">Total No of Ad</label>
-      <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="releaseorder.adTotal" required #adTotalField="ngModel">
+    <div class="form-group form-row">
+      <label for="adTotal" class="col-form-label col-3">Total No of Ads</label>
+      <input type="number" class="form-control col" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
+      <span class="col form-text">&times; {{selectedScheme == customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
     </div>
     
     <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
@@ -485,7 +486,7 @@
     <br>
     <div class="form-row">
       <div class="col">
-        <h4>Insertions ({{insertions.length}})</h4>
+        <h4>Insertions ({{insertions.length}} / {{availableAds}})</h4>
       </div>    
     </div>
     <br>
