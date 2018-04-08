@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ResetPasswordComponent implements OnInit {
 
   password: string;
+  cpassword: string;
   token: string;
   error: string;
   success: boolean;
