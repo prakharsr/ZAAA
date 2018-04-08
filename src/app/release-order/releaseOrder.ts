@@ -70,7 +70,7 @@ export class ReleaseOrder {
     
     paymentType = "";
     paymentDate = "";
-    paymentCheque = "";
+    paymentNo = "";
     paymentAmount = 0;
     paymentBankName = "";
     
