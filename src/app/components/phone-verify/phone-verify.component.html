@@ -8,7 +8,7 @@
   <form (ngSubmit)="sendOtp()" #phoneNumberForm="ngForm">
     <div class="form-group">
       <label for="phone">Phone Number</label>
-      <input type="tel" [(ngModel)]="number" required class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+      <input type="tel" [(ngModel)]="number" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number">
     </div>
 
     <div *ngIf="sendError" class="text-danger">

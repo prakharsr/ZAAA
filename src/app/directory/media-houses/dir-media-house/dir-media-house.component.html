@@ -164,7 +164,7 @@
 
           <div class="form-group">
             <label for="mobileNo">Mobile Number</label>
-            <input type="text" class="form-control" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+            <input type="tel"  pattern="^((\+91)|0|)\d{10}$" class="form-control" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
           </div>
 
           <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">

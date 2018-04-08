@@ -117,7 +117,7 @@
     
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" [(ngModel)]="profile.phone" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
+          <input type="tel" [(ngModel)]="profile.phone" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
         </div>
     
         <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">

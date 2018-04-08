@@ -165,7 +165,7 @@
 
         <div class="form-group">
           <label for="mobileNo">Mobile Number</label>
-          <input type="text" class="form-control" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
+          <input type="tel" class="form-control" pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
         </div>
 
         <div class="form-group">

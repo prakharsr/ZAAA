@@ -40,7 +40,7 @@
 
     <div class="form-group form-row">
       <label class="col-form-label col-md-3" for="phone">Phone Number</label>
-      <input type="number" class="form-control col-md-9" id="phone" name="phone" placeholder="Enter Phone Number" [(ngModel)]="coUser.phone" required #phoneField="ngModel">
+      <input type="number" class="form-control col-md-9" id="phone" pattern="^((\+91)|0|)\d{10}$" name="phone" placeholder="Enter Phone Number" [(ngModel)]="coUser.phone" required #phoneField="ngModel">
     </div>
 
     <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
