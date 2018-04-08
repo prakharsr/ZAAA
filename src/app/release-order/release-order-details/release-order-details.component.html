@@ -35,6 +35,12 @@
               <div class="col-md-4">GSTIN</div>
               <div class="col-md-8">{{releaseOrder.publicationGSTIN}}</div>
             </div>
+          </li>          
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Media Type</div>
+              <div class="col-md-8">{{releaseOrder.mediaType}}</div>
+            </div>
           </li>
         </ul>
       </div>
@@ -55,6 +61,12 @@
               <div class="col-md-4">State</div>
               <div class="col-md-8">{{releaseOrder.clientState}}</div>
             </div>
+          </li>          
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">GSTIN</div>
+              <div class="col-md-8">{{releaseOrder.clientGSTIN}}</div>
+            </div>
           </li>
         </ul>
       </div>
@@ -66,6 +78,18 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
+              <div class="col-md-4">Ad Type</div>
+              <div class="col-md-8">{{releaseOrder.adType}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Rate</div>
+              <div class="col-md-8">{{releaseOrder.rate}} {{releaseOrder.unit}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
               <div class="col-md-4">Size</div>
               <div class="col-md-8">{{releaseOrder.adSizeL}} x {{releaseOrder.adSizeW}}</div>
             </div>
@@ -74,6 +98,12 @@
             <div class="row">
               <div class="col-md-4">Total Space</div>
               <div class="col-md-8">{{releaseOrder.adTotalSpace}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Hue</div>
+              <div class="col-md-8">{{releaseOrder.adHue}}</div>
             </div>
           </li>
           <li class="list-group-item">
@@ -163,15 +193,22 @@
         <div class="card-header">Insertions</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let item of releaseOrder.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
-            <div class="row">
-              <div class="col-sm-4">Date</div>
-              <div class="col-sm-8">{{item.date | date}}</div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">Time</div>
-              <div class="col-sm-8">{{item.time}}</div>
-            </div>
+            {{toDate(item.date) | date}}
           </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-header">Categories</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</li>
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory2">{{releaseOrder.adCategory2}}</li>
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory3">{{releaseOrder.adCategory3}}</li>
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory4">{{releaseOrder.adCategory4}}</li>
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory5">{{releaseOrder.adCategory5}}</li>
+          <li class="list-group-item" *ngIf="releaseOrder.adCategory6">{{releaseOrder.adCategory6}}</li>
         </ul>
       </div>
     </div>
