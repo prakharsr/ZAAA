@@ -7,7 +7,8 @@ export class DirMediaHouse {
         edition: "",
         address: "",
         city: "",
-        state: ""
+        state: "",
+        pincode: ""
     };
     officeLandLine: string;
     officeStdNo: string;

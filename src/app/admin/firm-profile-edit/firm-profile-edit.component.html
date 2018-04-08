@@ -47,6 +47,18 @@
         </div>
       
         <div class="form-group">
+          <label for="registeredPincode">Pincode</label>
+          <input type="tel" minlength="6" maxlength="6" class="form-control" id="registeredPincode" name="registeredPincode" placeholder="Enter Pincode" [(ngModel)]="profile.registeredAddress.pincode" required #registeredPincodeField="ngModel">
+        </div>
+      
+        <div *ngIf="registeredPincodeField.invalid && (registeredPincodeField.dirty || registeredPincodeField.touched)" class="text-danger">
+          <div *ngIf="registeredPincodeField.errors.required">
+            Pincode is required.
+          </div>
+          <br>
+        </div>
+        
+        <div class="form-group">
           <label for="registeredCity">City</label>
           <input type="text" class="form-control" id="registeredCity" name="registeredCity" placeholder="Enter City" [(ngModel)]="profile.registeredAddress.city" required #registeredCityField="ngModel">
         </div>
@@ -79,6 +91,11 @@
 
         <div class="form-group">
           <input type="text" class="form-control" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="officePincode">Pincode</label>
+          <input type="tel" minlength="6" maxlength="6" class="form-control" id="officePincode" name="officePincode" placeholder="Enter Pincode" [(ngModel)]="profile.officeAddress.pincode" #officePincodeField="ngModel">
         </div>
       
         <div class="form-group">

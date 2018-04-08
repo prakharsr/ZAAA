@@ -40,6 +40,18 @@
   </div>
 
   <div class="form-group form-row">
+    <label class="col-md-3 col-form-label" for="pincode">Pincode</label>
+    <input type="tel" minlength="6" maxlength="6" class="form-control col-md-9" id="pincode" name="pincode" placeholder="Enter Pincode" [(ngModel)]="billingAddress.pincode" required #pincodeField="ngModel">
+  </div>
+
+  <div *ngIf="pincodeField.invalid && (pincodeField.dirty || pincodeField.touched)" class="text-danger">
+    <div *ngIf="pincodeField.errors.required">
+      Pincode is required.
+    </div>
+    <br>
+  </div>
+
+  <div class="form-group form-row">
     <label class="col-md-3 col-form-label" for="city">City</label>
     <input type="text" class="form-control col-md-9" id="city" name="city" placeholder="Enter City" [(ngModel)]="billingAddress.city" required #cityField="ngModel">
   </div>
