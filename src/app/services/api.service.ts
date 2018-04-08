@@ -337,4 +337,8 @@ export class ApiService {
       newPassword: newPassword
     });
   }
+
+  generatePaymentInvoice() {
+    return this.post('/user/plan/invoice', {});
+  }
 }
