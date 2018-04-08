@@ -569,6 +569,10 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   amountToWords(num) {
+    if (!num) {
+      return "Zero Only";
+    }
+
     let a = [
       '',
       'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ',
@@ -610,6 +614,16 @@ export class ReleaseOrderComponent implements OnInit {
   ];
 
   selectedTax: TaxValues;
+
+  get taxDisplay() {
+    let tax = this.selectedTax.primary + "%";
+
+    if (this.selectedTax.secondary) {
+      tax += " + " + this.selectedTax.secondary + "%"
+    }
+
+    return tax + (this.releaseorder.taxIncluded ? " Included" : " Excluded");
+  }
 }
 
 class TaxValues

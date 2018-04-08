@@ -425,7 +425,7 @@
       <label class="col-3 col-form-label">Tax</label>
       <div class="col-auto col-form-label">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="releaseorder.taxIncluded">
+          <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="releaseorder.taxIncluded">
           <label class="form-check-label">Included</label>
         </div>
       </div>
@@ -446,12 +446,12 @@
     </div>
 
     <div>
-      Net Amount = {{netAmount}}
+      Net Amount = {{netAmount}} ({{taxDisplay}})
     </div>
     <br>
 
     <div>
-      Net Amount in Words = {{amountToWords(netAmount)}}
+      Net Amount in Words = {{amountToWords(netAmount)}} ({{taxDisplay}})
     </div>
     <br>
     
