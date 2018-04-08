@@ -128,8 +128,13 @@
         </div>
       
         <div class="form-group">
+          <label for="stdNo">STD Number</label>
+          <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="Enter STD Number" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
+        </div>
+
+        <div class="form-group">
           <label for="landlineNo">Landline Number</label>
-          <input type="number" class="form-control" id="landlineNo" name="landlineNo" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+          <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
         </div>
       
         <div class="form-group">

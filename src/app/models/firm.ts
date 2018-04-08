@@ -4,6 +4,7 @@ export class Firm {
     name: string;
     registeredAddress = new Address();
     officeAddress = new Address();
+    stdNo : string;
     landlineNo: string;
     fax: string;
     website: string;

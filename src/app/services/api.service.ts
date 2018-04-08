@@ -254,6 +254,7 @@ export class ApiService {
           profile.nickname = data.firm.DisplayName;
           profile.fax = data.firm.Fax;
           profile.landlineNo = data.firm.Landline;
+          profile.stdNo = data.firm.STD;
           profile.website = data.firm.Website;
           profile.panNo = data.firm.PanNo;
           profile.gstNo = data.firm.GSTIN;
@@ -307,6 +308,7 @@ export class ApiService {
       officeAddress: firm.officeAddress,
       fax: firm.fax,
       landline: firm.landlineNo,
+      std: firm.stdNo,
       website: firm.website,
       pan: firm.panNo,
       gst: firm.gstNo,
