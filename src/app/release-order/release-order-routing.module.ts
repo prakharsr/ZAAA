@@ -7,6 +7,7 @@ import { ReleaseOrderDetailsComponent } from './release-order-details/release-or
 
 import { AuthGuard } from '../guards/auth-guard.service';
 import { ReleaseOrderResolver } from './release-order-resolver.service';
+import { RateCardResolver } from '../rate-card/rate-card-resolver.service';
 
 const routes: Routes = [
   {
@@ -15,7 +16,20 @@ const routes: Routes = [
     children: [
       { path: '', component: ReleaseOrderListComponent },
       { path: 'new', component: ReleaseOrderComponent },
-      { path: 'fromRateCard/:rateCard', component: ReleaseOrderComponent },
+      {
+        path: 'new/:copy',
+        component: ReleaseOrderComponent,
+        resolve: {
+          releaseOrder: ReleaseOrderResolver
+        }
+      },
+      {
+        path: 'fromRateCard/:rateCard',
+        component: ReleaseOrderComponent,
+        resolve: {
+          rateCard: RateCardResolver
+        }
+      },
       {
         path: "edit/:id",
         component: ReleaseOrderComponent,

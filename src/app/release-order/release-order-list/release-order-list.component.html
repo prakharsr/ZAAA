@@ -21,6 +21,7 @@
           {{releaseOrder.clientName}}
         </div>
         <div class="col-auto">
+          <a class="btn btn-outline-info" [routerLink]="['/releaseorders/new', releaseOrder.id]"><span class="fa fa-plus"></span> Copy into New</a>
           <button class="btn btn-outline-info" (click)="sendMsg()"><span class="fa fa-envelope"></span></button>
           <button class="btn btn-outline-danger" (click)="deleteReleaseOrder(releaseOrder)"><span class="fa fa-trash-alt"></span></button>
         </div>
