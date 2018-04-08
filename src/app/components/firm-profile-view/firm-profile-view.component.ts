@@ -57,4 +57,26 @@ export class FirmProfileViewComponent implements OnInit {
       }
     );
   }
+
+  removeLogo() {
+    this.api.deleteFirmLogo().subscribe(
+      data => {
+        if (data.success) {
+          this.success = 'Logo removed successfully';
+
+          this.profile.logo = environment.uploadsBaseUrl + data.photo;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
+    )
+  }
 }

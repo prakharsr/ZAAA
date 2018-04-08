@@ -56,6 +56,28 @@ export class ProfileViewComponent implements OnInit {
     );
   }
 
+  removeProfilePicture() {
+    this.api.deleteProfilePicture().subscribe(
+      data => {
+        if (data.success) {
+          this.success = 'Profile Picture removed successfully';
+
+          this.profile.photo = environment.uploadsBaseUrl + data.photo;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
+    )
+  }
+
   uploadSign(files: FileList) {
     this.error = '';
     this.success = '';
@@ -79,5 +101,27 @@ export class ProfileViewComponent implements OnInit {
         this.error = "Connection failed";
       }
     );
+  }
+
+  removeSign() {
+    this.api.deleteSign().subscribe(
+      data => {
+        if (data.success) {
+          this.success = 'Signature removed successfully';
+
+          this.profile.sign = environment.uploadsBaseUrl + data.photo;
+        }
+        else {
+          console.log(data);
+
+          this.error = data.msg;
+        }
+      },
+      err => {
+        console.log(err);
+
+        this.error = "Connection failed";
+      }
+    )
   }
 }
