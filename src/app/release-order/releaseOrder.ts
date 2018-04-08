@@ -53,6 +53,7 @@ export class ReleaseOrder {
     remark = "";
     paymentDetails = "";
     executiveName = "";
+    executiveOrg = "";
     otherCharges = 0;
     clientPayment = 0;
 }

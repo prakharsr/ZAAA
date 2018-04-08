@@ -467,7 +467,13 @@ export class ReleaseOrderComponent implements OnInit {
       .catch(() => of([]));
   }
 
-  executiveFormatter = (result: DirExecutive) => result.executiveName;
+  executiveInputFormatter = (result: DirExecutive) => {
+    this.releaseorder.executiveOrg = result.orgName;
+
+    return result.executiveName;
+  }
+
+  executiveResultFormatter = (result: DirExecutive) => result.executiveName;
 
   currentInsertionDate: NgbDate[];
 
@@ -622,7 +628,15 @@ export class ReleaseOrderComponent implements OnInit {
       tax += " + " + this.selectedTax.secondary + "%"
     }
 
-    return tax + (this.releaseorder.taxIncluded ? " Included" : " Excluded");
+    return tax + (this.releaseorder.taxIncluded ? " Tax Included" : " Tax Excluded");
+  }
+
+  get clientPayment() {
+    let amount = this.grossAmount;
+
+    amount -= (this.releaseorder.publicationDiscount * amount / 100);
+
+    return amount;
   }
 }
 

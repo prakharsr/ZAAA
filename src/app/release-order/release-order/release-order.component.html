@@ -510,12 +510,24 @@
 
     <div class="form-group">
       <label for="executiveName">Executive Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveFormatter" [inputFormatter]="executiveFormatter">
+      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
     </div>
     
     <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
       <div *ngIf="executiveNameField.errors.required">
         Executive Name is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="executiveOrg">Executive Organisation</label>
+      <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+    </div>
+    
+    <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
+      <div *ngIf="executiveOrgField.errors.required">
+        Executive Organisation is required.
       </div>
       <br>
     </div>
@@ -532,17 +544,10 @@
       <br>
     </div>
 
-    <div class="form-group">
-      <label for="clientPayment">Client Payment </label>
-      <input type="number" class="form-control" id="clientPayment" name="clientPayment" placeholder="Enter Client Payment" [(ngModel)]="releaseorder.clientPayment" required #clientPaymentField="ngModel">
+    <div>
+      Client Payment = {{clientPayment}}
     </div>
-    
-    <div *ngIf="clientPaymentField.invalid && (clientPaymentField.dirty || clientPaymentField.touched)" class="text-danger">
-      <div *ngIf="clientPaymentField.errors.required">
-        Client Payment is required.
-      </div>
-      <br>
-    </div>
+    <br>
 
     <br>
 
