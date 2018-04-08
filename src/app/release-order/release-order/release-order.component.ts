@@ -346,12 +346,24 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.netAmountFigures = this.netAmount;
     this.releaseorder.netAmountWords = this.amountToWords(this.netAmount);
     
-    this.releaseorder.adCategory1 = this.selectedCategories[0].name;
-    this.releaseorder.adCategory2 = this.selectedCategories[1].name;
-    this.releaseorder.adCategory3 = this.selectedCategories[2].name;
-    this.releaseorder.adCategory4 = this.selectedCategories[3].name;
-    this.releaseorder.adCategory5 = this.selectedCategories[4].name;
-    this.releaseorder.adCategory6 = this.selectedCategories[5].name;
+    if (this.selectedCategories[0]) {
+      this.releaseorder.adCategory1 = this.selectedCategories[0].name;
+    }
+    if (this.selectedCategories[1]) {
+      this.releaseorder.adCategory2 = this.selectedCategories[1].name;
+    }
+    if (this.selectedCategories[2]) {
+      this.releaseorder.adCategory3 = this.selectedCategories[2].name;
+    }
+    if (this.selectedCategories[3]) {
+      this.releaseorder.adCategory4 = this.selectedCategories[3].name;
+    }
+    if (this.selectedCategories[4]) {
+      this.releaseorder.adCategory5 = this.selectedCategories[4].name;
+    }
+    if (this.selectedCategories[5]) {
+      this.releaseorder.adCategory6 = this.selectedCategories[5].name;
+    }
 
     this.releaseorder.publicationName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
@@ -674,6 +686,43 @@ export class ReleaseOrderComponent implements OnInit {
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
 
   paymentTypes = ['Cash', 'Cheque', 'NEFT'];
+
+  addMediaHouse() {
+    let obj = new DirMediaHouse();
+
+    obj.orgName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    obj.address.edition = this.releaseorder.publicationEdition;
+    obj.address.state = this.releaseorder.publicationState;
+    obj.GSTIN = this.releaseorder.publicationGSTIN;
+    obj.mediaType = this.releaseorder.mediaType;
+
+    this.mediaHouseApi.createMediaHouse(obj).subscribe(data => {
+      // handle
+    });
+  }
+
+  addClient() {
+    let obj = new DirClient();
+
+    obj.orgName = this.client.orgName ? this.client.orgName : this.client;
+    obj.address.state = this.releaseorder.clientState;
+    obj.gstNo = this.releaseorder.clientGSTIN;
+    
+    this.clientApi.createClient(obj).subscribe(data => {
+      // handle
+    });
+  }
+  
+  addExecutive() {
+    let obj = new DirExecutive();
+
+    obj.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
+    obj.orgName = this.releaseorder.executiveOrg;
+    
+    this.executiveApi.createExecutive(obj).subscribe(data => {
+      // handle
+    });
+  }
 }
 
 class TaxValues
