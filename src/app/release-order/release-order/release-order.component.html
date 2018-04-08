@@ -380,6 +380,33 @@
     </div>
 
     <br>
+    <div class="form-row">
+      <div class="col">
+        <h4>Insertions ({{insertions.length}} / {{availableAds}})</h4>
+      </div>    
+    </div>
+    <br>
+
+    <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+      <span class="custom-day"
+            [class.focused]="focused"
+            [class.selected]="isSelected(date)"
+            [class.text-muted]="date.month !== currentMonth || disabled">
+        {{ date.day }}
+      </span>
+    </ng-template>
+    
+    <ngb-datepicker [(ngModel)]="currentInsertionDate"
+                    name="currentInsertionDate"
+                    [markDisabled]="insertionMarkDisabled"
+                    [dayTemplate]="insertionTemplate"
+                    (select)="addInsertion($event)"></ngb-datepicker>
+    
+    <br><br>
+    <p class="text-danger" *ngIf="insertionErr">{{insertionErr}}</p>
+    <br>
+
+    <br>
     <div>
       Gross Amount = {{grossAmount}}
     </div>
@@ -464,33 +491,6 @@
       <label for="remark">Remark</label>
       <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
     </div>
-
-    <br>
-    <div class="form-row">
-      <div class="col">
-        <h4>Insertions ({{insertions.length}} / {{availableAds}})</h4>
-      </div>    
-    </div>
-    <br>
-
-    <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
-      <span class="custom-day"
-            [class.focused]="focused"
-            [class.selected]="isSelected(date)"
-            [class.text-muted]="date.month !== currentMonth || disabled">
-        {{ date.day }}
-      </span>
-    </ng-template>
-    
-    <ngb-datepicker [(ngModel)]="currentInsertionDate"
-                    name="currentInsertionDate"
-                    [markDisabled]="insertionMarkDisabled"
-                    [dayTemplate]="insertionTemplate"
-                    (select)="addInsertion($event)"></ngb-datepicker>
-    
-    <br><br>
-    <p class="text-danger" *ngIf="insertionErr">{{insertionErr}}</p>
-    <br>
 
     <br>
     <h3>Payment Details</h3>
