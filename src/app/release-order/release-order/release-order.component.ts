@@ -113,7 +113,8 @@ export class ReleaseOrderComponent implements OnInit {
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
-      this.selectedTax = this.releaseorder.taxAmount;
+      this.selectedTax = this.taxes.find(element => element.primary == this.releaseorder.taxAmount.primary
+        && element.secondary == this.releaseorder.taxAmount.secondary);
     });
   }
 
