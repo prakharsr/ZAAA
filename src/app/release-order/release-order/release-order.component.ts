@@ -346,12 +346,24 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.netAmountFigures = this.netAmount;
     this.releaseorder.netAmountWords = this.amountToWords(this.netAmount);
     
-    this.releaseorder.adCategory1 = this.selectedCategories[0].name;
-    this.releaseorder.adCategory2 = this.selectedCategories[1].name;
-    this.releaseorder.adCategory3 = this.selectedCategories[2].name;
-    this.releaseorder.adCategory4 = this.selectedCategories[3].name;
-    this.releaseorder.adCategory5 = this.selectedCategories[4].name;
-    this.releaseorder.adCategory6 = this.selectedCategories[5].name;
+    if (this.selectedCategories[0]) {
+      this.releaseorder.adCategory1 = this.selectedCategories[0].name;
+    }
+    if (this.selectedCategories[1]) {
+      this.releaseorder.adCategory2 = this.selectedCategories[1].name;
+    }
+    if (this.selectedCategories[2]) {
+      this.releaseorder.adCategory3 = this.selectedCategories[2].name;
+    }
+    if (this.selectedCategories[3]) {
+      this.releaseorder.adCategory4 = this.selectedCategories[3].name;
+    }
+    if (this.selectedCategories[4]) {
+      this.releaseorder.adCategory5 = this.selectedCategories[4].name;
+    }
+    if (this.selectedCategories[5]) {
+      this.releaseorder.adCategory6 = this.selectedCategories[5].name;
+    }
 
     this.releaseorder.publicationName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
