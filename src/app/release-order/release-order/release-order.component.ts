@@ -90,6 +90,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.adPosition = this.positions[0];
         this.releaseorder.adTime = this.adTimes[0];
         this.selectedTax = this.taxes[0];
+        this.releaseorder.otherChargesType = this.otherChargesTypes[0];
       }
     });
   }
@@ -638,6 +639,8 @@ export class ReleaseOrderComponent implements OnInit {
 
     return amount;
   }
+
+  otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
 }
 
 class TaxValues

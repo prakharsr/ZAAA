@@ -532,16 +532,34 @@
       <br>
     </div>
 
-    <div class="form-group">
-      <label for="otherCharges">Other Charges</label>
-      <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Other Charges" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
-    </div>
-    
-    <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
-      <div *ngIf="paymentDetailsField.errors.required">
-        Other Charges is required.
+    <div class="form-row">
+      <label class="col-form-label col-md-3">Other Charges</label>
+      <div class="col">
+        <div class="form-group">
+          <select class="form-control" name="otherChargesType" [(ngModel)]="releaseorder.otherChargesType" id="otherChargesType" #otherChargesTypeField="ngModel" required>
+            <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
+          </select>
+        </div>
+
+        <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
+          <div *ngIf="otherChargesTypeField.errors.required">
+            Type is required.
+          </div>
+          <br>
+        </div>
       </div>
-      <br>
+      <div class="col">
+        <div class="form-group">
+          <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Amount" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
+        </div>
+
+        <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
+          <div *ngIf="paymentDetailsField.errors.required">
+            Amount is required.
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
 
     <div>

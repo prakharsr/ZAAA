@@ -55,5 +55,6 @@ export class ReleaseOrder {
     executiveName = "";
     executiveOrg = "";
     otherCharges = 0;
+    otherChargesType = "";
     clientPayment = 0;
 }
