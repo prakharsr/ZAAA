@@ -115,6 +115,25 @@ export class ReleaseOrderComponent implements OnInit {
 
       this.selectedTax = this.taxes.find(element => element.primary == this.releaseorder.taxAmount.primary
         && element.secondary == this.releaseorder.taxAmount.secondary);
+
+      let dirMediaHouse = new DirMediaHouse();
+      dirMediaHouse.orgName = this.releaseorder.publicationName;
+      dirMediaHouse.address.edition = this.releaseorder.publicationEdition;
+      dirMediaHouse.address.state = this.releaseorder.publicationState;
+      dirMediaHouse.GSTIN = this.releaseorder.publicationGSTIN;
+      dirMediaHouse.mediaType = this.releaseorder.mediaType;
+      this.mediaHouse = dirMediaHouse;
+      
+      let dirClient = new DirClient();
+      dirClient.orgName = this.releaseorder.clientName;
+      dirClient.address.state = this.releaseorder.clientState;
+      dirClient.gstNo = this.releaseorder.clientGSTIN;
+      this.client = dirClient;
+
+      let dirExecutive = new DirExecutive();
+      dirExecutive.executiveName = this.releaseorder.executiveName;
+      dirExecutive.orgName = this.releaseorder.executiveOrg;
+      this.executive = dirExecutive;
     });
   }
 
