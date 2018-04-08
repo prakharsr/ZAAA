@@ -89,6 +89,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.unit = this.units[0];
         this.releaseorder.adPosition = this.positions[0];
         this.releaseorder.adTime = this.adTimes[0];
+        this.selectedTax = this.taxes[0];
       }
     });
   }
@@ -600,4 +601,18 @@ export class ReleaseOrderComponent implements OnInit {
     
     return str;
   }
+
+  taxes: TaxValues[] = [
+    new TaxValues(5),
+    new TaxValues(10),
+    new TaxValues(14),
+    new TaxValues(28, 18)
+  ];
+
+  selectedTax: TaxValues;
+}
+
+class TaxValues
+{
+  constructor(public primary: number, public secondary = 0) {}
 }

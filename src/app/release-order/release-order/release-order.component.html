@@ -421,16 +421,28 @@
       <br>
     </div>
 
-    <div class="form-group">
-      <label for="taxAmount">Tax Amount</label>
-      <input type="number" class="form-control" id="taxAmount" name="taxAmount" placeholder="Enter Tax Amount" [(ngModel)]="releaseorder.taxAmount" required #taxAmountField="ngModel">
-    </div>
-    
-    <div *ngIf="taxAmountField.invalid && (taxAmountField.dirty || taxAmountField.touched)" class="text-danger">
-      <div *ngIf="taxAmountField.errors.required">
-        Tax Amount is required.
+    <div class="form-row">
+      <label class="col-3 col-form-label">Tax</label>
+      <div class="col-auto col-form-label">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" [(ngModel)]="releaseorder.taxIncluded">
+          <label class="form-check-label">Included</label>
+        </div>
       </div>
-      <br>
+      <div class="col">
+        <div class="form-group">
+          <select class="form-control" name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
+            <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
+          </select>
+        </div>
+
+        <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
+          <div *ngIf="taxField.errors.required">
+            Tax is required.
+          </div>
+          <br>
+        </div>
+      </div>
     </div>
 
     <div>

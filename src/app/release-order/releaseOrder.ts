@@ -46,6 +46,7 @@ export class ReleaseOrder {
     agencyDiscount1 = 0;
     agencyDiscount2 = 0;
     taxAmount = 0;
+    taxIncluded = false;
     netAmountFigures = 0;
     netAmountWords = "";
     caption = "";
