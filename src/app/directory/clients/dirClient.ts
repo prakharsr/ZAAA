@@ -7,6 +7,7 @@ export class DirClient {
     category: string;
     address = new Address();
     landLine: string;
+    stdNo: string;
     website: string;
     panNo: string;
     gstNo: string;
@@ -24,4 +25,5 @@ export class ContactPerson {
     dob = "";
     anniversaryDate = "";
     personLandLine = "";
+    personStdNo = "";
 }

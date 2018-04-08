@@ -23,6 +23,7 @@ export class ClientApiService {
       categoryType: client.category,
       address: client.address,
       landline: client.landLine,
+      stdNo: client.stdNo,
       website: client.website,
       panNo: client.panNo,
       gstin: client.gstNo,
@@ -40,7 +41,8 @@ export class ClientApiService {
       dob: body.DateOfBirth,
       anniversaryDate: body.Anniversary,
       photo: body.Photo,
-      personLandLine: body.Landline
+      personLandLine: body.Landline,
+      personStdNo: body.stdNo
     };
   }
 
@@ -54,7 +56,8 @@ export class ClientApiService {
       DateOfBirth: contactPerson.dob,
       Anniversary: contactPerson.anniversaryDate,
       Photo: contactPerson.photo,
-      Landline: contactPerson.personLandLine
+      Landline: contactPerson.personLandLine,
+      stdNo: contactPerson.personStdNo
     }
   }
 
@@ -69,6 +72,7 @@ export class ClientApiService {
     client.category = data.CategoryType;
     client.address = data.Address;
     client.landLine = data.Landline;
+    client.stdNo = data.stdNo;
     client.website = data.Website;
     client.panNo = data.PanNO;
     client.gstNo = data.GSTNo;
@@ -99,6 +103,7 @@ export class ClientApiService {
       CategoryType: client.category,
       Address: client.address,
       Landline: client.landLine,
+      stdNo: client.stdNo,
       Website: client.website,
       PanNO: client.panNo,
       GSTNo: client.gstNo,

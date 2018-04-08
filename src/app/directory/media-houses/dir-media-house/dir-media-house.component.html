@@ -66,8 +66,13 @@
       </div>
     
       <div class="form-group">
+        <label for="officeStdNo">STD No</label>
+        <input type="tel" class="form-control" minlength="3" maxlength="5" id="officeStdNo" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
+      </div>
+
+      <div class="form-group">
         <label for="officeLandLine">Office Landline</label>
-        <input type="text" class="form-control" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+        <input type="tel" class="form-control" minlength="6" maxlength="8" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
       </div>
     
       <br>

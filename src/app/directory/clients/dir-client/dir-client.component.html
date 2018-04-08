@@ -40,8 +40,13 @@
       </div>
 
       <div class="form-group">
+        <label for="stdNo">STD No</label>
+        <input type="tel" class="form-control" minlength="3" maxlength="5" id="stdNo" name="stdNo" placeholder="STD No" [(ngModel)]="client.stdNo" #stdNoField="ngModel">
+      </div>
+
+      <div class="form-group">
         <label for="landLine">Landline</label>
-        <input type="text" class="form-control" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
+        <input type="tel" class="form-control" minlength="6" maxlength="8" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
       </div>
     
       <div class="form-group">
@@ -152,8 +157,20 @@
         </div>
 
         <div class="form-group">
+          <label for="personStdNo">STD</label>
+          <input type="tel" class="form-control" minlength="3" maxlength="5" id="personStdNo-{{i}}" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
+        </div>
+
+        <div *ngIf="personStdNoField.invalid && (personStdNoField.dirty || personStdNoField.touched)" class="text-danger">
+          <div *ngIf="personStdNoField.errors.required">
+            STD No is required.
+          </div>
+          <br>
+        </div>
+        
+        <div class="form-group">
           <label for="personLandLine">Land Line</label>
-          <input type="text" class="form-control" id="personLandLine-{{i}}" name="s-{{i}}-personLandLine" placeholder="Enter LandLine Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
+          <input type="tel" class="form-control" minlength="6" maxlength="8" id="personLandLine-{{i}}" name="s-{{i}}-personLandLine" placeholder="Enter LandLine Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
         </div>
 
         <div *ngIf="personLandLineField.invalid && (personLandLineField.dirty || personLandLineField.touched)" class="text-danger">

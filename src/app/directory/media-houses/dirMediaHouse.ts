@@ -10,6 +10,7 @@ export class DirMediaHouse {
         state: ""
     };
     officeLandLine: string;
+    officeStdNo: string;
     scheduling: MediaHouseScheduling[];
 
     GSTIN: string;

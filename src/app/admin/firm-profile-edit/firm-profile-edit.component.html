@@ -126,16 +126,23 @@
           </div>
           <br>
         </div>
-      
-        <div class="form-group">
-          <label for="stdNo">STD Number</label>
-          <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="Enter STD Number" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
-        </div>
 
-        <div class="form-group">
-          <label for="landlineNo">Landline Number</label>
-          <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+        <div class="form-row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="stdNo">STD Number</label>
+              <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
+            </div>
+          </div>
+      
+        <div class="col-9">
+          <div class="form-group">
+            <label for="landlineNo">Landline Number</label>
+            <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+          </div>
         </div>
+        </div>
+       
       
         <div class="form-group">
           <label for="fax">Fax</label>
