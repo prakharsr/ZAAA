@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  razorPay: "rzp_test_qIUnr51XOjxMYX",
+  razorPay: "rzp_test_86QLf2LFy65g2j",
   apiUrl: "http://localhost:8080/api",
   uploadsBaseUrl: "http://localhost:8080"
 };
