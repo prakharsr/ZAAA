@@ -19,6 +19,7 @@ import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
 
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
+import { LoaderService } from './services/loader.service';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { MailingDetailsComponent } from './components/mailing-details/mailing-de
     AuthGuard,
     PhoneVerifyGuard,
     AdminGuard,
-    PlanGuard
+    PlanGuard,
+    LoaderService
   ],
   declarations: [
     MailingDetailsComponent
