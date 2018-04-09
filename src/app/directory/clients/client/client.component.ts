@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
 
 @Component({
-  selector: 'app-dir-client',
-  templateUrl: './dir-client.component.html',
-  styleUrls: ['./dir-client.component.css']
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.css']
 })
-export class DirClientComponent implements OnInit {
+export class ClientComponent implements OnInit {
 
   client = new Client();
   error: string;

@@ -7,7 +7,7 @@ import { PlanGuard } from '../guards/plan-guard.service';
 import { AdminGuard } from '../guards/admin-guard.service';
 
 import { CoUsersComponent } from './co-users/co-users.component';
-import { NewCoUserComponent } from './new-co-user/new-co-user.component';
+import { CoUserComponent } from './co-user/co-user.component';
 import { RoleEditComponent } from './role-edit/role-edit.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'new',
-        component: NewCoUserComponent
+        component: CoUserComponent
       },
       {
         path: ':id',

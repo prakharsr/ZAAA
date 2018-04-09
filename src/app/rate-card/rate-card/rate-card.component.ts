@@ -13,11 +13,11 @@ import { MediaHouseApiService } from '../../directory/media-houses/media-house-a
 import { MediaHouse } from '../../directory/media-houses/media-house';
 
 @Component({
-  selector: 'app-create-rate-card',
-  templateUrl: './create-rate-card.component.html',
-  styleUrls: ['./create-rate-card.component.css']
+  selector: 'app-rate-card',
+  templateUrl: './rate-card.component.html',
+  styleUrls: ['./rate-card.component.css']
 })
-export class CreateRateCardComponent implements OnInit {
+export class RateCardComponent implements OnInit {
 
   edit = false;
   id: string;

@@ -7,12 +7,12 @@ import { NgForm } from '@angular/forms';
 import { CoUserApiService } from '../co-user-api.service';
 
 @Component({
-  selector: 'app-new-co-user',
+  selector: 'app-co-user',
   animations: [routerAnimation],
-  templateUrl: './new-co-user.component.html',
-  styleUrls: ['./new-co-user.component.css']
+  templateUrl: './co-user.component.html',
+  styleUrls: ['./co-user.component.css']
 })
-export class NewCoUserComponent implements OnInit {
+export class CoUserComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 

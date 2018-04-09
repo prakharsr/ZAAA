@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
 
 @Component({
-  selector: 'app-dir-media-house',
-  templateUrl: './dir-media-house.component.html',
-  styleUrls: ['./dir-media-house.component.css']
+  selector: 'app-media-house',
+  templateUrl: './media-house.component.html',
+  styleUrls: ['./media-house.component.css']
 })
-export class DirMediaHouseComponent implements OnInit {
+export class MediaHouseComponent implements OnInit {
 
   mediaHouse = new MediaHouse();
   error: string;

@@ -4,11 +4,11 @@ import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dir-executive',
-  templateUrl: './dir-executive.component.html',
-  styleUrls: ['./dir-executive.component.css']
+  selector: 'app-executive',
+  templateUrl: './executive.component.html',
+  styleUrls: ['./executive.component.css']
 })
-export class DirExecutiveComponent implements OnInit {
+export class ExecutiveComponent implements OnInit {
 
   executive = new Executive();
   error: string;

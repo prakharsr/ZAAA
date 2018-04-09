@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RateCardListComponent } from './rate-card-list/rate-card-list.component';
-import { CreateRateCardComponent } from './create-rate-card/create-rate-card.component';
+import { RateCardComponent } from './rate-card/rate-card.component';
 import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.component';
 
 import { RateCardResolver } from './rate-card-resolver.service';
@@ -15,17 +15,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children:  [          
       { path: '', component: RateCardListComponent },
-      { path: 'new', component: CreateRateCardComponent },
+      { path: 'new', component: RateCardComponent },
       {
         path: 'new/:copy',
-        component: CreateRateCardComponent,
+        component: RateCardComponent,
         resolve: {
           rateCard: RateCardResolver
         }
       },
       {
         path: 'edit/:id',
-        component: CreateRateCardComponent,
+        component: RateCardComponent,
         resolve: {
           rateCard: RateCardResolver
         }
