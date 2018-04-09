@@ -15,8 +15,6 @@ export class BillingDetailsComponent implements OnInit {
   
   @Output() done = new EventEmitter();
 
-  error: string;
-
   constructor(public stateApi: StateApiService) { }
 
   ngOnInit() {

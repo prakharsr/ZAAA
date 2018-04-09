@@ -18,6 +18,7 @@ import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
 import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
+import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
 
 @NgModule({
   imports: [
@@ -39,12 +40,15 @@ import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
     PlanGuard,
     CanDeactiveGuard
   ],
-  declarations: [],
+  declarations: [
+    MailingDetailsComponent
+  ],
   exports: [
     CommonModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MailingDetailsComponent
   ]
 })
 export class BaseModule { }
