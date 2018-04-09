@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MailingDetails } from '../../models/mailing-details';
 
 @Component({
   selector: 'app-mailing-details',

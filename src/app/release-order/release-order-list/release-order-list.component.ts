@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReleaseOrderApiService } from '../release-order-api.service';
 import { DialogService } from '../../services/dialog.service';
 import { ReleaseOrder } from '../release-order';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MailingDetails } from '../../models/mailing-details';
 
 @Component({
   selector: 'app-release-order-list',
@@ -12,7 +14,7 @@ export class ReleaseOrderListComponent implements OnInit {
 
   releaseOrders = [];
 
-  constructor(private api: ReleaseOrderApiService, private dialog: DialogService) { }
+  constructor(private api: ReleaseOrderApiService, private dialog: DialogService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.api.getReleaseOrders().subscribe(data => this.releaseOrders = data);
@@ -38,6 +40,10 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   sendMsg() {}
+
+  showModal(modalContent) {
+    this.modalService.open(modalContent);
+  }
 
   mailingDetails(mailingDetails: MailingDetails) {}
 

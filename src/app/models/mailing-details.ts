@@ -1,4 +1,4 @@
-class MailingDetails {
+export class MailingDetails {
     to = "";
     cc = "";
     bcc = "";
