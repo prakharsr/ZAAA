@@ -94,10 +94,13 @@
         <label for="pincode">Pincode</label>
         <input type="tel" minlength="6" maxlength="6" class="form-control" id="pincode" name="pincode" placeholder="Enter Pincode" [(ngModel)]="mediaHouse.address.pincode" required #pincodeField="ngModel">
       </div>
-    
+
       <div *ngIf="pincodeField.invalid && (pincodeField.dirty || pincodeField.touched)" class="text-danger">
         <div *ngIf="pincodeField.errors.required">
           Pincode is required.
+        </div>
+        <div *ngIf="pincodeField.errors.minlength || pincodeField.errors.maxlength">
+          Pincode should be 6 characters long.
         </div>
         <br>
       </div>

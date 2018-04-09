@@ -55,6 +55,9 @@
           <div *ngIf="registeredPincodeField.errors.required">
             Pincode is required.
           </div>
+          <div *ngIf="registeredPincodeField.errors.minlength || registeredPincodeField.errors.maxlength">
+            Pincode should be 6 characters long.
+          </div>
           <br>
         </div>
         
