@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { UserRoles } from '../userRoles';
+import { UserRoles } from '../user-roles';
 
 @Component({
   selector: 'app-role-control',

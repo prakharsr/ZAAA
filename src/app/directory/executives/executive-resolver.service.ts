@@ -3,14 +3,14 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { DirExecutive } from './dirExecutive';
+import { Executive } from './executive';
 import { ExecutiveApiService } from './executive-api.service';
 
 @Injectable()
-export class ExecutiveResolver implements Resolve<DirExecutive> {
+export class ExecutiveResolver implements Resolve<Executive> {
   constructor(private api: ExecutiveApiService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DirExecutive> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Executive> {
     let id = route.paramMap.get('id');
 
     return this.api.getExecutive(id).take(1).map(executive => {

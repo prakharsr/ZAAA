@@ -4,6 +4,15 @@
   </div>
 </div>
 
+<ng-template #modalContent let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title">Enter Receipent Details</h4>
+  </div>
+  <div class="modal-body">
+    <app-mailing-details (done)="c('Submit'); mailingDetails($event)"></app-mailing-details>
+  </div>
+</ng-template>  
+
 <div class="container">
   <button class="fab" routerLink="/releaseorders/new"><span class="fa fa-plus"></span></button>
 

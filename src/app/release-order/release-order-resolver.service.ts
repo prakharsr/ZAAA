@@ -3,7 +3,7 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ReleaseOrder } from './releaseOrder';
+import { ReleaseOrder } from './release-order';
 import { ReleaseOrderApiService } from './release-order-api.service';
 
 @Injectable()

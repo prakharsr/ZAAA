@@ -4,7 +4,6 @@ import { routerAnimation } from '../../animations';
 import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
-import { CanComponentDeactivate } from '../../guards/canComponentDeactivate';
 import { StateApiService } from '../../services/state-api.service';
 import { Router } from '@angular/router';
 
@@ -14,11 +13,9 @@ import { Router } from '@angular/router';
   templateUrl: './firm-profile-edit.component.html',
   styleUrls: ['./firm-profile-edit.component.css']
 })
-export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate {
+export class FirmProfileEditComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
-
-  @ViewChild('profileForm') profileForm: NgForm;
 
   profile = new Firm();
   error: string;
@@ -27,10 +24,6 @@ export class FirmProfileEditComponent implements OnInit, CanComponentDeactivate 
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
-  }
-
-  canDeactivate() {
-    return !this.profileForm.dirty;
   }
 
   ifscChanged() {

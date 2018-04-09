@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { ReleaseOrder } from '../releaseOrder';
 import { DialogService } from '../../services/dialog.service';
+import { ReleaseOrder } from '../release-order';
 
 @Component({
   selector: 'app-release-order-list',
@@ -38,5 +38,7 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   sendMsg() {}
+
+  mailingDetails(mailingDetails: MailingDetails) {}
 
 }

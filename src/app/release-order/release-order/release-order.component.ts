@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrder, Insertion, TaxValues } from '../releaseOrder';
+import { ReleaseOrder, Insertion, TaxValues } from '../release-order';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -10,13 +10,13 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
 import { ClientApiService } from '../../directory/clients/client-api.service';
-import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
-import { DirClient } from '../../directory/clients/dirClient';
-import { DirExecutive } from '../../directory/executives/dirExecutive';
+import { MediaHouse } from '../../directory/media-houses/media-house';
+import { Client } from '../../directory/clients/client';
+import { Executive } from '../../directory/executives/executive';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { StateApiService } from '../../services/state-api.service';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { RateCard, Category, FixSize, Scheme } from '../../rate-card/rateCard';
+import { RateCard, Category, FixSize, Scheme } from '../../rate-card/rate-card';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
@@ -118,7 +118,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.selectedTax = this.taxes.find(element => element.primary == this.releaseorder.taxAmount.primary
         && element.secondary == this.releaseorder.taxAmount.secondary);
 
-      let dirMediaHouse = new DirMediaHouse();
+      let dirMediaHouse = new MediaHouse();
       dirMediaHouse.orgName = this.releaseorder.publicationName;
       dirMediaHouse.address.edition = this.releaseorder.publicationEdition;
       dirMediaHouse.address.state = this.releaseorder.publicationState;
@@ -126,13 +126,13 @@ export class ReleaseOrderComponent implements OnInit {
       dirMediaHouse.mediaType = this.releaseorder.mediaType;
       this.mediaHouse = dirMediaHouse;
       
-      let dirClient = new DirClient();
+      let dirClient = new Client();
       dirClient.orgName = this.releaseorder.clientName;
       dirClient.address.state = this.releaseorder.clientState;
       dirClient.gstNo = this.releaseorder.clientGSTIN;
       this.client = dirClient;
 
-      let dirExecutive = new DirExecutive();
+      let dirExecutive = new Executive();
       dirExecutive.executiveName = this.releaseorder.executiveName;
       dirExecutive.orgName = this.releaseorder.executiveOrg;
       this.executive = dirExecutive;
@@ -437,7 +437,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   mediaHouse;
 
-  initMediaHouse(result: DirMediaHouse) {
+  initMediaHouse(result: MediaHouse) {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
       this.releaseorder.publicationState = result.address.state;
@@ -501,13 +501,13 @@ export class ReleaseOrderComponent implements OnInit {
     return result;
   }
 
-  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+  mediaHouseInputFormatter = (result: MediaHouse) => {
     this.initMediaHouse(result);
 
     return result.orgName;
   }
 
-  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName + " - " + result.address.edition;
+  mediaHouseResultFormatter = (result: MediaHouse) => result.orgName + " - " + result.address.edition;
 
   client;
 
@@ -518,14 +518,14 @@ export class ReleaseOrderComponent implements OnInit {
       .catch(() => of([]));
   }
 
-  clientInputFormatter = (result: DirClient) => {
+  clientInputFormatter = (result: Client) => {
     this.releaseorder.clientState = result.address.state;
     this.releaseorder.clientGSTIN = result.gstNo;
 
     return result.orgName;
   }
 
-  clientResultFormatter = (result: DirClient) => result.orgName;
+  clientResultFormatter = (result: Client) => result.orgName;
 
   executive;
 
@@ -536,13 +536,13 @@ export class ReleaseOrderComponent implements OnInit {
       .catch(() => of([]));
   }
 
-  executiveInputFormatter = (result: DirExecutive) => {
+  executiveInputFormatter = (result: Executive) => {
     this.releaseorder.executiveOrg = result.orgName;
 
     return result.executiveName;
   }
 
-  executiveResultFormatter = (result: DirExecutive) => result.executiveName;
+  executiveResultFormatter = (result: Executive) => result.executiveName;
 
   currentInsertionDate: NgbDate[];
 
@@ -721,7 +721,7 @@ export class ReleaseOrderComponent implements OnInit {
   paymentTypes = ['Cash', 'Cheque', 'NEFT'];
 
   addMediaHouse() {
-    let obj = new DirMediaHouse();
+    let obj = new MediaHouse();
 
     obj.orgName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
     obj.address.edition = this.releaseorder.publicationEdition;
@@ -735,7 +735,7 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   addClient() {
-    let obj = new DirClient();
+    let obj = new Client();
 
     obj.orgName = this.client.orgName ? this.client.orgName : this.client;
     obj.address.state = this.releaseorder.clientState;
@@ -747,7 +747,7 @@ export class ReleaseOrderComponent implements OnInit {
   }
   
   addExecutive() {
-    let obj = new DirExecutive();
+    let obj = new Executive();
 
     obj.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
     obj.orgName = this.releaseorder.executiveOrg;

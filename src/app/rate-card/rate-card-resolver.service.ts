@@ -3,7 +3,7 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { RateCard } from './rateCard';
+import { RateCard } from './rate-card';
 import { RateCardApiService } from './rate-card-api.service';
 
 @Injectable()

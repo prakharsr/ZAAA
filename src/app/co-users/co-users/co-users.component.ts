@@ -1,8 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { CoUser } from '../coUser';
 import { routerAnimation } from '../../animations';
 import { DialogService } from '../../services/dialog.service';
 import { CoUserApiService } from '../co-user-api.service';
+import { CoUser } from '../co-user';
 
 @Component({
   selector: 'app-co-users',

@@ -1,4 +1,4 @@
-export class DirExecutive {
+export class Executive {
     orgName: string;
     companyName: string;
     executiveName: string;

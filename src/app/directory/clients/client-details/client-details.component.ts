@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirClient } from '../dirClient';
+import { Client } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ClientDetailsComponent implements OnInit {
 
-  client = new DirClient();
+  client = new Client();
   success: string;
   error: string;
 
@@ -20,7 +20,7 @@ export class ClientDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { client: DirClient }) => {
+    this.route.data.subscribe((data: { client: Client }) => {
       this.client = data.client;
     });
   }

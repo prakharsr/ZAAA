@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirExecutive } from '../dirExecutive';
+import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ExecutiveDetailsComponent implements OnInit {
 
-  executive = new DirExecutive();
+  executive = new Executive();
   error: string;
   success: string;
 
@@ -20,7 +20,7 @@ export class ExecutiveDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { executive: DirExecutive }) => {
+    this.route.data.subscribe((data: { executive: Executive }) => {
       this.executive = data.executive;
     });
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirClient, ContactPerson } from './dirClient';
+import { Client, ContactPerson } from './client';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
@@ -11,7 +11,7 @@ export class ClientApiService {
 
   constructor(private api: ApiService) { }
 
-  createClient(client: DirClient) : Observable<any> {
+  createClient(client: Client) : Observable<any> {
     let contactPersons = [];
 
     client.contactpersons.forEach(element => contactPersons.push(this.contactPersonToBody(element)));
@@ -61,8 +61,8 @@ export class ClientApiService {
     }
   }
 
-  private bodyToClient(data: any) : DirClient {
-    let client = new DirClient();
+  private bodyToClient(data: any) : Client {
+    let client = new Client();
 
     client.id = data._id;
 
@@ -90,7 +90,7 @@ export class ClientApiService {
     return client;
   }
 
-  editClient(client: DirClient) : Observable<any> {
+  editClient(client: Client) : Observable<any> {
     let contactPersons = [];
 
     client.contactpersons.forEach(element => contactPersons.push(this.contactPersonToBody(element)));
@@ -111,16 +111,16 @@ export class ClientApiService {
     });
   }
 
-  getClient(id: string) : Observable<DirClient> {
+  getClient(id: string) : Observable<Client> {
     return this.api.get('/user/client/' + id).pipe(
       map(data => data.success ? this.bodyToClient(data.client) : null)
     );
   }
 
-  getClients() : Observable<DirClient[]> {
+  getClients() : Observable<Client[]> {
     return this.api.get('/user/clients').pipe(
       map(data => {
-        let clients : DirClient[] = [];
+        let clients : Client[] = [];
 
         if (data.success) {
           data.clients.forEach(element => {
@@ -133,11 +133,11 @@ export class ClientApiService {
     );
   }
 
-  searchClients(query: string) : Observable<DirClient[]> {
+  searchClients(query: string) : Observable<Client[]> {
     if (query) {
       return this.api.get('/user/clients/' + query).pipe(
         map(data => {
-          let clients : DirClient[] = [];
+          let clients : Client[] = [];
 
           if (data.success) {
             data.clients.forEach(element => {
@@ -153,7 +153,7 @@ export class ClientApiService {
     return of([]);
   }
 
-  deleteClient(client: DirClient) : Observable<any> {
+  deleteClient(client: Client) : Observable<any> {
     return this.api.delete('/user/client/' + client.id);
   }
 

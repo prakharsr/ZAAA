@@ -3,7 +3,7 @@ import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ReleaseOrder } from './releaseOrder';
+import { ReleaseOrder } from './release-order';
 
 @Injectable()
 export class ReleaseOrderApiService {

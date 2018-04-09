@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { RateCard, FixSize, Remark } from './rateCard';
+import { RateCard, FixSize, Remark } from './rate-card';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';

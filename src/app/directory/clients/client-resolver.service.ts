@@ -3,14 +3,14 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { DirClient } from './dirClient';
+import { Client } from './client';
 import { ClientApiService } from './client-api.service';
 
 @Injectable()
-export class ClientResolver implements Resolve<DirClient> {
+export class ClientResolver implements Resolve<Client> {
   constructor(private api: ClientApiService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DirClient> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Client> {
     let id = route.paramMap.get('id');
 
     return this.api.getClient(id).take(1).map(client => {

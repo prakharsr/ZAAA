@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrder } from '../releaseOrder';
+import { ReleaseOrder } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';

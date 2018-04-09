@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirMediaHouse, MediaHouseScheduling } from '../dirMediaHouse';
+import { MediaHouse, MediaHouseScheduling } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
@@ -11,7 +11,7 @@ import { StateApiService } from '../../../services/state-api.service';
 })
 export class DirMediaHouseComponent implements OnInit {
 
-  mediaHouse = new DirMediaHouse();
+  mediaHouse = new MediaHouse();
   error: string;
   
   id: string;
@@ -32,7 +32,7 @@ export class DirMediaHouseComponent implements OnInit {
 
         this.edit = true;
 
-        this.route.data.subscribe((data: { mediaHouse: DirMediaHouse }) => {
+        this.route.data.subscribe((data: { mediaHouse: MediaHouse }) => {
           this.mediaHouse = data.mediaHouse;
         });
       }

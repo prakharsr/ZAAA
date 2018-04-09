@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, HostBinding } from '@angular/core';
-import { UserRoles } from '../userRoles';
+import { UserRoles } from '../user-roles';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routerAnimation } from '../../animations';
 import { CoUserApiService } from '../co-user-api.service';

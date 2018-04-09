@@ -1,4 +1,4 @@
-export class DirMediaHouse {
+export class MediaHouse {
     orgName: string;
     pubName: string;
     nickName: string;

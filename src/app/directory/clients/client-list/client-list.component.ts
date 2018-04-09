@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirClient } from '../dirClient';
+import { Client } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { DialogService } from '../../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class ClientListComponent implements OnInit {
 
-  clients: DirClient[] = [];
+  clients: Client[] = [];
 
   query: string;
   searchFailed = false;
@@ -40,11 +40,11 @@ export class ClientListComponent implements OnInit {
             return of([]);
           }));
 
-  inputFormatter = (result: DirClient) => {
+  inputFormatter = (result: Client) => {
     this.router.navigateByUrl('/dir/clients/' + result.id);
   }
 
-  deleteClient(client: DirClient) {
+  deleteClient(client: Client) {
     this.dialog.confirm("Are you sure you want to delete this client?").subscribe(confirm => {
       if (!confirm)
         return;

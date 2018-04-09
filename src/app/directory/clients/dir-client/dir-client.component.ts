@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirClient, ContactPerson } from '../dirClient';
+import { Client, ContactPerson } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
@@ -11,7 +11,7 @@ import { StateApiService } from '../../../services/state-api.service';
 })
 export class DirClientComponent implements OnInit {
 
-  client = new DirClient();
+  client = new Client();
   error: string;
 
   id: string;
@@ -28,7 +28,7 @@ export class DirClientComponent implements OnInit {
       if (params.has('id')) {
         this.edit = true;
 
-        this.route.data.subscribe((data: { client: DirClient }) => {
+        this.route.data.subscribe((data: { client: Client }) => {
           this.client = data.client;
         });
 

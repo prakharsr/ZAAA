@@ -1,10 +1,9 @@
 import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
-import { CoUser } from '../coUser';
-import { UserRoles } from '../userRoles';
+import { CoUser } from '../co-user';
+import { UserRoles } from '../user-roles';
 import { routerAnimation } from '../../animations';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { CanComponentDeactivate } from '../../guards/canComponentDeactivate';
 import { CoUserApiService } from '../co-user-api.service';
 
 @Component({
@@ -13,11 +12,9 @@ import { CoUserApiService } from '../co-user-api.service';
   templateUrl: './new-co-user.component.html',
   styleUrls: ['./new-co-user.component.css']
 })
-export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
+export class NewCoUserComponent implements OnInit {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
-
-  @ViewChild('newCoUserForm') newCoUserForm: NgForm;
 
   coUser = new CoUser();
 
@@ -26,10 +23,6 @@ export class NewCoUserComponent implements OnInit, CanComponentDeactivate {
   constructor(private api: CoUserApiService, private router: Router) { }
 
   ngOnInit() {
-  }
-
-  canDeactivate() {
-    return !this.newCoUserForm.dirty;
   }
 
   private navigateBack() {

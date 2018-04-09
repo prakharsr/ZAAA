@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard } from '../rateCard';
+import { RateCard } from '../rate-card';
 import { RateCardApiService } from '../rate-card-api.service';
 import { DialogService } from '../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';

@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { UserProfile } from '../../models/userProfile';
+import { UserProfile } from '../../models/user-profile';
 import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';

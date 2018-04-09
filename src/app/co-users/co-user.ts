@@ -1,4 +1,4 @@
-import {UserRoles} from './userRoles';
+import {UserRoles} from './user-roles';
 
 export class CoUser {
     name: string;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DirMediaHouse } from '../dirMediaHouse';
+import { MediaHouse } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { DialogService } from '../../../services/dialog.service';
 import {of} from 'rxjs/observable/of';
@@ -18,8 +18,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class MediaHouseListComponent implements OnInit {
 
-  mediaHouses: DirMediaHouse[] = [];
-  globalMediaHouses: DirMediaHouse[] = [];
+  mediaHouses: MediaHouse[] = [];
+  globalMediaHouses: MediaHouse[] = [];
 
   query: string;
   searchFailed = false;
@@ -42,11 +42,11 @@ export class MediaHouseListComponent implements OnInit {
             return of([]);
           }));
 
-  inputFormatter = (result: DirMediaHouse) => {
+  inputFormatter = (result: MediaHouse) => {
     this.router.navigateByUrl('/dir/media_houses/' + result.id);
   }
 
-  deleteMediaHouse(mediaHouse: DirMediaHouse) {
+  deleteMediaHouse(mediaHouse: MediaHouse) {
     this.dialog.confirm("Are you sure you want to delete this Media House?").subscribe(confirm => {
       if (!confirm)
         return;

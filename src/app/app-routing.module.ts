@@ -5,7 +5,6 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
-import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
 
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -34,7 +33,7 @@ const routes: Routes = [
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuard] },
   { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: "firm", component: FirmProfileViewComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
-  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard], canDeactivate: [CanDeactiveGuard] },
+  { path: "firm/edit", component: FirmProfileEditComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },

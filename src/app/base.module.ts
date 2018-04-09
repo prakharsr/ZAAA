@@ -17,7 +17,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
-import { CanDeactiveGuard } from './guards/can-deactive-guard.service';
+
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
 
 @NgModule({
@@ -37,8 +37,7 @@ import { MailingDetailsComponent } from './components/mailing-details/mailing-de
     AuthGuard,
     PhoneVerifyGuard,
     AdminGuard,
-    PlanGuard,
-    CanDeactiveGuard
+    PlanGuard
   ],
   declarations: [
     MailingDetailsComponent

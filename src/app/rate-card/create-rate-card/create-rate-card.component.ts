@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rateCard';
+import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rate-card';
 import { RateCardApiService } from '../rate-card-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { DirMediaHouse } from '../../directory/media-houses/dirMediaHouse';
+import { MediaHouse } from '../../directory/media-houses/media-house';
 
 @Component({
   selector: 'app-create-rate-card',
@@ -132,13 +132,13 @@ export class CreateRateCardComponent implements OnInit {
       .catch(() => of([]));
   }
   
-  mediaHouseInputFormatter = (result: DirMediaHouse) => {
+  mediaHouseInputFormatter = (result: MediaHouse) => {
     this.rateCard.bookingEdition = result.address.edition;
     
     return result.orgName;
   }
   
-  mediaHouseResultFormatter = (result: DirMediaHouse) => result.orgName + " - " + result.address.edition;
+  mediaHouseResultFormatter = (result: MediaHouse) => result.orgName + " - " + result.address.edition;
 
   categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];

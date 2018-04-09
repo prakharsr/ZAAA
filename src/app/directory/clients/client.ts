@@ -1,6 +1,6 @@
 import { Address } from "../../models/address";
 
-export class DirClient {
+export class Client {
     orgName: string;
     companyName: string;
     nickName: string;

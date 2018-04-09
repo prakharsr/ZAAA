@@ -11,7 +11,7 @@ import { Template } from '../models/template';
 import { WindowService } from './window.service';
 
 import { environment } from '../../environments/environment';
-import { UserProfile } from '../models/userProfile';
+import { UserProfile } from '../models/user-profile';
 import { Firm } from '../models/firm';
 import { Address } from '../models/address';
 

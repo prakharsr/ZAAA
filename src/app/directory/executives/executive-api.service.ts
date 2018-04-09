@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { DirExecutive } from './dirExecutive';
+import { Executive } from './executive';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
@@ -11,7 +11,7 @@ export class ExecutiveApiService {
 
   constructor(private api: ApiService) { }
 
-  createExecutive(executive: DirExecutive) : Observable<any> {
+  createExecutive(executive: Executive) : Observable<any> {
     return this.api.post('/user/executive', {
       organizationName: executive.orgName,
       companyName: executive.companyName,
@@ -25,8 +25,8 @@ export class ExecutiveApiService {
     });
   }
 
-  private bodyToExecutive(body: any) : DirExecutive {
-    let executive = new DirExecutive();
+  private bodyToExecutive(body: any) : Executive {
+    let executive = new Executive();
 
     executive.id = body._id;
 
@@ -48,16 +48,16 @@ export class ExecutiveApiService {
     return executive;
   }
 
-  getExecutive(id: string) : Observable<DirExecutive> {
+  getExecutive(id: string) : Observable<Executive> {
     return this.api.get('/user/executive/' + id).pipe(
       map(data => data.success ? this.bodyToExecutive(data.executive) : null)
     );
   }
 
-  getExecutives() : Observable<DirExecutive[]> {
+  getExecutives() : Observable<Executive[]> {
     return this.api.get('/user/executives').pipe(
       map(data => {
-        let executives : DirExecutive[] = [];
+        let executives : Executive[] = [];
 
         if (data.success) {
           data.executives.forEach(element => {
@@ -70,11 +70,11 @@ export class ExecutiveApiService {
     );
   }
 
-  searchExecutives(query: string) : Observable<DirExecutive[]> {
+  searchExecutives(query: string) : Observable<Executive[]> {
     if (query) {
       return this.api.get('/user/executives/' + query).pipe(
         map(data => {
-          let executives : DirExecutive[] = [];
+          let executives : Executive[] = [];
 
           if (data.success) {
             data.executives.forEach(element => {
@@ -90,7 +90,7 @@ export class ExecutiveApiService {
     return of([]);
   }
 
-  editExecutive(executive: DirExecutive) : Observable<any> {
+  editExecutive(executive: Executive) : Observable<any> {
     return this.api.patch('/user/executive', {
       id: executive.id,
       OrganizationName: executive.orgName,
@@ -105,7 +105,7 @@ export class ExecutiveApiService {
     });
   }
 
-  deleteExecutive(executive: DirExecutive) : Observable<any> {
+  deleteExecutive(executive: Executive) : Observable<any> {
     return this.api.delete('/user/executive/' + executive.id);
   }
 
