@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { routerAnimation } from '../../animations';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -16,16 +17,12 @@ export class LoginComponent implements OnInit {
   emailOrPhone: string;
   password: string;
 
-  error: string;
-
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private notifications: NotificationService) { }
 
   ngOnInit() {
   }
 
   submit() {
-    this.error = '';
-
     this.api.login(this.emailOrPhone, this.password).subscribe(
       data => {
         if (data.success) {
@@ -34,13 +31,13 @@ export class LoginComponent implements OnInit {
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }

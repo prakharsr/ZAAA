@@ -3,6 +3,7 @@ import { UserProfile } from '../../models/user-profile';
 import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -16,10 +17,8 @@ export class ProfileViewComponent implements OnInit {
 
   profile = new UserProfile();
   isAdmin: boolean;
-  error: string;
-  success: string;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private notifications: NotificationService) { }
 
   ngOnInit() {
     this.api.getUserProfile().subscribe(data => this.profile = data);
@@ -32,26 +31,23 @@ export class ProfileViewComponent implements OnInit {
   }
 
   uploadProfilePicture(files: FileList) {
-    this.error = '';
-    this.success = '';
-
     this.api.uploadProfilePicture(files.item(0)).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Profile Photo uploaded successfully';
+          this.notifications.show('Profile Photo uploaded successfully');
 
           this.profile.photo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     );
   }
@@ -60,45 +56,42 @@ export class ProfileViewComponent implements OnInit {
     this.api.deleteProfilePicture().subscribe(
       data => {
         if (data.success) {
-          this.success = 'Profile Picture removed successfully';
+          this.notifications.show('Profile Picture removed successfully');
 
           this.profile.photo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     )
   }
 
   uploadSign(files: FileList) {
-    this.error = '';
-    this.success = '';
-
     this.api.uploadSign(files.item(0)).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Signature uploaded successfully';
+          this.notifications.show('Signature uploaded successfully');
 
           this.profile.sign = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     );
   }
@@ -107,20 +100,20 @@ export class ProfileViewComponent implements OnInit {
     this.api.deleteSign().subscribe(
       data => {
         if (data.success) {
-          this.success = 'Signature removed successfully';
+          this.notifications.show('Signature removed successfully');
 
           this.profile.sign = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     )
   }

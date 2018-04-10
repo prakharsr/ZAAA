@@ -22,6 +22,7 @@ import { PlanGuard } from './guards/plan-guard.service';
 
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
 import { LoaderService } from './services/loader.service';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { LoaderService } from './services/loader.service';
     PhoneVerifyGuard,
     AdminGuard,
     PlanGuard,
-    LoaderService
+    LoaderService,
+    NotificationService
   ],
   declarations: [
     MailingDetailsComponent

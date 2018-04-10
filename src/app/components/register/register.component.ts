@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { routerAnimation } from '../../animations';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +17,8 @@ export class RegisterComponent implements OnInit {
   name: string;
   email: string;
   acceptTnC: boolean;
-  error: string;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService, private router: Router, private notifications: NotificationService) { }
 
   ngOnInit() { }
 
@@ -28,8 +28,6 @@ export class RegisterComponent implements OnInit {
 
   submit()
   {
-    this.error = '';
-
     this.api.signup(this.name, this.email).subscribe(
       data => {
         if (data.success) {
@@ -38,11 +36,11 @@ export class RegisterComponent implements OnInit {
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
         console.log(err);
       }
     );
