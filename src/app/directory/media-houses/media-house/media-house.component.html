@@ -220,12 +220,6 @@
     </div>
   </div>
 
-  <div *ngIf="error" class="text-danger">
-    {{error}}
-    
-    <br><br>
-  </div>
-
   <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
   <button class="btn btn-danger" (click)="cancel()">Cancel</button>
 </form>

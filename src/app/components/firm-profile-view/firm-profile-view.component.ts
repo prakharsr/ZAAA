@@ -3,6 +3,7 @@ import { Firm } from '../../models/firm';
 import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-firm-profile-view',
@@ -13,15 +14,12 @@ import { environment } from '../../../environments/environment';
 export class FirmProfileViewComponent implements OnInit {
 
   admin: boolean;
-  error: string;
-  success: string;
 
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile = new Firm();
 
-  constructor(private api: ApiService) {
-  }
+  constructor(private api: ApiService, private notifications: NotificationService) {}
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
@@ -34,26 +32,24 @@ export class FirmProfileViewComponent implements OnInit {
   }
 
   uploadLogo(files: FileList) {
-    this.error = '';
-    this.success = '';
 
     this.api.uploadFirmLogo(files.item(0)).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Logo uploaded successfully';
+          this.notifications.show('Logo uploaded successfully');
 
           this.profile.logo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     );
   }
@@ -62,20 +58,20 @@ export class FirmProfileViewComponent implements OnInit {
     this.api.deleteFirmLogo().subscribe(
       data => {
         if (data.success) {
-          this.success = 'Logo removed successfully';
+          this.notifications.show('Logo removed successfully');
 
           this.profile.logo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     )
   }

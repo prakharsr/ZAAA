@@ -19,6 +19,7 @@ import { ReleaseOrderApiService } from '../release-order-api.service';
 import { RateCard, Category, FixSize, Scheme } from '../../rate-card/rate-card';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-release-order',
@@ -29,7 +30,6 @@ export class ReleaseOrderComponent implements OnInit {
 
   releaseorder = new ReleaseOrder();
   query: string;
-  error: string;
   edit = false;
   id: string;
 
@@ -42,7 +42,8 @@ export class ReleaseOrderComponent implements OnInit {
     private clientApi: ClientApiService,
     private executiveApi: ExecutiveApiService,
     private rateCardApi: RateCardApiService,
-    public stateApi: StateApiService) { }
+    public stateApi: StateApiService,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -338,13 +339,13 @@ export class ReleaseOrderComponent implements OnInit {
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }
@@ -356,20 +357,18 @@ export class ReleaseOrderComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
 
   submit () {
-    this.error = '';
-
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;

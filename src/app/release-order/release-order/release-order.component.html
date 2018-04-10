@@ -632,12 +632,6 @@
     <br>
 
     <br>
-
-    <div *ngIf="error" class="text-danger">
-      {{error}}
-      
-      <br><br>
-    </div>
     
     <button type="submit" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>
     <button class="btn btn-danger" (click)="cancel()">Cancel</button>

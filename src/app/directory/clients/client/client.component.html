@@ -224,17 +224,9 @@
           <label for="anniversaryDate">Anniversary Date</label>
           <input type="date" class="form-control" id="anniversaryDate-{{i}}" name="anniversaryDate-{{i}}" placeholder="Enter Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
         </div>
-
-        <!-- Assign Ad Type, Assign Edition -->
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="error" class="text-danger">
-  {{error}}
-  
-  <br><br>
 </div>
 
   <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>

@@ -5,14 +5,6 @@
 </div>
 
 <div class="container">
-<div *ngIf="error || success">
-  <br>
-
-  <ngb-alert *ngIf="error" type="danger" (close)="error = null">{{ error }}</ngb-alert>
-  <ngb-alert *ngIf="success" type="success" (close)="success = null">{{ success }}</ngb-alert>
-
-  <br>
-</div>
 
 <button class="fab bg-info" *ngIf="admin" routerLink="/firm/edit"><span class="fa fa-pencil-alt"></span></button>
 

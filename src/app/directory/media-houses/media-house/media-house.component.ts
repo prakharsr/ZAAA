@@ -3,6 +3,7 @@ import { MediaHouse, MediaHouseScheduling } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-media-house',
@@ -12,7 +13,6 @@ import { StateApiService } from '../../../services/state-api.service';
 export class MediaHouseComponent implements OnInit {
 
   mediaHouse = new MediaHouse();
-  error: string;
   
   id: string;
 
@@ -21,7 +21,8 @@ export class MediaHouseComponent implements OnInit {
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     private router: Router,
-    public stateApi: StateApiService) { }
+    public stateApi: StateApiService,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.mediaHouse.scheduling = [new MediaHouseScheduling()];
@@ -59,13 +60,13 @@ export class MediaHouseComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
@@ -77,20 +78,18 @@ export class MediaHouseComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
 
   submit () {
-    this.error = '';
-
     if (this.edit) {
       this.editMediaHouse();
     }

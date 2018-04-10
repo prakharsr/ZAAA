@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,10 +13,8 @@ export class ResetPasswordComponent implements OnInit {
   password: string;
   cpassword: string;
   token: string;
-  error: string;
-  success: boolean;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, private route: ActivatedRoute, private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -24,22 +23,19 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submit() {
-    this.success = false;
-    this.error = '';
-
     this.api.resetPsw(this.token, this.password).subscribe(
       data => {
         if (data.success) {
-          this.success = true;
+          this.notifications.show('Password Changed Successfully.');
         }
         else {
           console.log(data);
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }

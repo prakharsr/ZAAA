@@ -3,6 +3,7 @@ import { Client, ContactPerson } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-client',
@@ -12,7 +13,6 @@ import { StateApiService } from '../../../services/state-api.service';
 export class ClientComponent implements OnInit {
 
   client = new Client();
-  error: string;
 
   id: string;
 
@@ -21,7 +21,8 @@ export class ClientComponent implements OnInit {
   constructor(private api: ClientApiService,
     private route: ActivatedRoute,
     private router: Router,
-    public stateApi: StateApiService) { }
+    public stateApi: StateApiService,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -49,13 +50,13 @@ export class ClientComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
@@ -67,20 +68,18 @@ export class ClientComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
 
   submit () {
-    this.error = '';
-
     if (this.edit) {
       this.editClient();
     }

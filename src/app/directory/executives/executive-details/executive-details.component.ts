@@ -3,6 +3,7 @@ import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-executive-details',
@@ -12,12 +13,11 @@ import { environment } from '../../../../environments/environment';
 export class ExecutiveDetailsComponent implements OnInit {
 
   executive = new Executive();
-  error: string;
-  success: string;
 
   constructor(private api: ExecutiveApiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { executive: Executive }) => {
@@ -26,26 +26,23 @@ export class ExecutiveDetailsComponent implements OnInit {
   }
 
   uploadProfilePicture(files: FileList) {
-    this.error = '';
-    this.success = '';
-
     this.api.uploadProfilePicture(this.executive.id, files.item(0)).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Profile Photo uploaded successfully';
+          this.notifications.show('Profile Photo uploaded successfully');
 
           this.executive.photo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     );
   }

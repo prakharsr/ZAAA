@@ -3,6 +3,7 @@ import { Client } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-client-details',
@@ -12,12 +13,11 @@ import { environment } from '../../../../environments/environment';
 export class ClientDetailsComponent implements OnInit {
 
   client = new Client();
-  success: string;
-  error: string;
 
   constructor(private api: ClientApiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { client: Client }) => {
@@ -26,26 +26,23 @@ export class ClientDetailsComponent implements OnInit {
   }
 
   uploadProfilePicture(files: FileList) {
-    this.error = '';
-    this.success = '';
-
     this.api.uploadProfilePicture(this.client.id, files.item(0)).subscribe(
       data => {
         if (data.success) {
-          this.success = 'Profile Photo uploaded successfully';
+          this.notifications.show('Profile Photo uploaded successfully');
 
           this.client.contactpersons[0].photo = environment.uploadsBaseUrl + data.photo;
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = "Connection failed";
+        this.notifications.show("Connection failed");
       }
     );
   }

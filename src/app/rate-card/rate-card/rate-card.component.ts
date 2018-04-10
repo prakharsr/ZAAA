@@ -11,6 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
 import { MediaHouse } from '../../directory/media-houses/media-house';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-rate-card',
@@ -31,11 +32,11 @@ export class RateCardComponent implements OnInit {
   constructor(private api: RateCardApiService,
     private route: ActivatedRoute,
     private router: Router,
-    private mediaHouseApi: MediaHouseApiService) { }
+    private mediaHouseApi: MediaHouseApiService,
+    private notifications: NotificationService) { }
 
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
-  error: string;
 
   private initNew() {
     this.rateCard.fixSizes = [new FixSize()];
@@ -362,13 +363,13 @@ export class RateCardComponent implements OnInit {
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }
@@ -380,19 +381,18 @@ export class RateCardComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
 
   submit () {
-    this.error = '';
     this.rateCard.categories = [];
 
     this.rateCard.mediaHouseName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;

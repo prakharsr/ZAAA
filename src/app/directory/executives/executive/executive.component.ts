@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-executive',
@@ -11,7 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ExecutiveComponent implements OnInit {
 
   executive = new Executive();
-  error: string;
 
   // dobModel;
 
@@ -21,7 +21,8 @@ export class ExecutiveComponent implements OnInit {
   
   constructor(private api: ExecutiveApiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -48,13 +49,13 @@ export class ExecutiveComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
@@ -66,20 +67,18 @@ export class ExecutiveComponent implements OnInit {
           this.goBack();
         }
         else {
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     )
   }
 
   submit() {
-    this.error = '';
-
     if (this.edit) {
       this.editExecutive();
     }
