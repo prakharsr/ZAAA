@@ -9,630 +9,654 @@
 
 <div class="container">  
   <form (ngSubmit)="submit()" #roForm="ngForm">
-    <h3>Publication Details</h3>
-    <br>
-
-    <div class="form-group">
-      <label for="publicationName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-    </div>
-    
-    <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
-      <div *ngIf="publicationNameField.errors.required">
-        Publication Name is required.
-      </div>
-      <br>
-    </div>
-    <div class="form-group">
-      <label for="publicationEdition">Edition</label>
-      <input type="text" class="form-control" id="publicationEdition" name="publicationEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
-    </div>
-    
-    <div *ngIf="publicationEditionField.invalid && (publicationEditionField.dirty || publicationEditionField.touched)" class="text-danger">
-      <div *ngIf="publicationEditionField.errors.required">
-        Edition Name is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-group">
-      <label for="publicationState">State</label>
-      <select class="form-control" id="publicationState" name="publicationState" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
-        <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-      </select>
-    </div>
-    
-    <div *ngIf="publicationStateField.invalid && (publicationStateField.dirty || publicationStateField.touched)" class="text-danger">
-      <div *ngIf="publicationStateField.errors.required">
-        State is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label for="publicationGSTIN">GSTIN</label>
-      <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-    </div>
-    
-    <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
-      <div *ngIf="publicationGSTINField.errors.required">
-        GSTIN is required.
-      </div>
-      <div *ngIf="publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength">
-        GSTIN should be 15 characters long.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label>Media Type</label>
-      <select class="form-control" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
-        <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
-      </select>
-    </div>
-
-    <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
-      <div *ngIf="mediaTypeField.errors.required">
-        Media type is required.
-      </div>
-      <br>
-    </div>
-
-    <button type="button" class="btn btn-outline-info" (click)="addMediaHouse()">Add New Media House</button>
-    <br><br>
-
-    <br>
-    <h3>Client Details</h3>
-    <br>
-
-    <div class="form-group">
-      <label for="clientName">Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-    </div>
-    
-    <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
-      <div *ngIf="clientNameField.errors.required">
-        Name is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-group">
-      <label for="clientState">State</label>
-      <select class="form-control" id="clientState" name="clientState" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
-        <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-      </select>
-    </div>
-    
-    <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
-      <div *ngIf="clientStateField.errors.required">
-        State is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-group">
-      <label for="clientGSTIN">GSTIN</label>
-      <input type="text" class="form-control" id="clientGSTIN" name="clientGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.clientGSTIN" required minlength="15" maxlength="15" #clientGSTINField="ngModel">
-    </div>
-    
-    <div *ngIf="clientGSTINField.invalid && (clientGSTINField.dirty || clientGSTINField.touched)" class="text-danger">
-      <div *ngIf="clientGSTINField.errors.required">
-        GSTIN is required.
-      </div>
-      <div *ngIf="clientGSTINField.errors.minlength || clientGSTINField.errors.maxlength">
-        GSTIN should be 15 characters long.
-      </div>
-      <br>
-    </div>
-
-    <button type="button" class="btn btn-outline-info" (click)="addClient()">Add New Client</button>
-    <br><br>
-
-    <br>
-    <h3>Ad Details</h3>
-    <br>
-
-    <div class="form-group">
-      <label>Ad Type</label>
-      <select class="form-control" name="adType" [(ngModel)]="releaseorder.adType" id="adType" #adTypeField="ngModel" required>
-        <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <label class="col-md-3 col-form-label">Rate</label>
-      <div class="col col-md-5">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Publication Details</mat-panel-title>
+          <mat-panel-description>Enter Publication details</mat-panel-description>
+        </mat-expansion-panel-header>
+        
         <div class="form-group">
-          <input type="number" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
-        </div>
-  
-        <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
-          <div *ngIf="rateField.errors.required">
-            Rate is empty or invalid.
-          </div>
-          <br>
-        </div>
-      </div>
-      <div class="col col-md-4">
-        <div class="form-group">
-          <select class="form-control" name="unit" [(ngModel)]="releaseorder.unit" id="unit" #unitField="ngModel" required>
-            <option *ngFor="let item of units" [value]="item">{{item}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <br>
-    <h3>Categories</h3>
-    <br>
-  
-    <div class="form-group">
-      <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
-    </div>
-  
-    <div class="form-row">
-      <div class="form-group col">
-        <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel">
-          <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none"></div>
-  
-      <div class="form-group col" *ngIf="category1 && category1.subcategories.length">
-        <select class="form-control" name="category2" [(ngModel)]="category2" id="category2">
-          <option *ngFor="let item of category1.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-md-none"></div>
-  
-      <div class="form-group col" *ngIf="category2 && category2.subcategories.length">
-        <select class="form-control" name="category3" [(ngModel)]="category3" id="category3">
-          <option *ngFor="let item of category2.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
-  
-      <div class="form-group col" *ngIf="category3 && category3.subcategories.length">
-        <select class="form-control" name="category4" [(ngModel)]="category4" id="category4">
-          <option *ngFor="let item of category3.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-md-none"></div>
-  
-      <div class="form-group col" *ngIf="category4 && category4.subcategories.length">
-        <select class="form-control" name="category5" [(ngModel)]="category5" id="category5">
-          <option *ngFor="let item of category4.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none"></div>
-  
-      <div class="form-group col" *ngIf="category5 && category5.subcategories.length">
-        <select class="form-control" name="category6" [(ngModel)]="category6" id="category6">
-          <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-      
-    </div>
-  
-    <div *ngIf="category1Field.invalid && (category1Field.dirty || category1Field.touched)" class="text-danger">
-      <div *ngIf="category1Field.errors.required">
-        Category is required.
-      </div>
-      <br>
-    </div>
-  
-    <br>
-
-    <div class="form-row">
-      <label class="col-md-3 col-form-label">Hue</label>
-      <div class="col-md-9">
-        <div class="form-group">
-          <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-            <option selected>Colored</option>
-            <option>Black &amp; White</option>
-          </select>
-        </div>
-
-        <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
-          <div *ngIf="hueField.errors.required">
-            Hue is required.
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-    
-    <br>
-    <h4>Size</h4>
-    <br>
-
-    <div class="form-group">
-      <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
-        <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
-        <option [ngValue]="customSize">Custom</option>
-      </select>
-    </div>
-
-    <div class="form-row" *ngIf="selectedSize == customSize">
-      <div class="col">
-        <div class="form-group">
-          <input type="number" class="form-control" id="customL" placeholder="Enter Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
-        </div>
-
-        <div *ngIf="customLField.invalid && (customLField.dirty || customLField.touched)" class="text-danger">
-          <div *ngIf="customLField.errors.required">
-            Length is required.
-          </div>
-          <br>
-        </div>
-      </div>
-      <div class="col-auto form-text">&times;</div>
-      <div class="col">
-        <div class="form-group">
-          <input type="number" class="form-control" id="customW" placeholder="Enter Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
-        </div>
-
-        <div *ngIf="customWField.invalid && (customWField.dirty || customWField.touched)" class="text-danger">
-          <div *ngIf="customWField.errors.required">
-            Width is required.
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      Total Space = {{totalSpace}}
-    </div>
-
-    <br><br>
-
-    <br>
-    <h4>Scheme</h4>
-    <br>
-
-    <div class="form-group">
-      <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
-        <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}</option>
-        <option [ngValue]="customScheme">Custom</option>
-      </select>
-    </div>
-
-    <div class="form-row" *ngIf="selectedScheme == customScheme">
-      <div class="col">
-        <div class="form-group">
-          <label>Paid</label>
-          <input type="number" class="form-control" id="customPaid" placeholder="Enter Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
-        </div>
-
-        <div *ngIf="customPaidField.invalid && (customPaidField.dirty || customPaidField.touched)" class="text-danger">
-          <div *ngIf="customPaidField.errors.required">
-            Paid is required.
-          </div>
-          <br>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label>Free</label>
-          <input type="number" class="form-control" id="customFree" placeholder="Enter Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
-        </div>
-
-        <div *ngIf="customFreeField.invalid && (customFreeField.dirty || customFreeField.touched)" class="text-danger">
-          <div *ngIf="customFreeField.errors.required">
-            Free is required.
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <br><br>
-    
-    <div class="form-group">
-      <label for="adEdition">Edition</label>
-      <input type="text" class="form-control" id="adEdition" name="adEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
-    </div>
-    
-    <div *ngIf="adEditionField.invalid && (adEditionField.dirty || adEditionField.touched)" class="text-danger">
-      <div *ngIf="adEditionField.errors.required">
-        Edition is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-row" *ngIf="releaseorder.mediaType == 'Print'">
-      <label class="col-md-3 col-form-label">Position</label>
-      <div class="col-md-9">
-        <div class="form-group">
-          <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
-            <option *ngFor="let item of positions" [value]="item">{{item}}</option>
-          </select>
-        </div>
-
-        <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
-          <div *ngIf="positionField.errors.required">
-            Position is required.
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group" *ngIf="releaseorder.mediaType != 'Print' ">
-      <label>Ad Time</label>
-      <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
-        <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
-      </select>
-    </div>
-    
-    <div class="form-row">
-      <label for="adTotal" class="col-form-label col-3">Total No of Ads</label>
-      <div class="col">
-        <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
-      </div>
-      <span class="col form-text">&times; {{selectedScheme == customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
-    </div>
-    
-    <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
-      <div *ngIf="adTotalField.errors.required">
-        Total Number of Ad is required.
-      </div>
-      <br>
-    </div>
-
-    <br>
-    <div class="form-row">
-      <div class="col">
-        <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
-      </div>    
-    </div>
-    <br>
-
-    <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
-      <span class="custom-day"
-            [class.focused]="focused"
-            [class.selected]="isSelected(date)"
-            [class.text-muted]="date.month !== currentMonth || disabled">
-        {{ date.day }}
-      </span>
-    </ng-template>
-    
-    <ngb-datepicker [(ngModel)]="currentInsertionDate"
-                    name="currentInsertionDate"
-                    [markDisabled]="insertionMarkDisabled"
-                    [dayTemplate]="insertionTemplate"
-                    (select)="addInsertion($event)"></ngb-datepicker>
-    
-    <br><br>
-    <p class="text-danger" *ngIf="insertionErr">{{insertionErr}}</p>
-    <br>
-
-    <br>
-    <div>
-      Gross Amount = {{grossAmount}}
-    </div>
-    <br>
-    
-    <div class="form-group">
-      <label for="publicationDiscount">Publication Discount</label>
-      <input type="number" class="form-control" id="publicationDiscount" name="publicationDiscount" placeholder="Enter Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
-    </div>
-    
-    <div *ngIf="publicationDiscountField.invalid && (publicationDiscountField.dirty || publicationDiscountField.touched)" class="text-danger">
-      <div *ngIf="publicationDiscountField.errors.required">
-        Publication Discount is required.
-      </div>
-      <br>
-    </div>
-    
-    <div class="form-group">
-      <label for="agencyDiscount1">Agency Discount 1</label>
-      <input type="number" class="form-control" id="agencyDiscount1" name="agencyDiscount1" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
-    </div>
-    
-    <div *ngIf="agencyDiscount1Field.invalid && (agencyDiscount1Field.dirty || agencyDiscount1Field.touched)" class="text-danger">
-      <div *ngIf="agencyDiscount1Field.errors.required">
-        Agency Discount 1 is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-group">
-      <label for="agencyDiscount2">Agency Discount 2</label>
-      <input type="number" class="form-control" id="agencyDiscount2" name="agencyDiscount2" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
-    </div>
-    
-    <div *ngIf="agencyDiscount2Field.invalid && (agencyDiscount2Field.dirty || agencyDiscount2Field.touched)" class="text-danger">
-      <div *ngIf="agencyDiscount2Field.errors.required">
-        Agency Discount 2 is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-row">
-      <label class="col-3 col-form-label">Tax</label>
-      <div class="col-auto col-form-label">
-        <div class="form-check">
-          <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="releaseorder.taxIncluded">
-          <label class="form-check-label">Included</label>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <select class="form-control" name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-            <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
-          </select>
-        </div>
-
-        <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
-          <div *ngIf="taxField.errors.required">
-            Tax is required.
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      Net Amount = {{netAmount}} ({{taxDisplay}})
-    </div>
-    <br>
-
-    <div>
-      Net Amount in Words = {{amountToWords(netAmount)}} ({{taxDisplay}})
-    </div>
-    <br>
-    
-    <div class="form-group">
-      <label for="caption">Caption</label>
-      <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
-    </div>
-
-    <div class="form-group">
-      <label for="remark">Remark</label>
-      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
-    </div>
-
-    <br>
-    <h3>Payment Details</h3>
-    <br>
-
-    <div class="form-group">
-      <label>Type</label>
-      <select class="form-control" name="paymentType" [(ngModel)]="releaseorder.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-        <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
-      </select>
-    </div>
-
-    <ng-container *ngIf="releaseorder.paymentType != 'Cash'">
-      <div class="form-group">
-        <label for="paymentDate">Date</label>
-        <input type="date" class="form-control" id="paymentDate" name="paymentDate" placeholder="Enter Date" [(ngModel)]="releaseorder.paymentDate" required #paymentDateField="ngModel">
-      </div>
-      
-      <div *ngIf="paymentDateField.invalid && (paymentDateField.dirty || paymentDateField.touched)" class="text-danger">
-        <div *ngIf="paymentDateField.errors.required">
-          Date is required.
-        </div>
-        <br>
-      </div>
-
-      <div class="form-group">
-        <label for="paymentCheque">No</label>
-        <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter No" [(ngModel)]="releaseorder.paymentNo" required #paymentChequeField="ngModel">
-      </div>
-      
-      <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
-        <div *ngIf="paymentChequeField.errors.required">
-          No is required.
-        </div>
-        <br>
-      </div>
-
-      <div class="form-group">
-        <label for="paymentAmount">Amount</label>
-        <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="releaseorder.paymentAmount" required #paymentAmountField="ngModel">
-      </div>
-      
-      <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
-        <div *ngIf="paymentAmountField.errors.required">
-          Amount is required.
-        </div>
-        <br>
-      </div>
-
-      <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
-        <div class="form-group">
-          <label for="bankName">Bank Name</label>
-          <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="releaseorder.paymentBankName" required #bankNameField="ngModel">
+          <label for="publicationName">Name</label>
+          <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
         </div>
         
-        <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
-          <div *ngIf="bankNameField.errors.required">
-            Bank Name is required.
+        <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
+          <div *ngIf="publicationNameField.errors.required">
+            Publication Name is required.
           </div>
           <br>
         </div>
-      </ng-container>
-    </ng-container>
-
-    <br>
-    <h3>Executive Details</h3>
-    <br>
-
-    <div class="form-group">
-      <label for="executiveName">Executive Name</label>
-      <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-    </div>
-    
-    <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
-      <div *ngIf="executiveNameField.errors.required">
-        Executive Name is required.
-      </div>
-      <br>
-    </div>
-
-    <div class="form-group">
-      <label for="executiveOrg">Executive Organisation</label>
-      <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-    </div>
-    
-    <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
-      <div *ngIf="executiveOrgField.errors.required">
-        Executive Organisation is required.
-      </div>
-      <br>
-    </div>
-
-    <button type="button" class="btn btn-outline-info" (click)="addExecutive()">Add New Executive</button>
-    <br><br>
-
-    <br>
-    <h3>Other Details</h3>
-    <br>
-
-    <div class="form-row">
-      <label class="col-form-label col-md-3">Other Charges</label>
-      <div class="col">
         <div class="form-group">
-          <select class="form-control" name="otherChargesType" [(ngModel)]="releaseorder.otherChargesType" id="otherChargesType" #otherChargesTypeField="ngModel" required>
-            <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
+          <label for="publicationEdition">Edition</label>
+          <input type="text" class="form-control" id="publicationEdition" name="publicationEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
+        </div>
+        
+        <div *ngIf="publicationEditionField.invalid && (publicationEditionField.dirty || publicationEditionField.touched)" class="text-danger">
+          <div *ngIf="publicationEditionField.errors.required">
+            Edition Name is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="publicationState">State</label>
+          <select class="form-control" id="publicationState" name="publicationState" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
+            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
           </select>
         </div>
-
-        <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
-          <div *ngIf="otherChargesTypeField.errors.required">
-            Type is required.
+        
+        <div *ngIf="publicationStateField.invalid && (publicationStateField.dirty || publicationStateField.touched)" class="text-danger">
+          <div *ngIf="publicationStateField.errors.required">
+            State is required.
           </div>
           <br>
         </div>
-      </div>
-      <div class="col">
+        
         <div class="form-group">
-          <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Amount" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
+          <label for="publicationGSTIN">GSTIN</label>
+          <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
         </div>
-
-        <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
-          <div *ngIf="paymentDetailsField.errors.required">
-            Amount is required.
+        
+        <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
+          <div *ngIf="publicationGSTINField.errors.required">
+            GSTIN is required.
+          </div>
+          <div *ngIf="publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength">
+            GSTIN should be 15 characters long.
           </div>
           <br>
         </div>
-      </div>
-    </div>
+        
+        <div class="form-group">
+          <label>Media Type</label>
+          <select class="form-control" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+            <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
+          </select>
+        </div>
+    
+        <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
+          <div *ngIf="mediaTypeField.errors.required">
+            Media type is required.
+          </div>
+          <br>
+        </div>
+    
+        <button type="button" class="btn btn-outline-info" (click)="addMediaHouse()">Add New Media House</button>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Client Details</mat-panel-title>
+          <mat-panel-description>Enter Client details</mat-panel-description>
+        </mat-expansion-panel-header>
 
-    <div>
-      Client Payment = {{clientPayment}}
-    </div>
-    <br>
+        <div class="form-group">
+          <label for="clientName">Name</label>
+          <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+        </div>
+        
+        <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
+          <div *ngIf="clientNameField.errors.required">
+            Name is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="clientState">State</label>
+          <select class="form-control" id="clientState" name="clientState" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+        
+        <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
+          <div *ngIf="clientStateField.errors.required">
+            State is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="clientGSTIN">GSTIN</label>
+          <input type="text" class="form-control" id="clientGSTIN" name="clientGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.clientGSTIN" required minlength="15" maxlength="15" #clientGSTINField="ngModel">
+        </div>
+        
+        <div *ngIf="clientGSTINField.invalid && (clientGSTINField.dirty || clientGSTINField.touched)" class="text-danger">
+          <div *ngIf="clientGSTINField.errors.required">
+            GSTIN is required.
+          </div>
+          <div *ngIf="clientGSTINField.errors.minlength || clientGSTINField.errors.maxlength">
+            GSTIN should be 15 characters long.
+          </div>
+          <br>
+        </div>
+    
+        <button type="button" class="btn btn-outline-info" (click)="addClient()">Add New Client</button>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Ad Details</mat-panel-title>
+          <mat-panel-description>Enter Ad details</mat-panel-description>
+        </mat-expansion-panel-header>
 
+        <div class="form-group">
+          <label>Ad Type</label>
+          <select class="form-control" name="adType" [(ngModel)]="releaseorder.adType" id="adType" #adTypeField="ngModel" required>
+            <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
+          </select>
+        </div>
+    
+        <div class="form-row">
+          <label class="col-md-3 col-form-label">Rate</label>
+          <div class="col col-md-5">
+            <div class="form-group">
+              <input type="number" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+            </div>
+      
+            <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
+              <div *ngIf="rateField.errors.required">
+                Rate is empty or invalid.
+              </div>
+              <br>
+            </div>
+          </div>
+          <div class="col col-md-4">
+            <div class="form-group">
+              <select class="form-control" name="unit" [(ngModel)]="releaseorder.unit" id="unit" #unitField="ngModel" required>
+                <option *ngFor="let item of units" [value]="item">{{item}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-row">
+          <label class="col-md-3 col-form-label">Hue</label>
+          <div class="col-md-9">
+            <div class="form-group">
+              <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+                <option selected>Colored</option>
+                <option>Black &amp; White</option>
+              </select>
+            </div>
+    
+            <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
+              <div *ngIf="hueField.errors.required">
+                Hue is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="adEdition">Edition</label>
+          <input type="text" class="form-control" id="adEdition" name="adEdition" placeholder="Enter Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
+        </div>
+        
+        <div *ngIf="adEditionField.invalid && (adEditionField.dirty || adEditionField.touched)" class="text-danger">
+          <div *ngIf="adEditionField.errors.required">
+            Edition is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-row" *ngIf="releaseorder.mediaType == 'Print'">
+          <label class="col-md-3 col-form-label">Position</label>
+          <div class="col-md-9">
+            <div class="form-group">
+              <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+                <option *ngFor="let item of positions" [value]="item">{{item}}</option>
+              </select>
+            </div>
+    
+            <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
+              <div *ngIf="positionField.errors.required">
+                Position is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+    
+        <div class="form-group" *ngIf="releaseorder.mediaType != 'Print' ">
+          <label>Ad Time</label>
+          <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
+            <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
+          </select>
+        </div>
+    
+        <div class="form-row">
+          <label class="col-3 col-form-label">Tax</label>
+          <div class="col-auto col-form-label">
+            <div class="form-check">
+              <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="releaseorder.taxIncluded">
+              <label class="form-check-label">Included</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <select class="form-control" name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
+                <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
+              </select>
+            </div>
+    
+            <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
+              <div *ngIf="taxField.errors.required">
+                Tax is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="caption">Caption</label>
+          <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
+        </div>
+    
+        <div class="form-group">
+          <label for="remark">Remark</label>
+          <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Categories</mat-panel-title>
+          <mat-panel-description>Select Categories</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
+        </div>
+      
+        <div class="form-row">
+          <div class="form-group col">
+            <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel">
+              <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+      
+          <div class="w-100 d-block d-sm-none"></div>
+      
+          <div class="form-group col" *ngIf="category1 && category1.subcategories.length">
+            <select class="form-control" name="category2" [(ngModel)]="category2" id="category2">
+              <option *ngFor="let item of category1.subcategories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+    
+          <div class="w-100 d-block d-md-none"></div>
+      
+          <div class="form-group col" *ngIf="category2 && category2.subcategories.length">
+            <select class="form-control" name="category3" [(ngModel)]="category3" id="category3">
+              <option *ngFor="let item of category2.subcategories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+      
+          <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
+      
+          <div class="form-group col" *ngIf="category3 && category3.subcategories.length">
+            <select class="form-control" name="category4" [(ngModel)]="category4" id="category4">
+              <option *ngFor="let item of category3.subcategories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+      
+          <div class="w-100 d-block d-md-none"></div>
+      
+          <div class="form-group col" *ngIf="category4 && category4.subcategories.length">
+            <select class="form-control" name="category5" [(ngModel)]="category5" id="category5">
+              <option *ngFor="let item of category4.subcategories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+      
+          <div class="w-100 d-block d-sm-none"></div>
+      
+          <div class="form-group col" *ngIf="category5 && category5.subcategories.length">
+            <select class="form-control" name="category6" [(ngModel)]="category6" id="category6">
+              <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
+            </select>
+          </div>
+          
+        </div>
+      
+        <div *ngIf="category1Field.invalid && (category1Field.dirty || category1Field.touched)" class="text-danger">
+          <div *ngIf="category1Field.errors.required">
+            Category is required.
+          </div>
+          <br>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Ad Size</mat-panel-title>
+          <mat-panel-description>Enter Size</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
+            <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
+            <option [ngValue]="customSize">Custom</option>
+          </select>
+        </div>
+    
+        <div class="form-row" *ngIf="selectedSize == customSize">
+          <div class="col">
+            <div class="form-group">
+              <input type="number" class="form-control" id="customL" placeholder="Enter Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+            </div>
+    
+            <div *ngIf="customLField.invalid && (customLField.dirty || customLField.touched)" class="text-danger">
+              <div *ngIf="customLField.errors.required">
+                Length is required.
+              </div>
+              <br>
+            </div>
+          </div>
+          <div class="col-auto form-text">&times;</div>
+          <div class="col">
+            <div class="form-group">
+              <input type="number" class="form-control" id="customW" placeholder="Enter Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+            </div>
+    
+            <div *ngIf="customWField.invalid && (customWField.dirty || customWField.touched)" class="text-danger">
+              <div *ngIf="customWField.errors.required">
+                Width is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+    
+        <div>
+          Total Space = {{totalSpace}}
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Scheme</mat-panel-title>
+          <mat-panel-description>Select Scheme</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
+            <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}</option>
+            <option [ngValue]="customScheme">Custom</option>
+          </select>
+        </div>
+    
+        <div class="form-row" *ngIf="selectedScheme == customScheme">
+          <div class="col">
+            <div class="form-group">
+              <label>Paid</label>
+              <input type="number" class="form-control" id="customPaid" placeholder="Enter Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
+            </div>
+    
+            <div *ngIf="customPaidField.invalid && (customPaidField.dirty || customPaidField.touched)" class="text-danger">
+              <div *ngIf="customPaidField.errors.required">
+                Paid is required.
+              </div>
+              <br>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Free</label>
+              <input type="number" class="form-control" id="customFree" placeholder="Enter Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
+            </div>
+    
+            <div *ngIf="customFreeField.invalid && (customFreeField.dirty || customFreeField.touched)" class="text-danger">
+              <div *ngIf="customFreeField.errors.required">
+                Free is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Insertions</mat-panel-title>
+          <mat-panel-description>Manage Insertions</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-row">
+          <label for="adTotal" class="col-form-label col-3">Total No of Ads</label>
+          <div class="col">
+            <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
+          </div>
+          <span class="col form-text">&times; {{selectedScheme == customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
+        </div>
+        
+        <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
+          <div *ngIf="adTotalField.errors.required">
+            Total Number of Ad is required.
+          </div>
+          <br>
+        </div>
+    
+        <br>
+        <div class="form-row">
+          <div class="col">
+            <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
+          </div>    
+        </div>
+        <br>
+    
+        <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+          <span class="custom-day"
+                [class.focused]="focused"
+                [class.selected]="isSelected(date)"
+                [class.text-muted]="date.month !== currentMonth || disabled">
+            {{ date.day }}
+          </span>
+        </ng-template>
+        
+        <ngb-datepicker [(ngModel)]="currentInsertionDate"
+                        name="currentInsertionDate"
+                        [markDisabled]="insertionMarkDisabled"
+                        [dayTemplate]="insertionTemplate"
+                        (select)="addInsertion($event)"></ngb-datepicker>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Discounts</mat-panel-title>
+          <mat-panel-description>Enter Discounts</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <label for="publicationDiscount">Publication Discount</label>
+          <input type="number" class="form-control" id="publicationDiscount" name="publicationDiscount" placeholder="Enter Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+        </div>
+        
+        <div *ngIf="publicationDiscountField.invalid && (publicationDiscountField.dirty || publicationDiscountField.touched)" class="text-danger">
+          <div *ngIf="publicationDiscountField.errors.required">
+            Publication Discount is required.
+          </div>
+          <br>
+        </div>
+        
+        <div class="form-group">
+          <label for="agencyDiscount1">Agency Discount 1</label>
+          <input type="number" class="form-control" id="agencyDiscount1" name="agencyDiscount1" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+        </div>
+        
+        <div *ngIf="agencyDiscount1Field.invalid && (agencyDiscount1Field.dirty || agencyDiscount1Field.touched)" class="text-danger">
+          <div *ngIf="agencyDiscount1Field.errors.required">
+            Agency Discount 1 is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="agencyDiscount2">Agency Discount 2</label>
+          <input type="number" class="form-control" id="agencyDiscount2" name="agencyDiscount2" placeholder="Enter Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+        </div>
+        
+        <div *ngIf="agencyDiscount2Field.invalid && (agencyDiscount2Field.dirty || agencyDiscount2Field.touched)" class="text-danger">
+          <div *ngIf="agencyDiscount2Field.errors.required">
+            Agency Discount 2 is required.
+          </div>
+          <br>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Payment Details</mat-panel-title>
+          <mat-panel-description>Enter Payment details</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control" name="paymentType" [(ngModel)]="releaseorder.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+            <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
+          </select>
+        </div>
+    
+        <ng-container *ngIf="releaseorder.paymentType != 'Cash'">
+          <div class="form-group">
+            <label for="paymentDate">Date</label>
+            <input type="date" class="form-control" id="paymentDate" name="paymentDate" placeholder="Enter Date" [(ngModel)]="releaseorder.paymentDate" required #paymentDateField="ngModel">
+          </div>
+          
+          <div *ngIf="paymentDateField.invalid && (paymentDateField.dirty || paymentDateField.touched)" class="text-danger">
+            <div *ngIf="paymentDateField.errors.required">
+              Date is required.
+            </div>
+            <br>
+          </div>
+    
+          <div class="form-group">
+            <label for="paymentCheque">No</label>
+            <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter No" [(ngModel)]="releaseorder.paymentNo" required #paymentChequeField="ngModel">
+          </div>
+          
+          <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
+            <div *ngIf="paymentChequeField.errors.required">
+              No is required.
+            </div>
+            <br>
+          </div>
+    
+          <div class="form-group">
+            <label for="paymentAmount">Amount</label>
+            <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="releaseorder.paymentAmount" required #paymentAmountField="ngModel">
+          </div>
+          
+          <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
+            <div *ngIf="paymentAmountField.errors.required">
+              Amount is required.
+            </div>
+            <br>
+          </div>
+    
+          <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
+            <div class="form-group">
+              <label for="bankName">Bank Name</label>
+              <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="releaseorder.paymentBankName" required #bankNameField="ngModel">
+            </div>
+            
+            <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
+              <div *ngIf="bankNameField.errors.required">
+                Bank Name is required.
+              </div>
+              <br>
+            </div>
+          </ng-container>
+        </ng-container>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Executive Details</mat-panel-title>
+          <mat-panel-description>Enter Executive details</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <label for="executiveName">Executive Name</label>
+          <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+        </div>
+        
+        <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
+          <div *ngIf="executiveNameField.errors.required">
+            Executive Name is required.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="executiveOrg">Executive Organisation</label>
+          <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+        </div>
+        
+        <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
+          <div *ngIf="executiveOrgField.errors.required">
+            Executive Organisation is required.
+          </div>
+          <br>
+        </div>
+    
+        <button type="button" class="btn btn-outline-info" (click)="addExecutive()">Add New Executive</button>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Other Details</mat-panel-title>
+          <mat-panel-description>Enter Other details</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-row">
+          <label class="col-form-label col-md-3">Other Charges</label>
+          <div class="col">
+            <div class="form-group">
+              <select class="form-control" name="otherChargesType" [(ngModel)]="releaseorder.otherChargesType" id="otherChargesType" #otherChargesTypeField="ngModel" required>
+                <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
+              </select>
+            </div>
+    
+            <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
+              <div *ngIf="otherChargesTypeField.errors.required">
+                Type is required.
+              </div>
+              <br>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Amount" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
+            </div>
+    
+            <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
+              <div *ngIf="paymentDetailsField.errors.required">
+                Amount is required.
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br><br>
+
+    <div class="card mb-3">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Net Amount</div>
+            <div class="col-md-8">{{netAmount}} ({{taxDisplay}})</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Net Amount in Words</div>
+            <div class="col-md-8">{{amountToWords(netAmount)}} ({{taxDisplay}})</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Client Payment</div>
+            <div class="col-md-8">{{clientPayment}}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
     <br>
     
     <button type="submit" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>

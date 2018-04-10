@@ -545,16 +545,12 @@ export class ReleaseOrderComponent implements OnInit {
 
   currentInsertionDate: NgbDate[];
 
-  insertionErr;
-
   addInsertion(date: NgbDate) {
-    this.insertionErr = '';
-
     const index = this.findInsertion(date);
 
     if (index == -1) {
       if (this.releaseorder.insertions.length >= this.availableAds) {
-        this.insertionErr = 'Total No of Ads reached';
+        this.notifications.show('Total No of Ads reached');
   
         return;
       }
@@ -565,8 +561,6 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   removeInsertion(i: number) {
-    this.insertionErr = '';
-
     this.releaseorder.insertions.splice(i, 1);
   }
 
