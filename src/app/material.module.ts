@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const modules = [
   MatCheckboxModule,
@@ -19,7 +20,8 @@ const modules = [
   MatNativeDateModule,
   MatProgressBarModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatToolbarModule
 ]
 
 @NgModule({

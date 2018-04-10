@@ -1,8 +1,10 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Rate Cards</h1>
-  </div>
-</div>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Rate Cards</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
 
 <div class="container">
   <button *ngIf="!ratecard.global" class="fab bg-info" [routerLink]="['/ratecards/edit', ratecard.id]"><span class="fa fa-pencil-alt"></span></button>

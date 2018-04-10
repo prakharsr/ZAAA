@@ -1,8 +1,10 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Verify Phone Number</h1>
-  </div>
-</div>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Verify Phone Number</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
 
 <div class="container">
   <form (ngSubmit)="sendOtp()" #phoneNumberForm="ngForm">
@@ -34,7 +36,7 @@
       <br>
     </div>
 
-    <br>
+    <br><br>
     <button type="submit" class="btn btn-success" [disabled]="!otpForm.form.valid">Verify Code</button>
   </form>
 </div>

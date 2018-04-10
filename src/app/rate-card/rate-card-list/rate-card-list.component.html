@@ -1,8 +1,10 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Rate Cards</h1>
-  </div>
-</div>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Rate Cards</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
 
 <ng-template #rt let-r="result">
   {{r.mediaHouseName}}
@@ -19,7 +21,7 @@
     <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
   </div>
 
-  <mat-tab-group class="demo-tab-group">
+  <mat-tab-group>
     <mat-tab label="Local">
       <br>
       <p *ngIf="ratecards.length == 0" class="text-muted">

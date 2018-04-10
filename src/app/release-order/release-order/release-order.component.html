@@ -1,9 +1,11 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4" *ngIf="!edit">Create Release Order</h1>
-    <h1 class="display-4" *ngIf="edit">Edit Release Order</h1>
-  </div>
-</div>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container" *ngIf="!edit">Crate Release Order</div>
+    <div class="container" *ngIf="edit">Edit Release Order</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
 
 <div class="container">  
   <form (ngSubmit)="submit()" #roForm="ngForm">

@@ -1,11 +1,11 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4" *ngIf="!edit">Create Rate Card</h1>
-    <h1 class="display-4" *ngIf="edit">Edit Rate Card</h1>
-  </div>
-</div>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container" *ngIf="!edit">Create Rate Card</div>
+    <div class="container" *ngIf="edit">Edit Rate Card</div>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<!-- Validation -->
+<br>
 
 <div class="container">
   <form (ngSubmit)="submit()" #rateCardForm="ngForm">
