@@ -5,6 +5,7 @@ import { routerAnimation } from '../../animations';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { CoUserApiService } from '../co-user-api.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-co-user',
@@ -18,9 +19,7 @@ export class CoUserComponent implements OnInit {
 
   coUser = new CoUser();
 
-  error: string;
-
-  constructor(private api: CoUserApiService, private router: Router) { }
+  constructor(private api: CoUserApiService, private router: Router, private notifications: NotificationService) { }
 
   ngOnInit() {
   }
@@ -30,8 +29,6 @@ export class CoUserComponent implements OnInit {
   }
 
   submit() {
-    this.error = '';
-
     this.api.createCoUser(this.coUser).subscribe(
       data => {
         if (data.success)
@@ -46,26 +43,26 @@ export class CoUserComponent implements OnInit {
               else {
                 console.log(d);
 
-                this.error = d.msg;
+                this.notifications.show(d.msg);
               }
             },
             err => {
               console.log(err);
 
-              this.error = 'Connection failed';
+              this.notifications.show('Connection failed');
             });
           }
         }
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }

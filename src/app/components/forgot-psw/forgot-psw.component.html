@@ -22,17 +22,6 @@
       <br>
     </div>
 
-    <div *ngIf="error" class="text-danger">
-      {{error}}
-      
-      <br>
-    </div>
-    <div *ngIf="success" class="text-success">
-      Password Reset Email sent.
-      
-      <br>
-    </div>
-
     <br>
     <button class="btn btn-success" [disabled]="!forgotPswForm.form.valid">Send</button>
   </form>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-forgot-psw',
@@ -9,31 +10,26 @@ import { ApiService } from '../../services/api.service';
 export class ForgotPswComponent implements OnInit {
 
   email: string;
-  error: string;
-  success: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private notifications: NotificationService) { }
 
   ngOnInit() {
   }
 
   submit() {
-    this.success = false;
-    this.error = '';
-
     this.api.forgotPsw(this.email).subscribe(
       data => {
         if (data.success) {
-          this.success = true;
+          this.notifications.show('Password Reset Email sent.');
         }
         else {
           console.log(data);
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }

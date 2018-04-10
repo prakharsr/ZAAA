@@ -3,6 +3,7 @@ import { UserRoles } from '../user-roles';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routerAnimation } from '../../animations';
 import { CoUserApiService } from '../co-user-api.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-role-edit',
@@ -16,11 +17,11 @@ export class RoleEditComponent implements OnInit {
 
   @Input() @Output() roles = new UserRoles();
   id: string;
-  error: string;
 
   constructor(private api: CoUserApiService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -35,8 +36,6 @@ export class RoleEditComponent implements OnInit {
   }
 
   submit() {
-    this.error = '';
-
     this.api.setRoles(this.id, this.roles).subscribe(data => {
       if (data.success) {       
         this.navigateBack();
@@ -44,13 +43,13 @@ export class RoleEditComponent implements OnInit {
       else {
         console.log(data);
 
-        this.error = data.msg;
+        this.notifications.show(data.msg);
       }
     },
     err => {
       console.log(err);
 
-      this.error = 'Connection failed';
+      this.notifications.show('Connection failed');
     });
   }
 

@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
 import { StateApiService } from '../../services/state-api.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-firm-profile-edit',
@@ -18,9 +19,12 @@ export class FirmProfileEditComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile = new Firm();
-  error: string;
 
-  constructor(private ifscService: IfscService, private api: ApiService, public stateApi: StateApiService, private router: Router) { }
+  constructor(private ifscService: IfscService,
+    private api: ApiService,
+    public stateApi: StateApiService,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
@@ -53,8 +57,6 @@ export class FirmProfileEditComponent implements OnInit {
   }
 
   submit() {
-    this.error = '';
-
     this.api.setFirmProfile(this.profile).subscribe(
       data => {
         if (data.success) {
@@ -63,13 +65,13 @@ export class FirmProfileEditComponent implements OnInit {
         else {
           console.log(data);
 
-          this.error = data.msg;
+          this.notifications.show(data.msg);
         }
       },
       err => {
         console.log(err);
 
-        this.error = 'Connection failed';
+        this.notifications.show('Connection failed');
       }
     );
   }

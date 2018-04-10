@@ -308,12 +308,6 @@
 
     <br>
   
-    <div *ngIf="error">
-      <ngb-alert type="danger" (close)="error = null">{{ error }}</ngb-alert>
-      
-      <br>
-    </div>
-  
     <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
     <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
 

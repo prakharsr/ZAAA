@@ -65,12 +65,6 @@
 
     <br>
 
-    <div class="text-danger" *ngIf="error">
-      {{error}}
-
-      <br><br>
-    </div>
-
     <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid">Add</button>
     <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
   </form>
