@@ -1,7 +1,6 @@
-import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CoUser } from '../co-user';
 import { UserRoles } from '../user-roles';
-import { routerAnimation } from '../../animations';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { CoUserApiService } from '../co-user-api.service';
@@ -9,13 +8,10 @@ import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-co-user',
-  animations: [routerAnimation],
   templateUrl: './co-user.component.html',
   styleUrls: ['./co-user.component.css']
 })
 export class CoUserComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') routeAnimation = true;
 
   coUser = new CoUser();
 

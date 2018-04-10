@@ -1,6 +1,5 @@
-import { Component, OnInit, HostBinding, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IfscService } from '../../services/ifsc.service';
-import { routerAnimation } from '../../animations';
 import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
@@ -10,14 +9,10 @@ import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-firm-profile-edit',
-  animations: [routerAnimation],
   templateUrl: './firm-profile-edit.component.html',
   styleUrls: ['./firm-profile-edit.component.css']
 })
 export class FirmProfileEditComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') routeAnimation = true;
-
   profile = new Firm();
 
   constructor(private ifscService: IfscService,

@@ -1,19 +1,15 @@
-import { Component, OnInit, Input, Output, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { UserRoles } from '../user-roles';
 import { ActivatedRoute, Router } from '@angular/router';
-import { routerAnimation } from '../../animations';
 import { CoUserApiService } from '../co-user-api.service';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-role-edit',
-  animations: [routerAnimation],
   templateUrl: './role-edit.component.html',
   styleUrls: ['./role-edit.component.css']
 })
 export class RoleEditComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') routeAnimation = true;
 
   @Input() @Output() roles = new UserRoles();
   id: string;

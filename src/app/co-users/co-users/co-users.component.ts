@@ -1,18 +1,14 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { routerAnimation } from '../../animations';
+import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { CoUserApiService } from '../co-user-api.service';
 import { CoUser } from '../co-user';
 
 @Component({
   selector: 'app-co-users',
-  animations: [routerAnimation],
   templateUrl: './co-users.component.html',
   styleUrls: ['./co-users.component.css']
 })
 export class CoUsersComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') routeAnimation = true;
 
   admin: boolean;
   myId: string;

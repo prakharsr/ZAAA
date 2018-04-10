@@ -1,19 +1,15 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserProfile } from '../../models/user-profile';
-import { routerAnimation } from '../../animations';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile-view',
-  animations: [routerAnimation],
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
 export class ProfileViewComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') routeAnimation = true;
 
   profile = new UserProfile();
   isAdmin: boolean;
