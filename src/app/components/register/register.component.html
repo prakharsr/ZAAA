@@ -6,42 +6,32 @@
 </div>
 
 <div class="container">
-  <form (ngSubmit)="submit()" #signUpForm="ngForm">  
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
-    </div>
-
-    <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
-      <div *ngIf="nameField.errors.required">
+  <form (ngSubmit)="submit()" #signUpForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+      <mat-error *ngIf="nameField.errors && nameField.errors.required">
         Name is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
-      <small class="form-text text-muted">
-        <br>An auto-generated password will be sent to this Email.<br>
-      </small>
-    </div>
-
-    <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-      <div *ngIf="emailField.errors.required">
+    <mat-form-field>
+      <input matInput placeholder="Email" [(ngModel)]="email" name="email" required email #emailField="ngModel">
+      <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
+      <mat-error *ngIf="emailField.errors && emailField.errors.required">
         Email is required.
-      </div>
-      <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      </mat-error>
+      <mat-error *ngIf="emailField.errors && !emailField.errors.required && emailField.errors.email">
         Invalid Email.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
+
+    <br><br>
 
     <mat-checkbox class="my-2" name="acceptTnC" [(ngModel)]="acceptTnC" required #acceptTnCField="ngModel">Accept Terms and Conditions</mat-checkbox>
 
     <div *ngIf="acceptTnCField.invalid && (acceptTnCField.dirty || acceptTnCField.touched)" class="text-danger">
       <div *ngIf="acceptTnCField.errors.required">
-          Accept Terms and Conditions to continue.
+        Accept Terms and Conditions to continue.
       </div>
     </div>
 
