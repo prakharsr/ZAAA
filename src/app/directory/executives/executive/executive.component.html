@@ -1,106 +1,87 @@
 <form (ngSubmit)="submit()" #dirForm="ngForm">
-  <div class="row">
-    <div class="col-md">
-      <h2 *ngIf="edit">Edit Executive</h2>
-      <h2 *ngIf="!edit">Add Executive</h2>
-      <br>
-    
-      <div class="form-group">
-        <label for="orgName">Organisation Name</label>
-        <input type="text" class="form-control" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="executive.orgName" #orgNameField="ngModel">
-      </div>
-    
-      <div class="form-group">
-        <label for="companyName">Company Name</label>
-        <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Enter Company Name" [(ngModel)]="executive.companyName" required #companyNameField="ngModel">
-      </div>
-    
-      <div *ngIf="companyNameField.invalid && (companyNameField.dirty || companyNameField.touched)" class="text-danger">
-        <div *ngIf="companyNameField.errors.required">
+  <h2 *ngIf="edit">Edit Executive</h2>
+  <h2 *ngIf="!edit">Add Executive</h2>
+
+  <br><br>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Executive Details</mat-panel-title>
+        <mat-panel-description>Enter Executive and Organisation details</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName">
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput placeholder="Company Name" name="companyName" [(ngModel)]="executive.companyName" required #companyNameField="ngModel">
+        <mat-error *ngIf="companyNameField.errors && companyNameField.errors.required">
           Company Name is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group">
-        <label for="executiveName">Executive Name</label>
-        <input type="text" class="form-control" id="executiveName" name="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive.executiveName" required #executiveNameField="ngModel">
-      </div>
-    
-      <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
-        <div *ngIf="executiveNameField.errors.required">
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput placeholder="Executive Name" name="executiveName" [(ngModel)]="executive.executiveName" required #executiveNameField="ngModel">
+        <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
           Executive Name is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group">
-        <label for="designation">Designation</label>
-        <input type="text" class="form-control" id="designation" name="designation" placeholder="Enter Designation" [(ngModel)]="executive.designation" #designationField="ngModel">
-      </div>
-    
-      <div class="form-group">
-        <label for="department">Department</label>
-        <input type="text" class="form-control" id="department" name="department" placeholder="Enter Department" [(ngModel)]="executive.department" #departmentField="ngModel">
-      </div>
-    
-      <div class="form-group">
-        <label for="mobileNo">Mobile Number</label>
-        <input type="tel" class="form-control" pattern="^((\+91)|0|)\d{10}$" id="mobileNo" name="mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="executive.mobileNo" required #mobileNoField="ngModel">
-      </div>
-    
-      <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
-        <div *ngIf="mobileNoField.errors.required">
-          Mobile Number is required.
-        </div>
-        <br>
-      </div>
-    
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" [(ngModel)]="executive.email" required #emailField="ngModel" email>
-      </div>
-    
-      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-        <div *ngIf="emailField.errors.required">
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Designation" name="designation" [(ngModel)]="executive.designation">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Department" name="department" [(ngModel)]="executive.department">
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Contact Details</mat-panel-title>
+        <mat-panel-description>Enter Mobile Number and Email</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <span matPrefix>+91 &nbsp;</span>
+        <input type="tel" matInput placeholder="Mobile Number" [(ngModel)]="executive.mobileNo" pattern="^\d{10}$" maxlength="10" minlength="10" required name="mobileNo" #mobileNoField="ngModel">
+        <mat-error *ngIf="mobileNoField.errors">
+          Mobile Number is empty or invalid.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="executive.email" name="email" required email #emailField="ngModel">
+        <mat-error *ngIf="emailField.errors && emailField.errors.required">
           Email is required.
-        </div>
-        <div *ngIf="!emailField.errors.required && emailField.errors.email">
+        </mat-error>
+        <mat-error *ngIf="emailField.errors && !emailField.errors.required && emailField.errors.email">
           Invalid Email.
-        </div>
-        <br>
-      </div>
-      <br>
-    </div>
-    <div class="col-md">
-      <br>
-      <h4>Personal Details</h4>
-      <br>
-      <!--photo -->
+        </mat-error>
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Personal Details</mat-panel-title>
+        <mat-panel-description>Enter Personal Details</mat-panel-description>
+      </mat-expansion-panel-header>
 
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter DOB" [(ngModel)]="executive.dob" #dobField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="dobPicker" placeholder="Date of Birth" [(ngModel)]="executive.dob" name="dob" disabled>
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker disabled="false"></mat-datepicker>
+      </mat-form-field>
 
-      <!-- <div class="form-group">
-        <label class="mr-3">Date of Birth:</label>
-        <span *ngIf="dobModel">{{dobModel.day}}-{{dobModel.month}}-{{dobModel.year}}</span>
-        <span *ngIf="!dobModel">dd-MM-yyyy</span>
-        <ng-template #dobPopContent>
-          <ngb-datepicker name="dobPicker" #dp [(ngModel)]="dobModel" (select)="dobPopover.close()"></ngb-datepicker>
-        </ng-template>
-        <button type="button" class="btn btn-outline-secondary ml-3" [ngbPopover]="dobPopContent" #dobPopover="ngbPopover" popoverTitle="Select Date of Birth">
-          <span class="fa fa-calendar"></span>
-        </button>
-      </div> -->
-    
-      <div class="form-group">
-        <label for="anniversaryDate">Anniversary Date</label>
-        <input type="date" class="form-control" id="anniversaryDate" name="anniversaryDate" placeholder="Enter Anniversary Date" [(ngModel)]="executive.anniversaryDate" #anniversaryDateField="ngModel">
-      </div>
-    </div>
-  </div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="anniversaryPicker" placeholder="Anniversary Date" [(ngModel)]="executive.anniversaryDate" name="anniversaryDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="anniversaryPicker"></mat-datepicker-toggle>
+        <mat-datepicker #anniversaryPicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br><br>
 
   <div *ngIf="error" class="text-danger">
     {{error}}
