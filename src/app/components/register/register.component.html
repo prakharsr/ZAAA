@@ -37,19 +37,15 @@
       <br>
     </div>
 
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="acceptTnC" name="acceptTnC" [(ngModel)]="acceptTnC" required #acceptTnCField="ngModel">
-      <label class="form-check-label" for="acceptTnC">Accept Terms and Conditions</label>
-    </div>
+    <mat-checkbox class="my-2" name="acceptTnC" [(ngModel)]="acceptTnC" required #acceptTnCField="ngModel">Accept Terms and Conditions</mat-checkbox>
 
     <div *ngIf="acceptTnCField.invalid && (acceptTnCField.dirty || acceptTnCField.touched)" class="text-danger">
       <div *ngIf="acceptTnCField.errors.required">
           Accept Terms and Conditions to continue.
       </div>
-      <br>
     </div>
 
-    <br>
+    <br><br>
 
     <div class="text-danger" *ngIf="error">
       {{error}}

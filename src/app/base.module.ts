@@ -6,6 +6,8 @@ import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MaterialModule } from './material.module';
+
 import { ApiService } from './services/api.service';
 import { RazorPayService } from './services/razorpay.service';
 import { WindowService } from './services/window.service';
@@ -26,7 +28,8 @@ import { LoaderService } from './services/loader.service';
     CommonModule,
     NgbModule.forRoot(),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     ApiService,
@@ -49,6 +52,7 @@ import { LoaderService } from './services/loader.service';
     NgbModule,
     FormsModule,
     HttpClientModule,
+    MaterialModule,
     MailingDetailsComponent
   ]
 })
