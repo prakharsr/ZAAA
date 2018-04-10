@@ -47,7 +47,7 @@ export class MediaHouseListComponent implements OnInit {
   }
 
   deleteMediaHouse(mediaHouse: MediaHouse) {
-    this.dialog.confirm("Are you sure you want to delete this Media House?").subscribe(confirm => {
+    this.dialog.confirmDeletion("Are you sure you want to delete this Media House?").subscribe(confirm => {
       if (!confirm)
         return;
 

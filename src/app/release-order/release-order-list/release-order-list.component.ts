@@ -21,7 +21,7 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   deleteReleaseOrder(releaseOrder: ReleaseOrder) {
-    this.dialog.confirm("Are you sure you want to delete this Release Order?").subscribe(confirm => {
+    this.dialog.confirmDeletion("Are you sure you want to delete this Release Order?").subscribe(confirm => {
       if (!confirm)
         return;
 

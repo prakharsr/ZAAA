@@ -21,6 +21,8 @@ import { AdminGuard } from './guards/admin-guard.service';
 import { PlanGuard } from './guards/plan-guard.service';
 
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+
 import { LoaderService } from './services/loader.service';
 import { NotificationService } from './services/notification.service';
 
@@ -47,7 +49,8 @@ import { NotificationService } from './services/notification.service';
     NotificationService
   ],
   declarations: [
-    MailingDetailsComponent
+    MailingDetailsComponent,
+    DialogComponent
   ],
   exports: [
     CommonModule,
@@ -56,6 +59,9 @@ import { NotificationService } from './services/notification.service';
     HttpClientModule,
     MaterialModule,
     MailingDetailsComponent
+  ],
+  entryComponents: [
+    DialogComponent
   ]
 })
 export class BaseModule { }

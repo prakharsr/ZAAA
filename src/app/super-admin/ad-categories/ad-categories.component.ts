@@ -65,7 +65,7 @@ export class AdCategoriesComponent implements OnInit {
   }
 
   deleteCategory(index: number, category: Category) {
-    this.dialog.confirm("Are you sure want to delete this category?").subscribe(
+    this.dialog.confirmDeletion("Are you sure want to delete this category?").subscribe(
       confirm => {
         if (!confirm) {
           return;

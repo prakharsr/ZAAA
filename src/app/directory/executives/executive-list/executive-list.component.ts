@@ -45,7 +45,7 @@ export class ExecutiveListComponent implements OnInit {
   }
 
   deleteExecutive(executive: Executive) {
-    this.dialog.confirm("Are you sure you want to delete this executive?").subscribe(confirm => {
+    this.dialog.confirmDeletion("Are you sure you want to delete this executive?").subscribe(confirm => {
       if (!confirm)
         return;
 

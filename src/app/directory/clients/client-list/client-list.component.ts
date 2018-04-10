@@ -45,7 +45,7 @@ export class ClientListComponent implements OnInit {
   }
 
   deleteClient(client: Client) {
-    this.dialog.confirm("Are you sure you want to delete this client?").subscribe(confirm => {
+    this.dialog.confirmDeletion("Are you sure you want to delete this client?").subscribe(confirm => {
       if (!confirm)
         return;
 

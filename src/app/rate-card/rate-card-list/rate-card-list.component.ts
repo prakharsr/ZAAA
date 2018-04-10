@@ -48,7 +48,7 @@ export class RateCardListComponent implements OnInit {
   }
 
   deleteRateCard(ratecard: RateCard) {
-    this.dialog.confirm("Are you sure you want to delete this Rate Card?").subscribe(confirm => {
+    this.dialog.confirmDeletion("Are you sure you want to delete this Rate Card?").subscribe(confirm => {
       if (!confirm)
         return;
 

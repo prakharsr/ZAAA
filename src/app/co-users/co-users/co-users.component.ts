@@ -33,7 +33,7 @@ export class CoUsersComponent implements OnInit {
   }
 
   delete(coUser: CoUser) {
-    this.dialog.confirm("Are you sure want to delete this Co-User?").subscribe(
+    this.dialog.confirmDeletion("Are you sure want to delete this Co-User?").subscribe(
       confirm => {
         if (!confirm) {
           return;

@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { WindowService } from './window.service';
-import { of } from 'rxjs/observable/of';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../components/dialog/dialog.component';
 
 @Injectable()
 export class DialogService {
 
-  constructor(private winRef: WindowService) { }
+  constructor(private dialog: MatDialog) { }
 
-  confirm(msg: string) : Observable<boolean> {
-    const confirmation = this.winRef.window.confirm(msg);
-
-    return of(confirmation);
+  confirmDeletion(msg: string) : Observable<boolean> {
+    return this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Confirm Deletion',
+        message: msg,
+        ok: true,
+        cancel: true
+      }
+    }).afterClosed();
   }
 }
