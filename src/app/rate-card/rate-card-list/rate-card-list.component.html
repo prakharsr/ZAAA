@@ -19,56 +19,52 @@
     <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
   </div>
 
-  <ngb-tabset>
-    <ngb-tab title="Local">
-      <ng-template ngbTabContent>
-        <br>
-        <p *ngIf="ratecards.length == 0" class="text-muted">
-          No Rate Cards
-        </p>
-      
-        <div class="card mb-3" *ngFor="let ratecard of ratecards">
-          <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                {{ratecard.pullOutName}}<br>
-                {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
-                {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
-              </div>
-              <div class="col-auto">
-                <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
-                <a class="btn btn-outline-success" [routerLink]="['/releaseorders/fromRateCard', ratecard.id]"><span class="fa fa-plus"></span> Create Release Order</a>
-                <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)"><span class="fa fa-trash-alt"></span></button>
-              </div>
+  <mat-tab-group class="demo-tab-group">
+    <mat-tab label="Local">
+      <br>
+      <p *ngIf="ratecards.length == 0" class="text-muted">
+        No Rate Cards
+      </p>
+    
+      <div class="card mb-3" *ngFor="let ratecard of ratecards">
+        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              {{ratecard.pullOutName}}<br>
+              {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
+              {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
+            </div>
+            <div class="col-auto">
+              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
+              <a class="btn btn-outline-success" [routerLink]="['/releaseorders/fromRateCard', ratecard.id]"><span class="fa fa-plus"></span> Create Release Order</a>
+              <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)"><span class="fa fa-trash-alt"></span></button>
             </div>
           </div>
         </div>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Global">
-      <ng-template ngbTabContent>
-        <br>
-        <p *ngIf="globalRateCards.length == 0" class="text-muted">
-          No Rate Cards
-        </p>
-      
-        <div class="card mb-3" *ngFor="let ratecard of globalRateCards">
-          <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                {{ratecard.pullOutName}}<br>
-                {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
-                {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
-              </div>
-              <div class="col-auto">
-                <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
-              </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Global">
+      <br>
+      <p *ngIf="globalRateCards.length == 0" class="text-muted">
+        No Rate Cards
+      </p>
+    
+      <div class="card mb-3" *ngFor="let ratecard of globalRateCards">
+        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              {{ratecard.pullOutName}}<br>
+              {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
+              {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
+            </div>
+            <div class="col-auto">
+              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
             </div>
           </div>
         </div>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
