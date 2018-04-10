@@ -6,40 +6,35 @@
 
 <div class="container">
   <form (ngSubmit)="sendOtp()" #phoneNumberForm="ngForm">
-    <div class="form-group">
-      <label for="phone">Phone Number</label>
-      <input type="tel" [(ngModel)]="number" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number">
-    </div>
+    <mat-form-field>
+      <span matPrefix>+91 &nbsp;</span>
+      <input type="tel" matInput placeholder="Phone Number" [(ngModel)]="number" pattern="^\d{10}$" maxlength="10" minlength="10" required name="phone">
+    </mat-form-field>
 
     <div *ngIf="sendError" class="text-danger">
-      <br>
-
       {{sendError}}
       
       <br>
     </div>
 
     <div class="text-right">
-      <button type="submit" class="btn btn-primary" [disabled]="!number || otpSent">Send Code</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!phoneNumberForm.form.valid || otpSent">Send Code</button>
     </div>
   </form>
 
   <form *ngIf="otpSent" (ngSubmit)="verifyOtp()" #otpForm="ngForm">
-    <div class="form-group">
-      <label for="otp">Verification Code</label>
-      <input type="text" [(ngModel)]="otp" required class="form-control" name="otp" id="otp" placeholder="Enter OTP">
-      <small class="form-text text-muted">Enter the Verification code received on your mobile.</small>
-    </div>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Verification Code" [(ngModel)]="otp" required name="otp">
+      <mat-hint>Enter the Verification code received on your mobile.</mat-hint>
+    </mat-form-field>
 
     <div *ngIf="verifyError" class="text-danger">
-      <br>
-
       {{verifyError}}
       
       <br>
     </div>
 
     <br>
-    <button type="submit" class="btn btn-success" [disabled]="!otp">Verify Code</button>
+    <button type="submit" class="btn btn-success" [disabled]="!otpForm.form.valid">Verify Code</button>
   </form>
 </div>
