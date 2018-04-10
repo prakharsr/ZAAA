@@ -4,13 +4,17 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
+<br>
+
 <div class="container">
   <form (ngSubmit)="submit()" #profileForm="ngForm">
-    <div class="row">
-      <div class="col-md-6">
-        <h3 class="text-muted">Business Details</h3>
-        <br>
-      
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Business Details</mat-panel-title>
+          <mat-panel-description>Enter Business details</mat-panel-description>
+        </mat-expansion-panel-header>
+
         <div class="form-group">
           <label for="firmName">Firm Name</label>
           <input type="text" class="form-control" id="firmName" name="firmName" placeholder="Enter Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
@@ -32,8 +36,107 @@
           <label for="nickname">Display / Nickname</label>
           <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
         </div>
-              
-        <h3 class="my-5 text-muted">Registered Address</h3>
+
+        <div class="form-group">
+          <label for="incDate">Incorporation Date</label>
+          <input type="date" class="form-control" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
+        </div>
+      
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input type="text" class="form-control" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
+        </div>
+      
+        <div class="form-group">
+          <label for="panNo">PAN Number</label>
+          <input type="text" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
+        </div>
+      
+        <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
+          <div *ngIf="panNoField.errors.required">
+            PAN Number is required.
+          </div>
+          <div *ngIf="panNoField.errors.minlength || panNoField.errors.maxlength">
+            PAN Number should be 10 characters long.
+          </div>
+          <br>
+        </div>
+      
+        <div class="form-group">
+          <label for="gstNo">GSTIN</label>
+          <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="profile.gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+        </div>
+      
+        <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
+          <div *ngIf="gstNoField.errors.required">
+            GSTIN is required.
+          </div>
+          <div *ngIf="gstNoField.errors.minlength || gstNoField.errors.maxlength">
+            GSTIN should be 15 characters long.
+          </div>
+          <br>
+        </div> 
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Contact Details</mat-panel-title>
+          <mat-panel-description>Enter Contact Details</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
+        </div>
+      
+        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+          <div *ngIf="emailField.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="!emailField.errors.required && emailField.errors.email">
+            Invalid Email.
+          </div>
+          <br>
+        </div>
+    
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" [(ngModel)]="profile.phone" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
+        </div>
+    
+        <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
+          <div *ngIf="phoneField.errors.required">
+            Phone Number is empty or invalid.
+          </div>
+          <br>
+        </div>
+
+        <div class="form-row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="stdNo">STD Number</label>
+              <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
+            </div>
+          </div>
+      
+        <div class="col-9">
+          <div class="form-group">
+            <label for="landlineNo">Landline Number</label>
+            <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+          </div>
+        </div>
+        </div>
+        
+      
+        <div class="form-group">
+          <label for="fax">Fax</label>
+          <input type="number" class="form-control" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Registered Address</mat-panel-title>
+          <mat-panel-description>Enter Registered Address</mat-panel-description>
+        </mat-expansion-panel-header>
 
         <div class="form-group">
           <input type="text" class="form-control" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
@@ -86,8 +189,12 @@
           </div>
           <br>
         </div>
-
-        <h3 class="my-5 text-muted">Office Address</h3>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Office Address</mat-panel-title>
+          <mat-panel-description>Enter Office Address</mat-panel-description>
+        </mat-expansion-panel-header>
 
         <button type="button" class="btn btn-warning btn-sm" (click)="copyAddress()">Copy from Above</button>
         <br><br>
@@ -112,106 +219,13 @@
             <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
           </select>
         </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Bank Account Details</mat-panel-title>
+          <mat-panel-description>Enter Bank Account Details</mat-panel-description>
+        </mat-expansion-panel-header>
 
-        <br><br><br>
-      
-        <div class="form-group">
-          <label for="incDate">Incorporation Date</label>
-          <input type="date" class="form-control" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
-        </div>
-    
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
-        </div>
-      
-        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-          <div *ngIf="emailField.errors.required">
-            Email is required.
-          </div>
-          <div *ngIf="!emailField.errors.required && emailField.errors.email">
-            Invalid Email.
-          </div>
-          <br>
-        </div>
-    
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" [(ngModel)]="profile.phone" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
-        </div>
-    
-        <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
-          <div *ngIf="phoneField.errors.required">
-            Phone Number is empty or invalid.
-          </div>
-          <br>
-        </div>
-
-        <div class="form-row">
-          <div class="col-3">
-            <div class="form-group">
-              <label for="stdNo">STD Number</label>
-              <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
-            </div>
-          </div>
-      
-        <div class="col-9">
-          <div class="form-group">
-            <label for="landlineNo">Landline Number</label>
-            <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
-          </div>
-        </div>
-        </div>
-       
-      
-        <div class="form-group">
-          <label for="fax">Fax</label>
-          <input type="number" class="form-control" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
-        </div>
-      
-        <div class="form-group">
-          <label for="website">Website</label>
-          <input type="text" class="form-control" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
-        </div>
-      
-        <div class="form-group">
-          <label for="panNo">PAN Number</label>
-          <input type="text" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
-        </div>
-      
-        <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
-          <div *ngIf="panNoField.errors.required">
-            PAN Number is required.
-          </div>
-          <div *ngIf="panNoField.errors.minlength || panNoField.errors.maxlength">
-            PAN Number should be 10 characters long.
-          </div>
-          <br>
-        </div>
-      
-        <div class="form-group">
-          <label for="gstNo">GSTIN</label>
-          <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="profile.gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-        </div>
-      
-        <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-          <div *ngIf="gstNoField.errors.required">
-            GSTIN is required.
-          </div>
-          <div *ngIf="gstNoField.errors.minlength || gstNoField.errors.maxlength">
-            GSTIN should be 15 characters long.
-          </div>
-          <br>
-        </div> 
-        
-        <br><br>
-      </div>
-
-      <div class="col-md-5 offset-md-1">
-        <h3 class="text-muted">Bank Account Details</h3>
-
-        <br>
-      
         <div class="form-group">
           <label for="bankAccountName">Account Name</label>
           <input type="text" class="form-control" id="bankAccountName" name="bankAccountName" placeholder="Enter Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
@@ -282,13 +296,13 @@
             <option value="Savings">Savings</option>
           </select>
         </div>
-        
-        <br><br>
-        
-        <h3 class="text-muted">Social</h3>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Social Details</mat-panel-title>
+          <mat-panel-description>Enter Social Details</mat-panel-description>
+        </mat-expansion-panel-header>
 
-        <br>
-      
         <div class="form-group">
           <label for="nickname">Facebook</label>
           <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
@@ -303,10 +317,10 @@
           <label for="nickname">Others</label>
           <input type="text" class="form-control" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
         </div>
-      </div>
-    </div>
+      </mat-expansion-panel>
+    </mat-accordion>
 
-    <br>
+    <br><br>
   
     <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
     <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
