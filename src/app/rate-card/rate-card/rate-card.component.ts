@@ -48,7 +48,6 @@ export class RateCardComponent implements OnInit {
 
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
-    this.rateCard.freqPeriod = this.periods[0];
     this.rateCard.unit = this.units[0];
     this.rateCard.position = this.positions[0];
     this.rateCard.hue = this.hues[0];
@@ -201,7 +200,7 @@ export class RateCardComponent implements OnInit {
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
 
-  hues = ['Colored', 'Black & White'];
+  hues = ['Black & White', 'Colored'];
 
   get mediaType() {
     return this.rateCard.mediaType;
@@ -228,9 +227,7 @@ export class RateCardComponent implements OnInit {
     return [];
   }
 
-  rateCardTypes = ['Regional', 'Corporate', 'Local'];
-
-  periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
+  rateCardTypes = ['Local', 'Regional', 'Corporate'];
 
   get units() {
     let result = [];

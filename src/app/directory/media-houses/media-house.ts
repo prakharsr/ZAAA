@@ -14,6 +14,9 @@ export class MediaHouse {
     officeStdNo: string;
     scheduling: MediaHouseScheduling[];
 
+    freqPeriod = "";
+    freqRemark = "";
+
     GSTIN: string;
 
     global: boolean;

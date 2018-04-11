@@ -72,7 +72,7 @@ export class ReleaseOrderComponent implements OnInit {
 
     this.releaseorder.adTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
-    this.releaseorder.adHue = 'Colored';
+    this.releaseorder.adHue = this.hues[0];
     this.releaseorder.unit = this.units[0];
     this.releaseorder.adPosition = this.positions[0];
     this.releaseorder.adTime = this.adTimes[0];
@@ -139,6 +139,8 @@ export class ReleaseOrderComponent implements OnInit {
       this.executive = dirExecutive;
     });
   }
+
+  hues = ['Black & White', 'Colored'];
 
   private initFromRateCard(rateCard: RateCard) {
     if (rateCard) {

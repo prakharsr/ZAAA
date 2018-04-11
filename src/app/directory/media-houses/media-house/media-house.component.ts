@@ -18,6 +18,8 @@ export class MediaHouseComponent implements OnInit {
 
   edit = false;
 
+  periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
+
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     private router: Router,
@@ -25,8 +27,6 @@ export class MediaHouseComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.mediaHouse.scheduling = [new MediaHouseScheduling()];
-
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
@@ -37,7 +37,11 @@ export class MediaHouseComponent implements OnInit {
           this.mediaHouse = data.mediaHouse;
         });
       }
-      else this.mediaHouse.mediaType = 'Print';
+      else {
+        this.mediaHouse.mediaType = 'Print';
+        this.mediaHouse.scheduling = [new MediaHouseScheduling()];
+        this.mediaHouse.freqPeriod = this.periods[0];
+      }
     });
   }
 

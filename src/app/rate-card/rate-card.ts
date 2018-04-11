@@ -7,9 +7,6 @@ export class RateCard {
     pullOutName = "";
     bookingEdition = "";
     
-    freqPeriod = "";
-    freqRemark = "";
-    
     fixSizes: FixSize[] = [];
     schemes: Scheme[] = [];
     premiums: Premium[] = [];

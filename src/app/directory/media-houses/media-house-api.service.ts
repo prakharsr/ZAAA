@@ -24,7 +24,11 @@ export class MediaHouseApiService {
       officeLandline: mediaHouse.officeLandLine,
       officeStdNo: mediaHouse.officeStdNo,
       scheduling: scheduling,
-      GSTIN: mediaHouse.GSTIN
+      GSTIN: mediaHouse.GSTIN,
+      frequency: {
+        Period: mediaHouse.freqPeriod,
+        Remark: mediaHouse.freqRemark
+      },
     });
   }
 
@@ -65,6 +69,13 @@ export class MediaHouseApiService {
     mediaHouse.officeStdNo = body.officeStdNo;
     mediaHouse.GSTIN = body.GSTIN;
 
+    if (body.Frequency) {
+      let freq : {Period: string, Remark: string} = body.Frequency;
+
+      mediaHouse.freqPeriod = freq.Period;
+      mediaHouse.freqRemark = freq.Remark;
+    }
+
     let scheduling : MediaHouseScheduling[] = [];
 
     if (body.Scheduling) {
@@ -96,6 +107,11 @@ export class MediaHouseApiService {
       OfficeLandline: mediaHouse.officeLandLine,
       officeStdNo: mediaHouse.officeStdNo,
       GSTIN: mediaHouse.GSTIN,
+      
+      Frequency: {
+        Period: mediaHouse.freqPeriod,
+        Remark: mediaHouse.freqRemark
+      },
 
       Scheduling: scheduling
     })

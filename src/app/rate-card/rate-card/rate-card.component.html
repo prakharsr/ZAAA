@@ -26,7 +26,8 @@
         </select>
       </div>
     </div>
-    <div class="col-md">
+    <!-- Will be used in future -->
+    <div class="col-md" *ngIf="false">
       <div class="form-group">
         <label>Rate Card Type</label>
         <select class="form-control" name="rateCardType" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField="ngModel" required>
@@ -100,34 +101,6 @@
           Pullout Name is required.
         </div>
         <br>
-      </div>
-    </div>
-  </div>
-  
-  <br>
-  <h3>Frequency</h3>
-  <br>
-
-  <div class="form-row">
-    <div class="col-sm">
-      <div class="form-group">
-        <label>Period</label>
-        <select class="form-control" name="freqPeriod" [(ngModel)]="rateCard.freqPeriod" id="freqPeriod" #freqPeriodField="ngModel" required>
-          <option *ngFor="let item of periods" [value]="item">{{item}}</option>
-        </select>
-      </div>
-
-      <div *ngIf="freqPeriodField.invalid && (freqPeriodField.dirty || freqPeriodField.touched)" class="text-danger">
-        <div *ngIf="freqPeriodField.errors.required">
-          Period is required.
-        </div>
-        <br>
-      </div>
-    </div>
-    <div class="col-sm">
-      <div class="form-group">
-        <label>Remark</label>
-        <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="rateCard.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
       </div>
     </div>
   </div>
@@ -246,8 +219,7 @@
       <div class="col-md-9">
         <div class="form-group">
           <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
-            <option selected>Colored</option>
-            <option>Black &amp; White</option>
+            <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
           </select>
         </div>
 

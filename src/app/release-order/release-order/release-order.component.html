@@ -174,8 +174,7 @@
           <div class="col-md-9">
             <div class="form-group">
               <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-                <option selected>Colored</option>
-                <option>Black &amp; White</option>
+                <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
               </select>
             </div>
     

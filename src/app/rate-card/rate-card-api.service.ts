@@ -63,10 +63,6 @@ export class RateCardApiService {
         Edition: rateCard.bookingEdition,
         PulloutName: rateCard.pullOutName
       },
-      frequency: {
-        Period: rateCard.freqPeriod,
-        Remark: rateCard.freqRemark
-      },
       categories: {
         SubCategory1: rateCard.categories[0],
         SubCategory2: rateCard.categories[1],
@@ -117,13 +113,6 @@ export class RateCardApiService {
       rateCard.mediaHouseName = bookingCenter.MediaHouseName;
       rateCard.bookingEdition = bookingCenter.Edition;
       rateCard.pullOutName = bookingCenter.PulloutName;
-    }
-
-    if (body.Frequency) {
-      let freq : {Period: string, Remark: string} = body.Frequency;
-
-      rateCard.freqPeriod = freq.Period;
-      rateCard.freqRemark = freq.Remark;
     }
 
     if (body.Category) {
@@ -329,10 +318,6 @@ export class RateCardApiService {
         MediaHouseName: rateCard.mediaHouseName,
         Edition: rateCard.bookingEdition,
         PulloutName: rateCard.pullOutName
-      },
-      Frequency: {
-        Period: rateCard.freqPeriod,
-        Remark: rateCard.freqRemark
       },
       Categories: {
         SubCategory1: rateCard.categories[0],

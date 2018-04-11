@@ -74,6 +74,34 @@
         <label for="officeLandLine">Office Landline</label>
         <input type="tel" class="form-control" minlength="6" maxlength="8" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
       </div>
+
+      <br>
+      <h3>Frequency</h3>
+      <br>
+
+      <div class="form-row">
+        <div class="col-sm">
+          <div class="form-group">
+            <label>Period</label>
+            <select class="form-control" name="freqPeriod" [(ngModel)]="mediaHouse.freqPeriod" id="freqPeriod" #freqPeriodField="ngModel" required>
+              <option *ngFor="let item of periods" [value]="item">{{item}}</option>
+            </select>
+          </div>
+
+          <div *ngIf="freqPeriodField.invalid && (freqPeriodField.dirty || freqPeriodField.touched)" class="text-danger">
+            <div *ngIf="freqPeriodField.errors.required">
+              Period is required.
+            </div>
+            <br>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="form-group">
+            <label>Remark</label>
+            <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="mediaHouse.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
+          </div>
+        </div>
+      </div>
     
       <br>
 
