@@ -90,6 +90,7 @@ export class ReleaseOrder {
     executiveOrg = "";
     
     otherCharges = 0;
+    otherRemark = "";
     otherChargesType = "";
     
     clientPayment = 0;
