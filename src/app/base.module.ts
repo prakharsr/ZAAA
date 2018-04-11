@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, Validator }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -25,6 +25,18 @@ import { DialogComponent } from './components/dialog/dialog.component';
 
 import { LoaderService } from './services/loader.service';
 import { NotificationService } from './services/notification.service';
+
+import { VerifyEmailDirective } from './validators/verify-email.directive';
+import { VerifyMinDirective } from './validators/verify-min.directive';
+import { VerifyMaxDirective } from './validators/verify-max.directive';
+import { VerifyLengthDirective } from './validators/verify-fix-length.directive';
+
+const validators = [
+  VerifyEmailDirective,
+  VerifyMinDirective,
+  VerifyMaxDirective,
+  VerifyLengthDirective
+];
 
 @NgModule({
   imports: [
@@ -50,7 +62,8 @@ import { NotificationService } from './services/notification.service';
   ],
   declarations: [
     MailingDetailsComponent,
-    DialogComponent
+    DialogComponent,
+    validators
   ],
   exports: [
     CommonModule,
@@ -58,7 +71,8 @@ import { NotificationService } from './services/notification.service';
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    MailingDetailsComponent
+    MailingDetailsComponent,
+    validators
   ],
   entryComponents: [
     DialogComponent,
