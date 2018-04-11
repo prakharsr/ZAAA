@@ -6,15 +6,6 @@
 
 <br>
 
-<ng-template #modalContent let-c="close">
-  <div class="modal-header">
-    <h4 class="modal-title">Enter Receipent Details</h4>
-  </div>
-  <div class="modal-body">
-    <app-mailing-details (done)="c('Submit'); mailingDetails($event)"></app-mailing-details>
-  </div>
-</ng-template>  
-
 <div class="container">
   <button class="fab" routerLink="/releaseorders/new"><span class="fa fa-plus"></span></button>
 
@@ -33,7 +24,7 @@
         </div>
         <div class="col-auto">
           <a class="btn btn-outline-info" [routerLink]="['/releaseorders/new', releaseOrder.id]"><span class="fa fa-plus"></span> Copy into New</a>
-          <button class="btn btn-outline-info" (click)="showModal(modalContent)"><span class="fa fa-envelope"></span></button>
+          <button class="btn btn-outline-info" (click)="sendMsg()"><span class="fa fa-envelope"></span></button>
           <button class="btn btn-outline-danger" (click)="deleteReleaseOrder(releaseOrder)"><span class="fa fa-trash-alt"></span></button>
         </div>
       </div>

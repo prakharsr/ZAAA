@@ -14,7 +14,7 @@ export class ReleaseOrderListComponent implements OnInit {
 
   releaseOrders = [];
 
-  constructor(private api: ReleaseOrderApiService, private dialog: DialogService, private modalService: NgbModal) { }
+  constructor(private api: ReleaseOrderApiService, private dialog: DialogService) { }
 
   ngOnInit() {
     this.api.getReleaseOrders().subscribe(data => this.releaseOrders = data);
@@ -39,10 +39,12 @@ export class ReleaseOrderListComponent implements OnInit {
     });
   }
 
-  sendMsg() {}
-
-  showModal(modalContent) {
-    this.modalService.open(modalContent);
+  sendMsg() {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        console.log(mailingDetails);
+      }
+    });
   }
 
   mailingDetails(mailingDetails: MailingDetails) {}

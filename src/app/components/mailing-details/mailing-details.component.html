@@ -1,43 +1,49 @@
-<form (ngSubmit)="submit()" #mailingDetailsForm="ngForm">
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="to">To</label>
-    <input type="email" class="form-control col-md-9" id="to" name="to" placeholder="Enter To" [(ngModel)]="details.to" required #toField="ngModel" email>
-  </div>
+<h2 mat-dialog-title>Mailing Details</h2>
 
-  <div *ngIf="toField.invalid && (toField.dirty || toField.touched)" class="text-danger">
-    <div *ngIf="toField.errors.required">
-      To is required.
+<mat-dialog-content>
+  <form #mailingDetailsForm="ngForm">
+    <div class="form-group">
+      <label for="to">To</label>
+      <input type="email" class="form-control" id="to" name="to" placeholder="Enter To" [(ngModel)]="details.to" required #toField="ngModel" email>
     </div>
-    <br>
-  </div>
 
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="cc">CC</label>
-    <input type="email" class="form-control col-md-9" id="cc" name="cc" placeholder="Enter CC" [(ngModel)]="details.cc" #ccField="ngModel" email>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="bcc">BCC</label>
-    <input type="email" class="form-control col-md-9" id="bcc" name="bcc" placeholder="Enter BCC" [(ngModel)]="details.bcc" #bccField="ngModel" email>
-  </div>
-
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="subject">Subject</label>
-    <input type="text" class="form-control col-md-9" id="subject" name="subject" placeholder="Enter Subject" [(ngModel)]="details.subject" required #subjectField="ngModel">
-  </div>
-
-  <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.subjectuched)" class="text-danger">
-    <div *ngIf="subjectField.errors.required">
-      Subject is required.
+    <div *ngIf="toField.invalid && (toField.dirty || toField.touched)" class="text-danger">
+      <div *ngIf="toField.errors.required">
+        To is required.
+      </div>
+      <br>
     </div>
-    <br>
-  </div>
 
-  <div class="form-group form-row">
-    <label class="col-md-3 col-form-label" for="content">Content</label>
-    <input type="text" class="form-control col-md-9" id="content" name="content" placeholder="Enter Content" [(ngModel)]="details.content" #contentField="ngModel">
-  </div>
+    <div class="form-group">
+      <label for="cc">CC</label>
+      <input type="email" class="form-control" id="cc" name="cc" placeholder="Enter CC" [(ngModel)]="details.cc" #ccField="ngModel" email>
+    </div>
 
-  <br>
-  <button class="btn btn-success" [disabled]="!mailingDetailsForm.form.valid">Submit</button>
-</form>
+    <div class="form-group">
+      <label for="bcc">BCC</label>
+      <input type="email" class="form-control" id="bcc" name="bcc" placeholder="Enter BCC" [(ngModel)]="details.bcc" #bccField="ngModel" email>
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" [(ngModel)]="details.subject" required #subjectField="ngModel">
+    </div>
+
+    <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.subjectuched)" class="text-danger">
+      <div *ngIf="subjectField.errors.required">
+        Subject is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <input type="text" class="form-control" id="content" name="content" placeholder="Enter Content" [(ngModel)]="details.content" #contentField="ngModel">
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>
+  <button mat-button [disabled]="!mailingDetailsForm.form.valid" [mat-dialog-close]="details">Submit</button>  
+</mat-dialog-actions>

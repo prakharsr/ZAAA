@@ -61,7 +61,8 @@ import { NotificationService } from './services/notification.service';
     MailingDetailsComponent
   ],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    MailingDetailsComponent
   ]
 })
 export class BaseModule { }
