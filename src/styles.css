@@ -1,4 +1,4 @@
-@import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+@import "~bootstrap/dist/css/bootstrap.min.css";
 @import url("https://use.fontawesome.com/releases/v5.0.7/css/all.css");
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
