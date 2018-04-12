@@ -82,7 +82,7 @@
           <br>
         </div>
     
-        <button type="button" class="btn btn-outline-info" (click)="addMediaHouse()">Add New Media House</button>
+        <button type="button" class="btn btn-outline-info" (click)="addMediaHouse()">Add to Directory</button>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -131,7 +131,7 @@
           <br>
         </div>
     
-        <button type="button" class="btn btn-outline-info" (click)="addClient()">Add New Client</button>
+        <button type="button" class="btn btn-outline-info" (click)="addClient()">Add to Directory</button>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -264,9 +264,14 @@
           <mat-panel-description>Select Categories</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><span class="fa fa-search"></span></span>
+          </div>
           <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
         </div>
+
+        <br>
       
         <div class="form-row">
           <div class="form-group col">
@@ -594,7 +599,7 @@
           <br>
         </div>
     
-        <button type="button" class="btn btn-outline-info" (click)="addExecutive()">Add New Executive</button>
+        <button type="button" class="btn btn-outline-info" (click)="addExecutive()">Add to Directory</button>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
