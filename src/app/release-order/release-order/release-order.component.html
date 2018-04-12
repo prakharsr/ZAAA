@@ -330,14 +330,15 @@
           <mat-panel-description>Enter Size</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
+        <mat-slide-toggle [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
+
+        <div class="form-group" *ngIf="!customSize">
           <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
             <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
-            <option [ngValue]="customSize">Custom</option>
           </select>
         </div>
     
-        <div class="form-row" *ngIf="selectedSize == customSize">
+        <div class="form-row" *ngIf="customSize">
           <div class="col">
             <div class="form-group">
               <input type="number" class="form-control" id="customL" placeholder="Enter Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
