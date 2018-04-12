@@ -68,7 +68,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   private initNew() {
     this.customSize = true;
-    this.selectedScheme = this.customScheme;
+    this.customScheme = true;
 
     this.releaseorder.adTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
@@ -110,7 +110,7 @@ export class ReleaseOrderComponent implements OnInit {
       }
 
       // edit only as custom scheme
-      this.selectedScheme = this.customScheme;
+      this.customScheme = true;
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
@@ -164,7 +164,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.schemes = rateCard.schemes;
         this.selectedScheme = this.schemes[0];
       }
-      else this.selectedScheme = this.customScheme;
+      else this.customScheme = true;
 
       this.buildCategoryTree(rateCard.categories);
 
@@ -414,7 +414,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSizeCustom = false;
     }
 
-    if (this.selectedScheme == this.customScheme) {
+    if (this.customScheme) {
       this.releaseorder.adSchemeFree = this.customFree;
       this.releaseorder.adSchemePaid = this.customPaid;
     }
@@ -577,7 +577,7 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   insertionMarkDisabled = (date: NgbDate, current: {month: number}) => {
-    if (this.selectedScheme != this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
+    if (this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
       let now = new Date();
       let last = new Date();
       now.setDate(now.getDate() - 1);
@@ -601,7 +601,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   schemes: Scheme[] = [];
 
-  customScheme: Scheme = { paid: 1, Free: 0, timeLimit: 0 }
+  customScheme = false;
 
   selectedScheme: Scheme;
 
@@ -637,11 +637,11 @@ export class ReleaseOrderComponent implements OnInit {
   adCountMultiplier = 0;
 
   get totalAds() {
-    return this.adCountMultiplier * (this.selectedScheme == this.customScheme ? this.customPaid : this.selectedScheme.paid);
+    return this.adCountMultiplier * (this.customScheme ? this.customPaid : this.selectedScheme.paid);
   }
 
   get availableAds() {
-    return (this.selectedScheme == this.customScheme
+    return (this.customScheme
       ? (this.customPaid + this.customFree) : (this.selectedScheme.paid + this.selectedScheme.Free))
       * this.adCountMultiplier;
   }
