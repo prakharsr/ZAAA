@@ -727,6 +727,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   get clientPayment() {
     let amount = this.grossAmount;
+    
+    this.releaseorder.otherCharges.forEach(element => amount += +element.amount);
 
     amount -= (this.releaseorder.publicationDiscount * amount / 100);
 
