@@ -57,6 +57,11 @@ export class RateCardComponent implements OnInit {
     if (data) {
       this.rateCard = data;
 
+      let dirMediaHouse = new MediaHouse();
+      dirMediaHouse.orgName = this.rateCard.mediaHouseName;
+      dirMediaHouse.address.edition = this.rateCard.bookingEdition;
+      this.mediaHouse = dirMediaHouse;
+
       this.dropdownPullOutName = this.others;
       this.customPullOutName = this.rateCard.pullOutName;
 

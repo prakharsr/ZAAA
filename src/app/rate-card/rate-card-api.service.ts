@@ -319,7 +319,7 @@ export class RateCardApiService {
         Edition: rateCard.bookingEdition,
         PulloutName: rateCard.pullOutName
       },
-      Categories: {
+      Category: {
         SubCategory1: rateCard.categories[0],
         SubCategory2: rateCard.categories[1],
         SubCategory3: rateCard.categories[2],
