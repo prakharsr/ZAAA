@@ -33,6 +33,8 @@ export class ReleaseOrderComponent implements OnInit {
   edit = false;
   id: string;
 
+  fixedCategoriesLevel = -1;
+
   selectedCategories: Category[] = [null, null, null, null, null, null];
 
   constructor(private route: ActivatedRoute,
@@ -166,6 +168,13 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else this.customScheme = true;
 
+      for (let i = 0; i < rateCard.categories.length; ++i) {
+        if (rateCard.categories[i]) {
+          ++this.fixedCategoriesLevel;
+        }
+        else break;
+      }
+
       this.buildCategoryTree(rateCard.categories);
 
       this.mediaHouseApi.searchMediaHouses(rateCard.mediaHouseName).subscribe(data => {
@@ -219,7 +228,13 @@ export class ReleaseOrderComponent implements OnInit {
     let result : Category[] = [];
 
     if (query) {
-      this.categories.forEach(element => {
+      let base = this.categories;
+
+      if (this.fixedCategoriesLevel > -1) {
+        base = this.selectedCategories[this.fixedCategoriesLevel].subcategories;
+      }
+
+      base.forEach(element => {
         this.findSubCategories(element, query).forEach(a => result.push(a));
       });
     }
@@ -245,7 +260,15 @@ export class ReleaseOrderComponent implements OnInit {
       result = result.parent;
     }
 
-    let i = 0;
+    let j = this.fixedCategoriesLevel + 1;
+
+    while (j > 0) {
+      stack.pop();
+
+      --j;
+    }
+
+    let i = this.fixedCategoriesLevel + 1;
 
     while (stack.length) {
       this.setCategory(i, stack.pop());
