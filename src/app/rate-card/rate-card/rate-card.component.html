@@ -109,9 +109,14 @@
   <h3>Categories</h3>
   <br>
 
-  <div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><span class="fa fa-search"></span></span>
+    </div>
     <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
   </div>
+
+  <br>
 
   <div class="form-row">
     <div class="form-group col">
