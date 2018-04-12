@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { MediaHouse, MediaHouseScheduling } from './media-house';
-import { map } from 'rxjs/operators';
+import { MediaHouse, MediaHouseScheduling, Pullout } from './media-house';
+import { map, elementAt } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 @Injectable()
@@ -12,10 +12,13 @@ export class MediaHouseApiService {
 
   createMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
     let scheduling = [];
+    let pullouts = [];
 
     mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+    mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
 
     return this.api.post('/user/mediahouse', {
+      pullouts: pullouts,
       organizationName: mediaHouse.orgName,
       publicationName: mediaHouse.pubName,
       nickName: mediaHouse.nickName,
@@ -85,20 +88,29 @@ export class MediaHouseApiService {
     }
 
     mediaHouse.scheduling = scheduling;
+    
+    if(body.pullouts) {
+      body.pullouts.forEach(element => {
+        mediaHouse.pullouts.push(new Pullout(element));
+      })
+    }
 
     return mediaHouse;
   }
 
   editMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
     let scheduling = [];
-
+    let pullouts = [];
+   
     if (mediaHouse.scheduling) {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
-
+    
+    mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
+    
     return this.api.patch('/user/mediahouse/', {
       id: mediaHouse.id,
-
+      pullouts: pullouts,
       OrganizationName: mediaHouse.orgName,
       PublicationName: mediaHouse.pubName,
       NickName: mediaHouse.nickName,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaHouse, MediaHouseScheduling } from '../media-house';
+import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StateApiService } from '../../../services/state-api.service';
@@ -40,6 +40,7 @@ export class MediaHouseComponent implements OnInit {
       else {
         this.mediaHouse.mediaType = 'Print';
         this.mediaHouse.scheduling = [new MediaHouseScheduling()];
+        this.mediaHouse.pullouts = [new Pullout('Main')];
         this.mediaHouse.freqPeriod = this.periods[0];
       }
     });
@@ -47,6 +48,14 @@ export class MediaHouseComponent implements OnInit {
 
   addScheduling() {
     this.mediaHouse.scheduling.push(new MediaHouseScheduling());
+  }
+
+  addPullouts() {
+    this.mediaHouse.pullouts.push(new Pullout(''));
+  }
+
+  removePullouts(i: number) {
+    this.mediaHouse.pullouts.splice(i, 1);
   }
 
   removeScheduling(i: number) {

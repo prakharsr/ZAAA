@@ -172,6 +172,30 @@
       </div>
 
       <br>
+
+      <div class="row">
+        <div class="col">
+          <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
+        </div>
+        <div class="col-auto">
+          <button type="button" (click)="addPullouts()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+        </div>
+      </div>
+
+      <br><br>
+
+      <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
+        <div class="col-auto">#{{i + 1}}</div>
+        <div class="col">
+          <div class="form-group">
+            <input type="text" class="form-control" id="pullouts-{{i}}" name="s-{{i}}-pullouts" placeholder="Enter Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
+          </div>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-outline-danger" type="button" (click)="removePullouts(i)"><span class="fa fa-trash-alt"></span></button>
+        </div>
+      </div>
+
     </div>
     <div class="col-md">
       <br>

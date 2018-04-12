@@ -82,6 +82,21 @@
       </ul>
     </div>
   </div>
+
+  <div class="col-lg">
+    <div class="card mb-3">
+        <div class="card-header">Pullouts</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of mediaHouse.pullouts; index as i">
+            <div class="row">
+              <div class="col-md-4">#{{i}}</div>
+              <div class="col-md-8">{{item.name}}</div>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+  
   <div class="col-lg">
     <div class="card mb-3" *ngFor="let scheduling of mediaHouse.scheduling; index as i">
       <div class="card-header">Scheduling #{{i + 1}}</div>
