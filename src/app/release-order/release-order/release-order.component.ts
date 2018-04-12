@@ -67,8 +67,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private initNew() {
-    this.selectedSize = this.customSize;
-    this.selectedScheme = this.customScheme;
+    this.customSize = true;
+    this.customScheme = true;
 
     this.releaseorder.adTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
@@ -95,7 +95,7 @@ export class ReleaseOrderComponent implements OnInit {
       ]);
 
       if (this.releaseorder.adSizeCustom) {
-        this.selectedSize = this.customSize;
+        this.customSize = true;
         this.customSizeL = this.releaseorder.adSizeL;
         this.customSizeW = this.releaseorder.adSizeW;
       }
@@ -110,7 +110,7 @@ export class ReleaseOrderComponent implements OnInit {
       }
 
       // edit only as custom scheme
-      this.selectedScheme = this.customScheme;
+      this.customScheme = true;
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
@@ -157,13 +157,13 @@ export class ReleaseOrderComponent implements OnInit {
         this.fixSizes = rateCard.fixSizes;
         this.selectedSize = this.fixSizes[0];
       }
-      else this.selectedSize = this.customSize;
+      else this.customSize = true;
 
       if (rateCard.schemes.length > 0) {
         this.schemes = rateCard.schemes;
         this.selectedScheme = this.schemes[0];
       }
-      else this.selectedScheme = this.customScheme;
+      else this.customScheme = true;
 
       this.buildCategoryTree(rateCard.categories);
 
@@ -401,7 +401,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
 
-    if (this.selectedSize == this.customSize) {
+    if (this.customSize) {
       this.releaseorder.adSizeL = this.customSizeL;
       this.releaseorder.adSizeW = this.customSizeW;
       this.releaseorder.adSizeCustom = true;
@@ -413,7 +413,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSizeCustom = false;
     }
 
-    if (this.selectedScheme == this.customScheme) {
+    if (this.customScheme) {
       this.releaseorder.adSchemeFree = this.customFree;
       this.releaseorder.adSchemePaid = this.customPaid;
     }
@@ -576,7 +576,7 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   insertionMarkDisabled = (date: NgbDate, current: {month: number}) => {
-    if (this.selectedScheme != this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
+    if (this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
       let now = new Date();
       let last = new Date();
       now.setDate(now.getDate() - 1);
@@ -591,7 +591,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   fixSizes: FixSize[] = [];
 
-  customSize: FixSize = { amount: -1, width: -1, length: -1 }
+  customSize = false;
 
   selectedSize: FixSize;
 
@@ -600,7 +600,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   schemes: Scheme[] = [];
 
-  customScheme: Scheme = { paid: 1, Free: 0, timeLimit: 0 }
+  customScheme = false;
 
   selectedScheme: Scheme;
 
@@ -608,14 +608,14 @@ export class ReleaseOrderComponent implements OnInit {
   customFree = 0;
 
   get totalSpace() {
-    if (this.selectedSize == this.customSize || this.selectedSize == null) {
+    if (this.customSize || this.selectedSize == null) {
       return this.customSizeL * this.customSizeW;
     }
     else return this.selectedSize.length * this.selectedSize.width;
   }
 
   get grossAmount() {
-    if (this.selectedSize == this.customSize) {
+    if (this.customSize) {
       return (this.releaseorder.rate * this.totalSpace) * this.totalAds;
     }
     else {
@@ -636,11 +636,11 @@ export class ReleaseOrderComponent implements OnInit {
   adCountMultiplier = 0;
 
   get totalAds() {
-    return this.adCountMultiplier * (this.selectedScheme == this.customScheme ? this.customPaid : this.selectedScheme.paid);
+    return this.adCountMultiplier * (this.customScheme ? this.customPaid : this.selectedScheme.paid);
   }
 
   get availableAds() {
-    return (this.selectedScheme == this.customScheme
+    return (this.customScheme
       ? (this.customPaid + this.customFree) : (this.selectedScheme.paid + this.selectedScheme.Free))
       * this.adCountMultiplier;
   }

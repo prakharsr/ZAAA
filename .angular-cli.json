@@ -17,6 +17,7 @@
       "tsconfig": "tsconfig.app.json",
       "prefix": "app",
       "styles": [
+        "theme.scss",
         "styles.css"
       ],
       "scripts": [],

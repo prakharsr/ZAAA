@@ -330,14 +330,15 @@
           <mat-panel-description>Enter Size</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
+        <mat-slide-toggle [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
+
+        <div class="form-group" *ngIf="!customSize">
           <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
             <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
-            <option [ngValue]="customSize">Custom</option>
           </select>
         </div>
     
-        <div class="form-row" *ngIf="selectedSize == customSize">
+        <div class="form-row" *ngIf="customSize">
           <div class="col">
             <div class="form-group">
               <input type="number" class="form-control" id="customL" placeholder="Enter Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
@@ -375,14 +376,15 @@
           <mat-panel-description>Select Scheme</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
+        <mat-slide-toggle [(ngModel)]="customScheme" name="customScheme" [disabled]="schemes.length == 0">Custom</mat-slide-toggle>
+
+        <div class="form-group" *ngIf="!customScheme">
           <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
             <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}</option>
-            <option [ngValue]="customScheme">Custom</option>
           </select>
         </div>
     
-        <div class="form-row" *ngIf="selectedScheme == customScheme">
+        <div class="form-row" *ngIf="customScheme">
           <div class="col">
             <div class="form-group">
               <label>Paid</label>
@@ -422,7 +424,7 @@
           <div class="col">
             <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
           </div>
-          <span class="col form-text">&times; {{selectedScheme == customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
+          <span class="col form-text">&times; {{customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
         </div>
         
         <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
