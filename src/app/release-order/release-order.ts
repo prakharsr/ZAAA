@@ -88,10 +88,15 @@ export class ReleaseOrder {
     
     executiveName = "";
     executiveOrg = "";
-    
-    otherCharges = 0;
+
     otherRemark = "";
-    otherChargesType = "";
+    otherCharges: OtherCharges[] = [];
+
     
     clientPayment = 0;
+}
+
+export class OtherCharges {
+    amount = "";
+    chargeType = "";
 }

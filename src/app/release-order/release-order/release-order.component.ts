@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrder, Insertion, TaxValues } from '../release-order';
+import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -77,7 +77,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adPosition = this.positions[0];
     this.releaseorder.adTime = this.adTimes[0];
     this.selectedTax = this.taxes[0];
-    this.releaseorder.otherChargesType = this.otherChargesTypes[0];
+    this.releaseorder.otherCharges = [new OtherCharges()];
     this.releaseorder.paymentType = this.paymentTypes[0];
   }
 
@@ -151,7 +151,6 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adPosition = rateCard.position;
 
       this.releaseorder.paymentType = this.paymentTypes[0];
-      this.releaseorder.otherChargesType = this.otherChargesTypes[0];
       this.selectedTax = this.taxes[0];
 
       if (rateCard.fixSizes.length > 0) {
@@ -741,6 +740,14 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
   
+  addCharges() {
+    this.releaseorder.otherCharges.push(new OtherCharges());
+  }
+
+  removeOtherCharge(i: number) {
+    this.releaseorder.otherCharges.splice(i, 1);
+  }
+
   addExecutive() {
     let obj = new Executive();
 

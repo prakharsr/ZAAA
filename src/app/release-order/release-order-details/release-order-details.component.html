@@ -226,10 +226,15 @@
             </div>
           </li>
           <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Other Charges</div>
-              <div class="col-md-8">{{releaseOrder.otherCharges}}</div>
-            </div>
+            <div>Other Charges</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of releaseOrder.otherCharges">
+                <div class="row">
+                    <div class="col-md-8">{{item.chargeType}}</div>
+                  <div class="col-md-4">{{item.amount}}</div>                  
+                </div>
+              </li>
+            </ul>
           </li>
           <li class="list-group-item">
             <div class="row">

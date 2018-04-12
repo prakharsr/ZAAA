@@ -600,36 +600,59 @@
           <mat-panel-description>Enter Other details</mat-panel-description>
         </mat-expansion-panel-header>
 
+        <br>
         <div class="form-row">
-          <label class="col-form-label col-md-3">Other Charges</label>
           <div class="col">
-            <div class="form-group">
-              <select class="form-control" name="otherChargesType" [(ngModel)]="releaseorder.otherChargesType" id="otherChargesType" #otherChargesTypeField="ngModel" required>
-                <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
-              </select>
-            </div>
-    
-            <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
-              <div *ngIf="otherChargesTypeField.errors.required">
-                Type is required.
-              </div>
-              <br>
-            </div>
+            <h4>Other Charges</h4>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <input type="number" class="form-control" id="otherCharges" name="otherCharges" placeholder="Enter Amount" [(ngModel)]="releaseorder.otherCharges" required #otherChargesField="ngModel">
-            </div>
-    
-            <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
-              <div *ngIf="paymentDetailsField.errors.required">
-                Amount is required.
-              </div>
-              <br>
-            </div>
+          <div class="col-auto">
+            <button type="button" (click)="addCharges()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
           </div>
-
         </div>
+        <br>
+        
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let charge of releaseorder.otherCharges; index as i">
+              <div class="form-row">
+                <label class="col-auto col-form-label">#{{i + 1}}</label>
+
+                <div class="col">
+                  <div class="form-group">
+                    <select class="form-control" name="otherChargesType-{{i}}" [(ngModel)]="charge.chargeType" id="otherChargesType-{{i}}" #otherChargesTypeField="ngModel" required>
+                      <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
+                    </select>
+                  </div>
+                  
+                  <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
+                    <div *ngIf="otherChargesTypeField.errors.required">
+                      Type is required.
+                    </div>
+                    <br>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="otherCharges-{{i}}" name="otherCharges-{{i}}" placeholder="Enter Amount" [(ngModel)]="charge.amount" required #otherChargesField="ngModel">
+                  </div>
+
+                  <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
+                    <div *ngIf="otherChargesField.errors.required">
+                      Amount is required.
+                    </div>
+                    <br>
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeOtherCharge(i)"><span class="fa fa-trash-alt"></span></button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <br>
 
         <div class="form-group">
           <label for="otherRemark">Remark</label>
