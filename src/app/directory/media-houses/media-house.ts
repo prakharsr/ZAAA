@@ -22,6 +22,7 @@ export class MediaHouse {
     global: boolean;
 
     id: string;
+    pullouts: Pullout[] = [];
 }
 
 export class MediaHouseScheduling {
@@ -30,4 +31,11 @@ export class MediaHouseScheduling {
     mobileNo: "";
     deskExtension: "";
     email: "";
+}
+
+export class Pullout {
+
+    constructor(public name: string) {
+
+    }
 }
