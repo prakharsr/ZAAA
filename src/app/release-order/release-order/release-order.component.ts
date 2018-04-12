@@ -766,7 +766,10 @@ export class ReleaseOrderComponent implements OnInit {
   }
   
   addCharges() {
-    this.releaseorder.otherCharges.push(new OtherCharges());
+    let item = new OtherCharges();
+    item.chargeType = this.otherChargesTypes[0];
+
+    this.releaseorder.otherCharges.push(item);
   }
 
   removeOtherCharge(i: number) {
