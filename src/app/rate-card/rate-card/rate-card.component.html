@@ -403,35 +403,43 @@
           <button mat-button type="button" color="primary" (click)="addScheme()">Add More</button>
         </mat-action-row>
       </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Taxes</mat-panel-title>
+          <mat-panel-description>Enter Taxes</mat-panel-description>
+        </mat-expansion-panel-header>
+      
+        <div class="text-muted" *ngIf="rateCard.taxes.length == 0">
+          No Taxes
+        </div>
+
+        <div *ngFor="let item of rateCard.taxes; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col-auto align-self-center">
+              <mat-checkbox name="taxIncluded-{{i}}" [(ngModel)]="item.included">Included</mat-checkbox>
+            </div>
+            <div class="col-auto">&nbsp;</div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
+                <mat-error *ngIf="rateField.errors && rateField.errors.required">
+                  Rate is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeTax(i)"><span class="fa fa-trash-alt"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addTax()">Add More</button>
+        </mat-action-row>
+      </mat-expansion-panel>
     </mat-accordion>
   
     <br>
-  
-  <!-- Tax -->  
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <h4>Taxes ({{rateCard.taxes.length}})</h4>
-    </div>
-    <div class="col-auto">
-      <button type="button" (click)="addTax()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-    </div>
-  </div>
-  <br>
-  
-  <div class="card">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let tax of rateCard.taxes; index as i">
-        <div class="form-row">
-          <input type="checkbox" class="col-auto form-check-input" id="taxIncluded-{{i}}" name="taxIncluded-{{i}}" [(ngModel)]="tax.included" #taxIncludedField="ngModel">
-          <label class="col-auto col-form-label">#{{i + 1}}</label>
-          <input type="number" class="form-control col mx-3" [disabled]="!tax.included" id="taxVal-{{i}}" placeholder="Enter Tax" [(ngModel)]="tax.rate" name="taxVal-{{i}}" #taxValField="ngModel">
-          <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeTax(i)"><span class="fa fa-trash-alt"></span></button>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <br>
   
   <!-- Covered -->
   <br>
