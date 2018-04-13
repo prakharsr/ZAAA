@@ -749,7 +749,19 @@ export class ReleaseOrderComponent implements OnInit {
     obj.mediaType = this.releaseorder.mediaType;
 
     this.mediaHouseApi.createMediaHouse(obj).subscribe(data => {
-      // handle
+      if (data.success) {
+        this.notifications.show('Added to Directory');
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    },
+    err => {
+      console.log(err);
+
+      this.notifications.show('Connection failed');
     });
   }
 
@@ -761,7 +773,19 @@ export class ReleaseOrderComponent implements OnInit {
     obj.gstNo = this.releaseorder.clientGSTIN;
     
     this.clientApi.createClient(obj).subscribe(data => {
-      // handle
+      if (data.success) {
+        this.notifications.show('Added to Directory');
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    },
+    err => {
+      console.log(err);
+
+      this.notifications.show('Connection failed');
     });
   }
   
@@ -783,7 +807,19 @@ export class ReleaseOrderComponent implements OnInit {
     obj.orgName = this.releaseorder.executiveOrg;
     
     this.executiveApi.createExecutive(obj).subscribe(data => {
-      // handle
+      if (data.success) {
+        this.notifications.show('Added to Directory');
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    },
+    err => {
+      console.log(err);
+
+      this.notifications.show('Connection failed');
     });
   }
 }
