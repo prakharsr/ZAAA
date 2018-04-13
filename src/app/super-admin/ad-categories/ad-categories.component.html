@@ -14,7 +14,9 @@
           <input [(ngModel)]="inputText[0]" class="form-control" name="category1" required>
         </div>
         <div class="col-auto">
-          <button type="submit" class="btn btn-outline-info" [disabled]="!category1Form.form.valid"><span class="fa fa-plus"></span></button>
+          <button type="submit" class="btn btn-outline-info" [disabled]="!category1Form.form.valid">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </form>
       <br>
@@ -22,7 +24,9 @@
         <button *ngFor="let category of categories" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" [class.active]="selectedCategories[0] == category" (click)="setCategory(0, category)">
           {{category.name}}
 
-          <button class="btn btn-danger btn-sm" (click)="deleteCategory(0, category)"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-danger btn-sm" (click)="deleteCategory(0, category)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </button>
       </div>
     </div>
@@ -34,7 +38,9 @@
             <input [(ngModel)]="inputText[i]" class="form-control" name="category-{{i}}" required>
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-outline-info" [disabled]="!categoryForm.form.valid"><span class="fa fa-plus"></span></button>
+            <button type="submit" class="btn btn-outline-info" [disabled]="!categoryForm.form.valid">
+              <mat-icon>add</mat-icon>
+            </button>
           </div>
         </form>
         <br>
@@ -42,7 +48,9 @@
           <button *ngFor="let category of selectedCategories[i - 1].subcategories" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" [class.active]="selectedCategory == category" (click)="setCategory(i, category)">
             {{category.name}}
 
-            <button class="btn btn-danger btn-sm" (click)="deleteCategory(i, category)"><span class="fa fa-trash-alt"></span></button>
+            <button class="btn btn-danger btn-sm" (click)="deleteCategory(i, category)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </button>
         </div>
       </div>

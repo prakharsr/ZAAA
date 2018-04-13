@@ -178,7 +178,9 @@
           <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
         </div>
         <div class="col-auto">
-          <button type="button" (click)="addPullouts()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+          <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
 
@@ -192,7 +194,9 @@
           </div>
         </div>
         <div class="col-auto">
-          <button class="btn btn-outline-danger" type="button" (click)="removePullouts(i)"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-outline-danger" type="button" (click)="removePullouts(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
 
@@ -205,7 +209,9 @@
           <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
         </div>
         <div class="col-auto">
-          <button type="button" (click)="addScheduling()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+          <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
       
@@ -213,7 +219,9 @@
 
       <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
         <div class="card-header">
-          <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
           #{{i + 1}}
         </div>
         <div class="card-body">

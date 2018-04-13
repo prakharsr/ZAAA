@@ -1,4 +1,6 @@
-<button class="fab" routerLink="/dir/clients/new"><span class="fa fa-plus"></span></button>
+<button class="fab" routerLink="/dir/clients/new">
+  <mat-icon>add</mat-icon>
+</button>
 
 <ng-template #rt let-r="result">
   {{r.orgName}}
@@ -27,7 +29,9 @@
         </div>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger" (click)="deleteClient(client)"><span class="fa fa-trash-alt"></span></button>
+        <button class="btn btn-outline-danger" (click)="deleteClient(client)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
   </div>

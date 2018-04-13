@@ -130,7 +130,9 @@
         <h4>Contact Person ({{client.contactpersons.length}})</h4>
       </div>
       <div class="col-auto">
-        <button type="button" (click)="addContactPerson()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+        <button type="button" (click)="addContactPerson()" class="btn btn-outline-info">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </div>
     
@@ -138,7 +140,9 @@
 
     <div *ngFor="let item of client.contactpersons; index as i" class="card mb-4">
       <div class="card-header">
-        <button class="btn btn-outline-danger float-right" type="button" (click)="removeContactPerson(i)"><span class="fa fa-trash-alt"></span></button>
+        <button class="btn btn-outline-danger float-right" type="button" (click)="removeContactPerson(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
         #{{i + 1}}
       </div>
       <div class="card-body">

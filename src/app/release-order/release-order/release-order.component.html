@@ -270,7 +270,9 @@
 
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text"><span class="fa fa-search"></span></span>
+            <span class="input-group-text">
+              <mat-icon>search</mat-icon>
+            </span>
           </div>
           <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
         </div>
@@ -636,7 +638,9 @@
               </mat-form-field>
             </div>
             <div class="col-auto col-form-label">
-              <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)"><span class="fa fa-trash-alt"></span></button>
+              <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </div>
           </div>
         </div>
