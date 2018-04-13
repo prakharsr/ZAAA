@@ -475,45 +475,41 @@
           <button mat-button type="button" color="primary" (click)="addCovered()">Add More</button>
         </mat-action-row>
       </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Remarks</mat-panel-title>
+          <mat-panel-description>Enter Remarks</mat-panel-description>
+        </mat-expansion-panel-header>
+      
+        <div class="text-muted" *ngIf="rateCard.remarks.length == 0">
+          No Remarks
+        </div>
+
+        <div *ngFor="let item of rateCard.remarks; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Remark" name="remark-{{i}}" [(ngModel)]="item.remark" required #remarkField="ngModel">
+                <mat-error *ngIf="remarkField.errors && remarkField.errors.required">
+                  Remark is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeRemark(i)"><span class="fa fa-trash-alt"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addRemark()">Add More</button>
+        </mat-action-row>
+      </mat-expansion-panel>
     </mat-accordion>
   
-    <br>
-  
-  <!-- Remarks -->  
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <h4>Remarks ({{rateCard.remarks.length}})</h4>
-    </div>
-    <div class="col-auto">
-      <button type="button" (click)="addRemark()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-    </div>
-  </div>
-  <br>
-  
-  <div class="card">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let item of rateCard.remarks; index as i">
-        <div class="form-row">
-            <label class="col-auto col-form-label">#{{i + 1}}</label>
-            <input type="text" class="form-control col mx-3" id="remark-{{i}}" name="remark-{{i}}" placeholder="Enter Remark" [(ngModel)]="item.remark" required #remarkField="ngModel">
-            <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeRemark(i)"><span class="fa fa-trash-alt"></span></button>
-        </div>
+    <br><br>
 
-        <div *ngIf="remarkField.invalid && (remarkField.dirty || remarkField.touched)" class="text-danger">
-          <br>
-          <div *ngIf="remarkField.errors.required">
-            Remark is required.
-          </div>
-          <br>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <br><br>
-
-  <button type="submit" class="btn btn-success" [disabled]="!rateCardForm.form.valid">Save</button>
-  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-</form>
+    <button type="submit" class="btn btn-success" [disabled]="!rateCardForm.form.valid">Save</button>
+    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+  </form>
 </div>
