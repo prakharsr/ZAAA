@@ -437,58 +437,47 @@
           <button mat-button type="button" color="primary" (click)="addTax()">Add More</button>
         </mat-action-row>
       </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Covered</mat-panel-title>
+          <mat-panel-description>Enter Covered</mat-panel-description>
+        </mat-expansion-panel-header>
+      
+        <div class="text-muted" *ngIf="rateCard.covered.length == 0">
+          No Covered
+        </div>
+
+        <div *ngFor="let item of rateCard.covered; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Media House" name="covMediaHouse-{{i}}" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
+                <mat-error *ngIf="covMediaHouseField.errors && covMediaHouseField.errors.required">
+                  Media House is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Edition" name="covEdition-{{i}}" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
+                <mat-error *ngIf="covEditionField.errors && covEditionField.errors.required">
+                  Edition is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeCovered(i)"><span class="fa fa-trash-alt"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addCovered()">Add More</button>
+        </mat-action-row>
+      </mat-expansion-panel>
     </mat-accordion>
   
     <br>
-  
-  <!-- Covered -->
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <h4>Covered ({{rateCard.covered.length}})</h4>
-    </div>
-    <div class="col-auto">
-      <button type="button" (click)="addCovered()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-    </div>
-  </div>
-  <br>
-  
-  <div *ngFor="let item of rateCard.covered; index as i" class="card mb-4">
-    <div class="card-header">
-      <button type="button" class="btn btn-outline-danger float-right" (click)="removeCovered(i)"><span class="fa fa-trash-alt"></span></button>
-      #{{i + 1}}
-    </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="col-md">
-          <div class="form-group">
-            <label for="covMediaHouse">Media House</label>
-            <input type="text" class="form-control" id="covMediaHouse-{{i}}" name="covMediaHouse-{{i}}" placeholder="Enter Media House" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
-          </div>
-          
-          <div *ngIf="covMediaHouseField.invalid && (covMediaHouseField.dirty || covMediaHouseField.touched)" class="text-danger">
-            <div *ngIf="covMediaHouseField.errors.required">
-              Media House is required.
-            </div>
-            <br>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-group">
-            <label for="covEdition">Edition</label>
-            <input type="text" class="form-control" id="covEdition-{{i}}" name="covEdition-{{i}}" placeholder="Enter Edition" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
-          </div>
-          
-          <div *ngIf="covEditionField.invalid && (covEditionField.dirty || covEditionField.touched)" class="text-danger">
-            <div *ngIf="covEditionField.errors.required">
-              Edition is required.
-            </div>
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   
   <!-- Remarks -->  
   <br>

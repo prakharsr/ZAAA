@@ -39,7 +39,6 @@ export class RateCardComponent implements OnInit {
   selectedCategories: Category[] = [null, null, null, null, null, null];
 
   private initNew() {
-    this.rateCard.covered = [new Covered()];
     this.rateCard.remarks = [new Remark()];
 
     this.mediaType = this.mediaTypes[0];
