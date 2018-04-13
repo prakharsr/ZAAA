@@ -357,72 +357,56 @@
           <button mat-button type="button" color="primary" (click)="addFixSize()">Add More</button>
         </mat-action-row>
       </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Schemes</mat-panel-title>
+          <mat-panel-description>Enter Schemes</mat-panel-description>
+        </mat-expansion-panel-header>
+      
+        <div class="text-muted" *ngIf="rateCard.schemes.length == 0">
+          No Schemes
+        </div>
+
+        <div *ngFor="let item of rateCard.schemes; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Paid" name="paid-{{i}}" [(ngModel)]="item.paid" required #paidField="ngModel">
+                <mat-error *ngIf="paidField.errors && paidField.errors.required">
+                  Paid is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Free" name="free-{{i}}" [(ngModel)]="item.Free" required #freeField="ngModel">
+                <mat-error *ngIf="freeField.errors && freeField.errors.required">
+                  Free is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Time Limit" name="timeLimit-{{i}}" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
+                <mat-error *ngIf="timeLimitField.errors && timeLimitField.errors.required">
+                  Time Limit is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeScheme(i)"><span class="fa fa-trash-alt"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addScheme()">Add More</button>
+        </mat-action-row>
+      </mat-expansion-panel>
     </mat-accordion>
   
     <br>
   
-  <!-- Schemes -->
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <h4>Scheme ({{rateCard.schemes.length}})</h4>
-    </div>
-    <div class="col-auto">
-      <button type="button" (click)="addScheme()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-    </div>
-  </div>
-  <br>
-  
-  <div *ngFor="let item of rateCard.schemes; index as i" class="card mb-4">
-    <div class="card-header">
-      <button type="button" class="btn btn-outline-danger float-right" (click)="removeScheme(i)"><span class="fa fa-trash-alt"></span></button>
-      #{{i + 1}}
-    </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="col-md">
-          <div class="form-group">
-            <label for="paid">Paid</label>
-            <input type="number" class="form-control" id="paid-{{i}}" name="paid-{{i}}" placeholder="Enter Paid" [(ngModel)]="item.paid" required #paidField="ngModel">
-          </div>
-          
-          <div *ngIf="paidField.invalid && (paidField.dirty || paidField.touched)" class="text-danger">
-            <div *ngIf="paidField.errors.required">
-              Paid is required.
-            </div>
-            <br>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-group">
-            <label for="free">Free</label>
-            <input type="number" class="form-control" id="free-{{i}}" name="free-{{i}}" placeholder="Enter Free" [(ngModel)]="item.Free" required #freeField="ngModel">
-          </div>
-          
-          <div *ngIf="freeField.invalid && (freeField.dirty || freeField.touched)" class="text-danger">
-            <div *ngIf="freeField.errors.required">
-              Free is required.
-            </div>
-            <br>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-group">
-            <label for="timelimit">Time Limit</label>
-            <input type="number" class="form-control" id="timelimit-{{i}}" name="timelimit-{{i}}" placeholder="Enter Time limit" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
-          </div>
-          
-          <div *ngIf="timeLimitField.invalid && (timeLimitField.dirty || timeLimitField.touched)" class="text-danger">
-            <div *ngIf="timeLimitField.errors.required">
-              Time Limit is required.
-            </div>
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Tax -->  
   <br>
   <div class="form-row">
