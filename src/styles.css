@@ -69,3 +69,7 @@ mat-form-field, mat-slide-toggle {
     width: 100%;
     margin: 10px 0;
 }
+
+mat-icon {
+    vertical-align: middle;
+}
