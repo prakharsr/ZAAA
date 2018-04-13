@@ -7,22 +7,17 @@
 
 <div class="container">
   <form (ngSubmit)="submit()" #forgotPswForm="ngForm">
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
-    </div>
-
-    <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-      <div *ngIf="emailField.errors.required">
+    <mat-form-field>
+      <input matInput placeholder="Email Address" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
+      <mat-error *ngIf="emailField.errors && emailField.errors.required">
         Email is required.
-      </div>
-      <div *ngIf="!emailField.errors.required && emailField.errors.email">
+      </mat-error>
+      <mat-error *ngIf="emailField.errors && emailField.errors.email">
         Invalid Email.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <br>
+    <br><br>
     <button class="btn btn-success" [disabled]="!forgotPswForm.form.valid">Send</button>
   </form>
 </div>
