@@ -39,7 +39,6 @@ export class RateCardComponent implements OnInit {
   selectedCategories: Category[] = [null, null, null, null, null, null];
 
   private initNew() {
-    this.rateCard.fixSizes = [new FixSize()];
     this.rateCard.schemes = [new Scheme()];
     this.rateCard.premiums = [new Premium()];
     this.rateCard.covered = [new Covered()];

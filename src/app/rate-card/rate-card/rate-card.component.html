@@ -311,73 +311,55 @@
           </div>
         </div>
       </mat-expansion-panel>
-    </mat-accordion>
-  
-    <br>
+      <mat-expansion-panel *ngIf="rateCard.mediaType == 'Print'">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Fix Sizes</mat-panel-title>
+          <mat-panel-description>Enter Fix Sizes</mat-panel-description>
+        </mat-expansion-panel-header>
+      
+        <div class="text-muted" *ngIf="rateCard.fixSizes.length == 0">
+          No Fix Sizes
+        </div>
 
-  <div *ngIf="rateCard.mediaType == 'Print'">
-    <!-- Fix Size -->
-    <br>
-    <div class="form-row">
-      <div class="col">
-        <h4>Fix Size ({{rateCard.fixSizes.length}})</h4>
-      </div>
-      <div class="col-auto">
-        <button type="button" (click)="addFixSize()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-      </div>
-    </div>
-    <br>
-  
-    <div *ngFor="let item of rateCard.fixSizes; index as i" class="card mb-4">
-      <div class="card-header">
-        <button type="button" class="btn btn-outline-danger float-right" (click)="removeFixSize(i)"><span class="fa fa-trash-alt"></span></button>
-        #{{i + 1}}
-      </div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="col-md">
-            <div class="form-group">
-              <label for="length">Length</label>
-              <input type="number" class="form-control" id="length-{{i}}" name="length-{{i}}" placeholder="Enter Length" [(ngModel)]="item.length" required #lengthField="ngModel">
+        <div *ngFor="let item of rateCard.fixSizes; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Length" name="length-{{i}}" [(ngModel)]="item.length" required #lengthField="ngModel">
+                <mat-error *ngIf="lengthField.errors && lengthField.errors.required">
+                  Length is required.
+                </mat-error>
+              </mat-form-field>
             </div>
-            
-            <div *ngIf="lengthField.invalid && (lengthField.dirty || lengthField.touched)" class="text-danger">
-              <div *ngIf="lengthField.errors.required">
-                Length is required.
-              </div>
-              <br>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Width" name="width-{{i}}" [(ngModel)]="item.width" required #widthField="ngModel">
+                <mat-error *ngIf="widthField.errors && widthField.errors.required">
+                  Width is required.
+                </mat-error>
+              </mat-form-field>
             </div>
-          </div>
-          <div class="col-md">
-            <div class="form-group">
-              <label for="width">Width</label>
-              <input type="number" class="form-control" id="width-{{i}}" name="width-{{i}}" placeholder="Enter Width" [(ngModel)]="item.width" required #widthField="ngModel">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Amount" name="amount-{{i}}" [(ngModel)]="item.amount" required #amountField="ngModel">
+                <mat-error *ngIf="amountField.errors && amountField.errors.required">
+                  Amount is required.
+                </mat-error>
+              </mat-form-field>
             </div>
-            
-            <div *ngIf="widthField.invalid && (widthField.dirty || widthField.touched)" class="text-danger">
-              <div *ngIf="widthField.errors.required">
-                Width is required.
-              </div>
-              <br>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="form-group">
-              <label for="amount">Amount</label>
-              <input type="number" class="form-control" id="amount-{{i}}" name="amount-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.amount" required #amountField="ngModel">
-            </div>
-            
-            <div *ngIf="amountField.invalid && (amountField.dirty || amountField.touched)" class="text-danger">
-              <div *ngIf="amountField.errors.required">
-                Amount is required.
-              </div>
-              <br>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeFixSize(i)"><span class="fa fa-trash-alt"></span></button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addFixSize()">Add More</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  
+    <br>
   
   <!-- Schemes -->
   <br>
@@ -433,55 +415,6 @@
           <div *ngIf="timeLimitField.invalid && (timeLimitField.dirty || timeLimitField.touched)" class="text-danger">
             <div *ngIf="timeLimitField.errors.required">
               Time Limit is required.
-            </div>
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Premium -->
-  <br>
-  <div class="form-row">
-    <div class="col">
-      <h4>Premium ({{rateCard.premiums.length}})</h4>
-    </div>
-    <div class="col-auto">
-      <button type="button" (click)="addPremium()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
-    </div>
-  </div>
-  <br>
-  
-  <div *ngFor="let item of rateCard.premiums; index as i" class="card mb-4">
-    <div class="card-header">
-      <button type="button" class="btn btn-outline-danger float-right" (click)="removePremium(i)"><span class="fa fa-trash-alt"></span></button>
-      #{{i + 1}}
-    </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="col-md">
-          <div class="form-group">
-            <label for="premiumType">Type</label>
-            <input type="text" class="form-control" id="premiumType-{{i}}" name="premiumType-{{i}}" placeholder="Enter Type" [(ngModel)]="item.premType" required #premTypeField="ngModel">
-          </div>
-          
-          <div *ngIf="premTypeField.invalid && (premTypeField.dirty || premTypeField.touched)" class="text-danger">
-            <div *ngIf="premTypeField.errors.required">
-              Type is required.
-            </div>
-            <br>
-          </div>
-        </div>
-        <div class="col-md">
-          <div class="form-group">
-            <label for="premAmount">Amount</label>
-            <input type="number" class="form-control" id="premAmount-{{i}}" name="premAmount-{{i}}" placeholder="Enter Amount" [(ngModel)]="item.premAmount" required #premAmountField="ngModel">
-          </div>
-          
-          <div *ngIf="premAmountField.invalid && (premAmountField.dirty || premAmountField.touched)" class="text-danger">
-            <div *ngIf="premAmountField.errors.required">
-              Amount is required.
             </div>
             <br>
           </div>
