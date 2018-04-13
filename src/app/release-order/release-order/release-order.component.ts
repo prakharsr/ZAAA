@@ -79,7 +79,6 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adPosition = this.positions[0];
     this.releaseorder.adTime = this.adTimes[0];
     this.selectedTax = this.taxes[0];
-    this.releaseorder.otherCharges = [new OtherCharges()];
     this.releaseorder.paymentType = this.paymentTypes[0];
   }
 

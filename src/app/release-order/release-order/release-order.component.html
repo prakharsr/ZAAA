@@ -609,69 +609,47 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>Other Details</mat-panel-title>
-          <mat-panel-description>Enter Other details</mat-panel-description>
+          <mat-panel-title>Other Charges</mat-panel-title>
+          <mat-panel-description>Enter Other Charges</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <br>
-        <div class="form-row">
-          <div class="col">
-            <h4>Other Charges</h4>
-          </div>
-          <div class="col-auto">
-            <button type="button" (click)="addCharges()" class="btn btn-outline-info"><span class="fa fa-plus"></span></button>
+        <div class="text-muted" *ngIf="releaseorder.otherCharges.length == 0">
+          No Other Charges
+        </div>
+
+        <div *ngFor="let item of releaseorder.otherCharges; index as i" class="mb-1">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
+                <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
+                  Type is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
+                <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
+                  Amount is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-auto col-form-label">
+              <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)"><span class="fa fa-trash-alt"></span></button>
+            </div>
           </div>
         </div>
-        <br>
         
-        <div class="card">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" *ngFor="let charge of releaseorder.otherCharges; index as i">
-              <div class="form-row">
-                <label class="col-auto col-form-label">#{{i + 1}}</label>
-
-                <div class="col">
-                  <div class="form-group">
-                    <select class="form-control" name="otherChargesType-{{i}}" [(ngModel)]="charge.chargeType" id="otherChargesType-{{i}}" #otherChargesTypeField="ngModel" required>
-                      <option *ngFor="let item of otherChargesTypes" [ngValue]="item">{{item}}</option>
-                    </select>
-                  </div>
-                  
-                  <div *ngIf="otherChargesTypeField.invalid && (otherChargesTypeField.dirty || otherChargesTypeField.touched)" class="text-danger">
-                    <div *ngIf="otherChargesTypeField.errors.required">
-                      Type is required.
-                    </div>
-                    <br>
-                  </div>
-                </div>
-
-                <div class="col">
-                  <div class="form-group">
-                    <input type="number" class="form-control" id="otherCharges-{{i}}" name="otherCharges-{{i}}" placeholder="Enter Amount" [(ngModel)]="charge.amount" required #otherChargesField="ngModel">
-                  </div>
-
-                  <div *ngIf="otherChargesField.invalid && (otherChargesField.dirty || otherChargesField.touched)" class="text-danger">
-                    <div *ngIf="otherChargesField.errors.required">
-                      Amount is required.
-                    </div>
-                    <br>
-                  </div>
-                </div>
-
-                <div class="col-auto">
-                  <button type="button" class="btn btn-outline-danger col-auto px-2" (click)="removeOtherCharge(i)"><span class="fa fa-trash-alt"></span></button>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
         <br>
 
-        <div class="form-group">
-          <label for="otherRemark">Remark</label>
-          <input type="text" class="form-control" id="otherRemark" name="otherRemark" placeholder="Enter Remark" [(ngModel)]="releaseorder.otherRemark" #otherRemarkField="ngModel">
-        </div>
-
+        <mat-action-row>
+          <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
+        </mat-action-row>
+        
+        <mat-form-field>
+          <input matInput placeholder="Remark" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+        </mat-form-field>
       </mat-expansion-panel>
     </mat-accordion>
     <br><br>
