@@ -73,3 +73,7 @@ mat-form-field, mat-slide-toggle {
 mat-icon {
     vertical-align: middle;
 }
+
+button[mat-icon-button] {
+    outline: none !important;
+}

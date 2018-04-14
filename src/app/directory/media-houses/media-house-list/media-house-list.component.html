@@ -24,7 +24,7 @@
             <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.orgName}}</a>
           </div>
           <div class="col-auto">
-            <button class="btn btn-outline-danger" (click)="deleteMediaHouse(mediaHouse)">
+            <button mat-icon-button color="warn" (click)="deleteMediaHouse(mediaHouse)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
