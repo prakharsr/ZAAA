@@ -84,13 +84,13 @@
               <div class="col-md-8">₹ {{ratecard.rate}} per {{ratecard.unit}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="IsTypeTime">
+          <li class="list-group-item" *ngIf="isTypeTime">
             <div class="row">
               <div class="col-md-4">Time</div>
               <div class="col-md-8">{{ratecard.adTime}}</div>
             </div>
           </li>
-          <li class="list-group-item" *ngIf="IsTypeWords">
+          <li class="list-group-item" *ngIf="isTypeWords">
             <div class="row">
               <div class="col-md-4">Maximum Words</div>
               <div class="col-md-8">{{ratecard.AdWordsMax}}</div>
