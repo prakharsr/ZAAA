@@ -84,7 +84,19 @@
               <div class="col-md-8">₹ {{ratecard.rate}} per {{ratecard.unit}}</div>
             </div>
           </li>
-          <ng-container *ngIf="ratecard.mediaType == 'Print'">
+          <li class="list-group-item" *ngIf="IsTypeTime">
+            <div class="row">
+              <div class="col-md-4">Time</div>
+              <div class="col-md-8">{{ratecard.adTime}}</div>
+            </div>
+          </li>
+          <li class="list-group-item" *ngIf="IsTypeWords">
+            <div class="row">
+              <div class="col-md-4">Maximum Words</div>
+              <div class="col-md-8">{{ratecard.AdWordsMax}}</div>
+            </div>
+          </li>
+          <ng-container *ngIf="isTypeLen">
             <li class="list-group-item">
               <div class="row">
                 <div class="col-md-4">Position</div>
@@ -119,7 +131,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="ratecard.mediaType == 'Print' && ratecard.fixSizes.length">
+    <div class="col-lg-6" *ngIf="isTypeLen && ratecard.fixSizes.length">
       <div class="card mb-3">
         <div class="card-header">Fix Sizes</div>
         <ul class="list-group list-group-flush">
@@ -140,7 +152,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6"*ngIf="ratecard.schemes.length">
+    <div class="col-lg-6" *ngIf="ratecard.schemes.length">
       <div class="card mb-3">
         <div class="card-header">Schemes</div>
         <ul class="list-group list-group-flush">
@@ -161,7 +173,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6"*ngIf="ratecard.taxes.length">
+    <div class="col-lg-6" *ngIf="ratecard.taxes.length">
       <div class="card mb-3">
         <div class="card-header">Taxes</div>
         <ul class="list-group list-group-flush">

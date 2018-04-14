@@ -21,4 +21,38 @@ export class RateCardDetailsComponent implements OnInit {
     });
   }
 
+  get isTypeWords() {
+
+    if (this.ratecard.mediaType == 'Print' && this.ratecard.adType == 'Text Classified') {
+      return true;
+    }
+
+    if (this.ratecard.mediaType == 'Electronic' && this.ratecard.adType == 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeLen() {
+
+    if (this.ratecard.mediaType == 'Print' && this.ratecard.adType != 'Text Classified') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeTime() {
+
+    if (this.ratecard.mediaType == 'Air') {
+      return true;
+    }
+
+    if (this.ratecard.mediaType == 'Electronic' && this.ratecard.adType != 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
 }
