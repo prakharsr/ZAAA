@@ -26,6 +26,20 @@
         </select>
       </div>
     </div>
+
+    <div *ngIf="rateCard.mediaType != 'Print' ">
+        <div class="col-md">
+          <div class="form-group">
+            <label>Ad Time</label>
+              <div class="form-group">
+                <select class="form-control" name="adTime" [(ngModel)]="rateCard.adTime" id="adTime" #adTimeField="ngModel" required>
+                  <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
+                </select>
+              </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Will be used in future -->
     <div class="col-md" *ngIf="false">
       <div class="form-group">

@@ -46,6 +46,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.remarks = [new Remark()];
     this.rateCard.taxes = [new Tax()];
 
+    this.rateCard.adTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
     this.rateCard.unit = this.units[0];
@@ -314,6 +315,10 @@ export class RateCardComponent implements OnInit {
 
   removeFixSize(i: number) {
     this.rateCard.fixSizes.splice(i, 1);
+  }
+
+  get adTimes() {
+    return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
   }
 
   addScheme(){

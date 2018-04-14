@@ -77,7 +77,6 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adHue = this.hues[0];
     this.releaseorder.unit = this.units[0];
     this.releaseorder.adPosition = this.positions[0];
-    this.releaseorder.adTime = this.adTimes[0];
     this.selectedTax = this.taxes[0];
     this.releaseorder.otherCharges = [new OtherCharges()];
     this.releaseorder.paymentType = this.paymentTypes[0];
@@ -147,6 +146,7 @@ export class ReleaseOrderComponent implements OnInit {
   private initFromRateCard(rateCard: RateCard) {
     if (rateCard) {
       this.releaseorder.adType = rateCard.adType;
+      this.releaseorder.adTime = rateCard.adTime;
       this.releaseorder.rate = rateCard.rate;
       this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
