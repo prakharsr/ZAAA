@@ -10,7 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { MediaHouse } from '../../directory/media-houses/media-house';
+import { MediaHouse, Pullout } from '../../directory/media-houses/media-house';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class RateCardComponent implements OnInit {
   others = "Others";
 
   dropdownPullOutName: string;
-  customPullOutName: string;
+  customPullOutName = 'Main';
 
   constructor(private api: RateCardApiService,
     private route: ActivatedRoute,
@@ -45,6 +45,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.position = this.positions[0];
     this.rateCard.hue = this.hues[0];
     this.rateCard.adTime = this.adTimes[0];
+    this.dropdownPullOutName = this.others;
   }
 
   private initEdit(data: RateCard) {
@@ -130,10 +131,16 @@ export class RateCardComponent implements OnInit {
       .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
       .catch(() => of([]));
   }
+
+  pullouts: Pullout[] = [];
   
   mediaHouseInputFormatter = (result: MediaHouse) => {
     this.rateCard.bookingEdition = result.address.edition;
-    
+
+    if (result.pullouts) {
+      this.pullouts = result.pullouts;
+    }
+
     return result.orgName;
   }
   

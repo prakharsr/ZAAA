@@ -57,6 +57,7 @@ export class RateCardApiService {
     return this.api.post('/user/ratecard', {
       mediaType: rateCard.mediaType,
       adType: rateCard.adType,
+      adTime: rateCard.adTime,
       rateCardType: rateCard.rateCardType,
       bookingCenter: {
         MediaHouseName: rateCard.mediaHouseName,
@@ -105,6 +106,7 @@ export class RateCardApiService {
 
     rateCard.mediaType = body.MediaType;
     rateCard.adType = body.AdType;
+    rateCard.adTime = body.AdTime;
     rateCard.rateCardType = body.RateCardType;
 
     if (body.BookingCenter) {
@@ -313,6 +315,7 @@ export class RateCardApiService {
       id: rateCard.id,
       MediaType: rateCard.mediaType,
       AdType: rateCard.adType,
+      AdTime: rateCard.adTime,
       RateCardType: rateCard.rateCardType,
       BookingCenter: {
         MediaHouseName: rateCard.mediaHouseName,
