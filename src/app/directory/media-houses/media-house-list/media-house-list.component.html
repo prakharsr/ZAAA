@@ -1,4 +1,6 @@
-<button class="fab" routerLink="/dir/media_houses/new"><span class="fa fa-plus"></span></button>
+<button class="fab" routerLink="/dir/media_houses/new">
+  <mat-icon>add</mat-icon>
+</button>
 
 <ng-template #rt let-r="result">
   {{r.orgName}}
@@ -22,7 +24,9 @@
             <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.orgName}}</a>
           </div>
           <div class="col-auto">
-            <button class="btn btn-outline-danger" (click)="deleteMediaHouse(mediaHouse)"><span class="fa fa-trash-alt"></span></button>
+            <button class="btn btn-outline-danger" (click)="deleteMediaHouse(mediaHouse)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </div>

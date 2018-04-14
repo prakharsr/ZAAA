@@ -43,7 +43,7 @@
             </li>
           </ul>
           <div class="card-body">
-            <a class="btn btn-danger" routerLink="/changePassword"><span class="fa fa-lg fa-key"></span> Change Password</a>
+            <a class="btn btn-danger" routerLink="/changePassword">Change Password</a>
           </div>
         </div>
     </div>
@@ -56,11 +56,13 @@
           <br><br>
           
           <label for="profile-upload" class="btn btn-outline-info">
-              Upload
+            <mat-icon>file_upload</mat-icon>
           </label>
           <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
 
-          <button class="btn btn-outline-danger mb-2" (click)="removeProfilePicture()"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-outline-danger mb-2" (click)="removeProfilePicture()">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
     </div>
@@ -73,11 +75,13 @@
           <br><br>
           
           <label for="sign-upload" class="btn btn-outline-info">
-              Upload
+            <mat-icon>file_upload</mat-icon>
           </label>
           <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
 
-          <button class="btn btn-outline-danger mb-2" (click)="removeSign()"><span class="fa fa-trash-alt"></span></button>
+          <button class="btn btn-outline-danger mb-2" (click)="removeSign()">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
     </div>

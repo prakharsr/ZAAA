@@ -14,8 +14,14 @@ export class MediaHouseApiService {
     let scheduling = [];
     let pullouts = [];
 
-    mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
-    mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
+
+    if (mediaHouse.scheduling) {
+      mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
+    }
+
+    if (mediaHouse.pullouts) {
+      mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
+    }
 
     return this.api.post('/user/mediahouse', {
       pullouts: pullouts,
@@ -106,7 +112,9 @@ export class MediaHouseApiService {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
     
-    mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
+    if (mediaHouse.pullouts) {
+      mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
+    }
     
     return this.api.patch('/user/mediahouse/', {
       id: mediaHouse.id,

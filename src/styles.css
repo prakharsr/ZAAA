@@ -1,6 +1,4 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
-/* @import url("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"); */
-@import url("https://use.fontawesome.com/releases/v5.0.7/css/all.css");
 
 .max-w-200 {
     max-width: 200px;
@@ -70,4 +68,8 @@ input.ng-valid.form-control, select.ng-valid {
 mat-form-field, mat-slide-toggle {
     width: 100%;
     margin: 10px 0;
+}
+
+mat-icon {
+    vertical-align: middle;
 }

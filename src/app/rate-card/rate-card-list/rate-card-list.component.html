@@ -15,7 +15,9 @@
 </ng-template>
 
 <div class="container">
-  <button class="fab" routerLink="/ratecards/new"><span class="fa fa-plus"></span></button>
+  <button class="fab" routerLink="/ratecards/new">
+    <mat-icon>add</mat-icon>
+  </button>
 
   <div class="form-group">
     <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
@@ -38,9 +40,15 @@
               {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
             </div>
             <div class="col-auto">
-              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
-              <a class="btn btn-outline-success" [routerLink]="['/releaseorders/fromRateCard', ratecard.id]"><span class="fa fa-plus"></span> Create Release Order</a>
-              <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)"><span class="fa fa-trash-alt"></span></button>
+              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]">
+                <mat-icon>add</mat-icon> Copy into New
+              </a>
+              <a class="btn btn-outline-success" [routerLink]="['/releaseorders/fromRateCard', ratecard.id]">
+                <mat-icon>add</mat-icon> Create Release Order
+              </a>
+              <button class="btn btn-outline-danger" (click)="deleteRateCard(ratecard)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </div>
           </div>
         </div>
@@ -62,7 +70,12 @@
               {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
             </div>
             <div class="col-auto">
-              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]"><span class="fa fa-plus"></span> Copy into New</a>
+              <a class="btn btn-outline-info" [routerLink]="['/ratecards/new', ratecard.id]">
+                <mat-icon>add</mat-icon> Copy into New
+              </a>
+              <a class="btn btn-outline-success" [routerLink]="['/releaseorders/fromRateCard', ratecard.id]">
+                <mat-icon>add</mat-icon> Create Release Order
+              </a>
             </div>
           </div>
         </div>

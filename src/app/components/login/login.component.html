@@ -6,32 +6,26 @@
 
 <div class="container">
   <form (ngSubmit)="submit()" #loginForm="ngForm">
-    <div class="form-group">
-      <label for="emailPhone">Email address or Phone</label>
-      <input type="text" class="form-control" id="emailPhone" placeholder="Enter email or phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
-    </div>
-
-    <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
-      <div *ngIf="emailOrPhoneField.errors.required">
+    <mat-form-field>
+      <input matInput placeholder="Email Address or Phone" name="emailPhone" [(ngModel)]="emailOrPhone" type='text' required #emailOrPhoneField="ngModel">
+      <mat-error *ngIf="emailOrPhoneField.errors && emailOrPhoneField.errors.required">
         Email or Phone is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
     <div class="form-group">
       <p class="float-right"><a tabindex="-1" routerLink="/forgotPassword">Forgot Password</a></p>
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
     </div>
 
-    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
-      <div *ngIf="passwordField.errors.required">
+    <mat-form-field>
+      <input matInput placeholder="Password" name="password" [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required #passwordField="ngModel">
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error *ngIf="passwordField.errors && passwordField.errors.required">
         Password is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <br>
+    <br><br>
     <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
   </form>
 

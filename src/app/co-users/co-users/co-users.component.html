@@ -7,7 +7,9 @@
 <br>
 
 <div class="container">
-  <button class="fab" *ngIf="admin" routerLink="/coUsers/new"><span class="fa fa-plus"></span></button>
+  <button class="fab" *ngIf="admin" routerLink="/coUsers/new">
+    <mat-icon>add</mat-icon>
+  </button>
 
   <div>
     <small class="text-muted">{{coUsers.length}} USERS</small>
@@ -31,15 +33,19 @@
       <div class="row">
         <div class="col-md">
           <h6>{{coUser.designation}}</h6>
-          <span class="fa fa-envelope mr-3"></span> {{ coUser.email }}
+          <mat-icon class="mr-3">mail</mat-icon> {{ coUser.email }}
           <br>
-          <span class="fa fa-phone mr-3"></span> {{ coUser.phone }}
+          <mat-icon class="mr-3">phone</mat-icon> {{ coUser.phone }}
           <br><br>
         </div>
         <div *ngIf="admin && myId != coUser.id && !coUser.isAdmin" class="col-md-auto">
           <div>
-            <a class="btn btn-outline-primary" [routerLink]="['/coUsers', coUser.id]"><span class="fa fa-pencil-alt"></span> Edit Roles</a>
-            <button class="btn btn-outline-danger" (click)="delete(coUser)"><span class="fa fa-trash-alt"></span></button>
+            <a class="btn btn-outline-primary" [routerLink]="['/coUsers', coUser.id]">
+              <mat-icon>edit</mat-icon> Edit Roles
+            </a>
+            <button class="btn btn-outline-danger" (click)="delete(coUser)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </div>

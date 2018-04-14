@@ -6,7 +6,9 @@
 
 <div class="container">
 
-<button class="fab bg-info" *ngIf="admin" routerLink="/firm/edit"><span class="fa fa-pencil-alt"></span></button>
+<button class="fab bg-info" *ngIf="admin" routerLink="/firm/edit">
+  <mat-icon>edit</mat-icon>
+</button>
 
 <br>
 
@@ -219,11 +221,13 @@
         <br><br>
         
         <label for="logo-upload" *ngIf="admin" class="btn btn-outline-info">
-            Upload
+          <mat-icon>file_upload</mat-icon>
         </label>
         <input type="file" *ngIf="admin" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
 
-        <button *ngIf="admin" class="btn btn-outline-danger mb-2" (click)="removeLogo()"><span class="fa fa-trash-alt"></span></button>
+        <button *ngIf="admin" class="btn btn-outline-danger mb-2" (click)="removeLogo()">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
   </div>

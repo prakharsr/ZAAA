@@ -1,4 +1,6 @@
-<button class="fab" routerLink="/dir/executives/new"><span class="fa fa-plus"></span></button>
+<button class="fab" routerLink="/dir/executives/new">
+  <mat-icon>add</mat-icon>
+</button>
 
 <ng-template #rt let-r="result">
   {{r.orgName}}
@@ -23,7 +25,9 @@
         <small>{{executive.executiveName}}</small>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger" (click)="deleteExecutive(executive)"><span class="fa fa-trash-alt"></span></button>
+        <button class="btn btn-outline-danger" (click)="deleteExecutive(executive)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
   </div>

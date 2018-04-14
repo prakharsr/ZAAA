@@ -12,7 +12,7 @@ export class MediaHouse {
     };
     officeLandLine: string;
     officeStdNo: string;
-    scheduling: MediaHouseScheduling[];
+    scheduling: MediaHouseScheduling[] = [];
 
     freqPeriod = "";
     freqRemark = "";

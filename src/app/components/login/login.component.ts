@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   emailOrPhone: string;
   password: string;
 
+  hidePassword = true;
+
   constructor(private api: ApiService, private router: Router, private notifications: NotificationService) { }
 
   ngOnInit() {
