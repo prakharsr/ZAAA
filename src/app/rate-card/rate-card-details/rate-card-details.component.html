@@ -66,9 +66,11 @@
       <div class="card mb-3">
         <div class="card-header">Categories</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let category of ratecard.categories">
-            {{category}}
-          </li>
+          <ng-container *ngFor="let category of ratecard.categories">
+            <li class="list-group-item" *ngIf="category">
+              {{category}}
+            </li>
+          </ng-container>
         </ul>
       </div>
     </div>
@@ -79,7 +81,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Rate</div>
-              <div class="col-md-8">{{ratecard.rate}} per {{ratecard.unit}}</div>
+              <div class="col-md-8">₹ {{ratecard.rate}} per {{ratecard.unit}}</div>
             </div>
           </li>
           <ng-container *ngIf="ratecard.mediaType == 'Print'">
@@ -118,47 +120,39 @@
       </div>
     </div>
     <div class="col-lg-6" *ngIf="ratecard.mediaType == 'Print' && ratecard.fixSizes.length">
-      <div class="card mb-3" *ngFor="let fixSize of ratecard.fixSizes; index as i">
-        <div class="card-header">Fix Size #{{i + 1}}</div>
+      <div class="card mb-3">
+        <div class="card-header">Fix Sizes</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let fixSize of ratecard.fixSizes; index as i">
             <div class="row">
               <div class="col-md-4">Width</div>
               <div class="col-md-8">{{fixSize.width}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Length</div>
               <div class="col-md-8">{{fixSize.length}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Amount</div>
-              <div class="col-md-8">{{fixSize.amount}}</div>
+              <div class="col-md-8">₹ {{fixSize.amount}}</div>
             </div>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-lg-6"*ngIf="ratecard.schemes.length">
-      <div class="card mb-3" *ngFor="let scheme of ratecard.schemes; index as i">
-        <div class="card-header">Scheme #{{i + 1}}</div>
+      <div class="card mb-3">
+        <div class="card-header">Schemes</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let scheme of ratecard.schemes; index as i">
             <div class="row">
               <div class="col-md-4">Paid</div>
               <div class="col-md-8">{{scheme.paid}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Free</div>
               <div class="col-md-8">{{scheme.Free}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Time Limit</div>
               <div class="col-md-8">{{scheme.timeLimit}}</div>
@@ -168,16 +162,14 @@
       </div>
     </div>
     <div class="col-lg-6"*ngIf="ratecard.taxes.length">
-      <div class="card mb-3" *ngFor="let tax of ratecard.taxes; index as i">
-        <div class="card-header">Tax #{{i + 1}}</div>
+      <div class="card mb-3">
+        <div class="card-header">Taxes</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let tax of ratecard.taxes; index as i">
             <div class="row">
               <div class="col-md-4">Included</div>
               <div class="col-md-8">{{tax.included}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Rate</div>
               <div class="col-md-8">{{tax.rate}}</div>
@@ -186,17 +178,15 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6"*ngIf="ratecard.covered.length">
-      <div class="card mb-3" *ngFor="let cov of ratecard.covered; index as i">
-        <div class="card-header">Covered #{{i + 1}}</div>
+    <div class="col-lg-6" *ngIf="ratecard.covered.length">
+      <div class="card mb-3">
+        <div class="card-header">Covered</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
+          <li class="list-group-item" *ngFor="let cov of ratecard.covered; index as i">
             <div class="row">
               <div class="col-md-4">Media House</div>
               <div class="col-md-8">{{cov.covMediaHouse}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Edition</div>
               <div class="col-md-8">{{cov.covEdition}}</div>
