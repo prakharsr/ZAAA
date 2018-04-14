@@ -32,6 +32,8 @@ export class RateCard {
     rate = 0;
     global: boolean;
 
+    AdWordsMax = 0;
+
     id: string;
 }
 

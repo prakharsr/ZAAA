@@ -95,18 +95,6 @@
               </select>
             </div>
           </div>
-          <div *ngIf="rateCard.mediaType != 'Print' ">
-              <div class="col-md">
-                <div class="form-group">
-                  <label>Ad Time</label>
-                    <div class="form-group">
-                      <select class="form-control" name="adTime" [(ngModel)]="rateCard.adTime" id="adTime" #adTimeField="ngModel" required>
-                        <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
-                      </select>
-                    </div>
-                </div>
-              </div>
-            </div>
           <!-- Will be used in future -->
           <div class="col-md" *ngIf="false">
             <div class="form-group">
@@ -218,8 +206,35 @@
             </div>
           </div>
         </div>
+        
+        <div *ngIf="isTypeTime">
+          <div class="form-group">
+            <label>Ad Time</label>
+            <div class="form-group">
+              <select class="form-control" name="adTime" [(ngModel)]="rateCard.adTime" id="adTime" #adTimeField="ngModel" required>
+                <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-        <div *ngIf="rateCard.mediaType == 'Print'">
+        <div *ngIf="isTypeWords">
+          <div class="form-group">
+            <div class="form-group">
+              <label>Maximum Words</label>
+              <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
+            </div>
+    
+            <div *ngIf="maxWordsField.invalid && (maxWordsField.dirty || maxWordsField.touched)" class="text-danger">
+              <div *ngIf="maxWordsField.errors.required">
+                  Maximum Words is required.
+              </div>
+              <br>
+            </div>              
+          </div>
+        </div>
+
+        <div *ngIf="isTypeLen">
           <div class="form-group">
             <label>Position</label>
             <select class="form-control" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
@@ -324,7 +339,7 @@
           </div>
         </div>
       </mat-expansion-panel>
-      <mat-expansion-panel *ngIf="rateCard.mediaType == 'Print'">
+      <mat-expansion-panel *ngIf="isTypeLen">
         <mat-expansion-panel-header>
           <mat-panel-title>Fix Sizes</mat-panel-title>
           <mat-panel-description>Enter Fix Sizes</mat-panel-description>

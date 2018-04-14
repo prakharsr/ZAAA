@@ -38,6 +38,41 @@ export class RateCardComponent implements OnInit {
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
 
+  get isTypeWords() {
+
+    if (this.mediaType == 'Print' && this.rateCard.adType == 'Text Classified') {
+      return true;
+    }
+
+    if (this.mediaType == 'Electronic' && this.rateCard.adType == 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeLen() {
+
+    if (this.mediaType == 'Print' && this.rateCard.adType != 'Text Classified') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeTime() {
+
+    if (this.mediaType == 'Air') {
+      return true;
+    }
+
+    if (this.mediaType == 'Electronic' && this.rateCard.adType != 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
+
   private initNew() {
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
@@ -238,10 +273,17 @@ export class RateCardComponent implements OnInit {
   get units() {
     let result = [];
 
-    if (this.rateCard.adType == 'Text Classified') {
+    if (this.isTypeLen) {
+      result.push('Sqcm');
+    }
+
+    if (this.isTypeWords) {
       result.push('Words');
     }
-    else result.push(this.rateCard.mediaType == 'Print' ? 'Sqcm' : 'sec');
+
+    if (this.isTypeTime) {
+      result.push('sec');
+    }
 
     return result;
   }

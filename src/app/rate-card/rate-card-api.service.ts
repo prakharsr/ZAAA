@@ -94,7 +94,8 @@ export class RateCardApiService {
       validFrom: rateCard.validFrom,
       validTill: rateCard.validTill,
       remarks: rateCard.remarks,
-      covered: covered
+      covered: covered,
+      AdWordsMax: rateCard.AdWordsMax
     });
   }
 
@@ -139,6 +140,7 @@ export class RateCardApiService {
 
     rateCard.position = body.Position;
     rateCard.hue = body.Hue;
+    rateCard.AdWordsMax = body.AdWordsMax;
 
     if (body.MaxSizeLimit) {
       let size : {Length: number, Width: number} = body.MaxSizeLimit;
@@ -352,7 +354,8 @@ export class RateCardApiService {
       ValidFrom: rateCard.validFrom,
       ValidTill: rateCard.validTill,
       Remarks: rateCard.remarks,
-      Covered: covered
+      Covered: covered,
+      AdWordsMax: rateCard.AdWordsMax
     });
   }
 }
