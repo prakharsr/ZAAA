@@ -23,8 +23,8 @@ export class RateCard {
     
     minLength = 0;
     minWidth = 0;
-    maxLength = 0;
-    maxWidth = 0; 
+    maxLength = 100;
+    maxWidth = 100;
 
     validFrom: Date;
     validTill: Date;
@@ -32,7 +32,7 @@ export class RateCard {
     rate = 0;
     global: boolean;
 
-    AdWordsMax = 0;
+    AdWordsMax = 50;
 
     id: string;
 }
