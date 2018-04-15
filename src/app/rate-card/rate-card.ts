@@ -33,6 +33,19 @@ export class RateCard {
 
     AdWordsMax = 50;
 
+    PremiumCustom = {
+        PremiumType: "",
+        Amount: 0,
+        Percentage: false
+    };
+
+    PremiumBox = 0;
+    PremiumBaseColour = 0;
+    PremiumCheckMark = 0;
+    PremiumEmailId = 0;
+    PremiumWebsite = 0;
+    PremiumExtraWords = 0;
+
     id: string;
 }
 
