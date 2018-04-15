@@ -15,67 +15,49 @@
           <mat-panel-description>Enter Business details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <label for="firmName">Firm Name</label>
-          <input type="text" class="form-control" id="firmName" name="firmName" placeholder="Enter Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
-        </div>
-      
-        <div *ngIf="firmNameField.invalid && (firmNameField.dirty || firmNameField.touched)" class="text-danger">
-          <div *ngIf="firmNameField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="firmName" placeholder="Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
+          <mat-error *ngIf="firmNameField.errors && firmNameField.errors.required">
             Firm Name is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="tagline">Tag Line</label>
-          <input type="text" class="form-control" id="tagline" name="tagline" placeholder="Enter Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="tagline" placeholder="Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="nickname">Display / Nickname</label>
-          <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="nickname" placeholder="Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="incDate">Incorporation Date</label>
-          <input type="date" class="form-control" id="incDate" name="incDate" placeholder="Enter Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="date" name="incDate" placeholder="Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="website">Website</label>
-          <input type="text" class="form-control" id="website" name="website" placeholder="Enter Website" [(ngModel)]="profile.website" #websiteField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="website" placeholder="Website" [(ngModel)]="profile.website" #websiteField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="panNo">PAN Number</label>
-          <input type="text" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
-        </div>
-      
-        <div *ngIf="panNoField.invalid && (panNoField.dirty || panNoField.touched)" class="text-danger">
-          <div *ngIf="panNoField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="panNo" placeholder="PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
+          <mat-error *ngIf="panNoField.errors && panNoField.errors.required">
             PAN Number is required.
-          </div>
-          <div *ngIf="panNoField.errors.minlength || panNoField.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="panNoField.errors && (panNoField.errors.minlength || panNoField.errors.maxlength)">
             PAN Number should be 10 characters long.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="gstNo">GSTIN</label>
-          <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="profile.gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-        </div>
-      
-        <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-          <div *ngIf="gstNoField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="profile.gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+          <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
             GSTIN is required.
-          </div>
-          <div *ngIf="gstNoField.errors.minlength || gstNoField.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
             GSTIN should be 15 characters long.
-          </div>
-          <br>
-        </div> 
+          </mat-error>
+        </mat-form-field>
+      
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -83,54 +65,42 @@
           <mat-panel-description>Enter Contact Details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="profile.email" required #emailField="ngModel" email>
-        </div>
-      
-        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-          <div *ngIf="emailField.errors.required">
+        <mat-form-field>
+          <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="profile.email" required #emailField="ngModel" verify-email>
+          <mat-error *ngIf="emailField.errors && emailField.errors.required">
             Email is required.
-          </div>
-          <div *ngIf="!emailField.errors.required && emailField.errors.email">
+          </mat-error>
+          <mat-error *ngIf="emailField.errors && emailField.errors.email">
             Invalid Email.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
     
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" [(ngModel)]="profile.phone" pattern="^((\+91)|0|)\d{10}$" required class="form-control" id="phone" name="phone" placeholder="Enter phone number" #phoneField="ngModel">
-        </div>
-    
-        <div *ngIf="phoneField.invalid && (phoneField.dirty || phoneField.touched)" class="text-danger">
-          <div *ngIf="phoneField.errors.required">
+        <mat-form-field>
+          <span matPrefix>+91 &nbsp;</span>
+          <input matInput type="tel" [(ngModel)]="profile.phone" pattern="^\d{10}$" maxlength="10" minlength="10" required name="phone" placeholder="Phone Number" #phoneField="ngModel">
+          <mat-error *ngIf="phoneField.errors && phoneField.errors.required">
             Phone Number is empty or invalid.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
         <div class="form-row">
           <div class="col-3">
-            <div class="form-group">
-              <label for="stdNo">STD Number</label>
-              <input type="tel" class="form-control" id="stdNo" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
-            </div>
+            <mat-form-field>
+              <input matInput type="tel" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
+            </mat-form-field>
           </div>
       
         <div class="col-9">
-          <div class="form-group">
-            <label for="landlineNo">Landline Number</label>
-            <input type="tel" class="form-control" id="landlineNo" name="landlineNo" minlength="6" maxlength="8" placeholder="Enter Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
-          </div>
+          <mat-form-field>
+            <input matInput type="tel" name="landlineNo" minlength="6" maxlength="8" placeholder="Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+          </mat-form-field>
         </div>
         </div>
         
       
-        <div class="form-group">
-          <label for="fax">Fax</label>
-          <input type="number" class="form-control" id="fax" name="fax" placeholder="Enter Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="number" name="fax" placeholder="Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
+        </mat-form-field>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -138,57 +108,39 @@
           <mat-panel-description>Enter Registered Address</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <input type="text" class="form-control" id="registeredAddress" name="registeredAddress" placeholder="Enter Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="registeredAddress" placeholder="Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
+          <mat-error *ngIf="firmNameField.errors && firmNameField.errors.required">
+            Registered Address is required.
+          </mat-error>
+        </mat-form-field>
       
-        <div *ngIf="registeredAddressField.invalid && (registeredAddressField.dirty || registeredAddressField.touched)" class="text-danger">
-          <div *ngIf="registeredAddressField.errors.required">
-              Registered Address is required.
-          </div>
-          <br>
-        </div>
-      
-        <div class="form-group">
-          <label for="registeredPincode">Pincode</label>
-          <input type="tel" minlength="6" maxlength="6" class="form-control" id="registeredPincode" name="registeredPincode" placeholder="Enter Pincode" [(ngModel)]="profile.registeredAddress.pincode" required #registeredPincodeField="ngModel">
-        </div>
-      
-        <div *ngIf="registeredPincodeField.invalid && (registeredPincodeField.dirty || registeredPincodeField.touched)" class="text-danger">
-          <div *ngIf="registeredPincodeField.errors.required">
+        <mat-form-field>
+          <input matInput type="tel" minlength="6" maxlength="6" name="registeredPincode" placeholder="Pincode" [(ngModel)]="profile.registeredAddress.pincode" required #registeredPincodeField="ngModel">
+          <mat-error *ngIf="registeredPincodeField.errors && registeredPincodeField.errors.required">
             Pincode is required.
-          </div>
-          <div *ngIf="registeredPincodeField.errors.minlength || registeredPincodeField.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="registeredPincodeField.errors && (registeredPincodeField.errors.minlength || registeredPincodeField.errors.maxlength)">
             Pincode should be 6 characters long.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
         
-        <div class="form-group">
-          <label for="registeredCity">City</label>
-          <input type="text" class="form-control" id="registeredCity" name="registeredCity" placeholder="Enter City" [(ngModel)]="profile.registeredAddress.city" required #registeredCityField="ngModel">
-        </div>
-      
-        <div *ngIf="registeredCityField.invalid && (registeredCityField.dirty || registeredCityField.touched)" class="text-danger">
-          <div *ngIf="registeredCityField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="registeredCity" placeholder="City" [(ngModel)]="profile.registeredAddress.city" required #registeredCityField="ngModel">
+          <mat-error *ngIf="registeredCityField.errors && registeredCityField.errors.required">
             City is required.
-          </div>
-          <br>
-        </div>
-      
-        <div class="form-group">
-          <label for="registeredState">State</label>
-          <select class="form-control" id="registeredState" name="registeredState" [(ngModel)]="profile.registeredAddress.state" required #registeredStateField="ngModel">
-            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-          </select>
-        </div>
-      
-        <div *ngIf="registeredStateField.invalid && (registeredStateField.dirty || registeredStateField.touched)" class="text-danger">
-          <div *ngIf="registeredStateField.errors.required">
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="State" name="registeredState" [(ngModel)]="profile.registeredAddress.state" required #registeredStateField="ngModel">
+            <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="registeredStateField.errors && registeredStateField.errors.required">
             State is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
+      
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -199,26 +151,26 @@
         <button type="button" mat-raised-button (click)="copyAddress()">Copy from Above</button>
         <br><br>
 
-        <div class="form-group">
-          <input type="text" class="form-control" id="officeAddress" name="officeAddress" placeholder="Enter Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="officeAddress" placeholder="Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="officePincode">Pincode</label>
-          <input type="tel" minlength="6" maxlength="6" class="form-control" id="officePincode" name="officePincode" placeholder="Enter Pincode" [(ngModel)]="profile.officeAddress.pincode" #officePincodeField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="tel" minlength="6" maxlength="6" name="officePincode" placeholder="Pincode" [(ngModel)]="profile.officeAddress.pincode" #officePincodeField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="officeCity">City</label>
-          <input type="text" class="form-control" id="officeCity" name="officeCity" placeholder="Enter City" [(ngModel)]="profile.officeAddress.city" #officeCityField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="officeCity" placeholder="City" [(ngModel)]="profile.officeAddress.city" #officeCityField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="officeState">State</label>
-          <select class="form-control" id="officeState" name="officeState" [(ngModel)]="profile.officeAddress.state" #officeStateField="ngModel">
-            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-          </select>
-        </div>
+        <mat-form-field>
+          <mat-select placeholder="State" name="officeState" [(ngModel)]="profile.officeAddress.state" #officeStateField="ngModel">
+            <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="officeStateField.errors && officeStateField.errors.required">
+            State is required.
+          </mat-error>
+        </mat-form-field>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -226,76 +178,50 @@
           <mat-panel-description>Enter Bank Account Details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <label for="bankAccountName">Account Name</label>
-          <input type="text" class="form-control" id="bankAccountName" name="bankAccountName" placeholder="Enter Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
-        </div>
-      
-        <div *ngIf="bankAccountNameField.invalid && (bankAccountNameField.dirty || bankAccountNameField.touched)" class="text-danger">
-          <div *ngIf="bankAccountNameField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="bankAccountName" placeholder="Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
+          <mat-error *ngIf="bankAccountNameField.errors && bankAccountNameField.errors.required">
             Account Name is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="bankAccountNo">Account Number</label>
-          <input type="text" class="form-control" id="bankAccountNo" name="bankAccountNo" placeholder="Enter Bank Account Number" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
-        </div>
-      
-        <div *ngIf="bankAccountNoField.invalid && (bankAccountNoField.dirty || bankAccountNoField.touched)" class="text-danger">
-          <div *ngIf="bankAccountNoField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="bankAccountNo" placeholder="Bank Account Number" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">
+          <mat-error *ngIf="bankAccountNoField.errors && bankAccountNoField.errors.required">
             Account Number is required.
-          </div>
-          <br>
-        </div>
-      
-        <div class="form-group">
-          <label for="bankIfsc">IFSC</label>
-          <input type="text" class="form-control" id="bankIfsc" name="bankIfsc" placeholder="Enter Bank IFSC" [(ngModel)]="profile.bankIfsc" required minlength="11" maxlength="11" #bankIfscField="ngModel" (input)="ifscChanged()">
-        </div>
-      
-        <div *ngIf="bankIfscField.invalid && (bankIfscField.dirty || bankIfscField.touched)" class="text-danger">
-          <div *ngIf="bankIfscField.errors.required">
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field>
+          <input matInput type="text" name="bankIfsc" placeholder="Bank IFSC" [(ngModel)]="profile.bankIfsc" required minlength="11" maxlength="11" #bankIfscField="ngModel" (input)="ifscChanged()">
+          <mat-error *ngIf="bankIfscField.errors && bankIfscField.errors.required">
             IFSC is required.
-          </div>
-          <div *ngIf="bankIfscField.errors.minlength || bankIfscField.errors.maxlength">
-            IFSC should have 11 characters.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+          <mat-error *ngIf="bankIfscField.errors && (bankIfscField.errors.minlength || bankIfscField.errors.maxlength)">
+            IFSC should be 11 characters long.
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="bankName">Bank Name</label>
-          <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="profile.bankName" required #bankNameField="ngModel">
-        </div>
-      
-        <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
-          <div *ngIf="bankNameField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="bankName" placeholder="Bank Name" [(ngModel)]="profile.bankName" required #bankNameField="ngModel">
+          <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
             Bank Name is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="bankBranchAddress">Bank Branch Address</label>
-          <input type="text" class="form-control" id="bankBranchAddress" name="bankBranchAddress" placeholder="Enter Bank Branch Address" [(ngModel)]="profile.bankBranchAddress" required #bankBranchAddressField="ngModel">
-        </div>
-      
-        <div *ngIf="bankBranchAddressField.invalid && (bankBranchAddressField.dirty || bankBranchAddressField.touched)" class="text-danger">
-          <div *ngIf="bankBranchAddressField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="bankBranchAddress" placeholder="Bank Branch Address" [(ngModel)]="profile.bankBranchAddress" required #bankBranchAddressField="ngModel">
+          <mat-error *ngIf="bankBranchAddressField.errors && bankBranchAddressField.errors.required">
             Bank Branch Address is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="bankAccountType">Bank Account Type</label>
-          <select class="form-control" id="bankAccountType" name="bankAccountType" [(ngModel)]="profile.bankAccountType">
-            <option value="Current">Current</option>
-            <option value="Savings">Savings</option>
-          </select>
-        </div>
+        <mat-form-field>
+          <mat-select placeholder="Bank Account Type" name="bankAccountType" [(ngModel)]="profile.bankAccountType">
+            <mat-option value="Current">Current</mat-option>
+            <mat-option value="Savings">Savings</mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -303,20 +229,17 @@
           <mat-panel-description>Enter Social Details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <label for="nickname">Facebook</label>
-          <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Enter Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="facebook" placeholder="Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="nickname">Twitter</label>
-          <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Enter Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="twitter" placeholder="Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
+        </mat-form-field>
       
-        <div class="form-group">
-          <label for="nickname">Others</label>
-          <input type="text" class="form-control" id="others" name="others" placeholder="Enter other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="others" placeholder="Other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
+        </mat-form-field>
       </mat-expansion-panel>
     </mat-accordion>
 
