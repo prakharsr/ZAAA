@@ -86,7 +86,15 @@ export class RateCardApiService {
       validTill: rateCard.validTill,
       remarks: rateCard.remarks,
       covered: covered,
-      AdWordsMax: rateCard.AdWordsMax
+      AdWordsMax: rateCard.AdWordsMax,
+
+      PremiumCustom: rateCard.PremiumCustom,
+      PremiumBox: rateCard.PremiumBox,
+      PremiumBaseColour: rateCard.PremiumBaseColour,
+      PremiumCheckMark: rateCard.PremiumCheckMark,
+      PremiumEmailId: rateCard.PremiumEmailId,
+      PremiumWebsite: rateCard.PremiumWebsite,
+      PremiumExtraWords: rateCard.PremiumExtraWords,
     });
   }
 
@@ -132,6 +140,14 @@ export class RateCardApiService {
     rateCard.position = body.Position;
     rateCard.hue = body.Hue;
     rateCard.AdWordsMax = body.AdWordsMax;
+
+    rateCard.PremiumCustom = body.PremiumCustom;
+    rateCard.PremiumBox = body.PremiumBox;
+    rateCard.PremiumBaseColour = body.PremiumBaseColour;
+    rateCard.PremiumCheckMark = body.PremiumCheckMark;
+    rateCard.PremiumEmailId = body.PremiumEmailId;
+    rateCard.PremiumWebsite = body.PremiumWebsite;
+    rateCard.PremiumExtraWords = body.PremiumExtraWords;
 
     if (body.MaxSizeLimit) {
       let size : {Length: number, Width: number} = body.MaxSizeLimit;
@@ -326,7 +342,15 @@ export class RateCardApiService {
       ValidTill: rateCard.validTill,
       Remarks: rateCard.remarks,
       Covered: covered,
-      AdWordsMax: rateCard.AdWordsMax
+      AdWordsMax: rateCard.AdWordsMax,
+
+      PremiumCustom: rateCard.PremiumCustom,
+      PremiumBox: rateCard.PremiumBox,
+      PremiumBaseColour: rateCard.PremiumBaseColour,
+      PremiumCheckMark: rateCard.PremiumCheckMark,
+      PremiumEmailId: rateCard.PremiumEmailId,
+      PremiumWebsite: rateCard.PremiumWebsite,
+      PremiumExtraWords: rateCard.PremiumExtraWords
     });
   }
 }

@@ -437,6 +437,75 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
+          <mat-panel-title>Premiums</mat-panel-title>
+          <mat-panel-description>Enter Premiums</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngIf="isTypeWords">
+          <p class="text-muted">Enter Amounts for the following Premiums</p>
+
+          <mat-form-field>
+            <input matInput placeholder="Box" name="premiumBox" [(ngModel)]="rateCard.PremiumBox" required #premiumBoxField="ngModel">
+            <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
+              Box Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="rateCard.PremiumBaseColour" required #premiumBaseColourField="ngModel">
+            <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
+              Base Colour Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="rateCard.PremiumCheckMark" required #premiumCheckMarkField="ngModel">
+            <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
+              Check Mark Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="rateCard.PremiumEmailId" required #premiumEmailIdField="ngModel">
+            <mat-error *ngIf="premiumEmailIdField.errors && premiumEmailIdField.errors.required">
+              Email Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="rateCard.PremiumWebsite" required #premiumWebsiteField="ngModel">
+            <mat-error *ngIf="premiumWebsiteField.errors && premiumWebsiteField.errors.required">
+              Website Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Extra Words" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
+            <mat-error *ngIf="premiumExtraWordsField.errors && premiumExtraWordsField.errors.required">
+              Extra Words Premium Amount is required.
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="!isTypeWords">
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Type" name="premiumType" [(ngModel)]="rateCard.PremiumCustom.PremiumType" required #premiumTypeField="ngModel">
+                <mat-error *ngIf="premiumTypeField.errors && premiumTypeField.errors.required">
+                  Premium Type is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="rateCard.PremiumCustom.Amount" required #premiumAmountField="ngModel">
+                <span matSuffix>{{rateCard.PremiumCustom.Percentage ? '%' : ''}}</span>
+                <mat-error *ngIf="premiumAmountField.errors && premiumAmountField.errors.required">
+                  Premium Amount is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="rateCard.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox>
+        </ng-container>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
           <mat-panel-title>Taxes</mat-panel-title>
           <mat-panel-description>Enter Taxes</mat-panel-description>
         </mat-expansion-panel-header>
