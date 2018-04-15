@@ -30,12 +30,14 @@ import { VerifyEmailDirective } from './validators/verify-email.directive';
 import { VerifyMinDirective } from './validators/verify-min.directive';
 import { VerifyMaxDirective } from './validators/verify-max.directive';
 import { VerifyLengthDirective } from './validators/verify-fix-length.directive';
+import { VerifyMultipleOfDirective } from './validators/verify-multiple-of.directive';
 
 const validators = [
   VerifyEmailDirective,
   VerifyMinDirective,
   VerifyMaxDirective,
-  VerifyLengthDirective
+  VerifyLengthDirective,
+  VerifyMultipleOfDirective
 ];
 
 @NgModule({

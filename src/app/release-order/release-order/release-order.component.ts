@@ -149,7 +149,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
-      this.adCountMultiplier = this.releaseorder.adTotal / (this.customPaid + this.customFree);
+      this.adCountPaid = (this.releaseorder.adTotal * this.customPaid) / (this.customPaid + this.customFree);
 
       this.selectedTax = this.taxes.find(element => element.primary == this.releaseorder.taxAmount.primary
         && element.secondary == this.releaseorder.taxAmount.secondary);
@@ -602,7 +602,19 @@ export class ReleaseOrderComponent implements OnInit {
 
   executiveResultFormatter = (result: Executive) => result.executiveName;
 
-  currentInsertionDate: NgbDate[];
+  isInsertionTimeLimitValid(date: NgbDate) {
+    if (!this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
+      let now = new Date();
+      let last = new Date();
+      now.setDate(now.getDate() - 1);
+      last.setDate(last.getDate() + this.selectedScheme.timeLimit + 1);
+
+      return date.before(new NgbDate(last.getFullYear(), last.getMonth() + 1, last.getDate()))
+        && date.after(new NgbDate(now.getFullYear(), now.getMonth() + 1, now.getDate()));
+    }
+
+    return false;
+  }
 
   addInsertion(date: NgbDate) {
     const index = this.findInsertion(date);
@@ -611,6 +623,11 @@ export class ReleaseOrderComponent implements OnInit {
       if (this.releaseorder.insertions.length >= this.availableAds) {
         this.notifications.show('Total No of Ads reached');
   
+        return;
+      }
+      else if (!this.isInsertionTimeLimitValid(date)) {
+        this.notifications.show('Date outside Scheme Time Limit');
+
         return;
       }
 
@@ -633,20 +650,6 @@ export class ReleaseOrderComponent implements OnInit {
     return this.findInsertion(date) != -1;
   }
 
-  insertionMarkDisabled = (date: NgbDate, current: {month: number}) => {
-    if (this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit) {
-      let now = new Date();
-      let last = new Date();
-      now.setDate(now.getDate() - 1);
-      last.setDate(last.getDate() + this.selectedScheme.timeLimit + 1);
-
-      return date.before(new NgbDate(last.getFullYear(), last.getMonth() + 1, last.getDate()))
-        && date.after(new NgbDate(now.getFullYear(), now.getMonth() + 1, now.getDate()));
-    }
-
-    return false;
-  }
-
   fixSizes: FixSize[] = [];
 
   customSize = false;
@@ -658,11 +661,48 @@ export class ReleaseOrderComponent implements OnInit {
 
   schemes: Scheme[] = [];
 
-  customScheme = false;
+  _customScheme = false;
 
-  selectedScheme: Scheme;
+  get customScheme() {
+    return this._customScheme;
+  }
 
-  customPaid = 1;
+  set customScheme(custom: boolean) {
+    this._customScheme = custom;
+
+    this.adCountPaid = custom ? this.customPaid : this.selectedScheme.paid;
+
+    this.releaseorder.insertions = [];
+  }
+
+  _selectedScheme: Scheme;
+
+  get selectedScheme() {
+    return this._selectedScheme;
+  }
+
+  set selectedScheme(scheme: Scheme) {
+    this._selectedScheme = scheme;
+
+    this.adCountPaid = scheme.paid;
+
+    this.releaseorder.insertions = [];
+  }
+
+  _customPaid = 1;
+
+  get customPaid() {
+    return this._customPaid;
+  }
+
+  set customPaid(paid: number) {
+    this._customPaid = paid;
+
+    this.adCountPaid = paid;
+
+    this.releaseorder.insertions = [];
+  }
+
   customFree = 0;
 
   get totalSpace() {
@@ -675,17 +715,17 @@ export class ReleaseOrderComponent implements OnInit {
   get grossAmount() {
     if (this.isTypeLen) {
       if (this.customSize) {
-        return (this.releaseorder.rate * this.totalSpace) * this.totalAds;
+        return (this.releaseorder.rate * this.totalSpace) * this.adCountPaid;
       }
       else {
-        return this.selectedSize.amount * this.totalAds;
+        return this.selectedSize.amount * this.adCountPaid;
       }
     }
     else if (this.isTypeTime) {
-      return this.releaseorder.rate * this.releaseorder.AdDuration;
+      return this.releaseorder.rate * this.releaseorder.AdDuration * this.adCountPaid;
     }
     else if (this.isTypeWords) {
-      return this.releaseorder.rate * this.releaseorder.AdWords;
+      return this.releaseorder.rate * this.releaseorder.AdWords * this.adCountPaid;
     }
     else return 0;
   }
@@ -700,16 +740,18 @@ export class ReleaseOrderComponent implements OnInit {
     return Math.ceil(amount);
   }
 
-  adCountMultiplier = 0;
-
-  get totalAds() {
-    return this.adCountMultiplier * (this.customScheme ? this.customPaid : this.selectedScheme.paid);
-  }
+  adCountPaid = 1;
 
   get availableAds() {
-    return (this.customScheme
-      ? (this.customPaid + this.customFree) : (this.selectedScheme.paid + this.selectedScheme.Free))
-      * this.adCountMultiplier;
+    if (this.customScheme) {
+      let multiplier = this.adCountPaid / this.customPaid;
+
+      return +this.adCountPaid + this.customFree * multiplier;
+    }
+    
+    let multiplier = this.adCountPaid / this.selectedScheme.paid;
+
+    return +this.adCountPaid + this.selectedScheme.Free * multiplier;
   }
 
   amountToWords(num) {

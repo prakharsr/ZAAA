@@ -386,7 +386,7 @@
 
         <div class="form-group" *ngIf="!customSize">
           <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
-            <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">{{fixSize.length}} x {{fixSize.width}} @ {{fixSize.amount}}</option>
+            <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">Length: {{fixSize.length}}, Width: {{fixSize.width}}, Amount: {{fixSize.amount}}</option>
           </select>
         </div>
     
@@ -432,7 +432,7 @@
 
         <div class="form-group" *ngIf="!customScheme">
           <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
-            <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}</option>
+            <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}, Time Limit: {{scheme.timeLimit}}</option>
           </select>
         </div>
     
@@ -471,43 +471,46 @@
           <mat-panel-description>Manage Insertions</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-row">
-          <label for="adTotal" class="col-form-label col-3">Total No of Ads</label>
-          <div class="col">
-            <input type="number" class="form-control" id="adTotal" name="adTotal" placeholder="Enter Total No of Ad" [(ngModel)]="adCountMultiplier" required #adTotalField="ngModel">
-          </div>
-          <span class="col form-text">&times; {{customScheme ? customPaid : selectedScheme.paid}} = {{totalAds}}</span>
+        <div class="form-group">
+          <label>No of Paid Ads</label>
+          <input type="number" class="form-control" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="Enter No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
         </div>
         
-        <div *ngIf="adTotalField.invalid && (adTotalField.dirty || adTotalField.touched)" class="text-danger">
-          <div *ngIf="adTotalField.errors.required">
-            Total Number of Ad is required.
+        <div *ngIf="adCountPaidField.invalid && (adCountPaidField.dirty || adCountPaidField.touched)" class="text-danger">
+          <div *ngIf="adCountPaidField.errors.required">
+            No of Paid Ads is required.
+          </div>
+          <div *ngIf="adCountPaidField.errors.multipleOf">
+            No of Paid Ads should be multiple of Paid Ads in Scheme.
           </div>
           <br>
         </div>
-    
-        <br>
-        <div class="form-row">
-          <div class="col">
-            <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
-          </div>    
-        </div>
-        <br>
-    
-        <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
-          <span class="custom-day"
-                [class.focused]="focused"
-                [class.selected]="isSelected(date)"
-                [class.text-muted]="date.month !== currentMonth || disabled">
-            {{ date.day }}
-          </span>
-        </ng-template>
-        
-        <ngb-datepicker [(ngModel)]="currentInsertionDate"
-                        name="currentInsertionDate"
-                        [markDisabled]="insertionMarkDisabled"
-                        [dayTemplate]="insertionTemplate"
-                        (select)="addInsertion($event)"></ngb-datepicker>
+
+        <ng-container *ngIf="adCountPaidField.valid">
+          <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
+
+          <br>
+          <div class="form-row">
+            <div class="col">
+              <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
+            </div>    
+          </div>
+          <br>
+      
+          <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+            <span class="custom-day"
+                  [class.focused]="focused"
+                  [class.selected]="isSelected(date)"
+                  [class.text-muted]="date.month !== currentMonth || disabled">
+              {{ date.day }}
+            </span>
+          </ng-template>
+          
+          <ngb-datepicker [(ngModel)]="currentInsertionDate"
+                          name="currentInsertionDate"
+                          [dayTemplate]="insertionTemplate"
+                          (select)="addInsertion($event)"></ngb-datepicker>
+        </ng-container>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
