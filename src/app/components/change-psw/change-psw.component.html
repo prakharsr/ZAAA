@@ -8,43 +8,29 @@
 
 <div class="container">
   <form (ngSubmit)="submit()" #changePswForm="ngForm">
-    <div class="form-group">
-      <label for="oldPassword">Old Password</label>
-      <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Enter Old Password" [(ngModel)]="oldPassword" required #oldPasswordField="ngModel">
-    </div>
-  
-    <div *ngIf="oldPasswordField.invalid && (oldPasswordField.dirty || oldPasswordField.touched)" class="text-danger">
-      <div *ngIf="oldPasswordField.errors.required">
+    <mat-form-field>
+      <input matInput type="password" name="oldPassword" placeholder="Old Password" [(ngModel)]="oldPassword" required #oldPasswordField="ngModel">
+      <mat-error *ngIf="oldPasswordField.errors && oldPasswordField.errors.required">
         Old Password is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="password">New Password</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="Enter New Password" [(ngModel)]="password" required #passwordField="ngModel">
-    </div>
-
-    <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
-      <div *ngIf="passwordField.errors.required">
+    <mat-form-field>
+      <input matInput type="password" name="password" placeholder="New Password" [(ngModel)]="password" required #passwordField="ngModel">
+      <mat-error *ngIf="passwordField.errors && passwordField.errors.required">
         New Password is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="cpassword">Confirm New Password</label>
-      <input type="password" class="form-control" id="cpassword" name="cpassword" [verify-equals]="password" placeholder="Confirm New Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
-    </div>
-
-    <div *ngIf="cpasswordField.invalid && (cpasswordField.dirty || cpasswordField.touched)" class="text-danger">
-      <div *ngIf="cpasswordField.errors.required">
+    <mat-form-field>
+      <input matInput type="password" name="cpassword" [verify-equals]="password" placeholder="Confirm New Password" [(ngModel)]="cpassword" required #cpasswordField="ngModel">
+      <mat-error *ngIf="cpasswordField.errors && cpasswordField.errors.required">
         Password confirmation is required.
-      </div>
-      <div *ngIf="cpasswordField.errors.equals">
+      </mat-error> 
+      <mat-error *ngIf="cpasswordField.errors && cpasswordField.errors.equals">
         Passwords don't match.
-      </div>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
     <br>
 
