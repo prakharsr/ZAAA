@@ -76,7 +76,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
+        <mat-select placeholder = "State" name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
           <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
         </mat-select>
         <mat-error *ngIf="stateField.errors && stateField.errors.required">

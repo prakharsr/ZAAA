@@ -5,75 +5,52 @@
       <h2 *ngIf="!edit">Add Media House</h2>
       <br>
 
-      <div class="form-group">
-        <label for="orgName">Organisation Name</label>
-        <input type="text" class="form-control" id="orgName" name="orgName" placeholder="Enter Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
-      </div>
-    
-      <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
-        <div *ngIf="orgNameField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
+        <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
           Organisation Name is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="pubName">Publication Name</label>
-        <input type="text" class="form-control" id="pubName" name="pubName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
-      </div>
-    
-      <div *ngIf="pubNameField.invalid && (pubNameField.dirty || pubNameField.touched)" class="text-danger">
-        <div *ngIf="pubNameField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="pubName" placeholder="Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
+        <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
           Publication Name is required.
-        </div>
-        <br>
-      </div>
-        
-      <div class="form-group">
-        <label for="nickName">Nick Name</label>
-        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
-      </div>
+        </mat-error>
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="mediaType">Media Type</label>
-        <select class="form-control" id="mediaType" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
-          <option>Print</option>
-          <option>Air</option>
-          <option>Electronic</option>
-        </select>
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
+      </mat-form-field>
     
-      <div *ngIf="mediaTypeField.invalid && (mediaTypeField.dirty || mediaTypeField.touched)" class="text-danger">
-        <div *ngIf="mediaTypeField.errors.required">
+      <mat-form-field>
+        <mat-select placeholder="Media Type" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+          <mat-option>Print</mat-option>
+          <mat-option>Air</mat-option>
+          <mat-option>Electronic</mat-option>
+        </mat-select>
+        <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
           Media type is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="gstNo">GSTIN</label>
-        <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="mediaHouse.GSTIN" required minlength="15" maxlength="15" #gstNoField="ngModel">
-      </div>
-    
-      <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-        <div *ngIf="gstNoField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN" required minlength="15" maxlength="15" #gstNoField="ngModel">
+        <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
           GSTIN is required.
-        </div>
-        <div *ngIf="gstNoField.errors.minlength || gstNoField.errors.maxlength">
+        </mat-error>
+        <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
           GSTIN should be 15 characters long.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="officeStdNo">STD No</label>
-        <input type="tel" class="form-control" minlength="3" maxlength="5" id="officeStdNo" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="officeLandLine">Office Landline</label>
-        <input type="tel" class="form-control" minlength="6" maxlength="8" id="officeLandLine" name="officeLandLine" placeholder="Enter Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+      </mat-form-field>
 
       <br>
       <h3>Frequency</h3>
@@ -81,25 +58,19 @@
 
       <div class="form-row">
         <div class="col-sm">
-          <div class="form-group">
-            <label>Period</label>
-            <select class="form-control" name="freqPeriod" [(ngModel)]="mediaHouse.freqPeriod" id="freqPeriod" #freqPeriodField="ngModel" required>
-              <option *ngFor="let item of periods" [value]="item">{{item}}</option>
-            </select>
-          </div>
-
-          <div *ngIf="freqPeriodField.invalid && (freqPeriodField.dirty || freqPeriodField.touched)" class="text-danger">
-            <div *ngIf="freqPeriodField.errors.required">
+          <mat-form-field>
+            <mat-select placeholder="Period" name="freqPeriod" [(ngModel)]="mediaHouse.freqPeriod" #freqPeriodField="ngModel" required>
+              <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
               Period is required.
-            </div>
-            <br>
-          </div>
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class="col-sm">
-          <div class="form-group">
-            <label>Remark</label>
-            <input type="text" class="form-control" id="freqRemark" placeholder="Enter Remarks" [(ngModel)]="mediaHouse.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
-          </div>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Remarks" [(ngModel)]="mediaHouse.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
+          </mat-form-field>
         </div>
       </div>
     
@@ -107,69 +78,45 @@
 
       <h3 class="mb-3">Address</h3>
     
-      <div class="form-group">
-        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="mediaHouse.address.address" required #addressField="ngModel">
-      </div>
-    
-      <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
-        <div *ngIf="addressField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" required #addressField="ngModel">
+        <mat-error *ngIf="addressField.errors && addressField.errors.required">
           Address is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="pincode">Pincode</label>
-        <input type="tel" minlength="6" maxlength="6" class="form-control" id="pincode" name="pincode" placeholder="Enter Pincode" [(ngModel)]="mediaHouse.address.pincode" required #pincodeField="ngModel">
-      </div>
-
-      <div *ngIf="pincodeField.invalid && (pincodeField.dirty || pincodeField.touched)" class="text-danger">
-        <div *ngIf="pincodeField.errors.required">
+      <mat-form-field>
+        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" required #pincodeField="ngModel">
+        <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
           Pincode is required.
-        </div>
-        <div *ngIf="pincodeField.errors.minlength || pincodeField.errors.maxlength">
+        </mat-error>
+        <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
           Pincode should be 6 characters long.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" [(ngModel)]="mediaHouse.address.city" required #cityField="ngModel">
-      </div>
-    
-      <div *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)" class="text-danger">
-        <div *ngIf="cityField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" required #cityField="ngModel">
+        <mat-error *ngIf="cityField.errors && cityField.errors.required">
           City is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="state">State</label>
-        <select class="form-control" id="state" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
-          <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-        </select>
-      </div>
-    
-      <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
-        <div *ngIf="stateField.errors.required">
+      <mat-form-field>
+        <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
+          <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="stateField.errors && stateField.errors.required">
           State is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="edition">Edition</label>
-        <input type="text" class="form-control" id="edition" name="edition" placeholder="Enter Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
-      </div>
-    
-      <div *ngIf="editionField.invalid && (editionField.dirty || editionField.touched)" class="text-danger">
-        <div *ngIf="editionField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
+        <mat-error *ngIf="editionField.errors && editionField.errors.required">
           Edition is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
       <br>
 
@@ -189,9 +136,9 @@
       <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
         <div class="col-auto">#{{i + 1}}</div>
         <div class="col">
-          <div class="form-group">
-            <input type="text" class="form-control" id="pullouts-{{i}}" name="s-{{i}}-pullouts" placeholder="Enter Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
-          </div>
+          <mat-form-field>
+            <input matInput type="text" id="pullouts-{{i}}" name="s-{{i}}-pullouts" placeholder="Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
+          </mat-form-field>
         </div>
         <div class="col-auto">
           <button class="btn btn-outline-danger" type="button" (click)="removePullouts(i)">
@@ -225,54 +172,38 @@
           #{{i + 1}}
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label for="person">Person</label>
-            <input type="text" class="form-control" id="person-{{i}}" name="s-{{i}}-person" placeholder="Enter Person" [(ngModel)]="item.person" required #personField="ngModel">
-          </div>
-
-          <div *ngIf="personField.invalid && (personField.dirty || personField.touched)" class="text-danger">
-            <div *ngIf="personField.errors.required">
+          <mat-form-field>
+            <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
+            <mat-error *ngIf="personField.errors && personField.errors.required">
               Person is required.
-            </div>
-            <br>
-          </div>
+            </mat-error>
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="designation">Designation</label>
-            <input type="text" class="form-control" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Enter Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-          </div>
+          <mat-form-field>
+            <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="mobileNo">Mobile Number</label>
-            <input type="tel"  pattern="^((\+91)|0|)\d{10}$" class="form-control" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-          </div>
+          <mat-form-field>
+            <span matPrefix>+91 &nbsp;</span>
+            <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+            <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
+              Phone Number is empty or invalid.
+            </mat-error>
+          </mat-form-field>
 
-          <div *ngIf="mobileNoField.invalid && (mobileNoField.dirty || mobileNoField.touched)" class="text-danger">
-            <div *ngIf="mobileNoField.errors.required">
-              Mobile Number is required.
-            </div>
-            <br>
-          </div>
+          <mat-form-field>
+            <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+          </mat-form-field>
 
-          <div class="form-group">
-            <label for="deskExtension">Desk Extension</label>
-            <input type="text" class="form-control" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Enter Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
-          </div>
-
-          <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email-{{i}}" name="s-{{i}}-email" placeholder="Enter email" [(ngModel)]="item.email" required #emailField="ngModel" email>
-          </div>
-
-          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-            <div *ngIf="emailField.errors.required">
+          <mat-form-field>
+            <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+            <mat-error *ngIf="emailField.errors && emailField.errors.required">
               Email is required.
-            </div>
-            <div *ngIf="!emailField.errors.required && emailField.errors.email">
+            </mat-error>
+            <mat-error *ngIf="emailField.errors && emailField.errors.email">
               Invalid Email.
-            </div>
-            <br>
-          </div>
+            </mat-error>
+          </mat-form-field>
 
           <!-- Assign Ad Type, Assign Edition -->
         </div>
