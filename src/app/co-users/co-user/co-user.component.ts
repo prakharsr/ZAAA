@@ -48,6 +48,7 @@ export class CoUserComponent implements OnInit {
               this.notifications.show('Connection failed');
             });
           }
+          else this.navigateBack();
         }
         else {
           console.log(data);
