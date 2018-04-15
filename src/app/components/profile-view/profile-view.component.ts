@@ -3,6 +3,7 @@ import { UserProfile } from '../../models/user-profile';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -14,7 +15,7 @@ export class ProfileViewComponent implements OnInit {
   profile = new UserProfile();
   isAdmin: boolean;
 
-  constructor(private api: ApiService, private notifications: NotificationService) { }
+  constructor(private api: ApiService, private dialog: DialogService, private notifications: NotificationService) { }
 
   ngOnInit() {
     this.api.getUserProfile().subscribe(data => this.profile = data);
@@ -49,25 +50,33 @@ export class ProfileViewComponent implements OnInit {
   }
 
   removeProfilePicture() {
-    this.api.deleteProfilePicture().subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show('Profile Picture removed successfully');
-
-          this.profile.photo = environment.uploadsBaseUrl + data.photo;
+    this.dialog.confirmDeletion("Are you sure want to delete your Profile Picture?").subscribe(
+      confirm => {
+        if (!confirm) {
+          return;
         }
-        else {
-          console.log(data);
 
-          this.notifications.show(data.msg);
-        }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
+        this.api.deleteProfilePicture().subscribe(
+          data => {
+            if (data.success) {
+              this.notifications.show('Profile Picture removed successfully');
+    
+              this.profile.photo = environment.uploadsBaseUrl + data.photo;
+            }
+            else {
+              console.log(data);
+    
+              this.notifications.show(data.msg);
+            }
+          },
+          err => {
+            console.log(err);
+    
+            this.notifications.show("Connection failed");
+          }
+        )
       }
-    )
+    );
   }
 
   uploadSign(files: FileList) {
@@ -93,24 +102,32 @@ export class ProfileViewComponent implements OnInit {
   }
 
   removeSign() {
-    this.api.deleteSign().subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show('Signature removed successfully');
-
-          this.profile.sign = environment.uploadsBaseUrl + data.photo;
+    this.dialog.confirmDeletion("Are you sure want to delete your Signature?").subscribe(
+      confirm => {
+        if (!confirm) {
+          return;
         }
-        else {
-          console.log(data);
 
-          this.notifications.show(data.msg);
-        }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
+        this.api.deleteSign().subscribe(
+          data => {
+            if (data.success) {
+              this.notifications.show('Signature removed successfully');
+    
+              this.profile.sign = environment.uploadsBaseUrl + data.photo;
+            }
+            else {
+              console.log(data);
+    
+              this.notifications.show(data.msg);
+            }
+          },
+          err => {
+            console.log(err);
+    
+            this.notifications.show("Connection failed");
+          }
+        )
       }
-    )
+    );
   }
 }
