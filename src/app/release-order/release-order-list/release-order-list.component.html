@@ -25,14 +25,23 @@
           {{releaseOrder.clientName}}
         </div>
         <div class="col-auto">
-          <a class="btn btn-outline-info" [routerLink]="['/releaseorders/new', releaseOrder.id]">
-            <mat-icon>add</mat-icon> Copy into New
-          </a>
-          <button class="btn btn-outline-info" (click)="sendMsg()">
-            <mat-icon>mail</mat-icon>
-          </button>
-          <button class="btn btn-outline-danger" (click)="deleteReleaseOrder(releaseOrder)">
-            <mat-icon>delete</mat-icon>
+          <mat-menu #releaseOrderMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/releaseorders/new', releaseOrder.id]">
+              <mat-icon>add</mat-icon> Copy into New
+            </button>
+            <button mat-menu-item [routerLink]="['/releaseorders/edit', releaseOrder.id]">
+              <mat-icon>edit</mat-icon> Edit
+            </button>
+            <button mat-menu-item (click)="sendMsg()">
+              <mat-icon>mail</mat-icon> Mail
+            </button>
+            <button mat-menu-item class="text-danger" (click)="deleteReleaseOrder(releaseOrder)">
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </mat-menu>
+          
+          <button mat-icon-button [matMenuTriggerFor]="releaseOrderMenu">
+            <mat-icon>more_vert</mat-icon>
           </button>
         </div>
       </div>
