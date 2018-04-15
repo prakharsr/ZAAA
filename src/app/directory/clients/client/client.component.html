@@ -5,120 +5,84 @@
       <h2 *ngIf="!edit">Add Client</h2>
       <br>
     
-      <div class="form-group">
-        <label for="orgName">Organisation / Individual Name</label>
-        <input type="text" class="form-control" id="orgName" name="orgName" placeholder="Enter Organisation / Individual Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
-      </div>
-    
-      <div *ngIf="orgNameField.invalid && (orgNameField.dirty || orgNameField.touched)" class="text-danger">
-        <div *ngIf="orgNameField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="orgName" placeholder="Organisation / Individual Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
+        <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
           Organisation / Individual Name is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="companyName">Company Name</label>
-        <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Enter Company Name" [(ngModel)]="client.companyName" required #companyNameField="ngModel">
-      </div>
-    
-      <div *ngIf="companyNameField.invalid && (companyNameField.dirty || companyNameField.touched)" class="text-danger">
-        <div *ngIf="companyNameField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="companyName" placeholder="Company Name" [(ngModel)]="client.companyName" required #companyNameField="ngModel">
+        <mat-error *ngIf="companyNameField.errors && companyNameField.errors.required">
           Company Name is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="nickName">Nick Name</label>
-        <input type="text" class="form-control" id="nickName" name="nickName" placeholder="Enter Nick Name" [(ngModel)]="client.nickName" #nickNameField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="client.nickName" #nickNameField="ngModel">
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="category">Category / Type</label>
-        <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category" [(ngModel)]="client.category" #categoryField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="category" placeholder="Category" [(ngModel)]="client.category" #categoryField="ngModel">
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="stdNo">STD No</label>
-        <input type="tel" class="form-control" minlength="3" maxlength="5" id="stdNo" name="stdNo" placeholder="STD No" [(ngModel)]="client.stdNo" #stdNoField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="tel" minlength="3" maxlength="5" name="stdNo" placeholder="STD No" [(ngModel)]="client.stdNo" #stdNoField="ngModel">
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="landLine">Landline</label>
-        <input type="tel" class="form-control" minlength="6" maxlength="8" id="landLine" name="landLine" placeholder="Enter Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="tel" minlength="6" maxlength="8" name="landLine" placeholder="Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="website">Website</label>
-        <input type="text" class="form-control" id="website" name="website" placeholder="Enter Website" [(ngModel)]="client.website" #websiteField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="website" placeholder="Website" [(ngModel)]="client.website" #websiteField="ngModel">
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="panNo">PAN Number</label>
-        <input type="text" class="form-control" id="panNo" name="panNo" placeholder="Enter PAN Number" [(ngModel)]="client.panNo" #panNoField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="panNo" placeholder="PAN Number" [(ngModel)]="client.panNo" #panNoField="ngModel">
+      </mat-form-field>
     
-      <div class="form-group">
-        <label for="gstNo">GST Number</label>
-        <input type="text" class="form-control" id="gstNo" name="gstNo" placeholder="Enter GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
-      </div>
+      <mat-form-field>
+        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
+      </mat-form-field>
 
       <br>
 
       <h3 class="mb-3">Address</h3>
     
-      <div class="form-group">
-        <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" [(ngModel)]="client.address.address" required #addressField="ngModel">
-      </div>
-    
-      <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)" class="text-danger">
-        <div *ngIf="addressField.errors.required">
+      <mat-form-field>
+        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" required #addressField="ngModel">
+        <mat-error *ngIf="addressField.errors && addressField.errors.required">
           Address is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="pincode">Pincode</label>
-        <input type="tel" minlength="6" maxlength="6" class="form-control" id="pincode" name="pincode" placeholder="Enter Pincode" [(ngModel)]="client.address.pincode" required #pincodeField="ngModel">
-      </div>
-    
-      <div *ngIf="pincodeField.invalid && (pincodeField.dirty || pincodeField.touched)" class="text-danger">
-        <div *ngIf="pincodeField.errors.required">
+      <mat-form-field>
+        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="client.address.pincode" required #pincodeField="ngModel">
+        <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
           Pincode is required.
-        </div>
-        <div *ngIf="pincodeField.errors.minlength || pincodeField.errors.maxlength">
+        </mat-error>
+        <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
           Pincode should be 6 characters long.
-        </div>
-        <br>
-      </div>
-
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" [(ngModel)]="client.address.city" required #cityField="ngModel">
-      </div>
-    
-      <div *ngIf="cityField.invalid && (cityField.dirty || cityField.touched)" class="text-danger">
-        <div *ngIf="cityField.errors.required">
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput type="text" name="city" placeholder="City" [(ngModel)]="client.address.city" required #cityField="ngModel">
+        <mat-error *ngIf="cityField.errors && cityField.errors.required">
           City is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="state">State</label>
-        <select class="form-control" id="state" name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
-          <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-        </select>
-      </div>
-    
-      <div *ngIf="stateField.invalid && (stateField.dirty || stateField.touched)" class="text-danger">
-        <div *ngIf="stateField.errors.required">
+      <mat-form-field>
+        <mat-select name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
+          <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="stateField.errors && stateField.errors.required">
           State is required.
-        </div>
-        <br>
-      </div>
+        </mat-error>
+      </mat-form-field>
 
       <br>
     </div>
@@ -146,88 +110,59 @@
         #{{i + 1}}
       </div>
       <div class="card-body">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name-{{i}}" name="s-{{i}}-name" placeholder="Enter Name" [(ngModel)]="item.name" required #nameField="ngModel">
-        </div>
-
-        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
-          <div *ngIf="nameField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
+          <mat-error *ngIf="nameField.errors && nameField.errors.required">
             Name is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="designation">Designation</label>
-          <input type="text" class="form-control" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Enter Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="text" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="department">Department</label>
-          <input type="text" class="form-control" id="department-{{i}}" name="s-{{i}}-department" placeholder="Enter Department" [(ngModel)]="item.department" required #departmentField="ngModel">
-        </div>
-
-        <div *ngIf="departmentField.invalid && (departmentField.dirty || departmentField.touched)" class="text-danger">
-          <div *ngIf="departmentField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
+          <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
             Department is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="personStdNo">STD</label>
-          <input type="tel" class="form-control" minlength="3" maxlength="5" id="personStdNo-{{i}}" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
-        </div>
-
-        <div *ngIf="personStdNoField.invalid && (personStdNoField.dirty || personStdNoField.touched)" class="text-danger">
-          <div *ngIf="personStdNoField.errors.required">
+        <mat-form-field>
+          <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
+          <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
             STD No is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
         
-        <div class="form-group">
-          <label for="personLandLine">Land Line</label>
-          <input type="tel" class="form-control" minlength="6" maxlength="8" id="personLandLine-{{i}}" name="s-{{i}}-personLandLine" placeholder="Enter LandLine Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
-        </div>
-
-        <div *ngIf="personLandLineField.invalid && (personLandLineField.dirty || personLandLineField.touched)" class="text-danger">
-          <div *ngIf="personLandLineField.errors.required">
+        <mat-form-field>
+          <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="LandLine Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
+          <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
             LandLine is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="mobileNo">Mobile Number</label>
-          <input type="tel" class="form-control" pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Enter Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" class="form-control" id="email-{{i}}" name="s-{{i}}-email" placeholder="Enter email" [(ngModel)]="item.email" required #emailField="ngModel" email>
-        </div>
-
-        <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-          <div *ngIf="emailField.errors.required">
+        <mat-form-field>
+          <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+          <mat-error *ngIf="emailField.errors && emailField.errors.required">
             Email is required.
-          </div>
-          <div *ngIf="!emailField.errors.required && emailField.errors.email">
+          </mat-error>
+          <mat-error *ngIf="emailField.errors && emailField.errors.email">
             Invalid Email.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label for="dob">Date of birth</label>
-          <input type="date" class="form-control" id="dob-{{i}}" name="dob-{{i}}" placeholder="Enter DOB" [(ngModel)]="item.dob" #dobField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="date" name="dob-{{i}}" placeholder="DOB" [(ngModel)]="item.dob" #dobField="ngModel">
+        </mat-form-field>
   
-        <div class="form-group">
-          <label for="anniversaryDate">Anniversary Date</label>
-          <input type="date" class="form-control" id="anniversaryDate-{{i}}" name="anniversaryDate-{{i}}" placeholder="Enter Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
-        </div>
+        <mat-form-field>
+          <input matInput type="date" name="anniversaryDate-{{i}}" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
+        </mat-form-field>
       </div>
     </div>
   </div>
