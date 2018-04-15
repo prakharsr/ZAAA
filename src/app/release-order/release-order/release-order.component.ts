@@ -190,6 +190,14 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.paymentType = this.paymentTypes[0];
       this.selectedTax = this.taxes[0];
 
+      this.releaseorder.PremiumCustom = rateCard.PremiumCustom;
+      this.releaseorder.PremiumBox.Amount = rateCard.PremiumBox;
+      this.releaseorder.PremiumBaseColour.Amount = rateCard.PremiumBaseColour;
+      this.releaseorder.PremiumEmailId.Amount = rateCard.PremiumEmailId;
+      this.releaseorder.PremiumCheckMark.Amount = rateCard.PremiumCheckMark;
+      this.releaseorder.PremiumWebsite.Amount = rateCard.PremiumWebsite;
+      this.releaseorder.PremiumExtraWords.Amount = rateCard.PremiumExtraWords;
+
       if (rateCard.fixSizes.length > 0) {
         this.fixSizes = rateCard.fixSizes;
         this.selectedSize = this.fixSizes[0];
@@ -712,7 +720,7 @@ export class ReleaseOrderComponent implements OnInit {
     else return this.selectedSize.length * this.selectedSize.width;
   }
 
-  get grossAmount() {
+  get grossAmountWithoutPremium() {
     if (this.isTypeLen) {
       if (this.customSize) {
         return (this.releaseorder.rate * this.totalSpace) * this.adCountPaid;
@@ -728,6 +736,42 @@ export class ReleaseOrderComponent implements OnInit {
       return this.releaseorder.rate * this.releaseorder.AdWords * this.adCountPaid;
     }
     else return 0;
+  }
+
+  get grossAmount() {
+    let amount = this.grossAmountWithoutPremium;
+
+    if (this.isTypeWords) {
+      if (this.releaseorder.PremiumBox.Included) {
+        amount += this.releaseorder.PremiumBox.Amount;
+      }
+
+      if (this.releaseorder.PremiumBaseColour.Included) {
+        amount += this.releaseorder.PremiumBaseColour.Amount;
+      }
+      
+      if (this.releaseorder.PremiumCheckMark.Included) {
+        amount += this.releaseorder.PremiumCheckMark.Amount;
+      }
+      
+      if (this.releaseorder.PremiumEmailId.Included) {
+        amount += this.releaseorder.PremiumEmailId.Amount * this.releaseorder.PremiumEmailId.Quantity;
+      }
+      
+      if (this.releaseorder.PremiumWebsite.Included) {
+        amount += this.releaseorder.PremiumWebsite.Amount * this.releaseorder.PremiumWebsite.Quantity;
+      }
+      
+      if (this.releaseorder.PremiumExtraWords.Included) {
+        amount += this.releaseorder.PremiumExtraWords.Amount * this.releaseorder.PremiumExtraWords.Quantity;
+      }
+    }
+    else if (this.releaseorder.PremiumCustom.Percentage) {
+      amount += (this.releaseorder.PremiumCustom.Amount * amount) / 100;
+    }
+    else amount += this.releaseorder.PremiumCustom.Amount;
+
+    return amount;
   }
 
   get netAmount() {

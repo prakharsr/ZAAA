@@ -97,6 +97,44 @@ export class ReleaseOrder {
     otherRemark = "";
     otherCharges: OtherCharges[] = [];
 
+    PremiumCustom = {
+        Amount: 0,
+        Percentage: false,
+        PremiumType: ""
+    };
+
+    PremiumBox = {
+        Amount: 0,
+        Included: false
+    };
+
+    PremiumBaseColour = {
+        Amount: 0,
+        Included: false
+    };
+
+    PremiumEmailId = {
+        Amount: 0,
+        Quantity: 1,
+        Included: false
+    };
+
+    PremiumCheckMark = {
+        Amount: 0,
+        Included: false
+    };
+    
+    PremiumWebsite = {
+        Amount: 0,
+        Quantity: 1,
+        Included: false
+    };
+
+    PremiumExtraWords = {
+        Amount: 0,
+        Quantity: 1,
+        Included: false
+    };
     
     clientPayment = 0;
 }
