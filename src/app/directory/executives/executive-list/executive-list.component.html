@@ -25,8 +25,17 @@
         <small>{{executive.executiveName}}</small>
       </div>
       <div class="col-auto">
-        <button mat-icon-button color="warn" (click)="deleteExecutive(executive)">
-          <mat-icon>delete</mat-icon>
+        <mat-menu #dirMenu="matMenu">
+          <button mat-menu-item [routerLink]="['/dir/executives/edit', executive.id]">
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button mat-menu-item class="text-danger" (click)="deleteExecutive(executive)">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </mat-menu>
+        
+        <button mat-icon-button [matMenuTriggerFor]="dirMenu">
+          <mat-icon>more_vert</mat-icon>
         </button>
       </div>
     </div>
