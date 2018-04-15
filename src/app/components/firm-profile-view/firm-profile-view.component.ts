@@ -3,6 +3,7 @@ import { Firm } from '../../models/firm';
 import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-firm-profile-view',
@@ -15,7 +16,7 @@ export class FirmProfileViewComponent implements OnInit {
 
   profile = new Firm();
 
-  constructor(private api: ApiService, private notifications: NotificationService) {}
+  constructor(private api: ApiService, private dialog: DialogService, private notifications: NotificationService) {}
 
   ngOnInit() {
     this.api.getFirmProfile().subscribe(data => this.profile = data);
@@ -51,24 +52,32 @@ export class FirmProfileViewComponent implements OnInit {
   }
 
   removeLogo() {
-    this.api.deleteFirmLogo().subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show('Logo removed successfully');
-
-          this.profile.logo = environment.uploadsBaseUrl + data.photo;
+    this.dialog.confirmDeletion("Are you sure want to delete the firm logo?").subscribe(
+      confirm => {
+        if (!confirm) {
+          return;
         }
-        else {
-          console.log(data);
 
-          this.notifications.show(data.msg);
-        }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
+        this.api.deleteFirmLogo().subscribe(
+          data => {
+            if (data.success) {
+              this.notifications.show('Logo removed successfully');
+    
+              this.profile.logo = environment.uploadsBaseUrl + data.photo;
+            }
+            else {
+              console.log(data);
+    
+              this.notifications.show(data.msg);
+            }
+          },
+          err => {
+            console.log(err);
+    
+            this.notifications.show("Connection failed");
+          }
+        )
       }
-    )
+    );
   }
 }
