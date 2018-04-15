@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Premium, Covered, Remark, Category, Tax } from '../rate-card';
+import { RateCard, FixSize, Scheme, Covered, Remark, Category, Tax } from '../rate-card';
 import { RateCardApiService } from '../rate-card-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -369,14 +369,6 @@ export class RateCardComponent implements OnInit {
 
   removeScheme(i: number){
     this.rateCard.schemes.splice(i, 1);
-  }
-
-  addPremium() {
-    this.rateCard.premiums.push(new Premium());
-  }
-
-  removePremium(i: number) {
-    this.rateCard.premiums.splice(i, 1);
   }
 
   addCovered() {

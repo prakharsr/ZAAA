@@ -10,7 +10,6 @@ export class RateCard {
     
     fixSizes: FixSize[] = [];
     schemes: Scheme[] = [];
-    premiums: Premium[] = [];
     covered: Covered[] = [];
     remarks: Remark[] = [];
     taxes: Tax[] = [];
@@ -47,11 +46,6 @@ export class Scheme {
     paid = 0;
     Free = 0;
     timeLimit = 0;
-}
-
-export class Premium {
-    premType = "";
-    premAmount = 0;
 }
 
 export class Covered {

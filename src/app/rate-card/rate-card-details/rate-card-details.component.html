@@ -217,24 +217,5 @@
         </ul>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="ratecard.premiums.length">
-      <div class="card mb-3" *ngFor="let premium of ratecard.premiums; index as i">
-        <div class="card-header">Premium #{{i + 1}}</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Type</div>
-              <div class="col-md-8">{{premium.premType}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Amount</div>
-              <div class="col-md-8">{{premium.premAmount}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </div>

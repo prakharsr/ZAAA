@@ -13,7 +13,6 @@ export class RateCardApiService {
   createRateCard(rateCard: RateCard): Observable<any> {
     let fixSizes = [],
       schemes = [],
-      premiums = [],
       covered = [],
       tax = [];
 
@@ -30,13 +29,6 @@ export class RateCardApiService {
         paid: element.paid,
         Free: element.Free,
         TimeLimit: element.timeLimit
-      });
-    });
-
-    rateCard.premiums.forEach(element => {
-      premiums.push({
-        Type: element.premType,
-        Amount: element.premAmount
       });
     });
 
@@ -89,7 +81,6 @@ export class RateCardApiService {
       },
       fixSize: fixSizes,
       scheme: schemes,
-      premium: premiums,
       tax: tax,
       validFrom: rateCard.validFrom,
       validTill: rateCard.validTill,
@@ -180,17 +171,6 @@ export class RateCardApiService {
       });
     }
 
-    if (body.Premium) {
-      let premiums : {Type: string, Amount: number}[] = body.Premium;
-
-      premiums.forEach(element => {
-        rateCard.premiums.push({
-          premType: element.Type,
-          premAmount: element.Amount
-        });
-      });
-    }
-
     if (body.Tax) {
       let tax : {Included: boolean, TaxRate: number}[] = body.Tax;
 
@@ -272,7 +252,6 @@ export class RateCardApiService {
   editRateCard(rateCard: RateCard): Observable<any> {
     let fixSizes = [],
       schemes = [],
-      premiums = [],
       covered = [],
       tax = [];
 
@@ -289,13 +268,6 @@ export class RateCardApiService {
         paid: element.paid,
         Free: element.Free,
         TimeLimit: element.timeLimit
-      });
-    });
-
-    rateCard.premiums.forEach(element => {
-      premiums.push({
-        Type: element.premType,
-        Amount: element.premAmount
       });
     });
 
@@ -349,7 +321,6 @@ export class RateCardApiService {
       },
       FixSize: fixSizes,
       Scheme: schemes,
-      Premium: premiums,
       Tax: tax,
       ValidFrom: rateCard.validFrom,
       ValidTill: rateCard.validTill,
