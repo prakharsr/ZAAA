@@ -445,37 +445,37 @@
           <p class="text-muted">Enter Amounts for the following Premiums</p>
 
           <mat-form-field>
-            <input matInput placeholder="Box" name="premiumBox" [(ngModel)]="rateCard.PremiumBox" required #premiumBoxField="ngModel">
+            <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="rateCard.PremiumBox" required #premiumBoxField="ngModel">
             <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
               Box Premium Amount is required.
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="rateCard.PremiumBaseColour" required #premiumBaseColourField="ngModel">
+            <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="rateCard.PremiumBaseColour" required #premiumBaseColourField="ngModel">
             <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
               Base Colour Premium Amount is required.
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="rateCard.PremiumCheckMark" required #premiumCheckMarkField="ngModel">
+            <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="rateCard.PremiumCheckMark" required #premiumCheckMarkField="ngModel">
             <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
               Check Mark Premium Amount is required.
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="rateCard.PremiumEmailId" required #premiumEmailIdField="ngModel">
+            <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="rateCard.PremiumEmailId" required #premiumEmailIdField="ngModel">
             <mat-error *ngIf="premiumEmailIdField.errors && premiumEmailIdField.errors.required">
               Email Premium Amount is required.
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="rateCard.PremiumWebsite" required #premiumWebsiteField="ngModel">
+            <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="rateCard.PremiumWebsite" required #premiumWebsiteField="ngModel">
             <mat-error *ngIf="premiumWebsiteField.errors && premiumWebsiteField.errors.required">
               Website Premium Amount is required.
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Extra Words" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
+            <input type="number" matInput placeholder="Extra Words" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
             <mat-error *ngIf="premiumExtraWordsField.errors && premiumExtraWordsField.errors.required">
               Extra Words Premium Amount is required.
             </mat-error>
@@ -493,7 +493,7 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="rateCard.PremiumCustom.Amount" required #premiumAmountField="ngModel">
+                <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="rateCard.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                 <span matSuffix>{{rateCard.PremiumCustom.Percentage ? '%' : ''}}</span>
                 <mat-error *ngIf="premiumAmountField.errors && premiumAmountField.errors.required">
                   Premium Amount is required.
