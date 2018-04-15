@@ -593,12 +593,10 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Quantity" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
-                  <mat-error *ngIf="premiumWebsiteQuantityField.errors && premiumWebsiteQuantityField.errors.required">
-                    Website Premium Quantity is required.
-                  </mat-error>
-                </mat-form-field>
+                <input type="number" matInput placeholder="Quantity" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
+                <mat-error *ngIf="premiumWebsiteQuantityField.errors && premiumWebsiteQuantityField.errors.required">
+                  Website Premium Quantity is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
@@ -616,12 +614,10 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Quantity" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
-                  <mat-error *ngIf="premiumExtraWordsQuantityField.errors && premiumExtraWordsQuantityField.errors.required">
-                    Extra Words Premium Quantity is required.
-                  </mat-error>
-                </mat-form-field>
+                <input type="number" matInput placeholder="Quantity" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
+                <mat-error *ngIf="premiumExtraWordsQuantityField.errors && premiumExtraWordsQuantityField.errors.required">
+                  Extra Words Premium Quantity is required.
+                </mat-error>
               </mat-form-field>
             </div>
           </div>
