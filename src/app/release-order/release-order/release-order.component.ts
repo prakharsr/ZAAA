@@ -47,6 +47,41 @@ export class ReleaseOrderComponent implements OnInit {
     public stateApi: StateApiService,
     private notifications: NotificationService) { }
 
+  get isTypeWords() {
+
+    if (this.mediaType == 'Print' && this.releaseorder.adType == 'Text Classified') {
+      return true;
+    }
+
+    if (this.mediaType == 'Electronic' && this.releaseorder.adType == 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeLen() {
+
+    if (this.mediaType == 'Print' && this.releaseorder.adType != 'Text Classified') {
+      return true;
+    }
+
+    return false;
+  }
+
+  get isTypeTime() {
+
+    if (this.mediaType == 'Air') {
+      return true;
+    }
+
+    if (this.mediaType == 'Electronic' && this.releaseorder.adType != 'Scroll') {
+      return true;
+    }
+
+    return false;
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
@@ -150,6 +185,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
+      this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
 
       this.releaseorder.paymentType = this.paymentTypes[0];
       this.selectedTax = this.taxes[0];
@@ -637,12 +673,21 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   get grossAmount() {
-    if (this.customSize) {
-      return (this.releaseorder.rate * this.totalSpace) * this.totalAds;
+    if (this.isTypeLen) {
+      if (this.customSize) {
+        return (this.releaseorder.rate * this.totalSpace) * this.totalAds;
+      }
+      else {
+        return this.selectedSize.amount * this.totalAds;
+      }
     }
-    else {
-      return this.selectedSize.amount * this.totalAds;
+    else if (this.isTypeTime) {
+      return this.releaseorder.rate * this.releaseorder.AdDuration;
     }
+    else if (this.isTypeWords) {
+      return this.releaseorder.rate * this.releaseorder.AdWords;
+    }
+    else return 0;
   }
 
   get netAmount() {

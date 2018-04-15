@@ -62,6 +62,11 @@ export class ReleaseOrder {
     adSchemeFree = 0;
     
     adTotal = 0;
+
+    AdWords = 0;
+    AdWordsMax = 0;
+
+    AdDuration = 0;
     
     insertions: Insertion[] = [];
     

@@ -172,24 +172,6 @@
             </div>
           </div>
         </div>
-    
-        <div class="form-row">
-          <label class="col-md-3 col-form-label">Hue</label>
-          <div class="col-md-9">
-            <div class="form-group">
-              <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-                <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
-              </select>
-            </div>
-    
-            <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
-              <div *ngIf="hueField.errors.required">
-                Hue is required.
-              </div>
-              <br>
-            </div>
-          </div>
-        </div>
         
         <div class="form-group">
           <label for="adEdition">Edition</label>
@@ -202,26 +184,85 @@
           </div>
           <br>
         </div>
-    
-        <div class="form-row" *ngIf="releaseorder.mediaType == 'Print'">
-          <label class="col-md-3 col-form-label">Position</label>
-          <div class="col-md-9">
-            <div class="form-group">
-              <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
-                <option *ngFor="let item of positions" [value]="item">{{item}}</option>
-              </select>
-            </div>
-    
-            <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
-              <div *ngIf="positionField.errors.required">
-                Position is required.
+
+        <ng-container *ngIf="isTypeLen">
+          <div class="form-row">
+            <label class="col-md-3 col-form-label">Hue</label>
+            <div class="col-md-9">
+              <div class="form-group">
+                <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+                  <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
+                </select>
               </div>
-              <br>
+      
+              <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
+                <div *ngIf="hueField.errors.required">
+                  Hue is required.
+                </div>
+                <br>
+              </div>
             </div>
           </div>
-        </div>
+      
+          <div class="form-row">
+            <label class="col-md-3 col-form-label">Position</label>
+            <div class="col-md-9">
+              <div class="form-group">
+                <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+                  <option *ngFor="let item of positions" [value]="item">{{item}}</option>
+                </select>
+              </div>
+      
+              <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
+                <div *ngIf="positionField.errors.required">
+                  Position is required.
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isTypeWords">
+          <div class="form-group">
+            <label>Maximum Words</label>
+            <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
+          </div>
     
-        <div class="form-group" *ngIf="releaseorder.mediaType != 'Print' ">
+          <div *ngIf="maxWordsField.invalid && (maxWordsField.dirty || maxWordsField.touched)" class="text-danger">
+            <div *ngIf="maxWordsField.errors.required">
+              Maximum Words is empty or invalid.
+            </div>
+            <br>
+          </div>
+          <div class="form-group">
+            <label>No of Words</label>
+            <input type="number" class="form-control" id="words" placeholder="Enter No of Words" [(ngModel)]="releaseorder.AdWords" name="words" required #wordsField="ngModel">
+          </div>
+    
+          <div *ngIf="wordsField.invalid && (wordsField.dirty || wordsField.touched)" class="text-danger">
+            <div *ngIf="wordsField.errors.required">
+              No of Words is empty or invalid.
+            </div>
+            <br>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isTypeWords">
+          <div class="form-group">
+            <label>Duration</label>
+            <input type="number" class="form-control" id="duration" placeholder="Enter Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
+          </div>
+    
+          <div *ngIf="durationField.invalid && (durationField.dirty || durationField.touched)" class="text-danger">
+            <div *ngIf="durationField.errors.required">
+              Duration is empty or invalid.
+            </div>
+            <br>
+          </div>
+        </ng-container>
+    
+        <div class="form-group" *ngIf="isTypeTime">
           <label>Ad Time</label>
           <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
             <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
@@ -335,7 +376,7 @@
           <br>
         </div>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="isTypeLen">
         <mat-expansion-panel-header>
           <mat-panel-title>Ad Size</mat-panel-title>
           <mat-panel-description>Enter Size</mat-panel-description>
