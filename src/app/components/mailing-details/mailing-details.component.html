@@ -2,44 +2,40 @@
 
 <mat-dialog-content>
   <form #mailingDetailsForm="ngForm">
-    <div class="form-group">
-      <label for="to">To</label>
-      <input type="email" class="form-control" id="to" name="to" placeholder="Enter To" [(ngModel)]="details.to" required #toField="ngModel" email>
-    </div>
+    <mat-form-field>
+      <input matInput placeholder="To" [(ngModel)]="details.to" name="to" required verify-email #toField="ngModel">
+      <mat-error *ngIf="toField.errors && toField.errors.required">
+        Receipent is required.
+      </mat-error>
+      <mat-error *ngIf="toField.errors && toField.errors.email">
+        Invalid Email.
+      </mat-error>
+    </mat-form-field>
 
-    <div *ngIf="toField.invalid && (toField.dirty || toField.touched)" class="text-danger">
-      <div *ngIf="toField.errors.required">
-        To is required.
-      </div>
-      <br>
-    </div>
+    <mat-form-field>
+      <input matInput placeholder="CC" [(ngModel)]="details.cc" name="cc" verify-email #ccField="ngModel">
+      <mat-error *ngIf="ccField.errors && ccField.errors.email">
+        Invalid Email.
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="cc">CC</label>
-      <input type="email" class="form-control" id="cc" name="cc" placeholder="Enter CC" [(ngModel)]="details.cc" #ccField="ngModel" email>
-    </div>
+    <mat-form-field>
+      <input matInput placeholder="BCC" [(ngModel)]="details.bcc" name="bcc" verify-email #bccField="ngModel">
+      <mat-error *ngIf="bccField.errors && bccField.errors.email">
+        Invalid Email.
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="bcc">BCC</label>
-      <input type="email" class="form-control" id="bcc" name="bcc" placeholder="Enter BCC" [(ngModel)]="details.bcc" #bccField="ngModel" email>
-    </div>
-
-    <div class="form-group">
-      <label for="subject">Subject</label>
-      <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" [(ngModel)]="details.subject" required #subjectField="ngModel">
-    </div>
-
-    <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.subjectuched)" class="text-danger">
-      <div *ngIf="subjectField.errors.required">
+    <mat-form-field>
+      <input matInput placeholder="Subject" [(ngModel)]="details.subject" name="subject" required #subjectField="ngModel">
+      <mat-error *ngIf="subjectField.errors && subjectField.errors.required">
         Subject is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="content">Content</label>
-      <input type="text" class="form-control" id="content" name="content" placeholder="Enter Content" [(ngModel)]="details.content" #contentField="ngModel">
-    </div>
+    <mat-form-field>
+      <textarea matInput placeholder="Content" name="content" [(ngModel)]="details.content"></textarea>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 
