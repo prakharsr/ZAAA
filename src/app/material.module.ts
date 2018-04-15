@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 const modules = [
   MatCheckboxModule,
@@ -31,7 +32,8 @@ const modules = [
   MatButtonModule,
   MatSlideToggleModule,
   MatIconModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSelectModule
 ]
 
 @NgModule({

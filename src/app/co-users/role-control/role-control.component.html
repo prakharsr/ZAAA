@@ -1,46 +1,38 @@
 <div class="row">
   <div class="col-lg col-md-6">
-    <div class="form-group">
-      <label>Release Order</label>
-    
-      <select class="form-control" name="release_order" [(ngModel)]="roles.release_order">
-        <option [value]="0">Block</option>
-        <option [value]="1">View</option>
-        <option [value]="2">Create</option>      
-      </select>
-    </div>
+    <mat-form-field>
+      <mat-select name="release_order" placeholder="Release Order" [(ngModel)]="roles.release_order">
+        <mat-option [value]="0">Block</mat-option>
+        <mat-option [value]="1">View</mat-option>
+        <mat-option [value]="2">Create</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="col-lg col-md-6">
-    <div class="form-group">
-      <label>Invoice</label>
-    
-      <select class="form-control" name="invoice" [(ngModel)]="roles.invoice">
-        <option [value]="0">Block</option>
-        <option [value]="1">View</option>
-        <option [value]="2">Create</option>      
-      </select>
-    </div>
+    <mat-form-field>
+      <mat-select name="invoice" placeholder="Invoice" [(ngModel)]="roles.invoice">
+        <mat-option [value]="0">Block</mat-option>
+        <mat-option [value]="1">View</mat-option>
+        <mat-option [value]="2">Create</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="col-lg col-md-6">
-    <div class="form-group">
-      <label>Payment Receipts</label>
-    
-      <select class="form-control" name="payment_receipts" [(ngModel)]="roles.payment_receipts">
-        <option [value]="0">Block</option>
-        <option [value]="1">View</option>
-        <option [value]="2">Create</option>      
-      </select>
-    </div>
+    <mat-form-field>
+      <mat-select name="payment_receipts" placeholder="Payment Receipts" [(ngModel)]="roles.payment_receipts">
+        <mat-option [value]="0">Block</mat-option>
+        <mat-option [value]="1">View</mat-option>
+        <mat-option [value]="2">Create</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   <div class="col-lg col-md-6">
-    <div class="form-group">
-      <label>Accounts</label>
-    
-      <select class="form-control" name="accounts" [(ngModel)]="roles.accounts">
-        <option [value]="0">Block</option>
-        <option [value]="1">View</option>
-        <option [value]="2">Create</option>      
-      </select>
-    </div>
+    <mat-form-field>
+      <mat-select name="accounts" placeholder="Accounts" [(ngModel)]="roles.accounts">
+        <mat-option [value]="0">Block</mat-option>
+        <mat-option [value]="1">View</mat-option>
+        <mat-option [value]="2">Create</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </div>
