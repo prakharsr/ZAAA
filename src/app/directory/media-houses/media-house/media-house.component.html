@@ -25,9 +25,7 @@
     
       <mat-form-field>
         <mat-select placeholder="Media Type" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
-          <mat-option>Print</mat-option>
-          <mat-option>Air</mat-option>
-          <mat-option>Electronic</mat-option>
+          <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
         </mat-select>
         <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
           Media type is required.

@@ -19,6 +19,7 @@ export class MediaHouseComponent implements OnInit {
   edit = false;
 
   periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
+  mediaTypes = ['Print', 'Air', 'Electronic'];
 
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class MediaHouseComponent implements OnInit {
         });
       }
       else {
-        this.mediaHouse.mediaType = 'Print';
+        this.mediaHouse.mediaType = this.mediaTypes[0];
         this.mediaHouse.scheduling = [new MediaHouseScheduling()];
         this.mediaHouse.pullouts = [new Pullout('Main')];
         this.mediaHouse.freqPeriod = this.periods[0];
