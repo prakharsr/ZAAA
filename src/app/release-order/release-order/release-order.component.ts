@@ -621,7 +621,7 @@ export class ReleaseOrderComponent implements OnInit {
         && date.after(new NgbDate(now.getFullYear(), now.getMonth() + 1, now.getDate()));
     }
 
-    return false;
+    return true;
   }
 
   addInsertion(date: NgbDate) {

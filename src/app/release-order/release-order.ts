@@ -140,6 +140,6 @@ export class ReleaseOrder {
 }
 
 export class OtherCharges {
-    amount = "";
+    amount = 0;
     chargeType = "";
 }
