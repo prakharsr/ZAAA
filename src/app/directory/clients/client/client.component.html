@@ -1,10 +1,17 @@
 <form (ngSubmit)="submit()" #dirForm="ngForm">
-  <div class="row">
-    <div class="col-md">
-      <h2 *ngIf="edit">Edit Client</h2>
-      <h2 *ngIf="!edit">Add Client</h2>
-      <br>
-    
+
+  <h2 *ngIf="edit">Edit Client</h2>
+  <h2 *ngIf="!edit">Add Client</h2>
+
+  <br><br>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Client Details</mat-panel-title>
+        <mat-panel-description>Enter Client details</mat-panel-description>
+      </mat-expansion-panel-header>
+
       <mat-form-field>
         <input matInput type="text" name="orgName" placeholder="Organisation / Individual Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
         <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
@@ -27,13 +34,18 @@
         <input matInput type="text" name="category" placeholder="Category" [(ngModel)]="client.category" #categoryField="ngModel">
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="tel" minlength="3" maxlength="5" name="stdNo" placeholder="STD No" [(ngModel)]="client.stdNo" #stdNoField="ngModel">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="tel" minlength="6" maxlength="8" name="landLine" placeholder="Land Line Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
-      </mat-form-field>
+      <div class="form-row">
+        <div class="col-4">
+          <mat-form-field>
+            <input matInput type="tel" minlength="3" maxlength="5" name="stdNo" placeholder="STD No" [(ngModel)]="client.stdNo" #stdNoField="ngModel">
+          </mat-form-field>
+        </div>
+        <div class="col-8">
+          <mat-form-field>
+            <input matInput type="tel" minlength="6" maxlength="8" name="landLine" placeholder="Landline Number" [(ngModel)]="client.landLine" #landLineField="ngModel">
+          </mat-form-field>
+        </div>
+      </div>
     
       <mat-form-field>
         <input matInput type="text" name="website" placeholder="Website" [(ngModel)]="client.website" #websiteField="ngModel">
@@ -46,11 +58,13 @@
       <mat-form-field>
         <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
       </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Address</mat-panel-title>
+        <mat-panel-description>Enter Client Address</mat-panel-description>
+      </mat-expansion-panel-header>
 
-      <br>
-
-      <h3 class="mb-3">Address</h3>
-    
       <mat-form-field>
         <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" required #addressField="ngModel">
         <mat-error *ngIf="addressField.errors && addressField.errors.required">
@@ -83,91 +97,123 @@
           State is required.
         </mat-error>
       </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-      <br>
+  <br><br>
+
+  <div class="row">
+    <div class="col">
+      <h4>Contact Persons ({{client.contactpersons.length}})</h4>
     </div>
-
-  <div class="col-md">
-    <br>
-    <div class="row">
-      <div class="col">
-        <h4>Contact Person ({{client.contactpersons.length}})</h4>
-      </div>
-      <div class="col-auto">
-        <button type="button" (click)="addContactPerson()" class="btn btn-outline-info">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </div>
-    
-    <br><br>
-
-    <div *ngFor="let item of client.contactpersons; index as i" class="card mb-4">
-      <div class="card-header">
-        <button class="btn btn-outline-danger float-right" type="button" (click)="removeContactPerson(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-        #{{i + 1}}
-      </div>
-      <div class="card-body">
-        <mat-form-field>
-          <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
-          <mat-error *ngIf="nameField.errors && nameField.errors.required">
-            Name is required.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
-          <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
-            Department is required.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
-          <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
-            STD No is required.
-          </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field>
-          <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="LandLine Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
-          <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
-            LandLine is required.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-          <mat-error *ngIf="emailField.errors && emailField.errors.required">
-            Email is required.
-          </mat-error>
-          <mat-error *ngIf="emailField.errors && emailField.errors.email">
-            Invalid Email.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="date" name="dob-{{i}}" placeholder="DOB" [(ngModel)]="item.dob" #dobField="ngModel">
-        </mat-form-field>
-  
-        <mat-form-field>
-          <input matInput type="date" name="anniversaryDate-{{i}}" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
-        </mat-form-field>
-      </div>
+    <div class="col-auto">
+      <button type="button" (click)="addContactPerson()" class="btn btn-outline-info">
+        <mat-icon>add</mat-icon> Add More
+      </button>
     </div>
   </div>
-</div>
 
+  <div *ngIf="client.contactpersons.length == 0" class="text-muted">
+    No Contact Persons
+  </div>
+
+  <br><br>
+
+  <div *ngFor="let item of client.contactpersons; index as i" class="card mb-4">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-auto align-self-center text-muted">#{{i + 1}}</div>
+        <div class="col align-self-center">{{item.name}}</div>
+        <div class="col-auto">
+          <button mat-icon-button color="warn" type="button" (click)="removeContactPerson(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Business Details</mat-panel-title>
+            <mat-panel-description>Enter Business details</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
+            <mat-error *ngIf="nameField.errors && nameField.errors.required">
+              Name is required.
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="text" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
+            <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
+              Department is required.
+            </mat-error>
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Contact Details</mat-panel-title>
+            <mat-panel-description>Enter Contact details</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="form-row">
+            <div class="col-4">
+              <mat-form-field>
+                <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
+                <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                  STD No is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-8">
+              <mat-form-field>
+                <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="Landline Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
+                <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                  Landline is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+    
+          <mat-form-field>
+            <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+            <mat-error *ngIf="emailField.errors && emailField.errors.required">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="emailField.errors && emailField.errors.email">
+              Invalid Email.
+            </mat-error>
+          </mat-form-field>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Personal Details</mat-panel-title>
+            <mat-panel-description>Enter Personal details</mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-form-field>
+            <input matInput type="date" name="dob-{{i}}" placeholder="DOB" [(ngModel)]="item.dob" #dobField="ngModel">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="date" name="anniversaryDate-{{i}}" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
+          </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+  
   <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
   <button class="btn btn-danger" (click)="cancel()">Cancel</button>
 </form>
