@@ -1,3 +1,3 @@
 export class Invoice {
-    releaseOrder: number;
+    releaseOrder: string;
 }

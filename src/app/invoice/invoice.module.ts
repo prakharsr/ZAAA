@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { BaseModule } from '../base.module';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { ReleaseOrderModule } from '../release-order/release-order.module';
-import { InvoiceComponent } from './invoice/invoice.component';
+
 import { InvoiceApiService } from './invoice-api.service';
+
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    BaseModule,
     ReleaseOrderModule,
     InvoiceRoutingModule
   ],
