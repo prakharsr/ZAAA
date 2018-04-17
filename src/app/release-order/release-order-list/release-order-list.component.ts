@@ -15,7 +15,7 @@ export class ReleaseOrderListComponent implements OnInit {
 
   releaseOrders = [];
 
-  displayedColumns = ['number', 'publication', 'client', 'action'];
+  displayedColumns = ['data', 'action'];
   dataSource = new MatTableDataSource();
 
   constructor(private api: ReleaseOrderApiService, private dialog: DialogService) { }

@@ -16,23 +16,18 @@
     No Release Orders
   </p>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z3">
     <mat-table #table [dataSource]="dataSource">
-      <ng-container matColumnDef="number">
+      <ng-container matColumnDef="data">
         <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
         <mat-cell *matCellDef="let element">
+          <br>
           <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+          <br><br>
+          <span class="text-muted">Publication:</span> {{element.publicationName}}<br>
+          <span class="text-muted">Client:</span> {{element.clientName}}
+          <br><br>
         </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="publication">
-        <mat-header-cell *matHeaderCellDef>Publication</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.publicationName}}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="client">
-        <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.clientName}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="action">
@@ -62,7 +57,6 @@
         </mat-cell>
       </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
