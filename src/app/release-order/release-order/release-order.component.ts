@@ -120,6 +120,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
       this.releaseorder = data.releaseOrder;
 
+      let insertionBkp = this.releaseorder.insertions;
+
       this.buildCategoryTree([
         this.releaseorder.adCategory1,
         this.releaseorder.adCategory2,
@@ -149,7 +151,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.customFree = this.releaseorder.adSchemeFree;
       this.customPaid = this.releaseorder.adSchemePaid;
 
-      this.adCountPaid = (this.releaseorder.adTotal * this.customPaid) / (this.customPaid + this.customFree);
+      this.adCountPaid = (+this.releaseorder.adTotal * +this.customPaid) / (+this.customPaid + +this.customFree);
 
       this.selectedTax = this.taxes.find(element => element.primary == this.releaseorder.taxAmount.primary
         && element.secondary == this.releaseorder.taxAmount.secondary);
@@ -172,6 +174,8 @@ export class ReleaseOrderComponent implements OnInit {
       dirExecutive.executiveName = this.releaseorder.executiveName;
       dirExecutive.orgName = this.releaseorder.executiveOrg;
       this.executive = dirExecutive;
+
+      this.releaseorder.insertions = insertionBkp;
     });
   }
 
