@@ -41,16 +41,21 @@
           GSTIN should be 15 characters long.
         </mat-error>
       </mat-form-field>
-    
-      <mat-form-field>
-        <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
-      </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
-      </mat-form-field>
+      <div class="form-row">
+        <div class="col-4">
+          <mat-form-field>
+            <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
+          </mat-form-field>
+        </div>
+        <div class="col-8">
+          <mat-form-field>
+            <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+          </mat-form-field>
+        </div>
+      </div>
 
-      <br>
+      <br><br>
       <h3>Frequency</h3>
       <br>
 
@@ -116,7 +121,7 @@
         </mat-error>
       </mat-form-field>
 
-      <br>
+      <br><br>
 
       <div class="row">
         <div class="col">
@@ -129,17 +134,17 @@
         </div>
       </div>
 
-      <br><br>
+      <br>
 
       <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
-        <div class="col-auto">#{{i + 1}}</div>
+        <div class="col-auto align-self-center">#{{i + 1}}</div>
         <div class="col">
           <mat-form-field>
-            <input matInput type="text" id="pullouts-{{i}}" name="s-{{i}}-pullouts" placeholder="Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
+            <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
           </mat-form-field>
         </div>
-        <div class="col-auto">
-          <button class="btn btn-outline-danger" type="button" (click)="removePullouts(i)">
+        <div class="col-auto align-self-center">
+          <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -202,8 +207,6 @@
               Invalid Email.
             </mat-error>
           </mat-form-field>
-
-          <!-- Assign Ad Type, Assign Edition -->
         </div>
       </div>
     </div>
