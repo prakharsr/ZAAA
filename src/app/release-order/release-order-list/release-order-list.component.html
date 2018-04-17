@@ -16,29 +16,42 @@
     No Release Orders
   </p>
 
-  <div class="card mb-3" *ngFor="let releaseOrder of releaseOrders">
-    <div class="card-header"><a [routerLink]="['/releaseorders', releaseOrder.id]">{{releaseOrder.releaseOrderNO}}</a></div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col">
-          {{releaseOrder.publicationName}}<br>
-          {{releaseOrder.clientName}}
-        </div>
-        <div class="col-auto">
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+      <ng-container matColumnDef="number">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="publication">
+        <mat-header-cell *matHeaderCellDef>Publication</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.publicationName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.clientName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
           <mat-menu #releaseOrderMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/releaseorders/new', releaseOrder.id]">
+            <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
               <mat-icon>add</mat-icon> Copy into New
             </button>
-            <button mat-menu-item [routerLink]="['/invoices/new', releaseOrder.id]">
+            <button mat-menu-item [routerLink]="['/invoices/new', element.id]">
               <mat-icon>add</mat-icon> Create Invoice
             </button>
-            <button mat-menu-item [routerLink]="['/releaseorders/edit', releaseOrder.id]">
+            <button mat-menu-item [routerLink]="['/releaseorders/edit', element.id]">
               <mat-icon>edit</mat-icon> Edit
             </button>
             <button mat-menu-item (click)="sendMsg()">
               <mat-icon>mail</mat-icon> Mail
             </button>
-            <button mat-menu-item class="text-danger" (click)="deleteReleaseOrder(releaseOrder)">
+            <button mat-menu-item class="text-danger" (click)="deleteReleaseOrder(element)">
               <mat-icon>delete</mat-icon> Delete
             </button>
           </mat-menu>
@@ -46,8 +59,11 @@
           <button mat-icon-button [matMenuTriggerFor]="releaseOrderMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
-        </div>
-      </div>
-    </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
   </div>
 </div>
