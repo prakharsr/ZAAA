@@ -20,8 +20,8 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Designation</div>
-              <div class="col-md-8" *ngIf="isAdmin">ADMIN</div>
-              <div class="col-md-8" *ngIf="!isAdmin">{{profile.designation}}</div>
+              <div class="col-md-8" *ngIf="profile.isAdmin">ADMIN</div>
+              <div class="col-md-8" *ngIf="!profile.isAdmin">{{profile.designation}}</div>
             </div>
           </li>
         </ul>

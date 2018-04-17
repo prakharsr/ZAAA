@@ -22,6 +22,7 @@ import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile
 import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { UserProfileResolver } from './services/user-profile-resolver.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,13 +34,21 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPswComponent },
   { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuard] },
-  { path: "profile", component: ProfileViewComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
+  {
+    path: "profile",
+    component: ProfileViewComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
+      user: UserProfileResolver
+    }
+  },
   {
     path: "firm",
     component: FirmProfileViewComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
-      firm: FirmResolver
+      firm: FirmResolver,
+      user: UserProfileResolver
     }
   },
   {
@@ -51,7 +60,14 @@ const routes: Routes = [
     }
   },
   { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
+      user: UserProfileResolver
+    }
+  },
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
   { path: 'reset_password/:token', component: ResetPasswordComponent },

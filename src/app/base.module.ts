@@ -18,6 +18,7 @@ import { LoaderService } from './services/loader.service';
 import { NotificationService } from './services/notification.service';
 
 import { FirmResolver } from './services/firm-resolver.service';
+import { UserProfileResolver } from './services/user-profile-resolver.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
@@ -64,7 +65,8 @@ const validators = [
     PlanGuard,
     LoaderService,
     NotificationService,
-    FirmResolver
+    FirmResolver,
+    UserProfileResolver
   ],
   declarations: [
     MailingDetailsComponent,

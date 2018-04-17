@@ -8,5 +8,7 @@ export class UserProfile {
     email: string;
     contact: string;
 
+    isAdmin: boolean;
+
     id: string;
 }

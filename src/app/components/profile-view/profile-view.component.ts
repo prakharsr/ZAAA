@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
 import { DialogService } from '../../services/dialog.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile-view',
@@ -13,17 +14,15 @@ import { DialogService } from '../../services/dialog.service';
 export class ProfileViewComponent implements OnInit {
 
   profile = new UserProfile();
-  isAdmin: boolean;
 
-  constructor(private api: ApiService, private dialog: DialogService, private notifications: NotificationService) { }
+  constructor(private api: ApiService,
+    private dialog: DialogService,
+    private notifications: NotificationService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.getUserProfile().subscribe(data => this.profile = data);
-
-    this.api.getUser().subscribe(data => {
-      if (data.success) {
-        this.isAdmin = data.user.isAdmin;
-      }
+    this.route.data.subscribe((data: { user: UserProfile }) => {
+      this.profile = data.user;
     });
   }
 

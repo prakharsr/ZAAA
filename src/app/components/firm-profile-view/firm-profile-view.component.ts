@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
 import { DialogService } from '../../services/dialog.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserProfile } from '../../models/user-profile';
 
 @Component({
   selector: 'app-firm-profile-view',
@@ -24,14 +25,9 @@ export class FirmProfileViewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.data.subscribe((data: { firm: Firm }) => {
+    this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       this.profile = data.firm;
-    });
-
-    this.api.getUser().subscribe(data => {
-      if (data.success) {
-        this.admin = data.user.isAdmin;
-      }
+      this.admin = data.user.isAdmin;
     });
   }
 

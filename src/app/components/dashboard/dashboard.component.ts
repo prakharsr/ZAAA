@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserProfile } from '../../models/user-profile';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +12,12 @@ export class DashboardComponent implements OnInit {
 
   admin: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.getUser().subscribe(data => {
-      if (data.success) {
-        this.admin = data.user.isAdmin;
-      }
-    })
+    this.route.data.subscribe((data: { user: UserProfile }) => {
+      this.admin = data.user.isAdmin;
+    });
   }
 
 }

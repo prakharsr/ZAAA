@@ -248,6 +248,8 @@ export class ApiService {
           if (data.user.signature) {
             profile.sign = environment.uploadsBaseUrl + data.user.signature;
           }
+
+          profile.isAdmin = data.user.isAdmin;
         }
 
         return profile;
