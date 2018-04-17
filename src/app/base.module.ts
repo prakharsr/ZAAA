@@ -14,6 +14,10 @@ import { WindowService } from './services/window.service';
 import { IfscService } from './services/ifsc.service';
 import { DialogService } from './services/dialog.service';
 import { StateApiService } from './services/state-api.service';
+import { LoaderService } from './services/loader.service';
+import { NotificationService } from './services/notification.service';
+
+import { FirmResolver } from './services/firm-resolver.service';
 
 import { AuthGuard } from './guards/auth-guard.service';
 import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
@@ -22,9 +26,6 @@ import { PlanGuard } from './guards/plan-guard.service';
 
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-
-import { LoaderService } from './services/loader.service';
-import { NotificationService } from './services/notification.service';
 
 import { VerifyEmailDirective } from './validators/verify-email.directive';
 import { VerifyMinDirective } from './validators/verify-min.directive';
@@ -62,7 +63,8 @@ const validators = [
     AdminGuard,
     PlanGuard,
     LoaderService,
-    NotificationService
+    NotificationService,
+    FirmResolver
   ],
   declarations: [
     MailingDetailsComponent,
