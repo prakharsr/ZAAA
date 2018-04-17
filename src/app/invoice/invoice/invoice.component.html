@@ -1,9 +1,19 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Create Invoice</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <br>
 
 <div class="container">
-  <h2>Select Insertions</h2>
+  <h3>Select Insertions</h3>
 
-  <mat-checkbox *ngFor="let item of availableInsertions" [(ngModel)]="item.checked">
-    {{item.insertion.date.day}}-{{item.insertion.date.month}}-{{item.insertion.date.year}}
-  </mat-checkbox>
+  <br>
+
+  <div *ngFor="let item of availableInsertions">
+    <mat-checkbox [(ngModel)]="item.checked">
+      {{toDate(item.insertion.date) | date}}
+    </mat-checkbox>
+  </div>
 </div>

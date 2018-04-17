@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReleaseOrder, Insertion } from '../../release-order/release-order';
 import { Invoice } from '../invoice';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -33,6 +34,10 @@ export class InvoiceComponent implements OnInit {
         }
       });
     });
+  }
+
+  toDate(date: NgbDate) {
+    return new Date(date.year, date.month - 1, date.day);
   }
 
 }
