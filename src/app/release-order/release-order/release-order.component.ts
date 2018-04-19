@@ -20,6 +20,7 @@ import { RateCard, Category, FixSize, Scheme } from '../../rate-card/rate-card';
 import { RateCardApiService } from '../../rate-card/rate-card-api.service';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { NotificationService } from '../../services/notification.service';
+import { OptionsService } from '../../services/options.service';
 
 @Component({
   selector: 'app-release-order',
@@ -45,7 +46,8 @@ export class ReleaseOrderComponent implements OnInit {
     private executiveApi: ExecutiveApiService,
     private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private options: OptionsService) { }
 
   get isTypeWords() {
 
@@ -83,6 +85,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categories = this.options.categories;
+
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
@@ -340,28 +344,7 @@ export class ReleaseOrderComponent implements OnInit {
     return formatted;
   }
 
-  categories = [
-    new Category('Property'),
-    new Category('Education'),
-    new Category('Medical', [
-      new Category('Surgery', [
-        new Category('C', [
-          new Category('Heart Surgery', [
-            new Category('Transplant', [
-              new Category('Deepest')
-            ])
-          ])
-        ]),
-        new Category('R', [
-          new Category('S', [
-            new Category('Deepest')
-          ])
-        ])
-      ])
-    ]),
-    new Category('Women'),
-    new Category('Real Estate')
-  ];
+  categories: Category[];
 
   getCategory(index: number) {
     return this.selectedCategories[index];

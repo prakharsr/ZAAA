@@ -16,6 +16,7 @@ import { DialogService } from './services/dialog.service';
 import { StateApiService } from './services/state-api.service';
 import { LoaderService } from './services/loader.service';
 import { NotificationService } from './services/notification.service';
+import { OptionsService } from './services/options.service';
 
 import { FirmResolver } from './services/firm-resolver.service';
 import { UserProfileResolver } from './services/user-profile-resolver.service';
@@ -66,7 +67,8 @@ const validators = [
     LoaderService,
     NotificationService,
     FirmResolver,
-    UserProfileResolver
+    UserProfileResolver,
+    OptionsService
   ],
   declarations: [
     MailingDetailsComponent,

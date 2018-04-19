@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
 import { MediaHouse, Pullout } from '../../directory/media-houses/media-house';
 import { NotificationService } from '../../services/notification.service';
+import { OptionsService } from '../../services/options.service';
 
 @Component({
   selector: 'app-rate-card',
@@ -33,7 +34,8 @@ export class RateCardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private mediaHouseApi: MediaHouseApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private options: OptionsService) { }
 
   rateCard = new RateCard();
   selectedCategories: Category[] = [null, null, null, null, null, null];
@@ -216,6 +218,8 @@ export class RateCardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categories = this.options.categories;
+
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
@@ -298,28 +302,7 @@ export class RateCardComponent implements OnInit {
     return result;
   }
   
-  categories = [
-    new Category('Property'),
-    new Category('Education'),
-    new Category('Medical', [
-      new Category('Surgery', [
-        new Category('C', [
-          new Category('Heart Surgery', [
-            new Category('Transplant', [
-              new Category('Deepest')
-            ])
-          ])
-        ]),
-        new Category('R', [
-          new Category('S', [
-            new Category('Deepest')
-          ])
-        ])
-      ])
-    ]),
-    new Category('Women'),
-    new Category('Real Estate')
-  ];
+  categories: Category[];
 
   getCategory(index: number) {
     return this.selectedCategories[index];
