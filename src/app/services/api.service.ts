@@ -250,6 +250,7 @@ export class ApiService {
           }
 
           profile.isAdmin = data.user.isAdmin;
+          profile.id = data.user._id;
         }
 
         return profile;

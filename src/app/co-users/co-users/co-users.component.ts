@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { CoUserApiService } from '../co-user-api.service';
 import { CoUser } from '../co-user';
+import { ActivatedRoute } from '@angular/router';
+import { UserProfile } from '../../models/user-profile';
 
 @Component({
   selector: 'app-co-users',
@@ -15,17 +17,17 @@ export class CoUsersComponent implements OnInit {
 
   coUsers: CoUser[] = [];
 
-  constructor(private api: CoUserApiService, private dialog: DialogService) { }
+  constructor(private api: CoUserApiService,
+    private dialog: DialogService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.coUsers.subscribe(data => this.coUsers = data);
+    this.route.data.subscribe((data: { coUsers: CoUser[], user: UserProfile }) => {
+      this.coUsers = data.coUsers;
 
-    this.api.getUser().subscribe(data => {
-      if (data.success) {
-        this.admin = data.user.isAdmin;
-        this.myId = data.user._id;
-      }
-    })
+      this.admin = data.user.isAdmin;
+      this.myId = data.user.id;
+    });
   }
 
   delete(coUser: CoUser) {
