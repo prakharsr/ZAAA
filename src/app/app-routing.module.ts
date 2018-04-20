@@ -23,6 +23,7 @@ import { TemplateSelectorComponent } from './admin/template-selector/template-se
 import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UserProfileResolver } from './services/user-profile-resolver.service';
+import { ProfileEditComponent } from './admin/profile-edit/profile-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +39,14 @@ const routes: Routes = [
     path: "profile",
     component: ProfileViewComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
+      user: UserProfileResolver
+    }
+  },
+  {
+    path: "profile/edit",
+    component: ProfileEditComponent,
+    canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
       user: UserProfileResolver
     }

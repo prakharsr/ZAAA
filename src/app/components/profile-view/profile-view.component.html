@@ -14,17 +14,27 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Name</div>
-              <div class="col-md-8">{{profile.name}}</div>
+              <div class="col-md-8">
+                {{profile.name}}
+                
+                <span class="text-muted">
+                  ({{profile.isAdmin ? 'ADMIN' : 'Co-User'}})
+                </span>
+              </div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Designation</div>
-              <div class="col-md-8" *ngIf="profile.isAdmin">ADMIN</div>
-              <div class="col-md-8" *ngIf="!profile.isAdmin">{{profile.designation}}</div>
+              <div class="col-md-8">{{profile.designation}}</div>
             </div>
           </li>
         </ul>
+        <div class="card-body" *ngIf="profile.isAdmin">
+          <a class="btn btn-info" routerLink="/profile/edit">
+            <mat-icon>edit</mat-icon> Edit
+          </a>
+        </div>
       </div>
       <div class="card mb-5">
           <div class="card-header">Login Details</div>
@@ -43,7 +53,9 @@
             </li>
           </ul>
           <div class="card-body">
-            <a class="btn btn-danger" routerLink="/changePassword">Change Password</a>
+            <a class="btn btn-danger" routerLink="/changePassword">
+              <mat-icon>vpn_key</mat-icon> Change Password
+            </a>
           </div>
         </div>
     </div>
