@@ -186,12 +186,19 @@
           <mat-panel-description>Enter Bank Account Details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-form-field>
-          <input matInput type="text" name="bankAccountName" placeholder="Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
-          <mat-error *ngIf="bankAccountNameField.errors && bankAccountNameField.errors.required">
-            Account Name is required.
-          </mat-error>
-        </mat-form-field>
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field>
+              <input matInput type="text" name="bankAccountName" placeholder="Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
+              <mat-error *ngIf="bankAccountNameField.errors && bankAccountNameField.errors.required">
+                Account Name is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-auto align-self-center">
+            <button class="btn btn-sm btn-outline-info" type="button" (click)="profile.bankAccountName = profile.name">Copy Firm Name</button>
+          </div>
+        </div>
       
         <mat-form-field>
           <input matInput type="text" name="bankAccountNo" placeholder="Bank Account Number" [(ngModel)]="profile.bankAccountNo" required #bankAccountNoField="ngModel">

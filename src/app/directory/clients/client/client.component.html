@@ -18,13 +18,20 @@
           Client Name is required.
         </mat-error>
       </mat-form-field>
-    
-      <mat-form-field>
-        <input matInput type="text" name="companyName" placeholder="Company Name" [(ngModel)]="client.companyName" required #companyNameField="ngModel">
-        <mat-error *ngIf="companyNameField.errors && companyNameField.errors.required">
-          Company Name is required.
-        </mat-error>
-      </mat-form-field>
+
+      <div class="form-row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput type="text" name="companyName" placeholder="Company Name" [(ngModel)]="client.companyName" required #companyNameField="ngModel">
+            <mat-error *ngIf="companyNameField.errors && companyNameField.errors.required">
+              Company Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-auto align-self-center">
+          <button class="btn btn-sm btn-outline-info" type="button" (click)="client.companyName = client.orgName">Copy from above</button>
+        </div>
+      </div>
     
       <mat-form-field>
         <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="client.nickName" #nickNameField="ngModel">

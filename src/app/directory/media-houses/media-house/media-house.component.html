@@ -6,18 +6,25 @@
       <br>
 
       <mat-form-field>
-        <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
-        <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
-          Organisation Name is required.
-        </mat-error>
-      </mat-form-field>
-    
-      <mat-form-field>
         <input matInput type="text" name="pubName" placeholder="Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
         <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
           Publication Name is required.
         </mat-error>
       </mat-form-field>
+
+      <div class="form-row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
+            <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+              Organisation Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-auto align-self-center">
+          <button class="btn btn-sm btn-outline-info" type="button" (click)="mediaHouse.orgName = mediaHouse.pubName">Copy from above</button>
+        </div>
+      </div>
     
       <mat-form-field>
         <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
