@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { StateApiService } from '../../services/state-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../services/notification.service';
+import { UserProfile } from '../../models/user-profile';
 
 @Component({
   selector: 'app-firm-profile-edit',
@@ -14,6 +15,7 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class FirmProfileEditComponent implements OnInit {
   profile = new Firm();
+  user: UserProfile;
 
   constructor(private ifscService: IfscService,
     private api: ApiService,
@@ -23,8 +25,9 @@ export class FirmProfileEditComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { firm: Firm }) => {
+    this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       this.profile = data.firm;
+      this.user = data.user;
     });
   }
 

@@ -19,6 +19,7 @@ import { MediaHouseDetailsComponent } from './media-houses/media-house-details/m
 import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
 
 import { AuthGuard } from '../guards/auth-guard.service';
+import { FirmResolver } from '../services/firm-resolver.service';
 
 const routes: Routes = [
   {
@@ -51,12 +52,19 @@ const routes: Routes = [
         path: 'executives',
         children: [
           { path: '', component: ExecutiveListComponent },
-          { path: 'new', component: ExecutiveComponent },
+          {
+            path: 'new',
+            component: ExecutiveComponent,
+            resolve: {
+              firm: FirmResolver
+            }
+          },
           {
             path: 'edit/:id',
             component: ExecutiveComponent,
             resolve: {
-              executive: ExecutiveResolver
+              executive: ExecutiveResolver,
+              firm: FirmResolver
             }
           },
           {

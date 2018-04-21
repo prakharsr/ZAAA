@@ -18,12 +18,19 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName" #orgNameField="ngModel">
-        <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
-          Organisation Name is required.
-        </mat-error>
-      </mat-form-field>
+      <div class="form-row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName" #orgNameField="ngModel">
+            <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+              Organisation Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-auto align-self-center">
+          <button class="btn btn-sm btn-outline-info" type="button" (click)="executive.orgName = firm.name">Copy Firm Name</button>
+        </div>
+      </div>
 
       <mat-form-field>
         <input matInput placeholder="Designation" name="designation" [(ngModel)]="executive.designation">

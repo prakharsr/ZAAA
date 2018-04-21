@@ -3,6 +3,7 @@ import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '../../../services/notification.service';
+import { Firm } from '../../../models/firm';
 
 @Component({
   selector: 'app-executive',
@@ -12,6 +13,7 @@ import { NotificationService } from '../../../services/notification.service';
 export class ExecutiveComponent implements OnInit {
 
   executive = new Executive();
+  firm: Firm;
 
   // dobModel;
 
@@ -31,8 +33,14 @@ export class ExecutiveComponent implements OnInit {
 
         this.edit = true;
 
-        this.route.data.subscribe((data: { executive: Executive }) => {
+        this.route.data.subscribe((data: { executive: Executive, firm: Firm }) => {
           this.executive = data.executive;
+          this.firm = data.firm;
+        });
+      }
+      else {
+        this.route.data.subscribe((data: { firm: Firm }) => {
+          this.firm = data.firm;
         });
       }
     });

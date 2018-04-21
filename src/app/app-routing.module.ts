@@ -65,7 +65,8 @@ const routes: Routes = [
     component: FirmProfileEditComponent,
     canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
-      firm: FirmResolver
+      firm: FirmResolver,
+      user: UserProfileResolver
     }
   },
   { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },

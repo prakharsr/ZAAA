@@ -65,15 +65,22 @@
           <mat-panel-description>Enter Contact Details</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <mat-form-field>
-          <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="profile.email" required #emailField="ngModel" verify-email>
-          <mat-error *ngIf="emailField.errors && emailField.errors.required">
-            Email is required.
-          </mat-error>
-          <mat-error *ngIf="emailField.errors && emailField.errors.email">
-            Invalid Email.
-          </mat-error>
-        </mat-form-field>
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field>
+              <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="profile.email" required #emailField="ngModel" verify-email>
+              <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                Email is required.
+              </mat-error>
+              <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                Invalid Email.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-auto align-self-center">
+            <button class="btn btn-sm btn-outline-info" type="button" (click)="profile.email = user.email">Copy from User</button>
+          </div>
+        </div>
     
         <mat-form-field>
           <span matPrefix>+91 &nbsp;</span>
@@ -98,13 +105,12 @@
             </mat-form-field>
           </div>
       
-        <div class="col-9">
-          <mat-form-field>
-            <input matInput type="tel" name="landlineNo" minlength="6" maxlength="8" placeholder="Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
-          </mat-form-field>
-        </div>
-        </div>
-        
+          <div class="col-9">
+            <mat-form-field>
+              <input matInput type="tel" name="landlineNo" minlength="6" maxlength="8" placeholder="Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+            </mat-form-field>
+          </div>
+        </div>        
       
         <mat-form-field>
           <input matInput type="number" name="fax" placeholder="Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
