@@ -5,6 +5,7 @@ export class Client {
     companyName: string;
     nickName: string;
     category: string;
+    SubCategoryType: string;
     address = new Address();
     landLine: string;
     stdNo: string;

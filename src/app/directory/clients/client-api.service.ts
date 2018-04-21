@@ -21,6 +21,7 @@ export class ClientApiService {
       companyName: client.companyName,
       nickName: client.nickName,
       categoryType: client.category,
+      SubCategoryType: client.SubCategoryType,
       address: client.address,
       landline: client.landLine,
       stdNo: client.stdNo,
@@ -72,6 +73,7 @@ export class ClientApiService {
     client.companyName = data.CompanyName;
     client.nickName = data.NickName;
     client.category = data.CategoryType;
+    client.SubCategoryType = data.SubCategoryType;
     client.address = data.Address;
     client.landLine = data.Landline;
     client.stdNo = data.stdNo;
@@ -105,6 +107,7 @@ export class ClientApiService {
       CompanyName: client.companyName,
       NickName: client.nickName,
       CategoryType: client.category,
+      SubCategoryType: client.SubCategoryType,
       Address: client.address,
       Landline: client.landLine,
       stdNo: client.stdNo,

@@ -36,10 +36,19 @@
       <mat-form-field>
         <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="client.nickName" #nickNameField="ngModel">
       </mat-form-field>
-    
-      <mat-form-field>
-        <input matInput type="text" name="category" placeholder="Category" [(ngModel)]="client.category" #categoryField="ngModel">
-      </mat-form-field>
+
+      <div class="form-row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput type="text" name="category" placeholder="Category" [(ngModel)]="client.category" #categoryField="ngModel">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <input matInput type="text" name="subcategory" placeholder="Sub Category" [(ngModel)]="client.SubCategoryType" #subCategoryField="ngModel">
+          </mat-form-field>
+        </div>
+      </div>
 
       <div class="form-row">
         <div class="col-4">
