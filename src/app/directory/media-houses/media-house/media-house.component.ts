@@ -40,8 +40,6 @@ export class MediaHouseComponent implements OnInit {
       }
       else {
         this.mediaHouse.mediaType = this.mediaTypes[0];
-        this.mediaHouse.pullouts = [new Pullout('Main')];
-        this.mediaHouse.freqPeriod = this.periods[0];
       }
     });
   }
@@ -51,7 +49,7 @@ export class MediaHouseComponent implements OnInit {
   }
 
   addPullouts() {
-    this.mediaHouse.pullouts.push(new Pullout(''));
+    this.mediaHouse.pullouts.push(new Pullout());
   }
 
   removePullouts(i: number) {

@@ -12,19 +12,13 @@ export class MediaHouseApiService {
 
   createMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
     let scheduling = [];
-    let pullouts = [];
-
-
+    
     if (mediaHouse.scheduling) {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
 
-    if (mediaHouse.pullouts) {
-      mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
-    }
-
     return this.api.post('/user/mediahouse', {
-      pullouts: pullouts,
+      pullouts: mediaHouse.pullouts,
       organizationName: mediaHouse.orgName,
       publicationName: mediaHouse.pubName,
       nickName: mediaHouse.nickName,
@@ -34,10 +28,6 @@ export class MediaHouseApiService {
       officeStdNo: mediaHouse.officeStdNo,
       scheduling: scheduling,
       GSTIN: mediaHouse.GSTIN,
-      frequency: {
-        Period: mediaHouse.freqPeriod,
-        Remark: mediaHouse.freqRemark
-      },
       Remark: mediaHouse.Remark
     });
   }
@@ -80,13 +70,6 @@ export class MediaHouseApiService {
     mediaHouse.GSTIN = body.GSTIN;
     mediaHouse.Remark = body.Remark;
 
-    if (body.Frequency) {
-      let freq : {Period: string, Remark: string} = body.Frequency;
-
-      mediaHouse.freqPeriod = freq.Period;
-      mediaHouse.freqRemark = freq.Remark;
-    }
-
     let scheduling : MediaHouseScheduling[] = [];
 
     if (body.Scheduling) {
@@ -98,9 +81,7 @@ export class MediaHouseApiService {
     mediaHouse.scheduling = scheduling;
     
     if(body.pullouts) {
-      body.pullouts.forEach(element => {
-        mediaHouse.pullouts.push(new Pullout(element));
-      })
+      mediaHouse.pullouts = body.pullouts;
     }
 
     return mediaHouse;
@@ -108,19 +89,14 @@ export class MediaHouseApiService {
 
   editMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
     let scheduling = [];
-    let pullouts = [];
-   
+
     if (mediaHouse.scheduling) {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
     
-    if (mediaHouse.pullouts) {
-      mediaHouse.pullouts.forEach(element => pullouts.push(element.name));
-    }
-    
     return this.api.patch('/user/mediahouse/', {
       id: mediaHouse.id,
-      pullouts: pullouts,
+      pullouts: mediaHouse.pullouts,
       OrganizationName: mediaHouse.orgName,
       PublicationName: mediaHouse.pubName,
       NickName: mediaHouse.nickName,
@@ -129,12 +105,6 @@ export class MediaHouseApiService {
       OfficeLandline: mediaHouse.officeLandLine,
       officeStdNo: mediaHouse.officeStdNo,
       GSTIN: mediaHouse.GSTIN,
-      
-      Frequency: {
-        Period: mediaHouse.freqPeriod,
-        Remark: mediaHouse.freqRemark
-      },
-
       Scheduling: scheduling,
 
       Remark: mediaHouse.Remark

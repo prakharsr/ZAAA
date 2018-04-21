@@ -65,28 +65,6 @@
       <mat-form-field>
         <input matInput placeholder="Remark" name="remark" [(ngModel)]="mediaHouse.Remark">
       </mat-form-field>
-
-      <br><br>
-      <h3>Frequency</h3>
-      <br>
-
-      <div class="form-row">
-        <div class="col-sm">
-          <mat-form-field>
-            <mat-select placeholder="Period" name="freqPeriod" [(ngModel)]="mediaHouse.freqPeriod" #freqPeriodField="ngModel" required>
-              <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
-              Period is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-sm">
-          <mat-form-field>
-            <input matInput type="text" placeholder="Remarks" [(ngModel)]="mediaHouse.freqRemark" name="freqRemark" #freqRemarkField="ngModel">
-          </mat-form-field>
-        </div>
-      </div>
     
       <br>
 
@@ -134,32 +112,53 @@
 
       <br><br>
 
-      <div class="row">
-        <div class="col">
-          <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
+      <ng-container *ngIf="mediaHouse.mediaType == 'Print'">
+        <div class="row">
+          <div class="col">
+            <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
+          </div>
+          <div class="col-auto">
+            <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="col-auto">
-          <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-      </div>
 
-      <br>
+        <br>
+        <div class="text-muted" *ngIf="mediaHouse.pullouts.length == 0">No Pullouts</div>
 
-      <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
-        <div class="col-auto align-self-center">#{{i + 1}}</div>
-        <div class="col">
-          <mat-form-field>
-            <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Pullout" [(ngModel)]="item.name" required #pulloutsField="ngModel">
-          </mat-form-field>
+        <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
+          <div class="col-auto align-self-center">#{{i + 1}}</div>
+          <div class="col">
+            <mat-form-field>
+              <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Name" [(ngModel)]="item.Name" required #pulloutsField="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel" required>
+                <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
+                Frequency is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field>
+              <input matInput type="text" placeholder="Language" [(ngModel)]="item.Language" name="lang-{{i}}" #langField="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Remarks" [(ngModel)]="item.Remark" name="freqRemark-{{i}}" #freqRemarkField="ngModel">
+            </mat-form-field>
+          </div>
+          <div class="col-auto align-self-center">
+            <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="col-auto align-self-center">
-          <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
+
+        <br><br>
+      </ng-container>
 
     </div>
     <div class="col-md">
