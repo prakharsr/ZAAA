@@ -475,9 +475,9 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field>
-            <input type="number" matInput placeholder="Extra Words" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
+            <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
             <mat-error *ngIf="premiumExtraWordsField.errors && premiumExtraWordsField.errors.required">
-              Extra Words Premium Amount is required.
+              Extra Words / Lines Premium Amount is required.
             </mat-error>
           </mat-form-field>
         </ng-container>
