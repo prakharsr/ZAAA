@@ -53,6 +53,10 @@
           </mat-form-field>
         </div>
       </div>
+
+      <mat-form-field>
+        <input matInput type="date" name="incDate" placeholder="Incorporation Date" [(ngModel)]="client.IncorporationDate" #incDateField="ngModel">
+      </mat-form-field>
     
       <mat-form-field>
         <input matInput type="text" name="website" placeholder="Website" [(ngModel)]="client.website" #websiteField="ngModel">

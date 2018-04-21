@@ -14,6 +14,7 @@ export class Client {
     id: string;
     contactpersons: ContactPerson[] = []; 
     Remark: string;
+    IncorporationDate: Date;
 }
 
 export class ContactPerson {

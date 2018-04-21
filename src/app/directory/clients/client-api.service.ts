@@ -28,7 +28,8 @@ export class ClientApiService {
       panNo: client.panNo,
       gstin: client.gstNo,
       contactPerson: contactPersons,
-      Remark: client.Remark
+      Remark: client.Remark,
+      IncorporationDate: client.IncorporationDate
     });
   }
 
@@ -78,6 +79,7 @@ export class ClientApiService {
     client.panNo = data.PanNO;
     client.gstNo = data.GSTNo;
     client.Remark = data.Remark;
+    client.IncorporationDate = data.IncorporationDate;
 
     let contactPersons : ContactPerson[] = [];
 
@@ -110,7 +112,8 @@ export class ClientApiService {
       PanNO: client.panNo,
       GSTNo: client.gstNo,
       ContactPerson: contactPersons,
-      Remark: client.Remark
+      Remark: client.Remark,
+      IncorporationDate: client.IncorporationDate
     });
   }
 
