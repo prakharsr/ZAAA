@@ -359,6 +359,18 @@ export class RateCardComponent implements OnInit {
     this.rateCard.covered.push(new Covered());
   }
 
+  copyCovered() {
+    let covered = new Covered();
+
+    if (this.mediaHouse) {
+      covered.covMediaHouse = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    }
+
+    covered.covEdition = this.rateCard.bookingEdition;
+
+    this.rateCard.covered.push(covered);
+  }
+
   removeCovered(i: number) {
     this.rateCard.covered.splice(i, 1);
   }
