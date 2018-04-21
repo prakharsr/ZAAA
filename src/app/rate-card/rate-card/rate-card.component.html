@@ -221,13 +221,13 @@
         <div *ngIf="isTypeWords">
           <div class="form-group">
             <div class="form-group">
-              <label>Maximum Words</label>
-              <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
+              <label>Maximum Words / Lines</label>
+              <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words / Lines" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
             </div>
     
             <div *ngIf="maxWordsField.invalid && (maxWordsField.dirty || maxWordsField.touched)" class="text-danger">
               <div *ngIf="maxWordsField.errors.required">
-                  Maximum Words is required.
+                  Maximum Words / Lines is required.
               </div>
               <br>
             </div>              

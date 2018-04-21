@@ -283,6 +283,7 @@ export class RateCardComponent implements OnInit {
 
     if (this.isTypeWords) {
       result.push('Words');
+      result.push('Lines');
     }
 
     if (this.isTypeTime) {

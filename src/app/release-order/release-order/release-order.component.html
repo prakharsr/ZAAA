@@ -225,24 +225,24 @@
 
         <ng-container *ngIf="isTypeWords">
           <div class="form-group">
-            <label>Maximum Words</label>
-            <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
+            <label>Maximum Words / Lines</label>
+            <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words / Lines" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
           </div>
     
           <div *ngIf="maxWordsField.invalid && (maxWordsField.dirty || maxWordsField.touched)" class="text-danger">
             <div *ngIf="maxWordsField.errors.required">
-              Maximum Words is empty or invalid.
+              Maximum Words / Lines is empty or invalid.
             </div>
             <br>
           </div>
           <div class="form-group">
-            <label>No of Words</label>
-            <input type="number" class="form-control" id="words" placeholder="Enter No of Words" [(ngModel)]="releaseorder.AdWords" name="words" required #wordsField="ngModel">
+            <label>No of Words / Lines</label>
+            <input type="number" class="form-control" id="words" placeholder="Enter No of Words / Lines" [(ngModel)]="releaseorder.AdWords" name="words" required #wordsField="ngModel">
           </div>
     
           <div *ngIf="wordsField.invalid && (wordsField.dirty || wordsField.touched)" class="text-danger">
             <div *ngIf="wordsField.errors.required">
-              No of Words is empty or invalid.
+              No of Words / Lines is empty or invalid.
             </div>
             <br>
           </div>

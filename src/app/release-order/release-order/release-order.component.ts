@@ -546,10 +546,18 @@ export class ReleaseOrderComponent implements OnInit {
   get units() {
     let result = [];
 
-    if (this.releaseorder.adType == 'Text Classified') {
-      result.push('Words');
+    if (this.isTypeLen) {
+      result.push('Sqcm');
     }
-    else result.push(this.releaseorder.mediaType == 'Print' ? 'Sqcm' : 'sec');
+
+    if (this.isTypeWords) {
+      result.push('Words');
+      result.push('Lines');
+    }
+
+    if (this.isTypeTime) {
+      result.push('sec');
+    }
 
     return result;
   }
