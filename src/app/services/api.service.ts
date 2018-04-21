@@ -301,6 +301,7 @@ export class ApiService {
           profile.website = data.firm.Website;
           profile.panNo = data.firm.PanNo;
           profile.gstNo = data.firm.GSTIN;
+          profile.OtherMobile = data.firm.OtherMobile;
 
           if (data.firm.RegisteredAddress)
             profile.registeredAddress = data.firm.RegisteredAddress;
@@ -355,6 +356,7 @@ export class ApiService {
       website: firm.website,
       pan: firm.panNo,
       gst: firm.gstNo,
+      OtherMobile: firm.OtherMobile,
 
       incorporationDate: firm.incDate,
 

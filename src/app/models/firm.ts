@@ -12,6 +12,8 @@ export class Firm {
     email: string;
     phone: string;
 
+    OtherMobile: string;
+
     panNo : string;
     gstNo : string;
 
