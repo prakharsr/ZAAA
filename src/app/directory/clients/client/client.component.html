@@ -13,9 +13,9 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-        <input matInput type="text" name="orgName" placeholder="Organisation / Individual Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
+        <input matInput type="text" name="orgName" placeholder="Client Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
         <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
-          Organisation / Individual Name is required.
+          Client Name is required.
         </mat-error>
       </mat-form-field>
     

@@ -14,7 +14,6 @@ export class ExecutiveApiService {
   createExecutive(executive: Executive) : Observable<any> {
     return this.api.post('/user/executive', {
       organizationName: executive.orgName,
-      companyName: executive.companyName,
       executiveName: executive.executiveName,
       designation: executive.designation,
       department: executive.department,
@@ -31,7 +30,6 @@ export class ExecutiveApiService {
     executive.id = body._id;
 
     executive.orgName = body.OrganizationName;
-    executive.companyName = body.CompanyName;
     executive.executiveName = body.ExecutiveName;
     executive.designation = body.Designation;
     executive.department = body.Department;
@@ -94,7 +92,6 @@ export class ExecutiveApiService {
     return this.api.patch('/user/executive', {
       id: executive.id,
       OrganizationName: executive.orgName,
-      CompanyName: executive.companyName,
       ExecutiveName: executive.executiveName,
       Designation: executive.designation,
       Department: executive.department,
