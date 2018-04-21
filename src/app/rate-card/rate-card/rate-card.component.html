@@ -353,7 +353,7 @@
           <div class="form-row">
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Length" name="length-{{i}}" [(ngModel)]="item.length" required #lengthField="ngModel">
+                <input type="number" matInput placeholder="Length" name="length-{{i}}" [(ngModel)]="item.length" required #lengthField="ngModel">
                 <mat-error *ngIf="lengthField.errors && lengthField.errors.required">
                   Length is required.
                 </mat-error>
@@ -361,7 +361,7 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Width" name="width-{{i}}" [(ngModel)]="item.width" required #widthField="ngModel">
+                <input type="number" matInput placeholder="Width" name="width-{{i}}" [(ngModel)]="item.width" required #widthField="ngModel">
                 <mat-error *ngIf="widthField.errors && widthField.errors.required">
                   Width is required.
                 </mat-error>
@@ -369,7 +369,7 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Amount" name="amount-{{i}}" [(ngModel)]="item.amount" required #amountField="ngModel">
+                <input type="number" matInput placeholder="Amount" name="amount-{{i}}" [(ngModel)]="item.amount" required #amountField="ngModel">
                 <mat-error *ngIf="amountField.errors && amountField.errors.required">
                   Amount is required.
                 </mat-error>
@@ -401,7 +401,7 @@
           <div class="form-row">
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Paid" name="paid-{{i}}" [(ngModel)]="item.paid" required #paidField="ngModel">
+                <input type="number" matInput placeholder="Paid" name="paid-{{i}}" [(ngModel)]="item.paid" required #paidField="ngModel">
                 <mat-error *ngIf="paidField.errors && paidField.errors.required">
                   Paid is required.
                 </mat-error>
@@ -409,7 +409,7 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Free" name="free-{{i}}" [(ngModel)]="item.Free" required #freeField="ngModel">
+                <input type="number" matInput placeholder="Free" name="free-{{i}}" [(ngModel)]="item.Free" required #freeField="ngModel">
                 <mat-error *ngIf="freeField.errors && freeField.errors.required">
                   Free is required.
                 </mat-error>
@@ -417,7 +417,7 @@
             </div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Time Limit" name="timeLimit-{{i}}" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
+                <input type="number" matInput placeholder="Time Limit" name="timeLimit-{{i}}" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
                 <mat-error *ngIf="timeLimitField.errors && timeLimitField.errors.required">
                   Time Limit is required.
                 </mat-error>
@@ -522,7 +522,7 @@
             <div class="col-auto">&nbsp;</div>
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
+                <input type="number" matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
                 <mat-error *ngIf="rateField.errors && rateField.errors.required">
                   Rate is required.
                 </mat-error>

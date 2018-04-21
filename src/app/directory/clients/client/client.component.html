@@ -66,14 +66,11 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" required #addressField="ngModel">
-        <mat-error *ngIf="addressField.errors && addressField.errors.required">
-          Address is required.
-        </mat-error>
+        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" #addressField="ngModel">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="client.address.pincode" required #pincodeField="ngModel">
+        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="client.address.pincode" #pincodeField="ngModel">
         <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
           Pincode is required.
         </mat-error>

@@ -82,14 +82,14 @@
       <h3 class="mb-3">Address</h3>
     
       <mat-form-field>
-        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" required #addressField="ngModel">
+        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" #addressField="ngModel">
         <mat-error *ngIf="addressField.errors && addressField.errors.required">
           Address is required.
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" required #pincodeField="ngModel">
+        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
         <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
           Pincode is required.
         </mat-error>
@@ -99,7 +99,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" required #cityField="ngModel">
+        <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
         <mat-error *ngIf="cityField.errors && cityField.errors.required">
           City is required.
         </mat-error>
@@ -165,7 +165,13 @@
         </div>
       </div>
       
-      <br><br>
+      <br>
+      
+      <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
+        No Schedulings
+      </div>
+
+      <br>
 
       <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
         <div class="card-header">
