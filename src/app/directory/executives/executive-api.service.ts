@@ -20,7 +20,8 @@ export class ExecutiveApiService {
       mobileNo: executive.mobileNo,
       email: executive.email,
       dob: executive.dob,
-      anniversary: executive.anniversaryDate
+      anniversary: executive.anniversaryDate,
+      Remark: executive.Remark
     });
   }
 
@@ -42,6 +43,8 @@ export class ExecutiveApiService {
 
     executive.dob = body.DateOfBirth;
     executive.anniversaryDate = body.Anniversary;
+
+    executive.Remark = body.Remark;
 
     return executive;
   }
@@ -98,7 +101,8 @@ export class ExecutiveApiService {
       MobileNo: executive.mobileNo,
       EmailId: executive.mobileNo,
       DateOfBirth: executive.dob,
-      Anniversary: executive.anniversaryDate
+      Anniversary: executive.anniversaryDate,
+      Remark: executive.Remark
     });
   }
 

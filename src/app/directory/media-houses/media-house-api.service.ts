@@ -38,6 +38,7 @@ export class MediaHouseApiService {
         Period: mediaHouse.freqPeriod,
         Remark: mediaHouse.freqRemark
       },
+      Remark: mediaHouse.Remark
     });
   }
 
@@ -77,6 +78,7 @@ export class MediaHouseApiService {
     mediaHouse.officeLandLine = body.OfficeLandline;
     mediaHouse.officeStdNo = body.officeStdNo;
     mediaHouse.GSTIN = body.GSTIN;
+    mediaHouse.Remark = body.Remark;
 
     if (body.Frequency) {
       let freq : {Period: string, Remark: string} = body.Frequency;
@@ -133,7 +135,9 @@ export class MediaHouseApiService {
         Remark: mediaHouse.freqRemark
       },
 
-      Scheduling: scheduling
+      Scheduling: scheduling,
+
+      Remark: mediaHouse.Remark
     })
   }
 

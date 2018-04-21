@@ -8,6 +8,7 @@ export class Executive {
     photo: string;
     dob: string;
     anniversaryDate: string;
+    Remark: string;
 
     id: string;
 }

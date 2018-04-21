@@ -13,6 +13,7 @@ export class Client {
     gstNo: string;
     id: string;
     contactpersons: ContactPerson[] = []; 
+    Remark: string;
 }
 
 export class ContactPerson {

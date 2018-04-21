@@ -27,7 +27,8 @@ export class ClientApiService {
       website: client.website,
       panNo: client.panNo,
       gstin: client.gstNo,
-      contactPerson: contactPersons
+      contactPerson: contactPersons,
+      Remark: client.Remark
     });
   }
 
@@ -76,6 +77,7 @@ export class ClientApiService {
     client.website = data.Website;
     client.panNo = data.PanNO;
     client.gstNo = data.GSTNo;
+    client.Remark = data.Remark;
 
     let contactPersons : ContactPerson[] = [];
 
@@ -107,7 +109,8 @@ export class ClientApiService {
       Website: client.website,
       PanNO: client.panNo,
       GSTNo: client.gstNo,
-      ContactPerson: contactPersons
+      ContactPerson: contactPersons,
+      Remark: client.Remark
     });
   }
 

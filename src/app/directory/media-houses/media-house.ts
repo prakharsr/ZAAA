@@ -21,6 +21,8 @@ export class MediaHouse {
 
     global: boolean;
 
+    Remark: string;
+
     id: string;
     pullouts: Pullout[] = [];
 }
