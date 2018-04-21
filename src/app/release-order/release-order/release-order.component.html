@@ -626,10 +626,7 @@
           <div class="row">
             <div class="col">
               <mat-form-field>
-                <input matInput placeholder="Type" name="premiumType" [(ngModel)]="releaseorder.PremiumCustom.PremiumType" required #premiumTypeField="ngModel">
-                <mat-error *ngIf="premiumTypeField.errors && premiumTypeField.errors.required">
-                  Premium Type is required.
-                </mat-error>
+                <input matInput placeholder="Type" name="premiumType" [(ngModel)]="releaseorder.PremiumCustom.PremiumType" #premiumTypeField="ngModel">
               </mat-form-field>
             </div>
             <div class="col">
