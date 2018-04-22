@@ -60,7 +60,7 @@ export class RateCardListComponent implements OnInit {
       });
     }
     else if (ratecard.validTill && new Date(ratecard.validTill).setDate(-30) < Date.now()) {
-      this.dialog.showYesNo('Rate Card Expired', 'This Rate Card has expired, Do you wish to continue?').subscribe(result => {
+      this.dialog.showYesNo('Rate Card Expired', 'This Rate Card is about to expire, Do you wish to continue?').subscribe(result => {
         if (result) {
           this.navigateToReleaseOrder(ratecard);
         }
