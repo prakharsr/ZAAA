@@ -21,6 +21,17 @@ export class DialogService {
     }).afterClosed();
   }
 
+  showYesNo(title: string, msg: string) : Observable<boolean> {
+    return this.dialog.open(DialogComponent, {
+      data: {
+        title: title,
+        message: msg,
+        yes: true,
+        no: true
+      }
+    }).afterClosed();
+  }
+
   getMailingDetails(to?: string) : Observable<MailingDetails> {
     return this.dialog.open(MailingDetailsComponent, {
       width: '400px',

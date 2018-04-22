@@ -43,7 +43,7 @@
                 <button mat-menu-item [routerLink]="['/ratecards/new', ratecard.id]">
                   <mat-icon>add</mat-icon> Copy into New
                 </button>
-                <button mat-menu-item [routerLink]="['/releaseorders/fromRateCard', ratecard.id]">
+                <button mat-menu-item (click)="createReleaseOrder(ratecard)">
                   <mat-icon>add</mat-icon> Create Release Order
                 </button>
                 <button mat-menu-item [routerLink]="['/ratecards/edit', ratecard.id]">
@@ -81,7 +81,7 @@
                 <button mat-menu-item [routerLink]="['/ratecards/new', ratecard.id]">
                   <mat-icon>add</mat-icon> Copy into New
                 </button>
-                <button mat-menu-item [routerLink]="['/releaseorders/fromRateCard', ratecard.id]">
+                <button mat-menu-item (click)="createReleaseOrder(ratecard)">
                   <mat-icon>add</mat-icon> Create Release Order
                 </button>
               </mat-menu>

@@ -275,6 +275,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.mediaType = mediaType;
 
     this.rateCard.adType = this.adTypes[0];
+    this.rateCard.unit = this.units[0];
   }
 
   get adTypes() {
@@ -363,9 +364,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.fixSizes.splice(i, 1);
   }
 
-  get adTimes() {
-    return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-  }
+  adTimes = ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
 
   addScheme(){
     this.rateCard.schemes.push(new Scheme());

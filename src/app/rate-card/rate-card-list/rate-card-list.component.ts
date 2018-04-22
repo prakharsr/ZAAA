@@ -47,6 +47,28 @@ export class RateCardListComponent implements OnInit {
     this.router.navigateByUrl('/ratecards/' + result.id);
   }
 
+  private navigateToReleaseOrder(ratecard: RateCard) {
+    this.router.navigateByUrl('/releaseorders/fromRateCard/' + ratecard.id);
+  }
+
+  createReleaseOrder(ratecard: RateCard) {
+    if (ratecard.validTill && ratecard.validTill < new Date()) {
+      this.dialog.showYesNo('Rate Card Expired', 'This Rate Card has expired, Do you wish to continue?').subscribe(result => {
+        if (result) {
+          this.navigateToReleaseOrder(ratecard);
+        }
+      });
+    }
+    else if (ratecard.validTill && new Date(ratecard.validTill).setDate(-30) < Date.now()) {
+      this.dialog.showYesNo('Rate Card Expired', 'This Rate Card has expired, Do you wish to continue?').subscribe(result => {
+        if (result) {
+          this.navigateToReleaseOrder(ratecard);
+        }
+      });
+    }
+    else this.navigateToReleaseOrder(ratecard);
+  }
+
   deleteRateCard(ratecard: RateCard) {
     this.dialog.confirmDeletion("Are you sure you want to delete this Rate Card?").subscribe(confirm => {
       if (!confirm)
