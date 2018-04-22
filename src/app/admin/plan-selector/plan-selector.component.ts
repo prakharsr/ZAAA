@@ -8,6 +8,7 @@ import { WindowService } from '../../services/window.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Firm } from '../../models/firm';
 import { Address } from '../../models/address';
+import { BillingDetails } from '../billing-details/billing-details.component';
 
 @Component({
   selector: 'app-plan-selector',
@@ -51,11 +52,11 @@ export class PlanSelectorComponent implements OnInit {
     this.api.getFirmProfile().subscribe(data => this.firm = data);
   }
 
-  private openPay(firmName: string, billingAddress: Address, gstNo: string) {
+  private openPay(details: BillingDetails) {
     this.razorPay.initPay(this.phone,
       this.email,
       this.selectedPlan.cost,
-      "ZAAA " + this.selectedPlan.name,
+      "AAMan " + this.selectedPlan.name,
       response => {
         console.log(response.razorpay_payment_id);
 
@@ -63,9 +64,7 @@ export class PlanSelectorComponent implements OnInit {
 
         this.api.setPlan(this.selectedPlan,
           response.razorpay_payment_id,
-          firmName,
-          billingAddress,
-          gstNo
+          details
         ).subscribe(
           data => {
             this.api.generatePaymentInvoice().subscribe(data => {
@@ -80,8 +79,8 @@ export class PlanSelectorComponent implements OnInit {
       });
   }
 
-  billingDetails(param: { firmName: string, billingAddress: Address, gstNo: string }) {
-    this.openPay(param.firmName, param.billingAddress, param.gstNo);
+  billingDetails(param: BillingDetails) {
+    this.openPay(param);
   }
 
   selectPlan(plan: Plan, modalContent)
@@ -92,8 +91,12 @@ export class PlanSelectorComponent implements OnInit {
     if (plan.cost != 0) {
       this.selectedPlan = plan;
 
-      if (this.firm && this.firm.name && this.firm.registeredAddress && this.firm.gstNo) {
-        this.openPay(this.firm.name, this.firm.registeredAddress, this.firm.gstNo);
+      if (this.firm && this.firm.name && this.firm.registeredAddress) {
+        this.openPay({
+          firmName: this.firm.name,
+          billingAddress: this.firm.registeredAddress,
+          GSTIN: this.firm.GSTIN
+        });
       }
       else {
         this.modalService.open(modalContent);
@@ -102,7 +105,7 @@ export class PlanSelectorComponent implements OnInit {
     else {
       this.paid = true;
       
-      this.api.setPlan(plan, '', '', new Address(), '').subscribe(
+      this.api.setPlan(plan, '', new BillingDetails()).subscribe(
         data => {
           this.router.navigateByUrl('/dashboard');
         },

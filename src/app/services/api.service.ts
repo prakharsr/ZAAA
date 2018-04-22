@@ -16,6 +16,7 @@ import { UserProfile } from '../models/user-profile';
 import { Firm } from '../models/firm';
 import { Address } from '../models/address';
 import { LoaderService } from './loader.service';
+import { BillingDetails } from '../admin/billing-details/billing-details.component';
 
 @Injectable()
 export class ApiService {
@@ -196,19 +197,15 @@ export class ApiService {
     ]);
   }
 
-  setPlan(plan: Plan,
-    payment: string,
-    firmName: string,
-    billingAddress: Address,
-    gstNo: string) : Observable<any> {
+  setPlan(plan: Plan, payment: string, details: BillingDetails) : Observable<any> {
 
     return this.post('/user/plan', {
       planID: plan.id,
       cost: plan.cost,
       paymentID: payment,
-      firmName: firmName,
-      billingAddress: billingAddress,
-      gstNo: gstNo
+      firmName: details.firmName,
+      billingAddress: details.billingAddress,
+      gstNo: details.GSTIN
     });
   }
 
