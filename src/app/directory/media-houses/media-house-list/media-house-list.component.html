@@ -21,7 +21,8 @@
       <div class="card-body">
         <div class="row">
           <div class="col">
-            <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.orgName}}</a>
+            <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.pubName}}</a>
+            <p>{{mediaHouse.address.edition}}</p>
           </div>
           <div class="col-auto">
             <mat-menu #dirMenu="matMenu">

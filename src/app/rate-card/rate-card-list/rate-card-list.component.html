@@ -31,13 +31,12 @@
       </p>
     
       <div class="card mb-3" *ngFor="let ratecard of ratecards">
-        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
+        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}} - {{ratecard.bookingEdition}}</a></div>
         <div class="card-body">
           <div class="row">
             <div class="col">
               {{ratecard.pullOutName}}<br>
-              {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
-              {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
+              {{ratecard.mediaType}} - {{ratecard.adType}}
             </div>
             <div class="col-auto">
               <mat-menu #rateCardMenu="matMenu">
@@ -70,13 +69,12 @@
       </p>
     
       <div class="card mb-3" *ngFor="let ratecard of globalRateCards">
-        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}}</a></div>
+        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}} - {{ratecard.bookingEdition}}</a></div>
         <div class="card-body">
           <div class="row">
             <div class="col">
               {{ratecard.pullOutName}}<br>
-              {{ratecard.mediaType}} - {{ratecard.adType}} - {{ratecard.rateCardType}}<br>
-              {{ratecard.freqPeriod}} - {{ratecard.freqRemark}}
+              {{ratecard.mediaType}} - {{ratecard.adType}}
             </div>
             <div class="col-auto">
               <mat-menu #rateCardMenu="matMenu">
