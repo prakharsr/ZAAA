@@ -74,10 +74,29 @@
       <mat-form-field>
         <input matInput type="text" name="panNo" placeholder="PAN Number" [(ngModel)]="client.panNo" #panNoField="ngModel">
       </mat-form-field>
-    
-      <mat-form-field>
-        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="client.gstNo" #gstNoField="ngModel">
-      </mat-form-field>
+
+      <div class="form-row">
+        <div class="{{client.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+          <mat-form-field>
+            <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="client.GSTIN.GSTType">
+              <mat-option value="URD">URD</mat-option>
+              <mat-option value="RD">RD</mat-option>
+              <mat-option value="CRD">CRD</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col" *ngIf="client.GSTIN.GSTType != 'URD'">
+          <mat-form-field>
+            <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="client.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+            <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+              GSTIN is required.
+            </mat-error>
+            <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+              GSTIN should be 15 characters long.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
 
       <mat-form-field>
         <input matInput type="text" name="remark" placeholder="Remark" [(ngModel)]="client.Remark" #remarkField="ngModel">

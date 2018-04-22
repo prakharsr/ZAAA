@@ -171,7 +171,7 @@ export class ReleaseOrderComponent implements OnInit {
       let dirClient = new Client();
       dirClient.orgName = this.releaseorder.clientName;
       dirClient.address.state = this.releaseorder.clientState;
-      dirClient.gstNo = this.releaseorder.clientGSTIN;
+      dirClient.GSTIN = this.releaseorder.clientGSTIN;
       this.client = dirClient;
 
       let dirExecutive = new Executive();
@@ -581,7 +581,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   clientInputFormatter = (result: Client) => {
     this.releaseorder.clientState = result.address.state;
-    this.releaseorder.clientGSTIN = result.gstNo;
+    this.releaseorder.clientGSTIN = result.GSTIN;
 
     return result.orgName;
   }
@@ -895,7 +895,7 @@ export class ReleaseOrderComponent implements OnInit {
 
     obj.orgName = this.client.orgName ? this.client.orgName : this.client;
     obj.address.state = this.releaseorder.clientState;
-    obj.gstNo = this.releaseorder.clientGSTIN;
+    obj.GSTIN = this.releaseorder.clientGSTIN;
     
     this.clientApi.createClient(obj).subscribe(data => {
       if (data.success) {

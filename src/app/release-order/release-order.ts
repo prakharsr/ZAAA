@@ -38,7 +38,10 @@ export class ReleaseOrder {
     
     clientName = "";
     clientState = "";
-    clientGSTIN = "";
+    clientGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
     
     adType = "";
     rate = 0;

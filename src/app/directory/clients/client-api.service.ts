@@ -27,7 +27,7 @@ export class ClientApiService {
       stdNo: client.stdNo,
       website: client.website,
       panNo: client.panNo,
-      gstin: client.gstNo,
+      GSTIN: client.GSTIN,
       contactPerson: contactPersons,
       Remark: client.Remark,
       IncorporationDate: client.IncorporationDate
@@ -79,7 +79,7 @@ export class ClientApiService {
     client.stdNo = data.stdNo;
     client.website = data.Website;
     client.panNo = data.PanNO;
-    client.gstNo = data.GSTNo;
+    client.GSTIN = data.GSTIN;
     client.Remark = data.Remark;
     client.IncorporationDate = data.IncorporationDate;
 
@@ -113,7 +113,7 @@ export class ClientApiService {
       stdNo: client.stdNo,
       Website: client.website,
       PanNO: client.panNo,
-      GSTNo: client.gstNo,
+      GSTIN: client.GSTIN,
       ContactPerson: contactPersons,
       Remark: client.Remark,
       IncorporationDate: client.IncorporationDate

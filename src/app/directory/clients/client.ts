@@ -11,7 +11,12 @@ export class Client {
     stdNo: string;
     website: string;
     panNo: string;
-    gstNo: string;
+    
+    GSTIN = {
+        GSTType: "RD",
+        GSTNo: ""
+    }
+
     id: string;
     contactpersons: ContactPerson[] = []; 
     Remark: string;
