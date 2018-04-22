@@ -335,9 +335,9 @@
               <mat-datepicker-toggle matSuffix [for]="validFrom"></mat-datepicker-toggle>
               <mat-datepicker #validFrom disabled="false"></mat-datepicker>    
             </mat-form-field>
-            </div>
-            <label class="col-form-label">to</label>
-            <div class="col-sm">
+          </div>
+          <label class="col-auto align-self-center">to</label>
+          <div class="col-sm">
             <mat-form-field>
               <input matInput [matDatepicker]="validTill" placeholder="Valid From" [(ngModel)]="rateCard.validTill" name="validTill" disabled>
               <mat-datepicker-toggle matSuffix [for]="validTill"></mat-datepicker-toggle>
