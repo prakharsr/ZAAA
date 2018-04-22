@@ -155,6 +155,26 @@ export class MediaHouseApiService {
     return of([]);
   }
 
+  searchMediaHousesByEdition(query: string, mediaHouseName: string) : Observable<MediaHouse[]> {
+    if (query && mediaHouseName) {
+      return this.api.get('/user/mediahouses/' + mediaHouseName + "/" + query).pipe(
+        map(data => {
+          let mediaHouses : MediaHouse[] = [];
+
+          if (data.success) {
+            data.mediahouses.forEach(element => {
+              mediaHouses.push(this.bodyToMediaHouse(element));            
+            });
+          }
+
+          return mediaHouses;
+        })
+      );
+    }
+
+    return of([]);
+  }
+
   deleteMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
     return this.api.delete('/user/mediahouse/' + mediaHouse.id);
   }

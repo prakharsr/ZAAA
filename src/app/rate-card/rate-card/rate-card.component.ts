@@ -90,7 +90,7 @@ export class RateCardComponent implements OnInit {
       this.rateCard = data;
 
       let dirMediaHouse = new MediaHouse();
-      dirMediaHouse.orgName = this.rateCard.mediaHouseName;
+      dirMediaHouse.pubName = this.rateCard.mediaHouseName;
       dirMediaHouse.address.edition = this.rateCard.bookingEdition;
       this.mediaHouse = dirMediaHouse;
 
@@ -178,10 +178,10 @@ export class RateCardComponent implements OnInit {
       this.pullouts = result.pullouts;
     }
 
-    return result.orgName;
+    return result.pubName;
   }
   
-  mediaHouseResultFormatter = (result: MediaHouse) => result.orgName + " - " + result.address.edition;
+  mediaHouseResultFormatter = (result: MediaHouse) => result.pubName + " - " + result.address.edition;
 
   categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];
@@ -363,7 +363,7 @@ export class RateCardComponent implements OnInit {
     let covered = new Covered();
 
     if (this.mediaHouse) {
-      covered.covMediaHouse = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+      covered.covMediaHouse = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
     }
 
     covered.covEdition = this.rateCard.bookingEdition;
@@ -432,7 +432,7 @@ export class RateCardComponent implements OnInit {
   submit () {
     this.rateCard.categories = [];
 
-    this.rateCard.mediaHouseName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    this.rateCard.mediaHouseName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
 
     this.selectedCategories.forEach(element => {
       if (element) {

@@ -161,7 +161,7 @@ export class ReleaseOrderComponent implements OnInit {
         && element.secondary == this.releaseorder.taxAmount.secondary);
 
       let dirMediaHouse = new MediaHouse();
-      dirMediaHouse.orgName = this.releaseorder.publicationName;
+      dirMediaHouse.pubName = this.releaseorder.publicationName;
       dirMediaHouse.address.edition = this.releaseorder.publicationEdition;
       dirMediaHouse.address.state = this.releaseorder.publicationState;
       dirMediaHouse.GSTIN = this.releaseorder.publicationGSTIN;
@@ -450,7 +450,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adCategory6 = this.selectedCategories[5].name;
     }
 
-    this.releaseorder.publicationName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    this.releaseorder.publicationName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
 
@@ -565,10 +565,10 @@ export class ReleaseOrderComponent implements OnInit {
   mediaHouseInputFormatter = (result: MediaHouse) => {
     this.initMediaHouse(result);
 
-    return result.orgName;
+    return result.pubName;
   }
 
-  mediaHouseResultFormatter = (result: MediaHouse) => result.orgName + " - " + result.address.edition;
+  mediaHouseResultFormatter = (result: MediaHouse) => result.pubName + " - " + result.address.edition;
 
   client;
 
@@ -867,7 +867,7 @@ export class ReleaseOrderComponent implements OnInit {
   addMediaHouse() {
     let obj = new MediaHouse();
 
-    obj.orgName = this.mediaHouse.orgName ? this.mediaHouse.orgName : this.mediaHouse;
+    obj.pubName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
     obj.address.edition = this.releaseorder.publicationEdition;
     obj.address.state = this.releaseorder.publicationState;
     obj.GSTIN = this.releaseorder.publicationGSTIN;
