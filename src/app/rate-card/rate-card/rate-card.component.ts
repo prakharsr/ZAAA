@@ -93,6 +93,7 @@ export class RateCardComponent implements OnInit {
       dirMediaHouse.pubName = this.rateCard.mediaHouseName;
       dirMediaHouse.address.edition = this.rateCard.bookingEdition;
       this.mediaHouse = dirMediaHouse;
+      this.edition = dirMediaHouse;
 
       this.dropdownPullOutName = this.others;
       this.customPullOutName = this.rateCard.pullOutName;
@@ -161,6 +162,7 @@ export class RateCardComponent implements OnInit {
   }
 
   mediaHouse;
+  edition;
 
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
@@ -169,10 +171,18 @@ export class RateCardComponent implements OnInit {
       .catch(() => of([]));
   }
 
+  searchEdition = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHousesByEdition(term,
+        this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null))
+      .catch(() => of([]));
+  }
+
   pullouts: Pullout[] = [];
   
   mediaHouseInputFormatter = (result: MediaHouse) => {
-    this.rateCard.bookingEdition = result.address.edition;
+    this.edition = result;
 
     if (result.pullouts) {
       this.pullouts = result.pullouts;
@@ -182,6 +192,16 @@ export class RateCardComponent implements OnInit {
   }
   
   mediaHouseResultFormatter = (result: MediaHouse) => result.pubName + " - " + result.address.edition;
+
+  editionInputFormatter = (result: MediaHouse) => {
+    if (result.pullouts) {
+      this.pullouts = result.pullouts;
+    }
+
+    return result.address.edition;
+  }
+  
+  editionResultFormatter = (result: MediaHouse) => result.address.edition;
 
   categoryInputFormatter = (result: Category) => {
     let stack : Category[] = [];
@@ -433,6 +453,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.categories = [];
 
     this.rateCard.mediaHouseName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
+    this.rateCard.bookingEdition = this.edition.address.edition ? this.edition.address.edition : this.edition;
 
     this.selectedCategories.forEach(element => {
       if (element) {

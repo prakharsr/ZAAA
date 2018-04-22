@@ -30,7 +30,7 @@
 
         <div class="form-group">
           <label>Edition</label>
-          <input type="text" class="form-control" id="bookingEdition" placeholder="Enter Edition" [(ngModel)]="rateCard.bookingEdition" name="bookingEdition" required #bookingEditionField="ngModel">
+          <input type="text" class="form-control" id="bookingEdition" [ngbTypeahead]="searchEdition" placeholder="Enter Edition" [(ngModel)]="edition" name="bookingEdition" required #bookingEditionField="ngModel" [resultFormatter]="editionResultFormatter" [inputFormatter]="editionInputFormatter">
         </div>
   
         <div *ngIf="bookingEditionField.invalid && (bookingEditionField.dirty || bookingEditionField.touched)" class="text-danger">
@@ -40,37 +40,39 @@
           <br>
         </div>
 
-        <label>Pullout Name</label>
+        <ng-container *ngIf="mediaType == 'Print'">
+          <label>Pullout Name</label>
 
-        <div class="form-row">
-          <div class="col">
-            <div class="form-group">
-              <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
-                  <option *ngFor="let item of pullouts" [ngValue]="item.name">{{item.name}}</option>
-                <option>{{others}}</option>
-              </select>
-            </div>
-      
-            <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
-              <div *ngIf="pullOutNameField.errors.required">
-                Pullout Name is required.
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                    <option *ngFor="let item of pullouts" [ngValue]="item.name">{{item.name}}</option>
+                  <option>{{others}}</option>
+                </select>
               </div>
-              <br>
+        
+              <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
+                <div *ngIf="pullOutNameField.errors.required">
+                  Pullout Name is required.
+                </div>
+                <br>
+              </div>
+            </div>
+            <div class="col" *ngIf="dropdownPullOutName == others">
+              <div class="form-group">
+                <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+              </div>
+        
+              <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
+                <div *ngIf="specPullOutNameField.errors.required">
+                  Pullout Name is required.
+                </div>
+                <br>
+              </div>
             </div>
           </div>
-          <div class="col" *ngIf="dropdownPullOutName == others">
-            <div class="form-group">
-              <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
-            </div>
-      
-            <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
-              <div *ngIf="specPullOutNameField.errors.required">
-                Pullout Name is required.
-              </div>
-              <br>
-            </div>
-          </div>
-        </div>
+        </ng-container>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
