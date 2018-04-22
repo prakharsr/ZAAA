@@ -28,7 +28,8 @@ export class MediaHouseApiService {
       officeStdNo: mediaHouse.officeStdNo,
       scheduling: scheduling,
       GSTIN: mediaHouse.GSTIN,
-      Remark: mediaHouse.Remark
+      Remark: mediaHouse.Remark,
+      Language: mediaHouse.Language
     });
   }
 
@@ -69,6 +70,7 @@ export class MediaHouseApiService {
     mediaHouse.officeStdNo = body.officeStdNo;
     mediaHouse.GSTIN = body.GSTIN;
     mediaHouse.Remark = body.Remark;
+    mediaHouse.Language = body.Language;
 
     let scheduling : MediaHouseScheduling[] = [];
 
@@ -106,8 +108,8 @@ export class MediaHouseApiService {
       officeStdNo: mediaHouse.officeStdNo,
       GSTIN: mediaHouse.GSTIN,
       Scheduling: scheduling,
-
-      Remark: mediaHouse.Remark
+      Remark: mediaHouse.Remark,
+      Language: mediaHouse.Language
     })
   }
 

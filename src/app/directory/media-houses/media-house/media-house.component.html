@@ -62,11 +62,15 @@
         </div>
       </div>
 
+      <mat-form-field *ngIf="mediaHouse.mediaType != 'Print'">
+        <input matInput type="text" placeholder="Language" [(ngModel)]="mediaHouse.Language" name="lang">
+      </mat-form-field>
+
       <mat-form-field>
         <input matInput placeholder="Remark" name="remark" [(ngModel)]="mediaHouse.Remark">
       </mat-form-field>
     
-      <br>
+      <br><br>
 
       <h3 class="mb-3">Address</h3>
     
@@ -159,7 +163,6 @@
 
         <br><br>
       </ng-container>
-
     </div>
     <div class="col-md">
       <br>

@@ -24,6 +24,8 @@ export class MediaHouse {
 
     id: string;
     pullouts: Pullout[] = [];
+
+    Language: string;
 }
 
 export class MediaHouseScheduling {

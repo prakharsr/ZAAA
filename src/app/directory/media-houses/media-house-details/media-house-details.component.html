@@ -43,6 +43,12 @@
             <div class="col-md-8">{{mediaHouse.officeStdNo}} {{mediaHouse.officeLandLine}}</div>
           </div>
         </li>
+        <li class="list-group-item" *ngIf="mediaHouse.mediaType != 'Print'">
+          <div class="row">
+            <div class="col-md-4">Language</div>
+            <div class="col-md-8">{{mediaHouse.Language}}</div>
+          </div>
+        </li>
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-4">Remark</div>
