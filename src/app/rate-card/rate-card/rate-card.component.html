@@ -327,19 +327,25 @@
         </div>
 
         <label>Validity</label>
+
         <div class="form-row">
           <div class="col-sm">
-            <div class="form-group">        
-              <input type="date" class="form-control" id="validFrom" [(ngModel)]="rateCard.validFrom" name="validFrom" #validFromField="ngModel">
+            <mat-form-field>
+              <input matInput [matDatepicker]="validFrom" placeholder="Valid From" [(ngModel)]="rateCard.validFrom" name="validFrom" disabled>
+              <mat-datepicker-toggle matSuffix [for]="validFrom"></mat-datepicker-toggle>
+              <mat-datepicker #validFrom disabled="false"></mat-datepicker>    
+            </mat-form-field>
             </div>
-          </div>
-          <label class="col-auto col-form-label">to</label>
-          <div class="col-sm">
-            <div class="form-group">
-              <input type="date" class="form-control" id="validTill" [(ngModel)]="rateCard.validTill" name="validTill" #validTillField="ngModel">
-            </div>
+            <label class="col-form-label">to</label>
+            <div class="col-sm">
+            <mat-form-field>
+              <input matInput [matDatepicker]="validTill" placeholder="Valid From" [(ngModel)]="rateCard.validTill" name="validTill" disabled>
+              <mat-datepicker-toggle matSuffix [for]="validTill"></mat-datepicker-toggle>
+              <mat-datepicker #validTill disabled="false"></mat-datepicker>    
+            </mat-form-field>
           </div>
         </div>
+ 
       </mat-expansion-panel>
       <mat-expansion-panel *ngIf="isTypeLen">
         <mat-expansion-panel-header>
