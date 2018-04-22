@@ -207,7 +207,7 @@
 
           <mat-form-field>
             <span matPrefix>+91 &nbsp;</span>
-            <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+            <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
             <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
               Phone Number is empty or invalid.
             </mat-error>

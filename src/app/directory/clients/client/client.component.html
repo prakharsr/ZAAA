@@ -64,7 +64,9 @@
       </div>
 
       <mat-form-field>
-        <input matInput type="date" name="incDate" placeholder="Incorporation Date" [(ngModel)]="client.IncorporationDate" #incDateField="ngModel">
+        <input matInput [matDatepicker]="incDateField" placeholder="Incorporation Date" [(ngModel)]="client.IncorporationDate" name="incDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="incDateField"></mat-datepicker-toggle>
+        <mat-datepicker #incDateField disabled="false"></mat-datepicker>
       </mat-form-field>
     
       <mat-form-field>
@@ -243,11 +245,15 @@
           </mat-expansion-panel-header>
 
           <mat-form-field>
-            <input matInput type="date" name="dob-{{i}}" placeholder="DOB" [(ngModel)]="item.dob" #dobField="ngModel">
+            <input matInput [matDatepicker]="dobField" placeholder="DOB" [(ngModel)]="item.dob" name="dob-{{i}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dobField"></mat-datepicker-toggle>
+            <mat-datepicker #dobField disabled="false"></mat-datepicker>
           </mat-form-field>
     
           <mat-form-field>
-            <input matInput type="date" name="anniversaryDate-{{i}}" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" #anniversaryDateField="ngModel">
+            <input matInput [matDatepicker]="anniversaryDateField" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" name="anniversaryDate-{{i}}" disabled>
+            <mat-datepicker-toggle matSuffix [for]="anniversaryDateField"></mat-datepicker-toggle>
+            <mat-datepicker #anniversaryDateField disabled="false"></mat-datepicker>
           </mat-form-field>
         </mat-expansion-panel>
       </mat-accordion>
