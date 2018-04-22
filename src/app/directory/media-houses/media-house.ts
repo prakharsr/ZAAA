@@ -16,7 +16,10 @@ export class MediaHouse {
 
     scheduling: MediaHouseScheduling[] = [];
 
-    GSTIN: string;
+    GSTIN = {
+        GSTType: "RD",
+        GSTNo: ""
+    }
 
     global: boolean;
 

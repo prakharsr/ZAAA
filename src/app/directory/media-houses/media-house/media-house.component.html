@@ -40,7 +40,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN" required minlength="15" maxlength="15" #gstNoField="ngModel">
+        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
         <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
           GSTIN is required.
         </mat-error>

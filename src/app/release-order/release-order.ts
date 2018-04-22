@@ -18,7 +18,10 @@ export class ReleaseOrder {
     
     agencyName = "";
     agencyAddress = "";
-    agencyGSTIN = "";
+    agencyGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
     agencyPerson = "";
     
     signature = "";
@@ -26,7 +29,10 @@ export class ReleaseOrder {
     publicationName = "";
     publicationEdition = "";
     publicationState = "";
-    publicationGSTIN = "";
+    publicationGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
     
     mediaType = "";
     

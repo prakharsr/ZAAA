@@ -55,7 +55,7 @@
         
         <div class="form-group">
           <label for="publicationGSTIN">GSTIN</label>
-          <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+          <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
         </div>
         
         <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
