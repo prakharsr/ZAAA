@@ -47,16 +47,29 @@
             PAN Number should be 10 characters long.
           </mat-error>
         </mat-form-field>
-      
-        <mat-form-field>
-          <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="profile.gstNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-          <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-            GSTIN is required.
-          </mat-error>
-          <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-            GSTIN should be 15 characters long.
-          </mat-error>
-        </mat-form-field>
+
+        <div class="form-row">
+          <div class="{{profile.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+            <mat-form-field>
+              <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="profile.GSTIN.GSTType">
+                <mat-option value="URD">URD</mat-option>
+                <mat-option value="RD">RD</mat-option>
+                <mat-option value="CRD">CRD</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col" *ngIf="profile.GSTIN.GSTType != 'URD'">
+            <mat-form-field>
+              <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="profile.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+              <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                GSTIN is required.
+              </mat-error>
+              <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                GSTIN should be 15 characters long.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
       
       </mat-expansion-panel>
       <mat-expansion-panel>

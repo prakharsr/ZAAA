@@ -15,7 +15,11 @@ export class Firm {
     OtherMobile: string;
 
     panNo : string;
-    gstNo : string;
+    
+    GSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
 
     incDate: Date;
 
