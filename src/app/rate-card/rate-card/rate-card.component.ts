@@ -451,8 +451,10 @@ export class RateCardComponent implements OnInit {
   submit () {
     this.rateCard.categories = [];
 
-    this.rateCard.mediaHouseName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
-    this.rateCard.bookingEdition = this.edition.address.edition ? this.edition.address.edition : this.edition;
+    this.rateCard.mediaHouseName = this.mediaHouse && this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
+
+    this.rateCard.bookingEdition = this.edition && this.edition.address && this.edition.address.edition
+      ? this.edition.address.edition : this.edition;
 
     this.selectedCategories.forEach(element => {
       if (element) {
