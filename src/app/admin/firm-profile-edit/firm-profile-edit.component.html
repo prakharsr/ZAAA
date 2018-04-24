@@ -31,7 +31,9 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="date" name="incDate" placeholder="Incorporation Date" [(ngModel)]="profile.incDate" #incDateField="ngModel">
+          <input matInput [matDatepicker]="incDateField" name="incDate" placeholder="Incorporation Date" [(ngModel)]="profile.incDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="incDateField"></mat-datepicker-toggle>
+          <mat-datepicker #incDateField disabled="false"></mat-datepicker>
         </mat-form-field>
       
         <mat-form-field>
