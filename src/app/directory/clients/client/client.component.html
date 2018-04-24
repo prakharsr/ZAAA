@@ -74,7 +74,7 @@
       </mat-form-field>
     
       <mat-form-field>
-        <input matInput type="text" name="panNo" placeholder="PAN Number" [(ngModel)]="client.panNo" #panNoField="ngModel">
+        <input matInput type="text" name="panNo" placeholder="PAN Number" minlength="10" maxlength="10" [(ngModel)]="client.panNo" #panNoField="ngModel">
       </mat-form-field>
 
       <div class="form-row">
