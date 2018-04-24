@@ -4,15 +4,6 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<ng-template #modalContent let-c="close">
-  <div class="modal-header">
-    <h4 class="modal-title">Enter Billing Details</h4>
-  </div>
-  <div class="modal-body">
-    <app-billing-details (done)="c('Submit'); billingDetails($event)"></app-billing-details>
-  </div>
-</ng-template>  
-
 <div class="container">
   <div class="planContainer">
     <div *ngFor="let plan of plans" class="plan">
@@ -26,7 +17,7 @@
         <ul class="features">
           <li><strong>{{plan.maxUsers}}</strong> Users</li>
           <li><strong>{{plan.maxAdmins}}</strong> Admins</li>
-        </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan, modalContent)">Select Plan</a>
+        </ul><a class="selectPlan" [class.disabled]="paid" (click)="selectPlan(plan)">Select Plan</a>
       </div>
     </div>
   </div>

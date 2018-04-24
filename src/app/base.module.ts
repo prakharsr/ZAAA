@@ -35,6 +35,7 @@ import { VerifyMaxDirective } from './validators/verify-max.directive';
 import { VerifyLengthDirective } from './validators/verify-fix-length.directive';
 import { VerifyMultipleOfDirective } from './validators/verify-multiple-of.directive';
 import { VerifyEqualsDirective } from './validators/verify-equals.directive';
+import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -73,6 +74,7 @@ const validators = [
   declarations: [
     MailingDetailsComponent,
     DialogComponent,
+    BillingDetailsComponent,
     validators
   ],
   exports: [
@@ -86,7 +88,8 @@ const validators = [
   ],
   entryComponents: [
     DialogComponent,
-    MailingDetailsComponent
+    MailingDetailsComponent,
+    BillingDetailsComponent
   ]
 })
 export class BaseModule { }

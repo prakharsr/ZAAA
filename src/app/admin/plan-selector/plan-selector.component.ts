@@ -5,10 +5,10 @@ import { RazorPayService } from '../../services/razorpay.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { WindowService } from '../../services/window.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Firm } from '../../models/firm';
 import { Address } from '../../models/address';
-import { BillingDetails } from '../billing-details/billing-details.component';
+import { BillingDetails } from '../../components/billing-details/billing-details.component';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-plan-selector',
@@ -31,7 +31,7 @@ export class PlanSelectorComponent implements OnInit {
     private appRef: ApplicationRef,
     private router: Router,
     private winRef: WindowService,
-    private modalService: NgbModal) { }
+    private dialog: DialogService) { }
 
   ngOnInit() {
     this.api.plans.subscribe(data => {
@@ -83,7 +83,7 @@ export class PlanSelectorComponent implements OnInit {
     this.openPay(param);
   }
 
-  selectPlan(plan: Plan, modalContent)
+  selectPlan(plan: Plan)
   {
     if (this.paid)
       return;
@@ -99,7 +99,9 @@ export class PlanSelectorComponent implements OnInit {
         });
       }
       else {
-        this.modalService.open(modalContent);
+        this.dialog.getBillingDetails().subscribe(data => {
+          this.billingDetails(data);
+        });
       }
     }
     else {

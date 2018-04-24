@@ -5,7 +5,6 @@ import { FirmProfileEditComponent } from './firm-profile-edit/firm-profile-edit.
 import { PlanSelectorComponent } from './plan-selector/plan-selector.component';
 import { TemplateSelectorItemComponent } from './template-selector-item/template-selector-item.component';
 import { TemplateSelectorComponent } from './template-selector/template-selector.component';
-import { BillingDetailsComponent } from './billing-details/billing-details.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
     PlanSelectorComponent,
     TemplateSelectorItemComponent,
     TemplateSelectorComponent,
-    BillingDetailsComponent,
     ProfileEditComponent
   ]
 })

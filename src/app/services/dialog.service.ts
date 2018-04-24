@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { MailingDetails } from '../models/mailing-details';
 import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
+import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
 
 @Injectable()
 export class DialogService {
@@ -38,6 +39,12 @@ export class DialogService {
       data: {
         to: to
       }
+    }).afterClosed();
+  }
+
+  getBillingDetails() : Observable<BillingDetails> {
+    return this.dialog.open(BillingDetailsComponent, {
+      disableClose: true
     }).afterClosed();
   }
 }

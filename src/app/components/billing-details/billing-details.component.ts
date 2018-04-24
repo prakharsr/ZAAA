@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Address } from '../../models/address';
 import { StateApiService } from '../../services/state-api.service';
 
@@ -20,15 +20,9 @@ export class BillingDetailsComponent implements OnInit {
 
   details = new BillingDetails();
   
-  @Output() done = new EventEmitter();
-
   constructor(public stateApi: StateApiService) { }
 
   ngOnInit() {
-  }
-
-  submit() {
-    this.done.emit(this.details);
   }
 
 }
