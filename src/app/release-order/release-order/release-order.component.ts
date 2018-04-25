@@ -728,7 +728,7 @@ export class ReleaseOrderComponent implements OnInit {
       return this.releaseorder.rate * this.releaseorder.AdDuration * this.adCountPaid;
     }
     else if (this.isTypeWords) {
-      return this.releaseorder.rate * this.releaseorder.AdWords * this.adCountPaid;
+      return this.releaseorder.rate * this.adCountPaid;
     }
     else return 0;
   }
