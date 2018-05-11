@@ -862,7 +862,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
 
-  paymentTypes = ['Cash', 'Cheque', 'NEFT'];
+  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
 
   addMediaHouse() {
     let obj = new MediaHouse();

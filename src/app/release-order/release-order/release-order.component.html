@@ -704,7 +704,7 @@
           </select>
         </div>
     
-        <ng-container *ngIf="releaseorder.paymentType != 'Cash'">
+        <ng-container *ngIf="releaseorder.paymentType != 'Cash' && releaseorder.paymentType != 'Credit'">
           <mat-form-field>
             <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Enter Date" [(ngModel)]="releaseorder.paymentDate" required disabled>
             <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
