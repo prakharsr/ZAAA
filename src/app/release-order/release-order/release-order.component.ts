@@ -187,6 +187,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   private initFromRateCard(rateCard: RateCard) {
     if (rateCard) {
+      this.releaseorder.mediaType = rateCard.mediaType;
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.adTime = rateCard.adTime;
       this.releaseorder.rate = rateCard.rate;
