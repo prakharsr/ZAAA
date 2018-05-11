@@ -192,43 +192,41 @@
           <br>
         </div>
 
-        <ng-container *ngIf="isTypeLen">
-          <div class="form-row">
-            <label class="col-md-3 col-form-label">Hue</label>
-            <div class="col-md-9">
-              <div class="form-group">
-                <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-                  <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
-                </select>
+        <div class="form-row" *ngIf="isTypeLen">
+          <label class="col-md-3 col-form-label">Hue</label>
+          <div class="col-md-9">
+            <div class="form-group">
+              <select class="form-control" name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+                <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
+              </select>
+            </div>
+    
+            <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
+              <div *ngIf="hueField.errors.required">
+                Hue is required.
               </div>
-      
-              <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
-                <div *ngIf="hueField.errors.required">
-                  Hue is required.
-                </div>
-                <br>
-              </div>
+              <br>
             </div>
           </div>
-      
-          <div class="form-row">
-            <label class="col-md-3 col-form-label">Position</label>
-            <div class="col-md-9">
-              <div class="form-group">
-                <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
-                  <option *ngFor="let item of positions" [value]="item">{{item}}</option>
-                </select>
+        </div>
+    
+        <div class="form-row" *ngIf="isTypeLen || isTypeWords">
+          <label class="col-md-3 col-form-label">Position</label>
+          <div class="col-md-9">
+            <div class="form-group">
+              <select class="form-control" name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+                <option *ngFor="let item of positions" [value]="item">{{item}}</option>
+              </select>
+            </div>
+    
+            <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
+              <div *ngIf="positionField.errors.required">
+                Position is required.
               </div>
-      
-              <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
-                <div *ngIf="positionField.errors.required">
-                  Position is required.
-                </div>
-                <br>
-              </div>
+              <br>
             </div>
           </div>
-        </ng-container>
+        </div>
 
         <ng-container *ngIf="isTypeWords">
           <div class="form-group">
@@ -267,14 +265,14 @@
             </div>
             <br>
           </div>
+
+          <div class="form-group">
+            <label>Ad Time</label>
+            <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
+              <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
+            </select>
+          </div>
         </ng-container>
-    
-        <div class="form-group" *ngIf="isTypeTime">
-          <label>Ad Time</label>
-          <select class="form-control" name="adTime" [(ngModel)]="releaseorder.adTime" id="adTime" #adTimeField="ngModel" required>
-            <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
-          </select>
-        </div>
     
         <div class="form-row">
           <label class="col-3 col-form-label">Tax</label>
