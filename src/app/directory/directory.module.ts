@@ -22,6 +22,7 @@ import { MediaHouseComponent } from './media-houses/media-house/media-house.comp
 import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
 import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
 import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
+import { MediaHouseListResolver } from './media-houses/media-house-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { MediaHouseResolver } from './media-houses/media-house-resolver.service'
     ClientResolver,
     ExecutiveResolver,
     MediaHouseResolver,
-    ClientListResolver
+    ClientListResolver,
+    MediaHouseListResolver
   ]
 })
 export class DirectoryModule { }
