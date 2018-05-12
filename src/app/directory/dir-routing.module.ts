@@ -21,6 +21,7 @@ import { MediaHouseResolver } from './media-houses/media-house-resolver.service'
 import { AuthGuard } from '../guards/auth-guard.service';
 import { FirmResolver } from '../services/firm-resolver.service';
 import { ClientListResolver } from './clients/client-list-resolver.service';
+import { ExecutiveListResolver } from './executives/executive-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -59,7 +60,14 @@ const routes: Routes = [
       {
         path: 'executives',
         children: [
-          { path: '', component: ExecutiveListComponent },
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: ExecutiveListComponent,
+            resolve: {
+              list: ExecutiveListResolver
+            }
+          },
           {
             path: 'new',
             component: ExecutiveComponent,

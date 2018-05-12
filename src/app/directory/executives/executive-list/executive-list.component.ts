@@ -8,8 +8,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { ExecutivePage } from '../executive-page';
 
 @Component({
   selector: 'app-executive-list',
@@ -20,13 +21,28 @@ export class ExecutiveListComponent implements OnInit {
 
   executives: Executive[] = [];
 
+  pageCount: number;
+    page: number;
+  
+    dummyArray;
+  
+
   query: string;
   searchFailed = false;
 
-  constructor(private api: ExecutiveApiService, private dialog: DialogService, private router: Router) { }
+constructor(private api: ExecutiveApiService,
+    private dialog: DialogService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.getExecutives().subscribe(data => this.executives = data);
+    this.route.data.subscribe((data: { list: ExecutivePage }) => {
+        this.executives = data.list.executives;
+        this.pageCount = data.list.pageCount;
+        this.page = data.list.page;
+  
+        this.dummyArray = Array(this.pageCount);
+      });
   }
 
   search = (text: Observable<string>) =>
