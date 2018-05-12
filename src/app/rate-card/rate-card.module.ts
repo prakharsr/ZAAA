@@ -9,6 +9,7 @@ import { RateCardResolver } from './rate-card-resolver.service';
 import { RateCardComponent } from './rate-card/rate-card.component';
 import { RateCardListComponent } from './rate-card-list/rate-card-list.component';
 import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.component';
+import { RateCardListResolver } from './rate-card-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.
   ],
   providers: [
     RateCardApiService,
-    RateCardResolver
+    RateCardResolver,
+    RateCardListResolver
   ]
 })
 export class RateCardModule { }

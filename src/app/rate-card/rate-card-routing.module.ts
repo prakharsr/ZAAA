@@ -8,13 +8,21 @@ import { RateCardDetailsComponent } from './rate-card-details/rate-card-details.
 import { RateCardResolver } from './rate-card-resolver.service';
 
 import { AuthGuard } from '../guards/auth-guard.service';
+import { RateCardListResolver } from './rate-card-list-resolver.service';
 
 const routes: Routes = [
   {
     path: 'ratecards',
     canActivate: [AuthGuard],
     children:  [          
-      { path: '', component: RateCardListComponent },
+      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: RateCardListComponent,
+            resolve: {
+              list: RateCardListResolver
+            }
+          },
       { path: 'new', component: RateCardComponent },
       {
         path: 'new/:copy',
