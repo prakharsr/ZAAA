@@ -231,7 +231,7 @@ export class RateCardApiService {
   }
 
   getRateCards(page: number, global: boolean = false) : Observable<RateCardPage> {
-    return this.api.get((global ? '/user/ratecards/global/' : '/user/ratecards/')+page).pipe(
+    return this.api.get((global ? '/user/ratecards/global/' : '/user/ratecards/') + page).pipe(
       map(data => {
         let ratecards : RateCard[] = [];
 
@@ -241,7 +241,7 @@ export class RateCardApiService {
           });
         }
 
-        return new RateCardPage(ratecards, data.perPage, data.page, data.pageCount);;
+        return new RateCardPage(ratecards, data.perPage, data.page, data.pageCount);
       })
     );
   }

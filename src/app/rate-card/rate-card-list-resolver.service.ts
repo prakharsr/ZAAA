@@ -1,4 +1,3 @@
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
@@ -13,8 +12,9 @@ export class RateCardListResolver implements Resolve<RateCardPage> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RateCardPage> {
     let page: any = route.paramMap.get('page');
+    let global: any = route.data.global;
 
-    return this.api.getRateCards(page).map(rateCard => {
+    return this.api.getRateCards(page, global).map(rateCard => {
       if (rateCard) {
         return rateCard;
       }

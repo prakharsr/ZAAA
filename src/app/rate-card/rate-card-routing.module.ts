@@ -14,15 +14,34 @@ const routes: Routes = [
   {
     path: 'ratecards',
     canActivate: [AuthGuard],
-    children:  [          
-      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+    data: {
+      global: false
+    },
+    children: [
+      {
+        path: 'global',
+        data: {
+          global: true
+        },
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
             component: RateCardListComponent,
             resolve: {
               list: RateCardListResolver
             }
-          },
+          }    
+        ]
+      },
+      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      {
+        path: 'list/:page',
+        component: RateCardListComponent,
+        resolve: {
+          list: RateCardListResolver
+        }
+      },
       { path: 'new', component: RateCardComponent },
       {
         path: 'new/:copy',

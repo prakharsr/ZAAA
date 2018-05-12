@@ -10,12 +10,11 @@
   {{r.mediaHouseName}}
   <br>
   {{r.pullOutName}}<br>
-  {{r.mediaType}} - {{r.adType}} - {{r.rateCardType}}<br>
-  {{r.freqPeriod}} - {{r.freqRemark}}
+  {{r.mediaType}} - {{r.adType}}<br>
 </ng-template>
 
 <div class="container">
-  <button class="fab" routerLink="/ratecards/new">
+  <button class="fab" routerLink="/ratecards/new" *ngIf="!global">
     <mat-icon>add</mat-icon>
   </button>
 
@@ -23,96 +22,59 @@
     <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
   </div>
 
-  <mat-tab-group>
-    <mat-tab label="Local">
-      <br>
-      <p *ngIf="ratecards.length == 0" class="text-muted">
-        No Rate Cards
-      </p>
-    
-      <div class="card mb-3" *ngFor="let ratecard of ratecards">
-        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}} - {{ratecard.bookingEdition}}</a></div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              {{ratecard.pullOutName}}<br>
-              {{ratecard.mediaType}} - {{ratecard.adType}}
-            </div>
-            <div class="col-auto">
-              <mat-menu #rateCardMenu="matMenu">
-                <button mat-menu-item [routerLink]="['/ratecards/new', ratecard.id]">
-                  <mat-icon>add</mat-icon> Copy into New
-                </button>
-                <button mat-menu-item (click)="createReleaseOrder(ratecard)">
-                  <mat-icon>add</mat-icon> Create Release Order
-                </button>
-                <button mat-menu-item [routerLink]="['/ratecards/edit', ratecard.id]">
-                  <mat-icon>edit</mat-icon> Edit
-                </button>
-                <button mat-menu-item class="text-danger" (click)="deleteRateCard(ratecard)">
-                  <mat-icon>delete</mat-icon> Delete
-                </button>
-              </mat-menu>
-              
-              <button mat-icon-button [matMenuTriggerFor]="rateCardMenu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-            </div>
-          </div>
+  <nav mat-tab-nav-bar class="x-overflow">
+    <a mat-tab-link routerLink="/ratecards" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Local</a>
+    <a mat-tab-link routerLink="/ratecards/global" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Global</a>
+  </nav>
+  
+  <br>
+  <p *ngIf="ratecards.length == 0" class="text-muted">
+    No Rate Cards
+  </p>
+  
+  <div class="card mb-3" *ngFor="let ratecard of ratecards">
+    <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}} - {{ratecard.bookingEdition}}</a></div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          {{ratecard.pullOutName}}<br>
+          {{ratecard.mediaType}} - {{ratecard.adType}}
+        </div>
+        <div class="col-auto" *ngIf="!global">
+          <mat-menu #dirMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/ratecards/edit', ratecard.id]">
+              <mat-icon>edit</mat-icon> Edit
+            </button>
+            <button mat-menu-item class="text-danger" (click)="deleteRateCard(ratecard)">
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </mat-menu>
+          
+          <button mat-icon-button [matMenuTriggerFor]="dirMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
         </div>
       </div>
-      
-      <nav *ngIf="pageCount != 0">
-        <ul class="pagination">
-          <li class="page-item" [class.disabled]="page == 1">
-            <a class="page-link" [routerLink]="['/ratecards/list', +page - 1]" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i == page">
-            <a class="page-link" [routerLink]="['/ratecards/list', i + 1]">{{i + 1}}</a>
-          </li>
-          <li class="page-item" [class.disabled]="page == pageCount">
-            <a class="page-link" [routerLink]="['/ratecards/list', +page + 1]" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </mat-tab>
-    <mat-tab label="Global">
-      <br>
-      <p *ngIf="globalRateCards.length == 0" class="text-muted">
-        No Rate Cards
-      </p>
-    
-      <div class="card mb-3" *ngFor="let ratecard of globalRateCards">
-        <div class="card-header"><a [routerLink]="['/ratecards', ratecard.id]">{{ratecard.mediaHouseName}} - {{ratecard.bookingEdition}}</a></div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              {{ratecard.pullOutName}}<br>
-              {{ratecard.mediaType}} - {{ratecard.adType}}
-            </div>
-            <div class="col-auto">
-              <mat-menu #rateCardMenu="matMenu">
-                <button mat-menu-item [routerLink]="['/ratecards/new', ratecard.id]">
-                  <mat-icon>add</mat-icon> Copy into New
-                </button>
-                <button mat-menu-item (click)="createReleaseOrder(ratecard)">
-                  <mat-icon>add</mat-icon> Create Release Order
-                </button>
-              </mat-menu>
-              
-              <button mat-icon-button [matMenuTriggerFor]="rateCardMenu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+  </div>
+  
+  <nav *ngIf="pageCount != 0">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page == 1">
+        <a class="page-link" [routerLink]="['/ratecards/list', +page - 1]" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i == page">
+        <a class="page-link" [routerLink]="['/ratecards/list', i + 1]">{{i + 1}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="page == pageCount">
+        <a class="page-link" [routerLink]="['/ratecards/list', +page + 1]" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

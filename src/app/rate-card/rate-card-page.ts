@@ -1,4 +1,3 @@
-
 import { RateCard } from "./rate-card";
 
 export class RateCardPage {

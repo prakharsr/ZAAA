@@ -20,8 +20,7 @@ import { RateCardPage } from '../rate-card-page';
 export class RateCardListComponent implements OnInit {
 
   ratecards: RateCard[] = [];
-  globalRateCards: RateCard[] = [];
-
+  global: boolean;
 
   pageCount: number;
   page: number;
@@ -37,7 +36,8 @@ export class RateCardListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: RateCardPage }) => {
+    this.route.data.subscribe((data: { list: RateCardPage, global: boolean }) => {
+        this.global = data.global;
         this.ratecards = data.list.rateCards;
         this.pageCount = data.list.pageCount;
         this.page = data.list.page;
@@ -45,8 +45,6 @@ export class RateCardListComponent implements OnInit {
         this.dummyArray = Array(this.pageCount);
       });
       
-      this.api.getRateCards(1, true).subscribe(data => this.globalRateCards = data.rateCards);
-
   }
 
   search = (text: Observable<string>) =>
