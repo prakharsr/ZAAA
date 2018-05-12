@@ -22,6 +22,7 @@ import { AuthGuard } from '../guards/auth-guard.service';
 import { FirmResolver } from '../services/firm-resolver.service';
 import { ClientListResolver } from './clients/client-list-resolver.service';
 import { ExecutiveListResolver } from './executives/executive-list-resolver.service';
+import { MediaHouseListResolver } from './media-houses/media-house-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -94,8 +95,34 @@ const routes: Routes = [
       },
       {
         path: 'media_houses',
+        data: {
+          global: false
+        },
         children: [
-          { path: '', component: MediaHouseListComponent },
+          {
+            path: 'global',
+            data: {
+              global: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                component: MediaHouseListComponent,
+                resolve: {
+                  list: MediaHouseListResolver
+                }
+              }    
+            ]
+          },
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: MediaHouseListComponent,
+            resolve: {
+              list: MediaHouseListResolver
+            }
+          },
           { path: 'new', component: MediaHouseComponent },
           {
             path: 'edit/:id',

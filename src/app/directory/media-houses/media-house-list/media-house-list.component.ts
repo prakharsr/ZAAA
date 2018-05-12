@@ -8,8 +8,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { MediaHousePage } from '../media-house-page';
 
 @Component({
   selector: 'app-media-house-list',
@@ -19,16 +20,31 @@ import { Observable } from 'rxjs/Observable';
 export class MediaHouseListComponent implements OnInit {
 
   mediaHouses: MediaHouse[] = [];
-  globalMediaHouses: MediaHouse[] = [];
+
+  global: boolean;
+
+  pageCount: number;
+  page: number;
+
+  dummyArray;
 
   query: string;
   searchFailed = false;
 
-  constructor(private api: MediaHouseApiService, private dialog: DialogService, private router: Router) { }
+  constructor(private api: MediaHouseApiService,
+    private dialog: DialogService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.getMediaHouses().subscribe(data => this.mediaHouses = data);
-    this.api.getMediaHouses(true).subscribe(data => this.globalMediaHouses = data);
+    this.route.data.subscribe((data: { list: MediaHousePage, global: boolean }) => {
+      this.global = data.global;
+      this.mediaHouses = data.list.mediaHouses;
+      this.pageCount = data.list.pageCount;
+      this.page = data.list.page;
+
+      this.dummyArray = Array(this.pageCount);
+    });
   }
 
   search = (text: Observable<string>) =>

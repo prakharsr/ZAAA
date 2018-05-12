@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { MediaHouse, MediaHouseScheduling, Pullout } from './media-house';
 import { map, elementAt } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { MediaHousePage } from './media-house-page';
 
 @Injectable()
 export class MediaHouseApiService {
@@ -119,8 +120,8 @@ export class MediaHouseApiService {
     );
   }
 
-  getMediaHouses(global: boolean = false) : Observable<MediaHouse[]> {
-    return this.api.get(global ? '/user/mediahouses/global' : '/user/mediahouses').pipe(
+  getMediaHouses(page: number, global: boolean = false) : Observable<MediaHousePage> {
+    return this.api.get((global ? '/user/mediahouses/global/' : '/user/mediahouses/') + page).pipe(
       map(data => {
         let mediaHouses : MediaHouse[] = [];
 
@@ -130,7 +131,7 @@ export class MediaHouseApiService {
           });
         }
 
-        return mediaHouses;
+        return new MediaHousePage(mediaHouses, data.perPage, data.page, data.pageCount);
       })
     );
   }
