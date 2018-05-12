@@ -87,7 +87,26 @@ const routes: Routes = [
       },
       {
         path: 'media_houses',
+        data: {
+          global: false
+        },
         children: [
+          {
+            path: 'global',
+            data: {
+              global: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                component: MediaHouseListComponent,
+                resolve: {
+                  list: MediaHouseListResolver
+                }
+              }    
+            ]
+          },
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',

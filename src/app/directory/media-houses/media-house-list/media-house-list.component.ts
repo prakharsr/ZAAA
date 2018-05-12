@@ -20,7 +20,8 @@ import { MediaHousePage } from '../media-house-page';
 export class MediaHouseListComponent implements OnInit {
 
   mediaHouses: MediaHouse[] = [];
-  globalMediaHouses: MediaHouse[] = [];
+
+  global: boolean;
 
   pageCount: number;
   page: number;
@@ -36,15 +37,14 @@ export class MediaHouseListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: MediaHousePage }) => {
+    this.route.data.subscribe((data: { list: MediaHousePage, global: boolean }) => {
+      this.global = data.global;
       this.mediaHouses = data.list.mediaHouses;
       this.pageCount = data.list.pageCount;
       this.page = data.list.page;
 
       this.dummyArray = Array(this.pageCount);
     });
-    
-    this.api.getMediaHouses(1, true).subscribe(data => this.globalMediaHouses = data.mediaHouses);
   }
 
   search = (text: Observable<string>) =>

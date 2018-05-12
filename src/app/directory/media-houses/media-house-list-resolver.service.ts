@@ -12,8 +12,9 @@ export class MediaHouseListResolver implements Resolve<MediaHousePage> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MediaHousePage> {
     let page: any = route.paramMap.get('page');
+    let global: any = route.data.global;
 
-    return this.api.getMediaHouses(page).map(mediaHouse => {
+    return this.api.getMediaHouses(page, global).map(mediaHouse => {
       if (mediaHouse) {
         return mediaHouse;
       }
