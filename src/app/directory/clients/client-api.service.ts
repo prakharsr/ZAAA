@@ -5,6 +5,7 @@ import { Client, ContactPerson } from './client';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
+import { ClientPage } from './client-page';
 
 @Injectable()
 export class ClientApiService {
@@ -126,8 +127,8 @@ export class ClientApiService {
     );
   }
 
-  getClients() : Observable<Client[]> {
-    return this.api.get('/user/clients').pipe(
+  getClients(page: number) : Observable<ClientPage> {
+    return this.api.get('/user/clients/' + page).pipe(
       map(data => {
         let clients : Client[] = [];
 
@@ -137,7 +138,7 @@ export class ClientApiService {
           });
         }
 
-        return clients;
+        return new ClientPage(clients, data.perPage, data.page, data.pageCount);
       })
     );
   }

@@ -9,6 +9,7 @@ import { ClientComponent } from './clients/client/client.component';
 import { ClientListComponent } from './clients/client-list/client-list.component';
 import { ClientDetailsComponent } from './clients/client-details/client-details.component';
 import { ClientResolver } from './clients/client-resolver.service';
+import { ClientListResolver } from './clients/client-list-resolver.service';
 
 import { ExecutiveApiService } from './executives/executive-api.service';
 import { ExecutiveComponent } from './executives/executive/executive.component';
@@ -45,7 +46,8 @@ import { MediaHouseResolver } from './media-houses/media-house-resolver.service'
     MediaHouseApiService,
     ClientResolver,
     ExecutiveResolver,
-    MediaHouseResolver
+    MediaHouseResolver,
+    ClientListResolver
   ]
 })
 export class DirectoryModule { }
