@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ReleaseOrder } from './release-order';
+import { ReleaseOrderPage } from './release-order-page';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -38,8 +39,8 @@ export class ReleaseOrderApiService {
     );
   }
 
-  getReleaseOrders(): Observable<ReleaseOrder[]> {
-    return this.api.get('/user/releaseorders').pipe(
+  getReleaseOrders(page: number): Observable<ReleaseOrderPage> {
+    return this.api.get('/user/releaseorders/' + page).pipe(
       map(data => {
         let releaseOrders: ReleaseOrder[] = [];
 
@@ -49,7 +50,7 @@ export class ReleaseOrderApiService {
           });
         }
 
-        return releaseOrders;
+        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
       })
     )
   }

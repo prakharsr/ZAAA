@@ -8,13 +8,21 @@ import { ReleaseOrderDetailsComponent } from './release-order-details/release-or
 import { AuthGuard } from '../guards/auth-guard.service';
 import { ReleaseOrderResolver } from './release-order-resolver.service';
 import { RateCardResolver } from '../rate-card/rate-card-resolver.service';
+import { ReleaseOrderListResolver } from './release-order-list-resolver.service';
 
 const routes: Routes = [
   {
     path: 'releaseorders',
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: ReleaseOrderListComponent },
+      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      {
+        path: 'list/:page',
+        component: ReleaseOrderListComponent,
+        resolve: {
+          list: ReleaseOrderListResolver
+        }
+      },
       { path: 'new', component: ReleaseOrderComponent },
       {
         path: 'new/:copy',

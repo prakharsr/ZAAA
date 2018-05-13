@@ -22,7 +22,7 @@
         <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <br>
-          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}Dummy</a>
           <br><br>
           <span class="text-muted">Publication:</span> {{element.publicationName}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
@@ -60,4 +60,26 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
+
+  <br>
+
+  <nav *ngIf="pageCount != 0">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page == 1">
+        <a class="page-link" [routerLink]="['/releaseorders/list', +page - 1]" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i == page">
+        <a class="page-link" [routerLink]="['/releaseorders/list', i + 1]">{{i + 1}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="page == pageCount">
+        <a class="page-link" [routerLink]="['/releaseorders/list', +page + 1]" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>

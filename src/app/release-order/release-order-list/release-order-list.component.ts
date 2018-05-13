@@ -5,6 +5,8 @@ import { ReleaseOrder } from '../release-order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MailingDetails } from '../../models/mailing-details';
 import { MatTableDataSource } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { ReleaseOrderPage } from '../release-order-page';
 
 @Component({
   selector: 'app-release-order-list',
@@ -18,13 +20,25 @@ export class ReleaseOrderListComponent implements OnInit {
   displayedColumns = ['data', 'action'];
   dataSource = new MatTableDataSource();
 
-  constructor(private api: ReleaseOrderApiService, private dialog: DialogService) { }
+  pageCount: number;
+  page: number;
+
+  dummyArray;
+
+  constructor(private api: ReleaseOrderApiService,
+    private dialog: DialogService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.api.getReleaseOrders().subscribe(data => {
-      this.releaseOrders = data;
+    this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
+      this.releaseOrders = data.list.releaseOrders;
 
-      this.dataSource.data = data;
+      this.dataSource.data = this.releaseOrders;
+
+      this.pageCount = data.list.pageCount;
+      this.page = data.list.page;
+
+      this.dummyArray = Array(this.pageCount);
     });
   }
 
@@ -36,7 +50,7 @@ export class ReleaseOrderListComponent implements OnInit {
       this.api.deleteReleaseOrder(releaseOrder).subscribe(
         data => {
           if (data.success) {
-            this.releaseOrders = this.releaseOrders.filter(c => c.id !== releaseOrder.id);
+            this.dataSource.data = this.releaseOrders = this.releaseOrders.filter(c => c.id !== releaseOrder.id);
           }
           else {
             console.log(data);
