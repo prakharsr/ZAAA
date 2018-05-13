@@ -7,6 +7,7 @@ import { MailingDetails } from '../../models/mailing-details';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { ReleaseOrderPage } from '../release-order-page';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-release-order-list',
@@ -27,7 +28,8 @@ export class ReleaseOrderListComponent implements OnInit {
 
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
@@ -54,21 +56,56 @@ export class ReleaseOrderListComponent implements OnInit {
           }
           else {
             console.log(data);
+
+            this.notifications.show(data.msg);
           }
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+
+          this.notifications.show("Connection failed");
+        }
       );
     });
   }
 
-  sendMsg() {
-    this.dialog.getMailingDetails().subscribe(mailingDetails => {
-      if (mailingDetails) {
-        console.log(mailingDetails);
+  gen(releaseOrder: ReleaseOrder) {
+    this.api.generate(releaseOrder).subscribe(data => {
+      if (data.success) {
+        this.notifications.show("Generated");
       }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    },
+    err => {
+      console.log(err);
+
+      this.notifications.show("Connection failed");
     });
   }
 
-  mailingDetails(mailingDetails: MailingDetails) {}
+  sendMsg(releaseOrder: ReleaseOrder) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
 
+            this.notifications.show(data.msg);
+          }
+        },
+        err => {
+          console.log(err);
+
+          this.notifications.show("Connection failed");
+        });
+      }
+    });
+  }
 }

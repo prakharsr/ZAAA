@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ReleaseOrder } from './release-order';
 import { ReleaseOrderPage } from './release-order-page';
+import { MailingDetails } from '../models/mailing-details';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -79,7 +80,16 @@ export class ReleaseOrderApiService {
     return of([]);
   }
 
-  sendMail() {
-    return this.api.post('/user/releaseorders/email', {});
+  sendMail(releaseOrder: ReleaseOrder, mailingDetails: MailingDetails) {
+    return this.api.post('/user/releaseorders/email', {
+      id: releaseOrder.id,
+      ...mailingDetails
+    });
+  }
+
+  generate(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorder/download', {
+      id: releaseOrder.id
+    });
   }
 }

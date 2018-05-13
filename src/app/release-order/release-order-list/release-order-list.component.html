@@ -34,6 +34,12 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-menu #releaseOrderMenu="matMenu">
+            <button mat-menu-item (click)="gen(element.id)">
+              Generate
+            </button>
+            <button mat-menu-item (click)="sendMsg(element.id)">
+              <mat-icon>mail</mat-icon> Generate and Send
+            </button>
             <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
               <mat-icon>add</mat-icon> Copy into New
             </button>
@@ -42,9 +48,6 @@
             </button>
             <button mat-menu-item [routerLink]="['/releaseorders/edit', element.id]">
               <mat-icon>edit</mat-icon> Edit
-            </button>
-            <button mat-menu-item (click)="sendMsg()">
-              <mat-icon>mail</mat-icon> Mail
             </button>
             <button mat-menu-item class="text-danger" (click)="deleteReleaseOrder(element)">
               <mat-icon>delete</mat-icon> Delete
