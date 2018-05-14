@@ -100,7 +100,7 @@ export class ExecutiveApiService {
       Designation: executive.designation,
       Department: executive.department,
       MobileNo: executive.mobileNo,
-      EmailId: executive.mobileNo,
+      EmailId: executive.email,
       DateOfBirth: executive.dob,
       Anniversary: executive.anniversaryDate,
       Remark: executive.Remark
