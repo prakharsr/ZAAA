@@ -138,7 +138,7 @@ export class MediaHouseApiService {
 
   searchMediaHouses(query: string) : Observable<MediaHouse[]> {
     if (query) {
-      return this.api.get('/user/mediahouses/' + query).pipe(
+      return this.api.get('/user/mediahouses/search/' + query).pipe(
         map(data => {
           let mediaHouses : MediaHouse[] = [];
 
@@ -158,7 +158,7 @@ export class MediaHouseApiService {
 
   searchMediaHousesByEdition(query: string, mediaHouseName: string) : Observable<MediaHouse[]> {
     if (query && mediaHouseName) {
-      return this.api.get('/user/mediahouses/' + mediaHouseName + "/" + query).pipe(
+      return this.api.get('/user/mediahouses/search/' + mediaHouseName + "/" + query).pipe(
         map(data => {
           let mediaHouses : MediaHouse[] = [];
 

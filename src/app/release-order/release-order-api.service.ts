@@ -60,24 +60,26 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(query: string) : Observable<ReleaseOrder[]> {
-    if (query) {
-      return this.api.get('/user/releaseorders/' + query).pipe(
-        map(data => {
-          let releaseOrders : ReleaseOrder[] = [];
+  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string) : Observable<ReleaseOrderPage> {
+    return this.api.post('/user/releaseorders/search', {
+      publicationName: mediaHouseName,
+      publicationEdition: edition,
+      clientName: clientName,
+      executiveName: executiveName,
+      executiveOrg: executiveOrg
+    }).pipe(
+      map(data => {
+        let releaseOrders : ReleaseOrder[] = [];
 
-          if (data.success) {
-            data.releaseOrders.forEach(element => {
-              releaseOrders.push(this.bodyToReleaseOrder(element));
-            });
-          }
+        if (data.success) {
+          data.releaseOrders.forEach(element => {
+            releaseOrders.push(this.bodyToReleaseOrder(element));
+          });
+        }
 
-          return releaseOrders;
-        })
-      );
-    }
-    
-    return of([]);
+        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
+      })
+    );
   }
 
   sendMail(releaseOrder: ReleaseOrder, mailingDetails: MailingDetails) {

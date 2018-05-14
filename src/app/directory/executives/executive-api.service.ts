@@ -74,7 +74,7 @@ export class ExecutiveApiService {
 
   searchExecutives(query: string) : Observable<Executive[]> {
     if (query) {
-      return this.api.get('/user/executives/' + query).pipe(
+      return this.api.get('/user/executives/search/' + query).pipe(
         map(data => {
           let executives : Executive[] = [];
 
@@ -89,6 +89,26 @@ export class ExecutiveApiService {
       );
     }
     
+    return of([]);
+  }
+
+  searchExecutivesByOrg(org: string, query: string) : Observable<Executive[]> {
+    if (query) {
+      return this.api.get('/user/executives/search/' + org + '/' + query).pipe(
+        map(data => {
+          let executives : Executive[] = [];
+
+          if (data.success) {
+            data.executives.forEach(element => {
+              executives.push(this.bodyToExecutive(element));     
+            });
+          }
+
+          return executives;
+        })
+      );
+    }
+
     return of([]);
   }
 

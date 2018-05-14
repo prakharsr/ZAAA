@@ -145,7 +145,7 @@ export class ClientApiService {
 
   searchClients(query: string) : Observable<Client[]> {
     if (query) {
-      return this.api.get('/user/clients/' + query).pipe(
+      return this.api.get('/user/clients/search/' + query).pipe(
         map(data => {
           let clients : Client[] = [];
 

@@ -248,7 +248,7 @@ export class RateCardApiService {
 
   searchRateCards(query: string) : Observable<RateCard[]> {
     if (query) {
-      return this.api.get('/user/ratecards/' + query).pipe(
+      return this.api.get('/user/ratecards/search/' + query).pipe(
         map(data => {
           let ratecards : RateCard[] = [];
 

@@ -34,13 +34,11 @@ export class ReleaseOrderListComponent implements OnInit {
 
   dummyArray;
 
-  queryPubname;
-  queryPubedition;
-  queryClientname;
-  queryExecutivename;
-  queryExecutiveorganisation;
-
-  searchFailed = false;
+  mediaHouse;
+  edition;
+  client;
+  executive;
+  executiveOrg;
 
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
@@ -53,15 +51,19 @@ export class ReleaseOrderListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
-      this.releaseOrders = data.list.releaseOrders;
-
-      this.dataSource.data = this.releaseOrders;
-
-      this.pageCount = data.list.pageCount;
-      this.page = data.list.page;
-
-      this.dummyArray = Array(this.pageCount);
+      this.init(data.list);
     });
+  }
+
+  private init(data: ReleaseOrderPage) {
+    this.releaseOrders = data.releaseOrders;
+
+    this.dataSource.data = this.releaseOrders;
+
+    this.pageCount = data.pageCount;
+    this.page = data.page;
+
+    this.dummyArray = Array(this.pageCount);
   }
 
   searchClient = (text: Observable<string>) => {
@@ -80,7 +82,23 @@ export class ReleaseOrderListComponent implements OnInit {
       .catch(() => of([]));
   }
 
-  executiveNameFormatter = (executive: Executive) => executive.executiveName;
+  private get executiveName() {
+    return this.executive ? (this.executive.executiveName ? this.executive.executiveName : this.executive) : null;
+  }
+
+  searchExecutiveOrg = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.executiveApi.searchExecutivesByOrg(this.executiveName, term))
+      .catch(() => of([]));
+  }
+
+  executiveNameFormatter = (executive: Executive) => {
+    this.executiveOrg = executive;
+
+    return executive.executiveName;
+  }
+  
   executiveOrgFormatter = (executive: Executive) => executive.orgName;
 
   searchMediaHouse = (text: Observable<string>) => {
@@ -90,7 +108,24 @@ export class ReleaseOrderListComponent implements OnInit {
       .catch(() => of([]));
   }
 
-  mediaHouseNameFormatter = (mediaHouse: MediaHouse) => mediaHouse.pubName;
+  private get mediaHouseName() {
+    return this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null;
+  }
+
+  searchEdition = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHousesByEdition(term, this.mediaHouseName))
+      .catch(() => of([]));
+  }
+
+  editionFormatter = (mediaHouse: MediaHouse) => mediaHouse.address.edition;
+
+  mediaHouseNameFormatter = (mediaHouse: MediaHouse) => {
+    this.edition = mediaHouse;
+
+    return mediaHouse.pubName;
+  }
 
   deleteReleaseOrder(releaseOrder: ReleaseOrder) {
     this.dialog.confirmDeletion("Are you sure you want to delete this Release Order?").subscribe(confirm => {
@@ -154,6 +189,31 @@ export class ReleaseOrderListComponent implements OnInit {
           this.notifications.show("Connection failed");
         });
       }
+    });
+  }
+
+  private get editionName() {
+    return this.edition ? (this.edition.address ? this.edition.address.edition : this.edition) : null;
+  }
+
+  private get clientName() {
+    return this.client ? (this.client.orgName ? this.client.orgName : this.client) : null;
+  }
+
+  private get exeOrg() {
+    return this.executiveOrg ? (this.executiveOrg.orgName ? this.executiveOrg.orgName : this.executiveOrg) : null;
+  }
+
+  search() {
+    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.executiveOrg).subscribe(data => {
+      this.init(data);
+
+      this.notifications.show('Searched')
+    },
+    err => {
+      console.log(err);
+
+      this.notifications.show('Connection failed');
     });
   }
 }
