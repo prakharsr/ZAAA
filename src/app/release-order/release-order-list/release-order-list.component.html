@@ -34,10 +34,10 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
           <mat-menu #releaseOrderMenu="matMenu">
-            <button mat-menu-item (click)="gen(element.id)">
+            <button mat-menu-item (click)="gen(element)">
               Generate
             </button>
-            <button mat-menu-item (click)="sendMsg(element.id)">
+            <button mat-menu-item (click)="sendMsg(element)">
               <mat-icon>mail</mat-icon> Generate and Send
             </button>
             <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
