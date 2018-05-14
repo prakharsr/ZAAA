@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { DialogService } from '../../services/dialog.service';
+import { DialogService } from '../../services/dialog.service'
+import { Observable } from 'rxjs/Observable';;
 import { ReleaseOrder } from '../release-order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MailingDetails } from '../../models/mailing-details';
 import { MatTableDataSource } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReleaseOrderPage } from '../release-order-page';
 import { NotificationService } from '../../services/notification.service';
+import {of} from 'rxjs/observable/of';
+import { ClientApiService } from '../../directory/clients/client-api.service';
+import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
+import { Client } from '../../directory/clients/client';
+import { Executive } from '../../directory/executives/executive';
+import { MediaHouse } from '../../directory/media-houses/media-house';
 
 @Component({
   selector: 'app-release-order-list',
@@ -26,10 +34,22 @@ export class ReleaseOrderListComponent implements OnInit {
 
   dummyArray;
 
+  queryPubname;
+  queryPubedition;
+  queryClientname;
+  queryExecutivename;
+  queryExecutiveorganisation;
+
+  searchFailed = false;
+
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
     private route: ActivatedRoute,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private router: Router,
+    private clientApi: ClientApiService,
+    private mediaHouseApi: MediaHouseApiService,
+    private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
@@ -43,6 +63,34 @@ export class ReleaseOrderListComponent implements OnInit {
       this.dummyArray = Array(this.pageCount);
     });
   }
+
+  searchClient = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.clientApi.searchClients(term))
+      .catch(() => of([]));
+  }
+
+  clientNameFormatter = (client: Client) => client.orgName;
+  
+  searchExecutive = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.executiveApi.searchExecutives(term))
+      .catch(() => of([]));
+  }
+
+  executiveNameFormatter = (executive: Executive) => executive.executiveName;
+  executiveOrgFormatter = (executive: Executive) => executive.orgName;
+
+  searchMediaHouse = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
+      .catch(() => of([]));
+  }
+
+  mediaHouseNameFormatter = (mediaHouse: MediaHouse) => mediaHouse.pubName;
 
   deleteReleaseOrder(releaseOrder: ReleaseOrder) {
     this.dialog.confirmDeletion("Are you sure you want to delete this Release Order?").subscribe(confirm => {

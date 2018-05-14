@@ -6,7 +6,47 @@
 
 <br>
 
+<ng-template #rtPubname let-r="result">
+  {{r.pubName}}
+</ng-template>
+
+<ng-template #rtPubedition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtClientname let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<ng-template #rtExecutivename let-r="result">
+  {{r.executiveName}}
+</ng-template>
+
+<ng-template #rtExecutiveorganisation let-r="result">
+  {{r.orgName}}
+</ng-template>
+
 <div class="container">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="queryPubname" [ngbTypeahead]="searchMediaHouse" placeholder="Search" [resultTemplate]="rtPubname" [inputFormatter]="mediaHouseNameFormatter"/>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="queryPubedition" [ngbTypeahead]="searchMediaHouse" placeholder="Search" [resultTemplate]="rtPubedition"/>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="queryClientname" [ngbTypeahead]="searchClient" placeholder="Search" [resultTemplate]="rtClientname" [inputFormatter]="clientNameFormatter" />
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="queryExecutivename" [ngbTypeahead]="searchExecutive" placeholder="Search" [resultTemplate]="rtExecutivename" [inputFormatter]="executiveNameFormatter" />
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="queryExecutiveorganisation" [ngbTypeahead]="searchExecutive" placeholder="Search" [resultTemplate]="rtExecutiveorganisation" [inputFormatter]="executiveOrgFormatter" />
+  </div>
+
   <button class="fab" routerLink="/releaseorders/new">
     <mat-icon>add</mat-icon>
   </button>
