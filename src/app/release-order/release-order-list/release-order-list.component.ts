@@ -16,6 +16,7 @@ import { ExecutiveApiService } from '../../directory/executives/executive-api.se
 import { Client } from '../../directory/clients/client';
 import { Executive } from '../../directory/executives/executive';
 import { MediaHouse } from '../../directory/media-houses/media-house';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-release-order-list',
@@ -49,7 +50,8 @@ export class ReleaseOrderListComponent implements OnInit {
     private router: Router,
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
-    private executiveApi: ExecutiveApiService) { }
+    private executiveApi: ExecutiveApiService,
+    private windowService: WindowService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
@@ -156,13 +158,19 @@ export class ReleaseOrderListComponent implements OnInit {
 
   gen(releaseOrder: ReleaseOrder) {
     this.api.generate(releaseOrder).subscribe(data => {
-      if (data.success) {
-        this.notifications.show("Generated");
+      if (data.msg) {
+        this.notifications.show(data.msg);
       }
       else {
         console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
 
-        this.notifications.show(data.msg);
+        let a = this.windowService.window.document.createElement('a');
+        a.download = 'releaseorder.pdf';
+        a.href = url;
+        a.click();
       }
     },
     err => {

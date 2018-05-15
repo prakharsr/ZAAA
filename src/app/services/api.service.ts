@@ -58,14 +58,16 @@ export class ApiService {
     return { headers: { Authorization: this.authToken }};
   }
 
-  post(url: string, body: any) : Observable<any> {
+  post(url: string, body: any, extra = {}) : Observable<any> {
 
     this.loaderService.show();
 
     if (this.authToken)
     {
-        return this.http.post(environment.apiUrl + url, body, this.headers)
-          .finally(() => this.loaderService.hide());
+        return this.http.post(environment.apiUrl + url, body, {
+          ...this.headers,
+          ...extra
+        }).finally(() => this.loaderService.hide());
     }
     else {
       return this.http.post(environment.apiUrl + url, body)

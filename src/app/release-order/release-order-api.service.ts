@@ -93,6 +93,6 @@ export class ReleaseOrderApiService {
   generate(releaseOrder: ReleaseOrder) {
     return this.api.post('/user/releaseorder/download', {
       id: releaseOrder.id
-    });
+    }, { responseType: 'blob' });
   }
 }
