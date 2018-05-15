@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReleaseOrderApiService } from '../release-order-api.service';
 import { DialogService } from '../../services/dialog.service'
-import { Observable } from 'rxjs/Observable';;
+import { Observable } from 'rxjs/Observable';
 import { ReleaseOrder } from '../release-order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MailingDetails } from '../../models/mailing-details';

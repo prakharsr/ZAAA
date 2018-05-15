@@ -77,6 +77,7 @@ export class ReleaseOrderApiService {
 
   searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<ReleaseOrder>> {
     return this.api.post('/user/releaseorders/search', {
+      page: 1,
       publicationName: mediaHouseName,
       publicationEdition: edition,
       clientName: clientName,
@@ -94,6 +95,28 @@ export class ReleaseOrderApiService {
         }
 
         return new PageData<ReleaseOrder>(releaseOrders, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  searchInsertions(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<InsertionCheckItem>> {
+    return this.api.post('/user/releaseorders/insertions/search', {
+      page: 1,
+      publicationName: mediaHouseName,
+      publicationEdition: edition,
+      clientName: clientName,
+      executiveName: executiveName,
+      executiveOrg: executiveOrg,
+      insertionPeriod: creationPeriod
+    }).pipe(
+      map(data => {
+        let insertions : InsertionCheckItem[] = [];
+
+        if (data.success) {
+          insertions = data.insertions;
+        }
+
+        return new PageData<InsertionCheckItem>(insertions, data.perPage, data.page, data.pageCount);
       })
     );
   }
