@@ -1,7 +1,7 @@
 import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 
 export class Insertion {
-    constructor(public date: NgbDate, public marked = false) {}
+    constructor(public date: NgbDate, public marked = false, public state = 0) {}
 }
 
 export class TaxValues

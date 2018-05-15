@@ -3,9 +3,9 @@ import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ReleaseOrder } from './release-order';
-import { ReleaseOrderPage } from './release-order-page';
+import { ReleaseOrder, Insertion } from './release-order';
 import { MailingDetails } from '../models/mailing-details';
+import { PageData } from '../models/page-data';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -40,7 +40,7 @@ export class ReleaseOrderApiService {
     );
   }
 
-  getReleaseOrders(page: number): Observable<ReleaseOrderPage> {
+  getReleaseOrders(page: number): Observable<PageData<ReleaseOrder>> {
     return this.api.get('/user/releaseorders/' + page).pipe(
       map(data => {
         let releaseOrders: ReleaseOrder[] = [];
@@ -51,7 +51,21 @@ export class ReleaseOrderApiService {
           });
         }
 
-        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
+        return new PageData<ReleaseOrder>(releaseOrders, data.perPage, data.page, data.pageCount);
+      })
+    )
+  }
+
+  getInsertions(page: number): Observable<PageData<Insertion>> {
+    return this.api.get('/user/releaseorders/insertions/' + page).pipe(
+      map(data => {
+        let insertions: Insertion[] = [];
+
+        if (data.success) {
+          insertions = data.insertions;
+        }
+
+        return new PageData<Insertion>(insertions, data.perPage, data.page, data.pageCount);
       })
     )
   }
@@ -60,7 +74,7 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<ReleaseOrderPage> {
+  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<ReleaseOrder>> {
     return this.api.post('/user/releaseorders/search', {
       publicationName: mediaHouseName,
       publicationEdition: edition,
@@ -78,7 +92,7 @@ export class ReleaseOrderApiService {
           });
         }
 
-        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
+        return new PageData<ReleaseOrder>(releaseOrders, data.perPage, data.page, data.pageCount);
       })
     );
   }

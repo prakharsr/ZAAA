@@ -11,6 +11,7 @@ import { ReleaseOrderListResolver } from './release-order-list-resolver.service'
 import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
 import { ReleaseOrderDetailsComponent } from './release-order-details/release-order-details.component';
+import { InsertionCheckComponent } from './insertion-check/insertion-check.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ReleaseOrderDetailsComponent } from './release-order-details/release-or
   declarations: [
     ReleaseOrderComponent,
     ReleaseOrderListComponent,
-    ReleaseOrderDetailsComponent
+    ReleaseOrderDetailsComponent,
+    InsertionCheckComponent
   ]
 })
 export class ReleaseOrderModule { }

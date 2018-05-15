@@ -10,7 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RateCardPage } from '../rate-card-page';
+import { PageData } from '../../models/page-data';
 
 @Component({
   selector: 'app-rate-card-list',
@@ -36,9 +36,9 @@ export class RateCardListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: RateCardPage, global: boolean }) => {
+    this.route.data.subscribe((data: { list: PageData<RateCard>, global: boolean }) => {
         this.global = data.global;
-        this.ratecards = data.list.rateCards;
+        this.ratecards = data.list.list;
         this.pageCount = data.list.pageCount;
         this.page = data.list.page;
   
