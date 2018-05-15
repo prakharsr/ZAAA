@@ -3,9 +3,10 @@ import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ReleaseOrder, Insertion } from './release-order';
+import { ReleaseOrder } from './release-order';
 import { MailingDetails } from '../models/mailing-details';
 import { PageData } from '../models/page-data';
+import { InsertionCheckItem } from './insertion-check-item';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -56,16 +57,16 @@ export class ReleaseOrderApiService {
     )
   }
 
-  getInsertions(page: number): Observable<PageData<Insertion>> {
+  getInsertions(page: number): Observable<PageData<InsertionCheckItem>> {
     return this.api.get('/user/releaseorders/insertions/' + page).pipe(
       map(data => {
-        let insertions: Insertion[] = [];
+        let insertions: InsertionCheckItem[] = [];
 
         if (data.success) {
           insertions = data.insertions;
         }
 
-        return new PageData<Insertion>(insertions, data.perPage, data.page, data.pageCount);
+        return new PageData<InsertionCheckItem>(insertions, data.perPage, data.page, data.pageCount);
       })
     )
   }

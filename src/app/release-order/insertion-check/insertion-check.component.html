@@ -1,3 +1,54 @@
-<p>
-  insertion-check works!
-</p>
+<div class="container">
+  <br><br>
+
+  <h2 style="font-weight: lighter">Insertion Check</h2>
+
+  <br><br>
+
+  <div *ngFor="let insertion of insertions">
+    <div class="card mb-2">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-auto">
+            <mat-checkbox [(ngModel)]="insertion.checked"></mat-checkbox>
+          </div>
+          <div class="col">
+            <strong>Client:</strong> {{insertion.clientName}}<br>
+            <strong>Publication:</strong> {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
+            <strong>Executive:</strong> {{insertion.executiveName}} - {{insertion.executiveOrg}}
+          </div>
+          <div class="col-auto">
+            {{toDate(insertion.insertions.date) | date}}
+          </div>
+          <div class="col-auto">
+            <span *ngIf="insertion.insertions.state == 0" class="text-muted">Not Published</span>
+            <span *ngIf="insertion.insertions.state == 1" class="text-success">Published</span>
+            <span *ngIf="insertion.insertions.state == 2" class="text-danger">Disputed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <nav *ngIf="pageCount != 0">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page == 1">
+        <a class="page-link" [routerLink]="['/releaseorders/check/list', +page - 1]" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i == page">
+        <a class="page-link" [routerLink]="['/releaseorders/check/list', i + 1]">{{i + 1}}</a>
+      </li>
+      <li class="page-item" [class.disabled]="page == pageCount">
+        <a class="page-link" [routerLink]="['/releaseorders/check/list', +page + 1]" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
