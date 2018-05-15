@@ -4,7 +4,7 @@ import { RateCard, FixSize, Remark } from './rate-card';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { RateCardPage } from './rate-card-page';
+import { PageData } from '../models/page-data';
 
 @Injectable()
 export class RateCardApiService {
@@ -230,7 +230,7 @@ export class RateCardApiService {
     );
   }
 
-  getRateCards(page: number, global: boolean = false) : Observable<RateCardPage> {
+  getRateCards(page: number, global: boolean = false) : Observable<PageData<RateCard>> {
     return this.api.get((global ? '/user/ratecards/global/' : '/user/ratecards/') + page).pipe(
       map(data => {
         let ratecards : RateCard[] = [];
@@ -241,7 +241,7 @@ export class RateCardApiService {
           });
         }
 
-        return new RateCardPage(ratecards, data.perPage, data.page, data.pageCount);
+        return new PageData<RateCard>(ratecards, data.perPage, data.page, data.pageCount);
       })
     );
   }

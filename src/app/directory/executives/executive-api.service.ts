@@ -5,7 +5,7 @@ import { Executive } from './executive';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
-import { ExecutivePage } from './executive-page';
+import { PageData } from '../../models/page-data';
 
 @Injectable()
 export class ExecutiveApiService {
@@ -56,7 +56,7 @@ export class ExecutiveApiService {
     );
   }
 
-  getExecutives(page: number) : Observable<ExecutivePage> {
+  getExecutives(page: number) : Observable<PageData<Executive>> {
     return this.api.get('/user/executives/' + page).pipe(
       map(data => {
         let executives : Executive[] = [];
@@ -67,7 +67,7 @@ export class ExecutiveApiService {
           });
         }
 
-        return new ExecutivePage(executives, data.perPage, data.page, data.pageCount);
+        return new PageData<Executive>(executives, data.perPage, data.page, data.pageCount);
       })
     );
   }

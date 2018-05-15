@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MediaHousePage } from '../media-house-page';
+import { PageData } from '../../../models/page-data';
 
 @Component({
   selector: 'app-media-house-list',
@@ -37,9 +37,9 @@ export class MediaHouseListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: MediaHousePage, global: boolean }) => {
+    this.route.data.subscribe((data: { list: PageData<MediaHouse>, global: boolean }) => {
       this.global = data.global;
-      this.mediaHouses = data.list.mediaHouses;
+      this.mediaHouses = data.list.list;
       this.pageCount = data.list.pageCount;
       this.page = data.list.page;
 

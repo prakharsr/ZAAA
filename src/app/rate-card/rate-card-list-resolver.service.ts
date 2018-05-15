@@ -3,14 +3,15 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { RateCardPage } from './rate-card-page';
 import { RateCardApiService } from './rate-card-api.service';
+import { PageData } from '../models/page-data';
+import { RateCard } from './rate-card';
 
 @Injectable()
-export class RateCardListResolver implements Resolve<RateCardPage> {
+export class RateCardListResolver implements Resolve<PageData<RateCard>> {
   constructor(private api: RateCardApiService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RateCardPage> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageData<RateCard>> {
     let page: any = route.paramMap.get('page');
     let global: any = route.data.global;
 

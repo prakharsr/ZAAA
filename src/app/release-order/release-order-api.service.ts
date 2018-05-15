@@ -4,8 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ReleaseOrder } from './release-order';
-import { ReleaseOrderPage } from './release-order-page';
 import { MailingDetails } from '../models/mailing-details';
+import { PageData } from '../models/page-data';
+import { InsertionCheckItem } from './insertion-check-item';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -40,7 +41,7 @@ export class ReleaseOrderApiService {
     );
   }
 
-  getReleaseOrders(page: number): Observable<ReleaseOrderPage> {
+  getReleaseOrders(page: number): Observable<PageData<ReleaseOrder>> {
     return this.api.get('/user/releaseorders/' + page).pipe(
       map(data => {
         let releaseOrders: ReleaseOrder[] = [];
@@ -51,7 +52,21 @@ export class ReleaseOrderApiService {
           });
         }
 
-        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
+        return new PageData<ReleaseOrder>(releaseOrders, data.perPage, data.page, data.pageCount);
+      })
+    )
+  }
+
+  getInsertions(page: number): Observable<PageData<InsertionCheckItem>> {
+    return this.api.get('/user/releaseorders/insertions/' + page).pipe(
+      map(data => {
+        let insertions: InsertionCheckItem[] = [];
+
+        if (data.success) {
+          insertions = data.insertions;
+        }
+
+        return new PageData<InsertionCheckItem>(insertions, data.perPage, data.page, data.pageCount);
       })
     )
   }
@@ -60,7 +75,7 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<ReleaseOrderPage> {
+  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<ReleaseOrder>> {
     return this.api.post('/user/releaseorders/search', {
       publicationName: mediaHouseName,
       publicationEdition: edition,
@@ -78,9 +93,16 @@ export class ReleaseOrderApiService {
           });
         }
 
-        return new ReleaseOrderPage(releaseOrders, data.perPage, data.page, data.pageCount);
+        return new PageData<ReleaseOrder>(releaseOrders, data.perPage, data.page, data.pageCount);
       })
     );
+  }
+
+  setInsertionCheck(state: number, ids: string[]) {
+    return this.api.post('/user/releaseorders/insertions/check', {
+      ids: ids,
+      state: state
+    });
   }
 
   sendMail(releaseOrder: ReleaseOrder, mailingDetails: MailingDetails) {

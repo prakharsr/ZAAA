@@ -10,7 +10,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ExecutivePage } from '../executive-page';
+import { PageData } from '../../../models/page-data';
 
 @Component({
   selector: 'app-executive-list',
@@ -36,8 +36,8 @@ constructor(private api: ExecutiveApiService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: ExecutivePage }) => {
-        this.executives = data.list.executives;
+    this.route.data.subscribe((data: { list: PageData<Executive> }) => {
+        this.executives = data.list.list;
         this.pageCount = data.list.pageCount;
         this.page = data.list.page;
   

@@ -7,7 +7,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MailingDetails } from '../../models/mailing-details';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReleaseOrderPage } from '../release-order-page';
 import { NotificationService } from '../../services/notification.service';
 import {of} from 'rxjs/observable/of';
 import { ClientApiService } from '../../directory/clients/client-api.service';
@@ -17,6 +16,7 @@ import { Client } from '../../directory/clients/client';
 import { Executive } from '../../directory/executives/executive';
 import { MediaHouse } from '../../directory/media-houses/media-house';
 import { WindowService } from '../../services/window.service';
+import { PageData } from '../../models/page-data';
 
 @Component({
   selector: 'app-release-order-list',
@@ -54,13 +54,13 @@ export class ReleaseOrderListComponent implements OnInit {
     private windowService: WindowService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: ReleaseOrderPage }) => {
+    this.route.data.subscribe((data: { list: PageData<ReleaseOrder> }) => {
       this.init(data.list);
     });
   }
 
-  private init(data: ReleaseOrderPage) {
-    this.releaseOrders = data.releaseOrders;
+  private init(data: PageData<ReleaseOrder>) {
+    this.releaseOrders = data.list;
 
     this.dataSource.data = this.releaseOrders;
 

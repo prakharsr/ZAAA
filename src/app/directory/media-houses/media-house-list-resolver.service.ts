@@ -3,14 +3,15 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { MediaHousePage } from './media-house-page';
 import { MediaHouseApiService } from './media-house-api.service';
+import { PageData } from '../../models/page-data';
+import { MediaHouse } from './media-house';
 
 @Injectable()
-export class MediaHouseListResolver implements Resolve<MediaHousePage> {
+export class MediaHouseListResolver implements Resolve<PageData<MediaHouse>> {
   constructor(private api: MediaHouseApiService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MediaHousePage> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageData<MediaHouse>> {
     let page: any = route.paramMap.get('page');
     let global: any = route.data.global;
 

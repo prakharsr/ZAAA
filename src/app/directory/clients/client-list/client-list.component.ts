@@ -10,7 +10,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClientPage } from '../client-page';
+import { PageData } from '../../../models/page-data';
 
 @Component({
   selector: 'app-client-list',
@@ -35,8 +35,8 @@ export class ClientListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: ClientPage }) => {
-      this.clients = data.list.clients;
+    this.route.data.subscribe((data: { list: PageData<Client> }) => {
+      this.clients = data.list.list;
       this.pageCount = data.list.pageCount;
       this.page = data.list.page;
 
