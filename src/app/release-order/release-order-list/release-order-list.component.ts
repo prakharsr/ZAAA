@@ -40,6 +40,8 @@ export class ReleaseOrderListComponent implements OnInit {
   executive;
   executiveOrg;
 
+  pastDays = 0;
+
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
     private route: ActivatedRoute,
@@ -205,7 +207,7 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   search() {
-    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg).subscribe(data => {
+    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays).subscribe(data => {
       this.init(data);
 
       this.notifications.show('Searched')

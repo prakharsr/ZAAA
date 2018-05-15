@@ -48,6 +48,15 @@
       <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
     </div>
 
+    <div class="form-group col-6 col-md">
+      <select [(ngModel)]="pastDate">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
     <div class="col-auto">
       <button class="btn btn-info" (click)="search()">
         <mat-icon>search</mat-icon>

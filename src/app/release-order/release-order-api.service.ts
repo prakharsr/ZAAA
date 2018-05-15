@@ -60,13 +60,14 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string) : Observable<ReleaseOrderPage> {
+  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<ReleaseOrderPage> {
     return this.api.post('/user/releaseorders/search', {
       publicationName: mediaHouseName,
       publicationEdition: edition,
       clientName: clientName,
       executiveName: executiveName,
-      executiveOrg: executiveOrg
+      executiveOrg: executiveOrg,
+      creationPeriod: creationPeriod
     }).pipe(
       map(data => {
         let releaseOrders : ReleaseOrder[] = [];
