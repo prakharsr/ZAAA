@@ -98,6 +98,13 @@ export class ReleaseOrderApiService {
     );
   }
 
+  setInsertionCheck(state: number, ids: string[]) {
+    return this.api.post('/user/releaseorders/insertions/check', {
+      ids: ids,
+      state: state
+    });
+  }
+
   sendMail(releaseOrder: ReleaseOrder, mailingDetails: MailingDetails) {
     return this.api.post('/user/releaseorders/email', {
       id: releaseOrder.id,

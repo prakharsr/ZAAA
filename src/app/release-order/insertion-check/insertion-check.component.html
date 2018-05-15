@@ -3,6 +3,14 @@
 
   <h2 style="font-weight: lighter">Insertion Check</h2>
 
+  <br>
+
+  Mark selected as:
+
+  <button (click)="mark(0)" class="btn btn-primary ml-3">Not Published</button>
+  <button (click)="mark(1)" class="btn btn-success">Published</button>
+  <button (click)="mark(2)" class="btn btn-danger">Disputed</button>
+
   <br><br>
 
   <div *ngFor="let insertion of insertions">
