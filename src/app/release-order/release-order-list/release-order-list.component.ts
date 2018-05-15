@@ -205,7 +205,7 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   search() {
-    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.executiveOrg).subscribe(data => {
+    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg).subscribe(data => {
       this.init(data);
 
       this.notifications.show('Searched')
