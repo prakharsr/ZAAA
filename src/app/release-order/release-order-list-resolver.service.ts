@@ -34,8 +34,7 @@ export class ReleaseOrderListResolver implements Resolve<Result> {
           search: searchParams
         }
       }
-      else { // id not found
-        this.router.navigateByUrl('/releaseorders');
+      else {
         return null;
       }
     })

@@ -107,7 +107,11 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   private get executiveName() {
-    return this.executive ? (this.executive.executiveName ? this.executive.executiveName : this.executive) : null;
+    if (this.executive instanceof String) {
+      return this.executive;
+    }
+
+    return this.executive ? this.executive.executiveName : null;
   }
 
   searchExecutiveOrg = (text: Observable<string>) => {
@@ -133,7 +137,11 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   private get mediaHouseName() {
-    return this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null;
+    if (this.mediaHouse instanceof String) {
+      return this.mediaHouse;
+    }
+
+    return this.mediaHouse ? this.mediaHouse.pubName : null;
   }
 
   searchEdition = (text: Observable<string>) => {
@@ -223,15 +231,27 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   private get editionName() {
-    return this.edition ? (this.edition.address ? this.edition.address.edition : this.edition) : null;
+    if (this.edition instanceof String) {
+      return this.edition;
+    }
+
+    return this.edition ? (this.edition.address ? this.edition.address.edition : null) : null;
   }
 
   private get clientName() {
-    return this.client ? (this.client.orgName ? this.client.orgName : this.client) : null;
+    if (this.client instanceof String) {
+      return this.client;
+    }
+
+    return this.client ? this.client.orgName : null;
   }
 
   private get exeOrg() {
-    return this.executiveOrg ? (this.executiveOrg.orgName ? this.executiveOrg.orgName : this.executiveOrg) : null;
+    if (this.executiveOrg instanceof String) {
+      return this.executiveOrg;
+    }
+
+    return this.executiveOrg ? this.executiveOrg.orgName : null;
   }
 
   search(pageNo?: number) {
@@ -239,7 +259,7 @@ export class ReleaseOrderListComponent implements OnInit {
       pageNo = this.page;
     }
 
-    this.router.navigateByUrl('/releaseorders/list/' + pageNo, {
+    this.router.navigate(['/releaseorders/list/', pageNo], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
   }
