@@ -55,27 +55,27 @@ export class ReleaseOrderListComponent implements OnInit {
     private windowService: WindowService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }) => {
-      this.init(data.list);
+    this.route.data.subscribe((data: { resolved: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }}) => {
+      this.init(data.resolved.list);
 
       let pub = new MediaHouse();
-      pub.pubName = data.search.mediaHouse;
-      pub.address.edition = data.search.edition;
+      pub.pubName = data.resolved.search.mediaHouse;
+      pub.address.edition = data.resolved.search.edition;
 
       this.mediaHouse = this.edition = pub;
      
       let cl = new Client();
-      cl.orgName = data.search.client;
+      cl.orgName = data.resolved.search.client;
 
       this.client = cl;
 
       let exe = new Executive();
-      exe.executiveName = data.search.executive;
-      exe.orgName = data.search.executiveOrg;
+      exe.executiveName = data.resolved.search.executive;
+      exe.orgName = data.resolved.search.executiveOrg;
 
       this.executive = this.executiveOrg = exe;
 
-      this.pastDays = data.search.past;
+      this.pastDays = data.resolved.search.past;
     });
   }
 
@@ -234,16 +234,13 @@ export class ReleaseOrderListComponent implements OnInit {
     return this.executiveOrg ? (this.executiveOrg.orgName ? this.executiveOrg.orgName : this.executiveOrg) : null;
   }
 
-  search() {
-    this.api.searchReleaseOrders(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays).subscribe(data => {
-      this.init(data);
+  search(pageNo?: number) {
+    if (!pageNo) {
+      pageNo = this.page;
+    }
 
-      this.notifications.show('Searched')
-    },
-    err => {
-      console.log(err);
-
-      this.notifications.show('Connection failed');
+    this.router.navigateByUrl('/releaseorders/list/' + pageNo, {
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
   }
 }

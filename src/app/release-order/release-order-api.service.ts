@@ -7,6 +7,7 @@ import { ReleaseOrder } from './release-order';
 import { MailingDetails } from '../models/mailing-details';
 import { PageData } from '../models/page-data';
 import { InsertionCheckItem } from './insertion-check-item';
+import { ReleaseOrderSearchParams } from './release-order-search-params';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -75,15 +76,15 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<ReleaseOrder>> {
+  searchReleaseOrders(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<ReleaseOrder>> {
     return this.api.post('/user/releaseorders/search', {
-      page: 1,
-      publicationName: mediaHouseName,
-      publicationEdition: edition,
-      clientName: clientName,
-      executiveName: executiveName,
-      executiveOrg: executiveOrg,
-      creationPeriod: creationPeriod
+      page: page,
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      clientName: params.client,
+      executiveName: params.executive,
+      executiveOrg: params.executiveOrg,
+      creationPeriod: params.past
     }).pipe(
       map(data => {
         let releaseOrders : ReleaseOrder[] = [];

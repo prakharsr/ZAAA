@@ -6,22 +6,38 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { ReleaseOrderApiService } from './release-order-api.service';
 import { PageData } from '../models/page-data';
 import { ReleaseOrder } from './release-order';
+import { ReleaseOrderSearchParams } from './release-order-search-params';
+
+class Result {
+  list: PageData<ReleaseOrder>;
+  search: ReleaseOrderSearchParams;
+}
 
 @Injectable()
-export class ReleaseOrderListResolver implements Resolve<PageData<ReleaseOrder>> {
+export class ReleaseOrderListResolver implements Resolve<Result> {
   constructor(private api: ReleaseOrderApiService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageData<ReleaseOrder>> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Result> {
     let page: any = route.paramMap.get('page');
 
-    return this.api.getReleaseOrders(page).map(releaseorder => {
+    let searchParams = new ReleaseOrderSearchParams(route.queryParamMap.get('mediaHouse'),
+      route.queryParamMap.get('edition'),
+      route.queryParamMap.get('client'),
+      route.queryParamMap.get('executive'),
+      route.queryParamMap.get('executiveOrg'),
+      +route.queryParamMap.get('past'));
+
+    return this.api.searchReleaseOrders(page, searchParams).map(releaseorder => {
       if (releaseorder) {
-        return releaseorder;
+        return {
+          list: releaseorder,
+          search: searchParams
+        }
       }
       else { // id not found
         this.router.navigateByUrl('/releaseorders');
         return null;
       }
-    });
+    })
   }
 }

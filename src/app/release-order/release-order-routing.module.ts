@@ -11,7 +11,6 @@ import { RateCardResolver } from '../rate-card/rate-card-resolver.service';
 import { ReleaseOrderListResolver } from './release-order-list-resolver.service';
 import { InsertionCheckComponent } from './insertion-check/insertion-check.component';
 import { InsertionListResolver } from './insertion-list-resolver.service';
-import { ReleaseOrderSearchResolver } from './release-order-search-resolver.service';
 
 const routes: Routes = [
   {
@@ -36,8 +35,7 @@ const routes: Routes = [
         path: 'list/:page',
         component: ReleaseOrderListComponent,
         resolve: {
-          search: ReleaseOrderSearchResolver,
-          list: ReleaseOrderListResolver
+          resolved: ReleaseOrderListResolver
         }
       },
       { path: 'new', component: ReleaseOrderComponent },
