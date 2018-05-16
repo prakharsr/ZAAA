@@ -17,6 +17,7 @@ import { Executive } from '../../directory/executives/executive';
 import { MediaHouse } from '../../directory/media-houses/media-house';
 import { WindowService } from '../../services/window.service';
 import { PageData } from '../../models/page-data';
+import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
 @Component({
   selector: 'app-release-order-list',
@@ -54,8 +55,27 @@ export class ReleaseOrderListComponent implements OnInit {
     private windowService: WindowService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: PageData<ReleaseOrder> }) => {
+    this.route.data.subscribe((data: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }) => {
       this.init(data.list);
+
+      let pub = new MediaHouse();
+      pub.pubName = data.search.mediaHouse;
+      pub.address.edition = data.search.edition;
+
+      this.mediaHouse = this.edition = pub;
+     
+      let cl = new Client();
+      cl.orgName = data.search.client;
+
+      this.client = cl;
+
+      let exe = new Executive();
+      exe.executiveName = data.search.executive;
+      exe.orgName = data.search.executiveOrg;
+
+      this.executive = this.executiveOrg = exe;
+
+      this.pastDays = data.search.past;
     });
   }
 
