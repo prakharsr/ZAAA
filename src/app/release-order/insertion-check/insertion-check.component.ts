@@ -16,6 +16,7 @@ import { MediaHouse } from '../../directory/media-houses/media-house';
 import { DialogService } from '../../services/dialog.service';
 import { ReleaseOrder } from '../release-order';
 import { MatTableDataSource } from '@angular/material';
+import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
 @Component({
   selector: 'app-insertion-check',
@@ -52,8 +53,27 @@ export class InsertionCheckComponent implements OnInit {
     private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: PageData<InsertionCheckItem> }) => {
-      this.init(data.list);
+    this.route.data.subscribe((data: { resolved: { list: PageData<InsertionCheckItem>, search: ReleaseOrderSearchParams }}) => {
+      this.init(data.resolved.list);
+
+      let pub = new MediaHouse();
+      pub.pubName = data.resolved.search.mediaHouse;
+      pub.address.edition = data.resolved.search.edition;
+
+      this.mediaHouse = this.edition = pub;
+
+      let cl = new Client();
+      cl.orgName = data.resolved.search.client;
+
+      this.client = cl;
+
+      let exe = new Executive();
+      exe.executiveName = data.resolved.search.executive;
+      exe.orgName = data.resolved.search.executiveOrg;
+
+      this.executive = this.executiveOrg = exe;
+
+      this.pastDays = data.resolved.search.past;
     });
   }
 
@@ -86,7 +106,11 @@ export class InsertionCheckComponent implements OnInit {
   }
 
   private get executiveName() {
-    return this.executive ? (this.executive.executiveName ? this.executive.executiveName : this.executive) : null;
+    if (this.executive instanceof String) {
+      return this.executive;
+    }
+      
+    return this.executive ? this.executive.executiveName : null;
   }
 
   searchExecutiveOrg = (text: Observable<string>) => {
@@ -112,7 +136,11 @@ export class InsertionCheckComponent implements OnInit {
   }
 
   private get mediaHouseName() {
-    return this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null;
+    if (this.mediaHouse instanceof String) {
+      return this.mediaHouse;
+    }
+
+    return this.mediaHouse ? this.mediaHouse.pubName : null;
   }
 
   searchEdition = (text: Observable<string>) => {
@@ -158,27 +186,36 @@ export class InsertionCheckComponent implements OnInit {
   }
 
   private get editionName() {
-    return this.edition ? (this.edition.address ? this.edition.address.edition : this.edition) : null;
+    if (this.edition instanceof String) {
+      return this.edition;
+    }
+
+    return this.edition ? (this.edition.address ? this.edition.address.edition : null) : null;
   }
 
   private get clientName() {
-    return this.client ? (this.client.orgName ? this.client.orgName : this.client) : null;
+    if (this.client instanceof String) {
+      return this.client;
+    }
+
+    return this.client ? this.client.orgName : null;
   }
 
   private get exeOrg() {
-    return this.executiveOrg ? (this.executiveOrg.orgName ? this.executiveOrg.orgName : this.executiveOrg) : null;
+    if (this.executiveOrg instanceof String) {
+      return this.executiveOrg;
+    }
+
+    return this.executiveOrg ? this.executiveOrg.orgName : null;
   }
 
-  search() {
-    this.api.searchInsertions(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays).subscribe(data => {
-      this.init(data);
+  search(pageNo?: number) {
+    if (!pageNo) {
+      pageNo = this.page;
+    }
 
-      this.notifications.show('Searched')
-    },
-    err => {
-      console.log(err);
-
-      this.notifications.show('Connection failed');
-    });
+    this.router.navigate(['/releaseorders/check/list/', pageNo], {
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
+    })
   }
 }

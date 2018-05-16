@@ -100,15 +100,15 @@ export class ReleaseOrderApiService {
     );
   }
 
-  searchInsertions(mediaHouseName: string, edition: string, clientName: string, executiveName: string, executiveOrg: string, creationPeriod: number) : Observable<PageData<InsertionCheckItem>> {
+  searchInsertions(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<InsertionCheckItem>> {
     return this.api.post('/user/releaseorders/insertions/search', {
-      page: 1,
-      publicationName: mediaHouseName,
-      publicationEdition: edition,
-      clientName: clientName,
-      executiveName: executiveName,
-      executiveOrg: executiveOrg,
-      insertionPeriod: creationPeriod
+      page: page,
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      clientName: params.client,
+      executiveName: params.executive,
+      executiveOrg: params.executiveOrg,
+      insertionPeriod: params.past
     }).pipe(
       map(data => {
         let insertions : InsertionCheckItem[] = [];

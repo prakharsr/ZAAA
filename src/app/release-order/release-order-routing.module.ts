@@ -26,7 +26,7 @@ const routes: Routes = [
             path: 'list/:page',
             component: InsertionCheckComponent,
             resolve: {
-              list: InsertionListResolver
+              resolved: InsertionListResolver
             }
           }
         ]
