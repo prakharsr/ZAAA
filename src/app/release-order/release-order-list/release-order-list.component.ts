@@ -159,6 +159,14 @@ export class ReleaseOrderListComponent implements OnInit {
     return mediaHouse.pubName;
   }
 
+  private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
+    if (releaseOrder.generated) {
+      return of(true);
+    }
+
+    return this.dialog.showYesNo('Confirm Generation', "Release Order will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+  }
+
   deleteReleaseOrder(releaseOrder: ReleaseOrder) {
     this.dialog.confirmDeletion("Are you sure you want to delete this Release Order?").subscribe(confirm => {
       if (!confirm)
@@ -185,46 +193,58 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   gen(releaseOrder: ReleaseOrder) {
-    this.api.generate(releaseOrder).subscribe(data => {
-      if (data.msg) {
-        this.notifications.show(data.msg);
-      }
-      else {
-        console.log(data);
-        
-        let blob = new Blob([data], { type: 'application/pdf' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
-
-        let a = this.windowService.window.document.createElement('a');
-        a.download = 'releaseorder.pdf';
-        a.href = url;
-        a.click();
-      }
-    },
-    err => {
-      console.log(err);
-
-      this.notifications.show("Connection failed");
-    });
-  }
-
-  sendMsg(releaseOrder: ReleaseOrder) {
-    this.dialog.getMailingDetails().subscribe(mailingDetails => {
-      if (mailingDetails) {
-        this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
-          if (data.success) {
-            this.notifications.show("Sent Successfully");
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.api.generate(releaseOrder).subscribe(data => {
+          if (data.msg) {
+            this.notifications.show(data.msg);
+    
+            releaseOrder.generated = true;
           }
           else {
             console.log(data);
-
-            this.notifications.show(data.msg);
+            
+            let blob = new Blob([data], { type: 'application/pdf' });
+            let url = this.windowService.window.URL.createObjectURL(blob);
+    
+            let a = this.windowService.window.document.createElement('a');
+            a.download = 'releaseorder.pdf';
+            a.href = url;
+            a.click();
           }
         },
         err => {
           console.log(err);
-
+    
           this.notifications.show("Connection failed");
+        });
+      }
+    })
+  }
+
+  sendMsg(releaseOrder: ReleaseOrder) {
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.dialog.getMailingDetails().subscribe(mailingDetails => {
+          if (mailingDetails) {
+            this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+              if (data.success) {
+                this.notifications.show("Sent Successfully");
+
+                releaseOrder.generated = true;
+              }
+              else {
+                console.log(data);
+
+                this.notifications.show(data.msg);
+              }
+            },
+            err => {
+              console.log(err);
+
+              this.notifications.show("Connection failed");
+            });
+          }
         });
       }
     });

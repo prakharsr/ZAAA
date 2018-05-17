@@ -146,6 +146,8 @@ export class ReleaseOrder {
     };
     
     clientPayment = 0;
+
+    generated = false;
 }
 
 export class OtherCharges {

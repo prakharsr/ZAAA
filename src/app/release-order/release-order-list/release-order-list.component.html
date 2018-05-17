@@ -79,7 +79,14 @@
         <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <br>
-          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}Dummy</a>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}Dummy</a>
+            </div>
+            <div class="col-auto text-muted" *ngIf="element.generated">
+              GENERATED
+            </div>
+          </div>
           <br><br>
           <span class="text-muted">Publication:</span> {{element.publicationName}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
@@ -92,10 +99,10 @@
         <mat-cell *matCellDef="let element">
           <mat-menu #releaseOrderMenu="matMenu">
             <button mat-menu-item (click)="gen(element)">
-              Generate
+              <mat-icon>save_alt</mat-icon> Download
             </button>
             <button mat-menu-item (click)="sendMsg(element)">
-              <mat-icon>mail</mat-icon> Generate and Send
+              <mat-icon>mail</mat-icon> Send Email
             </button>
             <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
               <mat-icon>add</mat-icon> Copy into New
@@ -103,10 +110,10 @@
             <button mat-menu-item [routerLink]="['/invoices/new', element.id]">
               <mat-icon>add</mat-icon> Create Invoice
             </button>
-            <button mat-menu-item [routerLink]="['/releaseorders/edit', element.id]">
+            <button mat-menu-item *ngIf="!element.generated" [routerLink]="['/releaseorders/edit', element.id]">
               <mat-icon>edit</mat-icon> Edit
             </button>
-            <button mat-menu-item class="text-danger" (click)="deleteReleaseOrder(element)">
+            <button mat-menu-item *ngIf="!element.generated" class="text-danger" (click)="deleteReleaseOrder(element)">
               <mat-icon>delete</mat-icon> Delete
             </button>
           </mat-menu>
