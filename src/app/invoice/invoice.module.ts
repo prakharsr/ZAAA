@@ -4,8 +4,11 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
 import { ReleaseOrderModule } from '../release-order/release-order.module';
 
 import { InvoiceApiService } from './invoice-api.service';
+import { InvoiceResolver } from './invoice-resolver.service';
 
 import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
 
 @NgModule({
   imports: [
@@ -13,7 +16,14 @@ import { InvoiceComponent } from './invoice/invoice.component';
     ReleaseOrderModule,
     InvoiceRoutingModule
   ],
-  declarations: [InvoiceComponent],
-  providers: [InvoiceApiService]
+  declarations: [
+    InvoiceComponent,
+    InvoiceDetailsComponent,
+    InvoiceListComponent
+  ],
+  providers: [
+    InvoiceApiService,
+    InvoiceResolver
+  ]
 })
 export class InvoiceModule { }
