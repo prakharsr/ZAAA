@@ -7,7 +7,7 @@
 <br>
 
 <div class="container">
-  <button class="fab bg-info" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
+  <button *ngIf="!releaseOrder.generated" class="fab bg-info" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
     <mat-icon>edit</mat-icon>
   </button>
 
