@@ -68,9 +68,9 @@
     
   Mark selected as:
 
-  <button (click)="mark(0)" class="btn btn-primary ml-3">Not Published</button>
-  <button (click)="mark(1)" class="btn btn-success">Published</button>
-  <button (click)="mark(2)" class="btn btn-danger">Disputed</button>
+  <button (click)="mark(1)" class="btn btn-danger ml-3">Not Published</button>
+  <button (click)="mark(2)" class="btn btn-success">Published</button>
+  <button (click)="mark(3)" class="btn btn-warning">Disputed</button>
 
   <br><br>
 
@@ -90,9 +90,10 @@
             {{toDate(insertion.insertions.date) | date}}
           </div>
           <div class="col-auto">
-            <span *ngIf="insertion.insertions.state == 0" class="text-muted">Not Published</span>
-            <span *ngIf="insertion.insertions.state == 1" class="text-success">Published</span>
-            <span *ngIf="insertion.insertions.state == 2" class="text-danger">Disputed</span>
+            <span *ngIf="insertion.insertions.state == 0" class="text-muted">None</span>
+            <span *ngIf="insertion.insertions.state == 1" class="text-danger">Not Published</span>
+            <span *ngIf="insertion.insertions.state == 2" class="text-success">Published</span>
+            <span *ngIf="insertion.insertions.state == 3" class="text-warning">Disputed</span>
           </div>
         </div>
       </div>
