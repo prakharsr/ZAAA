@@ -274,11 +274,7 @@ export class ReleaseOrderListComponent implements OnInit {
     return this.executiveOrg ? this.executiveOrg.orgName : null;
   }
 
-  search(pageNo?: number) {
-    if (!pageNo) {
-      pageNo = this.page;
-    }
-
+  search(pageNo: number) {
     this.router.navigate(['/releaseorders/list/', pageNo], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
