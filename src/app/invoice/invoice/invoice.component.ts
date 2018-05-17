@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReleaseOrder, Insertion } from '../../release-order/release-order';
+import { ReleaseOrder, Insertion, OtherCharges } from '../../release-order/release-order';
 import { Invoice } from '../invoice';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { NotificationService } from '../../services/notification.service';
@@ -41,7 +41,8 @@ export class InvoiceComponent implements OnInit {
       this.client = data.resolved.client;
       this.executive = data.resolved.executive;
 
-      this.invoice.releaseOrderId = data.resolved.releaseorder.id;
+      this.invoice.releaseOrderId = this.releaseOrder.id;
+      this.invoice.otherCharges = this.releaseOrder.otherCharges;
 
       this.releaseOrder.insertions.forEach(element => {
         if (!element.marked) {
@@ -85,6 +86,15 @@ export class InvoiceComponent implements OnInit {
 
   cancel() {
     this.goBack();
+  }
+
+  otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
+
+  addCharges() {
+    let item = new OtherCharges();
+    item.chargeType = this.otherChargesTypes[0];
+
+    this.invoice.otherCharges.push(item);
   }
 
 }
