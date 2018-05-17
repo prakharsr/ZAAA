@@ -279,4 +279,14 @@ export class ReleaseOrderListComponent implements OnInit {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
   }
+
+  createInvoice(releaseorder: ReleaseOrder) {
+    if (releaseorder.insertions.every(insertion => insertion.marked)) {
+      this.notifications.show('No more insertions to create Invoices for');
+
+      return;
+    }
+
+    this.router.navigate(['/invoices/new', releaseorder.id]);
+  }
 }
