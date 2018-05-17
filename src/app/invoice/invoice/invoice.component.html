@@ -16,4 +16,11 @@
       {{toDate(item.insertion.date) | date}}
     </mat-checkbox>
   </div>
+
+  <form (ngSubmit)="submit()" #invoiceForm="ngForm">
+    <br><br>
+
+    <button class="btn btn-success" type="submit" [disabled]="!invoiceForm.form.valid">Submit</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+  </form>
 </div>
