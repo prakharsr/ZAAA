@@ -42,7 +42,14 @@ export class InvoiceComponent implements OnInit {
       this.executive = data.resolved.executive;
 
       this.invoice.releaseOrderId = this.releaseOrder.id;
+      this.invoice.adGrossAmount = this.releaseOrder.adGrossAmount;
       this.invoice.otherCharges = this.releaseOrder.otherCharges;
+      this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
+      this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
+      this.invoice.taxAmount = this.releaseOrder.taxAmount;
+      this.invoice.taxIncluded = this.releaseOrder.taxIncluded;
+
+      this.invoice.taxType = this.mediaHouse.address.state == this.client.address.state ? 'SGST + CGST' : 'IGST';
 
       this.releaseOrder.insertions.forEach(element => {
         if (!element.marked) {
@@ -66,6 +73,8 @@ export class InvoiceComponent implements OnInit {
 
       return;
     }
+
+    this.invoice.pendingAmount = this.invoice.FinalAmount;
 
     this.api.createInvoice(this.invoice).subscribe(data => {
       if (data.success) {

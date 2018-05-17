@@ -343,7 +343,7 @@
             <li class="list-group-item">
               <div class="row">
                 <div class="col-md-4">Premium Amount</div>
-                <div class="col-md-8" *ngIf="!releaseOrder.PremiumCustom.Percentage">{{releaseOrder.PremiumCustom.Amount}}</div>
+                <div class="col-md-8" *ngIf="!releaseOrder.PremiumCustom.Percentage">₹ {{releaseOrder.PremiumCustom.Amount}}</div>
                 <div class="col-md-8" *ngIf="releaseOrder.PremiumCustom.Percentage">{{releaseOrder.PremiumCustom.Amount}} %</div>
               </div>
             </li>

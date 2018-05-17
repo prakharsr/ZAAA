@@ -1,4 +1,8 @@
-import { OtherCharges, Insertion } from "../release-order/release-order";
+import { OtherCharges, Insertion, TaxValues } from "../release-order/release-order";
+
+class Amount {
+    constructor(public percentage = false, public amount = 0) { }
+}
 
 export class Invoice {
     id = "";
@@ -8,26 +12,20 @@ export class Invoice {
 
     adGrossAmount = 0;
     
-    taxType: 'CGST' | 'IGST' | 'SGST';
+    taxType = "";
     
-    taxAmount = {
-        primary: 0,
-        secondary: 0
-    }
+    taxAmount = new TaxValues(0);
 
     taxIncluded = false;
 
     otherCharges: OtherCharges[] = [];
 
-    extraCharges = 0;
+    extraCharges = new Amount();
 
-    publicationDiscount = 0;
-    agencyDiscount1 = 0;
-    agencyDiscount2 = 0;
+    publicationDiscount = new Amount(true);
+    agencyDiscount1 = new Amount(true);
     
-    additionalCharges = 0;
-
-    additionalTax = 0;
+    additionalCharges = new Amount();
 
     caption = '';
     remark = '';
