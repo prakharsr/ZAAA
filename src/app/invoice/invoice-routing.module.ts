@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../guards/auth-guard.service';
-import { ReleaseOrderResolver } from '../release-order/release-order-resolver.service';
+import { ReleaseOrderDirResolver } from '../release-order/release-order-dir-resolver.service';
 import { InvoiceResolver } from './invoice-resolver.service';
 import { InvoiceListResolver } from './invoice-list-resolver.service';
 
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'new/:id',
         component: InvoiceComponent,
         resolve: {
-          releaseOrder: ReleaseOrderResolver
+          resolved: ReleaseOrderDirResolver
         }
       },
       {

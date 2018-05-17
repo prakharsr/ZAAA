@@ -8,11 +8,21 @@ import { MailingDetails } from '../models/mailing-details';
 import { PageData } from '../models/page-data';
 import { InsertionCheckItem } from './insertion-check-item';
 import { ReleaseOrderSearchParams } from './release-order-search-params';
+import { MediaHouse } from '../directory/media-houses/media-house';
+import { Client } from '../directory/clients/client';
+import { Executive } from '../directory/executives/executive';
+import { ClientApiService } from '../directory/clients/client-api.service';
+import { MediaHouseApiService } from '../directory/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '../directory/executives/executive-api.service';
+import { ReleaseOrderDir } from './release-order-dir-resolver.service';
 
 @Injectable()
 export class ReleaseOrderApiService {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+    private clientApi: ClientApiService,
+    private mediaHouseApi: MediaHouseApiService,
+    private executiveApi: ExecutiveApiService) { }
 
   private bodyToReleaseOrder(body: any) {
     let result = new ReleaseOrder();
@@ -39,6 +49,17 @@ export class ReleaseOrderApiService {
   getReleaseOrder(id: string): Observable<ReleaseOrder> {
     return this.api.get('/user/releaseorder/' + id).pipe(
       map(data => data.success ? this.bodyToReleaseOrder(data.releaseOrder) : null)
+    );
+  }
+
+  getReleaseOrderDir(id: string): Observable<ReleaseOrderDir> {
+    return this.api.get('/user/releaseorder/' + id).pipe(
+      map(data => data.success ? {
+        releaseorder: this.bodyToReleaseOrder(data.releaseOrder),
+        mediaHouse: this.mediaHouseApi.bodyToMediaHouse(data.mediahouse),
+        client: this.clientApi.bodyToClient(data.client),
+        executive: this.executiveApi.bodyToExecutive(data.executive)
+       } : null)
     );
   }
 

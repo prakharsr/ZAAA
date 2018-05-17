@@ -8,6 +8,7 @@ import { ReleaseOrderApiService } from './release-order-api.service';
 import { ReleaseOrderResolver } from './release-order-resolver.service';
 import { ReleaseOrderListResolver } from './release-order-list-resolver.service';
 import { InsertionListResolver } from './insertion-list-resolver.service';
+import { ReleaseOrderDirResolver } from './release-order-dir-resolver.service';
 
 import { ReleaseOrderComponent } from './release-order/release-order.component';
 import { ReleaseOrderListComponent } from './release-order-list/release-order-list.component';
@@ -25,7 +26,8 @@ import { InsertionCheckComponent } from './insertion-check/insertion-check.compo
     ReleaseOrderApiService,
     ReleaseOrderResolver,
     ReleaseOrderListResolver,
-    InsertionListResolver
+    InsertionListResolver,
+    ReleaseOrderDirResolver
   ],
   declarations: [
     ReleaseOrderComponent,

@@ -56,7 +56,7 @@ export class MediaHouseApiService {
     };
   }
 
-  private bodyToMediaHouse(body: any) : MediaHouse {
+  bodyToMediaHouse(body: any) : MediaHouse {
     let mediaHouse = new MediaHouse();
 
     mediaHouse.id = body._id;

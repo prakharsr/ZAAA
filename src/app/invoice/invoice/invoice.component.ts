@@ -5,6 +5,10 @@ import { Invoice } from '../invoice';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { NotificationService } from '../../services/notification.service';
 import { InvoiceApiService } from '../invoice-api.service';
+import { MediaHouse } from '../../directory/media-houses/media-house';
+import { Client } from '../../directory/clients/client';
+import { Executive } from '../../directory/executives/executive';
+import { ReleaseOrderDir } from '../../release-order/release-order-dir-resolver.service';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -19,6 +23,9 @@ export class InvoiceComponent implements OnInit {
 
   invoice = new Invoice();
   releaseOrder: ReleaseOrder;
+  mediaHouse: MediaHouse;
+  client: Client;
+  executive: Executive;
 
   availableInsertions: AvailableInsertion[] = [];
 
@@ -28,10 +35,13 @@ export class InvoiceComponent implements OnInit {
     private api: InvoiceApiService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
-      this.releaseOrder = data.releaseOrder;
+    this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
+      this.releaseOrder = data.resolved.releaseorder;
+      this.mediaHouse = data.resolved.mediaHouse;
+      this.client = data.resolved.client;
+      this.executive = data.resolved.executive;
 
-      this.invoice.releaseOrderId = data.releaseOrder.id;
+      this.invoice.releaseOrderId = data.resolved.releaseorder.id;
 
       this.releaseOrder.insertions.forEach(element => {
         if (!element.marked) {

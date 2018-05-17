@@ -65,7 +65,7 @@ export class ClientApiService {
     }
   }
 
-  private bodyToClient(data: any) : Client {
+  bodyToClient(data: any) : Client {
     let client = new Client();
 
     client.id = data._id;

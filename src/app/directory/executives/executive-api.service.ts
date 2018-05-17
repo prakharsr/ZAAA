@@ -26,7 +26,7 @@ export class ExecutiveApiService {
     });
   }
 
-  private bodyToExecutive(body: any) : Executive {
+  bodyToExecutive(body: any) : Executive {
     let executive = new Executive();
 
     executive.id = body._id;
