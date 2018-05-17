@@ -53,7 +53,7 @@
         <span class="sr-only">Previous</span>
       </a>
     </li>
-    <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i == page">
+    <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i + 1 == page">
       <a class="page-link" [routerLink]="['/dir/media_houses/list', i + 1]">{{i + 1}}</a>
     </li>
     <li class="page-item" [class.disabled]="page == pageCount">
