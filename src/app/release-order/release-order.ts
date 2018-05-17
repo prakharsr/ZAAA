@@ -65,7 +65,7 @@ export class ReleaseOrder {
     
     adEdition = "";
     adPosition = "";
-    adTime = ""
+    AdTime = ""
     
     adSchemePaid = 0;
     adSchemeFree = 0;

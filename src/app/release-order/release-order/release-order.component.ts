@@ -111,7 +111,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.customSize = true;
     this.customScheme = true;
 
-    this.releaseorder.adTime = this.adTimes[0];
+    this.releaseorder.AdTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
     this.releaseorder.adHue = this.hues[0];
     this.releaseorder.unit = this.units[0];
@@ -189,7 +189,7 @@ export class ReleaseOrderComponent implements OnInit {
     if (rateCard) {
       this.releaseorder.mediaType = rateCard.mediaType;
       this.releaseorder.adType = rateCard.adType;
-      this.releaseorder.adTime = rateCard.adTime;
+      this.releaseorder.AdTime = rateCard.AdTime;
       this.releaseorder.rate = rateCard.rate;
       this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;

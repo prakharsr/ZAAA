@@ -81,7 +81,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.unit = this.units[0];
     this.rateCard.position = this.positions[0];
     this.rateCard.hue = this.hues[0];
-    this.rateCard.adTime = this.adTimes[0];
+    this.rateCard.AdTime = this.adTimes[0];
     this.dropdownPullOutName = this.others;
   }
 

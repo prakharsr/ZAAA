@@ -1,7 +1,7 @@
 export class RateCard {
     mediaType = "";
     adType = "";
-    adTime = "";
+    AdTime = "";
     rateCardType = "";
     
     mediaHouseName = "";
