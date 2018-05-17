@@ -2,6 +2,7 @@ import { OtherCharges, Insertion } from "../release-order/release-order";
 
 export class Invoice {
     date: Date;
+    releaseOrderId = "";
 
     adGrossAmount = 0;
     

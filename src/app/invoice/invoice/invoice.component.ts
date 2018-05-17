@@ -26,7 +26,7 @@ export class InvoiceComponent implements OnInit {
     this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
       this.releaseOrder = data.releaseOrder;
 
-      this.invoice.releaseOrder = data.releaseOrder.id;
+      this.invoice.releaseOrderId = data.releaseOrder.id;
 
       this.releaseOrder.insertions.forEach(element => {
         if (!element.marked) {
