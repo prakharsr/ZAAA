@@ -26,7 +26,7 @@ import { ReleaseOrderSearchParams } from '../release-order-search-params';
 })
 export class ReleaseOrderListComponent implements OnInit {
 
-  releaseOrders = [];
+  releaseOrders: ReleaseOrder[] = [];
 
   displayedColumns = ['data', 'action'];
   dataSource = new MatTableDataSource();

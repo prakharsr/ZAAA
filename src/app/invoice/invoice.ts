@@ -1,6 +1,8 @@
 import { OtherCharges, Insertion } from "../release-order/release-order";
 
 export class Invoice {
+    id = "";
+
     date: Date;
     releaseOrderId = "";
 

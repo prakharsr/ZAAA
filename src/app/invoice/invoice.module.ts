@@ -5,6 +5,7 @@ import { ReleaseOrderModule } from '../release-order/release-order.module';
 
 import { InvoiceApiService } from './invoice-api.service';
 import { InvoiceResolver } from './invoice-resolver.service';
+import { InvoiceListResolver } from './invoice-list-resolver.service';
 
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
@@ -23,7 +24,8 @@ import { InvoiceListComponent } from './invoice-list/invoice-list.component';
   ],
   providers: [
     InvoiceApiService,
-    InvoiceResolver
+    InvoiceResolver,
+    InvoiceListResolver
   ]
 })
 export class InvoiceModule { }

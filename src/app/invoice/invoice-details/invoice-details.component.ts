@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Invoice } from '../invoice';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoiceDetailsComponent implements OnInit {
 
-  constructor() { }
+  invoice = new Invoice();
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe((data: { invoice: Invoice }) => {
+      this.invoice = data.invoice;
+    });
   }
 
 }
