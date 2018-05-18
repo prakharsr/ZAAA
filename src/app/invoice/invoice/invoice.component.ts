@@ -80,9 +80,9 @@ export class InvoiceComponent implements OnInit {
       return;
     }
 
-    this.invoice.FinalAmount = this.finalAmount;
-    this.invoice.FinalTaxAmount = this.finalTaxAmount;
-    this.invoice.pendingAmount = this.invoice.FinalAmount;
+    this.invoice.netAmountFigures = this.netAmount;
+    this.invoice.netAmountWords = this.amountToWords(this.invoice.netAmountFigures);
+    this.invoice.pendingAmount = this.invoice.netAmountFigures;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
     this.api.createInvoice(this.invoice).subscribe(data => {
@@ -147,9 +147,11 @@ export class InvoiceComponent implements OnInit {
     else return this.insertionCount;
   }
 
-  get finalAmount() {
+  get netAmount() {
     let grossSingle = this.invoice.adGrossAmount / this.releaseOrder.adSchemePaid;
     let result = grossSingle * this.toPay;
+
+    this.invoice.otherCharges.forEach(otherCharge => result += otherCharge.amount);
 
     if (this.invoice.additionalCharges.percentage) {
       result += (result * this.invoice.additionalCharges.amount) / 100;
@@ -176,12 +178,50 @@ export class InvoiceComponent implements OnInit {
 
   get finalTaxAmount() {
     let amount = 0;
-    let finalAmount = this.finalAmount;
+    let finalAmount = this.netAmount;
 
     amount += (this.invoice.taxAmount.primary * finalAmount) / 100;
     amount += (this.invoice.taxAmount.secondary * finalAmount) / 100;
 
     return amount;
+  }
+
+  amountToWords(num) {
+    if (!num) {
+      return "Zero Only";
+    }
+
+    let a = [
+      '',
+      'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ',
+      'Ten ',
+      'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '
+    ];
+    
+    let b = [
+      '', '',
+      'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
+    ];
+    
+    let c = ['Crore ', 'Lakh ', 'Thousand ', 'Hundred '];
+  
+    if ((num = num.toString()).length > 9)
+      return 'overflow';
+
+    let n : any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    
+    if (!n)
+      return;
+      
+    let str = '';
+
+    for (let i = 0; i < 4; ++i) {
+      str += (n[i + 1] != 0) ? (a[Number(n[i + 1])] || b[n[i + 1][0]] + ' ' + a[n[i + 1][1]]) + c[i] : '';
+    }
+
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only' : '';
+    
+    return str;
   }
 
 }

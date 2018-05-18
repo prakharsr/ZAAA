@@ -30,8 +30,6 @@ export class Invoice {
     caption = '';
     remark = '';
     otherRemark = '';
-    FinalAmount = 0;
-    FinalTaxAmount = 0;
     netAmountFigures = 0;
     netAmountWords = '';
 

@@ -11,6 +11,7 @@ import { ClientApiService } from '../../directory/clients/client-api.service';
 import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { of } from 'rxjs/observable/of';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -38,7 +39,8 @@ export class InvoiceListComponent implements OnInit {
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
     private executiveApi: ExecutiveApiService,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<Invoice>, search: ReleaseOrderSearchParams }}) => {
@@ -169,4 +171,13 @@ export class InvoiceListComponent implements OnInit {
     });
   }
 
+  createPaymentReceipt(invoice: Invoice) {
+    if (invoice.pendingAmount <= 0) {
+      this.notifications.show('All Payments have been completed for this Invoice');
+
+      return;
+    }
+
+    this.router.navigate(['/receipts', invoice.id]);
+  }
 }
