@@ -178,6 +178,6 @@ export class InvoiceListComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/receipts', invoice.id]);
+    this.router.navigate(['/receipts/new', invoice.id]);
   }
 }
