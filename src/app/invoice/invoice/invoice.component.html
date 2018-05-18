@@ -21,7 +21,7 @@
 
       <br><br>
     </div>
-    <div class="col-md-auto">
+    <div class="col-md">
       <p>
         <strong>Media House:</strong> {{mediaHouse.pubName}} - {{mediaHouse.address.edition}}<br>
         <strong>Client:</strong> {{client.orgName}}<br>
@@ -35,11 +35,14 @@
 
       <p>
         <strong>Gross Amount:</strong> {{invoice.adGrossAmount}}<br>
-        <strong>Final Amount:</strong> {{finalAmount}}<br>
+        <strong>Net Amount:</strong> {{netAmount}}<br>
+        <strong>Net Amount in Words:</strong> {{amountToWords(netAmount)}}<br>
         
-        <strong>Final Tax Amount:</strong> {{finalTaxAmount}}
-        ({{invoice.taxAmount.primary}}% <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
-        {{invoice.taxInclude ? 'Included' : 'Excluded'}})
+        <strong>Tax:</strong>
+        {{invoice.taxAmount.primary}}% <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
+        {{invoice.taxInclude ? 'Included' : 'Excluded'}}
+        
+        ({{invoice.taxType}})
       </p>
     
       <br><br>
