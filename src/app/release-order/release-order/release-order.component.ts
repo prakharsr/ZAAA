@@ -719,22 +719,22 @@ export class ReleaseOrderComponent implements OnInit {
   get grossAmountWithoutPremium() {
     if (this.isTypeLen) {
       if (this.customSize) {
-        return (this.releaseorder.rate * this.totalSpace) * this.adCountPaid;
+        return this.releaseorder.rate * this.totalSpace;
       }
       else {
-        return this.selectedSize.amount * this.adCountPaid;
+        return this.selectedSize.amount;
       }
     }
     else if (this.isTypeTime) {
-      return this.releaseorder.rate * this.releaseorder.AdDuration * this.adCountPaid;
+      return this.releaseorder.rate * this.releaseorder.AdDuration;
     }
     else if (this.isTypeWords) {
-      return this.releaseorder.rate * this.adCountPaid;
+      return this.releaseorder.rate;
     }
     else return 0;
   }
 
-  get grossAmount() {
+  get grossAmountSingle() {
     let amount = this.grossAmountWithoutPremium;
 
     if (this.isTypeWords) {
@@ -768,6 +768,10 @@ export class ReleaseOrderComponent implements OnInit {
     else amount += this.releaseorder.PremiumCustom.Amount;
 
     return amount;
+  }
+
+  get grossAmount() {
+    return this.grossAmountSingle * this.adCountPaid;
   }
 
   get netAmount() {

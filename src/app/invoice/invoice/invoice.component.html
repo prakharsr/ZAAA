@@ -28,7 +28,19 @@
         <strong>Executive:</strong> {{executive.executiveName}} - {{executive.orgName}}
       </p>
 
-      <p><strong>Gross Amount:</strong> {{invoice.adGrossAmount}}</p>
+      <p>
+        {{insertionCount}} Insertions<br>
+        {{toPay}} Paid, {{insertionCount - toPay}} Free
+      </p>
+
+      <p>
+        <strong>Gross Amount:</strong> {{invoice.adGrossAmount}}<br>
+        <strong>Final Amount:</strong> {{finalAmount}}<br>
+        
+        <strong>Final Tax Amount:</strong> {{finalTaxAmount}}
+        ({{invoice.taxAmount.primary}}% <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
+        {{invoice.taxInclude ? 'Included' : 'Excluded'}})
+      </p>
     
       <br><br>
     </div>
@@ -136,6 +148,40 @@
       <div class="col-auto align-self-center">
         <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
       </div>
+    </div>
+    
+    <div class="form-row">
+      <label class="col-3 col-form-label">Tax</label>
+      <div class="col-auto col-form-label">
+        <div class="form-check">
+          <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="invoice.taxIncluded">
+          <label class="form-check-label">Included</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <select class="form-control" name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
+            <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
+          </select>
+        </div>
+
+        <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
+          <div *ngIf="taxField.errors.required">
+            Tax is required.
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="caption">Caption</label>
+      <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
+    </div>
+
+    <div class="form-group">
+      <label for="remark">Remark</label>
+      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="invoice.remark" #remarkField="ngModel">
     </div>
 
     <br><br>
