@@ -177,5 +177,7 @@ export class InvoiceListComponent implements OnInit {
 
       return;
     }
+
+    this.router.navigate(['/receipts', invoice.id]);
   }
 }
