@@ -6,6 +6,7 @@
 
 <br>
 
+<div class="container">
   <div class="row">
     <div class="col-lg-6">
       <div class="card mb-3">
@@ -20,26 +21,17 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Release Order Id</div>
-              <div class="col-md-8">{{invoice.releaseOrderId}}</div>
+              <div class="col-md-8"><a [routerLink]="['/releaseorders', invoice.releaseOrderId]">{{invoice.releaseOrderId}}</a></div>
             </div>
-          </li>
+          </li>       
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Tax Type</div>
-              <div class="col-md-8">{{invoice.taxType}}</div>
-            </div>
-          </li>          
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Tax Amount</div>
-              <div class="col-md-8">Primary: {{invoice.taxAmount.primary}}</div>
-              <div class="col-md-8">Secondary: {{invoice.taxAmount.secondary}}</div>
-            </div>
-          </li>          
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Tax Included</div>
-              <div class="col-md-8">{{invoice.taxIncluded}}</div>
+              <div class="col-md-4">Tax</div>
+              <div class="col-md-8">
+                {{invoice.taxAmount.primary}}%
+                <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
+                ({{invoice.taxType}}) {{invoice.taxIncluded ? 'Included' : 'Excluded'}}
+              </div>
             </div>
           </li>
           <li class="list-group-item">
@@ -57,26 +49,28 @@
             <div class="row">
               <div class="col-md-4">Extra Charges</div>
               <div class="col-md-8" *ngIf="invoice.extraCharges.percentage">{{invoice.extraCharges.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.extraCharges.percentage">{{invoice.extraCharges.amount}}</div>
+              <div class="col-md-8" *ngIf="!invoice.extraCharges.percentage">₹ {{invoice.extraCharges.amount}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Publication Discount</div>
-              <div class="col-md-8">{{invoice.publicationDiscount.amount}} %</div>
+              <div class="col-md-8" *ngIf="invoice.publicationDiscount.percentage">{{invoice.publicationDiscount.amount}} %</div>
+              <div class="col-md-8" *ngIf="!invoice.publicationDiscount.percentage">₹ {{invoice.publicationDiscount.amount}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Agency Discount 1</div>
-              <div class="col-md-8">{{invoice.agencyDiscount1.amount}} %</div>
+              <div class="col-md-4">Agency Discount</div>
+              <div class="col-md-8" *ngIf="invoice.agencyDiscount1.percentage">{{invoice.agencyDiscount1.amount}} %</div>
+              <div class="col-md-8" *ngIf="!invoice.agencyDiscount1.percentage">₹ {{invoice.agencyDiscount1.amount}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Additional Charges</div>
               <div class="col-md-8" *ngIf="invoice.additionalCharges.percentage">{{invoice.additionalCharges.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.additionalCharges.percentage">{{invoice.additionalCharges.amount}}</div>
+              <div class="col-md-8" *ngIf="!invoice.additionalCharges.percentage">₹ {{invoice.additionalCharges.amount}}</div>
             </div>
           </li>
           <li class="list-group-item">
@@ -99,20 +93,8 @@
           </li>
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Final Amount</div>
-              <div class="col-md-8">{{invoice.FinalAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Final Tax Amount</div>
-              <div class="col-md-8">{{invoice.FinalTaxAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
               <div class="col-md-4">Net Amount In Figures</div>
-              <div class="col-md-8">{{invoice.netAmountFigures}}</div>
+              <div class="col-md-8">₹ {{invoice.netAmountFigures}}</div>
             </div>
           </li>
           <li class="list-group-item">
@@ -124,13 +106,13 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Cleared Amount</div>
-              <div class="col-md-8">{{invoice.clearedAmount}}</div>
+              <div class="col-md-8">₹ {{invoice.clearedAmount}}</div>
             </div>
           </li>
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Pending Amount</div>
-              <div class="col-md-8">{{invoice.pendingAmount}}</div>
+              <div class="col-md-8">₹ {{invoice.pendingAmount}}</div>
             </div>
           </li>
         </ul>
@@ -141,352 +123,11 @@
       <div class="card mb-3">
         <div class="card-header">Insertions</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of invoice.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
+          <li class="list-group-item" *ngFor="let item of invoice.insertions">
             {{toDate(item.date) | date}}
           </li>
         </ul>
       </div>
-
-    <!-- <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Client Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Name</div>
-              <div class="col-md-8">{{releaseOrder.clientName}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">State</div>
-              <div class="col-md-8">{{releaseOrder.clientState}}</div>
-            </div>
-          </li>          
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">GSTIN</div>
-              <div class="col-md-8">{{releaseOrder.clientGSTIN.GSTType}} {{releaseOrder.clientGSTIN.GSTNo}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Ad Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Type</div>
-              <div class="col-md-8">{{releaseOrder.adType}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate</div>
-              <div class="col-md-8">{{releaseOrder.rate}} {{releaseOrder.unit}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeLen">
-            <div class="row">
-              <div class="col-md-4">Size</div>
-              <div class="col-md-8">{{releaseOrder.adSizeL}} x {{releaseOrder.adSizeW}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeLen">
-            <div class="row">
-              <div class="col-md-4">Total Space</div>
-              <div class="col-md-8">{{releaseOrder.adTotalSpace}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Edition</div>
-              <div class="col-md-8">{{releaseOrder.adEdition}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="!isTypeTime">
-            <div class="row">
-              <div class="col-md-4">Position</div>
-              <div class="col-md-8">{{releaseOrder.adPosition}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeTime">
-            <div class="row">
-              <div class="col-md-4">Duration</div>
-              <div class="col-md-8">{{releaseOrder.AdDuration}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeTime">
-            <div class="row">
-              <div class="col-md-4">Ad Time</div>
-              <div class="col-md-8">{{releaseOrder.AdTime}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeWords">
-            <div class="row">
-              <div class="col-md-4">Maximum Words/ Lines</div>
-              <div class="col-md-8">{{releaseOrder.AdWords}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeWords">
-            <div class="row">
-              <div class="col-md-4">No of Words/ Lines</div>
-              <div class="col-md-8">{{releaseOrder.AdWordsMax}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeLen">
-            <div class="row">
-              <div class="col-md-4">Hue</div>
-              <div class="col-md-8">{{releaseOrder.adHue}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Caption</div>
-              <div class="col-md-8">{{releaseOrder.caption}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Remark</div>
-              <div class="col-md-8">{{releaseOrder.remark}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Tax Amount</div>
-              <div class="col-md-8">{{taxDisplay}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Total No of Ads</div>
-              <div class="col-md-8">{{releaseOrder.adTotal}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Gross Amount</div>
-              <div class="col-md-8">₹ {{releaseOrder.adGrossAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount in Figures</div>
-              <div class="col-md-8">₹ {{releaseOrder.netAmountFigures}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount in Words</div>
-              <div class="col-md-8">{{releaseOrder.netAmountWords}}</div>
-            </div>
-          </li>          
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Categories</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</li>
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory2">{{releaseOrder.adCategory2}}</li>
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory3">{{releaseOrder.adCategory3}}</li>
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory4">{{releaseOrder.adCategory4}}</li>
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory5">{{releaseOrder.adCategory5}}</li>
-          <li class="list-group-item" *ngIf="releaseOrder.adCategory6">{{releaseOrder.adCategory6}}</li>
-        </ul>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-header">Discounts</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Publication Discount</div>
-            <div class="col-md-8">{{releaseOrder.publicationDiscount}} %</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Agency Discount 1</div>
-            <div class="col-md-8">{{releaseOrder.agencyDiscount1}} %</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Agency Discount 2</div>
-            <div class="col-md-8">{{releaseOrder.agencyDiscount2}} %</div>
-          </div>
-        </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Payment Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Type</div>
-              <div class="col-md-8">{{releaseOrder.paymentType}}</div>
-            </div>
-          </li>
-          <div *ngIf="releaseOrder.paymentType == 'Cheque' || releaseOrder.paymentType == 'NEFT'">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Date</div>
-                <div class="col-md-8">{{releaseOrder.paymentDate | date}}</div>
-              </div>
-            </li>          
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Number</div>
-                <div class="col-md-8">{{releaseOrder.paymentNo}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Amount</div>
-                <div class="col-md-8">{{releaseOrder.paymentAmount}}</div>
-              </div>
-            </li>  
-            <li class="list-group-item" *ngIf="releaseOrder.paymentType == 'Cheque'">
-              <div class="row">
-                <div class="col-md-4">Bank Name</div>
-                <div class="col-md-8">{{releaseOrder.paymentBankName}}</div>
-              </div>
-            </li>  
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Client Payment</div>
-                <div class="col-md-8">₹ {{releaseOrder.clientPayment}}</div>
-              </div>
-            </li>
-          </div>          
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Insertions</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of releaseOrder.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
-            {{toDate(item.date) | date}}
-          </li>
-        </ul>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-header">Premiums</div>
-        <ul class="list-group list-group-flush" *ngIf="isTypeWords">
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumBox.Included">
-            <div class="row">
-              <div class="col">Box</div>
-              <div class="col">₹ {{releaseOrder.PremiumBox.Amount}}</div>
-              <div class="col"></div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumBaseColour.Included">
-            <div class="row">
-              <div class="col">Base Colour</div>
-              <div class="col"> ₹ {{releaseOrder.PremiumBaseColour.Amount}}</div>
-              <div class="col"></div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumCheckMark.Included">
-            <div class="row">
-              <div class="col">Check Mark</div>
-              <div class="col">₹ {{releaseOrder.PremiumCheckMark.Amount}}</div>
-              <div class="col"></div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumEmailId.Included">
-            <div class="row">
-              <div class="col">Email</div>
-              <div class="col">₹ {{releaseOrder.PremiumEmailId.Amount}}</div>
-              <div class="col">Quantity : {{releaseOrder.PremiumEmailId.Quantity}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumWebsite.Included">
-            <div class="row">
-              <div class="col">Email</div>
-              <div class="col"> ₹ {{releaseOrder.PremiumWebsite.Amount}}</div>
-              <div class="col">Quantity : {{releaseOrder.PremiumWebsite.Quantity}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="releaseOrder.PremiumExtraWords.Included">
-            <div class="row">
-              <div class="col">Extra Words / Lines</div>
-              <div class="col">₹ {{releaseOrder.PremiumExtraWords.Amount}}</div>
-              <div class="col">Quantity : {{releaseOrder.PremiumExtraWords.Quantity}}</div>
-            </div>
-          </li>
-        </ul>
-
-        <ul class="list-group list-group-flush" *ngIf="!isTypeWords">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Premium Type</div>
-                <div class="col-md-8">{{releaseOrder.PremiumCustom.PremiumType}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Premium Amount</div>
-                <div class="col-md-8" *ngIf="!releaseOrder.PremiumCustom.Percentage">₹ {{releaseOrder.PremiumCustom.Amount}}</div>
-                <div class="col-md-8" *ngIf="releaseOrder.PremiumCustom.Percentage">{{releaseOrder.PremiumCustom.Amount}} %</div>
-              </div>
-            </li>
-        </ul>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-header">Scheme</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Paid</div>
-              <div class="col-md-8">{{releaseOrder.adSchemePaid}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Free</div>
-              <div class="col-md-8">{{releaseOrder.adSchemeFree}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="card mb-3">
-        <div class="card-header">Other Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div>Other Charges</div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let item of releaseOrder.otherCharges">
-                <div class="row">
-                    <div class="col-md-8">{{item.chargeType}}</div>
-                  <div class="col-md-4">₹ {{item.amount}}</div>                  
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Remark</div>
-              <div class="col-md-8">{{releaseOrder.otherRemark}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
+  </div>
 </div>

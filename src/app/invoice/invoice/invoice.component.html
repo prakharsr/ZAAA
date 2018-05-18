@@ -92,6 +92,10 @@
         <mat-action-row>
           <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
         </mat-action-row>
+
+        <mat-form-field>
+          <input matInput placeholder="Remark" name="otherRemark" [(ngModel)]="invoice.otherRemark">
+        </mat-form-field>
       </mat-expansion-panel>
     </mat-accordion>
 
