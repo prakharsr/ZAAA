@@ -75,6 +75,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     this.invoice.pendingAmount = this.invoice.FinalAmount;
+    this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
     this.api.createInvoice(this.invoice).subscribe(data => {
       if (data.success) {
