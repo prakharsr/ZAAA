@@ -27,11 +27,7 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Tax</div>
-              <div class="col-md-8">
-                {{invoice.taxAmount.primary}}%
-                <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
-                ({{invoice.taxType}}) {{invoice.taxIncluded ? 'Included' : 'Excluded'}}
-              </div>
+              <div class="col-md-8">{{taxDisplay}}</div>
             </div>
           </li>
           <li class="list-group-item">

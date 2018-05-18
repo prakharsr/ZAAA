@@ -23,4 +23,18 @@ export class InvoiceDetailsComponent implements OnInit {
   toDate(date: NgbDate) {
     return new Date(date.year, date.month - 1, date.day);
   }
+
+  get taxDisplay() {
+    let tax = this.invoice.taxAmount.primary + "%";
+
+    if (this.invoice.taxAmount.secondary != 0) {
+      tax += " + " + this.invoice.taxAmount.secondary + "%"
+    }
+
+    if (this.invoice.taxType) {
+      tax += " (" + this.invoice.taxType + ") ";
+    }
+
+    return tax + (this.invoice.taxIncluded ? " Included" : " Excluded");
+  }
 }
