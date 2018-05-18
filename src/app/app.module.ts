@@ -10,6 +10,7 @@ import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
 import { ReleaseOrderModule } from './release-order/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
+import { ReceiptsModule } from './receipts/receipts.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -53,6 +54,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     RateCardModule,
     ReleaseOrderModule,
     InvoiceModule,
+    ReceiptsModule,
     AppRoutingModule
   ],
   providers: [],
