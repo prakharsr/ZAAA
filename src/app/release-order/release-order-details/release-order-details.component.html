@@ -228,6 +228,15 @@
         </li>
         </ul>
       </div>
+
+      <div class="card mb-3">
+        <div class="card-header">Insertions</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of releaseOrder.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
+            {{toDate(item.date) | date}}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="col-lg-6">
@@ -277,15 +286,6 @@
     </div>
 
     <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Insertions</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of releaseOrder.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
-            {{toDate(item.date) | date}}
-          </li>
-        </ul>
-      </div>
-
       <div class="card mb-3">
         <div class="card-header">Premiums</div>
         <ul class="list-group list-group-flush" *ngIf="isTypeWords">
