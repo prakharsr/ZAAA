@@ -6,6 +6,9 @@ import { AuthGuard } from '../guards/auth-guard.service';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { ReceiptListComponent } from './receipt-list/receipt-list.component';
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
+import { ReceiptListResolver } from './receipt-list-resolver.service';
+import { InvoiceDirResolver } from '../invoice/invoice-dir-resolver.service';
+import { ReceiptResolver } from './receipt-resolver.service';
 
 const routes: Routes = [
   {
@@ -15,15 +18,24 @@ const routes: Routes = [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
       {
         path: 'list/:page',
-        component: ReceiptListComponent
+        component: ReceiptListComponent,
+        resolve: {
+            resolved: ReceiptListResolver
+        }
       },
       {
         path: 'new/:id',
-        component: ReceiptComponent
+        component: ReceiptComponent,
+        resolve: {
+          resolved: InvoiceDirResolver
+        }
       },
       {
         path: ':id',
-        component: ReceiptDetailsComponent
+        component: ReceiptDetailsComponent,
+        resolve: {
+          invoice: ReceiptResolver
+        }
       }
     ]
   }

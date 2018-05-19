@@ -42,7 +42,6 @@ export class InvoiceComponent implements OnInit {
       this.executive = data.resolved.executive;
 
       this.invoice.releaseOrderId = this.releaseOrder.id;
-      this.invoice.adGrossAmount = this.releaseOrder.adGrossAmount;
       this.invoice.otherCharges = this.releaseOrder.otherCharges;
       this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
       this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
@@ -79,7 +78,8 @@ export class InvoiceComponent implements OnInit {
 
       return;
     }
-
+    
+    this.invoice.adGrossAmount = this.grossAmount;
     this.invoice.netAmountFigures = this.netAmount;
     this.invoice.netAmountWords = this.amountToWords(this.invoice.netAmountFigures);
     this.invoice.pendingAmount = this.invoice.netAmountFigures;
@@ -147,24 +147,28 @@ export class InvoiceComponent implements OnInit {
     else return this.insertionCount;
   }
 
-  get netAmount() {
-    let grossSingle = this.invoice.adGrossAmount / this.releaseOrder.adSchemePaid;
-    let result = grossSingle * this.toPay;
+  get grossAmount() {
+    let grossSingle = this.releaseOrder.adGrossAmount / this.releaseOrder.adSchemePaid;
+    return Math.ceil(grossSingle * this.toPay);
+  }
 
-    this.invoice.otherCharges.forEach(otherCharge => result += otherCharge.amount);
+  get netAmount() {
+    let result = this.grossAmount;
+
+    this.invoice.otherCharges.forEach(otherCharge => result += +otherCharge.amount);
 
     if (this.invoice.additionalCharges.percentage) {
-      result += (result * this.invoice.additionalCharges.amount) / 100;
+      result += +(result * this.invoice.additionalCharges.amount) / 100;
     }
-    else result += this.invoice.additionalCharges.amount;
+    else result += +this.invoice.additionalCharges.amount;
 
     if (this.invoice.extraCharges.percentage) {
-      result += (result * this.invoice.extraCharges.amount) / 100;
+      result += +(result * this.invoice.extraCharges.amount) / 100;
     }
-    else result += this.invoice.extraCharges.amount;
+    else result += +this.invoice.extraCharges.amount;
 
     if (this.invoice.publicationDiscount.percentage) {
-      result -= (result * this.invoice.publicationDiscount.amount) / 100;
+      result -= +(result * this.invoice.publicationDiscount.amount) / 100;
     }
     else result -= this.invoice.publicationDiscount.amount
     
@@ -173,7 +177,7 @@ export class InvoiceComponent implements OnInit {
     }
     else result -= this.invoice.agencyDiscount1.amount;
 
-    return result;
+    return Math.ceil(result);
   }
 
   get finalTaxAmount() {
@@ -222,6 +226,10 @@ export class InvoiceComponent implements OnInit {
     str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only' : '';
     
     return str;
+  }
+
+  removeOtherCharge(i: number) {
+    this.invoice.otherCharges.splice(i, 1);
   }
 
 }

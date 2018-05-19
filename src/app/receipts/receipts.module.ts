@@ -8,6 +8,8 @@ import { ReceiptsApiService } from './receipts-api.service';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { ReceiptListComponent } from './receipt-list/receipt-list.component';
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
+import { ReceiptResolver } from './receipt-resolver.service';
+import { ReceiptListResolver } from './receipt-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { ReceiptDetailsComponent } from './receipt-details/receipt-details.compo
     ReceiptDetailsComponent
   ],
   providers: [
-    ReceiptsApiService
+    ReceiptsApiService,
+    ReceiptResolver,
+    ReceiptListResolver
   ]
 })
 export class ReceiptsModule { }

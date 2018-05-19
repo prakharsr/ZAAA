@@ -6,6 +6,9 @@ export class PaymentReceipt {
     paymentType = "";
     paymentDate = "";
     paymentNo = "";
-    paymentAmount = "";
+    paymentAmount = 0;
+    paymentAmountWords = "";
     paymentBankName = "";
+
+    generated = false;
 }

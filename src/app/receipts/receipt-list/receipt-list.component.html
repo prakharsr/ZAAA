@@ -1,3 +1,117 @@
-<p>
-  receipt-list works!
-</p>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Payment Receipts</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<ng-template #rtExecutive let-r="result">
+  {{r.executiveName}} - {{r.orgName}}
+</ng-template>
+
+<ng-template #rtExecutiveOrg let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<div class="container">
+  <div class="form-row">
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="executive" [ngbTypeahead]="searchExecutive" placeholder="Executive" [resultTemplate]="rtExecutive" [inputFormatter]="executiveNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <select [(ngModel)]="pastDays" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <p *ngIf="receipts.length == 0" class="text-muted">
+    No Receipts
+  </p>
+
+  <div class="card mb-3" *ngFor="let receipt of receipts">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <a [routerLink]="['/receipts', receipt.id]">Dummy</a>
+          </div>
+          <div class="col-auto">
+            <mat-menu #receiptMenu="matMenu">
+              <button mat-menu-item (click)="gen(receipt)">
+                <mat-icon>save_alt</mat-icon> Download
+              </button>
+              <button mat-menu-item (click)="sendMsg(receipt)">
+                <mat-icon>mail</mat-icon> Send Email
+              </button>
+            </mat-menu>
+            
+            <button mat-icon-button [matMenuTriggerFor]="receiptMenu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  <br>
+
+  <nav *ngIf="pageCount != 0">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="page == 1">
+        <button class="page-link" (click)="search(+page - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </button>
+      </li>
+      <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i + 1 == page">
+        <button class="page-link" (click)="search(i + 1)">{{i + 1}}</button>
+      </li>
+      <li class="page-item" [class.disabled]="page == pageCount">
+        <button class="page-link" (click)="search(+page + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>

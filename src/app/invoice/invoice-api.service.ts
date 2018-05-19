@@ -6,11 +6,19 @@ import { PageData } from '../models/page-data';
 import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
 import { map } from 'rxjs/operators';
 import { MailingDetails } from '../models/mailing-details';
+import { ReleaseOrder } from '../release-order/release-order';
+import { ClientApiService } from '../directory/clients/client-api.service';
+import { MediaHouseApiService } from '../directory/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '../directory/executives/executive-api.service';
+import { InvoiceDir } from './invoice-dir-resolver.service';
 
 @Injectable()
 export class InvoiceApiService {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService,
+    private clientApi: ClientApiService,
+    private mediaHouseApi: MediaHouseApiService,
+    private executiveApi: ExecutiveApiService) { }
 
   private bodyToInvoice(body: any) {
     let result = new Invoice();
@@ -66,4 +74,16 @@ export class InvoiceApiService {
       id: invoice.id
     }, { responseType: 'blob' });
   }
+
+  getInvoiceDir(id: string): Observable<InvoiceDir> {
+    return this.api.get('/user/invoice/' + id).pipe(
+      map(data => data.success ? {
+        invoice: this.bodyToInvoice(data.invoice),
+        mediaHouse: this.mediaHouseApi.bodyToMediaHouse(data.mediahouse),
+        client: this.clientApi.bodyToClient(data.client),
+        executive: this.executiveApi.bodyToExecutive(data.executive)
+       } : null)
+    );
+  }
+
 }

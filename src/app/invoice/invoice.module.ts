@@ -10,6 +10,7 @@ import { InvoiceListResolver } from './invoice-list-resolver.service';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceDirResolver } from './invoice-dir-resolver.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { InvoiceListComponent } from './invoice-list/invoice-list.component';
   providers: [
     InvoiceApiService,
     InvoiceResolver,
-    InvoiceListResolver
+    InvoiceListResolver,
+    InvoiceDirResolver
   ]
 })
 export class InvoiceModule { }
