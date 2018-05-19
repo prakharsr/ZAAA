@@ -5,6 +5,7 @@ import { Invoice } from './invoice';
 import { PageData } from '../models/page-data';
 import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
 import { map } from 'rxjs/operators';
+import { MailingDetails } from '../models/mailing-details';
 
 @Injectable()
 export class InvoiceApiService {
@@ -51,5 +52,18 @@ export class InvoiceApiService {
         return new PageData<Invoice>(invoices, data.perPage, data.page, data.pageCount);
       })
     );
+  }
+
+  sendMail(invoice: Invoice, mailingDetails: MailingDetails) {
+    return this.api.post('/user/invoice/email', {
+      id: invoice.id,
+      ...mailingDetails
+    });
+  }
+
+  generate(invoice: Invoice) {
+    return this.api.post('/user/invoice/download', {
+      id: invoice.id
+    }, { responseType: 'blob' });
   }
 }

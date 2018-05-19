@@ -38,4 +38,6 @@ export class Invoice {
     pendingAmount = 0;
 
     insertions: Insertion[] = [];
+
+    generated = false;
 }

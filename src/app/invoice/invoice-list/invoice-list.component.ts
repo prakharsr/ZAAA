@@ -12,6 +12,9 @@ import { MediaHouseApiService } from '../../directory/media-houses/media-house-a
 import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { of } from 'rxjs/observable/of';
 import { NotificationService } from '../../services/notification.service';
+import { DialogService } from '../../services/dialog.service';
+import { InvoiceApiService } from '../invoice-api.service';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -40,7 +43,10 @@ export class InvoiceListComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService,
     private executiveApi: ExecutiveApiService,
     private router: Router,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private dialog: DialogService,
+    private api: InvoiceApiService,
+    private windowService: WindowService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<Invoice>, search: ReleaseOrderSearchParams }}) => {
@@ -139,6 +145,72 @@ export class InvoiceListComponent implements OnInit {
     this.edition = mediaHouse;
 
     return mediaHouse.pubName;
+  }
+
+  gen(invoice: Invoice) {
+    this.confirmGeneration(invoice).subscribe(confirm => {
+      if (confirm) {
+        this.api.generate(invoice).subscribe(data => {
+          if (data.msg) {
+            this.notifications.show(data.msg);
+    
+            invoice.generated = true;
+          }
+          else {
+            console.log(data);
+            
+            let blob = new Blob([data], { type: 'application/pdf' });
+            let url = this.windowService.window.URL.createObjectURL(blob);
+    
+            let a = this.windowService.window.document.createElement('a');
+            a.download = 'invoice.pdf';
+            a.href = url;
+            a.click();
+          }
+        },
+        err => {
+          console.log(err);
+    
+          this.notifications.show("Connection failed");
+        });
+      }
+    })
+  }
+
+  sendMsg(invoice: Invoice) {
+    this.confirmGeneration(invoice).subscribe(confirm => {
+      if (confirm) {
+        this.dialog.getMailingDetails().subscribe(mailingDetails => {
+          if (mailingDetails) {
+            this.api.sendMail(invoice, mailingDetails).subscribe(data => {
+              if (data.success) {
+                this.notifications.show("Sent Successfully");
+
+                invoice.generated = true;
+              }
+              else {
+                console.log(data);
+
+                this.notifications.show(data.msg);
+              }
+            },
+            err => {
+              console.log(err);
+
+              this.notifications.show("Connection failed");
+            });
+          }
+        });
+      }
+    });
+  }
+
+  private confirmGeneration(invoice: Invoice) : Observable<boolean> {
+    if (invoice.generated) {
+      return of(true);
+    }
+
+    return this.dialog.showYesNo('Confirm Generation', "Invoice will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
   }
 
   private get editionName() {
