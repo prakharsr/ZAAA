@@ -59,11 +59,6 @@ export class ExecutiveComponent implements OnInit {
         else {
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     )
   }
@@ -77,11 +72,6 @@ export class ExecutiveComponent implements OnInit {
         else {
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     )
   }

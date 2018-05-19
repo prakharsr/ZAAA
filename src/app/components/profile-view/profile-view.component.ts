@@ -39,11 +39,6 @@ export class ProfileViewComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
       }
     );
   }
@@ -67,11 +62,6 @@ export class ProfileViewComponent implements OnInit {
     
               this.notifications.show(data.msg);
             }
-          },
-          err => {
-            console.log(err);
-    
-            this.notifications.show("Connection failed");
           }
         )
       }
@@ -91,11 +81,6 @@ export class ProfileViewComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
       }
     );
   }
@@ -119,11 +104,6 @@ export class ProfileViewComponent implements OnInit {
     
               this.notifications.show(data.msg);
             }
-          },
-          err => {
-            console.log(err);
-    
-            this.notifications.show("Connection failed");
           }
         )
       }

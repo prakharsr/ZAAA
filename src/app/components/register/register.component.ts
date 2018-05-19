@@ -34,10 +34,6 @@ export class RegisterComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        this.notifications.show("Connection failed");
-        console.log(err);
       }
     );
   }

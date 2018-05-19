@@ -41,13 +41,6 @@ export class PhoneVerifyComponent implements OnInit {
 
           this.sendError = data.msg;
         }
-      },
-      err => {
-        this.otpSent = false;
-
-        console.log(err)
-
-        this.sendError = 'Connection failed';
       }
     )
   }
@@ -66,11 +59,6 @@ export class PhoneVerifyComponent implements OnInit {
 
           this.verifyError = data.msg;
         }
-      },
-      err => {
-        console.log(err)
-
-        this.verifyError = 'Connection failed';
       }
     );
   }

@@ -38,11 +38,6 @@ export class ExecutiveDetailsComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
       }
     );
   }

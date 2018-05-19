@@ -178,11 +178,6 @@ export class ReleaseOrderListComponent implements OnInit {
 
             this.notifications.show(data.msg);
           }
-        },
-        err => {
-          console.log(err);
-
-          this.notifications.show("Connection failed");
         }
       );
     });
@@ -208,11 +203,6 @@ export class ReleaseOrderListComponent implements OnInit {
             a.href = url;
             a.click();
           }
-        },
-        err => {
-          console.log(err);
-    
-          this.notifications.show("Connection failed");
         });
       }
     })
@@ -234,11 +224,6 @@ export class ReleaseOrderListComponent implements OnInit {
 
                 this.notifications.show(data.msg);
               }
-            },
-            err => {
-              console.log(err);
-
-              this.notifications.show("Connection failed");
             });
           }
         });

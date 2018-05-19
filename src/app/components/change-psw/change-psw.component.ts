@@ -29,11 +29,6 @@ export class ChangePswComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     );
   }

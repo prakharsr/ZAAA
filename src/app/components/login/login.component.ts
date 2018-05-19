@@ -31,11 +31,6 @@ export class LoginComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     );
   }

@@ -26,10 +26,6 @@ export class ForgotPswComponent implements OnInit {
           console.log(data);
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-        this.notifications.show('Connection failed');
       }
     );
   }

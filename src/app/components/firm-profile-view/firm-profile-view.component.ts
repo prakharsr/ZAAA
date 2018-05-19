@@ -45,11 +45,6 @@ export class FirmProfileViewComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show("Connection failed");
       }
     );
   }
@@ -73,11 +68,6 @@ export class FirmProfileViewComponent implements OnInit {
     
               this.notifications.show(data.msg);
             }
-          },
-          err => {
-            console.log(err);
-    
-            this.notifications.show("Connection failed");
           }
         )
       }

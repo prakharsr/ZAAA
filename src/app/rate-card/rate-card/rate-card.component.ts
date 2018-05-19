@@ -421,11 +421,6 @@ export class RateCardComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     );
   }
@@ -439,11 +434,6 @@ export class RateCardComponent implements OnInit {
         else {
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     )
   }

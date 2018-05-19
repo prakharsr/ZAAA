@@ -57,11 +57,6 @@ export class ReceiptComponent implements OnInit {
 
         this.notifications.show(data.msg);
       }
-    },
-    err => {
-      console.log(err);
-
-      this.notifications.show('Connection failed');
     });
   }
 
@@ -72,5 +67,7 @@ export class ReceiptComponent implements OnInit {
   cancel() {
     this.goBack();
   }
+
+  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
 }
 

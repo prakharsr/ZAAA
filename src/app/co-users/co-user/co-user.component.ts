@@ -41,11 +41,6 @@ export class CoUserComponent implements OnInit {
 
                 this.notifications.show(d.msg);
               }
-            },
-            err => {
-              console.log(err);
-
-              this.notifications.show('Connection failed');
             });
           }
           else this.navigateBack();
@@ -55,11 +50,6 @@ export class CoUserComponent implements OnInit {
 
           this.notifications.show(data.msg);
         }
-      },
-      err => {
-        console.log(err);
-
-        this.notifications.show('Connection failed');
       }
     );
   }

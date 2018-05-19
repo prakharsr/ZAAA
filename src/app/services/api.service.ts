@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
+import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/observable/throw';
 
 import { Plan } from '../models/plan';
 import { Template } from '../models/template';
@@ -17,6 +19,7 @@ import { Firm } from '../models/firm';
 import { Address } from '../models/address';
 import { LoaderService } from './loader.service';
 import { BillingDetails } from '../components/billing-details/billing-details.component';
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class ApiService {
@@ -52,10 +55,26 @@ export class ApiService {
     }
   }
 
-  constructor(private http: HttpClient, private windowService: WindowService, private loaderService: LoaderService) { }
+  constructor(private http: HttpClient,
+    private windowService: WindowService,
+    private loaderService: LoaderService,
+    private notifications: NotificationService) { }
 
   private get headers() {
     return { headers: { Authorization: this.authToken }};
+  }
+
+  private apply(obj: Observable<any>) {
+    return obj.pipe(
+      retry(2)
+    ).catch(err => {
+      console.log(err);
+
+      this.notifications.show('Connection to ther server failed!');
+
+      return Observable.throw(err);
+    })
+    .finally(() => this.loaderService.hide())  
   }
 
   post(url: string, body: any, extra = {}) : Observable<any> {
@@ -64,14 +83,13 @@ export class ApiService {
 
     if (this.authToken)
     {
-        return this.http.post(environment.apiUrl + url, body, {
+        return this.apply(this.http.post(environment.apiUrl + url, body, {
           ...this.headers,
           ...extra
-        }).finally(() => this.loaderService.hide());
+        }));
     }
     else {
-      return this.http.post(environment.apiUrl + url, body)
-        .finally(() => this.loaderService.hide());
+      return this.apply(this.http.post(environment.apiUrl + url, body));
     }
   }
 
@@ -81,12 +99,10 @@ export class ApiService {
 
     if (this.authToken)
     {
-        return this.http.patch(environment.apiUrl + url, body, this.headers)
-          .finally(() => this.loaderService.hide());
+        return this.apply(this.http.patch(environment.apiUrl + url, body, this.headers));
     }
     else {
-      return this.http.patch(environment.apiUrl + url, body)
-        .finally(() => this.loaderService.hide());
+      return this.apply(this.http.patch(environment.apiUrl + url, body));
     }
   }
 
@@ -96,12 +112,10 @@ export class ApiService {
 
     if (this.authToken)
     {
-        return this.http.get(environment.apiUrl + url, this.headers)
-          .finally(() => this.loaderService.hide());
+        return this.apply(this.http.get(environment.apiUrl + url, this.headers));
     }
     else {
-      return this.http.get(environment.apiUrl + url)
-        .finally(() => this.loaderService.hide());
+      return this.apply(this.http.get(environment.apiUrl + url));
     }
   }
 
@@ -109,8 +123,7 @@ export class ApiService {
 
     this.loaderService.show();
 
-    return this.http.delete(environment.apiUrl + url, this.headers)
-      .finally(() => this.loaderService.hide());
+    return this.apply(this.http.delete(environment.apiUrl + url, this.headers));
   }
 
   fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
@@ -120,8 +133,7 @@ export class ApiService {
     const formData = new FormData();
     formData.append(key, fileToUpload, fileToUpload.name);
 
-    return this.http.post(environment.apiUrl + url, formData, this.headers)
-      .finally(() => this.loaderService.hide());
+    return this.apply(this.http.post(environment.apiUrl + url, formData, this.headers));
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {
