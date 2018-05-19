@@ -28,6 +28,8 @@ import { PlanGuard } from './guards/plan-guard.service';
 
 import { MailingDetailsComponent } from './components/mailing-details/mailing-details.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 import { VerifyEmailDirective } from './validators/verify-email.directive';
 import { VerifyMinDirective } from './validators/verify-min.directive';
@@ -35,7 +37,6 @@ import { VerifyMaxDirective } from './validators/verify-max.directive';
 import { VerifyLengthDirective } from './validators/verify-fix-length.directive';
 import { VerifyMultipleOfDirective } from './validators/verify-multiple-of.directive';
 import { VerifyEqualsDirective } from './validators/verify-equals.directive';
-import { BillingDetailsComponent } from './components/billing-details/billing-details.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -75,7 +76,8 @@ const validators = [
     MailingDetailsComponent,
     DialogComponent,
     BillingDetailsComponent,
-    validators
+    validators,
+    PaginationComponent
   ],
   exports: [
     CommonModule,
@@ -84,7 +86,8 @@ const validators = [
     HttpClientModule,
     MaterialModule,
     MailingDetailsComponent,
-    validators
+    validators,
+    PaginationComponent
   ],
   entryComponents: [
     DialogComponent,

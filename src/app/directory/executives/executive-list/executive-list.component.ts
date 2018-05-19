@@ -22,11 +22,8 @@ export class ExecutiveListComponent implements OnInit {
   executives: Executive[] = [];
 
   pageCount: number;
-    page: number;
+  page: number;
   
-    dummyArray;
-  
-
   query: string;
   searchFailed = false;
 
@@ -40,8 +37,6 @@ constructor(private api: ExecutiveApiService,
         this.executives = data.list.list;
         this.pageCount = data.list.pageCount;
         this.page = data.list.page;
-  
-        this.dummyArray = Array(this.pageCount);
       });
   }
 
@@ -77,5 +72,9 @@ constructor(private api: ExecutiveApiService,
         err => console.log(err)
       );
     });
+  }
+
+  navigate(i: number) {
+    this.router.navigate(['/dir/executives/list', i]);
   }
 }

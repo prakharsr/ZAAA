@@ -24,8 +24,6 @@ export class ClientListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   query: string;
   searchFailed = false;
 
@@ -39,8 +37,6 @@ export class ClientListComponent implements OnInit {
       this.clients = data.list.list;
       this.pageCount = data.list.pageCount;
       this.page = data.list.page;
-
-      this.dummyArray = Array(this.pageCount);
     });
   }
 
@@ -76,5 +72,9 @@ export class ClientListComponent implements OnInit {
         err => console.log(err)
       );
     });
+  }
+
+  navigate(i: number) {
+    this.router.navigate(['/dir/clients/list', i]);
   }
 }

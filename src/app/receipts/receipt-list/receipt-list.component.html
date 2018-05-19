@@ -95,23 +95,5 @@
     
   <br>
 
-  <nav *ngIf="pageCount != 0">
-    <ul class="pagination">
-      <li class="page-item" [class.disabled]="page == 1">
-        <button class="page-link" (click)="search(+page - 1)" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </button>
-      </li>
-      <li class="page-item" *ngFor="let x of dummyArray; index as i" [class.active]="i + 1 == page">
-        <button class="page-link" (click)="search(i + 1)">{{i + 1}}</button>
-      </li>
-      <li class="page-item" [class.disabled]="page == pageCount">
-        <button class="page-link" (click)="search(+page + 1)" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </button>
-      </li>
-    </ul>
-  </nav>
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
 </div>

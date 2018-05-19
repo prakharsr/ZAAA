@@ -28,8 +28,6 @@ export class InvoiceListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   mediaHouse;
   edition;
   client;
@@ -54,8 +52,6 @@ export class InvoiceListComponent implements OnInit {
 
       this.pageCount = data.resolved.list.pageCount;
       this.page = data.resolved.list.page;
-
-      this.dummyArray = Array(this.pageCount);
 
       let pub = new MediaHouse();
       pub.pubName = data.resolved.search.mediaHouse;

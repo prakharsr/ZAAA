@@ -102,4 +102,8 @@ export class RateCardListComponent implements OnInit {
       );
     });
   }
+
+  navigate(i: number) {
+    this.router.navigate(['/ratecards/list', i]);
+  }
 }

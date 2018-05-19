@@ -34,8 +34,6 @@ export class ReleaseOrderListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   mediaHouse;
   edition;
   client;
@@ -86,8 +84,6 @@ export class ReleaseOrderListComponent implements OnInit {
 
     this.pageCount = data.pageCount;
     this.page = data.page;
-
-    this.dummyArray = Array(this.pageCount);
   }
 
   searchClient = (text: Observable<string>) => {

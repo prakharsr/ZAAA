@@ -26,8 +26,6 @@ export class MediaHouseListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   query: string;
   searchFailed = false;
 
@@ -42,8 +40,6 @@ export class MediaHouseListComponent implements OnInit {
       this.mediaHouses = data.list.list;
       this.pageCount = data.list.pageCount;
       this.page = data.list.page;
-
-      this.dummyArray = Array(this.pageCount);
     });
   }
 
@@ -79,5 +75,9 @@ export class MediaHouseListComponent implements OnInit {
         err => console.log(err)
       );
     });
+  }
+
+  navigate(i: number) {
+    this.router.navigate(['/dir/media_houses/list', i]);
   }
 }
