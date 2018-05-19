@@ -40,7 +40,7 @@
         
         <strong>Tax:</strong>
         {{invoice.taxAmount.primary}}% <span *ngIf="invoice.taxAmount.secondary">+ {{invoice.taxAmount.secondary}}%</span>
-        {{invoice.taxInclude ? 'Included' : 'Excluded'}}
+        {{invoice.taxIncluded ? 'Included' : 'Excluded'}}
         
         ({{invoice.taxType}})
       </p>
