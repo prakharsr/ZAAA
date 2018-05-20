@@ -1,3 +1,53 @@
-<p>
-  receipt-details works!
-</p>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Payment Details: {{receipt.id}}</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-header">Payment Details</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Type</div>
+            <div class="col-md-8">{{receipt.paymentType}}</div>
+          </div>
+        </li>
+        <div *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Cheque Date</div>
+              <div class="col-md-8">{{receipt.paymentDate | date}}</div>
+            </div>
+          </li>          
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Cheque Number</div>
+              <div class="col-md-8">{{receipt.paymentNo}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Cheque Amount</div>
+              <div class="col-md-8">{{receipt.paymentAmount}}</div>
+            </div>
+          </li>  
+          <li class="list-group-item" *ngIf="receipt.paymentType == 'Cheque'">
+            <div class="row">
+              <div class="col-md-4">Bank Name</div>
+              <div class="col-md-8">{{receipt.paymentBankName}}</div>
+            </div>
+          </li>  
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Client Payment</div>
+              <div class="col-md-8">₹ {{receipt.clientPayment}}</div>
+            </div>
+          </li>
+        </div>          
+      </ul>
+    </div>
+  </div>
+</div>
