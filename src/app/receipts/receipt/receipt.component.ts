@@ -36,17 +36,19 @@ export class ReceiptComponent implements OnInit {
     private options: OptionsService) { }
 
   ngOnInit() {
-
     this.route.data.subscribe((data: { resolved: InvoiceDir }) => {
       this.invoice = data.resolved.invoice;
       this.mediaHouse = data.resolved.mediaHouse;
       this.client = data.resolved.client;
       this.executive = data.resolved.executive;
       this.receipt.invoiceID = this.invoice.id;
+
+      this.receipt.paymentType = this.paymentTypes[0];
     });
   }
 
   submit () {
+    this.receipt.paymentAmountWords = this.options.amountToWords(this.receipt.paymentAmount);
 
     this.api.createReceipt(this.receipt).subscribe(data => {
       if (data.success) {

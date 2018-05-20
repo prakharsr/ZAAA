@@ -21,6 +21,12 @@
             <div class="col-md-8">₹ {{receipt.paymentAmount}}</div>
           </div>
         </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Amount in Words</div>
+            <div class="col-md-8">{{receipt.paymentAmountWords}}</div>
+          </div>
+        </li>
         <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
           <li class="list-group-item">
             <div class="row">

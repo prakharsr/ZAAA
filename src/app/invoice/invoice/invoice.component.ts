@@ -9,6 +9,7 @@ import { MediaHouse } from '../../directory/media-houses/media-house';
 import { Client } from '../../directory/clients/client';
 import { Executive } from '../../directory/executives/executive';
 import { ReleaseOrderDir } from '../../release-order/release-order-dir-resolver.service';
+import { OptionsService } from '../../services/options.service';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -32,7 +33,8 @@ export class InvoiceComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private notifications: NotificationService,
     private router: Router,
-    private api: InvoiceApiService) { }
+    private api: InvoiceApiService,
+    private options: OptionsService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
@@ -81,7 +83,7 @@ export class InvoiceComponent implements OnInit {
     
     this.invoice.adGrossAmount = this.grossAmount;
     this.invoice.netAmountFigures = this.netAmount;
-    this.invoice.netAmountWords = this.amountToWords(this.invoice.netAmountFigures);
+    this.invoice.netAmountWords = this.options.amountToWords(this.invoice.netAmountFigures);
     this.invoice.pendingAmount = this.invoice.netAmountFigures;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
@@ -183,44 +185,6 @@ export class InvoiceComponent implements OnInit {
     amount += (this.invoice.taxAmount.secondary * finalAmount) / 100;
 
     return amount;
-  }
-
-  amountToWords(num) {
-    if (!num) {
-      return "Zero Only";
-    }
-
-    let a = [
-      '',
-      'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ',
-      'Ten ',
-      'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '
-    ];
-    
-    let b = [
-      '', '',
-      'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
-    ];
-    
-    let c = ['Crore ', 'Lakh ', 'Thousand ', 'Hundred '];
-  
-    if ((num = num.toString()).length > 9)
-      return 'overflow';
-
-    let n : any = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-    
-    if (!n)
-      return;
-      
-    let str = '';
-
-    for (let i = 0; i < 4; ++i) {
-      str += (n[i + 1] != 0) ? (a[Number(n[i + 1])] || b[n[i + 1][0]] + ' ' + a[n[i + 1][1]]) + c[i] : '';
-    }
-
-    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only' : '';
-    
-    return str;
   }
 
   removeOtherCharge(i: number) {

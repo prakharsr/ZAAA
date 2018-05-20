@@ -7,78 +7,81 @@
 <br>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-      <form (ngSubmit)="submit()" #receiptForm="ngForm">
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Payment Details</mat-panel-title>
-              <mat-panel-description>Enter Payment details</mat-panel-description>
-            </mat-expansion-panel-header>
+  <form (ngSubmit)="submit()" #receiptForm="ngForm">
+    <p><strong>Pending Amount:</strong> ₹ {{invoice.pendingAmount}}</p>
 
-            <div class="form-group">
-              <label>Type</label>
-              <select class="form-control" name="paymentType" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-                <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
-              </select>
+    <br>
+
+    <div class="form-group">
+      <label for="paymentAmount">Amount</label>
+      <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+    </div>
+
+    <br>
+    
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Payment Details</mat-panel-title>
+          <mat-panel-description>Enter Payment details</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-control" name="paymentType" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+            <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
+          </select>
+        </div>
+        
+        <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
+          <div *ngIf="paymentAmountField.errors.required">
+            Amount is required.
+          </div>
+          <br>
+        </div>
+
+        <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
+          <mat-form-field>
+            <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Enter Date" [(ngModel)]="receipt.paymentDate" required disabled>
+            <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
+            <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
+            <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+              Date is required.
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-group">
+            <label for="paymentCheque">{{receipt.paymentType}} Number</label>
+            <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter {{receipt.paymentType}} Number" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
+          </div>
+          
+          <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
+            <div *ngIf="paymentChequeField.errors.required">
+              {{receipt.paymentType}} Number is required.
             </div>
+            <br>
+          </div>
 
-            <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
-              <mat-form-field>
-                <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Enter Date" [(ngModel)]="receipt.paymentDate" required disabled>
-                <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
-                <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-                <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
-                  Date is required.
-                </mat-error>
-              </mat-form-field>
-
-              <div class="form-group">
-                <label for="paymentCheque">No</label>
-                <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
+          <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+            <div class="form-group">
+              <label for="bankName">Bank Name</label>
+              <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
+            </div>
+            
+            <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
+              <div *ngIf="bankNameField.errors.required">
+                Bank Name is required.
               </div>
-              
-              <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
-                <div *ngIf="paymentChequeField.errors.required">
-                  No is required.
-                </div>
-                <br>
-              </div>
-
-              <div class="form-group">
-                <label for="paymentAmount">Amount</label>
-                <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-              </div>
-              
-              <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
-                <div *ngIf="paymentAmountField.errors.required">
-                  Amount is required.
-                </div>
-                <br>
-              </div>
-
-            <ng-container *ngIf="receipt.paymentType == 'Cheque'">
-              <div class="form-group">
-                <label for="bankName">Bank Name</label>
-                <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
-              </div>
-              
-              <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
-                <div *ngIf="bankNameField.errors.required">
-                  Bank Name is required.
-                </div>
-                <br>
-              </div>
-            </ng-container>
+              <br>
+            </div>
           </ng-container>
-        </mat-expansion-panel>
-      </mat-accordion>
+        </ng-container>
+      </mat-expansion-panel>
+    </mat-accordion>
+
     <br><br>
 
     <button type="submit" class="btn btn-success" [disabled]="!receiptForm.form.valid">Save</button>
     <button class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
-  </div>
-  </div>
 </div>
