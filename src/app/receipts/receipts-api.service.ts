@@ -6,6 +6,7 @@ import { PageData } from '../models/page-data';
 import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
 import { map } from 'rxjs/operators';
 import { MailingDetails } from '../models/mailing-details';
+import { Invoice } from '../invoice/invoice';
 
 @Injectable()
 export class ReceiptsApiService {
@@ -26,12 +27,16 @@ export class ReceiptsApiService {
     return this.api.post('/user/receipt', receipt);
   }
 
+  createAdvanceReceipt(receipt: PaymentReceipt) {
+    return this.api.post('/user/receipt/advanced', receipt);
+  }
+
   getReceipt(id: string): Observable<PaymentReceipt> {
     return this.api.get('/user/receipt/' + id).map(data => data.success ? this.bodyToReceipt(data.receipt) : null);
   }
 
-  searchReceipts(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<PaymentReceipt>> {
-    return this.api.post('/user/receipt/search', {
+  searchReceipts(page: number, params: ReleaseOrderSearchParams, advance = false) : Observable<PageData<PaymentReceipt>> {
+    return this.api.post(advance ? '/user/receipt/advanced/search/' : '/user/receipt/search', {
       page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
@@ -52,6 +57,13 @@ export class ReceiptsApiService {
         return new PageData<PaymentReceipt>(receipts, data.perPage, data.page, data.pageCount);
       })
     );
+  }
+
+  link(invoice: Invoice, advancedReceipt: PaymentReceipt) {
+    return this.api.post('/user/receipt/advanced/link', {
+      invoiceID: invoice.id,
+      receiptID: advancedReceipt.id
+    });
   }
 
   sendMail(receipt: PaymentReceipt, mailingDetails: MailingDetails) {

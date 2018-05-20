@@ -27,7 +27,7 @@ export class ReceiptListResolver implements Resolve<Result> {
       route.queryParamMap.get('executiveOrg'),
       +route.queryParamMap.get('past'));
 
-    return this.api.searchReceipts(page, searchParams).map(receipt => {
+    return this.api.searchReceipts(page, searchParams, route.data.advance).map(receipt => {
       if (receipt) {
         return {
           list: receipt,

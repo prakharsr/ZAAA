@@ -28,6 +28,8 @@ export class ReceiptListComponent implements OnInit {
   pageCount: number;
   page: number;
 
+  advance = false;
+
   mediaHouse;
   edition;
   client;
@@ -47,8 +49,9 @@ export class ReceiptListComponent implements OnInit {
     private windowService: WindowService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<PaymentReceipt>, search: ReleaseOrderSearchParams }}) => {
+    this.route.data.subscribe((data: { resolved: { list: PageData<PaymentReceipt>, search: ReleaseOrderSearchParams }, advance: boolean}) => {
       this.receipts = data.resolved.list.list;
+      this.advance = data.advance;
 
       this.pageCount = data.resolved.list.pageCount;
       this.page = data.resolved.list.page;

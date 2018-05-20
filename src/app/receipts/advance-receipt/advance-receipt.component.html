@@ -1,0 +1,17 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+      <div class="container">Create Advance Receipt</div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <br>
+  
+  <div class="container">
+    <form (ngSubmit)="submit()" #receiptForm="ngForm">
+        
+      <br><br>
+  
+      <button type="submit" class="btn btn-success" [disabled]="!receiptForm.form.valid">Save</button>
+      <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
