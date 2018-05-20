@@ -1,6 +1,6 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Payment Details: {{receipt.id}}</div>
+    <div class="container">Payment Receipt: {{receipt.id}}</div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -15,38 +15,32 @@
             <div class="col-md-8">{{receipt.paymentType}}</div>
           </div>
         </li>
-        <div *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Amount</div>
+            <div class="col-md-8">₹ {{receipt.paymentAmount}}</div>
+          </div>
+        </li>
+        <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Cheque Date</div>
+              <div class="col-md-4">Date</div>
               <div class="col-md-8">{{receipt.paymentDate | date}}</div>
             </div>
           </li>          
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Cheque Number</div>
+              <div class="col-md-4">{{receipt.paymentType}} Number</div>
               <div class="col-md-8">{{receipt.paymentNo}}</div>
             </div>
           </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Cheque Amount</div>
-              <div class="col-md-8">{{receipt.paymentAmount}}</div>
-            </div>
-          </li>  
           <li class="list-group-item" *ngIf="receipt.paymentType == 'Cheque'">
             <div class="row">
               <div class="col-md-4">Bank Name</div>
               <div class="col-md-8">{{receipt.paymentBankName}}</div>
             </div>
-          </li>  
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Client Payment</div>
-              <div class="col-md-8">₹ {{receipt.clientPayment}}</div>
-            </div>
           </li>
-        </div>          
+        </ng-container>          
       </ul>
     </div>
   </div>

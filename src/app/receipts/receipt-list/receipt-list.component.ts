@@ -144,61 +144,41 @@ export class ReceiptListComponent implements OnInit {
   }
 
   gen(receipt: PaymentReceipt) {
-    this.confirmGeneration(receipt).subscribe(confirm => {
-      if (confirm) {
-        this.api.generate(receipt).subscribe(data => {
-          if (data.msg) {
-            this.notifications.show(data.msg);
-    
-            receipt.generated = true;
-          }
-          else {
-            console.log(data);
-            
-            let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
-    
-            let a = this.windowService.window.document.createElement('a');
-            a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
-            a.download = 'receipt.pdf';
-            a.href = url;
-            a.click();
-          }
-        });
+    this.api.generate(receipt).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
       }
-    })
-  }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
 
-  sendMsg(receipt: PaymentReceipt) {
-    this.confirmGeneration(receipt).subscribe(confirm => {
-      if (confirm) {
-        this.dialog.getMailingDetails().subscribe(mailingDetails => {
-          if (mailingDetails) {
-            this.api.sendMail(receipt, mailingDetails).subscribe(data => {
-              if (data.success) {
-                this.notifications.show("Sent Successfully");
-
-                receipt.generated = true;
-              }
-              else {
-                console.log(data);
-
-                this.notifications.show(data.msg);
-              }
-            });
-          }
-        });
+        let a = this.windowService.window.document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        this.windowService.window.document.body.appendChild(a);
+        a.download = 'receipt.pdf';
+        a.href = url;
+        a.click();
       }
     });
   }
 
-  private confirmGeneration(receipt: PaymentReceipt) : Observable<boolean> {
-    if (receipt.generated) {
-      return of(true);
-    }
+  sendMsg(receipt: PaymentReceipt) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.sendMail(receipt, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
 
-    return this.dialog.showYesNo('Confirm Generation', "Payment Receipt will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
   }
 
   private get editionName() {

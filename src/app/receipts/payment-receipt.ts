@@ -9,6 +9,4 @@ export class PaymentReceipt {
     paymentAmount = 0;
     paymentAmountWords = "";
     paymentBankName = "";
-
-    generated = false;
 }

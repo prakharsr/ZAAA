@@ -144,61 +144,41 @@ export class InvoiceListComponent implements OnInit {
   }
 
   gen(invoice: Invoice) {
-    this.confirmGeneration(invoice).subscribe(confirm => {
-      if (confirm) {
-        this.api.generate(invoice).subscribe(data => {
-          if (data.msg) {
-            this.notifications.show(data.msg);
-    
-            invoice.generated = true;
-          }
-          else {
-            console.log(data);
-            
-            let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
-    
-            let a = this.windowService.window.document.createElement('a');
-            a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
-            a.download = 'invoice.pdf';
-            a.href = url;
-            a.click();
-          }
-        });
+    this.api.generate(invoice).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
       }
-    })
-  }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
 
-  sendMsg(invoice: Invoice) {
-    this.confirmGeneration(invoice).subscribe(confirm => {
-      if (confirm) {
-        this.dialog.getMailingDetails().subscribe(mailingDetails => {
-          if (mailingDetails) {
-            this.api.sendMail(invoice, mailingDetails).subscribe(data => {
-              if (data.success) {
-                this.notifications.show("Sent Successfully");
-
-                invoice.generated = true;
-              }
-              else {
-                console.log(data);
-
-                this.notifications.show(data.msg);
-              }
-            });
-          }
-        });
+        let a = this.windowService.window.document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        this.windowService.window.document.body.appendChild(a);
+        a.download = 'invoice.pdf';
+        a.href = url;
+        a.click();
       }
     });
   }
 
-  private confirmGeneration(invoice: Invoice) : Observable<boolean> {
-    if (invoice.generated) {
-      return of(true);
-    }
+  sendMsg(invoice: Invoice) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.sendMail(invoice, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
 
-    return this.dialog.showYesNo('Confirm Generation', "Invoice will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
   }
 
   private get editionName() {

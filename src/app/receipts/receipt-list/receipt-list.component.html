@@ -70,28 +70,28 @@
   </p>
 
   <div class="card mb-3" *ngFor="let receipt of receipts">
-      <div class="card-body">
-        <div class="row">
-          <div class="col">
-            <a [routerLink]="['/receipts', receipt.id]">Dummy</a>
-          </div>
-          <div class="col-auto">
-            <mat-menu #receiptMenu="matMenu">
-              <button mat-menu-item (click)="gen(receipt)">
-                <mat-icon>save_alt</mat-icon> Download
-              </button>
-              <button mat-menu-item (click)="sendMsg(receipt)">
-                <mat-icon>mail</mat-icon> Send Email
-              </button>
-            </mat-menu>
-            
-            <button mat-icon-button [matMenuTriggerFor]="receiptMenu">
-              <mat-icon>more_vert</mat-icon>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="['/receipts', receipt.id]">Dummy</a>
+        </div>
+        <div class="col-auto">
+          <mat-menu #receiptMenu="matMenu">
+            <button mat-menu-item (click)="gen(receipt)">
+              <mat-icon>save_alt</mat-icon> Download
             </button>
-          </div>
+            <button mat-menu-item (click)="sendMsg(receipt)">
+              <mat-icon>mail</mat-icon> Send Email
+            </button>
+          </mat-menu>
+          
+          <button mat-icon-button [matMenuTriggerFor]="receiptMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
         </div>
       </div>
     </div>
+  </div>
     
   <br>
 
