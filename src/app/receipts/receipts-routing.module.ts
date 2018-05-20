@@ -34,7 +34,7 @@ const routes: Routes = [
         path: ':id',
         component: ReceiptDetailsComponent,
         resolve: {
-          invoice: ReceiptResolver
+          receipt: ReceiptResolver
         }
       }
     ]
