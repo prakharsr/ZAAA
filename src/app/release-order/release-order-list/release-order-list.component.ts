@@ -199,6 +199,8 @@ export class ReleaseOrderListComponent implements OnInit {
             let url = this.windowService.window.URL.createObjectURL(blob);
     
             let a = this.windowService.window.document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            this.windowService.window.document.body.appendChild(a);
             a.download = 'releaseorder.pdf';
             a.href = url;
             a.click();
