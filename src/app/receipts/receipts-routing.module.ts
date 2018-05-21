@@ -10,6 +10,8 @@ import { ReceiptComponent } from './receipt/receipt.component';
 import { ReceiptListComponent } from './receipt-list/receipt-list.component';
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
 import { AdvanceReceiptComponent } from './advance-receipt/advance-receipt.component';
+import { LinkAdvanceComponent } from './link-advance/link-advance.component';
+import { InvoiceResolver } from '../invoice/invoice-resolver.service';
 
 const routes: Routes = [
   {
@@ -30,9 +32,23 @@ const routes: Routes = [
             path: 'list/:page',
             component: ReceiptListComponent,
             resolve: {
-                resolved: ReceiptListResolver
+              resolved: ReceiptListResolver
             }
-          }    
+          },
+          {
+            path: 'link/:id',
+            children: [
+              { path: '', redirectTo: '1', pathMatch: 'full' },
+              {
+                path: ':page',
+                component: LinkAdvanceComponent,
+                resolve: {
+                  invoice: InvoiceResolver,
+                  resolved: ReceiptListResolver
+                }
+              }
+            ]
+          }
         ]
       },
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
@@ -40,7 +56,7 @@ const routes: Routes = [
         path: 'list/:page',
         component: ReceiptListComponent,
         resolve: {
-            resolved: ReceiptListResolver
+          resolved: ReceiptListResolver
         }
       },
       { path: 'new', component: AdvanceReceiptComponent },

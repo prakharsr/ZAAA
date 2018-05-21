@@ -11,6 +11,7 @@ import { ReceiptDetailsComponent } from './receipt-details/receipt-details.compo
 import { ReceiptResolver } from './receipt-resolver.service';
 import { ReceiptListResolver } from './receipt-list-resolver.service';
 import { AdvanceReceiptComponent } from './advance-receipt/advance-receipt.component';
+import { LinkAdvanceComponent } from './link-advance/link-advance.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { AdvanceReceiptComponent } from './advance-receipt/advance-receipt.compo
     ReceiptComponent,
     ReceiptListComponent,
     ReceiptDetailsComponent,
-    AdvanceReceiptComponent
+    AdvanceReceiptComponent,
+    LinkAdvanceComponent
   ],
   providers: [
     ReceiptsApiService,

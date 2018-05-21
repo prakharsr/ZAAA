@@ -220,4 +220,14 @@ export class InvoiceListComponent implements OnInit {
 
     this.router.navigate(['/receipts/new', invoice.id]);
   }
+
+  linkAdvanceReceipt(invoice: Invoice) {
+    if (invoice.pendingAmount <= 0) {
+      this.notifications.show('All Payments have been completed for this Invoice');
+
+      return;
+    }
+
+    this.router.navigate(['/receipts/advance/link', invoice.id]);
+  }
 }

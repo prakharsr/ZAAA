@@ -44,6 +44,7 @@ export class ReceiptComponent implements OnInit {
       this.receipt.invoiceID = this.invoice.id;
 
       this.receipt.paymentType = this.paymentTypes[0];
+      this.receipt.paymentAmount = this.invoice.pendingAmount;
     });
   }
 

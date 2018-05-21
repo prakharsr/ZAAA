@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="container">Link Advance Receipt</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <div class="card mb-3" *ngFor="let receipt of receipts">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+            {{receipt.paymentType}}<br>
+            ₹ {{receipt.paymentAmount}}
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary" (click)="link(receipt)">Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
+</div>
