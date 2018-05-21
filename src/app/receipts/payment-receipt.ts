@@ -10,3 +10,23 @@ export class PaymentReceipt {
     paymentAmountWords = "";
     paymentBankName = "";
 }
+
+export class AdvanceReceipt extends PaymentReceipt {
+    publicationName = "";
+    publicationEdition = "";
+    publicationState = "";
+    publicationGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
+
+    clientName = "";
+    clientState = "";
+    clientGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
+
+    executiveName = "";
+    executiveOrg = "";
+}

@@ -34,7 +34,7 @@ export class InvoiceComponent implements OnInit {
     private notifications: NotificationService,
     private router: Router,
     private api: InvoiceApiService,
-    private options: OptionsService) { }
+    public options: OptionsService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {

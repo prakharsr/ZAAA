@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { PaymentReceipt } from './payment-receipt';
+import { PaymentReceipt, AdvanceReceipt } from './payment-receipt';
 import { Observable } from 'rxjs/Observable';
 import { PageData } from '../models/page-data';
 import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
@@ -27,7 +27,7 @@ export class ReceiptsApiService {
     return this.api.post('/user/receipt', receipt);
   }
 
-  createAdvanceReceipt(receipt: PaymentReceipt) {
+  createAdvanceReceipt(receipt: AdvanceReceipt) {
     return this.api.post('/user/receipt/advanced', receipt);
   }
 
@@ -59,7 +59,7 @@ export class ReceiptsApiService {
     );
   }
 
-  link(invoice: Invoice, advancedReceipt: PaymentReceipt) {
+  link(invoice: Invoice, advancedReceipt: AdvanceReceipt) {
     return this.api.post('/user/receipt/advanced/link', {
       invoiceID: invoice.id,
       receiptID: advancedReceipt.id

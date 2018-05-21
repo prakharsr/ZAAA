@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentReceipt } from '../payment-receipt';
+import { PaymentReceipt, AdvanceReceipt } from '../payment-receipt';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReleaseOrderSearchParams } from '../../release-order/release-order-search-params';
 import { PageData } from '../../models/page-data';
@@ -35,7 +35,7 @@ export class LinkAdvanceComponent implements OnInit {
     });
   }
 
-  link(receipt: PaymentReceipt) {
+  link(receipt: AdvanceReceipt) {
     this.api.link(this.invoice, receipt).subscribe(data => {
       if (data.success) {
         this.router.navigateByUrl('/invoices');

@@ -47,7 +47,7 @@ export class ReleaseOrderComponent implements OnInit {
     private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
     private notifications: NotificationService,
-    private options: OptionsService) { }
+    public options: OptionsService) { }
 
   get isTypeWords() {
 

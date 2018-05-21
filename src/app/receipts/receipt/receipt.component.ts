@@ -29,9 +29,6 @@ export class ReceiptComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private api: ReceiptsApiService,
-    private mediaHouseApi: MediaHouseApiService,
-    private clientApi: ClientApiService,
-    private executiveApi: ExecutiveApiService,
     private notifications: NotificationService,
     private options: OptionsService) { }
 
