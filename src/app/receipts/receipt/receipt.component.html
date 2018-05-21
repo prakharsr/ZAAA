@@ -17,6 +17,13 @@
       <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
     </div>
 
+    <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
+      <div *ngIf="paymentAmountField.errors.required">
+        Amount is required.
+      </div>
+      <br>
+    </div>
+
     <br>
     
     <mat-accordion>
@@ -31,13 +38,6 @@
           <select class="form-control" name="paymentType" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
             <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
           </select>
-        </div>
-        
-        <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
-          <div *ngIf="paymentAmountField.errors.required">
-            Amount is required.
-          </div>
-          <br>
         </div>
 
         <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
