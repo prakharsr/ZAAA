@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../../rate-card/rate-card';
-import { DialogService } from '../../services/dialog.service';
-import { OptionsService } from '../../services/options.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { OptionsService } from '@aaman/main/options.service';
+import { Category } from '@aaman/ratecard/rate-card';
 
 @Component({
   selector: 'app-ad-categories',

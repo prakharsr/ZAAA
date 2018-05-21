@@ -1,4 +1,4 @@
-import { Address } from "../../models/address";
+import { Address } from "@aaman/main/address";
 
 export class Client {
     orgName: string;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WindowService } from './window.service';
-
-import { environment } from '../../environments/environment';
+import { WindowService } from '@aaman/main/window.service';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class RazorPayService {

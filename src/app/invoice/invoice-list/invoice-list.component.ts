@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Invoice } from '../invoice';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { Client } from '../../directory/clients/client';
-import { Executive } from '../../directory/executives/executive';
-import { PageData } from '../../models/page-data';
-import { ReleaseOrderSearchParams } from '../../release-order/release-order-search-params';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientApiService } from '../../directory/clients/client-api.service';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { of } from 'rxjs/observable/of';
-import { NotificationService } from '../../services/notification.service';
-import { DialogService } from '../../services/dialog.service';
-import { InvoiceApiService } from '../invoice-api.service';
-import { WindowService } from '../../services/window.service';
+import { Invoice } from '@aaman/invoice/invoice';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
+import { WindowService } from '@aaman/main/window.service';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Executive } from '@aaman/dir/executives/executive';
+import { Client } from '@aaman/dir/clients/client';
 
 @Component({
   selector: 'app-invoice-list',

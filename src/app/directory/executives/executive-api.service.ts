@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { Executive } from './executive';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
 import { of } from 'rxjs/observable/of';
-import { PageData } from '../../models/page-data';
+import { ApiService } from '@aaman/main/api.service';
+import { Executive } from '@aaman/dir/executives/executive';
+import { environment } from 'environments/environment';
+import { PageData } from '@aaman/main/page-data';
 
 @Injectable()
 export class ExecutiveApiService {

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../guards/auth-guard.service';
-import { ReleaseOrderDirResolver } from '../release-order/release-order-dir-resolver.service';
-import { InvoiceResolver } from './invoice-resolver.service';
-import { InvoiceListResolver } from './invoice-list-resolver.service';
+import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { InvoiceListResolver } from '@aaman/invoice/invoice-list-resolver.service';
+import { ReleaseOrderDirResolver } from '@aaman/releaseorder/release-order-dir-resolver.service';
+import { InvoiceResolver } from '@aaman/invoice/invoice-resolver.service';
 
-import { InvoiceComponent } from './invoice/invoice.component';
-import { InvoiceListComponent } from './invoice-list/invoice-list.component';
-import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { InvoiceListComponent } from '@aaman/invoice/invoice-list/invoice-list.component';
+import { InvoiceComponent } from '@aaman/invoice/invoice/invoice.component';
+import { InvoiceDetailsComponent } from '@aaman/invoice/invoice-details/invoice-details.component';
 
 const routes: Routes = [
   {

@@ -3,10 +3,10 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { PageData } from '../models/page-data';
-import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
-import { PaymentReceipt } from './payment-receipt';
-import { ReceiptsApiService } from './receipts-api.service';
+import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 
 class Result {
   list: PageData<PaymentReceipt>;

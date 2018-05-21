@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Firm } from '../../models/firm';
-import { ApiService } from '../../services/api.service';
-import { environment } from '../../../environments/environment';
-import { NotificationService } from '../../services/notification.service';
-import { DialogService } from '../../services/dialog.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfile } from '../../models/user-profile';
+import { Firm } from '@aaman/main/firm';
+import { ApiService } from '@aaman/main/api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { UserProfile } from '@aaman/main/user-profile';
+import { environment } from 'environments/environment.prod';
 
 @Component({
   selector: 'app-firm-profile-view',

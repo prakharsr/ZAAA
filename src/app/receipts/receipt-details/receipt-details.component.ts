@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentReceipt } from '../payment-receipt';
-import { ReceiptsApiService } from '../receipts-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
+import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 
 @Component({
   selector: 'app-receipt-details',

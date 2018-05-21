@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../rate-card/rate-card';
+import { Category } from '@aaman/ratecard/rate-card';
 
 @Injectable()
 export class OptionsService {

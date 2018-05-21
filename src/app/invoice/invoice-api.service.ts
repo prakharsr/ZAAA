@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ApiService } from '../services/api.service';
-import { Invoice } from './invoice';
-import { PageData } from '../models/page-data';
-import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
 import { map } from 'rxjs/operators';
-import { MailingDetails } from '../models/mailing-details';
-import { ReleaseOrder } from '../release-order/release-order';
-import { ClientApiService } from '../directory/clients/client-api.service';
-import { MediaHouseApiService } from '../directory/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '../directory/executives/executive-api.service';
-import { InvoiceDir } from './invoice-dir-resolver.service';
+import { ApiService } from '@aaman/main/api.service';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { Invoice } from '@aaman/invoice/invoice';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { PageData } from '@aaman/main/page-data';
+import { MailingDetails } from '@aaman/main/mailing-details';
+import { InvoiceDir } from '@aaman/invoice/invoice-dir-resolver.service';
 
 @Injectable()
 export class InvoiceApiService {

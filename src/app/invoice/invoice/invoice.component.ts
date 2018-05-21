@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReleaseOrder, Insertion, OtherCharges, TaxValues } from '../../release-order/release-order';
-import { Invoice } from '../invoice';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { NotificationService } from '../../services/notification.service';
-import { InvoiceApiService } from '../invoice-api.service';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { Client } from '../../directory/clients/client';
-import { Executive } from '../../directory/executives/executive';
-import { ReleaseOrderDir } from '../../release-order/release-order-dir-resolver.service';
-import { OptionsService } from '../../services/options.service';
+import { Insertion, ReleaseOrder, OtherCharges, TaxValues } from '@aaman/releaseorder/release-order';
+import { Invoice } from '@aaman/invoice/invoice';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Client } from '@aaman/dir/clients/client';
+import { Executive } from '@aaman/dir/executives/executive';
+import { NotificationService } from '@aaman/main/notification.service';
+import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
+import { OptionsService } from '@aaman/main/options.service';
+import { ReleaseOrderDir } from '@aaman/releaseorder/release-order-dir-resolver.service';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }

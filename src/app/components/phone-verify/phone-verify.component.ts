@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { ApiService } from '@aaman/main/api.service';
 
 @Component({
   selector: 'app-phone-verify',
@@ -17,7 +17,8 @@ export class PhoneVerifyComponent implements OnInit {
   sendError : string;
   verifyError: string;
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService,
+    private router: Router) { }
 
   ngOnInit() {
     this.api.getUser().subscribe(data => {

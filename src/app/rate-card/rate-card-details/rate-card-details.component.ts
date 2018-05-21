@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard } from '../rate-card';
-import { RateCardApiService } from '../rate-card-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { RateCard } from '@aaman/ratecard/rate-card';
+import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
 
 @Component({
   selector: 'app-rate-card-details',

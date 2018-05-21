@@ -14,6 +14,24 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@aaman/main/*": [
+        "app/admin/*",
+        "app/components/*",
+        "app/guards/*",
+        "app/validators/*",
+        "app/services/*",
+        "app/models/*"
+      ],
+      "@aaman/couser/*": ["app/co-users/*"],
+      "@aaman/dir/*": ["app/directory/*"],
+      "@aaman/invoice/*": ["app/invoice/*"],
+      "@aaman/ratecard/*": ["app/rate-card/*"],
+      "@aaman/receipts/*": ["app/receipts/*"],
+      "@aaman/releaseorder/*": ["app/release-order/*"],
+      "@aaman/superadmin/*": ["app/super-admin/*"]
+    }
   }
 }

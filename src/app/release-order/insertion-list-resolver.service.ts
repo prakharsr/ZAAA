@@ -2,10 +2,10 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ReleaseOrderApiService } from './release-order-api.service';
-import { PageData } from '../models/page-data';
-import { InsertionCheckItem } from './insertion-check-item';
-import { ReleaseOrderSearchParams } from './release-order-search-params';
+import { PageData } from '@aaman/main/page-data';
+import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
 
 class Result {
   list: PageData<InsertionCheckItem>;

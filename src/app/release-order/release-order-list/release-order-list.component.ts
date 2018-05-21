@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ReleaseOrderApiService } from '../release-order-api.service';
-import { DialogService } from '../../services/dialog.service'
 import { Observable } from 'rxjs/Observable';
-import { ReleaseOrder } from '../release-order';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MailingDetails } from '../../models/mailing-details';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
 import {of} from 'rxjs/observable/of';
-import { ClientApiService } from '../../directory/clients/client-api.service';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
-import { Client } from '../../directory/clients/client';
-import { Executive } from '../../directory/executives/executive';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { WindowService } from '../../services/window.service';
-import { PageData } from '../../models/page-data';
-import { ReleaseOrderSearchParams } from '../release-order-search-params';
+import { ReleaseOrder } from '@aaman/releaseorder/release-order';
+import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { WindowService } from '@aaman/main/window.service';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Executive } from '@aaman/dir/executives/executive';
+import { Client } from '@aaman/dir/clients/client';
 
 @Component({
   selector: 'app-release-order-list',

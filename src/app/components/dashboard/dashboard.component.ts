@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfile } from '../../models/user-profile';
+import { UserProfile } from '@aaman/main/user-profile';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   admin: boolean;
 
-  constructor(private api: ApiService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { user: UserProfile }) => {

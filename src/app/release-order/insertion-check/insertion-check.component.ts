@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageData } from '../../models/page-data';
-import { InsertionCheckItem } from '../insertion-check-item';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { ReleaseOrderApiService } from '../release-order-api.service';
-import { NotificationService } from '../../services/notification.service';
-import { ClientApiService } from '../../directory/clients/client-api.service';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import { Client } from '../../directory/clients/client';
-import { Executive } from '../../directory/executives/executive';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { DialogService } from '../../services/dialog.service';
-import { ReleaseOrder } from '../release-order';
 import { MatTableDataSource } from '@angular/material';
-import { ReleaseOrderSearchParams } from '../release-order-search-params';
+import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
+import { DialogService } from '@aaman/main/dialog.service';
+import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Client } from '@aaman/dir/clients/client';
+import { Executive } from '@aaman/dir/executives/executive';
 
 @Component({
   selector: 'app-insertion-check',
@@ -87,7 +86,6 @@ export class InsertionCheckComponent implements OnInit {
 
     this.dummyArray = Array(this.pageCount);
   }
-
 
   searchClient = (text: Observable<string>) => {
     return text.debounceTime(300)

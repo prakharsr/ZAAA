@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard, FixSize, Scheme, Covered, Remark, Category, Tax } from '../rate-card';
-import { RateCardApiService } from '../rate-card-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
@@ -9,10 +7,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { MediaHouse, Pullout } from '../../directory/media-houses/media-house';
-import { NotificationService } from '../../services/notification.service';
-import { OptionsService } from '../../services/options.service';
+import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { OptionsService } from '@aaman/main/options.service';
+import { RateCard, Category, FixSize, Scheme, Covered, Remark, Tax } from '@aaman/ratecard/rate-card';
+import { MediaHouse, Pullout } from '@aaman/dir/media-houses/media-house';
 
 @Component({
   selector: 'app-rate-card',

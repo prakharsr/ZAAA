@@ -3,9 +3,9 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Executive } from './executive';
-import { ExecutiveApiService } from './executive-api.service';
-import { PageData } from '../../models/page-data';
+import { Executive } from '@aaman/dir/executives/executive';
+import { PageData } from '@aaman/main/page-data';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
 
 @Injectable()
 export class ExecutiveListResolver implements Resolve<PageData<Executive>> {

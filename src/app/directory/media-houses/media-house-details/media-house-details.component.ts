@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaHouse } from '../media-house';
-import { MediaHouseApiService } from '../media-house-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
 
 @Component({
   selector: 'app-media-house-details',

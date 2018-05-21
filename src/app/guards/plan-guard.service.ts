@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationExtras } from '@angular/router';
-import { ApiService } from '../services/api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { ApiService } from '@aaman/main/api.service';
 
 @Injectable()
 export class PlanGuard implements CanActivate {
 
-  constructor(private api: ApiService, private router: Router) { }
+  constructor(private api: ApiService,
+    private router: Router) { }
 
   private goToPlan() {
     this.router.navigateByUrl('/plan');

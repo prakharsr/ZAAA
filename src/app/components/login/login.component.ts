@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
+import { ApiService } from '@aaman/main/api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,9 @@ export class LoginComponent implements OnInit {
 
   hidePassword = true;
 
-  constructor(private api: ApiService, private router: Router, private notifications: NotificationService) { }
+  constructor(private api: ApiService,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
   }

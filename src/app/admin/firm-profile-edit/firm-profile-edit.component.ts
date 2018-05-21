@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IfscService } from '../../services/ifsc.service';
-import { Firm } from '../../models/firm';
-import { ApiService } from '../../services/api.service';
 import { NgForm } from '@angular/forms';
-import { StateApiService } from '../../services/state-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
-import { UserProfile } from '../../models/user-profile';
+import { UserProfile } from '@aaman/main/user-profile';
+import { Firm } from '@aaman/main/firm';
+import { IfscService } from '@aaman/main/ifsc.service';
+import { ApiService } from '@aaman/main/api.service';
+import { StateApiService } from '@aaman/main/state-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-firm-profile-edit',

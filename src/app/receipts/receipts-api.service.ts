@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { PaymentReceipt, AdvanceReceipt } from './payment-receipt';
 import { Observable } from 'rxjs/Observable';
-import { PageData } from '../models/page-data';
-import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
 import { map } from 'rxjs/operators';
-import { MailingDetails } from '../models/mailing-details';
-import { Invoice } from '../invoice/invoice';
+import { ApiService } from '@aaman/main/api.service';
+import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { PageData } from '@aaman/main/page-data';
+import { MailingDetails } from '@aaman/main/mailing-details';
+import { Invoice } from '@aaman/invoice/invoice';
 
 @Injectable()
 export class ReceiptsApiService {

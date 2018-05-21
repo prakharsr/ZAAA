@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Executive } from '../executive';
-import { ExecutiveApiService } from '../executive-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService } from '../../../services/notification.service';
-import { Firm } from '../../../models/firm';
+import { Executive } from '@aaman/dir/executives/executive';
+import { Firm } from '@aaman/main/firm';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-executive',

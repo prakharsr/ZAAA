@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from '../../services/dialog.service';
-import { CoUserApiService } from '../co-user-api.service';
-import { CoUser } from '../co-user';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfile } from '../../models/user-profile';
+import { CoUser } from '@aaman/couser/co-user';
+import { CoUserApiService } from '@aaman/couser/co-user-api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { UserProfile } from '@aaman/main/user-profile';
 
 @Component({
   selector: 'app-co-users',

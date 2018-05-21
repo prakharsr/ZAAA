@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { NotificationService } from '../../services/notification.service';
+import { ApiService } from '@aaman/main/api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-forgot-psw',
@@ -11,7 +11,8 @@ export class ForgotPswComponent implements OnInit {
 
   email: string;
 
-  constructor(private api: ApiService, private notifications: NotificationService) { }
+  constructor(private api: ApiService,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
   }

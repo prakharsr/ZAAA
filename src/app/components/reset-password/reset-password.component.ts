@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
+import { ApiService } from '@aaman/main/api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,7 +14,9 @@ export class ResetPasswordComponent implements OnInit {
   cpassword: string;
   token: string;
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private notifications: NotificationService) { }
+  constructor(private api: ApiService,
+    private route: ActivatedRoute,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

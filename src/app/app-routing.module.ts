@@ -1,29 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './guards/auth-guard.service';
-import { PhoneVerifyGuard } from './guards/phone-verify-guard.service';
-import { AdminGuard } from './guards/admin-guard.service';
-import { PlanGuard } from './guards/plan-guard.service';
+import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { AdminGuard } from '@aaman/main/admin-guard.service';
+import { PhoneVerifyGuard } from '@aaman/main/phone-verify-guard.service';
+import { PlanGuard } from '@aaman/main/plan-guard.service';
+import { FirmResolver } from '@aaman/main/firm-resolver.service';
+import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
 
-import { FirmResolver } from './services/firm-resolver.service';
-
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ProfileViewComponent } from './components/profile-view/profile-view.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { FirmProfileViewComponent } from './components/firm-profile-view/firm-profile-view.component';
-import { PhoneVerifyComponent } from './components/phone-verify/phone-verify.component';
-import { ChangePswComponent } from './components/change-psw/change-psw.component';
-import { ForgotPswComponent } from './components/forgot-psw/forgot-psw.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { FirmProfileEditComponent } from './admin/firm-profile-edit/firm-profile-edit.component';
-import { TemplateSelectorComponent } from './admin/template-selector/template-selector.component';
-import { PlanSelectorComponent } from './admin/plan-selector/plan-selector.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { UserProfileResolver } from './services/user-profile-resolver.service';
-import { ProfileEditComponent } from './admin/profile-edit/profile-edit.component';
+import { HomeComponent } from '@aaman/main/home/home.component';
+import { LoginComponent } from '@aaman/main/login/login.component';
+import { RegisterComponent } from '@aaman/main/register/register.component';
+import { ForgotPswComponent } from '@aaman/main/forgot-psw/forgot-psw.component';
+import { PhoneVerifyComponent } from '@aaman/main/phone-verify/phone-verify.component';
+import { ProfileViewComponent } from '@aaman/main/profile-view/profile-view.component';
+import { ProfileEditComponent } from '@aaman/main/profile-edit/profile-edit.component';
+import { FirmProfileViewComponent } from '@aaman/main/firm-profile-view/firm-profile-view.component';
+import { FirmProfileEditComponent } from '@aaman/main/firm-profile-edit/firm-profile-edit.component';
+import { TemplateSelectorComponent } from '@aaman/main/template-selector/template-selector.component';
+import { DashboardComponent } from '@aaman/main/dashboard/dashboard.component';
+import { PlanSelectorComponent } from '@aaman/main/plan-selector/plan-selector.component';
+import { ChangePswComponent } from '@aaman/main/change-psw/change-psw.component';
+import { ResetPasswordComponent } from '@aaman/main/reset-password/reset-password.component';
+import { NotFoundComponent } from '@aaman/main/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '../../models/user-profile';
-import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService } from '../../services/notification.service';
+import { UserProfile } from '@aaman/main/user-profile';
+import { ApiService } from '@aaman/main/api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-profile-edit',

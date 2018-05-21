@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DirComponent } from './dir/dir.component';
+import { DirComponent } from '@aaman/dir/dir/dir.component';
 
-import { ClientComponent } from './clients/client/client.component';
-import { ClientListComponent } from './clients/client-list/client-list.component';
-import { ClientDetailsComponent } from './clients/client-details/client-details.component';
-import { ClientResolver } from './clients/client-resolver.service';
+import { ClientListComponent } from '@aaman/dir/clients/client-list/client-list.component';
+import { ClientComponent } from '@aaman/dir/clients/client/client.component';
+import { ClientResolver } from '@aaman/dir/clients/client-resolver.service';
+import { ClientDetailsComponent } from '@aaman/dir/clients/client-details/client-details.component';
 
-import { ExecutiveComponent } from './executives/executive/executive.component';
-import { ExecutiveListComponent } from './executives/executive-list/executive-list.component';
-import { ExecutiveDetailsComponent } from './executives/executive-details/executive-details.component';
-import { ExecutiveResolver } from './executives/executive-resolver.service';
+import { ExecutiveListComponent } from '@aaman/dir/executives/executive-list/executive-list.component';
+import { ExecutiveComponent } from '@aaman/dir/executives/executive/executive.component';
+import { ExecutiveResolver } from '@aaman/dir/executives/executive-resolver.service';
+import { ExecutiveDetailsComponent } from '@aaman/dir/executives/executive-details/executive-details.component';
 
-import { MediaHouseComponent } from './media-houses/media-house/media-house.component';
-import { MediaHouseListComponent } from './media-houses/media-house-list/media-house-list.component';
-import { MediaHouseDetailsComponent } from './media-houses/media-house-details/media-house-details.component';
-import { MediaHouseResolver } from './media-houses/media-house-resolver.service';
+import { MediaHouseListComponent } from '@aaman/dir/media-houses/media-house-list/media-house-list.component';
+import { MediaHouseComponent } from '@aaman/dir/media-houses/media-house/media-house.component';
+import { MediaHouseResolver } from '@aaman/dir/media-houses/media-house-resolver.service';
+import { MediaHouseDetailsComponent } from '@aaman/dir/media-houses/media-house-details/media-house-details.component';
 
-import { AuthGuard } from '../guards/auth-guard.service';
-import { FirmResolver } from '../services/firm-resolver.service';
-import { ClientListResolver } from './clients/client-list-resolver.service';
-import { ExecutiveListResolver } from './executives/executive-list-resolver.service';
-import { MediaHouseListResolver } from './media-houses/media-house-list-resolver.service';
+import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { ClientListResolver } from '@aaman/dir/clients/client-list-resolver.service';
+import { ExecutiveListResolver } from '@aaman/dir/executives/executive-list-resolver.service';
+import { FirmResolver } from '@aaman/main/firm-resolver.service';
+import { MediaHouseListResolver } from '@aaman/dir/media-houses/media-house-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -112,7 +112,7 @@ const routes: Routes = [
                 resolve: {
                   list: MediaHouseListResolver
                 }
-              }    
+              }
             ]
           },
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },

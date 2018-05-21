@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MailingDetails } from '../../models/mailing-details';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { MailingDetails } from '@aaman/main/mailing-details';
 
 @Component({
   selector: 'app-mailing-details',

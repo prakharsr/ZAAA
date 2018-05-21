@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Client, ContactPerson } from '../client';
-import { ClientApiService } from '../client-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StateApiService } from '../../../services/state-api.service';
-import { NotificationService } from '../../../services/notification.service';
+import { Client, ContactPerson } from '@aaman/dir/clients/client';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { StateApiService } from '@aaman/main/state-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-client',

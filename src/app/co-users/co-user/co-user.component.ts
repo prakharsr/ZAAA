@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CoUser } from '../co-user';
-import { UserRoles } from '../user-roles';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { CoUserApiService } from '../co-user-api.service';
-import { NotificationService } from '../../services/notification.service';
+import { CoUser } from '@aaman/couser/co-user';
+import { CoUserApiService } from '@aaman/couser/co-user-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-co-user',
@@ -15,7 +14,9 @@ export class CoUserComponent implements OnInit {
 
   coUser = new CoUser();
 
-  constructor(private api: CoUserApiService, private router: Router, private notifications: NotificationService) { }
+  constructor(private api: CoUserApiService,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
   }

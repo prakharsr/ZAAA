@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Template } from '../../models/template';
+import { Template } from '@aaman/main/template';
 
 @Component({
   selector: 'app-template-selector-item',

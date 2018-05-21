@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { UserRoles } from '../user-roles';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CoUserApiService } from '../co-user-api.service';
-import { NotificationService } from '../../services/notification.service';
+import { UserRoles } from '@aaman/couser/user-roles';
+import { CoUserApiService } from '@aaman/couser/co-user-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
   selector: 'app-role-edit',

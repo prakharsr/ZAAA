@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '../../models/user-profile';
-import { ApiService } from '../../services/api.service';
-import { environment } from '../../../environments/environment';
-import { NotificationService } from '../../services/notification.service';
-import { DialogService } from '../../services/dialog.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserProfile } from '@aaman/main/user-profile';
+import { ApiService } from '@aaman/main/api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-profile-view',

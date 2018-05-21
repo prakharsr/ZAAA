@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../components/dialog/dialog.component';
-import { MailingDetails } from '../models/mailing-details';
-import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
-import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
+import { DialogComponent } from '@aaman/main/dialog/dialog.component';
+import { MailingDetails } from '@aaman/main/mailing-details';
+import { MailingDetailsComponent } from '@aaman/main/mailing-details/mailing-details.component';
+import { BillingDetails, BillingDetailsComponent } from '@aaman/main/billing-details/billing-details.component';
 
 @Injectable()
 export class DialogService {

@@ -3,10 +3,10 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { PageData } from '../models/page-data';
-import { ReleaseOrderSearchParams } from '../release-order/release-order-search-params';
-import { Invoice } from './invoice';
-import { InvoiceApiService } from './invoice-api.service';
+import { Invoice } from '@aaman/invoice/invoice';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
 
 class Result {
   list: PageData<Invoice>;
@@ -15,7 +15,8 @@ class Result {
 
 @Injectable()
 export class InvoiceListResolver implements Resolve<Result> {
-  constructor(private api: InvoiceApiService, private router: Router) {}
+  constructor(private api: InvoiceApiService,
+    private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Result> {
     let page: any = route.paramMap.get('page');

@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Executive } from '../executive';
-import { ExecutiveApiService } from '../executive-api.service';
-import { DialogService } from '../../../services/dialog.service';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -10,7 +7,10 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { PageData } from '../../../models/page-data';
+import { Executive } from '@aaman/dir/executives/executive';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { PageData } from '@aaman/main/page-data';
 
 @Component({
   selector: 'app-executive-list',

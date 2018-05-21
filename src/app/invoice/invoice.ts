@@ -1,4 +1,4 @@
-import { OtherCharges, Insertion, TaxValues } from "../release-order/release-order";
+import { TaxValues, OtherCharges, Insertion } from "@aaman/releaseorder/release-order";
 
 class Amount {
     constructor(public percentage = false, public amount = 0) { }

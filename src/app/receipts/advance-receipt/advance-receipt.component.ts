@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { AdvanceReceipt } from '../payment-receipt';
-import { ReceiptsApiService } from '../receipts-api.service';
-import { NotificationService } from '../../services/notification.service';
-import { StateApiService } from '../../services/state-api.service';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { ClientApiService } from '../../directory/clients/client-api.service';
-import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { Client } from '../../directory/clients/client';
 import { of } from 'rxjs/observable/of';
-import { Executive } from '../../directory/executives/executive';
+import { AdvanceReceipt } from '@aaman/receipts/payment-receipt';
+import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { StateApiService } from '@aaman/main/state-api.service';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Client } from '@aaman/dir/clients/client';
+import { Executive } from '@aaman/dir/executives/executive';
 
 @Component({
   selector: 'app-advance-receipt',

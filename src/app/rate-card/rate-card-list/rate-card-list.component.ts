@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RateCard } from '../rate-card';
-import { RateCardApiService } from '../rate-card-api.service';
-import { DialogService } from '../../services/dialog.service';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -10,7 +7,10 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PageData } from '../../models/page-data';
+import { RateCard } from '@aaman/ratecard/rate-card';
+import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { PageData } from '@aaman/main/page-data';
 
 @Component({
   selector: 'app-rate-card-list',

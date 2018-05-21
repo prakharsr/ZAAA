@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentReceipt } from '../payment-receipt';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReceiptsApiService } from '../receipts-api.service';
-import { MediaHouseApiService } from '../../directory/media-houses/media-house-api.service';
-import { ClientApiService } from '../../directory/clients/client-api.service';
-import { ExecutiveApiService } from '../../directory/executives/executive-api.service';
-import { NotificationService } from '../../services/notification.service';
-import { OptionsService } from '../../services/options.service';
-import { InvoiceDir } from '../../invoice/invoice-dir-resolver.service';
-import { Invoice } from '../../invoice/invoice';
-import { MediaHouse } from '../../directory/media-houses/media-house';
-import { Client } from '../../directory/clients/client';
-import { Executive } from '../../directory/executives/executive';
+import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
+import { Invoice } from '@aaman/invoice/invoice';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { Client } from '@aaman/dir/clients/client';
+import { Executive } from '@aaman/dir/executives/executive';
+import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { OptionsService } from '@aaman/main/options.service';
+import { InvoiceDir } from '@aaman/invoice/invoice-dir-resolver.service';
 
 @Component({
   selector: 'app-receipt',
@@ -70,4 +67,3 @@ export class ReceiptComponent implements OnInit {
 
   paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
 }
-

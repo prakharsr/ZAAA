@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { RateCard, FixSize, Remark } from './rate-card';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { PageData } from '../models/page-data';
+import { ApiService } from '@aaman/main/api.service';
+import { RateCard } from '@aaman/ratecard/rate-card';
+import { PageData } from '@aaman/main/page-data';
 
 @Injectable()
 export class RateCardApiService {

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../guards/auth-guard.service';
-import { ReceiptListResolver } from './receipt-list-resolver.service';
-import { InvoiceDirResolver } from '../invoice/invoice-dir-resolver.service';
-import { ReceiptResolver } from './receipt-resolver.service';
+import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { ReceiptListResolver } from '@aaman/receipts/receipt-list-resolver.service';
+import { InvoiceResolver } from '@aaman/invoice/invoice-resolver.service';
+import { InvoiceDirResolver } from '@aaman/invoice/invoice-dir-resolver.service';
+import { ReceiptResolver } from '@aaman/receipts/receipt-resolver.service';
 
-import { ReceiptComponent } from './receipt/receipt.component';
-import { ReceiptListComponent } from './receipt-list/receipt-list.component';
-import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
-import { AdvanceReceiptComponent } from './advance-receipt/advance-receipt.component';
-import { LinkAdvanceComponent } from './link-advance/link-advance.component';
-import { InvoiceResolver } from '../invoice/invoice-resolver.service';
+import { ReceiptListComponent } from '@aaman/receipts/receipt-list/receipt-list.component';
+import { LinkAdvanceComponent } from '@aaman/receipts/link-advance/link-advance.component';
+import { AdvanceReceiptComponent } from '@aaman/receipts/advance-receipt/advance-receipt.component';
+import { ReceiptComponent } from '@aaman/receipts/receipt/receipt.component';
+import { ReceiptDetailsComponent } from '@aaman/receipts/receipt-details/receipt-details.component';
 
 const routes: Routes = [
   {

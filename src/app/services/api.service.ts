@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
 import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-
-import { Plan } from '../models/plan';
-import { Template } from '../models/template';
-
-import { WindowService } from './window.service';
-
-import { environment } from '../../environments/environment';
-import { UserProfile } from '../models/user-profile';
-import { Firm } from '../models/firm';
-import { Address } from '../models/address';
-import { LoaderService } from './loader.service';
-import { BillingDetails } from '../components/billing-details/billing-details.component';
-import { NotificationService } from './notification.service';
+import { WindowService } from '@aaman/main/window.service';
+import { LoaderService } from '@aaman/main/loader.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { environment } from 'environments/environment';
+import { Template } from '@aaman/main/template';
+import { Plan } from '@aaman/main/plan';
+import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
+import { UserProfile } from '@aaman/main/user-profile';
+import { Firm } from '@aaman/main/firm';
 
 @Injectable()
 export class ApiService {

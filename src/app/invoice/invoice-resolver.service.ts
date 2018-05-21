@@ -3,8 +3,8 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Invoice } from './invoice';
-import { InvoiceApiService } from './invoice-api.service';
+import { Invoice } from '@aaman/invoice/invoice';
+import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
 
 @Injectable()
 export class InvoiceResolver implements Resolve<Invoice> {

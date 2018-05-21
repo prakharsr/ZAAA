@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
+import { AdCategoriesComponent } from '@aaman/superadmin/ad-categories/ad-categories.component';
 
 const routes: Routes = [
   {

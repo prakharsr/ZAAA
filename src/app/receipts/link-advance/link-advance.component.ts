@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PaymentReceipt, AdvanceReceipt } from '../payment-receipt';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReleaseOrderSearchParams } from '../../release-order/release-order-search-params';
-import { PageData } from '../../models/page-data';
-import { ReceiptsApiService } from '../receipts-api.service';
-import { Invoice } from '../../invoice/invoice';
-import { NotificationService } from '../../services/notification.service';
+import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
+import { Invoice } from '@aaman/invoice/invoice';
+import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { NotificationService } from '@aaman/main/notification.service';
+import { PageData } from '@aaman/main/page-data';
+import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 
 @Component({
   selector: 'app-link-advance',

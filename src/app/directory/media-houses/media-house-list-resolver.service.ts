@@ -3,9 +3,9 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { MediaHouseApiService } from './media-house-api.service';
-import { PageData } from '../../models/page-data';
-import { MediaHouse } from './media-house';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { PageData } from '@aaman/main/page-data';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
 
 @Injectable()
 export class MediaHouseListResolver implements Resolve<PageData<MediaHouse>> {

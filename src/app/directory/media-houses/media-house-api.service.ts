@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Observable } from 'rxjs/Observable';
-import { MediaHouse, MediaHouseScheduling, Pullout } from './media-house';
 import { map, elementAt } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { PageData } from '../../models/page-data';
+import { ApiService } from '@aaman/main/api.service';
+import { MediaHouse, MediaHouseScheduling } from '@aaman/dir/media-houses/media-house';
+import { PageData } from '@aaman/main/page-data';
 
 @Injectable()
 export class MediaHouseApiService {

@@ -1,14 +1,13 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
-import { Plan } from '../../models/plan';
-import { ApiService } from '../../services/api.service';
-import { RazorPayService } from '../../services/razorpay.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { WindowService } from '../../services/window.service';
-import { Firm } from '../../models/firm';
-import { Address } from '../../models/address';
-import { BillingDetails } from '../../components/billing-details/billing-details.component';
-import { DialogService } from '../../services/dialog.service';
+import { Plan } from '@aaman/main/plan';
+import { Firm } from '@aaman/main/firm';
+import { ApiService } from '@aaman/main/api.service';
+import { RazorPayService } from '@aaman/main/razorpay.service';
+import { WindowService } from '@aaman/main/window.service';
+import { DialogService } from '@aaman/main/dialog.service';
+import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
 
 @Component({
   selector: 'app-plan-selector',

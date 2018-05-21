@@ -3,8 +3,8 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { MediaHouse } from './media-house';
-import { MediaHouseApiService } from './media-house-api.service';
+import { MediaHouse } from '@aaman/dir/media-houses/media-house';
+import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
 
 @Injectable()
 export class MediaHouseResolver implements Resolve<MediaHouse> {
