@@ -232,8 +232,13 @@
       <div class="card mb-3">
         <div class="card-header">Insertions</div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of releaseOrder.insertions" [class.bg-success]="item.marked" [class.text-light]="item.marked">
-            {{toDate(item.date) | date}}
+          <li class="list-group-item" *ngFor="let item of releaseOrder.insertions">
+            <div class="row">
+              <div class="col">{{toDate(item.date) | date}}</div>
+              <div class="col-auto text-success" *ngIf="item.marked">
+                <mat-icon>check</mat-icon>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
