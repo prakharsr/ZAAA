@@ -175,6 +175,40 @@
           </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
+              <mat-panel-title>Executive Details</mat-panel-title>
+              <mat-panel-description>Enter Executive details</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="form-group">
+              <label for="executiveName">Executive Name</label>
+              <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+            </div>
+            
+            <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
+              <div *ngIf="executiveNameField.errors.required">
+                Executive Name is required.
+              </div>
+              <br>
+            </div>
+        
+            <div class="form-group">
+              <label for="executiveOrg">Executive Organisation</label>
+              <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+            </div>
+            
+            <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
+              <div *ngIf="executiveOrgField.errors.required">
+                Executive Organisation is required.
+              </div>
+              <br>
+            </div>
+
+            <mat-action-row>
+              <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
               <mat-panel-title>Ad Details</mat-panel-title>
               <mat-panel-description>Enter Ad details</mat-panel-description>
             </mat-expansion-panel-header>
@@ -779,40 +813,6 @@
                 </div>
               </ng-container>
             </ng-container>
-          </mat-expansion-panel>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>Executive Details</mat-panel-title>
-              <mat-panel-description>Enter Executive details</mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <div class="form-group">
-              <label for="executiveName">Executive Name</label>
-              <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-            </div>
-            
-            <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
-              <div *ngIf="executiveNameField.errors.required">
-                Executive Name is required.
-              </div>
-              <br>
-            </div>
-        
-            <div class="form-group">
-              <label for="executiveOrg">Executive Organisation</label>
-              <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-            </div>
-            
-            <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
-              <div *ngIf="executiveOrgField.errors.required">
-                Executive Organisation is required.
-              </div>
-              <br>
-            </div>
-
-            <mat-action-row>
-              <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
-            </mat-action-row>
           </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
