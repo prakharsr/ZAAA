@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Media House Invoice Details</h2>
+
+<mat-dialog-content>
+  <form #mediaHouseInvoiceForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Invoice Number" [(ngModel)]="details.invoiceNo" name="invoiceNo" required #invoiceNoField="ngModel">
+      <mat-error *ngIf="invoiceNoField.errors && invoiceNoField.errors.required">
+        Invoice Number is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="dateField" name="date" placeholder="Incorporation Date" [(ngModel)]="details.date" disabled>
+      <mat-datepicker-toggle matSuffix [for]="dateField"></mat-datepicker-toggle>
+      <mat-datepicker #dateField disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Amount" [(ngModel)]="details.amount" name="amount" required #amountField="ngModel">
+      <mat-error *ngIf="amountField.errors && amountField.errors.required">
+        Amount is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Tax Amount" [(ngModel)]="details.taxAmount" name="taxAmount" required #taxAmountField="ngModel">
+      <mat-error *ngIf="taxAmountField.errors && taxAmountField.errors.required">
+        Tax Amount is required.
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [disabled]="!mediaHouseInvoiceForm.form.valid" [mat-dialog-close]="details">Save</button>  
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>  
+</mat-dialog-actions>
