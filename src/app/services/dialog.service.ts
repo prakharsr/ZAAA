@@ -48,7 +48,7 @@ export class DialogService {
     }).afterClosed();
   }
 
-  show<T>(component: any, config: { data: any, width?: string, height?: string }) : Observable<T> {
+  show<T>(component: any, config?: { data?: any, width?: string, height?: string }) : Observable<T> {
     return this.dialog.open(component, config).afterClosed();
   }
 }

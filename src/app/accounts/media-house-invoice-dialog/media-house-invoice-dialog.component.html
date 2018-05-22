@@ -10,7 +10,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="dateField" name="date" placeholder="Incorporation Date" [(ngModel)]="details.date" disabled>
+      <input matInput [matDatepicker]="dateField" name="date" placeholder="Date" [(ngModel)]="details.date" disabled>
       <mat-datepicker-toggle matSuffix [for]="dateField"></mat-datepicker-toggle>
       <mat-datepicker #dateField disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -23,12 +23,16 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Tax Amount" [(ngModel)]="details.taxAmount" name="taxAmount" required #taxAmountField="ngModel">
+      <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.taxAmount" name="taxAmount" required #taxAmountField="ngModel">
       <mat-error *ngIf="taxAmountField.errors && taxAmountField.errors.required">
         Tax Amount is required.
       </mat-error>
     </mat-form-field>
   </form>
+
+  <br>
+
+  <p>Total: ₹ {{details.amount + details.taxAmount}}</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
