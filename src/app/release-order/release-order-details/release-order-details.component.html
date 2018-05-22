@@ -74,6 +74,23 @@
           </li>
         </ul>
       </div>
+      <div class="card mb-3">
+        <div class="card-header">Executive Details</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{releaseOrder.executiveName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Organization</div>
+              <div class="col-md-8">{{releaseOrder.executiveOrg}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="col-lg-6">
@@ -360,14 +377,8 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Paid</div>
-              <div class="col-md-8">{{releaseOrder.adSchemePaid}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Free</div>
-              <div class="col-md-8">{{releaseOrder.adSchemeFree}}</div>
+              <div class="col">Paid: {{releaseOrder.adSchemePaid}}</div>
+              <div class="col">Free: {{releaseOrder.adSchemeFree}}</div>
             </div>
           </li>
         </ul>
