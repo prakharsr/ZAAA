@@ -6,7 +6,7 @@ import { Invoice } from '../invoice';
 import { NotificationService, DialogService, WindowService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 
 import {
   Client,

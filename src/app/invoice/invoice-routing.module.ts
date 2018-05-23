@@ -12,7 +12,7 @@ import {
   InvoiceDetailsComponent
 } from '.';
 
-import { ReleaseOrderDirResolver } from '@aaman/releaseorder/release-order-dir-resolver.service';
+import { ReleaseOrderDirResolver } from 'app/release-order';
 
 const routes: Routes = [
   {

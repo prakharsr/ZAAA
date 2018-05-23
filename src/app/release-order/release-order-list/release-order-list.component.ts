@@ -4,11 +4,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import {of} from 'rxjs/observable/of';
-import { ReleaseOrder } from '@aaman/releaseorder/release-order';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { ReleaseOrder } from '../release-order';
+import { ReleaseOrderApiService } from '../release-order-api.service';
 import { DialogService, NotificationService, WindowService } from 'app/services';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
 import {
   Client,

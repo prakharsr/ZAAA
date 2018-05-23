@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { ApiService } from 'app/services';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
 import { Invoice } from './invoice';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
 import { InvoiceDir } from './invoice-dir-resolver.service';
 

@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { Insertion, ReleaseOrder, OtherCharges, TaxValues } from '@aaman/releaseorder/release-order';
 import { Invoice } from '../invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
 import { NotificationService, OptionsService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
-import { ReleaseOrderDir } from '@aaman/releaseorder/release-order-dir-resolver.service';
+
+import {
+  Insertion,
+  ReleaseOrder,
+  OtherCharges,
+  TaxValues,
+  ReleaseOrderDir
+} from 'app/release-order';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }

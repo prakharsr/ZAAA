@@ -6,7 +6,7 @@ import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
 import { NotificationService, DialogService, WindowService } from 'app/services';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 
 import {
   Client,

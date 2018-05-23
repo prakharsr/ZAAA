@@ -3,15 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from 'app/guards';
 
-import { InsertionListResolver } from '@aaman/releaseorder/insertion-list-resolver.service';
-import { ReleaseOrderListResolver } from '@aaman/releaseorder/release-order-list-resolver.service';
-import { ReleaseOrderResolver } from '@aaman/releaseorder/release-order-resolver.service';
 import { RateCardResolver } from 'app/rate-card';
 
-import { InsertionCheckComponent } from '@aaman/releaseorder/insertion-check/insertion-check.component';
-import { ReleaseOrderListComponent } from '@aaman/releaseorder/release-order-list/release-order-list.component';
-import { ReleaseOrderComponent } from '@aaman/releaseorder/release-order/release-order.component';
-import { ReleaseOrderDetailsComponent } from '@aaman/releaseorder/release-order-details/release-order-details.component';
+import {
+  InsertionListResolver,
+  ReleaseOrderListResolver,
+  ReleaseOrderResolver,
+  InsertionCheckComponent,
+  ReleaseOrderComponent,
+  ReleaseOrderDetailsComponent,
+  ReleaseOrderListComponent
+} from '.';
 
 const routes: Routes = [
   {

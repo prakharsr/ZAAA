@@ -3,8 +3,8 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ReleaseOrder } from '@aaman/releaseorder/release-order';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { ReleaseOrder } from './release-order';
+import { ReleaseOrderApiService } from './release-order-api.service';
 
 @Injectable()
 export class ReleaseOrderResolver implements Resolve<ReleaseOrder> {

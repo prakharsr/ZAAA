@@ -7,7 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
-import { ReleaseOrderModule } from '@aaman/releaseorder/release-order.module';
+import { ReleaseOrderModule } from './release-order/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ReceiptsModule } from '@aaman/receipts/receipts.module';
 import { AccountsModule } from './accounts/accounts.module';

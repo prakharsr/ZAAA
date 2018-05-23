@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { ReleaseOrderSearchParams, ReleaseOrderApiService } from 'app/release-order';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { AccountsApiService } from './accounts-api.service';
 

@@ -4,10 +4,10 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
-import { ReleaseOrder } from '@aaman/releaseorder/release-order';
-import { ReleaseOrderDir } from '@aaman/releaseorder/release-order-dir-resolver.service';
-import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrder } from './release-order';
+import { ReleaseOrderDir } from './release-order-dir-resolver.service';
+import { InsertionCheckItem } from './insertion-check-item';
+import { ReleaseOrderSearchParams } from './release-order-search-params';
 import { PageData, MailingDetails } from 'app/models';
 
 @Injectable()

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Invoice } from './invoice';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 import { InvoiceApiService } from './invoice-api.service';
 
 class Result {

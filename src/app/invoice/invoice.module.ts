@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
-import { ReleaseOrderModule } from '@aaman/releaseorder/release-order.module';
+import { ReleaseOrderModule } from 'app/release-order/release-order.module';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 
 import {

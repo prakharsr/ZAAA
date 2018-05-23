@@ -5,7 +5,7 @@ import { Invoice } from 'app/invoice';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 import { NotificationService } from 'app/services';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 
 @Component({
   selector: 'app-link-advance',

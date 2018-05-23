@@ -4,11 +4,11 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import { MatTableDataSource } from '@angular/material';
-import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { InsertionCheckItem } from '../insertion-check-item';
+import { ReleaseOrderApiService } from '../release-order-api.service';
 import { NotificationService, DialogService } from 'app/services';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
 import {
   Client,

@@ -1,4 +1,4 @@
-import { InsertionCheckItem } from "@aaman/releaseorder/insertion-check-item";
+import { InsertionCheckItem } from "app/release-order";
 
 export class MediaHouseInvoiceItem {
     _id = "";

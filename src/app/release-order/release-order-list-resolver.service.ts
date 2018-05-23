@@ -3,10 +3,10 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { ReleaseOrder } from '@aaman/releaseorder/release-order';
+import { ReleaseOrder } from './release-order';
 import { PageData } from 'app/models';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { ReleaseOrderSearchParams } from './release-order-search-params';
+import { ReleaseOrderApiService } from './release-order-api.service';
 
 class Result {
   list: PageData<ReleaseOrder>;

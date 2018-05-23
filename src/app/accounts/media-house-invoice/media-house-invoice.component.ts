@@ -6,7 +6,7 @@ import { AccountsApiService } from '../accounts-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 
 import {
   MediaHouse,

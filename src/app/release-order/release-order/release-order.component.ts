@@ -8,8 +8,8 @@ import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '@aaman/releaseorder/release-order';
-import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
+import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
+import { ReleaseOrderApiService } from '../release-order-api.service';
 import { StateApiService, NotificationService, OptionsService } from 'app/services';
 
 import {

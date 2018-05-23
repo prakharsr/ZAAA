@@ -17,8 +17,7 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@aaman/receipts/*": ["app/receipts/*"],
-      "@aaman/releaseorder/*": ["app/release-order/*"]
+      "@aaman/receipts/*": ["app/receipts/*"]
     }
   }
 }
