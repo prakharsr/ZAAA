@@ -18,7 +18,6 @@
     "baseUrl": "./src",
     "paths": {
       "@aaman/main/*": [
-        "app/admin/*",
         "app/components/*"
       ],
       "@aaman/accounts/*": ["app/accounts/*"],

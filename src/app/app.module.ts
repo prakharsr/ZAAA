@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BaseModule } from './base.module';
-import { AdminModule } from '@aaman/main/admin.module';
+import { AdminModule } from './admin/admin.module';
 import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from '@aaman/ratecard/rate-card.module';
