@@ -9,7 +9,7 @@ import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
 import { ReleaseOrderModule } from './release-order/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
-import { ReceiptsModule } from '@aaman/receipts/receipts.module';
+import { ReceiptsModule } from './receipts/receipts.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 

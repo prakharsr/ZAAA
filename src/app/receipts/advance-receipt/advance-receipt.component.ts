@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { AdvanceReceipt } from '@aaman/receipts/payment-receipt';
-import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { AdvanceReceipt } from '../payment-receipt';
+import { ReceiptsApiService } from '../receipts-api.service';
 import { NotificationService, StateApiService } from 'app/services';
 
 import {

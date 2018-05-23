@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
-import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
+import { PaymentReceipt } from '../payment-receipt';
 import { NotificationService, DialogService, WindowService } from 'app/services';
-import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { ReceiptsApiService } from '../receipts-api.service';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from 'app/release-order';
 

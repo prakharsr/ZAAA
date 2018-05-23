@@ -15,9 +15,6 @@
       "es2017",
       "dom"
     ],
-    "baseUrl": "./src",
-    "paths": {
-      "@aaman/receipts/*": ["app/receipts/*"]
-    }
+    "baseUrl": "./src"
   }
 }

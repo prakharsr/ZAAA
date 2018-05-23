@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
+import { PaymentReceipt } from '../payment-receipt';
 import { Invoice, InvoiceDir } from 'app/invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
-import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
+import { ReceiptsApiService } from '../receipts-api.service';
 import { NotificationService, OptionsService } from 'app/services';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { ApiService } from 'app/services';
-import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
+import { PaymentReceipt, AdvanceReceipt } from './payment-receipt';
 import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
 import { Invoice } from 'app/invoice';

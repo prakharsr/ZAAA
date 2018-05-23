@@ -2,17 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from 'app/guards';
-import { ReceiptListResolver } from '@aaman/receipts/receipt-list-resolver.service';
 
 import { InvoiceResolver, InvoiceDirResolver } from 'app/invoice';
 
-import { ReceiptResolver } from '@aaman/receipts/receipt-resolver.service';
-
-import { ReceiptListComponent } from '@aaman/receipts/receipt-list/receipt-list.component';
-import { LinkAdvanceComponent } from '@aaman/receipts/link-advance/link-advance.component';
-import { AdvanceReceiptComponent } from '@aaman/receipts/advance-receipt/advance-receipt.component';
-import { ReceiptComponent } from '@aaman/receipts/receipt/receipt.component';
-import { ReceiptDetailsComponent } from '@aaman/receipts/receipt-details/receipt-details.component';
+import {
+  ReceiptListResolver,
+  ReceiptResolver,
+  ReceiptListComponent,
+  LinkAdvanceComponent,
+  AdvanceReceiptComponent,
+  ReceiptComponent,
+  ReceiptDetailsComponent
+} from '.';
 
 const routes: Routes = [
   {
