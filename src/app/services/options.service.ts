@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Category } from '@aaman/ratecard/rate-card';
+
+// Prevent circular dependency
+import { Category } from 'app/rate-card/rate-card';
 
 @Injectable()
 export class OptionsService {

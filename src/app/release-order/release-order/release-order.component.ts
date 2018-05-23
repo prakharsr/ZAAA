@@ -9,10 +9,16 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '@aaman/releaseorder/release-order';
-import { Category, RateCard, FixSize, Scheme } from '@aaman/ratecard/rate-card';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
-import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
 import { StateApiService, NotificationService, OptionsService } from 'app/services';
+
+import {
+  Category,
+  RateCard,
+  FixSize,
+  Scheme,
+  RateCardApiService
+} from 'app/rate-card';
 
 import {
   Client,

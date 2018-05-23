@@ -6,7 +6,7 @@ import { AuthGuard } from 'app/guards';
 import { InsertionListResolver } from '@aaman/releaseorder/insertion-list-resolver.service';
 import { ReleaseOrderListResolver } from '@aaman/releaseorder/release-order-list-resolver.service';
 import { ReleaseOrderResolver } from '@aaman/releaseorder/release-order-resolver.service';
-import { RateCardResolver } from '@aaman/ratecard/rate-card-resolver.service';
+import { RateCardResolver } from 'app/rate-card';
 
 import { InsertionCheckComponent } from '@aaman/releaseorder/insertion-check/insertion-check.component';
 import { ReleaseOrderListComponent } from '@aaman/releaseorder/release-order-list/release-order-list.component';

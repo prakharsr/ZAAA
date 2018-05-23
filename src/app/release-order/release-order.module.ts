@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
 import { DirectoryModule } from 'app/directory/directory.module';
-import { RateCardModule } from '@aaman/ratecard/rate-card.module';
+import { RateCardModule } from 'app/rate-card/rate-card.module';
 import { ReleaseOrderRoutingModule } from '@aaman/releaseorder/release-order-routing.module';
 
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';

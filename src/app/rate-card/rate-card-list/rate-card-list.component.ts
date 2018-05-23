@@ -7,8 +7,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RateCard } from '@aaman/ratecard/rate-card';
-import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
+import { RateCard } from '../rate-card';
+import { RateCardApiService } from '../rate-card-api.service';
 import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
 

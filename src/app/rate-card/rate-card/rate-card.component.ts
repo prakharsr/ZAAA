@@ -7,10 +7,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
-import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
+import { RateCardApiService } from '../rate-card-api.service';
 import { MediaHouseApiService, MediaHouse, Pullout } from 'app/directory';
 import { NotificationService, OptionsService } from 'app/services';
-import { RateCard, Category, FixSize, Scheme, Covered, Remark, Tax } from '@aaman/ratecard/rate-card';
+import { RateCard, Category, FixSize, Scheme, Covered, Remark, Tax } from '../rate-card';
 
 @Component({
   selector: 'app-rate-card',

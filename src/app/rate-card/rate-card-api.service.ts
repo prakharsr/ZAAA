@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
-import { RateCard } from '@aaman/ratecard/rate-card';
+import { RateCard } from './rate-card';
 import { PageData } from 'app/models';
 
 @Injectable()

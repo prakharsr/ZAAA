@@ -3,9 +3,9 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { RateCard } from '@aaman/ratecard/rate-card';
+import { RateCard } from './rate-card';
 import { PageData } from 'app/models';
-import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
+import { RateCardApiService } from './rate-card-api.service';
 
 @Injectable()
 export class RateCardListResolver implements Resolve<PageData<RateCard>> {
