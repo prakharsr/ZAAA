@@ -6,6 +6,72 @@
 
 <br>
 
+<div class="container">
+  <ng-template #rtMediaHouse let-r="result">
+    {{r.pubName}} - {{r.address.edition}}
+  </ng-template>
+  
+  <ng-template #rtEdition let-r="result">
+    {{r.address.edition}}
+  </ng-template>
+  
+  <ng-template #rtClient let-r="result">
+    {{r.orgName}}
+  </ng-template>
+  
+  <ng-template #rtExecutive let-r="result">
+    {{r.executiveName}} - {{r.orgName}}
+  </ng-template>
+  
+  <ng-template #rtExecutiveOrg let-r="result">
+    {{r.orgName}}
+  </ng-template>
+  
+  <div class="form-row">
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="executive" [ngbTypeahead]="searchExecutive" placeholder="Executive" [resultTemplate]="rtExecutive" [inputFormatter]="executiveNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <select [(ngModel)]="pastDays" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
+</div>
+
 <pre>{{res | async | json}}</pre>
 
 <div class="container">
