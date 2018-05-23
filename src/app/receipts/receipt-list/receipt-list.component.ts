@@ -7,7 +7,7 @@ import { NotificationService } from '@aaman/main/notification.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 import { WindowService } from '@aaman/main/window.service';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 
 import {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Firm } from '@aaman/main/firm';
+import { Firm, UserProfile } from 'app/models';
 import { ApiService } from '@aaman/main/api.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { NotificationService } from '@aaman/main/notification.service';
-import { UserProfile } from '@aaman/main/user-profile';
 import { environment } from 'environments/environment.prod';
 
 @Component({

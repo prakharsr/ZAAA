@@ -10,11 +10,14 @@ import { WindowService } from '@aaman/main/window.service';
 import { LoaderService } from '@aaman/main/loader.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { environment } from 'environments/environment';
-import { Template } from '@aaman/main/template';
-import { Plan } from '@aaman/main/plan';
 import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
-import { UserProfile } from '@aaman/main/user-profile';
-import { Firm } from '@aaman/main/firm';
+
+import {
+  Template,
+  Plan,
+  UserProfile,
+  Firm
+} from 'app/models';
 
 @Injectable()
 export class ApiService {

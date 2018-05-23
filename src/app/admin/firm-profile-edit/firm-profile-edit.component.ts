@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserProfile } from '@aaman/main/user-profile';
-import { Firm } from '@aaman/main/firm';
+import { UserProfile, Firm } from 'app/models';
 import { IfscService } from '@aaman/main/ifsc.service';
 import { ApiService } from '@aaman/main/api.service';
 import { StateApiService } from '@aaman/main/state-api.service';

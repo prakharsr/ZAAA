@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Template } from '@aaman/main/template';
+import { Template } from 'app/models';
 import { ApiService } from '@aaman/main/api.service';
 
 @Component({

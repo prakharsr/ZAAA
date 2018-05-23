@@ -1,4 +1,4 @@
-import { Address } from "@aaman/main/address";
+import { Address } from "./address";
 
 export class Firm {
     name: string;

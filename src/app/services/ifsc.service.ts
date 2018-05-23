@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { IfscResponse } from '@aaman/main/ifsc-response';
+import { IfscResponse } from 'app/models';
 
 @Injectable()
 export class IfscService {

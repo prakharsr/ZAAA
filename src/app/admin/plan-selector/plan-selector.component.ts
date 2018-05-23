@@ -1,8 +1,7 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { Plan } from '@aaman/main/plan';
-import { Firm } from '@aaman/main/firm';
+import { Plan, Firm } from 'app/models';
 import { ApiService } from '@aaman/main/api.service';
 import { RazorPayService } from '@aaman/main/razorpay.service';
 import { WindowService } from '@aaman/main/window.service';

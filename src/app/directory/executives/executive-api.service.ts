@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { ApiService } from '@aaman/main/api.service';
 import { Executive } from './executive';
 import { environment } from 'environments/environment';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 
 @Injectable()
 export class ExecutiveApiService {

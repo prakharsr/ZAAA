@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CoUser } from '../co-user';
 import { CoUserApiService } from '../co-user-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
-import { UserProfile } from '@aaman/main/user-profile';
+import { UserProfile } from 'app/models';
 
 @Component({
   selector: 'app-co-users',

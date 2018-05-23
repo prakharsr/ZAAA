@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { RateCard } from '@aaman/ratecard/rate-card';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
 
 @Injectable()

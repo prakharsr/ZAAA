@@ -6,10 +6,9 @@ import { ApiService } from '@aaman/main/api.service';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
 import { ReleaseOrder } from '@aaman/releaseorder/release-order';
 import { ReleaseOrderDir } from '@aaman/releaseorder/release-order-dir-resolver.service';
-import { PageData } from '@aaman/main/page-data';
 import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { MailingDetails } from '@aaman/main/mailing-details';
+import { PageData, MailingDetails } from 'app/models';
 
 @Injectable()
 export class ReleaseOrderApiService {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserProfile } from '@aaman/main/user-profile';
+import { UserProfile } from 'app/models';
 import { ApiService } from '@aaman/main/api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 

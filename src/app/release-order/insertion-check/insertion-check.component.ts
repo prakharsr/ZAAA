@@ -8,7 +8,7 @@ import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
 import { DialogService } from '@aaman/main/dialog.service';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 
 import {

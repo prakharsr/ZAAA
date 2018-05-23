@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { MediaHouse } from './media-house';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { MediaHouseApiService } from './media-house-api.service';
 
 @Injectable()

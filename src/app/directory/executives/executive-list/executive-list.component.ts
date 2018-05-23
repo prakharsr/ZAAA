@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 
 @Component({
   selector: 'app-executive-list',

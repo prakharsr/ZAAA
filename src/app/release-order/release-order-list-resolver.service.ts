@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { ReleaseOrder } from '@aaman/releaseorder/release-order';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
 

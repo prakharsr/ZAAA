@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from '@aaman/main/api.service';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
 import { MediaHouseInvoiceItem } from '@aaman/accounts/media-house-invoice-item';
 

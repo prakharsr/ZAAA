@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 

@@ -2,7 +2,7 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
 import { MediaHouseInvoiceItem } from '@aaman/accounts/media-house-invoice-item';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserProfile } from '@aaman/main/user-profile';
+import { UserProfile } from 'app/models';
 
 @Component({
   selector: 'app-dashboard',

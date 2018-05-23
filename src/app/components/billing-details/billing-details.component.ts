@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from '@aaman/main/address';
+import { Address } from 'app/models';
 import { StateApiService } from '@aaman/main/state-api.service';
 
 export class BillingDetails {

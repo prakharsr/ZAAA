@@ -4,8 +4,7 @@ import { map } from 'rxjs/operators';
 import { ApiService } from '@aaman/main/api.service';
 import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { PageData } from '@aaman/main/page-data';
-import { MailingDetails } from '@aaman/main/mailing-details';
+import { PageData, MailingDetails } from 'app/models';
 import { Invoice } from 'app/invoice';
 
 @Injectable()

@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RateCard } from '@aaman/ratecard/rate-card';
 import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 
 @Component({
   selector: 'app-rate-card-list',

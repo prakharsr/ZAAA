@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from '@aaman/main/api.service';
 import { Client, ContactPerson } from './client';
-import { PageData } from '@aaman/main/page-data';
+import { PageData } from 'app/models';
 
 @Injectable()
 export class ClientApiService {

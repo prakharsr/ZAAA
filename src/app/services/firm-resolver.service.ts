@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Firm } from '@aaman/main/firm';
+import { Firm } from 'app/models';
 import { ApiService } from '@aaman/main/api.service';
 
 @Injectable()
