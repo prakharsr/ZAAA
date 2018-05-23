@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
+import { DirRoutingModule } from './dir-routing.module';
 
 import {
   DirComponent,
-  DirRoutingModule,
 
   ClientListComponent,
   ClientComponent,

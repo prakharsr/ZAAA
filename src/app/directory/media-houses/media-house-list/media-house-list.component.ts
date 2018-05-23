@@ -7,8 +7,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { MediaHouse } from '@aaman/dir/media-houses/media-house';
-import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { MediaHouse } from '../media-house';
+import { MediaHouseApiService } from '../media-house-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { PageData } from '@aaman/main/page-data';
 

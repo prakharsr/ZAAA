@@ -3,8 +3,8 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Executive } from '@aaman/dir/executives/executive';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { Executive } from './executive';
+import { ExecutiveApiService } from './executive-api.service';
 
 @Injectable()
 export class ExecutiveResolver implements Resolve<Executive> {

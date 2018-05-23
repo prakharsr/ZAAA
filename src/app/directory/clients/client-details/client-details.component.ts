@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client } from '@aaman/dir/clients/client';
-import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { Client } from '../client';
+import { ClientApiService } from '../client-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { environment } from 'environments/environment.prod';
 

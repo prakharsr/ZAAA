@@ -1,8 +1,5 @@
 export * from './dir/dir.component';
 
-export * from './dir-routing.module';
-export * from './directory.module';
-
 export * from './clients/client';
 export * from './executives/executive';
 export * from './media-houses/media-house';

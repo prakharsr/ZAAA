@@ -7,8 +7,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Client } from '@aaman/dir/clients/client';
-import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { Client } from '../client';
+import { ClientApiService } from '../client-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { PageData } from '@aaman/main/page-data';
 

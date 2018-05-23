@@ -7,8 +7,8 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Executive } from '@aaman/dir/executives/executive';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { Executive } from '../executive';
+import { ExecutiveApiService } from '../executive-api.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { PageData } from '@aaman/main/page-data';
 

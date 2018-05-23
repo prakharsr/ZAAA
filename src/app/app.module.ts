@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BaseModule } from './base.module';
 import { AdminModule } from '@aaman/main/admin.module';
-import { DirectoryModule } from '@aaman/dir/directory.module';
+import { DirectoryModule } from './directory/directory.module';
 import { CoUsersModule } from '@aaman/couser/co-users.module';
 import { RateCardModule } from '@aaman/ratecard/rate-card.module';
 import { ReleaseOrderModule } from '@aaman/releaseorder/release-order.module';
