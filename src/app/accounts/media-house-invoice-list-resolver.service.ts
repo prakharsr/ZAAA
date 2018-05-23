@@ -5,8 +5,8 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
-import { MediaHouseInvoiceItem } from '@aaman/accounts/media-house-invoice-item';
-import { AccountsApiService } from '@aaman/accounts/accounts-api.service';
+import { MediaHouseInvoiceItem } from './media-house-invoice-item';
+import { AccountsApiService } from './accounts-api.service';
 
 class Result {
   list: PageData<MediaHouseInvoiceItem>;

@@ -6,7 +6,7 @@ import { ApiService } from 'app/services';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { PageData } from 'app/models';
 import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
-import { MediaHouseInvoiceItem } from '@aaman/accounts/media-house-invoice-item';
+import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 
 @Injectable()
 export class AccountsApiService {

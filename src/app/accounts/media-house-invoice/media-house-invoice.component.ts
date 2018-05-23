@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import { MediaHouseInvoiceDialogComponent } from '@aaman/accounts/media-house-invoice-dialog/media-house-invoice-dialog.component';
-import { AccountsApiService } from '@aaman/accounts/accounts-api.service';
+import { MediaHouseInvoiceDialogComponent } from '../media-house-invoice-dialog/media-house-invoice-dialog.component';
+import { AccountsApiService } from '../accounts-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';

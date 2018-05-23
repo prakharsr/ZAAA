@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaHouseInvoice } from '@aaman/accounts/media-house-invoice';
+import { MediaHouseInvoice } from '../media-house-invoice';
 
 @Component({
   selector: 'app-media-house-invoice-dialog',

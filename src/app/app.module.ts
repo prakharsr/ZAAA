@@ -10,7 +10,7 @@ import { RateCardModule } from '@aaman/ratecard/rate-card.module';
 import { ReleaseOrderModule } from '@aaman/releaseorder/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ReceiptsModule } from '@aaman/receipts/receipts.module';
-import { AccountsModule } from '@aaman/accounts/accounts.module';
+import { AccountsModule } from './accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';

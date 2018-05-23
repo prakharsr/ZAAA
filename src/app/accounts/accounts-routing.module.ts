@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MediaHouseInvoiceComponent } from '@aaman/accounts/media-house-invoice/media-house-invoice.component';
 import { AuthGuard } from 'app/guards';
-import { MediaHouseInvoiceListResolver } from '@aaman/accounts/media-house-invoice-list-resolver.service';
+
+import {
+  MediaHouseInvoiceComponent,
+  MediaHouseInvoiceListResolver
+} from '.';
 
 const routes: Routes = [
   {
