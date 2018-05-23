@@ -26,16 +26,11 @@ export class InsertionCheckComponent implements OnInit {
 
   insertions: InsertionCheckItem[] = [];
 
-  displayedColumns = ['data', 'action'];
-  dataSource = new MatTableDataSource();
-
   page: number;
   pageCount: number;
 
   pastDays = 0;
   
-  dummyArray;
-
   mediaHouse;
   edition;
   client;
@@ -79,12 +74,8 @@ export class InsertionCheckComponent implements OnInit {
   private init(data: PageData<InsertionCheckItem>) {
     this.insertions = data.list;
 
-    this.dataSource.data = this.insertions;
-
     this.pageCount = data.pageCount;
     this.page = data.page;
-
-    this.dummyArray = Array(this.pageCount);
   }
 
   searchClient = (text: Observable<string>) => {
