@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { AuthGuard } from 'app/guards';
+
 import { InsertionListResolver } from '@aaman/releaseorder/insertion-list-resolver.service';
 import { ReleaseOrderListResolver } from '@aaman/releaseorder/release-order-list-resolver.service';
 import { ReleaseOrderResolver } from '@aaman/releaseorder/release-order-resolver.service';

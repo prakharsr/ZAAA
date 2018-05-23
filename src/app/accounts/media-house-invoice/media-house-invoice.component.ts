@@ -6,14 +6,17 @@ import { MediaHouseInvoiceDialogComponent } from '@aaman/accounts/media-house-in
 import { AccountsApiService } from '@aaman/accounts/accounts-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@aaman/main/notification.service';
-import { ClientApiService } from '@aaman/dir/clients/client-api.service';
-import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
-import { Client } from '@aaman/dir/clients/client';
-import { Executive } from '@aaman/dir/executives/executive';
-import { MediaHouse } from '@aaman/dir/media-houses/media-house';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
+
+import {
+  MediaHouse,
+  Executive,
+  Client,
+  MediaHouseApiService,
+  ExecutiveApiService,
+  ClientApiService
+} from 'app/directory';
 
 @Component({
   selector: 'app-media-house-invoice',
@@ -23,7 +26,6 @@ import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-sear
 export class MediaHouseInvoiceComponent implements OnInit {
 
   res;
-
 
   page: number;
   pageCount: number;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { AuthGuard } from 'app/guards';
 import { RateCardListResolver } from '@aaman/ratecard/rate-card-list-resolver.service';
 import { RateCardResolver } from '@aaman/ratecard/rate-card-resolver.service';
 

@@ -20,8 +20,6 @@
       "@aaman/main/*": [
         "app/admin/*",
         "app/components/*",
-        "app/guards/*",
-        "app/validators/*",
         "app/services/*",
         "app/models/*"
       ],

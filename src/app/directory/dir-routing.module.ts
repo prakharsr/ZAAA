@@ -23,7 +23,7 @@ import {
   MediaHouseListResolver
 } from '.';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
+import { AuthGuard } from 'app/guards';
 import { FirmResolver } from '@aaman/main/firm-resolver.service';
 
 const routes: Routes = [

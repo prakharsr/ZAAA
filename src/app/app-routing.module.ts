@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
-import { AdminGuard } from '@aaman/main/admin-guard.service';
-import { PhoneVerifyGuard } from '@aaman/main/phone-verify-guard.service';
-import { PlanGuard } from '@aaman/main/plan-guard.service';
+import {
+  AuthGuard,
+  AdminGuard,
+  PhoneVerifyGuard,
+  PlanGuard
+} from 'app/guards';
+
 import { FirmResolver } from '@aaman/main/firm-resolver.service';
 import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
 
