@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice, InvoiceDir } from 'app/invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { OptionsService } from '@aaman/main/options.service';
-import { InvoiceDir } from '@aaman/invoice/invoice-dir-resolver.service';
 
 @Component({
   selector: 'app-receipt',

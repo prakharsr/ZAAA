@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice } from '../invoice';
 
 @Component({
   selector: 'app-invoice-details',

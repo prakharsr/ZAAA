@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice } from 'app/invoice';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { PageData } from '@aaman/main/page-data';

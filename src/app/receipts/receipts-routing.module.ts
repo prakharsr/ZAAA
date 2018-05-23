@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from 'app/guards';
 import { ReceiptListResolver } from '@aaman/receipts/receipt-list-resolver.service';
-import { InvoiceResolver } from '@aaman/invoice/invoice-resolver.service';
-import { InvoiceDirResolver } from '@aaman/invoice/invoice-dir-resolver.service';
+
+import { InvoiceResolver, InvoiceDirResolver } from 'app/invoice';
+
 import { ReceiptResolver } from '@aaman/receipts/receipt-resolver.service';
 
 import { ReceiptListComponent } from '@aaman/receipts/receipt-list/receipt-list.component';

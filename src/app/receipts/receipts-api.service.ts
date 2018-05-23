@@ -6,7 +6,7 @@ import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt'
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { PageData } from '@aaman/main/page-data';
 import { MailingDetails } from '@aaman/main/mailing-details';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice } from 'app/invoice';
 
 @Injectable()
 export class ReceiptsApiService {

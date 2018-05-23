@@ -3,11 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { ApiService } from '@aaman/main/api.service';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice } from './invoice';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { PageData } from '@aaman/main/page-data';
 import { MailingDetails } from '@aaman/main/mailing-details';
-import { InvoiceDir } from '@aaman/invoice/invoice-dir-resolver.service';
+import { InvoiceDir } from './invoice-dir-resolver.service';
 
 @Injectable()
 export class InvoiceApiService {

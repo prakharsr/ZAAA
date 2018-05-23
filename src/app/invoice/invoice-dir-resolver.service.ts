@@ -3,9 +3,9 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Invoice } from '@aaman/invoice/invoice';
+import { Invoice } from './invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
-import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
+import { InvoiceApiService } from './invoice-api.service';
 
 export class InvoiceDir {
   invoice: Invoice;
