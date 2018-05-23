@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '@aaman/main/dialog/dialog.component';
 import { MailingDetails } from 'app/models';
-import { MailingDetailsComponent } from '@aaman/main/mailing-details/mailing-details.component';
-import { BillingDetails, BillingDetailsComponent } from '@aaman/main/billing-details/billing-details.component';
+
+// Import individually to prevent circular dependency
+import { DialogComponent } from '../components/dialog/dialog.component';
+import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
+import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
 
 @Injectable()
 export class DialogService {

@@ -10,7 +10,7 @@ import { WindowService } from './window.service';
 import { LoaderService } from './loader.service';
 import { NotificationService } from './notification.service';
 import { environment } from 'environments/environment';
-import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
+import { BillingDetails } from 'app/components';
 
 import {
   Template,

@@ -10,17 +10,19 @@ import {
 
 import { FirmResolver, UserProfileResolver } from 'app/services';
 
-import { HomeComponent } from '@aaman/main/home/home.component';
-import { LoginComponent } from '@aaman/main/login/login.component';
-import { RegisterComponent } from '@aaman/main/register/register.component';
-import { ForgotPswComponent } from '@aaman/main/forgot-psw/forgot-psw.component';
-import { PhoneVerifyComponent } from '@aaman/main/phone-verify/phone-verify.component';
-import { ProfileViewComponent } from '@aaman/main/profile-view/profile-view.component';
-import { FirmProfileViewComponent } from '@aaman/main/firm-profile-view/firm-profile-view.component';
-import { DashboardComponent } from '@aaman/main/dashboard/dashboard.component';
-import { ChangePswComponent } from '@aaman/main/change-psw/change-psw.component';
-import { ResetPasswordComponent } from '@aaman/main/reset-password/reset-password.component';
-import { NotFoundComponent } from '@aaman/main/not-found/not-found.component';
+import {
+  HomeComponent,
+  LoginComponent,
+  RegisterComponent,
+  ForgotPswComponent,
+  PhoneVerifyComponent,
+  ProfileViewComponent,
+  FirmProfileViewComponent,
+  DashboardComponent,
+  ChangePswComponent,
+  ResetPasswordComponent,
+  NotFoundComponent
+} from './components';
 
 import {
   ProfileEditComponent,

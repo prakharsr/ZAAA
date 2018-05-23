@@ -14,19 +14,22 @@ import { AccountsModule } from '@aaman/accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from '@aaman/main/home/home.component';
-import { PhoneVerifyComponent } from '@aaman/main/phone-verify/phone-verify.component';
-import { NavbarComponent } from '@aaman/main/navbar/navbar.component';
-import { LoginComponent } from '@aaman/main/login/login.component';
-import { RegisterComponent } from '@aaman/main/register/register.component';
-import { ProfileViewComponent } from '@aaman/main/profile-view/profile-view.component';
-import { DashboardComponent } from '@aaman/main/dashboard/dashboard.component';
-import { FirmProfileViewComponent } from '@aaman/main/firm-profile-view/firm-profile-view.component';
-import { ChangePswComponent } from '@aaman/main/change-psw/change-psw.component';
-import { ForgotPswComponent } from '@aaman/main/forgot-psw/forgot-psw.component';
-import { NotFoundComponent } from '@aaman/main/not-found/not-found.component';
-import { ResetPasswordComponent } from '@aaman/main/reset-password/reset-password.component';
-import { LoaderComponent } from '@aaman/main/loader/loader.component';
+
+import {
+  HomeComponent,
+  LoginComponent,
+  RegisterComponent,
+  ForgotPswComponent,
+  PhoneVerifyComponent,
+  ProfileViewComponent,
+  FirmProfileViewComponent,
+  DashboardComponent,
+  ChangePswComponent,
+  ResetPasswordComponent,
+  NotFoundComponent,
+  NavbarComponent,
+  LoaderComponent
+} from './components';
 
 @NgModule({
   declarations: [

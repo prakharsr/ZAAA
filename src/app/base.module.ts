@@ -20,19 +20,21 @@ import {
   OptionsService,
   FirmResolver,
   UserProfileResolver
-} from 'app/services';
+} from './services';
 
 import {
   AuthGuard,
   PhoneVerifyGuard,
   AdminGuard,
   PlanGuard
-} from 'app/guards';
+} from './guards';
 
-import { MailingDetailsComponent } from '@aaman/main/mailing-details/mailing-details.component';
-import { DialogComponent } from '@aaman/main/dialog/dialog.component';
-import { BillingDetailsComponent } from '@aaman/main/billing-details/billing-details.component';
-import { PaginationComponent } from '@aaman/main/pagination/pagination.component';
+import {
+  MailingDetailsComponent,
+  DialogComponent,
+  BillingDetailsComponent,
+  PaginationComponent
+} from './components';
 
 import {
   VerifyEmailDirective,
@@ -41,7 +43,7 @@ import {
   VerifyLengthDirective,
   VerifyMultipleOfDirective,
   VerifyEqualsDirective
-} from 'app/validators';
+} from './validators';
 
 const validators = [
   VerifyEmailDirective,

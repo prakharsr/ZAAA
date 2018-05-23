@@ -17,9 +17,6 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@aaman/main/*": [
-        "app/components/*"
-      ],
       "@aaman/accounts/*": ["app/accounts/*"],
       "@aaman/ratecard/*": ["app/rate-card/*"],
       "@aaman/receipts/*": ["app/receipts/*"],

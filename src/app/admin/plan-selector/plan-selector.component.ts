@@ -10,7 +10,7 @@ import {
   DialogService
 } from 'app/services';
 
-import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
+import { BillingDetails } from 'app/components';
 
 @Component({
   selector: 'app-plan-selector',
