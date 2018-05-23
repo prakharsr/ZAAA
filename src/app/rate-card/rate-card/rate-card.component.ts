@@ -8,11 +8,10 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import { map } from 'rxjs/operators';
 import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
-import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
+import { MediaHouseApiService, MediaHouse, Pullout } from 'app/directory';
 import { NotificationService } from '@aaman/main/notification.service';
 import { OptionsService } from '@aaman/main/options.service';
 import { RateCard, Category, FixSize, Scheme, Covered, Remark, Tax } from '@aaman/ratecard/rate-card';
-import { MediaHouse, Pullout } from '@aaman/dir/media-houses/media-house';
 
 @Component({
   selector: 'app-rate-card',

@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Invoice } from '@aaman/invoice/invoice';
-import { MediaHouse } from '@aaman/dir/media-houses/media-house';
-import { Client } from '@aaman/dir/clients/client';
-import { Executive } from '@aaman/dir/executives/executive';
+import { MediaHouse, Client, Executive } from 'app/directory';
 import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
 
 export class InvoiceDir {

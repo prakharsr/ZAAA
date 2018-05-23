@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Executive } from '@aaman/dir/executives/executive';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { Executive } from '../executive';
+import { ExecutiveApiService } from '../executive-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { environment } from 'environments/environment';
 

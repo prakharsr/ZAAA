@@ -3,18 +3,21 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { Invoice } from '@aaman/invoice/invoice';
-import { ClientApiService } from '@aaman/dir/clients/client-api.service';
-import { MediaHouseApiService } from '@aaman/dir/media-houses/media-house-api.service';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 import { DialogService } from '@aaman/main/dialog.service';
 import { InvoiceApiService } from '@aaman/invoice/invoice-api.service';
 import { WindowService } from '@aaman/main/window.service';
 import { PageData } from '@aaman/main/page-data';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
-import { MediaHouse } from '@aaman/dir/media-houses/media-house';
-import { Executive } from '@aaman/dir/executives/executive';
-import { Client } from '@aaman/dir/clients/client';
+
+import {
+  Client,
+  MediaHouse,
+  Executive,
+  ClientApiService,
+  MediaHouseApiService,
+  ExecutiveApiService
+} from 'app/directory';
 
 @Component({
   selector: 'app-invoice-list',

@@ -21,22 +21,26 @@ import { OptionsService } from '@aaman/main/options.service';
 import { FirmResolver } from '@aaman/main/firm-resolver.service';
 import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
-import { PhoneVerifyGuard } from '@aaman/main/phone-verify-guard.service';
-import { AdminGuard } from '@aaman/main/admin-guard.service';
-import { PlanGuard } from '@aaman/main/plan-guard.service';
+import {
+  AuthGuard,
+  PhoneVerifyGuard,
+  AdminGuard,
+  PlanGuard
+} from 'app/guards';
 
 import { MailingDetailsComponent } from '@aaman/main/mailing-details/mailing-details.component';
 import { DialogComponent } from '@aaman/main/dialog/dialog.component';
 import { BillingDetailsComponent } from '@aaman/main/billing-details/billing-details.component';
 import { PaginationComponent } from '@aaman/main/pagination/pagination.component';
 
-import { VerifyEmailDirective } from '@aaman/main/verify-email.directive';
-import { VerifyMinDirective } from '@aaman/main/verify-min.directive';
-import { VerifyMaxDirective } from '@aaman/main/verify-max.directive';
-import { VerifyLengthDirective } from '@aaman/main/verify-fix-length.directive';
-import { VerifyMultipleOfDirective } from '@aaman/main/verify-multiple-of.directive';
-import { VerifyEqualsDirective } from '@aaman/main/verify-equals.directive';
+import {
+  VerifyEmailDirective,
+  VerifyMinDirective,
+  VerifyMaxDirective,
+  VerifyLengthDirective,
+  VerifyMultipleOfDirective,
+  VerifyEqualsDirective
+} from 'app/validators';
 
 const validators = [
   VerifyEmailDirective,

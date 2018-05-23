@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { map, elementAt } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from '@aaman/main/api.service';
-import { MediaHouse, MediaHouseScheduling } from '@aaman/dir/media-houses/media-house';
+import { MediaHouse, MediaHouseScheduling } from './media-house';
 import { PageData } from '@aaman/main/page-data';
 
 @Injectable()

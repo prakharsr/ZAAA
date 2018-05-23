@@ -3,9 +3,9 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { Client } from '@aaman/dir/clients/client';
+import { Client } from './client';
 import { PageData } from '@aaman/main/page-data';
-import { ClientApiService } from '@aaman/dir/clients/client-api.service';
+import { ClientApiService } from './client-api.service';
 
 @Injectable()
 export class ClientListResolver implements Resolve<PageData<Client>> {

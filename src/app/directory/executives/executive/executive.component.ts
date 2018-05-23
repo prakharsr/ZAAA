@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Executive } from '@aaman/dir/executives/executive';
+import { Executive } from '../executive';
 import { Firm } from '@aaman/main/firm';
-import { ExecutiveApiService } from '@aaman/dir/executives/executive-api.service';
+import { ExecutiveApiService } from '../executive-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({

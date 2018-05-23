@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from '@aaman/main/api.service';
-import { Executive } from '@aaman/dir/executives/executive';
+import { Executive } from './executive';
 import { environment } from 'environments/environment';
 import { PageData } from '@aaman/main/page-data';
 
