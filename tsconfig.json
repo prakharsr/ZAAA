@@ -26,7 +26,6 @@
         "app/models/*"
       ],
       "@aaman/accounts/*": ["app/accounts/*"],
-      "@aaman/couser/*": ["app/co-users/*"],
       "@aaman/invoice/*": ["app/invoice/*"],
       "@aaman/ratecard/*": ["app/rate-card/*"],
       "@aaman/receipts/*": ["app/receipts/*"],

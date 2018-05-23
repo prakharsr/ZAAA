@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '@aaman/main/auth-guard.service';
-import { PhoneVerifyGuard } from '@aaman/main/phone-verify-guard.service';
-import { PlanGuard } from '@aaman/main/plan-guard.service';
+import { AuthGuard, PhoneVerifyGuard, PlanGuard } from 'app/guards';
 
-import { CoUsersResolver } from '@aaman/couser/co-user-resolver.service';
 import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
 
-import { CoUsersComponent } from '@aaman/couser/co-users/co-users.component';
-import { CoUserComponent } from '@aaman/couser/co-user/co-user.component';
-import { RoleEditComponent } from '@aaman/couser/role-edit/role-edit.component';
+import {
+  CoUsersResolver,
+  CoUserComponent,
+  CoUsersComponent,
+  RoleEditComponent  
+} from '.';
 
 const routes: Routes = [
   {

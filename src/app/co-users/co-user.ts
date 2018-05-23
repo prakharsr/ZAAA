@@ -1,4 +1,4 @@
-import { UserRoles } from "@aaman/couser/user-roles";
+import { UserRoles } from "./user-roles";
 
 export class CoUser {
     name: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserRoles } from '@aaman/couser/user-roles';
-import { CoUserApiService } from '@aaman/couser/co-user-api.service';
+import { UserRoles } from '../user-roles';
+import { CoUserApiService } from '../co-user-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { CoUser } from '@aaman/couser/co-user';
-import { CoUserApiService } from '@aaman/couser/co-user-api.service';
+import { CoUser } from '../co-user';
+import { CoUserApiService } from '../co-user-api.service';
 import { NotificationService } from '@aaman/main/notification.service';
 
 @Component({
