@@ -3,27 +3,27 @@
 <mat-dialog-content>
   <form #mediaHouseInvoiceForm="ngForm">
     <mat-form-field>
-      <input matInput placeholder="Invoice Number" [(ngModel)]="details.invoiceNo" name="invoiceNo" required #invoiceNoField="ngModel">
+      <input matInput placeholder="Invoice Number" [(ngModel)]="details.MHINo" name="invoiceNo" required #invoiceNoField="ngModel">
       <mat-error *ngIf="invoiceNoField.errors && invoiceNoField.errors.required">
         Invoice Number is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="dateField" name="date" placeholder="Date" [(ngModel)]="details.date" disabled>
+      <input matInput [matDatepicker]="dateField" name="date" placeholder="Date" [(ngModel)]="details.MHIDate" disabled>
       <mat-datepicker-toggle matSuffix [for]="dateField"></mat-datepicker-toggle>
       <mat-datepicker #dateField disabled="false"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Amount" [(ngModel)]="details.amount" name="amount" required #amountField="ngModel">
+      <input type="number" matInput placeholder="Amount" [(ngModel)]="details.MHIGrossAmount" name="amount" required #amountField="ngModel">
       <mat-error *ngIf="amountField.errors && amountField.errors.required">
         Amount is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.taxAmount" name="taxAmount" required #taxAmountField="ngModel">
+      <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.MHITaxAmount" name="taxAmount" required #taxAmountField="ngModel">
       <mat-error *ngIf="taxAmountField.errors && taxAmountField.errors.required">
         Tax Amount is required.
       </mat-error>

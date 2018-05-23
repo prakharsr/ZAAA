@@ -20,9 +20,9 @@
   <div class="card-body">
     <div class="row">
       <div class="col">
-        <a [routerLink]="['/dir/executives', executive.id]">{{executive.orgName}}</a>
+        <a [routerLink]="['/dir/executives', executive.id]">{{executive.executiveName}}</a>
         <br>
-        <small>{{executive.executiveName}}</small>
+        <small>{{executive.orgName}}</small>
       </div>
       <div class="col-auto">
         <mat-menu #dirMenu="matMenu">

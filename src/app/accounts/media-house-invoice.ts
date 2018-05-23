@@ -1,7 +1,7 @@
 export class MediaHouseInvoice {
-    constructor(public invoiceNo = "") { }
+    constructor(public MHINo = "") { }
 
-    date: Date;
-    amount = 0;
-    taxAmount = 0;
+    MHIDate: Date;
+    MHIGrossAmount = 0;
+    MHITaxAmount = 0;
 }
