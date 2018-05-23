@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { CoUser } from '../co-user';
 import { CoUserApiService } from '../co-user-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-co-user',

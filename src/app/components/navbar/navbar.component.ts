@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 
 @Component({
   selector: 'app-navbar',

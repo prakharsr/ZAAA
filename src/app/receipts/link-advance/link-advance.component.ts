@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
 import { Invoice } from 'app/invoice';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService } from 'app/services';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 

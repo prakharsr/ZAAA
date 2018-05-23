@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { MediaHouse } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
-import { DialogService } from '@aaman/main/dialog.service';
+import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
 
 @Component({

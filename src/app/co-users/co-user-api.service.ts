@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 import { CoUser } from './co-user';
 import { UserRoles } from './user-roles';
 

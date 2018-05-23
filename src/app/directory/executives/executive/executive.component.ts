@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Executive } from '../executive';
 import { Firm } from 'app/models';
 import { ExecutiveApiService } from '../executive-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-executive',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 import { Executive } from './executive';
 import { environment } from 'environments/environment';
 import { PageData } from 'app/models';

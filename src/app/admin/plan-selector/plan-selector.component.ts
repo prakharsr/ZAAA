@@ -2,10 +2,14 @@ import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Plan, Firm } from 'app/models';
-import { ApiService } from '@aaman/main/api.service';
-import { RazorPayService } from '@aaman/main/razorpay.service';
-import { WindowService } from '@aaman/main/window.service';
-import { DialogService } from '@aaman/main/dialog.service';
+
+import {
+  ApiService,
+  RazorPayService,
+  WindowService,
+  DialogService
+} from 'app/services';
+
 import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
 
 @Component({

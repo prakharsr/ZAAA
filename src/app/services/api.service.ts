@@ -6,9 +6,9 @@ import { map } from 'rxjs/operators/map';
 import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-import { WindowService } from '@aaman/main/window.service';
-import { LoaderService } from '@aaman/main/loader.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { WindowService } from './window.service';
+import { LoaderService } from './loader.service';
+import { NotificationService } from './notification.service';
 import { environment } from 'environments/environment';
 import { BillingDetails } from '@aaman/main/billing-details/billing-details.component';
 
@@ -19,17 +19,16 @@ import {
   Firm
 } from 'app/models';
 
+const AuthTokenKey = "auth_token";
+
 @Injectable()
 export class ApiService {
-
-  private authTokenKey : string = "auth_token";
-
   private _authToken: string;
 
   private get authToken() : string {
     if (!this._authToken)
     {
-      this._authToken = this.windowService.window.localStorage.getItem(this.authTokenKey);
+      this._authToken = this.windowService.window.localStorage.getItem(AuthTokenKey);
     }
 
     return this._authToken;
@@ -45,11 +44,11 @@ export class ApiService {
   private set authToken(authToken: string) {
     if (!authToken) {
       this._authToken = '';
-      this.windowService.window.localStorage.removeItem(this.authTokenKey);
+      this.windowService.window.localStorage.removeItem(AuthTokenKey);
     }
     else {
       this._authToken = authToken;
-      this.windowService.window.localStorage.setItem(this.authTokenKey, authToken);
+      this.windowService.window.localStorage.setItem(AuthTokenKey, authToken);
     }
   }
 

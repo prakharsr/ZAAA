@@ -7,7 +7,7 @@ import {
   PlanGuard
 } from 'app/guards';
 
-import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
+import { UserProfileResolver } from 'app/services';
 
 import {
   CoUsersResolver,

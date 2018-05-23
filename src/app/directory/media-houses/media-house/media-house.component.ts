@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
-import { StateApiService } from '@aaman/main/state-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { StateApiService, NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-media-house',

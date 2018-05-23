@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 
 @Injectable()
 export class PhoneVerifyGuard implements CanActivate {

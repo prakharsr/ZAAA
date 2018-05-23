@@ -24,7 +24,7 @@ import {
 } from '.';
 
 import { AuthGuard } from 'app/guards';
-import { FirmResolver } from '@aaman/main/firm-resolver.service';
+import { FirmResolver } from 'app/services';
 
 const routes: Routes = [
   {

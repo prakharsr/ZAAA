@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Template } from 'app/models';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 
 @Component({
   selector: 'app-template-selector',

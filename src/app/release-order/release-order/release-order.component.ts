@@ -12,9 +12,7 @@ import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '@aaman/release
 import { Category, RateCard, FixSize, Scheme } from '@aaman/ratecard/rate-card';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
 import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
-import { StateApiService } from '@aaman/main/state-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
-import { OptionsService } from '@aaman/main/options.service';
+import { StateApiService, NotificationService, OptionsService } from 'app/services';
 
 import {
   Client,

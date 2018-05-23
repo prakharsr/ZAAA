@@ -4,8 +4,7 @@ import { PaymentReceipt } from '@aaman/receipts/payment-receipt';
 import { Invoice, InvoiceDir } from 'app/invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
-import { OptionsService } from '@aaman/main/options.service';
+import { NotificationService, OptionsService } from 'app/services';
 
 @Component({
   selector: 'app-receipt',

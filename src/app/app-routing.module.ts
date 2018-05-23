@@ -8,8 +8,7 @@ import {
   PlanGuard
 } from 'app/guards';
 
-import { FirmResolver } from '@aaman/main/firm-resolver.service';
-import { UserProfileResolver } from '@aaman/main/user-profile-resolver.service';
+import { FirmResolver, UserProfileResolver } from 'app/services';
 
 import { HomeComponent } from '@aaman/main/home/home.component';
 import { LoginComponent } from '@aaman/main/login/login.component';

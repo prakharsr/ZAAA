@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 import { PaymentReceipt, AdvanceReceipt } from '@aaman/receipts/payment-receipt';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 import { PageData, MailingDetails } from 'app/models';

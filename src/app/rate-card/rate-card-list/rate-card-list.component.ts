@@ -9,7 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RateCard } from '@aaman/ratecard/rate-card';
 import { RateCardApiService } from '@aaman/ratecard/rate-card-api.service';
-import { DialogService } from '@aaman/main/dialog.service';
+import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
 
 @Component({

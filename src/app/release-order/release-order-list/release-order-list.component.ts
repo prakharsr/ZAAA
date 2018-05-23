@@ -6,9 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {of} from 'rxjs/observable/of';
 import { ReleaseOrder } from '@aaman/releaseorder/release-order';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
-import { DialogService } from '@aaman/main/dialog.service';
-import { NotificationService } from '@aaman/main/notification.service';
-import { WindowService } from '@aaman/main/window.service';
+import { DialogService, NotificationService, WindowService } from 'app/services';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 

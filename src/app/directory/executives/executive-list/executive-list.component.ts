@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
-import { DialogService } from '@aaman/main/dialog.service';
+import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
 import { ReleaseOrder } from '@aaman/releaseorder/release-order';
 import { ReleaseOrderDir } from '@aaman/releaseorder/release-order-dir-resolver.service';

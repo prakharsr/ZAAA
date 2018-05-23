@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 import { ClientApiService, MediaHouseApiService, ExecutiveApiService } from 'app/directory';
 import { Invoice } from './invoice';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';

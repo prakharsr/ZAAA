@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoUser } from '../co-user';
 import { CoUserApiService } from '../co-user-api.service';
-import { DialogService } from '@aaman/main/dialog.service';
+import { DialogService } from 'app/services';
 import { UserProfile } from 'app/models';
 
 @Component({

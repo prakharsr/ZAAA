@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Address } from 'app/models';
-import { StateApiService } from '@aaman/main/state-api.service';
+import { StateApiService } from 'app/services';
 
 export class BillingDetails {
   firmName: string;

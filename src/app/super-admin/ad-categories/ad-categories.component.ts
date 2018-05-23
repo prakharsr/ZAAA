@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService } from '@aaman/main/dialog.service';
-import { OptionsService } from '@aaman/main/options.service';
+import { DialogService, OptionsService } from 'app/services';
 import { Category } from '@aaman/ratecard/rate-card';
 
 @Component({

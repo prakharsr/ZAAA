@@ -5,9 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import { MatTableDataSource } from '@angular/material';
 import { InsertionCheckItem } from '@aaman/releaseorder/insertion-check-item';
-import { DialogService } from '@aaman/main/dialog.service';
 import { ReleaseOrderApiService } from '@aaman/releaseorder/release-order-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService, DialogService } from 'app/services';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '@aaman/releaseorder/release-order-search-params';
 

@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { AdvanceReceipt } from '@aaman/receipts/payment-receipt';
 import { ReceiptsApiService } from '@aaman/receipts/receipts-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
-import { StateApiService } from '@aaman/main/state-api.service';
+import { NotificationService, StateApiService } from 'app/services';
 
 import {
   Client,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Executive } from '../executive';
 import { ExecutiveApiService } from '../executive-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService } from 'app/services';
 import { environment } from 'environments/environment';
 
 @Component({

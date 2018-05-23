@@ -19,8 +19,7 @@
     "paths": {
       "@aaman/main/*": [
         "app/admin/*",
-        "app/components/*",
-        "app/services/*"
+        "app/components/*"
       ],
       "@aaman/accounts/*": ["app/accounts/*"],
       "@aaman/ratecard/*": ["app/rate-card/*"],

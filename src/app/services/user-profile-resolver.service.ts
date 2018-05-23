@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { UserProfile } from 'app/models';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class UserProfileResolver implements Resolve<UserProfile> {

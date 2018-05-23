@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from '@aaman/main/api.service';
+import { ApiService } from 'app/services';
 
 @Component({
   selector: 'app-phone-verify',

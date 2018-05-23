@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../client';
 import { ClientApiService } from '../client-api.service';
-import { NotificationService } from '@aaman/main/notification.service';
+import { NotificationService } from 'app/services';
 import { environment } from 'environments/environment.prod';
 
 @Component({
