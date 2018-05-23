@@ -27,8 +27,7 @@
       "@aaman/invoice/*": ["app/invoice/*"],
       "@aaman/ratecard/*": ["app/rate-card/*"],
       "@aaman/receipts/*": ["app/receipts/*"],
-      "@aaman/releaseorder/*": ["app/release-order/*"],
-      "@aaman/superadmin/*": ["app/super-admin/*"]
+      "@aaman/releaseorder/*": ["app/release-order/*"]
     }
   }
 }
