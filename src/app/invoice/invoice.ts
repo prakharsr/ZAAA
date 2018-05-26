@@ -7,6 +7,8 @@ class Amount {
 export class Invoice {
     id = "";
 
+    invoiceNO = "";
+
     date: Date;
     releaseOrderId = "";
 

@@ -15,6 +15,7 @@ import {
 } from '.';
 
 import { FirmResolver } from 'app/services';
+import { ReceiptListResolver } from 'app/receipts';
 
 const routes: Routes = [
   {
@@ -41,7 +42,22 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'clientreceipts', component: ClientReceiptsComponent },
+      {
+        path: 'clientreceipts',
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: ClientReceiptsComponent,
+            data: {
+              advance: false
+            },
+            resolve: {
+              resolved: ReceiptListResolver
+            }
+          }
+        ]
+      },
       { path: 'clientinvoicepayments', component: ClientInvoicePaymentsComponent },
       { path: 'executiveinvoicepayments', component: ExecutiveInvoicePaymentsComponent },
       { path: 'creditdebitnotes', component: CreditDebitNotesComponent },

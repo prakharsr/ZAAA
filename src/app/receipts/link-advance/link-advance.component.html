@@ -11,8 +11,9 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-            {{receipt.paymentType}}<br>
-            ₹ {{receipt.paymentAmount}}
+          Receipt: {{receipt.receiptNO}}<br>
+          {{receipt.paymentType}}<br>
+          ₹ {{receipt.paymentAmount}}
         </div>
         <div class="col-auto">
           <button class="btn btn-primary" (click)="link(receipt)">Link</button>

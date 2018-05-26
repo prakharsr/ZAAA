@@ -84,7 +84,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/receipts', receipt.id]">Dummy</a>
+          <a [routerLink]="['/receipts', receipt.id]">{{receipt.receiptNO}}</a>
         </div>
         <div class="col-auto">
           <mat-menu #receiptMenu="matMenu">

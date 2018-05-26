@@ -73,7 +73,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/invoices', invoice.id]">Dummy</a>
+          <a [routerLink]="['/invoices', invoice.id]">{{invoice.invoiceNO}}</a>
         </div>
         <div class="col-auto">
           <mat-menu #invoiceMenu="matMenu">

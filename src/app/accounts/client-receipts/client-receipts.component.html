@@ -7,4 +7,49 @@
 <br>
 
 <div class="container">
+
+  <br>
+
+  <div class="form-row">
+    <div class="col-md-auto mt-1 mr-3">
+      <p>Mark selected as:</p>
+    </div>
+    <div class="col-md">
+      <button (click)="mark(1)" class="btn btn-success">Accepted</button>
+      <button (click)="mark(2)" class="btn btn-danger">Rejected</button>
+    </div>
+  </div>
+
+  <br><br>
+
+  <p *ngIf="receipts.length == 0" class="text-muted">
+    No Receipts
+  </p>
+
+  <div class="card mb-3 mat-elevation-z2" *ngFor="let creceipt of receipts">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto">
+          <mat-checkbox [(ngModel)]="creceipt.checked"></mat-checkbox>
+        </div>
+        <div class="col">
+          Dummy
+        </div>
+        <div class="col">
+          <strong>Client:</strong> {{creceipt.receipt.clientName}}<br>
+          <strong>Media House:</strong> {{creceipt.receipt.publicationName}} - {{creceipt.receipt.publicationEdition}}<br>
+          <strong>Executive:</strong> {{creceipt.receipt.executiveName}} - {{creceipt.receipt.executiveOrg}}
+        </div>
+        <div class="col-auto">          
+          <span *ngIf="creceipt.receipt.status == 0" class="text-muted">Collected</span>
+          <span *ngIf="creceipt.receipt.status == 2" class="text-success">Accepted</span>
+          <span *ngIf="creceipt.receipt.status == 1" class="text-danger">Rejected</span>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
 </div>

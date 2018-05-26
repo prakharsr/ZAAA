@@ -1,6 +1,9 @@
 export class PaymentReceipt {
     invoiceID = "";
 
+    receiptNO = "";
+    status = 0;
+
     id = "";
 
     paymentType = "";
