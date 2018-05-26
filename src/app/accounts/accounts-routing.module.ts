@@ -5,14 +5,29 @@ import { AuthGuard } from 'app/guards';
 
 import {
   MediaHouseInvoiceComponent,
-  MediaHouseInvoiceListResolver
+  MediaHouseInvoiceListResolver,
+  AccountsHomeComponent,
+  ClientReceiptsComponent,
+  ClientInvoicePaymentsComponent,
+  ExecutiveInvoicePaymentsComponent,
+  CreditDebitNotesComponent,
+  AccountsGstComponent
 } from '.';
+
+import { FirmResolver } from 'app/services';
 
 const routes: Routes = [
   {
     path: 'accounts',
     canActivate: [AuthGuard],
     children: [
+      {
+        path: '',
+        component: AccountsHomeComponent,
+        resolve: {
+          firm: FirmResolver
+        }
+      },
       {
         path: 'mediahouseinvoice',
         children: [
@@ -25,7 +40,12 @@ const routes: Routes = [
             }
           }
         ]
-      }
+      },
+      { path: 'clientreceipts', component: ClientReceiptsComponent },
+      { path: 'clientinvoicepayments', component: ClientInvoicePaymentsComponent },
+      { path: 'executiveinvoicepayments', component: ExecutiveInvoicePaymentsComponent },
+      { path: 'creditdebitnotes', component: CreditDebitNotesComponent },
+      { path: 'gst', component: AccountsGstComponent }
     ]
   }
 ];

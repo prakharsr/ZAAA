@@ -6,7 +6,7 @@ import { AccountsApiService } from '../accounts-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { ReleaseOrderSearchParams } from 'app/release-order';
+import { ReleaseOrderSearchParams, Insertion } from 'app/release-order';
 
 import {
   MediaHouse,
@@ -17,6 +17,9 @@ import {
   ClientApiService
 } from 'app/directory';
 
+import { PageData } from 'app/models';
+import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
+
 @Component({
   selector: 'app-media-house-invoice',
   templateUrl: './media-house-invoice.component.html',
@@ -24,10 +27,14 @@ import {
 })
 export class MediaHouseInvoiceComponent implements OnInit {
 
-  res;
+  step = 0;
 
   page: number;
   pageCount: number;
+
+  list: MediaHouseInvoiceItem[] = [];
+
+  insertionCheckList: { insertion: Insertion, checked: boolean }[] = [];
 
   pastDays = 0;
   
@@ -47,7 +54,30 @@ export class MediaHouseInvoiceComponent implements OnInit {
     private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
-    // this.res = this.api.searchMediaHouseInvoice(1);
+    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams } }) => {
+      this.list = data.resolved.list.list;
+      this.page = data.resolved.list.page;
+      this.pageCount = data.resolved.list.pageCount;
+
+      let pub = new MediaHouse();
+      pub.pubName = data.resolved.search.mediaHouse;
+      pub.address.edition = data.resolved.search.edition;
+
+      this.mediaHouse = this.edition = pub;
+     
+      let cl = new Client();
+      cl.orgName = data.resolved.search.client;
+
+      this.client = cl;
+
+      let exe = new Executive();
+      exe.executiveName = data.resolved.search.executive;
+      exe.orgName = data.resolved.search.executiveOrg;
+
+      this.executive = this.executiveOrg = exe;
+
+      this.pastDays = data.resolved.search.past;
+    });
   }
 
   show() {
@@ -121,7 +151,6 @@ export class MediaHouseInvoiceComponent implements OnInit {
     return mediaHouse.pubName;
   }
 
-
   toDate(date: NgbDate) {
     return new Date(date.year, date.month - 1, date.day);
   }
@@ -153,6 +182,19 @@ export class MediaHouseInvoiceComponent implements OnInit {
   search(pageNo: number) {
     this.router.navigate(['/releaseorders/check/list/', pageNo], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
+    })
+  }
+
+  selectRO(i: number) {
+    ++this.step;
+
+    this.insertionCheckList = this.list[i].entries.map(entry => {
+      let ins: any = entry.insertions;
+
+      return {
+        insertion: ins,
+        checked: false
+      }
     })
   }
 }

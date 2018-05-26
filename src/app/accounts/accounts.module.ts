@@ -6,7 +6,14 @@ import { AccountsRoutingModule } from './accounts-routing.module';
 import {
   AccountsApiService,
   MediaHouseInvoiceComponent,
-  MediaHouseInvoiceDialogComponent
+  MediaHouseInvoiceDialogComponent,
+  MediaHouseInvoiceListResolver,
+  AccountsHomeComponent,
+  ClientReceiptsComponent,
+  ClientInvoicePaymentsComponent,
+  ExecutiveInvoicePaymentsComponent,
+  CreditDebitNotesComponent,
+  AccountsGstComponent
 } from '.';
 
 @NgModule({
@@ -17,9 +24,18 @@ import {
   ],
   declarations: [
     MediaHouseInvoiceComponent,
-    MediaHouseInvoiceDialogComponent
+    MediaHouseInvoiceDialogComponent,
+    AccountsHomeComponent,
+    ClientReceiptsComponent,
+    ClientInvoicePaymentsComponent,
+    ExecutiveInvoicePaymentsComponent,
+    CreditDebitNotesComponent,
+    AccountsGstComponent
   ],
   entryComponents: [MediaHouseInvoiceDialogComponent],
-  providers: [AccountsApiService]
+  providers: [
+    AccountsApiService,
+    MediaHouseInvoiceListResolver
+  ]
 })
 export class AccountsModule { }
