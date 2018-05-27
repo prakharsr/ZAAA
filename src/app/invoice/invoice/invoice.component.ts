@@ -126,30 +126,9 @@ export class InvoiceComponent implements OnInit {
     return this.availableInsertions.filter(insertion => insertion.checked).length;
   }
 
-  get toPay() {
-    let adCountPaid = (+this.releaseOrder.adTotal * +this.releaseOrder.adSchemePaid) / (+this.releaseOrder.adSchemePaid + +this.releaseOrder.adSchemeFree);
-
-    if (adCountPaid == this.releaseOrder.insertions.length) {
-      return this.insertionCount;
-    }
-
-    let marked = this.releaseOrder.insertions.filter(insertion => insertion.marked).length;  
-
-    if (marked >= adCountPaid) {
-      return 0;
-    }
-
-    let residue = marked + this.insertionCount - adCountPaid;
-
-    if (residue >= 0) {
-      return this.insertionCount - residue;
-    }
-    else return this.insertionCount;
-  }
-
   get grossAmount() {
-    let grossSingle = this.releaseOrder.adGrossAmount / this.releaseOrder.adSchemePaid;
-    return Math.ceil(grossSingle * this.toPay);
+    let grossSingle = this.releaseOrder.adGrossAmount / this.releaseOrder.insertions.length;
+    return Math.ceil(grossSingle * this.insertionCount);
   }
 
   get netAmount() {
