@@ -16,6 +16,7 @@ import {
 
 import { FirmResolver, FirmUsersResolver } from 'app/services';
 import { ReceiptListResolver } from 'app/receipts';
+import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -53,7 +54,7 @@ const routes: Routes = [
               advance: false
             },
             resolve: {
-              resolved: ReceiptListResolver,
+              resolved: ClientReceiptsListResolver,
               users: FirmUsersResolver
             }
           }

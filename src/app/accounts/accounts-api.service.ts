@@ -6,6 +6,7 @@ import { ApiService } from 'app/services';
 import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order';
 import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
+import { PaymentReceipt } from '../receipts';
 
 @Injectable()
 export class AccountsApiService {
@@ -32,5 +33,12 @@ export class AccountsApiService {
         return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
       })
     );
+  }
+
+  setReceiptStatus(receipt: PaymentReceipt, status: number) {
+    return this.api.post('/user/receipt/status', {
+      receiptID: receipt.id,
+      status: status
+    });
   }
 }

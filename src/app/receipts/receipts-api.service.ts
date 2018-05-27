@@ -7,6 +7,10 @@ import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
 import { Invoice } from 'app/invoice';
 
+export class ReceiptSearchParams extends ReleaseOrderSearchParams {
+  user?: string;
+}
+
 @Injectable()
 export class ReceiptsApiService {
 
@@ -34,7 +38,7 @@ export class ReceiptsApiService {
     return this.api.get('/user/receipt/' + id).map(data => data.success ? this.bodyToReceipt(data.receipt) : null);
   }
 
-  searchReceipts(page: number, params: ReleaseOrderSearchParams, advance = false) : Observable<PageData<PaymentReceipt>> {
+  searchReceipts(page: number, params: ReceiptSearchParams, advance = false) : Observable<PageData<PaymentReceipt>> {
     return this.api.post(advance ? '/user/receipt/advanced/search/' : '/user/receipt/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -42,7 +46,8 @@ export class ReceiptsApiService {
       clientName: params.client,
       executiveName: params.executive,
       executiveOrg: params.executiveOrg,
-      date: params.past
+      date: params.past,
+      user: params.user
     }).pipe(
       map(data => {
         let receipts : PaymentReceipt[] = [];

@@ -16,6 +16,8 @@ import {
   AccountsGstComponent
 } from '.';
 
+import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
+
 @NgModule({
   imports: [
     BaseModule,
@@ -35,7 +37,8 @@ import {
   entryComponents: [MediaHouseInvoiceDialogComponent],
   providers: [
     AccountsApiService,
-    MediaHouseInvoiceListResolver
+    MediaHouseInvoiceListResolver,
+    ClientReceiptsListResolver
   ]
 })
 export class AccountsModule { }
