@@ -236,36 +236,46 @@ export class ApiService {
     return this.get('/user/profile');
   }
 
-  getUserProfile() : Observable<UserProfile> {
-    let base = this.get('/user/profile');
+  private bodyToUser(data: any) {
+    let profile = new UserProfile();
 
-    let result = base.pipe(
+    profile.name = data.name;
+    profile.designation = data.designation;
+    profile.contact = data.phone;
+    profile.email = data.email;
+
+    if (data.photo) {
+      profile.photo = environment.uploadsBaseUrl + data.photo;
+    }
+
+    if (data.signature) {
+      profile.sign = environment.uploadsBaseUrl + data.signature;
+    }
+
+    profile.isAdmin = data.isAdmin;
+    profile.id = data._id;
+    
+    return profile;
+  }
+
+  getUserProfile() : Observable<UserProfile> {
+    return this.get('/user/profile').pipe(
+      map(data => data.success ? this.bodyToUser(data.user) : new UserProfile())
+    );
+  }
+
+  getFirmUsers() : Observable<UserProfile[]> {
+    return this.get('/firm/users').pipe(
       map(data => {
-        let profile = new UserProfile();
+        let result: UserProfile[] = [];
 
         if (data.success) {
-          profile.name = data.user.name;
-          profile.designation = data.user.designation;
-          profile.contact = data.user.phone;
-          profile.email = data.user.email;
-
-          if (data.user.photo) {
-            profile.photo = environment.uploadsBaseUrl + data.user.photo;
-          }
-
-          if (data.user.signature) {
-            profile.sign = environment.uploadsBaseUrl + data.user.signature;
-          }
-
-          profile.isAdmin = data.user.isAdmin;
-          profile.id = data.user._id;
+          data.users.forEach(element => result.push(this.bodyToUser(element)));
         }
 
-        return profile;
+        return result;
       })
     );
-
-    return result;
   }
 
   setUserProfile(userProfile: UserProfile) : Observable<any> {

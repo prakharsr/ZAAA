@@ -14,7 +14,7 @@ import {
   AccountsGstComponent
 } from '.';
 
-import { FirmResolver } from 'app/services';
+import { FirmResolver, FirmUsersResolver } from 'app/services';
 import { ReceiptListResolver } from 'app/receipts';
 
 const routes: Routes = [
@@ -53,7 +53,8 @@ const routes: Routes = [
               advance: false
             },
             resolve: {
-              resolved: ReceiptListResolver
+              resolved: ReceiptListResolver,
+              users: FirmUsersResolver
             }
           }
         ]

@@ -19,7 +19,8 @@ import {
   NotificationService,
   OptionsService,
   FirmResolver,
-  UserProfileResolver
+  UserProfileResolver,
+  FirmUsersResolver
 } from './services';
 
 import {
@@ -77,7 +78,8 @@ const validators = [
     NotificationService,
     FirmResolver,
     UserProfileResolver,
-    OptionsService
+    OptionsService,
+    FirmUsersResolver
   ],
   declarations: [
     MailingDetailsComponent,
