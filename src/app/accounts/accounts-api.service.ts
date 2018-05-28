@@ -8,6 +8,18 @@ import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
 
+export class PaymentsResponse {
+  publicationName = "";
+  publicationEdition = "";
+  clientName = "";
+  invoiceNO = "";
+  shadow = 0;
+  balance = 0;
+  totalBalance = 0;
+  executiveOrg = "";
+  executiveName = "";
+}
+
 @Injectable()
 export class AccountsApiService {
 
@@ -42,9 +54,35 @@ export class AccountsApiService {
     });
   }
 
-  executivePayments(page: number, executiveName: string, executiveOrg: string) {
-    return this.api.post('/user/invoice/executivePayments', {
-      page: page
-    });
+  private pipePayments(base: Observable<any>): Observable<PageData<PaymentsResponse>> {
+    return base.pipe(
+      map(data => {
+          let result: PaymentsResponse[] = [];
+
+          if (data.success) {
+            data.invoices.forEach((invoice: { entries: PaymentsResponse[] }) => {
+              invoice.entries.forEach(entry => result.push(entry));
+            });
+          }
+
+          return new PageData<PaymentsResponse>(result, data.perPage, data.page, data.pageCount);
+        }
+      )
+    );
+  }
+
+  executivePayments(page: number, executiveName: string, executiveOrg: string): Observable<PageData<PaymentsResponse>> {
+    return this.pipePayments(this.api.post('/user/invoice/executivePayments', {
+      page: page,
+      executiveName: executiveName,
+      executiveOrg: executiveOrg
+    }));
+  }
+
+  clientPayments(page: number, clientName: string): Observable<PageData<PaymentsResponse>> {
+    return this.pipePayments(this.api.post('/user/invoice/clientPayments', {
+      page: page,
+      executiveName: clientName
+    }));
   }
 }

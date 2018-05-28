@@ -44,6 +44,11 @@ export class ClientReceiptsComponent implements OnInit {
       this.users = data.users;
       this.users.unshift(this.allUsers);
 
+      let cl = new Client();
+      cl.orgName = data.resolved.search.client;
+
+      this.client = cl;
+
       if (data.resolved.search.user) {
         this.selectedUser = this.users.find(user => user.id == data.resolved.search.user);
       }
