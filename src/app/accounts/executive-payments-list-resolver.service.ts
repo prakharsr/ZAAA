@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { PageData } from 'app/models';
-import { PaymentsResponse, AccountsApiService } from '.';
+import { AccountsApiService, PaymentTotalResponse } from '.';
 
 class Result {
-  list: PageData<PaymentsResponse>;
+  total: PaymentTotalResponse;
   executive: string;
   executiveOrg: string;
 }
@@ -25,7 +25,7 @@ export class ExecutivePaymentsListResolver implements Resolve<Result> {
     return this.api.executivePayments(page, executive, executiveOrg).map(releaseorder => {
       if (releaseorder) {
         return {
-          list: releaseorder,
+          total: releaseorder,
           executive: executive,
           executiveOrg: executiveOrg
         }

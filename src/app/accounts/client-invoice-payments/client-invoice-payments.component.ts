@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PaymentsResponse, AccountsApiService } from '../accounts-api.service';
+import { PaymentsResponse, AccountsApiService, PaymentTotalResponse } from '../accounts-api.service';
 import { ClientApiService, Client } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageData } from 'app/models';
@@ -16,6 +16,10 @@ export class ClientInvoicePaymentsComponent implements OnInit {
   page: number;
   pageCount: number;
 
+  shadow = 0;
+  balance = 0;
+  totalBalance = 0;
+
   client;
 
   list: PaymentsResponse[] = [];
@@ -26,16 +30,20 @@ export class ClientInvoicePaymentsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<PaymentsResponse>, client: string }}) => {
-      this.list = data.resolved.list.list;
+    this.route.data.subscribe((data: { resolved: { total: PaymentTotalResponse, client: string }}) => {
+      this.list = data.resolved.total.list.list;
 
       let cl = new Client();
       cl.orgName = data.resolved.client;
 
       this.client = cl;
 
-      this.page = data.resolved.list.page;
-      this.pageCount = data.resolved.list.pageCount;
+      this.shadow = data.resolved.total.shadow;
+      this.balance = data.resolved.total.balance;
+      this.totalBalance = data.resolved.total.totalBalance;
+
+      this.page = data.resolved.total.list.page;
+      this.pageCount = data.resolved.total.list.pageCount;
     });
   }
 

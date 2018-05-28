@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/observable';
-import { AccountsApiService, PaymentsResponse } from '../accounts-api.service';
+import { AccountsApiService, PaymentsResponse, PaymentTotalResponse } from '../accounts-api.service';
 import { ExecutiveApiService, Executive } from 'app/directory';
 import { of } from 'rxjs/observable/of';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,10 @@ export class ExecutiveInvoicePaymentsComponent implements OnInit {
   page;
   pageCount;
 
+  shadow = 0;
+  balance = 0;
+  totalBalance = 0;
+
   executive;
   executiveOrg;
 
@@ -27,8 +31,8 @@ export class ExecutiveInvoicePaymentsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<PaymentsResponse>, executive: string, executiveOrg: string }}) => {
-      this.list = data.resolved.list.list;
+    this.route.data.subscribe((data: { resolved: { total: PaymentTotalResponse, executive: string, executiveOrg: string }}) => {
+      this.list = data.resolved.total.list.list;
 
       let exe = new Executive();
       exe.executiveName = data.resolved.executive;
@@ -36,8 +40,12 @@ export class ExecutiveInvoicePaymentsComponent implements OnInit {
 
       this.executive = this.executiveOrg = exe;
 
-      this.page = data.resolved.list.page;
-      this.pageCount = data.resolved.list.pageCount;
+      this.shadow = data.resolved.total.shadow;
+      this.balance = data.resolved.total.balance;
+      this.totalBalance = data.resolved.total.totalBalance;
+
+      this.page = data.resolved.total.list.page;
+      this.pageCount = data.resolved.total.list.pageCount;
     });
   }
 

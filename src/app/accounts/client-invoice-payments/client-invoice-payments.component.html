@@ -48,5 +48,14 @@
     <br>
   
     <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
+
+    <div class="card mt-5">
+      <div class="card-header">Total</div>
+      <div class="card-body">
+        <strong>Balance:</strong> ₹ {{balance}}<br>
+        <strong>Shadow:</strong> ₹ {{shadow}}<br>
+        <strong>Total Balance:</strong> ₹ {{totalBalance}}
+      </div>
+    </div>
   </div>
   

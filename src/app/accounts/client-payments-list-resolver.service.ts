@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { PageData } from 'app/models';
-import { PaymentsResponse, AccountsApiService } from '.';
+import { PaymentTotalResponse, AccountsApiService } from '.';
 
 class Result {
-  list: PageData<PaymentsResponse>;
+  total: PaymentTotalResponse;
   client: string;
 }
 
@@ -23,7 +23,7 @@ export class ClientPaymentsListResolver implements Resolve<Result> {
     return this.api.clientPayments(page, client).map(releaseorder => {
       if (releaseorder) {
         return {
-          list: releaseorder,
+          total: releaseorder,
           client: client
         }
       }

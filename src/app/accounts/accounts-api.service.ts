@@ -20,6 +20,14 @@ export class PaymentsResponse {
   executiveName = "";
 }
 
+export class PaymentTotalResponse {
+  shadow = 0;
+  balance = 0;
+  totalBalance = 0;
+
+  list: PageData<PaymentsResponse>;
+}
+
 @Injectable()
 export class AccountsApiService {
 
@@ -54,24 +62,31 @@ export class AccountsApiService {
     });
   }
 
-  private pipePayments(base: Observable<any>): Observable<PageData<PaymentsResponse>> {
+  private pipePayments(base: Observable<any>): Observable<PaymentTotalResponse> {
     return base.pipe(
       map(data => {
-          let result: PaymentsResponse[] = [];
+          let result = new PaymentTotalResponse();
+          let arr: PaymentsResponse[] = [];
 
           if (data.success) {
-            data.invoices.forEach((invoice: { entries: PaymentsResponse[] }) => {
-              invoice.entries.forEach(entry => result.push(entry));
+            data.invoices.forEach((invoice: { balance: number, shadow: number, totalBalance: number, entries: PaymentsResponse[] }) => {
+              invoice.entries.forEach(entry => arr.push(entry));
+
+              result.shadow += invoice.shadow;
+              result.balance += invoice.balance;
+              result.totalBalance += invoice.totalBalance;
             });
           }
 
-          return new PageData<PaymentsResponse>(result, data.perPage, data.page, data.pageCount);
+          result.list = new PageData<PaymentsResponse>(arr, data.perPage, data.page, data.pageCount);
+
+          return result;
         }
       )
     );
   }
 
-  executivePayments(page: number, executiveName: string, executiveOrg: string): Observable<PageData<PaymentsResponse>> {
+  executivePayments(page: number, executiveName: string, executiveOrg: string): Observable<PaymentTotalResponse> {
     return this.pipePayments(this.api.post('/user/invoice/executivePayments', {
       page: page,
       executiveName: executiveName,
@@ -79,7 +94,7 @@ export class AccountsApiService {
     }));
   }
 
-  clientPayments(page: number, clientName: string): Observable<PageData<PaymentsResponse>> {
+  clientPayments(page: number, clientName: string): Observable<PaymentTotalResponse> {
     return this.pipePayments(this.api.post('/user/invoice/clientPayments', {
       page: page,
       executiveName: clientName
