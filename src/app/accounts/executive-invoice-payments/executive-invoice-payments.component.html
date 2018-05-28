@@ -33,7 +33,25 @@
 
   <br>
 
-  <pre>{{res | async | json}}</pre>
+  <div class="card mb-3 mat-elevation-z3" *ngFor="let item of list">
+    <div class="card-body">
+      <h4 style="font-weight: lighter">{{item.invoiceNO}}</h4>
+      <br>
+
+      <div class="row">
+        <div class="col-md">
+          <strong>Client:</strong> {{item.clientName}}<br>
+          <strong>Media House:</strong> {{item.publicationName}} - {{item.publicationEdition}}<br>
+          <strong>Executive:</strong> {{item.executiveName}} - {{item.executiveOrg}}<br><br>
+        </div>
+        <div class="col-md">
+          <strong>Balance:</strong> ₹ {{item.balance}}<br>
+          <strong>Shadow:</strong> ₹ {{item.shadow}}<br>
+          <strong>Total Balance:</strong> ₹ {{item.totalBalance}}
+        </div>
+      </div>
+    </div>
+  </div>
     
   <br>
 

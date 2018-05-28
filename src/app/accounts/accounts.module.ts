@@ -17,6 +17,8 @@ import {
 } from '.';
 
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
+import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
+import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import { ClientReceiptsListResolver } from './client-receipts-list-resolver.serv
   providers: [
     AccountsApiService,
     MediaHouseInvoiceListResolver,
-    ClientReceiptsListResolver
+    ClientReceiptsListResolver,
+    ClientPaymentsListResolver,
+    ExecutivePaymentsListResolver
   ]
 })
 export class AccountsModule { }

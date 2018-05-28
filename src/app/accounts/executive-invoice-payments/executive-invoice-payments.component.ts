@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/observable';
-import { AccountsApiService } from '../accounts-api.service';
+import { AccountsApiService, PaymentsResponse } from '../accounts-api.service';
 import { ExecutiveApiService, Executive } from 'app/directory';
 import { of } from 'rxjs/observable/of';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PageData } from 'app/models';
 
 @Component({
   selector: 'app-executive-invoice-payments',
@@ -11,22 +13,42 @@ import { of } from 'rxjs/observable/of';
 })
 export class ExecutiveInvoicePaymentsComponent implements OnInit {
 
-  res;
-
   page;
   pageCount;
 
   executive;
   executiveOrg;
 
+  list: PaymentsResponse[] = [];
+
   constructor(private api: AccountsApiService,
-    private executiveApi: ExecutiveApiService) { }
+    private executiveApi: ExecutiveApiService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    this.res = this.api.executivePayments(1, null, null);
+    this.route.data.subscribe((data: { resolved: { list: PageData<PaymentsResponse>, executive: string, executiveOrg: string }}) => {
+      this.list = data.resolved.list.list;
+
+      let exe = new Executive();
+      exe.executiveName = data.resolved.executive;
+      exe.orgName = data.resolved.executiveOrg;
+
+      this.executive = this.executiveOrg = exe;
+
+      this.page = data.resolved.list.page;
+      this.pageCount = data.resolved.list.pageCount;
+    });
   }
 
-  search(page: number) { }
+  search(pageNo: number) {
+    this.router.navigate(['/accounts/executiveinvoicepayments/list/', pageNo], {
+      queryParams: {
+        executive: this.executiveName,
+        executiveOrg: this.exeOrg
+      }
+    });
+  }
 
   searchExecutive = (text: Observable<string>) => {
     return text.debounceTime(300)
@@ -58,4 +80,11 @@ export class ExecutiveInvoicePaymentsComponent implements OnInit {
   
   executiveOrgFormatter = (executive: Executive) => executive.orgName;
 
+  private get exeOrg() {
+    if (this.executiveOrg instanceof String) {
+      return this.executiveOrg;
+    }
+
+    return this.executiveOrg ? this.executiveOrg.orgName : null;
+  }
 }

@@ -17,6 +17,8 @@ import {
 import { FirmResolver, FirmUsersResolver } from 'app/services';
 import { ReceiptListResolver } from 'app/receipts';
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
+import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
+import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -60,8 +62,32 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'clientinvoicepayments', component: ClientInvoicePaymentsComponent },
-      { path: 'executiveinvoicepayments', component: ExecutiveInvoicePaymentsComponent },
+      {
+        path: 'clientinvoicepayments',
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: ClientInvoicePaymentsComponent,
+            resolve: {
+              resolved: ClientPaymentsListResolver
+            }
+          }
+        ]
+      },
+      {
+        path: 'executiveinvoicepayments',
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: ExecutiveInvoicePaymentsComponent,
+            resolve: {
+              resolved: ExecutivePaymentsListResolver
+            }
+          }
+        ]
+      },
       { path: 'creditdebitnotes', component: CreditDebitNotesComponent },
       { path: 'gst', component: AccountsGstComponent }
     ]
