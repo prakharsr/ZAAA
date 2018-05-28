@@ -35,8 +35,27 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'generated',
+        data: {
+          generated: true,
+        },
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: ReleaseOrderListComponent,        
+            resolve: {
+              resolved: ReleaseOrderListResolver
+            }
+          }
+        ]
+      },
+      {
         path: 'list/:page',
         component: ReleaseOrderListComponent,
+        data: {
+          generated: false
+        },
         resolve: {
           resolved: ReleaseOrderListResolver
         }

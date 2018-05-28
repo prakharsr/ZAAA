@@ -64,6 +64,11 @@
     </div>
   </div>
 
+  <nav mat-tab-nav-bar class="x-overflow">
+    <a mat-tab-link routerLink="/releaseorders" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Not Generated</a>
+    <a mat-tab-link routerLink="/releaseorders/generated" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Generated</a>
+  </nav>
+
   <button class="fab" routerLink="/releaseorders/new">
     <mat-icon>add</mat-icon>
   </button>
@@ -73,30 +78,18 @@
     No Release Orders
   </p>
 
-  <div class="mat-elevation-z3">
-    <mat-table #table [dataSource]="dataSource">
-      <ng-container matColumnDef="data">
-        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <br>
-          <div class="row">
-            <div class="col">
-              <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
-            </div>
-            <div class="col-auto text-muted" *ngIf="element.generated">
-              GENERATED
-            </div>
-          </div>
+  <div class="mat-elevation-z3 card" *ngFor="let element of releaseOrders">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+
           <br><br>
-          <span class="text-muted">Publication:</span> {{element.publicationName}}<br>
+          <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
           <br><br>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        </div>
+        <div class="col-auto">
           <mat-menu #releaseOrderMenu="matMenu">
             <button mat-menu-item (click)="gen(element)">
               <mat-icon>save_alt</mat-icon> Download
@@ -121,11 +114,9 @@
           <button mat-icon-button [matMenuTriggerFor]="releaseOrderMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
-        </mat-cell>
-      </ng-container>
-
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        </div>
+      </div>
+    </div>
   </div>
 
   <br>

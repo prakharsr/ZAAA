@@ -28,9 +28,6 @@ export class ReleaseOrderListComponent implements OnInit {
 
   releaseOrders: ReleaseOrder[] = [];
 
-  displayedColumns = ['data', 'action'];
-  dataSource = new MatTableDataSource();
-
   pageCount: number;
   page: number;
 
@@ -79,8 +76,6 @@ export class ReleaseOrderListComponent implements OnInit {
 
   private init(data: PageData<ReleaseOrder>) {
     this.releaseOrders = data.list;
-
-    this.dataSource.data = this.releaseOrders;
 
     this.pageCount = data.pageCount;
     this.page = data.page;
@@ -171,7 +166,7 @@ export class ReleaseOrderListComponent implements OnInit {
       this.api.deleteReleaseOrder(releaseOrder).subscribe(
         data => {
           if (data.success) {
-            this.dataSource.data = this.releaseOrders = this.releaseOrders.filter(c => c.id !== releaseOrder.id);
+            this.releaseOrders = this.releaseOrders.filter(c => c.id !== releaseOrder.id);
           }
           else {
             console.log(data);

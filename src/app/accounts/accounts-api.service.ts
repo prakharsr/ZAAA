@@ -41,4 +41,10 @@ export class AccountsApiService {
       status: status
     });
   }
+
+  executivePayments(page: number, executiveName: string, executiveOrg: string) {
+    return this.api.post('/user/invoice/executivePayments', {
+      page: page
+    });
+  }
 }

@@ -27,7 +27,7 @@ export class ReleaseOrderListResolver implements Resolve<Result> {
       route.queryParamMap.get('executiveOrg'),
       +route.queryParamMap.get('past'));
 
-    return this.api.searchReleaseOrders(page, searchParams).map(releaseorder => {
+    return this.api.searchReleaseOrders(page, searchParams, route.data.generated).map(releaseorder => {
       if (releaseorder) {
         return {
           list: releaseorder,
