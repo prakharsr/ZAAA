@@ -15,7 +15,7 @@ body {
 }
 
 .login-form {
-	width: 500px;
+	width: fit-content;
 	height: 400px;
 	background: -webkit-linear-gradient(-45deg, #9575cd,#9575cd, #ec407a);
 	border-radius: 20px;
