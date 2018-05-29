@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-info">
+<nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl != this.expectedUrl">
   <div class="container">
-      <a class="navbar-brand" routerLink="/">AAMan</a>
+      <img src="assets/logo.jpg" width="50" height="50">&nbsp;&nbsp;&nbsp;
+      <a class="navbar-brand">AAMan</a>
       <button class="navbar-toggler" (click)="toggleNavbar()" type="button">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -8,11 +9,14 @@
       <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
         <ul class="navbar-nav mr-auto" *ngIf="api.isLoggedIn">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/dashboard">Dashboard</a>
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" ></a>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
         <ul class="navbar-nav" *ngIf="api.isLoggedIn">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/profile">Profile</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/" (click)="api.logout();collapseNavbar()">Logout</a>
             </li>
@@ -28,3 +32,51 @@
       </div>
   </div>
 </nav>
+
+<mat-toolbar *ngIf="api.isLoggedIn">
+    <div class="container">
+
+        <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
+    
+        <mat-menu #romenu="matMenu">
+            <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
+            <button mat-menu-item routerLink="/releaseorders">Non-Generated Release Orders</button>
+            <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
+        </mat-menu> 
+        
+        <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
+    
+        <mat-menu #invmenu="matMenu">
+            <button mat-menu-item routerLink="/invoices">View Invoices</button>
+        </mat-menu>
+        
+        <button mat-button [matMenuTriggerFor]="rcmenu">Payment Receipts</button>
+    
+        <mat-menu #rcmenu="matMenu">
+            <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
+            <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
+            <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
+        </mat-menu> 
+    
+        <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
+    
+        <mat-menu #dirmenu="matMenu">
+            <button mat-menu-item routerLink="/dir/clients">Clients</button>
+            <button mat-menu-item routerLink="/dir/executives">Executives</button>
+            <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
+        </mat-menu> 
+    
+        <button mat-button [matMenuTriggerFor]="acmenu">Accounts</button>
+    
+        <mat-menu #acmenu="matMenu">
+            <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
+            <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
+            <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
+            <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
+            <button mat-menu-item routerLink="/accounts/creditdebitnotes">Credit/ Debit Notes</button>
+            <button mat-menu-item routerLink="/accounts/gst">GST</button>
+        </mat-menu> 
+    
+                
+    </div>
+</mat-toolbar>

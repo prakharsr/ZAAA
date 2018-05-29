@@ -1,45 +1,76 @@
-<div class="jumbotron jumbotron-fluid">
+<nav class="navbar navbar-expand-sm navbar-dark bg-info">
   <div class="container">
-    <h1 class="display-4">Sign Up</h1>
-    <p class="lead">For Advertsing Agency Administrators</p>
+    <div class="col">
+        <img src="assets/logo.jpg" width="50" height="50">
+        <a class="navbar-brand">AAMan</a>
+    </div>
+      
+      <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
+        <table class="tablewrapper">
+          <tr>
+            <td class="row1">Email or Phone</td>
+            <td class="row1">Password</td>
+          </tr>
+          <tr>
+            <td>
+                <input type="text" class="form-control" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+              </td>
+            <td>
+                <input type="password" class="form-control" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+              </td>
+            <td>
+              <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
+            </td>
+          </tr>
+          <tr>
+              <td class="row2 h"><a class="forgot" routerLink="/forgotPassword">Forgot your password?</a></td>
+        </table>
+      </form>        
+    </div>
+</nav>
+
+<div id="contentwrapper">
+  <div id="content">  
+    
+    <div id="rightbod">
+      <div class="signup bolder">Sign Up</div>
+      <form (ngSubmit)="submit()" #signUpForm="ngForm">
+
+      <div class="formbox">
+        <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+        <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+          <div *ngIf="nameField.errors.required">
+            Name is required.
+          </div>
+          <br>
+        </div>
+      </div>
+
+      <div class="formbox">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
+        <small class="form-text text-muted">
+          <br>An auto-generated password will be sent to this Email.<br>
+        </small>
+      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+        <div *ngIf="emailField.errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="!emailField.errors.required && emailField.errors.email">
+          Invalid Email.
+        </div>
+        <br>
+      </div>
+      </div>
+      <p>By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
+      <p>Click to view our <a routerLink="">Subscription plans</a>.</p>
+          <br>
+          <p>Already have an account, <a routerLink="/login">Login</a>.</p>
+          <div class="formbox">
+            <button type="submit" class="btn btn-success" [disabled]="!signUpForm.form.valid">Sign Up</button>
+          </div>
+      </form>
+    </div>
   </div>
 </div>
-
-<div class="container">
-  <form (ngSubmit)="submit()" #signUpForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
-      <mat-error *ngIf="nameField.errors && nameField.errors.required">
-        Name is required.
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
-      <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
-      <mat-error *ngIf="emailField.errors && emailField.errors.required">
-        Email is required.
-      </mat-error>
-      <mat-error *ngIf="emailField.errors && emailField.errors.email">
-        Invalid Email.
-      </mat-error>
-    </mat-form-field>
-
-    <br><br>
-
-    <mat-checkbox class="my-2" name="acceptTnC" [(ngModel)]="acceptTnC" required #acceptTnCField="ngModel">Accept Terms and Conditions</mat-checkbox>
-
-    <div *ngIf="acceptTnCField.invalid && (acceptTnCField.dirty || acceptTnCField.touched)" class="text-danger">
-      <div *ngIf="acceptTnCField.errors.required">
-        Accept Terms and Conditions to continue.
-      </div>
-    </div>
-
-    <br><br>
-
-    <button type="submit" class="btn btn-success" [disabled]="!signUpForm.form.valid">Sign Up</button>
-  </form>
-
-  <br>
-  <p>Already have an account, <a routerLink="/login">Login</a>.</p>
-</div>
+      
+      

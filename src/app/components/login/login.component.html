@@ -4,31 +4,24 @@
   </div>
 </div>
 
-<div class="container">
-  <form (ngSubmit)="submit()" #loginForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Email Address or Phone" name="emailPhone" [(ngModel)]="emailOrPhone" type='text' required #emailOrPhoneField="ngModel">
-      <mat-error *ngIf="emailOrPhoneField.errors && emailOrPhoneField.errors.required">
+<form (ngSubmit)="submit()" class="login"  #loginForm="ngForm">
+    <h1>AAMan</h1>
+    <input type="text" class="login-input" id="emailPhone" placeholder="Enter email or phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+    <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
+      <div *ngIf="emailOrPhoneField.errors.required">
         Email or Phone is required.
-      </mat-error>
-    </mat-form-field>
-
-    <div class="form-group">
-      <p class="float-right"><a tabindex="-1" routerLink="/forgotPassword">Forgot Password</a></p>
+      </div>
+      <br>
     </div>
-
-    <mat-form-field>
-      <input matInput placeholder="Password" name="password" [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required #passwordField="ngModel">
-      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-      <mat-error *ngIf="passwordField.errors && passwordField.errors.required">
-        Password is required.
-      </mat-error>
-    </mat-form-field>
-
-    <br><br>
-    <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-  </form>
-
-  <br>
-  <p>Don't have an account, create <a routerLink="/register">one</a>.</p>
-</div>
+      <input type="password" class="login-input" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+      <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+        <div *ngIf="passwordField.errors.required">
+          Password is required.
+        </div>
+        <br>
+      </div>
+    <button class="login-submit" [disabled]="!loginForm.form.valid">Login</button>
+    <p class="login-help"><a routerLink="/forgotPassword">Forgot password?</a></p>
+    <br>
+    <p class="login-help">Don't have an account, create <a routerLink="/register">one</a>.</p>
+ </form>
