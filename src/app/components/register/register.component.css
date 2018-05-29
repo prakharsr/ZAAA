@@ -9,6 +9,7 @@
     width:fit-content;
     padding-top:20px;
     padding-right: 30px;
+
   }
   
   #leftbod {
@@ -158,5 +159,5 @@
   }
 
   .forgot {
-      color: #bdc7d8;
+      color: white;
   }
