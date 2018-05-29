@@ -6,8 +6,9 @@
   
   #content {
     margin: 0 auto;
-    width:980px;
+    width:fit-content;
     padding-top:20px;
+    padding-right: 30px;
   }
   
   #leftbod {
@@ -15,6 +16,13 @@
     display:inline-block;
   }
   
+  input.ng-invalid.form-control, select.ng-invalid {
+    border-left: none;
+  }
+
+  input.ng-valid.form-control, select.ng-valid {
+    border-left: none;
+  }
   
   .leftbar {
     
