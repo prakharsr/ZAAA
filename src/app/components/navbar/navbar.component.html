@@ -20,6 +20,12 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/" (click)="api.logout();collapseNavbar()">Logout</a>
             </li>
+            <li class="nav-item">
+                <button mat-icon-button class="nav-link" routerLink="" (click)="collapseNavbar()" >
+                    <mat-icon>settings</mat-icon>
+                </button>                
+            </li>
+            
         </ul>
         <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
             <li class="nav-item">
@@ -27,6 +33,11 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <button mat-icon-button class="nav-link" routerLink="" (click)="collapseNavbar()" >
+                    <mat-icon>settings</mat-icon>
+                </button>                
             </li>
         </ul>
       </div>
