@@ -7,6 +7,7 @@ import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order'
 import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
+import { CreditDebitNote } from './credit-debit-note';
 
 export class PaymentsResponse {
   publicationName = "";
@@ -99,5 +100,13 @@ export class AccountsApiService {
       page: page,
       executiveName: clientName
     }));
+  }
+
+  createMediaHouseNote(note: CreditDebitNote) {
+    return this.api.post('/user/notes/mediahouse', note);
+  }
+
+  createClientNote(note: CreditDebitNote) {
+    return this.api.post('/user/notes/client', note);
   }
 }

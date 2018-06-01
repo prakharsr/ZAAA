@@ -1,3 +1,24 @@
-<p>
-  credit-debit-notes works!
-</p>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Credit / Debit Notes</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <button class="fab" routerLink="/accounts/notes/mediahouse/new" *ngIf="mediaHouseNote">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button class="fab" routerLink="/accounts/notes/client/new" *ngIf="clientNote">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <nav mat-tab-nav-bar class="x-overflow">
+    <a mat-tab-link routerLink="/accounts/notes/mediahouse" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Media House</a>
+    <a mat-tab-link routerLink="/accounts/notes/client" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Client</a>
+  </nav>
+
+  <br>
+</div>

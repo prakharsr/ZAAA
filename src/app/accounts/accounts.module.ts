@@ -19,6 +19,7 @@ import {
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
 import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
+import { CreateNoteComponent } from './create-note/create-note.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ExecutivePaymentsListResolver } from './executive-payments-list-resolve
     ClientInvoicePaymentsComponent,
     ExecutiveInvoicePaymentsComponent,
     CreditDebitNotesComponent,
-    AccountsGstComponent
+    AccountsGstComponent,
+    CreateNoteComponent
   ],
   entryComponents: [MediaHouseInvoiceDialogComponent],
   providers: [

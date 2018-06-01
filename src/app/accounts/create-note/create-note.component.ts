@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { CreditDebitNote } from '../credit-debit-note';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-credit-debit-notes',
-  templateUrl: './credit-debit-notes.component.html',
-  styleUrls: ['./credit-debit-notes.component.css']
+  selector: 'app-create-note',
+  templateUrl: './create-note.component.html',
+  styleUrls: ['./create-note.component.css']
 })
-export class CreditDebitNotesComponent implements OnInit {
+export class CreateNoteComponent implements OnInit {
 
   mediaHouseNote = false;
   clientNote = false;
+
+  note = new CreditDebitNote();
 
   constructor(private route: ActivatedRoute) { }
 
@@ -19,5 +22,13 @@ export class CreditDebitNotesComponent implements OnInit {
       this.clientNote = data.clientNote;
     });
   }
+
+  goBack() { }
+
+  cancel() {
+    this.goBack();
+  }
+
+  submit() { }
 
 }
