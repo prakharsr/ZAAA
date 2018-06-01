@@ -4,7 +4,11 @@ export class CreditDebitNote {
 
     clientName = "";
 
+    // Used with Client
     invoiceNO = "";
+
+    // Used with Publication
+    releaseOrderNO = "";
     
     amount = 0;
     remark = "";

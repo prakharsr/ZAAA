@@ -6,5 +6,64 @@
 
 <br>
 
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
 <div class="container">
+  <form (ngSubmit)="submit()" #noteForm="ngForm">
+    <ng-container *ngIf="clientNote">
+      <div class="form-group">
+        <input type="text" class="form-control mt-3" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+      </div>
+
+      <div class="form-group">
+        <label>Invoice No</label>
+        <input type="number" class="form-control" id="invoiceNo" placeholder="Enter Invoice No" [(ngModel)]="note.invoiceNO" name="invoiceNo" required #invoiceNoField="ngModel">
+      </div>
+
+      <div *ngIf="invoiceNoField.invalid && (invoiceNoField.dirty || invoiceNoField.touched)" class="text-danger">
+        <div *ngIf="invoiceNoField.errors.required">
+          Invoice No is empty or invalid.
+        </div>
+        <br>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="mediaHouseNote">
+      <div class="form-group">
+        <label>Release Order No</label>
+        <input type="number" class="form-control" id="releaseOrderNo" placeholder="Enter Release Order No" [(ngModel)]="note.releaseOrderNO" name="releaseOrderNo" required #releaseOrderNoField="ngModel">
+      </div>
+
+      <div *ngIf="releaseOrderNoField.invalid && (releaseOrderNoField.dirty || releaseOrderNoField.touched)" class="text-danger">
+        <div *ngIf="releaseOrderNoField.errors.required">
+          Release Order No is empty or invalid.
+        </div>
+        <br>
+      </div>
+    </ng-container>
+
+    <div class="form-group">
+      <label>Amount</label>
+      <input type="number" class="form-control" id="amount" placeholder="Enter Amount" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
+    </div>
+
+    <div *ngIf="amountField.invalid && (amountField.dirty || amountField.touched)" class="text-danger">
+      <div *ngIf="amountField.errors.required">
+        Amount is empty or invalid.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label for="remark">Remark</label>
+      <input type="text" class="form-control" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="note.remark" #remarkField="ngModel">
+    </div>
+
+    <br><br>
+
+    <button class="btn btn-success" type="submit" [disabled]="!inoteForm.form.valid">Submit</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+  </form>
 </div>
