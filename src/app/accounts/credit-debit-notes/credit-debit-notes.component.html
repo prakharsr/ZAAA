@@ -6,6 +6,18 @@
 
 <br>
 
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
 <div class="container">
   <button class="fab" routerLink="/accounts/notes/mediahouse/new" *ngIf="mediaHouseNote">
     <mat-icon>add</mat-icon>
@@ -25,7 +37,7 @@
   <div class="form-row">
     <ng-container *ngIf="clientNote">
       <div class="form-group col">
-        <input type="text" class="form-control mt-3" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+        <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
       </div>
     </ng-container>
 

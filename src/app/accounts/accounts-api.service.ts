@@ -115,6 +115,8 @@ export class AccountsApiService {
       map(data => {
         let list: CreditDebitNote[] = [];
 
+        console.log(data);
+
         if (data.success) {
           data.note.forEach(element => {
             let item = new CreditDebitNote();

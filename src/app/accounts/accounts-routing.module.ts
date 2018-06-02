@@ -40,6 +40,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: MediaHouseInvoiceComponent,
             resolve: {
               resolved: MediaHouseInvoiceListResolver
@@ -53,6 +54,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ClientReceiptsComponent,
             data: {
               advance: false
@@ -70,6 +72,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ClientInvoicePaymentsComponent,
             resolve: {
               resolved: ClientPaymentsListResolver
@@ -83,6 +86,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ExecutiveInvoicePaymentsComponent,
             resolve: {
               resolved: ExecutivePaymentsListResolver
@@ -100,8 +104,10 @@ const routes: Routes = [
               mediaHouseNote: true
             },
             children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
               {
-                path: '',
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
                 component: CreditDebitNotesComponent,
                 resolve: {
                   resolved: NotesListResolver
@@ -116,8 +122,10 @@ const routes: Routes = [
               clientNote: true
             },
             children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
               {
-                path: '',
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
                 component: CreditDebitNotesComponent,
                 resolve: {
                   resolved: NotesListResolver
