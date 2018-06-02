@@ -79,7 +79,7 @@
           <strong>Amount:</strong> ₹ {{note.amount}}<br>
           <strong>Remark:</strong> {{note.remark}}
         </div>
-        <div class="col-auto">
+        <div class="col-auto" *ngIf="clientNote">
           <mat-menu #notesMenu="matMenu">
             <button mat-menu-item (click)="gen(note)">
               <mat-icon>save_alt</mat-icon> Download
