@@ -100,8 +100,9 @@ const routes: Routes = [
               mediaHouseNote: true
             },
             children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
               {
-                path: '',
+                path: 'list/:page',
                 component: CreditDebitNotesComponent,
                 resolve: {
                   resolved: NotesListResolver
@@ -116,8 +117,9 @@ const routes: Routes = [
               clientNote: true
             },
             children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
               {
-                path: '',
+                path: 'list/:page',
                 component: CreditDebitNotesComponent,
                 resolve: {
                   resolved: NotesListResolver
