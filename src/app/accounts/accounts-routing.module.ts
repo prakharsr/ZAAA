@@ -20,6 +20,7 @@ import { ClientReceiptsListResolver } from './client-receipts-list-resolver.serv
 import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
 import { CreateNoteComponent } from './create-note/create-note.component';
+import { NotesListResolver } from './notes-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -99,7 +100,13 @@ const routes: Routes = [
               mediaHouseNote: true
             },
             children: [
-              { path: '', component: CreditDebitNotesComponent },
+              {
+                path: '',
+                component: CreditDebitNotesComponent,
+                resolve: {
+                  resolved: NotesListResolver
+                }
+              },
               { path: 'new', component: CreateNoteComponent }
             ]
           },
@@ -109,7 +116,13 @@ const routes: Routes = [
               clientNote: true
             },
             children: [
-              { path: '', component: CreditDebitNotesComponent },
+              {
+                path: '',
+                component: CreditDebitNotesComponent,
+                resolve: {
+                  resolved: NotesListResolver
+                }
+              },
               { path: 'new', component: CreateNoteComponent }
             ]
           }

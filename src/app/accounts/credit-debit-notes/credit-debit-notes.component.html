@@ -21,4 +21,71 @@
   </nav>
 
   <br>
+
+  <div class="form-row">
+    <ng-container *ngIf="clientNote">
+      <div class="form-group col">
+        <input type="text" class="form-control mt-3" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="mediaHouseNote">
+      <div class="form-group col-md">
+        <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+      </div>
+  
+      <div class="form-group col-md">
+        <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+      </div>
+    </ng-container>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <p *ngIf="notes.length == 0" class="text-muted">
+    No Credit / Debit Notes
+  </p>
+
+  <div class="mat-elevation-z3 mb-3 card" *ngFor="let note of notes">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <ng-container *ngIf="clientNote">
+            <strong>Invoice No:</strong> {{note.invoiceNO}}<br>
+            <strong>Client:</strong> {{note.clientName}}<br>
+          </ng-container>
+          <ng-container *ngIf="mediaHouseNote">
+            <strong>Release Order No:</strong> {{note.releaseOrderNO}}<br>
+            <strong>Publication:</strong> {{note.publicationName}} - {{note.publicationEdition}}<br>
+          </ng-container>
+
+          <strong>Amount:</strong> ₹ {{note.amount}}<br>
+          <strong>Remark:</strong> {{note.remark}}
+        </div>
+        <div class="col-auto">
+          <mat-menu #notesMenu="matMenu">
+            <button mat-menu-item (click)="gen(note)">
+              <mat-icon>save_alt</mat-icon> Download
+            </button>
+            <button mat-menu-item (click)="sendMsg(note)">
+              <mat-icon>mail</mat-icon> Send Email
+            </button>
+          </mat-menu>
+          
+          <button mat-icon-button [matMenuTriggerFor]="notesMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
 </div>

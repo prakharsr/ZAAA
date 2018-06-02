@@ -1,6 +1,6 @@
 export class CreditDebitNote {
     publicationName = "";
-    publicationState = "";
+    publicationEdition = "";
 
     clientName = "";
 

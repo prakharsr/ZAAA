@@ -109,4 +109,39 @@ export class AccountsApiService {
   createClientNote(note: CreditDebitNote) {
     return this.api.post('/user/notes/client', note);
   }
+
+  private pipeNotes(base: Observable<any>)  : Observable<PageData<CreditDebitNote>> {
+    return base.pipe(
+      map(data => {
+        let list: CreditDebitNote[] = [];
+
+        if (data.success) {
+          data.note.forEach(element => {
+            let item = new CreditDebitNote();
+
+            Object.assign(item, element);
+
+            list.push(item);
+          });
+        }
+
+        return new PageData<CreditDebitNote>(list, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  searchClientNotes(page: number, client: string) : Observable<PageData<CreditDebitNote>> {
+    return this.pipeNotes(this.api.post('/user/notes/client/search', {
+      page: page,
+      clientName: client
+    }));
+  }
+
+  searchMediaHouseNotes(page: number, publication: string, edition: string) : Observable<PageData<CreditDebitNote>> {
+    return this.pipeNotes(this.api.post('/user/notes/mediahouse/search', {
+      page: page,
+      publicationName: publication,
+      publicationEdition: edition
+    }));
+  }
 }
