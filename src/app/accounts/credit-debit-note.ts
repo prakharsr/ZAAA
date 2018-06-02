@@ -11,6 +11,8 @@ export class CreditDebitNote {
     releaseOrderNO = "";
     
     amount = 0;
+    amountWords = "";
+
     remark = "";
     
     date = {
@@ -22,4 +24,6 @@ export class CreditDebitNote {
     DocId = "";
     firm = "";
     user = "";
+
+    _id = "";
 }

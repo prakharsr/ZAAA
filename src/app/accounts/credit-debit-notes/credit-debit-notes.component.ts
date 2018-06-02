@@ -5,6 +5,8 @@ import { CreditDebitNote } from '../credit-debit-note';
 import { MediaHouse, Client, ClientApiService, MediaHouseApiService } from 'app/directory';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { AccountsApiService } from '../accounts-api.service';
+import { NotificationService, WindowService, DialogService } from 'app/services';
 
 @Component({
   selector: 'app-credit-debit-notes',
@@ -28,7 +30,11 @@ export class CreditDebitNotesComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private clientApi: ClientApiService,
-    private mediaHouseApi: MediaHouseApiService) { }
+    private mediaHouseApi: MediaHouseApiService,
+    private api: AccountsApiService,
+    private notifications: NotificationService,
+    private windowService: WindowService,
+    private dialog: DialogService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: {
@@ -127,7 +133,41 @@ export class CreditDebitNotesComponent implements OnInit {
     });
   }
 
-  gen(note: CreditDebitNote) { }
+  gen(note: CreditDebitNote) {
+    this.api.generateNotePdf(note).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
+      }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
 
-  sendMsg(note: CreditDebitNote) { }
+        let a = this.windowService.window.document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        this.windowService.window.document.body.appendChild(a);
+        a.download = 'note.pdf';
+        a.href = url;
+        a.click();
+      }
+    });
+  }
+
+  sendMsg(note: CreditDebitNote) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.mailNote(note, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
+
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
+  }
 }
