@@ -3,7 +3,7 @@ import { PaymentReceipt, ReceiptSearchParams } from 'app/receipts';
 import { PageData, UserProfile } from 'app/models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientApiService, Client } from 'app/directory';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { AccountsApiService } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
