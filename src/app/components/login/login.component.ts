@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.api.login(this.emailOrPhone, this.password).subscribe(
       data => {
         if (data.success) {
-          this.router.navigateByUrl('profile');
+          this.router.navigateByUrl('dashboard');
         }
         else {
           console.log(data);
