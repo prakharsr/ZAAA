@@ -12,10 +12,10 @@ export class HomeComponent implements OnInit {
   constructor(public api: ApiService, private router: Router) { }
 
   ngOnInit() {
-    if(this.api.isLoggedIn)
-    {
-      this.router.navigateByUrl('profile');
-    }
+    // if(this.api.isLoggedIn)
+    // {
+    //   this.router.navigateByUrl('profile');
+    // }
   }
 
 }

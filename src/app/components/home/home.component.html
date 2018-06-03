@@ -7,6 +7,7 @@
     <br>
     <p class="lead">
       <a class="btn btn-info btn-lg" *ngIf="api.isLoggedIn" routerLink="/profile">My Profile</a>
+      <a class="btn btn-info btn-lg" *ngIf="api.isLoggedIn" routerLink="/dashboard">Dashboard</a>
       <a class="btn btn-info btn-lg" *ngIf="!api.isLoggedIn" routerLink="/login">Login</a>
       <a class="btn btn-info btn-lg" *ngIf="!api.isLoggedIn" routerLink="/register">Register</a>
     </p>
