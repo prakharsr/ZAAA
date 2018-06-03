@@ -43,27 +43,21 @@
 
       <form (ngSubmit)="submit()" #signUpForm="ngForm">
         <mat-form-field>
-          <input type="text" id="name" placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+          <input matInput type="text" id="name" placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
           <mat-error *ngIf="nameField.errors && nameField.errors.required">
             Name is required.
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
-          <small class="form-text text-muted">
-            <br>An auto-generated password will be sent to this Email.<br>
-          </small>
-      
-          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
-            <div *ngIf="emailField.errors.required">
-              Email is required.
-            </div>
-            <div *ngIf="!emailField.errors.required && emailField.errors.email">
-              Invalid Email.
-            </div>
-            <br>
-          </div>
+          <input matInput placeholder="Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
+          <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
+          <mat-error *ngIf="emailField.errors && emailField.errors.required">
+            Email is required.
+          </mat-error>
+          <mat-error *ngIf="emailField.errors && emailField.errors.email">
+            Invalid Email.
+          </mat-error>
         </mat-form-field>
         
         <p>By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
