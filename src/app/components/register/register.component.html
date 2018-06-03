@@ -42,17 +42,14 @@
       <br>
 
       <form (ngSubmit)="submit()" #signUpForm="ngForm">
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
-          <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
-            <div *ngIf="nameField.errors.required">
-              Name is required.
-            </div>
-            <br>
-          </div>
-        </div>
+        <mat-form-field>
+          <input type="text" id="name" placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+          <mat-error *ngIf="nameField.errors && nameField.errors.required">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
+        <mat-form-field>
           <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" [(ngModel)]="email" required #emailField="ngModel" email>
           <small class="form-text text-muted">
             <br>An auto-generated password will be sent to this Email.<br>
@@ -67,7 +64,7 @@
             </div>
             <br>
           </div>
-        </div>
+        </mat-form-field>
         
         <p>By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
         
