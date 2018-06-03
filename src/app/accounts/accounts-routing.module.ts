@@ -19,6 +19,8 @@ import { ReceiptListResolver } from 'app/receipts';
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
 import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
+import { CreateNoteComponent } from './create-note/create-note.component';
+import { NotesListResolver } from './notes-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -38,6 +40,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: MediaHouseInvoiceComponent,
             resolve: {
               resolved: MediaHouseInvoiceListResolver
@@ -51,6 +54,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ClientReceiptsComponent,
             data: {
               advance: false
@@ -68,6 +72,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ClientInvoicePaymentsComponent,
             resolve: {
               resolved: ClientPaymentsListResolver
@@ -81,6 +86,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           {
             path: 'list/:page',
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             component: ExecutiveInvoicePaymentsComponent,
             resolve: {
               resolved: ExecutivePaymentsListResolver
@@ -88,7 +94,48 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'creditdebitnotes', component: CreditDebitNotesComponent },
+      {
+        path: 'notes',
+        children: [
+          { path: '', redirectTo: 'mediahouse', pathMatch: 'full' },
+          {
+            path: 'mediahouse',
+            data: {
+              mediaHouseNote: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                component: CreditDebitNotesComponent,
+                resolve: {
+                  resolved: NotesListResolver
+                }
+              },
+              { path: 'new', component: CreateNoteComponent }
+            ]
+          },
+          {
+            path: 'client',
+            data: {
+              clientNote: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                component: CreditDebitNotesComponent,
+                resolve: {
+                  resolved: NotesListResolver
+                }
+              },
+              { path: 'new', component: CreateNoteComponent }
+            ]
+          }
+        ]
+      },
       { path: 'gst', component: AccountsGstComponent }
     ]
   }

@@ -4,9 +4,10 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
 import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order';
-import { PageData } from 'app/models';
+import { PageData, MailingDetails } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
+import { CreditDebitNote } from './credit-debit-note';
 
 export class PaymentsResponse {
   publicationName = "";
@@ -99,5 +100,63 @@ export class AccountsApiService {
       page: page,
       executiveName: clientName
     }));
+  }
+
+  createMediaHouseNote(note: CreditDebitNote) {
+    return this.api.post('/user/notes/mediahouse', note);
+  }
+
+  createClientNote(note: CreditDebitNote) {
+    return this.api.post('/user/notes/client', note);
+  }
+
+  private pipeNotes(base: Observable<any>)  : Observable<PageData<CreditDebitNote>> {
+    return base.pipe(
+      map(data => {
+        let list: CreditDebitNote[] = [];
+
+        console.log(data);
+
+        if (data.success) {
+          data.note.forEach(element => {
+            let item = new CreditDebitNote();
+
+            Object.assign(item, element);
+
+            list.push(item);
+          });
+        }
+
+        return new PageData<CreditDebitNote>(list, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  searchClientNotes(page: number, client: string) : Observable<PageData<CreditDebitNote>> {
+    return this.pipeNotes(this.api.post('/user/notes/client/search', {
+      page: page,
+      clientName: client
+    }));
+  }
+
+  searchMediaHouseNotes(page: number, publication: string, edition: string) : Observable<PageData<CreditDebitNote>> {
+    return this.pipeNotes(this.api.post('/user/notes/mediahouse/search', {
+      page: page,
+      publicationName: publication,
+      publicationEdition: edition
+    }));
+  }
+
+  mailNote(note: CreditDebitNote, mailingDetails: MailingDetails) {
+    return this.api.post('/user/notes/email', {
+      id: note._id,
+      ...mailingDetails
+    });
+  }
+
+  generateNotePdf(note: CreditDebitNote) {
+    return this.api.post('/user/notes/download', {
+      id: note._id
+    }, { responseType: 'blob' });
   }
 }

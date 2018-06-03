@@ -33,6 +33,7 @@ const routes: Routes = [
           {
             path: 'list/:page',
             component: ReceiptListComponent,
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             resolve: {
               resolved: ReceiptListResolver
             }
@@ -44,6 +45,7 @@ const routes: Routes = [
               {
                 path: ':page',
                 component: LinkAdvanceComponent,
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
                 resolve: {
                   invoice: InvoiceResolver,
                   resolved: ReceiptListResolver
@@ -57,6 +59,7 @@ const routes: Routes = [
       {
         path: 'list/:page',
         component: ReceiptListComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         resolve: {
           resolved: ReceiptListResolver
         }

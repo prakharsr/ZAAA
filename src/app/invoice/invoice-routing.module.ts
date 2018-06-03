@@ -23,6 +23,7 @@ const routes: Routes = [
       {
         path: 'list/:page',
         component: InvoiceListComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         resolve: {
           resolved: InvoiceListResolver
         }
