@@ -35,6 +35,8 @@ export class Invoice {
     netAmountFigures = 0;
     netAmountWords = '';
 
+    FinalTaxAmount = 0;
+
     /*for payment reciept */
     clearedAmount = 0;
     pendingAmount = 0;
