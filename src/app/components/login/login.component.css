@@ -1,23 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
-html,
 body {
 	box-sizing: border-box;
-	background: -webkit-linear-gradient(-45deg, #2c36c7, #ec407a);
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	font-family: "Open Sans", sans-serif;
-}
-
-* {
-	transition: all 0.3s;
 }
 
 .login-form {
 	width: fit-content;
 	height: 400px;
-	background: -webkit-linear-gradient(-45deg, #9575cd,#9575cd, #ec407a);
+	background: lightskyblue;
 	border-radius: 20px;
 	position: relative;
 	margin: 100px auto;
@@ -80,7 +72,6 @@ h1 {
 a {
 	float: right;
 	margin: 10px;
-	color:#55ff55;
 }
 
 p {
