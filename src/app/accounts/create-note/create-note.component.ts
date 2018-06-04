@@ -5,7 +5,7 @@ import { ClientApiService, Client, MediaHouse, MediaHouseApiService } from 'app/
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { AccountsApiService } from '../accounts-api.service';
-import { NotificationService } from 'app/services';
+import { NotificationService, OptionsService } from 'app/services';
 
 @Component({
   selector: 'app-create-note',
@@ -28,7 +28,8 @@ export class CreateNoteComponent implements OnInit {
     private api: AccountsApiService,
     private notifications: NotificationService,
     private router: Router,
-    private mediaHouseApi: MediaHouseApiService) { }
+    private mediaHouseApi: MediaHouseApiService,
+    private options: OptionsService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { mediaHouseNote: boolean, clientNote: boolean }) => {
@@ -59,6 +60,8 @@ export class CreateNoteComponent implements OnInit {
     this.note.date.day = today.getDate();
     this.note.date.month = today.getMonth() + 1;
     this.note.date.year = today.getFullYear();
+
+    this.note.amountWords = this.options.amountToWords(this.note.amount);
 
     let obs: Observable<any>;
 

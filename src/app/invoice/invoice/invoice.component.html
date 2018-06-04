@@ -180,6 +180,28 @@
       </div>
     </div>
 
+    <div class="form-row">
+      <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+        <mat-form-field>
+          <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+            <mat-option value="URD">URD</mat-option>
+            <mat-option value="RD">RD</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
+        <mat-form-field>
+          <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+          <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+            GSTIN is required.
+          </mat-error>
+          <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+            GSTIN should be 15 characters long.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="caption">Caption</label>
       <input type="text" class="form-control" id="caption" name="caption" placeholder="Enter Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">

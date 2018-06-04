@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
 import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order';
-import { PageData } from 'app/models';
+import { PageData, MailingDetails } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
 import { CreditDebitNote } from './credit-debit-note';
@@ -145,5 +145,18 @@ export class AccountsApiService {
       publicationName: publication,
       publicationEdition: edition
     }));
+  }
+
+  mailNote(note: CreditDebitNote, mailingDetails: MailingDetails) {
+    return this.api.post('/user/notes/email', {
+      id: note._id,
+      ...mailingDetails
+    });
+  }
+
+  generateNotePdf(note: CreditDebitNote) {
+    return this.api.post('/user/notes/download', {
+      id: note._id
+    }, { responseType: 'blob' });
   }
 }

@@ -51,6 +51,8 @@ export class InvoiceComponent implements OnInit {
       this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
       this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
 
+      this.invoice.GSTIN = this.client.GSTIN;
+
       this.taxes.forEach(element => {
         if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
           this.invoice.taxAmount = element;
@@ -88,6 +90,7 @@ export class InvoiceComponent implements OnInit {
     this.invoice.netAmountFigures = this.netAmount;
     this.invoice.netAmountWords = this.options.amountToWords(this.invoice.netAmountFigures);
     this.invoice.pendingAmount = this.invoice.netAmountFigures;
+    this.invoice.FinalTaxAmount = this.finalTaxAmount;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
     this.api.createInvoice(this.invoice).subscribe(data => {
@@ -160,13 +163,12 @@ export class InvoiceComponent implements OnInit {
   }
 
   get finalTaxAmount() {
-    let amount = 0;
-    let finalAmount = this.netAmount;
+    let taxAmount = this.netAmount;
 
-    amount += (this.invoice.taxAmount.primary * finalAmount) / 100;
-    amount += (this.invoice.taxAmount.secondary * finalAmount) / 100;
+    taxAmount += (this.invoice.taxAmount.primary * taxAmount) / 100;
+    taxAmount += (this.invoice.taxAmount.secondary * taxAmount) / 100;
 
-    return amount;
+    return taxAmount;
   }
 
   removeOtherCharge(i: number) {

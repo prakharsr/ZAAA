@@ -104,6 +104,13 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else if (params.has('copy')) {
         this.initFromReleaseOrder();
+
+        this.releaseorder.releaseOrderNO = "";
+        this.releaseorder.id = "";
+        this.releaseorder.generated = false;
+        this.releaseorder.date = new Date();
+
+        this.releaseorder.insertions = this.releaseorder.insertions.map(insertion => new Insertion(insertion.date));
       }
       else if (params.has('rateCard')) {
         this.route.data.subscribe((data: { rateCard: RateCard }) => this.initFromRateCard(data.rateCard));
