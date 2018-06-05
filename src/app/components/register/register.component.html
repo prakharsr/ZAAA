@@ -2,16 +2,16 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-info">
   <div class="container">
-    <div class="col">
+    <div>
       <img src="assets/logo.jpg" width="50" height="50">
-      <a class="navbar-brand">AAMan</a>
+      <a class="navbar-brand text-light">AAMan</a>
     </div>
       
     <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
       <table class="tablewrapper">
         <tr>
-          <td class="text-light">Email or Phone</td>
-          <td class="text-light">Password</td>
+          <td class="text-lighter">Email or Phone</td>
+          <td class="text-lighter">Password</td>
         </tr>
         <tr>
           <td>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
           <td>
-            <a class="text-light" routerLink="/forgotPassword">Forgot your password?</a>
+            <a class="text-lighter" routerLink="/forgotPassword">Forgot your password?</a>
           </td>
         </tr>
       </table>
@@ -36,7 +36,7 @@
 
 <div class="container">
   <div class="row justify-content-end">
-    <div class="col-auto">
+    <div class="col-md-auto">
       <br>
       <h1 class="display-4">Sign Up</h1>
       <br>

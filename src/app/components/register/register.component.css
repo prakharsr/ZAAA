@@ -14,3 +14,7 @@ input.ng-invalid.form-control, select.ng-invalid {
 input.ng-valid.form-control, select.ng-valid {
   border-left: 1px solid #ced4da;
 }
+
+.text-lighter {
+  color: #edf0f5;
+}
