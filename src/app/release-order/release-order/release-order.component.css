@@ -19,3 +19,10 @@
 .list-group-item div:first-child {
     font-style: italic;
 }
+
+@media (max-width:991px) {
+    #calculations {
+        /* position: fixed; */
+        vertical-align: top;
+    }
+}
