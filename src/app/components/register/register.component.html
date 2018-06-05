@@ -36,10 +36,9 @@
 
 <div class="container">
   <div class="row justify-content-end">
-    <div class="col-md-auto">
-      <br>
+    <div class="col-md-9 col-lg-6 col-xl-5">
+      <br><br>
       <h1 class="display-4">Sign Up</h1>
-      <br>
 
       <form (ngSubmit)="submit()" #signUpForm="ngForm">
         <mat-form-field>
@@ -59,18 +58,18 @@
             Invalid Email.
           </mat-error>
         </mat-form-field>
+
+        <br><br>
         
-        <p>By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
-        
-        <p>Click to view our <a routerLink="">Subscription plans</a>.</p>
-        
-        <br>
-        
-        <p>Already have an account, <a routerLink="/login">Login</a>.</p>
+        <p class="small">By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
         
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!signUpForm.form.valid">Sign Up</button>
         </div>
+
+        <br>
+
+        <p class="small">Click to view our <a routerLink="">Subscription plans</a>.</p>
       </form>
     </div>
   </div>
