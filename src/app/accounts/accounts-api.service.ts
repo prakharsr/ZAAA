@@ -115,8 +115,6 @@ export class AccountsApiService {
       map(data => {
         let list: CreditDebitNote[] = [];
 
-        console.log(data);
-
         if (data.success) {
           data.note.forEach(element => {
             let item = new CreditDebitNote();
@@ -158,5 +156,49 @@ export class AccountsApiService {
     return this.api.post('/user/notes/download', {
       id: note._id
     }, { responseType: 'blob' });
+  }
+
+  private pipeTax(base: Observable<any>) : Observable<PageData<any>> {
+    return base.pipe(
+      map(data => {
+        let list = [];
+
+        if (data.success) {
+          data.invoice.forEach(element => {
+            let item = { };
+
+            Object.assign(item, element);
+
+            list.push(item);
+          });
+        }
+
+        return new PageData<any>(list, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  queryInvoiceTaxClient(client: string, page: number) : Observable<PageData<any>> {
+    return this.pipeTax(this.api.post('/user/invoice/tax', {
+      clientName: client,
+      page: page
+    }));
+  }
+
+  queryInvoiceTaxMonth(month: string, page: number) : Observable<PageData<any>> {
+    let yyyy = +month.substr(0, 4);
+    let mm = +month.substr(5, 2);
+
+    let date = new Date(yyyy, mm - 1);
+    date.setDate(0);
+
+    return this.pipeTax(this.api.post('/user/invoice/tax', {
+      page: page,
+      period: {
+        day: date.getDate(),
+        month: mm,
+        year: yyyy
+      }
+    }));
   }
 }

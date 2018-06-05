@@ -21,6 +21,7 @@ import { ClientPaymentsListResolver } from './client-payments-list-resolver.serv
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
 import { CreateNoteComponent } from './create-note/create-note.component';
 import { NotesListResolver } from './notes-list-resolver.service';
+import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -136,7 +137,46 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'gst', component: AccountsGstComponent }
+      {
+        path: 'gst',
+        children: [
+          { path: '', redirectTo: 'month', pathMatch: 'full' },
+          {
+            path: 'month',
+            data: {
+              monthTax: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                resolve: {
+                  resolved: InvoiceTaxListResolver
+                },
+                component: AccountsGstComponent
+              }
+            ]
+          },
+          {
+            path: 'client',
+            data: {
+              clientTax: true
+            },
+            children: [
+              { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+              {
+                path: 'list/:page',
+                runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                resolve: {
+                  resolved: InvoiceTaxListResolver
+                },
+                component: AccountsGstComponent
+              }
+            ]
+          }
+        ]
+      }
     ]
   }
 ];

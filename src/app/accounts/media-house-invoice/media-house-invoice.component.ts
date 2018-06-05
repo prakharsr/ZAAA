@@ -82,7 +82,9 @@ export class MediaHouseInvoiceComponent implements OnInit {
 
   show() {
     this.dialog.show(MediaHouseInvoiceDialogComponent);
-  } searchClient = (text: Observable<string>) => {
+  }
+  
+  searchClient = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
       .switchMap(term => this.clientApi.searchClients(term))
