@@ -26,7 +26,7 @@
     <p class="login-help">Don't have an account, create <a routerLink="/register">one</a>.</p>
  </form> -->
 
- <form (ngSubmit)="submit()"  #loginForm="ngForm" class="login-form">
+ <!-- <form (ngSubmit)="submit()"  #loginForm="ngForm" class="login-form">
 	<h1>Login</h1>
 	
 	<label for="user-name"> Email/Phone : 
@@ -43,5 +43,64 @@
 
 	<p>Dont have an account? <br>
   <a id="signUP" routerLink="/register">SignUp</a></p>
-	
-</form>
+  </form> -->
+
+<div class="bg-color"></div>
+
+<div class="container">
+  <br><br>
+
+  <div class="card mat-elevation-z1 bg-white">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" #loginForm="ngForm">
+
+        <br>
+
+        <h1 class="display-4 text-center">Login</h1>
+        
+        <br>
+
+        <div class="form-group">
+          <label for="user-name">Email/Phone</label>
+
+          <input type="text" class="form-control" id="user-name" placeholder="Enter email/phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+          <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
+            <div *ngIf="emailOrPhoneField.errors.required">
+              Email or Phone is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+          <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+            <div *ngIf="passwordField.errors.required">
+              Password is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <br>
+        
+        <button class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid" id="loginBtn">Login</button>
+
+        <br>
+
+        <div class="row">
+          <div class="col text-right">
+            <a routerLink="/forgotPassword">Forgot Password?</a>
+          </div>
+          <div class="col">
+            <a routerLink="/register">Sign Up</a>
+          </div>
+        </div>
+
+        <br>
+      </form>
+    </div>
+  </div>
+</div>
