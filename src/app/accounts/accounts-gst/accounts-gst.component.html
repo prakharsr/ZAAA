@@ -5,8 +5,12 @@
 </mat-toolbar>
 
 <ng-template #rtClient let-r="result">
-    {{r.orgName}}
-  </ng-template>
+  {{r.orgName}}
+</ng-template>
+
+<button class="fab bg-info" (click)="downloadSheet()">
+  <mat-icon>save_alt</mat-icon>
+</button>
 
 <div class="container">
   <nav mat-tab-nav-bar class="x-overflow">

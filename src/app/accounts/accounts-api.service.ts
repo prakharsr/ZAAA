@@ -185,20 +185,36 @@ export class AccountsApiService {
     }));
   }
 
-  queryInvoiceTaxMonth(month: string, page: number) : Observable<PageData<any>> {
+  private genPeriod(month: string) {
     let yyyy = +month.substr(0, 4);
     let mm = +month.substr(5, 2);
 
     let date = new Date(yyyy, mm - 1);
     date.setDate(0);
 
+    return {
+      day: date.getDate(),
+      month: mm,
+      year: yyyy
+    };
+  }
+
+  queryInvoiceTaxMonth(month: string, page: number) : Observable<PageData<any>> {
     return this.pipeTax(this.api.post('/user/invoice/tax', {
       page: page,
-      period: {
-        day: date.getDate(),
-        month: mm,
-        year: yyyy
-      }
+      period: this.genPeriod(month)
     }));
+  }
+
+  generateInvoiceTaxClient(client: string) {
+    return this.api.post('/user/invoice/taxSheet', {
+      clientName: client
+    }, { responseType: 'blob' });
+  }
+
+  generateInvoiceTaxMonth(month: string) {
+    return this.api.post('/user/invoice/taxSheet', {
+      period: this.genPeriod(month)
+    }, { responseType: 'blob' });
   }
 }

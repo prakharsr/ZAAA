@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { ClientApiService, Client } from 'app/directory';
 import { of } from 'rxjs/observable/of';
 import { AccountsApiService } from '../accounts-api.service';
-import { PageData } from '../../models';
+import { PageData } from 'app/models';
+import { NotificationService, WindowService } from 'app/services';
 
 @Component({
   selector: 'app-accounts-gst',
@@ -29,7 +30,9 @@ export class AccountsGstComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private clientApi: ClientApiService,
     private api: AccountsApiService,
-    private router: Router) { }
+    private router: Router,
+    private notifications: NotificationService,
+    private windowService: WindowService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: {
@@ -51,7 +54,7 @@ export class AccountsGstComponent implements OnInit {
 
       if (this.clientTax) {
         let cl = new Client();
-        this.client.orgName = data.resolved.client;
+        cl.orgName = data.resolved.client;
 
         this.client = cl;
       }
@@ -87,4 +90,35 @@ export class AccountsGstComponent implements OnInit {
     return this.client ? this.client.orgName : null;
   }
 
+  downloadSheet()
+  {
+    let base: Observable<any> = null;
+
+    if (this.clientTax) {
+      base = this.api.generateInvoiceTaxClient(this.clientName);
+    }
+
+    if (this.monthTax) {
+      base = this.api.generateInvoiceTaxMonth(this.month);
+    }
+
+    base.subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
+      }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/xlsx' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
+
+        let a = this.windowService.window.document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        this.windowService.window.document.body.appendChild(a);
+        a.download = 'tax.xlsx';
+        a.href = url;
+        a.click();
+      }
+    });
+  }
 }
