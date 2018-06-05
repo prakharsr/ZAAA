@@ -46,48 +46,47 @@
 
 <mat-toolbar *ngIf="api.isLoggedIn">
     <div class="container">
-
-        <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
-    
-        <mat-menu #romenu="matMenu">
-            <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
-            <button mat-menu-item routerLink="/releaseorders">Non-Generated Release Orders</button>
-            <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
-        </mat-menu> 
+        <div class="x-overflow">
+            <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
         
-        <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
-    
-        <mat-menu #invmenu="matMenu">
-            <button mat-menu-item routerLink="/invoices">View Invoices</button>
-        </mat-menu>
+            <mat-menu #romenu="matMenu">
+                <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
+                <button mat-menu-item routerLink="/releaseorders">Non-Generated Release Orders</button>
+                <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
+            </mat-menu> 
+            
+            <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
         
-        <button mat-button [matMenuTriggerFor]="rcmenu">Payment Receipts</button>
-    
-        <mat-menu #rcmenu="matMenu">
-            <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
-            <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
-            <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
-        </mat-menu> 
-    
-        <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
-    
-        <mat-menu #dirmenu="matMenu">
-            <button mat-menu-item routerLink="/dir/clients">Clients</button>
-            <button mat-menu-item routerLink="/dir/executives">Executives</button>
-            <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
-        </mat-menu> 
-    
-        <button mat-button [matMenuTriggerFor]="acmenu">Accounts</button>
-    
-        <mat-menu #acmenu="matMenu">
-            <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
-            <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
-            <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
-            <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
-            <button mat-menu-item routerLink="/accounts/creditdebitnotes">Credit/ Debit Notes</button>
-            <button mat-menu-item routerLink="/accounts/gst">GST</button>
-        </mat-menu> 
-    
-                
+            <mat-menu #invmenu="matMenu">
+                <button mat-menu-item routerLink="/invoices">View Invoices</button>
+            </mat-menu>
+            
+            <button mat-button [matMenuTriggerFor]="rcmenu">Payment Receipts</button>
+        
+            <mat-menu #rcmenu="matMenu">
+                <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
+                <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
+                <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
+            </mat-menu> 
+        
+            <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
+        
+            <mat-menu #dirmenu="matMenu">
+                <button mat-menu-item routerLink="/dir/clients">Clients</button>
+                <button mat-menu-item routerLink="/dir/executives">Executives</button>
+                <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
+            </mat-menu> 
+        
+            <button mat-button [matMenuTriggerFor]="acmenu">Accounts</button>
+        
+            <mat-menu #acmenu="matMenu">
+                <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
+                <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
+                <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
+                <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
+                <button mat-menu-item routerLink="/accounts/creditdebitnotes">Credit/ Debit Notes</button>
+                <button mat-menu-item routerLink="/accounts/gst">GST</button>
+            </mat-menu>    
+        </div>  
     </div>
 </mat-toolbar>
