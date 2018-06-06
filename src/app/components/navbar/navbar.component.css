@@ -1,3 +1,12 @@
 .x-overflow {
     overflow-x: auto;
 }
+
+#navbar {
+    position: fixed;
+    z-index: 30;
+    right: -17px;
+    border-radius: 0;
+    width: auto;
+    left: -17px;
+}

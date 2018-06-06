@@ -23,7 +23,7 @@
 @media (max-width: 991px) {
     #calculations {
         position: fixed;
-        top: -16px;
+        top: 120px;
         z-index: 30;
         right: -17px;
         border-radius: 0;
