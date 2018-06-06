@@ -1,39 +1,5 @@
 <div class="bg-color"></div>
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-info">
-  <div class="container">
-    <div>
-      <img src="assets/logo.jpg" width="50" height="50">
-      <a class="navbar-brand text-light">AAMan</a>
-    </div>
-      
-    <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
-      <table class="tablewrapper">
-        <tr>
-          <td class="text-lighter">Email or Phone</td>
-          <td class="text-lighter">Password</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" class="form-control" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
-          </td>
-          <td>
-            <input type="password" class="form-control" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
-          </td>
-          <td>
-            <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a class="text-lighter" routerLink="/forgotPassword">Forgot your password?</a>
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</nav>
-
 <div class="container">
   <div class="row justify-content-end">
     <div class="col-md-9 col-lg-6 col-xl-5">
