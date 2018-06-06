@@ -21,6 +21,7 @@ import { ClientPaymentsListResolver } from './client-payments-list-resolver.serv
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
 import { CreateNoteComponent } from './create-note/create-note.component';
 import { NotesListResolver } from './notes-list-resolver.service';
+import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { NotesListResolver } from './notes-list-resolver.service';
     ClientReceiptsListResolver,
     ClientPaymentsListResolver,
     ExecutivePaymentsListResolver,
-    NotesListResolver
+    NotesListResolver,
+    InvoiceTaxListResolver
   ]
 })
 export class AccountsModule { }

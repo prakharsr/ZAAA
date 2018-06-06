@@ -51,6 +51,8 @@ export class InvoiceComponent implements OnInit {
       this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
       this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
 
+      this.invoice.GSTIN = this.client.GSTIN;
+
       this.taxes.forEach(element => {
         if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
           this.invoice.taxAmount = element;

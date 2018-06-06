@@ -5,29 +5,25 @@ import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { PageData } from 'app/models';
 import { AccountsApiService } from './accounts-api.service';
-import { CreditDebitNote } from './credit-debit-note';
 
 class Result {
-  list: PageData<CreditDebitNote>;
+  list: PageData<any>;
   client?: string;
-  publication?: string;
-  edition?: string;
+  month?: string;
 }
 
 @Injectable()
-export class NotesListResolver implements Resolve<Result> {
+export class InvoiceTaxListResolver implements Resolve<Result> {
   constructor(private api: AccountsApiService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Result> {
     let page: any = route.paramMap.get('page');
 
-
     let client = route.queryParamMap.get('client');
-    let publication = route.queryParamMap.get('publication');
-    let edition = route.queryParamMap.get('edition');
+    let month = route.queryParamMap.get('month');
 
-    if (route.data.clientNote) {
-      return this.api.searchClientNotes(page, client).map(data => {
+    if (route.data.clientTax) {
+      return this.api.queryInvoiceTaxClient(client, page).map(data => {
         if (data) {
           return {
             list: data,
@@ -39,13 +35,17 @@ export class NotesListResolver implements Resolve<Result> {
         }
       });
     }
-    else if (route.data.mediaHouseNote) {
-      return this.api.searchMediaHouseNotes(page, publication, edition).map(data => {
+    else if (route.data.monthTax) {
+      if (!month) {
+        let today = new Date();
+        month = today.getFullYear() + '-' + (+today.getMonth() + 1).toString().padStart(2, '0');
+      }
+
+      return this.api.queryInvoiceTaxMonth(month, page).map(data => {
         if (data) {
           return {
             list: data,
-            publication: publication,
-            edition: edition
+            month: month
           }
         }
         else {

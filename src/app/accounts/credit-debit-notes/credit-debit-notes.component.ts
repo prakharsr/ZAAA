@@ -125,8 +125,7 @@ export class CreditDebitNotesComponent implements OnInit {
 
   search(page: number) {
     this.router.navigate(['/accounts/notes', this.clientNote ? 'client' : 'mediahouse', 'list', page], {
-      queryParams: {
-        client: this.clientName,
+      queryParams: this.clientNote ? { client: this.clientName } : {
         publication: this.mediaHouseName,
         edition: this.editionName
       }

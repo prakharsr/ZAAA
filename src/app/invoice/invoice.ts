@@ -9,6 +9,11 @@ export class Invoice {
 
     invoiceNO = "";
 
+    GSTIN = {
+        GSTType: "RD",
+        GSTNo: ""
+    }
+
     date: Date;
     releaseOrderId = "";
 
