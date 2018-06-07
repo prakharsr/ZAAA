@@ -40,14 +40,19 @@
           {{ratecard.pullOutName}}<br>
           {{ratecard.mediaType}} - {{ratecard.adType}}
         </div>
-        <div class="col-auto" *ngIf="!global">
+        <div class="col-auto">
           <mat-menu #dirMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/ratecards/edit', ratecard.id]">
-              <mat-icon>edit</mat-icon> Edit
+            <button mat-menu-item (click)="createReleaseOrder(ratecard)">
+              <mat-icon>add</mat-icon> Create Release Order
             </button>
-            <button mat-menu-item class="text-danger" (click)="deleteRateCard(ratecard)">
-              <mat-icon>delete</mat-icon> Delete
-            </button>
+            <ng-container *ngIf="!global">
+              <button mat-menu-item [routerLink]="['/ratecards/edit', ratecard.id]">
+                <mat-icon>edit</mat-icon> Edit
+              </button>
+              <button mat-menu-item class="text-danger" (click)="deleteRateCard(ratecard)">
+                <mat-icon>delete</mat-icon> Delete
+              </button>
+            </ng-container>
           </mat-menu>
           
           <button mat-icon-button [matMenuTriggerFor]="dirMenu">
