@@ -12,3 +12,5 @@ export * from './insertion-check/insertion-check.component';
 export * from './release-order/release-order.component';
 export * from './release-order-details/release-order-details.component';
 export * from './release-order-list/release-order-list.component';
+export * from './categories-details/categories-details.component';
+export * from './insertion-details/insertion-details.component';

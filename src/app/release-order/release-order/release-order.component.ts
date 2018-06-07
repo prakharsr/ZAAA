@@ -10,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { StateApiService, NotificationService, OptionsService } from 'app/services';
+import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
+import { CategoriesDetails } from '../categories-details/categories-details.component';
 
 import {
   Category,
@@ -54,7 +55,8 @@ export class ReleaseOrderComponent implements OnInit {
     private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
     private notifications: NotificationService,
-    public options: OptionsService) { }
+    public options: OptionsService,
+    private dialog: DialogService) { }
 
   get isTypeWords() {
 
@@ -306,6 +308,16 @@ export class ReleaseOrderComponent implements OnInit {
 
     return result;
 
+  }
+
+  getCategories() {
+    this.dialog.getCategoriesDetails().subscribe(data => {
+      this.categoriesDetails(data);
+    });
+  }
+
+  categoriesDetails(param: CategoriesDetails) {
+    // this.openPay(param);
   }
 
   searchCategories = (text: Observable<string>) => {

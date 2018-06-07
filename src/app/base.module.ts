@@ -45,6 +45,7 @@ import {
   VerifyMultipleOfDirective,
   VerifyEqualsDirective
 } from './validators';
+import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
 
 const validators = [
   VerifyEmailDirective,
@@ -100,8 +101,10 @@ const validators = [
   ],
   entryComponents: [
     DialogComponent,
+    CategoriesDetailsComponent,
     MailingDetailsComponent,
-    BillingDetailsComponent
+    BillingDetailsComponent,
+    InsertionDetailsComponent
   ]
 })
 export class BaseModule { }

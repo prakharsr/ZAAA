@@ -202,7 +202,12 @@
                 <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
               </mat-form-field>
 
-              <div class="input-group">
+              <button class="btn btn-danger" type="button" (click)="getCategories()">Categories</button>
+
+            </div>
+
+              
+              <!-- <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
                     <mat-icon>search</mat-icon>
@@ -267,7 +272,7 @@
                 <br>
               </div>
 
-            </div>
+            </div> -->
             
         
             <div class="form-row">
@@ -350,8 +355,6 @@
               </div>
             </div>
 
-
-        
             <mat-form-field>
               <input type="text" matInput id="remark" name="remark" placeholder="Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
             </mat-form-field>
