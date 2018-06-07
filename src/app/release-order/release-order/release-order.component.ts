@@ -310,16 +310,6 @@ export class ReleaseOrderComponent implements OnInit {
 
   }
 
-  getCategories() {
-    this.dialog.getCategoriesDetails().subscribe(data => {
-      this.categoriesDetails(data);
-    });
-  }
-
-  categoriesDetails(param: CategoriesDetails) {
-    // this.openPay(param);
-  }
-
   searchCategories = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
@@ -403,6 +393,17 @@ export class ReleaseOrderComponent implements OnInit {
   set category5(category: Category) { this.setCategory(4, category); }
   set category6(category: Category) { this.setCategory(5, category); }
 
+  getCategories() {
+    this.dialog.getCategoriesDetails().subscribe(data => {
+      this.setCategoriesDetails(data);
+    });
+  }
+
+  setCategoriesDetails(details: CategoriesDetails) {
+    this.categories = details.categories;
+    this.selectedCategories = details.selectedCategories;
+  }
+  
   private goBack() {
     this.router.navigateByUrl(this.edit ? '/releaseorders/' + this.id : '/releaseorders');
   }
@@ -492,6 +493,8 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
 
+    console.log(this.releaseorder);
+    
     if (this.edit) {
       this.editReleaseOrder();
     }

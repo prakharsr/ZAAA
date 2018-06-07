@@ -2,9 +2,6 @@
 
 <mat-dialog-content>
   <div class="row">
-    <mat-form-field class="col-lg col-md-6">
-      <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
-    </mat-form-field>
 
     <div class="input-group">
       <div class="input-group-prepend">
@@ -76,5 +73,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <!-- <button mat-button [disabled]="!billingDetailsForm.form.valid" [mat-dialog-close]="details">Submit</button>   -->
+  <button mat-button [mat-dialog-close]="details">Submit</button>  
 </mat-dialog-actions>
