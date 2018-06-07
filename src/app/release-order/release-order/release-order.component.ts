@@ -29,6 +29,7 @@ import {
   MediaHouseApiService,
   ExecutiveApiService
 } from 'app/directory';
+import { InsertionDetails } from '..';
 
 @Component({
   selector: 'app-release-order',
@@ -492,8 +493,6 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemeFree = this.selectedScheme.Free;
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
-
-    console.log(this.releaseorder);
     
     if (this.edit) {
       this.editReleaseOrder();
@@ -671,6 +670,23 @@ export class ReleaseOrderComponent implements OnInit {
 
   isSelected(date: NgbDate) {
     return this.findInsertion(date) != -1;
+  }
+
+  getInsertions() {
+    this.dialog.getInsertionDetails().subscribe(data => {
+      this.setInsertionDetails(data);
+    });
+  }
+
+  setInsertionDetails(details: InsertionDetails) {
+
+    details.customScheme = this.customScheme;
+    details._selectedScheme = this._selectedScheme;
+    details.insertions = this.releaseorder.insertions;
+    details.adCountPaid = this.adCountPaid;
+    details.customPaid = this.customPaid;
+    details.customFree = this.customFree;
+
   }
 
   fixSizes: FixSize[] = [];

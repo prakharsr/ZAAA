@@ -381,7 +381,9 @@
               <mat-panel-description>Manage Insertions</mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div class="form-group">
+            <button mat-button type="button" color="primary" (click)="getInsertions()">Insertions</button>
+
+             <div class="form-group">
               <label>No of Paid Ads</label>
               <input type="number" class="form-control" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="Enter No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
             </div>
@@ -420,7 +422,7 @@
                               name="currentInsertionDate"
                               [dayTemplate]="insertionTemplate"
                               (select)="addInsertion($event)"></ngb-datepicker>
-            </ng-container>
+            </ng-container> 
           </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
