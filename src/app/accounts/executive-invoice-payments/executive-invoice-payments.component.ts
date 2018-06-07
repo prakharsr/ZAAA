@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/observable';
+import { Observable } from 'rxjs/Observable';
 import { AccountsApiService, PaymentsResponse, PaymentTotalResponse } from '../accounts-api.service';
 import { ExecutiveApiService, Executive } from 'app/directory';
 import { of } from 'rxjs/observable/of';
