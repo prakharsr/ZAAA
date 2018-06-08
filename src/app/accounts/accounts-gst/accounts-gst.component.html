@@ -1,3 +1,93 @@
-<p>
-  accounts-gst works!
-</p>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Taxation</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<button class="fab bg-info" (click)="downloadSheet()">
+  <mat-icon>save_alt</mat-icon>
+</button>
+
+<div class="container">
+  <nav mat-tab-nav-bar class="x-overflow">
+    <a mat-tab-link routerLink="/accounts/gst/month" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Month</a>
+    <a mat-tab-link routerLink="/accounts/gst/client" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Client</a>
+  </nav>
+
+  <br>
+
+  <div class="form-row">
+    <div class="form-group col" *ngIf="clientTax">
+      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+    </div>
+
+    <div class="form-group col" *ngIf="monthTax">
+      <input type="month" class="form-control" [(ngModel)]="month"/>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <p *ngIf="list.length == 0" class="text-muted">
+    No Tax Information
+  </p>
+
+  <table class="table table-bordered table-responsive-md" *ngIf="list.length">
+    <thead>
+      <tr class="table-info">
+        <td rowspan="2">Info</td>
+        <td colspan="2">SGST</td>
+        <td colspan="2">CGST</td>
+        <td colspan="2">IGST</td>
+      </tr>
+      <tr class="table-info">
+        <td>%</td>
+        <td>Amount</td>
+        <td>%</td>
+        <td>Amount</td>
+        <td>%</td>
+        <td>Amount</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let invoice of list">
+        <td>
+          <strong>Invoice No:</strong><br>
+          {{invoice.invoiceNO}}<br><br>
+
+          <strong>Client:</strong><br>
+          {{invoice.clientName}}<br><br>
+
+          <div class="text-muted">{{invoice.date | date}}</div>
+        </td>
+        <ng-container *ngIf="invoice.taxType == 'IGST'">
+          <td style="white-space: nowrap;">0 %</td>
+          <td style="white-space: nowrap;">₹ 0</td>
+          <td style="white-space: nowrap;">0 %</td>
+          <td style="white-space: nowrap;">₹ 0</td>
+          <td style="white-space: nowrap;">{{+invoice.taxAmount.primary + +invoice.taxAmount.secondary}} %</td>
+          <td style="white-space: nowrap;">₹ {{invoice.FinalTaxAmount}}</td>
+        </ng-container>
+        <ng-container *ngIf="invoice.taxType != 'IGST'">
+          <td style="white-space: nowrap;">{{(+invoice.taxAmount.primary + +invoice.taxAmount.secondary) / 2}} %</td>
+          <td style="white-space: nowrap;">₹ {{invoice.FinalTaxAmount / 2}}</td>
+          <td style="white-space: nowrap;">{{(+invoice.taxAmount.primary + +invoice.taxAmount.secondary) / 2}} %</td>
+          <td style="white-space: nowrap;">₹ {{invoice.FinalTaxAmount / 2}}</td>
+          <td style="white-space: nowrap;">0 %</td>
+          <td style="white-space: nowrap;">₹ 0</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
+</div>
