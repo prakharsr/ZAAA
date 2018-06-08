@@ -2,7 +2,13 @@
 
 <mat-dialog-content>
 
-  <ng-container>
+  <ng-container >
+    <div class="form-row">
+      <div class="col">
+        <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
+      </div>    
+    </div>
+    
     <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
       <span class="custom-day"
             [class.focused]="focused"
