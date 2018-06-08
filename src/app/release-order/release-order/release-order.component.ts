@@ -681,7 +681,7 @@ export class ReleaseOrderComponent implements OnInit {
   setInsertionDetails(details: InsertionDetails) {
 
     details.customScheme = this.customScheme;
-    details._selectedScheme = this._selectedScheme;
+    details.selectedScheme = this.selectedScheme;
     details.insertions = this.releaseorder.insertions;
     details.adCountPaid = this.adCountPaid;
     details.customPaid = this.customPaid;

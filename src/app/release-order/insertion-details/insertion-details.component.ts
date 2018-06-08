@@ -11,12 +11,12 @@ import { FixSize, Scheme, RateCard } from '../../rate-card/rate-card';
 import { ActivatedRoute } from '@angular/router';
 
 export class InsertionDetails {
-  customScheme;
-  _selectedScheme: Scheme;
+  customScheme = false;
+  selectedScheme: Scheme;
   insertions: Insertion[] = [];
-  adCountPaid;
-  customPaid;
-  customFree;
+  adCountPaid = 1;
+  customPaid = 1;
+  customFree = 0;
 }
 
 @Component({
@@ -67,11 +67,11 @@ export class InsertionDetailsComponent implements OnInit {
   }
 
   get selectedScheme() {
-    return this.details._selectedScheme;
+    return this.details.selectedScheme;
   }
 
   set selectedScheme(scheme: Scheme) {
-    this.details._selectedScheme = scheme;
+    this.details.selectedScheme = scheme;
 
     this.details.adCountPaid = scheme.paid;
 
