@@ -1,11 +1,10 @@
 <h2 mat-dialog-title>Insertion Details</h2>
 
 <mat-dialog-content>
-
   <ng-container >
     <div class="form-row">
       <div class="col">
-        <h4>Insertions ({{releaseorder.insertions.length}} / {{availableAds}})</h4>
+        <h4>Insertions ({{injected.insertions.length}} / {{injected.availableAds}})</h4>
       </div>    
     </div>
     
@@ -26,5 +25,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="details">Submit</button>  
+  <button mat-button [mat-dialog-close]="injected.insertions">Submit</button>  
 </mat-dialog-actions>
