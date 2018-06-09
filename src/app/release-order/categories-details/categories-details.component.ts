@@ -13,8 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 
 export class CategoriesDetails {
   selectedCategories: Category[] = [null, null, null, null, null, null];
-
-  categories : Category[];
 }
 
 @Component({
@@ -30,9 +28,9 @@ export class CategoriesDetailsComponent implements OnInit {
   edit = false;
   id: string;
   
-  constructor(public options: OptionsService,public stateApi: StateApiService, private route: ActivatedRoute) { }
+  constructor(public options: OptionsService, public stateApi: StateApiService, private route: ActivatedRoute) { }
 
-    ngOnInit() {
+  ngOnInit() {
     this.categories = this.options.categories;
 
     this.route.paramMap.subscribe(params => {
@@ -70,6 +68,13 @@ export class CategoriesDetailsComponent implements OnInit {
   private initFromRateCard(rateCard: RateCard) {
     if (rateCard) {
       this.buildCategoryTree(rateCard.categories);
+      
+      for (let i = 0; i < rateCard.categories.length; ++i) {
+        if (rateCard.categories[i]) {
+          ++this.fixedCategoriesLevel;
+        }
+        else break;
+      }
     }
   }
 
@@ -126,7 +131,6 @@ export class CategoriesDetailsComponent implements OnInit {
     }
 
     return result;
-
   }
 
   searchCategories = (text: Observable<string>) => {
@@ -211,6 +215,4 @@ export class CategoriesDetailsComponent implements OnInit {
   set category4(category: Category) { this.setCategory(3, category); }
   set category5(category: Category) { this.setCategory(4, category); }
   set category6(category: Category) { this.setCategory(5, category); }
-
-
 }

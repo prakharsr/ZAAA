@@ -202,7 +202,7 @@
                 <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
               </mat-form-field>
 
-              <button mat-button color="primary"  class="col-lg col-md-6" (click)="getCategories()">Categories</button>
+              <button type="button" mat-button color="primary"  class="col-lg col-md-6" (click)="getCategories()">Categories</button>
               
               <mat-form-field class="col-lg col-md-6"> 
                 <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
@@ -298,7 +298,7 @@
                 <br>
               </div>
     
-              <button class="col-lg col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions</button>
+              <button type="button" class="col-lg col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions</button>
 
               <mat-form-field class="col-lg col-md-6"> 
                 <input type="text" matInput id="remark" name="remark" placeholder="Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">

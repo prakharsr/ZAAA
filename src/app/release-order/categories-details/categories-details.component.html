@@ -1,8 +1,7 @@
 <h2 mat-dialog-title>Categories Details</h2>
 
 <mat-dialog-content>
-  <div class="row">
-
+  <div class="container-fluid">
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">
@@ -11,67 +10,68 @@
       </div>
       <input id="search" name="search" type="text" class="form-control" [(ngModel)]="query" [ngbTypeahead]="searchCategories" placeholder="Search Categories" [resultFormatter]="categoryResultFormatter" [inputFormatter]="categoryInputFormatter" />
     </div>
-  
-    <div class="form-row">
-      <div class="form-group col">
-        <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel" [disabled]="fixedCategoriesLevel >= 0">
-          <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none"></div>
-  
-      <div class="form-group col" *ngIf="category1 && category1.subcategories.length">
-        <select class="form-control" name="category2" [(ngModel)]="category2" id="category2" [disabled]="fixedCategoriesLevel >= 1">
-          <option *ngFor="let item of category1.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
 
-      <div class="w-100 d-block d-md-none"></div>
+    <br>
   
-      <div class="form-group col" *ngIf="category2 && category2.subcategories.length">
-        <select class="form-control" name="category3" [(ngModel)]="category3" id="category3" [disabled]="fixedCategoriesLevel >= 2">
-          <option *ngFor="let item of category2.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
-  
-      <div class="form-group col" *ngIf="category3 && category3.subcategories.length">
-        <select class="form-control" name="category4" [(ngModel)]="category4" id="category4" [disabled]="fixedCategoriesLevel >= 3">
-          <option *ngFor="let item of category3.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-md-none"></div>
-  
-      <div class="form-group col" *ngIf="category4 && category4.subcategories.length">
-        <select class="form-control" name="category5" [(ngModel)]="category5" id="category5" [disabled]="fixedCategoriesLevel >= 4">
-          <option *ngFor="let item of category4.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-  
-      <div class="w-100 d-block d-sm-none"></div>
-  
-      <div class="form-group col" *ngIf="category5 && category5.subcategories.length">
-        <select class="form-control" name="category6" [(ngModel)]="category6" id="category6" [disabled]="fixedCategoriesLevel >= 5">
-          <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
-        </select>
-      </div>
-      
-    </div>
-  
-    <div *ngIf="category1Field.invalid && (category1Field.dirty || category1Field.touched)" class="text-danger">
-      <div *ngIf="category1Field.errors.required">
-        Category is required.
-      </div>
-      <br>
-    </div>
+    <form #categoriesForm="ngForm">
+      <div class="form-row">
+        <div class="form-group col">
+          <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" required #category1Field="ngModel" [disabled]="fixedCategoriesLevel >= 0">
+            <option *ngFor="let item of categories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
+    
+        <div class="w-100 d-block d-sm-none"></div>
+    
+        <div class="form-group col" *ngIf="category1 && category1.subcategories.length">
+          <select class="form-control" name="category2" [(ngModel)]="category2" id="category2" [disabled]="fixedCategoriesLevel >= 1">
+            <option *ngFor="let item of category1.subcategories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
 
-  </div>
-  
+        <div class="w-100 d-block d-md-none"></div>
+    
+        <div class="form-group col" *ngIf="category2 && category2.subcategories.length">
+          <select class="form-control" name="category3" [(ngModel)]="category3" id="category3" [disabled]="fixedCategoriesLevel >= 2">
+            <option *ngFor="let item of category2.subcategories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
+    
+        <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
+    
+        <div class="form-group col" *ngIf="category3 && category3.subcategories.length">
+          <select class="form-control" name="category4" [(ngModel)]="category4" id="category4" [disabled]="fixedCategoriesLevel >= 3">
+            <option *ngFor="let item of category3.subcategories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
+    
+        <div class="w-100 d-block d-md-none"></div>
+    
+        <div class="form-group col" *ngIf="category4 && category4.subcategories.length">
+          <select class="form-control" name="category5" [(ngModel)]="category5" id="category5" [disabled]="fixedCategoriesLevel >= 4">
+            <option *ngFor="let item of category4.subcategories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>
+    
+        <div class="w-100 d-block d-sm-none"></div>
+    
+        <div class="form-group col" *ngIf="category5 && category5.subcategories.length">
+          <select class="form-control" name="category6" [(ngModel)]="category6" id="category6" [disabled]="fixedCategoriesLevel >= 5">
+            <option *ngFor="let item of category5.subcategories" [ngValue]="item">{{item.name}}</option>
+          </select>
+        </div>      
+      </div>
+    
+      <div *ngIf="category1Field.invalid && (category1Field.dirty || category1Field.touched)" class="text-danger">
+        <div *ngIf="category1Field.errors.required">
+          Category is required.
+        </div>
+        <br>
+      </div>
+    </form>
+  </div>  
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="details">Submit</button>  
+  <button mat-button [disabled]="!categoriesForm.form.valid" [mat-dialog-close]="details">Submit</button>  
 </mat-dialog-actions>
