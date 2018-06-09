@@ -22,6 +22,7 @@ export class CategoriesDetails {
 })
 export class CategoriesDetailsComponent implements OnInit {
 
+  query;
   details = new CategoriesDetails();
   fixedCategoriesLevel = -1;
   releaseorder = new ReleaseOrder();
