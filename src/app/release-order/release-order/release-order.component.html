@@ -34,6 +34,30 @@
             </div>
           </li>
         </ul>
+        <div id="cat_small_rev" class="card-header text-light small" *ngIf="releaseorder.adCategory1 != '' || releaseorder.adCategory2 != '' || releaseorder.adCategory3 != '' || releaseorder.adCategory4 != '' || releaseorder.adCategory5 != '' || releaseorder.adCategory6 != ''">
+          Categories
+        </div>
+        <ul id="cat_small_rev" class="list-group list-group-flush small">
+          <li class="list-group-item" *ngIf="releaseorder.adCategory1">{{releaseorder.adCategory1}}</li>
+          <li class="list-group-item" *ngIf="releaseorder.adCategory2">{{releaseorder.adCategory2}}</li>
+          <li class="list-group-item" *ngIf="releaseorder.adCategory3">{{releaseorder.adCategory3}}</li>
+          <li class="list-group-item" *ngIf="releaseorder.adCategory4">{{releaseorder.adCategory4}}</li>
+          <li class="list-group-item" *ngIf="releaseorder.adCategory5">{{releaseorder.adCategory5}}</li>
+          <li class="list-group-item" *ngIf="releaseorder.adCategory6">{{releaseorder.adCategory6}}</li>
+        </ul>
+        <div id="ins_small_rev" class="card-header text-light small" *ngIf="releaseorder.insertions != ''">
+          Insertions
+        </div>
+        <ul id="ins_small_rev" class="list-group list-group-flush small">
+          <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
+            <div class="row">
+              <div class="col">{{toDate(item.date) | date}}</div>
+              <div class="col-auto text-success" *ngIf="item.marked">
+                <mat-icon>check</mat-icon>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-lg-8">
@@ -65,6 +89,19 @@
                   </mat-error>
                 </mat-form-field>
 
+            </div>
+            <div id="cat_small">
+              <label>Categories</label>
+              <div *ngIf="releaseorder.adCategory1 != '' || releaseorder.adCategory2 != '' || releaseorder.adCategory3 != '' || releaseorder.adCategory4 != '' || releaseorder.adCategory5 != '' || releaseorder.adCategory6 != ''">
+                <ul class="list-group list-group-flush small">
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory1">{{releaseorder.adCategory1}}</li>
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory2">{{releaseorder.adCategory2}}</li>
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory3">{{releaseorder.adCategory3}}</li>
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory4">{{releaseorder.adCategory4}}</li>
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory5">{{releaseorder.adCategory5}}</li>
+                  <li class="list-group-item" *ngIf="releaseorder.adCategory6">{{releaseorder.adCategory6}}</li>
+                </ul>
+              </div>
             </div>
            
             <div class="row">
@@ -140,30 +177,6 @@
 
             <mat-card-actions>
               <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
-            </mat-card-actions>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Executive Details</mat-card-title>
-
-            <div class="row">
-              <mat-form-field class="col-lg col-md-6">
-                <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-                <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
-                  Executive Name is required.
-                </mat-error>
-              </mat-form-field>
-              
-              <mat-form-field class="col-lg col-md-6">
-                <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-                <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
-                  Executive Organisation is required.
-                </mat-error>
-              </mat-form-field>
-            </div>
-            
-
-            <mat-card-actions>
-              <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
             </mat-card-actions>
           </mat-card>
           <mat-card>
@@ -305,6 +318,22 @@
               </mat-form-field>
 
             </div>
+            <br>
+            <div id="ins_small">
+              <label>Insertions</label>
+              <div *ngIf="releaseorder.insertions != ''">
+                <ul class="list-group list-group-flush small">
+                  <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
+                    <div class="row">
+                      <div class="col">{{toDate(item.date) | date}}</div>
+                      <div class="col-auto text-success" *ngIf="item.marked">
+                        <mat-icon>check</mat-icon>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
 
             <div *ngIf="adCountPaidField.valid">
               <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
@@ -413,45 +442,54 @@
           <mat-card>
             <mat-card-title>Premiums</mat-card-title>
             <ng-container *ngIf="isTypeWords">
-              <div class="form-row">
-                <div class="col-auto align-self-center">
-                  <mat-checkbox name="cBox" [(ngModel)]="releaseorder.PremiumBox.Included"></mat-checkbox>
+              <div class="row">
+                <div class="col-lg col-md-6">
+                    <div class="form-row">
+                      <div class="col-auto align-self-center">
+                        <mat-checkbox name="cBox" [(ngModel)]="releaseorder.PremiumBox.Included"></mat-checkbox>
+                      </div>
+                      <div class="col">
+                        <mat-form-field class="premiums">
+                          <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
+                          <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
+                            Box Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
-                    <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
-                      Box Premium Amount is required.
-                    </mat-error>
-                  </mat-form-field>
+                <div class="col-lg col-md-6">
+                    <div class="form-row">
+                      <div class="col-auto align-self-center">
+                        <mat-checkbox name="cBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Included"></mat-checkbox>
+                      </div>
+                      <div class="col">
+                        <mat-form-field class="premiums">
+                          <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
+                          <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
+                            Base Colour Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg col-md-6">
+                  <div class="form-row">
+                      <div class="col-auto align-self-center">
+                        <mat-checkbox name="cCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Included"></mat-checkbox>
+                      </div>
+                      <div class="col">
+                        <mat-form-field class="premiums">
+                          <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
+                          <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
+                            Check Mark Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col-auto align-self-center">
-                  <mat-checkbox name="cBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Included"></mat-checkbox>
-                </div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
-                    <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
-                      Base Colour Premium Amount is required.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-auto align-self-center">
-                  <mat-checkbox name="cCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Included"></mat-checkbox>
-                </div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
-                    <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
-                      Check Mark Premium Amount is required.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
+              
               <div class="form-row">
                 <div class="col-auto align-self-center">
                   <mat-checkbox name="cEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Included"></mat-checkbox>
@@ -584,7 +622,23 @@
                 </ng-container>
               </div>
             </ng-container>
-          
+            <div class="row">
+              <mat-form-field class="col-lg col-md-6">
+                <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+                <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
+                  Executive Name is required.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field class="col-lg col-md-6">
+                <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+                <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
+                  Executive Organisation is required.
+                </mat-error>
+              </mat-form-field>
+
+              <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+            </div>
           </mat-card>
 
           <mat-card>

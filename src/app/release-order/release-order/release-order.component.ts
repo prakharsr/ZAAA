@@ -91,6 +91,10 @@ export class ReleaseOrderComponent implements OnInit {
     return false;
   }
 
+  toDate(date: NgbDate) {
+    return new Date(date.year, date.month - 1, date.day);
+  }
+  
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {

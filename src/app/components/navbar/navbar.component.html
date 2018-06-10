@@ -111,9 +111,9 @@
                     <button mat-menu-item routerLink="/invoices">View Invoices</button>
                 </mat-menu>
                 
-                <button mat-button [matMenuTriggerFor]="rcmenu">Payment Receipts</button>
+                <button mat-button [matMenuTriggerFor]="prcmenu">Payment Receipts</button>
             
-                <mat-menu #rcmenu="matMenu">
+                <mat-menu #prcmenu="matMenu">
                     <button mat-menu-item routerLink="/invoices">Create Payment Receipt</button>    
                     <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
                     <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
@@ -128,9 +128,9 @@
                     <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
                 </mat-menu> 
 
-                <button mat-button [matMenuTriggerFor]="dirmenu">Rate Cards</button>
+                <button mat-button [matMenuTriggerFor]="rcmenu">Rate Cards</button>
             
-                <mat-menu #dirmenu="matMenu">
+                <mat-menu #rcmenu="matMenu">
                     <button mat-menu-item routerLink="/ratecards/new">Create Rate Card</button>
                     <button mat-menu-item routerLink="/ratecards">View Rate Card</button>
                 </mat-menu> 
@@ -145,15 +145,15 @@
                 <mat-menu #purchase="matMenu">
                     <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
                     <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
-                    <button mat-menu-item routerLink="/accounts/creditdebitnotes">Credit/ Debit Notes</button>
-                    <button mat-menu-item routerLink="/accounts/gst">GST</button>
+                    <button mat-menu-item routerLink="/accounts/notes/mediahouse">Credit/ Debit Notes</button>
+                    <button mat-menu-item routerLink="/accounts/gst/month">GST</button>
                 </mat-menu>
 
                 <mat-menu #sale="matMenu">
                     <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
                     <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
-                    <button mat-menu-item routerLink="/accounts/creditdebitnotes">Credit/ Debit Notes</button>
-                    <button mat-menu-item routerLink="/accounts/gst">GST</button>
+                    <button mat-menu-item routerLink="/accounts/notes/client">Credit/ Debit Notes</button>
+                    <button mat-menu-item routerLink="/accounts/gst/client">GST</button>
                 </mat-menu>
             </div>  
         </div>
