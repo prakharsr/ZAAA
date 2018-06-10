@@ -34,21 +34,21 @@
             </div>
           </li>
         </ul>
-        <div id="cat_small_rev" class="card-header text-light small" *ngIf="releaseorder.adCategory1 != '' || releaseorder.adCategory2 != '' || releaseorder.adCategory3 != '' || releaseorder.adCategory4 != '' || releaseorder.adCategory5 != '' || releaseorder.adCategory6 != ''">
+        <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">
           Categories
         </div>
-        <ul id="cat_small_rev" class="list-group list-group-flush small">
-          <li class="list-group-item" *ngIf="releaseorder.adCategory1">{{releaseorder.adCategory1}}</li>
-          <li class="list-group-item" *ngIf="releaseorder.adCategory2">{{releaseorder.adCategory2}}</li>
-          <li class="list-group-item" *ngIf="releaseorder.adCategory3">{{releaseorder.adCategory3}}</li>
-          <li class="list-group-item" *ngIf="releaseorder.adCategory4">{{releaseorder.adCategory4}}</li>
-          <li class="list-group-item" *ngIf="releaseorder.adCategory5">{{releaseorder.adCategory5}}</li>
-          <li class="list-group-item" *ngIf="releaseorder.adCategory6">{{releaseorder.adCategory6}}</li>
+        <ul class="list-group list-group-flush small d-none d-lg-block">
+          <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
+          <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
+          <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
+          <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
+          <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
+          <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
         </ul>
-        <div id="ins_small_rev" class="card-header text-light small" *ngIf="releaseorder.insertions != ''">
+        <div class="card-header text-light small d-none d-lg-block" *ngIf="releaseorder.insertions.length">
           Insertions
         </div>
-        <ul id="ins_small_rev" class="list-group list-group-flush small">
+        <ul class="list-group list-group-flush small d-none d-lg-block"  *ngIf="releaseorder.insertions.length">
           <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
             <div class="row">
               <div class="col">{{toDate(item.date) | date}}</div>
@@ -66,65 +66,63 @@
             <mat-card-title>Publication Details</mat-card-title>
             
             <div class="row">
-                <mat-form-field class="col-lg col-md-6">
-                  <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-                  <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
-                    Media House Name is required.
-                  </mat-error>
-                </mat-form-field>
-                  
-                <mat-form-field class="col-lg col-md-6">
-                  <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
-                  <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
-                    Edition Name is required.
-                  </mat-error>
-                </mat-form-field>
-            
-                <mat-form-field class="col-lg col-md-6">
-                  <mat-select name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
-                    <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
-                    Media type is required.
-                  </mat-error>
-                </mat-form-field>
-
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+                <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
+                  Media House Name is required.
+                </mat-error>
+              </mat-form-field>
+                
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
+                <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
+                  Edition Name is required.
+                </mat-error>
+              </mat-form-field>
+          
+              <mat-form-field class="col-lg col-md-6">
+                <mat-select name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                  Media type is required.
+                </mat-error>
+              </mat-form-field>
             </div>
-            <div id="cat_small">
+
+            <div class="d-lg-none">
               <label>Categories</label>
-              <div *ngIf="releaseorder.adCategory1 != '' || releaseorder.adCategory2 != '' || releaseorder.adCategory3 != '' || releaseorder.adCategory4 != '' || releaseorder.adCategory5 != '' || releaseorder.adCategory6 != ''">
+              <div *ngIf="selectedCategories[0]">
                 <ul class="list-group list-group-flush small">
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory1">{{releaseorder.adCategory1}}</li>
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory2">{{releaseorder.adCategory2}}</li>
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory3">{{releaseorder.adCategory3}}</li>
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory4">{{releaseorder.adCategory4}}</li>
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory5">{{releaseorder.adCategory5}}</li>
-                  <li class="list-group-item" *ngIf="releaseorder.adCategory6">{{releaseorder.adCategory6}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
+                  <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
                 </ul>
               </div>
             </div>
            
             <div class="row">
+              <mat-form-field class="col-lg col-md-6">
+                <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
 
-                <mat-form-field class="col-lg col-md-6">
-                  <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
-                    <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
-                    State is required.
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="col-lg col-md-6">
-                  <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-                  <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
-                    GSTIN is required.
-                  </mat-error>
-                  <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
-                    GSTIN should be 15 characters long.
-                  </mat-error>
-                </mat-form-field>
-
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+                <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
+                  GSTIN is required.
+                </mat-error>
+                <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
+                  GSTIN should be 15 characters long.
+                </mat-error>
+              </mat-form-field>
             </div>
 
             <mat-card-actions>
@@ -136,21 +134,21 @@
             <mat-card-title>Client Details</mat-card-title>
 
            <div class="row">
-              <mat-form-field class="col-lg col-md-6">
-                <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-                <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
-                  Name is required.
-                </mat-error>
-              </mat-form-field>
-              
-              <mat-form-field class="col-lg col-md-6">
-                <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
-                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
-                  State is required.
-                </mat-error>
-              </mat-form-field>
+            <mat-form-field class="col-lg col-md-6">
+              <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+              <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+                Name is required.
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="col-lg col-md-6">
+              <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+                <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+                State is required.
+              </mat-error>
+            </mat-form-field>
            </div>
 
             <div class="form-row">
@@ -183,7 +181,6 @@
             <mat-card-title>Ad Details</mat-card-title>
 
             <div class="row">
-
               <mat-form-field class="col-lg col-md-6">
                   <mat-select matInput name="adType" [(ngModel)]="releaseorder.adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
@@ -273,8 +270,7 @@
                   <mat-error *ngIf="customLField.errors && customLField.errors.required">
                     Length is required.
                   </mat-error>
-                </mat-form-field>
-        
+                </mat-form-field>        
               </div>
               <div class="col-auto form-text">&times;</div>
               <div class="col">
@@ -319,9 +315,9 @@
 
             </div>
             <br>
-            <div id="ins_small">
+            <div class="d-lg-none">
               <label>Insertions</label>
-              <div *ngIf="releaseorder.insertions != ''">
+              <div *ngIf="releaseorder.insertions">
                 <ul class="list-group list-group-flush small">
                   <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
                     <div class="row">
