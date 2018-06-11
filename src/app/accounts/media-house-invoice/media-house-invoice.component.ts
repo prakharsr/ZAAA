@@ -19,6 +19,7 @@ import {
 
 import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
+import { MediaHouseInvoice } from '..';
 
 @Component({
   selector: 'app-media-house-invoice',
@@ -81,7 +82,28 @@ export class MediaHouseInvoiceComponent implements OnInit {
   }
 
   show() {
-    this.dialog.show(MediaHouseInvoiceDialogComponent);
+    this.dialog.show(MediaHouseInvoiceDialogComponent)
+      .subscribe((invoice: MediaHouseInvoice) => {
+        invoice.insertions = this.insertionCheckList
+          .filter(item => item.checked)
+          .map(item => {
+            return{
+              ...item.insertion,
+              insertionDate: this.toDate(item.insertion.date)
+            }
+          });
+
+        this.api.createMediaHouseInvoice(invoice).subscribe(data => {
+          if (data.success) {
+            this.step = 0;
+          }
+          else {
+            console.log(data);
+
+            this.notifications.show(data.msg);
+          }
+        });
+    });
   }
   
   searchClient = (text: Observable<string>) => {
