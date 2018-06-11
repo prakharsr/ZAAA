@@ -19,6 +19,7 @@ import {
 
 import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
+import { MediaHouseInvoice } from '..';
 
 @Component({
   selector: 'app-media-house-invoice',
@@ -33,6 +34,7 @@ export class MediaHouseInvoiceComponent implements OnInit {
   pageCount: number;
 
   list: MediaHouseInvoiceItem[] = [];
+  selectedRoId = "";
 
   insertionCheckList: { insertion: Insertion, checked: boolean }[] = [];
 
@@ -81,7 +83,33 @@ export class MediaHouseInvoiceComponent implements OnInit {
   }
 
   show() {
-    this.dialog.show(MediaHouseInvoiceDialogComponent);
+    this.dialog.show(MediaHouseInvoiceDialogComponent)
+      .subscribe((invoice: MediaHouseInvoice) => {
+        invoice.insertions = this.insertionCheckList
+          .filter(item => item.checked)
+          .map(item => {
+            return{
+              ...item.insertion,
+              insertionDate: this.toDate(item.insertion.date),
+              Amount: 0,
+              collectedAmount: 0,
+              pendingAmount: 0,
+            }
+          });
+
+        invoice.releaseOrderId = this.selectedRoId;
+
+        this.api.createMediaHouseInvoice(invoice).subscribe(data => {
+          if (data.success) {
+            this.step = 0;
+          }
+          else {
+            console.log(data);
+
+            this.notifications.show(data.msg);
+          }
+        });
+    });
   }
   
   searchClient = (text: Observable<string>) => {
@@ -189,6 +217,8 @@ export class MediaHouseInvoiceComponent implements OnInit {
 
   selectRO(i: number) {
     ++this.step;
+
+    this.selectedRoId = this.list[i]._id;
 
     this.insertionCheckList = this.list[i].entries.map(entry => {
       let ins: any = entry.insertions;
