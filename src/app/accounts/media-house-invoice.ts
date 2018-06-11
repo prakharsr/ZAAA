@@ -7,7 +7,7 @@ class InsertionWithDateObject extends Insertion {
 export class MediaHouseInvoice {
     constructor(public MHINo = "") { }
 
-    id = ""; // Release Order Id
+    releaseOrderId = ""; // Release Order Id
 
     insertions: InsertionWithDateObject[] = [];
 

@@ -34,6 +34,7 @@ export class MediaHouseInvoiceComponent implements OnInit {
   pageCount: number;
 
   list: MediaHouseInvoiceItem[] = [];
+  selectedRoId = "";
 
   insertionCheckList: { insertion: Insertion, checked: boolean }[] = [];
 
@@ -89,9 +90,14 @@ export class MediaHouseInvoiceComponent implements OnInit {
           .map(item => {
             return{
               ...item.insertion,
-              insertionDate: this.toDate(item.insertion.date)
+              insertionDate: this.toDate(item.insertion.date),
+              Amount: 0,
+              collectedAmount: 0,
+              pendingAmount: 0,
             }
           });
+
+        invoice.releaseOrderId = this.selectedRoId;
 
         this.api.createMediaHouseInvoice(invoice).subscribe(data => {
           if (data.success) {
@@ -211,6 +217,8 @@ export class MediaHouseInvoiceComponent implements OnInit {
 
   selectRO(i: number) {
     ++this.step;
+
+    this.selectedRoId = this.list[i]._id;
 
     this.insertionCheckList = this.list[i].entries.map(entry => {
       let ins: any = entry.insertions;
