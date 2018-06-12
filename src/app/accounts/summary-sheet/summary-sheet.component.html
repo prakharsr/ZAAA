@@ -1,0 +1,65 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Summary Sheet</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<div class="container">
+  <div class="form-row">
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br><br>
+
+  <form #ssForm="ngForm" (ngSubmit)="submit()">
+    <button type="submit" class="btn btn-success" [disabled]="!ssForm.form.valid">Submit</button>
+
+    <br><br>
+
+    <div *ngFor="let insertion of insertions">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <strong>Client:</strong> {{insertion.clientName}}<br>
+              <strong>Publication:</strong> {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
+              <strong>Executive:</strong> {{insertion.executiveName}} - {{insertion.executiveOrg}}
+            </div>
+            <div class="col-auto">
+              {{toDate(insertion.insertions.date) | date}}
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
+</div>

@@ -22,6 +22,8 @@ import { ExecutivePaymentsListResolver } from './executive-payments-list-resolve
 import { CreateNoteComponent } from './create-note/create-note.component';
 import { NotesListResolver } from './notes-list-resolver.service';
 import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
+import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
+import { InsertionListResolver } from 'app/release-order';
 
 const routes: Routes = [
   {
@@ -174,6 +176,20 @@ const routes: Routes = [
                 component: AccountsGstComponent
               }
             ]
+          }
+        ]
+      },
+      {
+        path: 'summarysheet',
+        children: [
+          { path: '', redirectTo: '1', pathMatch: 'full' },
+          {
+            path: ':page',
+            component: SummarySheetComponent,
+            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+            resolve: {
+              resolved: InsertionListResolver
+            }
           }
         ]
       }
