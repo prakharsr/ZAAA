@@ -40,9 +40,6 @@ export class AccountsApiService {
       page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
-      clientName: params.client,
-      executiveName: params.executive,
-      executiveOrg: params.executiveOrg,
       insertionPeriod: params.past
     }).pipe(
       map(data => {

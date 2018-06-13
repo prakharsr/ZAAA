@@ -21,9 +21,7 @@ export class MediaHouseInvoiceListResolver implements Resolve<Result> {
 
     let searchParams = new ReleaseOrderSearchParams(route.queryParamMap.get('mediaHouse'),
       route.queryParamMap.get('edition'),
-      route.queryParamMap.get('client'),
-      route.queryParamMap.get('executive'),
-      route.queryParamMap.get('executiveOrg'),
+      null, null, null,
       +route.queryParamMap.get('past'));
 
     return this.api.searchMediaHouseInvoice(page, searchParams).map(mediahouseinvoices => {

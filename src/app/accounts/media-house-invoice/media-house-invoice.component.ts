@@ -7,15 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrderSearchParams, Insertion } from 'app/release-order';
-
-import {
-  MediaHouse,
-  Executive,
-  Client,
-  MediaHouseApiService,
-  ExecutiveApiService,
-  ClientApiService
-} from 'app/directory';
+import { MediaHouse, MediaHouseApiService } from 'app/directory';
 
 import { PageData } from 'app/models';
 import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
@@ -42,18 +34,13 @@ export class MediaHouseInvoiceComponent implements OnInit {
   
   mediaHouse;
   edition;
-  client;
-  executive;
-  executiveOrg;
 
   constructor(private dialog: DialogService,
     private api: AccountsApiService,
     private route: ActivatedRoute,
     private notifications: NotificationService,
     private router: Router,
-    private clientApi: ClientApiService,
-    private mediaHouseApi: MediaHouseApiService,
-    private executiveApi: ExecutiveApiService) { }
+    private mediaHouseApi: MediaHouseApiService,) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams } }) => {
@@ -66,17 +53,6 @@ export class MediaHouseInvoiceComponent implements OnInit {
       pub.address.edition = data.resolved.search.edition;
 
       this.mediaHouse = this.edition = pub;
-     
-      let cl = new Client();
-      cl.orgName = data.resolved.search.client;
-
-      this.client = cl;
-
-      let exe = new Executive();
-      exe.executiveName = data.resolved.search.executive;
-      exe.orgName = data.resolved.search.executiveOrg;
-
-      this.executive = this.executiveOrg = exe;
 
       this.pastDays = data.resolved.search.past;
     });
@@ -111,46 +87,6 @@ export class MediaHouseInvoiceComponent implements OnInit {
         });
     });
   }
-  
-  searchClient = (text: Observable<string>) => {
-    return text.debounceTime(300)
-      .distinctUntilChanged()
-      .switchMap(term => this.clientApi.searchClients(term))
-      .catch(() => of([]));
-  }
-
-  clientNameFormatter = (client: Client) => client.orgName;
-  
-  searchExecutive = (text: Observable<string>) => {
-    return text.debounceTime(300)
-      .distinctUntilChanged()
-      .switchMap(term => this.executiveApi.searchExecutives(term))
-      .catch(() => of([]));
-  }
-
-  private get executiveName() {
-    if (this.executive instanceof String) {
-      return this.executive;
-    }
-      
-    return this.executive ? this.executive.executiveName : null;
-  }
-
-  searchExecutiveOrg = (text: Observable<string>) => {
-    return text.debounceTime(300)
-      .distinctUntilChanged()
-      .switchMap(term => this.executiveApi.searchExecutivesByOrg(this.executiveName, term))
-      .catch(() => of([]));
-  }
-
-  executiveNameFormatter = (executive: Executive) => {
-    this.executiveOrg = executive;
-
-    return executive.executiveName;
-  }
-  
-  executiveOrgFormatter = (executive: Executive) => executive.orgName;
-
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
@@ -193,25 +129,9 @@ export class MediaHouseInvoiceComponent implements OnInit {
     return this.edition ? (this.edition.address ? this.edition.address.edition : null) : null;
   }
 
-  private get clientName() {
-    if (this.client instanceof String) {
-      return this.client;
-    }
-
-    return this.client ? this.client.orgName : null;
-  }
-
-  private get exeOrg() {
-    if (this.executiveOrg instanceof String) {
-      return this.executiveOrg;
-    }
-
-    return this.executiveOrg ? this.executiveOrg.orgName : null;
-  }
-
   search(pageNo: number) {
-    this.router.navigate(['/releaseorders/check/list/', pageNo], {
-      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
+    this.router.navigate(['/accounts/mediahouseinvoice/list/', pageNo], {
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, this.pastDays)
     })
   }
 

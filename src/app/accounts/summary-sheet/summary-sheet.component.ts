@@ -56,7 +56,7 @@ export class SummarySheetComponent implements OnInit {
 
   search(pageNo: number) {
     this.router.navigate(['/accounts/summarysheet/', pageNo], {
-      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, '', '', '', 0)
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, 0)
     })
   }
 
