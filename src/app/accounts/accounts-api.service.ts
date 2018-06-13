@@ -222,4 +222,8 @@ export class AccountsApiService {
       period: this.genPeriod(month)
     }, { responseType: 'blob' });
   }
+
+  generateSummarySheet(insertions: { _id: string, amount: number }[]) {
+    return this.api.post('/user/summarySheet', insertions);
+  }
 }
