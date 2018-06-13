@@ -8,6 +8,7 @@ import { PageData, MailingDetails } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
 import { CreditDebitNote } from './credit-debit-note';
+import { MediaHouseInvoice } from '.';
 
 export class PaymentsResponse {
   publicationName = "";
@@ -54,6 +55,10 @@ export class AccountsApiService {
         return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
       })
     );
+  }
+
+  createMediaHouseInvoice(invoice: MediaHouseInvoice) {
+    return this.api.post('/user/mediahouseinvoice/', invoice);
   }
 
   setReceiptStatus(receipt: PaymentReceipt, status: number) {
@@ -216,5 +221,9 @@ export class AccountsApiService {
     return this.api.post('/user/invoice/taxSheet', {
       period: this.genPeriod(month)
     }, { responseType: 'blob' });
+  }
+
+  generateSummarySheet(insertions: { _id: string, amount: number }[]) {
+    return this.api.post('/user/summarySheet', insertions);
   }
 }

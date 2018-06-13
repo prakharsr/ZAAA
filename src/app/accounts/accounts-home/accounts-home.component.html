@@ -8,21 +8,24 @@
 
 <div class="container">
   <div>
-    <a routerLink="/accounts/mediahouseinvoice">Media House Invoice</a>
+    <a routerLink="mediahouseinvoice">Media House Invoice</a>
   </div>
   <div>
-    <a routerLink="/accounts/clientreceipts">Client Receipts</a>
+    <a routerLink="clientreceipts">Client Receipts</a>
   </div>
   <div>
-    <a routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</a>
+    <a routerLink="clientinvoicepayments">Client Invoice Payments</a>
   </div>
   <div>
-    <a routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</a>
+    <a routerLink="executiveinvoicepayments">Executive Invoice Payments</a>
   </div>
   <div>
-    <a routerLink="/accounts/notes">Credit / Debit Notes</a>
+    <a routerLink="notes">Credit / Debit Notes</a>
   </div>
   <div>
-    <a routerLink="/accounts/gst" *ngIf="firm.GSTIN.GSTType == 'RD'">GST</a>
+    <a routerLink="gst" *ngIf="firm.GSTIN.GSTType == 'RD'">GST</a>
+  </div>  
+  <div>
+    <a routerLink="summarysheet">Summary Sheet</a>
   </div>
 </div>

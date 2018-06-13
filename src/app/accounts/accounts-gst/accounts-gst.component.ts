@@ -109,7 +109,7 @@ export class AccountsGstComponent implements OnInit {
       else {
         console.log(data);
         
-        let blob = new Blob([data], { type: 'application/xlsx' });
+        let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         let url = this.windowService.window.URL.createObjectURL(blob);
 
         let a = this.windowService.window.document.createElement('a');
