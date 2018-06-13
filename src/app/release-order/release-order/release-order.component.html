@@ -89,20 +89,6 @@
                 </mat-error>
               </mat-form-field>
             </div>
-
-            <div class="d-lg-none">
-              <label>Categories</label>
-              <div *ngIf="selectedCategories[0]">
-                <ul class="list-group list-group-flush small">
-                  <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
-                  <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
-                  <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
-                  <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
-                  <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
-                  <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
-                </ul>
-              </div>
-            </div>
            
             <div class="row">
               <mat-form-field class="col-lg col-md-6">
@@ -212,7 +198,7 @@
                 <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
               </mat-form-field>
 
-              <button type="button" mat-button color="primary"  class="col-lg col-md-6" (click)="getCategories()">Categories</button>
+              <button type="button" mat-button color="primary" class="col-lg col-md-6" (click)="getCategories()">Categories *</button>
               
               <mat-form-field class="col-lg col-md-6"> 
                 <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
@@ -221,8 +207,19 @@
                 </mat-error>
               </mat-form-field>
 
-            </div>        
+            </div>   
 
+            <!-- <div class="row small" id="small_cat" *ngIf="selectedCategories[0]">
+              &nbsp;&nbsp;&nbsp;Categories :
+              <div *ngIf="selectedCategories[0]">  {{selectedCategories[0].name}}</div>
+              <div *ngIf="selectedCategories[1]">, {{selectedCategories[1].name}}</div>
+              <div *ngIf="selectedCategories[2]">, {{selectedCategories[2].name}}</div>
+              <div *ngIf="selectedCategories[3]">, {{selectedCategories[3].name}}</div>
+              <div *ngIf="selectedCategories[4]">, {{selectedCategories[4].name}}</div>
+              <div *ngIf="selectedCategories[5]">, {{selectedCategories[5].name}}</div>
+            </div> -->
+            
+            <br>
             <label>Scheme</label>
             <mat-slide-toggle [(ngModel)]="customScheme" name="customScheme" [disabled]="schemes.length == 0">Custom</mat-slide-toggle>
 
@@ -307,7 +304,7 @@
                 <br>
               </div>
     
-              <button type="button" class="col-lg col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions</button>
+              <button type="button" class="col-lg col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions *</button>
 
               <mat-form-field class="col-lg col-md-6"> 
                 <input type="text" matInput id="remark" name="remark" placeholder="Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
