@@ -46,6 +46,8 @@
     </div>
   </div>
 
+  <pre>{{ list | json }}</pre>
+
   <br>
 
   <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>  
