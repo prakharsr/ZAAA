@@ -23,6 +23,7 @@ import { CreateNoteComponent } from './create-note/create-note.component';
 import { NotesListResolver } from './notes-list-resolver.service';
 import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
+import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
     CreditDebitNotesComponent,
     AccountsGstComponent,
     CreateNoteComponent,
-    SummarySheetComponent
+    SummarySheetComponent,
+    MediaHouseInvoiceListComponent
   ],
   entryComponents: [MediaHouseInvoiceDialogComponent],
   providers: [
