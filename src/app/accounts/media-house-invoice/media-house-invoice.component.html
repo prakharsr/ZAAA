@@ -11,16 +11,8 @@
 </ng-template>
 
 <div class="container">
-  <div class="form-row">
-    <div class="form-group col">
-      <input type="text" class="form-control" [(ngModel)]="releaseOrder" [ngbTypeahead]="searchRO" placeholder="Release Order No" [resultTemplate]="rtRO" [inputFormatter]="roNoFormatter"/>
-    </div>
-
-    <div class="col-auto">
-      <button class="btn btn-info" (click)="search(1)">
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="releaseOrder" [ngbTypeahead]="searchRO" placeholder="Release Order No" [resultTemplate]="rtRO" [inputFormatter]="roNoFormatter"/>
   </div>
   
   <br>
