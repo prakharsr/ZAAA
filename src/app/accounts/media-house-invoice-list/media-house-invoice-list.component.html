@@ -59,7 +59,7 @@
         <strong>Date:</strong> {{insertion.insertionDate | date}}<br>
         <strong>Amount:</strong> ₹ {{insertion.Amount | number}}<br>
         <strong>Collected:</strong> ₹ {{insertion.collectedAmount}}<br>
-        <strong>Pending:</strong> ₹ {{insertion.pendingAmount}}
+        <strong>Pending:</strong> ₹ {{insertion.Amount - insertion.collectedAmount}}
       </li>
     </ul>
   </div>
