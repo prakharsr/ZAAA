@@ -35,14 +35,11 @@ export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchMediaHouseInvoice(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
-    return this.api.post('/user/mediahouseinvoice/search', {
+  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
+    return this.api.post('/user/summarySheet/search', {
       page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
-      clientName: params.client,
-      executiveName: params.executive,
-      executiveOrg: params.executiveOrg,
       insertionPeriod: params.past
     }).pipe(
       map(data => {
@@ -53,6 +50,25 @@ export class AccountsApiService {
         }
 
         return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  searchMediaHouseInvoices(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoice>> {
+    return this.api.post('/user/mediahouseinvoice/search', {
+      page: page,
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      insertionPeriod: params.past
+    }).pipe(
+      map(data => {
+        let mediahouseinvoices : MediaHouseInvoice[] = [];
+
+        if (data.success) {
+          mediahouseinvoices = data.mediahouseInvoice;
+        }
+
+        return new PageData<MediaHouseInvoice>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
       })
     );
   }
@@ -224,6 +240,8 @@ export class AccountsApiService {
   }
 
   generateSummarySheet(insertions: { _id: string, amount: number }[]) {
-    return this.api.post('/user/summarySheet', insertions);
+    return this.api.post('/user/summarySheet', {
+      mhis: insertions
+    });
   }
 }

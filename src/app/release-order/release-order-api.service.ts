@@ -116,6 +116,22 @@ export class ReleaseOrderApiService {
     );
   }
 
+  searchByNo(keyword: string) : Observable<ReleaseOrder[]> {
+    return this.api.get('/user/releaseorders/searchByNo/' + keyword).pipe(
+      map(data => {
+        let releaseOrders: ReleaseOrder[] = [];
+
+        if (data.success) {
+          data.releaseOrders.forEach(element => {
+            releaseOrders.push(this.bodyToReleaseOrder(element));
+          });
+        }
+
+        return releaseOrders;
+      })
+    );
+  }
+
   searchInsertions(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<InsertionCheckItem>> {
     return this.api.post('/user/releaseorders/insertions/search', {
       page: page,

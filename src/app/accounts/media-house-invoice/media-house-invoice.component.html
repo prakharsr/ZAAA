@@ -1,96 +1,31 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Media House Invoices</div>
+    <div class="container">Create Media House Invoice</div>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <br>
 
-<ng-template #rtMediaHouse let-r="result">
-  {{r.pubName}} - {{r.address.edition}}
-</ng-template>
-
-<ng-template #rtEdition let-r="result">
-  {{r.address.edition}}
-</ng-template>
-
-<ng-template #rtClient let-r="result">
-  {{r.orgName}}
-</ng-template>
-
-<ng-template #rtExecutive let-r="result">
-  {{r.executiveName}} - {{r.orgName}}
-</ng-template>
-
-<ng-template #rtExecutiveOrg let-r="result">
-  {{r.orgName}}
+<ng-template #rtRO let-r="result">
+  {{r.releaseOrderNO}}
 </ng-template>
 
 <div class="container">
-
-  <div *ngIf="step == 0">
-    <h3>Select Release Order</h3>
-
-    <br>
-
-    <div class="form-row">
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
-      </div>
-  
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
-      </div>
-  
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
-      </div>
-  
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <input type="text" class="form-control" [(ngModel)]="executive" [ngbTypeahead]="searchExecutive" placeholder="Executive" [resultTemplate]="rtExecutive" [inputFormatter]="executiveNameFormatter" />
-      </div>
-  
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
-      </div>
-  
-      <div class="form-group col-sm-6 col-md-4 col-xl">
-        <select [(ngModel)]="pastDays" class="form-control">
-          <option [ngValue]="0">Any Time</option>
-          <option [ngValue]="7">Past 7 days</option>
-          <option [ngValue]="15">Past 15 days</option>
-          <option [ngValue]="30">Past 30 days</option>
-        </select>
-      </div>
-  
-      <div class="col-auto">
-        <button class="btn btn-info" (click)="search(1)">
-          <mat-icon>search</mat-icon>
-        </button>
-      </div>
-    </div>
-  
-    <br>
-
-    <div class="card mb-3" *ngFor="let item of list; index as i">
-      <div class="card-header">
-        <div class="row">
-          <div class="col">{{item._id}}</div>
-          <div class="col-auto">
-            <button class="btn btn-outline-info" (click)="selectRO(i)">Select</button>
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        {{item.entries[0].clientName}}
-      </div>
+  <div class="form-row">
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="releaseOrder" [ngbTypeahead]="searchRO" placeholder="Release Order No" [resultTemplate]="rtRO" [inputFormatter]="roNoFormatter"/>
     </div>
 
-    <br>
-
-    <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
   </div>
-  <div *ngIf="step == 1">
+  
+  <br>
+
+  <div *ngIf="insertionCheckList.length">
     <h3>Select Insertions</h3>
     <br>
     <div *ngFor="let item of insertionCheckList">
@@ -100,6 +35,5 @@
     <br>
 
     <button class="btn btn-outline-info" (click)="show()">Proceed</button>
-    <button class="btn btn-outline-danger" (click)="step = 0">Cancel</button>
   </div>
 </div>
