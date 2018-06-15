@@ -46,7 +46,23 @@
     </div>
   </div>
 
-  <pre>{{ list | json }}</pre>
+  <div class="card mat-elevation-z3 mb-3" *ngFor="let item of list">
+    <div class="card-body">
+      <strong>No:</strong> {{item.MHINo}}<br>
+      <strong>Date:</strong> {{item.MHIDate | date}}<br>
+      <strong>Gross Amount:</strong> {{item.MHIGrossAmount}}<br>
+      <strong>Tax Amount:</strong> {{item.MHITaxAmount}}<br><br>
+      <strong>Publication:</strong> {{item.publicationName}} - {{item.publicationEdition}}<br>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let insertion of item.insertions">
+        <strong>Date:</strong> {{insertion.insertionDate | date}}<br>
+        <strong>Amount:</strong> ₹ {{insertion.Amount | number}}<br>
+        <strong>Collected:</strong> ₹ {{insertion.collectedAmount}}<br>
+        <strong>Pending:</strong> ₹ {{insertion.pendingAmount}}
+      </li>
+    </ul>
+  </div>
 
   <br>
 

@@ -35,8 +35,8 @@ export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchMediaHouseInvoice(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
-    return this.api.post('/user/mediahouseinvoice/search', {
+  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
+    return this.api.post('/user/summarySheet/search', {
       page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
@@ -50,6 +50,25 @@ export class AccountsApiService {
         }
 
         return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
+      })
+    );
+  }
+
+  searchMediaHouseInvoices(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoice>> {
+    return this.api.post('/user/mediahouseinvoice/search', {
+      page: page,
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      insertionPeriod: params.past
+    }).pipe(
+      map(data => {
+        let mediahouseinvoices : MediaHouseInvoice[] = [];
+
+        if (data.success) {
+          mediahouseinvoices = data.mediahouseInvoice;
+        }
+
+        return new PageData<MediaHouseInvoice>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
       })
     );
   }

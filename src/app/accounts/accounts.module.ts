@@ -7,7 +7,7 @@ import {
   AccountsApiService,
   MediaHouseInvoiceComponent,
   MediaHouseInvoiceDialogComponent,
-  MediaHouseInvoiceListResolver,
+  SummarySheetListResolver,
   AccountsHomeComponent,
   ClientReceiptsComponent,
   ClientInvoicePaymentsComponent,
@@ -24,6 +24,7 @@ import { NotesListResolver } from './notes-list-resolver.service';
 import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
 import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
+import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
 
 @NgModule({
   imports: [
@@ -47,12 +48,13 @@ import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media
   entryComponents: [MediaHouseInvoiceDialogComponent],
   providers: [
     AccountsApiService,
-    MediaHouseInvoiceListResolver,
+    SummarySheetListResolver,
     ClientReceiptsListResolver,
     ClientPaymentsListResolver,
     ExecutivePaymentsListResolver,
     NotesListResolver,
-    InvoiceTaxListResolver
+    InvoiceTaxListResolver,
+    MediaHouseInvoiceListResolver
   ]
 })
 export class AccountsModule { }

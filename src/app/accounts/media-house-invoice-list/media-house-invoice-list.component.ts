@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
 import { AccountsApiService } from '../accounts-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from 'app/release-order';
+import { MediaHouseInvoice } from '../media-house-invoice';
 
 @Component({
   selector: 'app-media-house-invoice-list',
@@ -23,7 +23,7 @@ export class MediaHouseInvoiceListComponent implements OnInit {
   page: number;
   pageCount: number;
 
-  list: MediaHouseInvoiceItem[] = [];
+  list: MediaHouseInvoice[] = [];
 
   constructor(private api: AccountsApiService,
     private route: ActivatedRoute,
@@ -31,7 +31,7 @@ export class MediaHouseInvoiceListComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams } }) => {
+    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoice>, search: ReleaseOrderSearchParams } }) => {
       this.list = data.resolved.list.list;
       this.page = data.resolved.list.page;
       this.pageCount = data.resolved.list.pageCount;
@@ -89,5 +89,4 @@ export class MediaHouseInvoiceListComponent implements OnInit {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, this.pastDays)
     })
   }
-
 }
