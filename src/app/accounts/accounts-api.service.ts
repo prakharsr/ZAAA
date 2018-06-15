@@ -240,6 +240,8 @@ export class AccountsApiService {
   }
 
   generateSummarySheet(insertions: { _id: string, amount: number }[]) {
-    return this.api.post('/user/summarySheet', insertions);
+    return this.api.post('/user/summarySheet', {
+      mhis: insertions
+    });
   }
 }

@@ -36,14 +36,22 @@ export class SummarySheetComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    // USE MEDIAHOUSE INVOICE QUERY FUNCTION HERE
     this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams }}) => {
-      // this.insertions = data.resolved.list.list.map(insertion => {
-      //   return {
-      //     ...insertion,
-      //     amount: 0
-      //   }
-      // });
+      data.resolved.list.list.forEach(element => {
+        element.entries.forEach(entry => {
+          this.insertions.push({
+            _id: element._id,
+            clientName: entry.clientName,
+            checked: entry.checked,
+            executiveName: entry.executiveName,
+            executiveOrg: entry.executiveOrg,
+            publicationEdition: entry.publicationEdition,
+            publicationName: entry.publicationName,
+            insertions: entry.insertions,
+            amount: 0
+          });
+        });
+      });
       
       this.page = data.resolved.list.page;
       this.pageCount = data.resolved.list.pageCount;
