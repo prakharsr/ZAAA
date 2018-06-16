@@ -30,6 +30,7 @@ import {
   NavbarComponent,
   LoaderComponent
 } from './components';
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {
     InvoiceModule,
     ReceiptsModule,
     AccountsModule,
+    ReportsModule,
     AppRoutingModule
   ],
   providers: [],
