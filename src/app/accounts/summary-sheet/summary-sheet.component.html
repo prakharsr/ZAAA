@@ -43,12 +43,10 @@
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <strong>Client:</strong> {{insertion.clientName}}<br>
-              <strong>Publication:</strong> {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
-              <strong>Executive:</strong> {{insertion.executiveName}} - {{insertion.executiveOrg}}
+              <strong>Publication:</strong><br> {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
             </div>
             <div class="col-auto">
-              {{toDate(insertion.insertions.date) | date}}
+              {{insertion.insertions.insertionDate | date}}
             </div>
             <div class="col">
               <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>

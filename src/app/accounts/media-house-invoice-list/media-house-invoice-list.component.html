@@ -1,0 +1,70 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Media House Invoices</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<div class="container">
+  <button class="fab" routerLink="/accounts/mediahouseinvoice/new">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <br>
+
+  <div class="form-row">
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <select [(ngModel)]="pastDays" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search(1)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="card mat-elevation-z3 mb-3" *ngFor="let item of list">
+    <div class="card-body">
+      <strong>No:</strong> {{item.MHINo}}<br>
+      <strong>Date:</strong> {{item.MHIDate | date}}<br>
+      <strong>Gross Amount:</strong> {{item.MHIGrossAmount}}<br>
+      <strong>Tax Amount:</strong> {{item.MHITaxAmount}}<br><br>
+      <strong>Publication:</strong> {{item.publicationName}} - {{item.publicationEdition}}<br>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let insertion of item.insertions">
+        <strong>Date:</strong> {{insertion.insertionDate | date}}<br>
+        <strong>Amount:</strong> ₹ {{insertion.Amount | number}}<br>
+        <strong>Collected:</strong> ₹ {{insertion.collectedAmount}}<br>
+        <strong>Pending:</strong> ₹ {{insertion.Amount - insertion.collectedAmount}}
+      </li>
+    </ul>
+  </div>
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>  
+</div>

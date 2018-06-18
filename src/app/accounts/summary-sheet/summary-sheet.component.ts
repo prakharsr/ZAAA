@@ -8,6 +8,7 @@ import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order'
 import { AccountsApiService } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
 
 class InsertionWithAmount extends InsertionCheckItem {
   amount = 0;
@@ -35,12 +36,21 @@ export class SummarySheetComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<InsertionCheckItem>, search: ReleaseOrderSearchParams }}) => {
-      this.insertions = data.resolved.list.list.map(insertion => {
-        return {
-          ...insertion,
-          amount: 0
-        }
+    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams }}) => {
+      data.resolved.list.list.forEach(element => {
+        element.entries.forEach(entry => {
+          this.insertions.push({
+            _id: element._id,
+            clientName: entry.clientName,
+            checked: entry.checked,
+            executiveName: entry.executiveName,
+            executiveOrg: entry.executiveOrg,
+            publicationEdition: entry.publicationEdition,
+            publicationName: entry.publicationName,
+            insertions: entry.insertions,
+            amount: 0
+          });
+        });
       });
       
       this.page = data.resolved.list.page;
@@ -56,7 +66,7 @@ export class SummarySheetComponent implements OnInit {
 
   search(pageNo: number) {
     this.router.navigate(['/accounts/summarysheet/', pageNo], {
-      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, '', '', '', 0)
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, 0)
     })
   }
 

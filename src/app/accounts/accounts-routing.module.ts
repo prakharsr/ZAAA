@@ -5,7 +5,7 @@ import { AuthGuard } from 'app/guards';
 
 import {
   MediaHouseInvoiceComponent,
-  MediaHouseInvoiceListResolver,
+  SummarySheetListResolver,
   AccountsHomeComponent,
   ClientReceiptsComponent,
   ClientInvoicePaymentsComponent,
@@ -23,7 +23,8 @@ import { CreateNoteComponent } from './create-note/create-note.component';
 import { NotesListResolver } from './notes-list-resolver.service';
 import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
-import { InsertionListResolver } from 'app/release-order';
+import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
+import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -44,11 +45,12 @@ const routes: Routes = [
           {
             path: 'list/:page',
             runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-            component: MediaHouseInvoiceComponent,
+            component: MediaHouseInvoiceListComponent,
             resolve: {
               resolved: MediaHouseInvoiceListResolver
             }
-          }
+          },
+          { path: 'new', component: MediaHouseInvoiceComponent }
         ]
       },
       {
@@ -188,7 +190,7 @@ const routes: Routes = [
             component: SummarySheetComponent,
             runGuardsAndResolvers: 'paramsOrQueryParamsChange',
             resolve: {
-              resolved: InsertionListResolver
+              resolved: SummarySheetListResolver
             }
           }
         ]

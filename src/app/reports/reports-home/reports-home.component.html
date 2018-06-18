@@ -1,0 +1,46 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Reports</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <div class="form-row">
+    <div class="form-group col">
+      <label>Creation Period</label>
+      <select [(ngModel)]="creationPeriod" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+    
+    <div class="form-group col">
+      <label>Updation Period</label>
+      <select [(ngModel)]="updationPeriod" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div>
+    <button (click)="mediaHouse()" class="btn btn-primary btn-block">Media House</button>
+    <button (click)="client()" class="btn btn-primary btn-block">Client</button>
+    <button (click)="executive()" class="btn btn-primary btn-block">Executive</button>
+    <button (click)="invoice()" class="btn btn-primary btn-block">Invoice</button>
+    <button (click)="ro()" class="btn btn-primary btn-block">Release Order</button>
+    <button (click)="receipt()" class="btn btn-primary btn-block">Receipt</button>
+    <button (click)="mhi()" class="btn btn-primary btn-block">Media House Invoice</button>
+    <button (click)="mhNote()" class="btn btn-primary btn-block">Media House Notes</button>
+    <button (click)="clientNote()" class="btn btn-primary btn-block">Client Notes</button>
+    <button (click)="ratecard()" class="btn btn-primary btn-block">Ratecard</button>
+  </div>
+</div>
