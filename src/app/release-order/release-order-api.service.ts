@@ -168,9 +168,15 @@ export class ReleaseOrderApiService {
     });
   }
 
-  generate(releaseOrder: ReleaseOrder) {
+  generatePdf(releaseOrder: ReleaseOrder) {
     return this.api.post('/user/releaseorder/download', {
       id: releaseOrder.id
     }, { responseType: 'blob' });
+  }
+
+  generate(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorder/generate', {
+      id: releaseOrder.id
+    });
   }
 }
