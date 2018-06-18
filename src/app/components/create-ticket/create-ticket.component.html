@@ -1,0 +1,40 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Create Ticket</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <form (ngSubmit)="submit()" #ticketForm="ngForm">
+    <div class="form-group">
+      <label>Subject</label>
+      <input type="text" class="form-control" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
+    </div>
+
+    <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.touched)" class="text-danger">
+      <div *ngIf="subjectField.errors.required">
+        Subject is required.
+      </div>
+      <br>
+    </div>
+
+    <div class="form-group">
+      <label>Details</label>
+      <input type="text" class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" required #detailsField="ngModel">
+    </div>
+
+    <div *ngIf="detailsField.invalid && (detailsField.dirty || detailsField.touched)" class="text-danger">
+      <div *ngIf="detailsField.errors.required">
+        Details is required.
+      </div>
+      <br>
+    </div>
+
+    <br><br>
+
+    <button class="btn btn-success" type="submit" [disabled]="!ticketForm.form.valid">Submit</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+  </form>
+</div>

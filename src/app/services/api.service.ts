@@ -16,7 +16,9 @@ import {
   Template,
   Plan,
   UserProfile,
-  Firm
+  Firm,
+  Ticket,
+  PageData
 } from 'app/models';
 
 const AuthTokenKey = "auth_token";
@@ -406,5 +408,30 @@ export class ApiService {
 
   generatePaymentInvoice() {
     return this.post('/user/plan/invoice', {});
+  }
+
+  createTicket(ticket: Ticket) {
+    return this.post('/user/ticket', ticket);
+  }
+
+  queryTickets(page: number, insertionPeriod: number) : Observable<PageData<Ticket>> {
+    return this.post('/user/ticket/search', {
+      insertionPeriod: insertionPeriod,
+      page: page
+    }).map(data => {
+      let tickets: Ticket[] = [];
+
+      if (data.success) {
+        data.tickets.forEach(element => {
+          let ticket = new Ticket();
+
+          Object.assign(ticket, element);
+
+          tickets.push(ticket);
+        });
+      }
+
+      return new PageData<Ticket>(tickets, data.perPage, data.page, data.pageCount);
+    });
   }
 }
