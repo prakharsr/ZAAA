@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
+import { StateApiService, NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
 import { CategoriesDetails } from '../categories-details/categories-details.component';
 
 import {
@@ -43,6 +43,11 @@ export class ReleaseOrderComponent implements OnInit {
   edit = false;
   id: string;
 
+  releaseOrder = new ReleaseOrder();
+  previewBool: boolean;
+  saveAndGenBool: boolean;
+  saveAndSendMsgBool: boolean;
+
   selectedCategories: Category[] = [null, null, null, null, null, null];
   categories: Category[];
   fixedCategoriesLevel = -1;
@@ -57,7 +62,8 @@ export class ReleaseOrderComponent implements OnInit {
     public stateApi: StateApiService,
     private notifications: NotificationService,
     public options: OptionsService,
-    private dialog: DialogService) { }
+    private dialog: DialogService,
+    private windowService: WindowService) { }
 
   get isTypeWords() {
 
@@ -97,7 +103,81 @@ export class ReleaseOrderComponent implements OnInit {
   toDate(date: NgbDate) {
     return new Date(date.year, date.month - 1, date.day);
   }
+
+
+  private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
+    if (releaseOrder.generated) {
+      return of(true);
+    }
+
+    return this.dialog.showYesNo('Confirm Generation', "Release Order will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+  }
+
+  saveAndGen() {
+    this.saveAndGenBool = true;
+    this.submit();
+  }
+
+  saveAndSendMsg() {
+    this.saveAndSendMsgBool = true;
+    this.submit();
+  }
   
+  preview() {
+    this.previewBool = true;
+    this.submit();    
+  }
+
+  gen(releaseOrder: ReleaseOrder) {
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.api.generate(releaseOrder).subscribe(data => {
+          if (data.msg) {
+            this.notifications.show(data.msg);
+    
+            releaseOrder.generated = true;
+          }
+          else {
+            console.log(data);
+            
+            let blob = new Blob([data], { type: 'application/pdf' });
+            let url = this.windowService.window.URL.createObjectURL(blob);
+    
+            let a = this.windowService.window.document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            this.windowService.window.document.body.appendChild(a);
+            a.download = 'releaseorder.pdf';
+            a.href = url;
+            a.click();
+          }
+        });
+      }
+    })
+  }
+
+  sendMsg(releaseOrder: ReleaseOrder) {
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.dialog.getMailingDetails().subscribe(mailingDetails => {
+          if (mailingDetails) {
+            this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+              if (data.success) {
+                this.notifications.show("Sent Successfully");
+
+                releaseOrder.generated = true;
+              }
+              else {
+                console.log(data);
+
+                this.notifications.show(data.msg);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
   ngOnInit() {
     this.categories = this.options.categories;
 
@@ -418,22 +498,35 @@ export class ReleaseOrderComponent implements OnInit {
     this.api.createReleaseOrder(this.releaseorder).subscribe(
       data => {
         if (data.success) {
-          this.goBack();
-        }
+          if(this.previewBool) {
+            this.router.navigateByUrl('/releaseorders/'+ data.msg);
+          }
+          if(this.saveAndGenBool) {
+            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
+              console.log(ro);
+              this.gen(ro);
+              });
+            }
+          if(this.saveAndSendMsgBool) {
+            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
+              console.log(ro);
+              this.sendMsg(ro);
+              });
+            }
         else {
           console.log(data);
 
           this.notifications.show(data.msg);
         }
       }
-    );
+    })
   }
 
   private editReleaseOrder() {
     this.api.editReleaseOrder(this.releaseorder).subscribe(
       data => {
         if (data.success) {
-          this.goBack();
+          // this.goBack();
         }
         else {
           this.notifications.show(data.msg);

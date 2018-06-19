@@ -682,9 +682,9 @@
         
                 <button type="submit" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>
                 <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
-                <button type="button" class="btn btn-primary" [disabled]="!roForm.form.valid">Preview</button>
-                <button type="button" class="btn btn-success" [disabled]="!roForm.form.valid">Download</button>
-                <button type="button" class="btn btn-primary" [disabled]="!roForm.form.valid">Send Email</button>
+                <button type="button" (click)="preview()"  class="btn btn-primary" [disabled]="!roForm.form.valid">Preview</button>
+                <button type="button" class="btn btn-success" (click)="saveAndGen()" [disabled]="!roForm.form.valid">Download</button>
+                <button type="button" class="btn btn-primary" (click)="saveAndSendMsg()" [disabled]="!roForm.form.valid">Send Email</button>
               </form>
             </div>
           </div>
