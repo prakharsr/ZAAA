@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatSidenav, MatSidenavContainer, MatSidenavModule } from '@angular/material';
 
 const modules = [
   MatCheckboxModule,
@@ -37,7 +37,8 @@ const modules = [
   MatMenuModule,
   MatSelectModule,
   MatTableModule,
-  MatCardModule
+  MatCardModule,
+  MatSidenavModule,
 ]
 
 @NgModule({

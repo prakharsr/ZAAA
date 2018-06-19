@@ -2,11 +2,7 @@
     font-style: italic;
 }
 
-#calculations {
-    z-index: 30;
-}
-
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     #calculations {
         position: fixed;
         top: 105px;
@@ -20,6 +16,23 @@
     mat-toolbar {
         margin-top: 260px;
     }
+} */
+
+/* #calculations {
+    z-index: 30;
+} */
+
+mat-sidenav {
+    margin-right: 25px;
+    position: fixed;
+    z-index: 30;
+    top: 150px;
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 115px;
+    z-index: 30;
 }
 
 mat-card {
@@ -29,10 +42,15 @@ mat-card {
 
 mat-card-title {
     font-size: 15px;
+    font-weight: bolder;
 }
 
-mat-form-field {
-    margin: 2px;
+#ro_container {
+    margin-left: 20px;
+}
+
+#add_details {
+    font-weight: bolder;
 }
 
 label {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -29,6 +29,7 @@ import {
   MediaHouseApiService,
   ExecutiveApiService
 } from 'app/directory';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-release-order',
