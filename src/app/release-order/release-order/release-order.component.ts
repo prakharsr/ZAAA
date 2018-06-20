@@ -44,6 +44,7 @@ export class ReleaseOrderComponent implements OnInit {
   id: string;
 
   releaseOrder = new ReleaseOrder();
+  saveBool: boolean;
   previewBool: boolean;
   saveAndGenBool: boolean;
   saveAndSendMsgBool: boolean;
@@ -111,6 +112,11 @@ export class ReleaseOrderComponent implements OnInit {
     }
 
     return this.dialog.showYesNo('Confirm Generation', "Release Order will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+  }
+
+  save() {
+    this.saveBool = true;
+    this.submit();
   }
 
   saveAndGen() {
@@ -498,18 +504,19 @@ export class ReleaseOrderComponent implements OnInit {
     this.api.createReleaseOrder(this.releaseorder).subscribe(
       data => {
         if (data.success) {
+          if(this.saveBool) {
+            this.goBack();
+          }
           if(this.previewBool) {
             this.router.navigateByUrl('/releaseorders/'+ data.msg);
           }
           if(this.saveAndGenBool) {
             this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              console.log(ro);
               this.gen(ro);
               });
             }
           if(this.saveAndSendMsgBool) {
             this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              console.log(ro);
               this.sendMsg(ro);
               });
             }
@@ -526,7 +533,22 @@ export class ReleaseOrderComponent implements OnInit {
     this.api.editReleaseOrder(this.releaseorder).subscribe(
       data => {
         if (data.success) {
-          // this.goBack();
+          if(this.saveBool) {
+            this.goBack();
+          }
+          if(this.previewBool) {
+            this.router.navigateByUrl('/releaseorders/'+ data.msg);
+          }
+          if(this.saveAndGenBool) {
+            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
+              this.gen(ro);
+              });
+            }
+          if(this.saveAndSendMsgBool) {
+            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
+              this.sendMsg(ro);
+              });
+            }
         }
         else {
           this.notifications.show(data.msg);
