@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, Validator }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material.module';
+import { LivechatWidgetModule } from '@livechat/angular-widget';
 
 import {
   ApiService,
@@ -61,7 +60,8 @@ const validators = [
     NgbModule.forRoot(),
     FormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    LivechatWidgetModule
   ],
   providers: [
     ApiService,
@@ -96,7 +96,8 @@ const validators = [
     MaterialModule,
     MailingDetailsComponent,
     validators,
-    PaginationComponent
+    PaginationComponent,
+    LivechatWidgetModule
   ],
   entryComponents: [
     DialogComponent,
