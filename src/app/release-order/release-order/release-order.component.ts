@@ -44,10 +44,6 @@ export class ReleaseOrderComponent implements OnInit {
   id: string;
 
   releaseOrder = new ReleaseOrder();
-  saveBool: boolean;
-  previewBool: boolean;
-  saveAndGenBool: boolean;
-  saveAndSendMsgBool: boolean;
 
   selectedCategories: Category[] = [null, null, null, null, null, null];
   categories: Category[];
@@ -115,26 +111,38 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   save() {
-    this.saveBool = true;
-    this.submit();
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.goBack();
+      }
+    });
   }
 
   saveAndGen() {
-    this.saveAndGenBool = true;
-    this.submit();
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.releaseorder);
+      }
+    });
   }
 
   saveAndSendMsg() {
-    this.saveAndSendMsgBool = true;
-    this.submit();
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.sendMsg(this.releaseorder);
+      }
+    });
   }
   
   preview() {
-    this.previewBool = true;
-    this.submit();    
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.releaseorder, true);
+      }
+    });
   }
 
-  gen(releaseOrder: ReleaseOrder) {
+  gen(releaseOrder: ReleaseOrder, preview = false) {
     this.confirmGeneration(releaseOrder).subscribe(confirm => {
       if (confirm) {
         this.api.generate(releaseOrder).subscribe(data => {
@@ -152,8 +160,15 @@ export class ReleaseOrderComponent implements OnInit {
             let a = this.windowService.window.document.createElement('a');
             a.setAttribute('style', 'display:none;');
             this.windowService.window.document.body.appendChild(a);
-            a.download = 'releaseorder.pdf';
             a.href = url;
+
+            if (preview) {
+              a.setAttribute("target", "_blank");
+            }
+            else {
+              a.download = 'releaseorder.pdf';
+            }
+
             a.click();
           }
         });
@@ -501,63 +516,37 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private createReleaseOrder() {
-    this.api.createReleaseOrder(this.releaseorder).subscribe(
-      data => {
+    return this.api.createReleaseOrder(this.releaseorder).pipe(
+      map(data => {
         if (data.success) {
-          if(this.saveBool) {
-            this.goBack();
-          }
-          if(this.previewBool) {
-            this.router.navigateByUrl('/releaseorders/'+ data.msg);
-          }
-          if(this.saveAndGenBool) {
-            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              this.gen(ro);
-              });
-            }
-          if(this.saveAndSendMsgBool) {
-            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              this.sendMsg(ro);
-              });
-            }
+          this.releaseorder.id = data.msg;
+        }
         else {
           console.log(data);
 
           this.notifications.show(data.msg);
         }
-      }
-    })
+
+        return data;
+      })
+    );
   }
 
   private editReleaseOrder() {
-    this.api.editReleaseOrder(this.releaseorder).subscribe(
-      data => {
+    return this.api.editReleaseOrder(this.releaseorder).pipe(
+      map(data => {
         if (data.success) {
-          if(this.saveBool) {
-            this.goBack();
-          }
-          if(this.previewBool) {
-            this.router.navigateByUrl('/releaseorders/'+ data.msg);
-          }
-          if(this.saveAndGenBool) {
-            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              this.gen(ro);
-              });
-            }
-          if(this.saveAndSendMsgBool) {
-            this.api.getReleaseOrder(data.msg).subscribe(ro=> {
-              this.sendMsg(ro);
-              });
-            }
         }
         else {
           this.notifications.show(data.msg);
         }
-      }
+
+        return data;
+      })
     )
   }
 
-  submit () {
+  submit () : Observable<any> {
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
@@ -597,11 +586,10 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemeFree = this.selectedScheme.Free;
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
-    
-    if (this.edit) {
-      this.editReleaseOrder();
-    }
-    else this.createReleaseOrder();
+
+    let base: Observable<any> = this.edit ? this.editReleaseOrder() : this.createReleaseOrder();
+
+    return base;
   }
 
   searchMediaHouse = (text: Observable<string>) => {
