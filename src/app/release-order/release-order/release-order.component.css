@@ -23,7 +23,7 @@
 } */
 
 mat-sidenav {
-    margin-right: 25px;
+    padding-right: 25px;
     position: fixed;
     z-index: 30;
     top: 150px;
@@ -45,18 +45,10 @@ mat-card-title {
     font-weight: bolder;
 }
 
-#ro_container {
-    margin-left: 20px;
-}
-
 #add_details {
     font-weight: bolder;
 }
 
 label {
     font-size: 15px;
-}
-
-.premiums {
-    width: 150px;
 }
