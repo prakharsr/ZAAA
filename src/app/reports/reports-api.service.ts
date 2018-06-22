@@ -75,4 +75,12 @@ export class ReportsApiService {
       updationPeriod: updationPeriod
     }, { responseType: 'blob' });
   }
+
+  insertionsReport(creationPeriod: number, updationPeriod: number, insertionPeriod: number) {
+    return this.api.post('/user/reports/insertions', {
+      creationPeriod: creationPeriod,
+      updationPeriod: updationPeriod,
+      insertionPeriod: insertionPeriod
+    }, { responseType: 'blob' });
+  }
 }

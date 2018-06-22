@@ -6,3 +6,4 @@ export * from './page-data';
 export * from './plan';
 export * from './template';
 export * from './user-profile';
+export * from './ticket';

@@ -12,6 +12,7 @@ export class ReportsHomeComponent implements OnInit {
 
   creationPeriod = 0;
   updationPeriod = 0;
+  insertionPeriod = 0;
 
   constructor(private api: ReportsApiService,
     private notifications: NotificationService,
@@ -79,5 +80,9 @@ export class ReportsHomeComponent implements OnInit {
 
   ratecard() {
     this.download(this.api.ratecardReport(this.creationPeriod, this.updationPeriod));
+  }
+
+  insertions() {
+    this.download(this.api.insertionsReport(this.creationPeriod, this.updationPeriod, this.insertionPeriod));
   }
 }

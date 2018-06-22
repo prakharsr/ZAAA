@@ -91,7 +91,7 @@
         </div>
         <div class="col-auto">
           <mat-menu #releaseOrderMenu="matMenu">
-            <button mat-menu-item *ngIf="element.generated" (click)="gen(element)">
+            <button mat-menu-item *ngIf="element.generated" (click)="pdf(element)">
               <mat-icon>save_alt</mat-icon> Download
             </button>
             <button mat-menu-item *ngIf="element.generated" (click)="sendMsg(element)">
@@ -116,6 +116,8 @@
           </button>
         </div>
       </div>
+
+      <button (click)="generate(element)" class="btn btn-outline-success" *ngIf="!element.generated">Generate</button>
     </div>
   </div>
 

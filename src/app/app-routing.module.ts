@@ -30,6 +30,8 @@ import {
   TemplateSelectorComponent,
   PlanSelectorComponent
 } from 'app/admin';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -87,6 +89,20 @@ const routes: Routes = [
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
   { path: 'reset_password/:token', component: ResetPasswordComponent },
+  {
+    path: 'tickets',
+    children: [
+      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      {
+        path: 'list/:page',
+        component: TicketListComponent
+      },
+      {
+        path: 'new',
+        component: CreateTicketComponent
+      }
+    ]
+  },
   { path: '**', component: NotFoundComponent }
 ];
 

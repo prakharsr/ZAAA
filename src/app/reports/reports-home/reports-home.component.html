@@ -42,5 +42,20 @@
     <button (click)="mhNote()" class="btn btn-primary btn-block">Media House Notes</button>
     <button (click)="clientNote()" class="btn btn-primary btn-block">Client Notes</button>
     <button (click)="ratecard()" class="btn btn-primary btn-block">Ratecard</button>
+
+    <div class="row">
+      <div class="form-group col">
+        <label>Insertion Period</label>
+        <select [(ngModel)]="insertionPeriod" class="form-control">
+          <option [ngValue]="0">Any Time</option>
+          <option [ngValue]="7">Past 7 days</option>
+          <option [ngValue]="15">Past 15 days</option>
+          <option [ngValue]="30">Past 30 days</option>
+        </select>
+      </div>
+      <div class="col">
+        <button (click)="insertions()" class="btn btn-primary btn-block">Insertions</button>
+      </div>
+    </div>
   </div>
 </div>

@@ -30,7 +30,10 @@ import {
   NavbarComponent,
   LoaderComponent
 } from './components';
+
 import { ReportsModule } from './reports/reports.module';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { ReportsModule } from './reports/reports.module';
     ForgotPswComponent,
     NotFoundComponent,
     ResetPasswordComponent,
-    LoaderComponent
+    LoaderComponent,
+    TicketListComponent,
+    CreateTicketComponent
   ],
   imports: [
     BrowserModule,
