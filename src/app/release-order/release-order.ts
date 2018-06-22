@@ -36,6 +36,8 @@ export class ReleaseOrder {
         GSTType: "URD",
         GSTNo: ""
     }
+
+    pulloutName = "";
     
     mediaType = "";
     

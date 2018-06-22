@@ -119,6 +119,40 @@
                 </mat-form-field>
               </div>
 
+              <ng-container *ngIf="mediaType == 'Print'">
+                <label>Pullout Name</label>
+      
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                          <option *ngFor="let item of pullouts" [ngValue]="item.Name">{{item.Name}}</option>
+                        <option>{{others}}</option>
+                      </select>
+                    </div>
+              
+                    <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
+                      <div *ngIf="pullOutNameField.errors.required">
+                        Pullout Name is required.
+                      </div>
+                      <br>
+                    </div>
+                  </div>
+                  <div class="col" *ngIf="dropdownPullOutName == others">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+                    </div>
+              
+                    <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
+                      <div *ngIf="specPullOutNameField.errors.required">
+                        Pullout Name is required.
+                      </div>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
               <mat-card-actions>
                 <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
               </mat-card-actions>

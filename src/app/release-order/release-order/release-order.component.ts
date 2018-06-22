@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
@@ -27,9 +27,9 @@ import {
   Executive,
   ClientApiService,
   MediaHouseApiService,
-  ExecutiveApiService
+  ExecutiveApiService,
+  Pullout
 } from 'app/directory';
-import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-release-order',
@@ -48,6 +48,11 @@ export class ReleaseOrderComponent implements OnInit {
   selectedCategories: Category[] = [null, null, null, null, null, null];
   categories: Category[];
   fixedCategoriesLevel = -1;
+
+  others = "Others";
+
+  dropdownPullOutName: string;
+  customPullOutName = 'Main';
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -201,6 +206,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   ngOnInit() {
     this.categories = this.options.categories;
+    this.dropdownPullOutName = this.others;
 
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
@@ -317,6 +323,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
       this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
+      this.customPullOutName = rateCard.pullOutName;
 
       this.releaseorder.paymentType = this.paymentTypes[0];
       this.selectedTax = this.taxes[0];
@@ -566,6 +573,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
 
+    this.releaseorder.pulloutName = this.dropdownPullOutName == this.others ? this.customPullOutName : this.dropdownPullOutName;
+
     if (this.customSize) {
       this.releaseorder.adSizeL = this.customSizeL;
       this.releaseorder.adSizeW = this.customSizeW;
@@ -601,6 +610,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   mediaHouse;
 
+  pullouts: Pullout[] = [];
+
   initMediaHouse(result: MediaHouse) {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
@@ -608,6 +619,10 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.publicationGSTIN = result.GSTIN;
 
       this.releaseorder.adEdition = result.address.edition;
+    }
+
+    if (result.pullouts) {
+      this.pullouts = result.pullouts;
     }
 
     this.mediaType = result.mediaType;
