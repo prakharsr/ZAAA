@@ -308,6 +308,8 @@ export class ReleaseOrderComponent implements OnInit {
       this.executive = dirExecutive;
 
       this.releaseorder.insertions = insertionBkp;
+
+      this.customPullOutName = this.releaseorder.pulloutName;
     });
   }
 
@@ -853,7 +855,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   get grossAmountWithoutPremium() {
     if (this.isTypeLen) {
-      if (this.customSize) {
+      if (this.customSize && !this.releaseorder.fixRate) {
         return this.releaseorder.rate * this.totalSpace;
       }
       else {

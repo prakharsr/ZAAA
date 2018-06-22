@@ -49,6 +49,8 @@ export class ReleaseOrder {
     }
     
     adType = "";
+
+    fixRate = false;
     rate = 0;
     unit = "";
     

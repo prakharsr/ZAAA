@@ -299,37 +299,44 @@
                 <button type="button" class="col-lg-3 col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions *</button>
               </div>
 
-              <div class="row" *ngIf="isTypeLen">
-                <label class="col-lg-1 col-md-6">Ad Size</label>
-                
-                <mat-slide-toggle class="col-lg-1 col-md-6" [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
+              <ng-container *ngIf="isTypeLen">
+                <div class="row">
+                  <label class="col-auto">Ad Size</label>
+                  
+                  <mat-slide-toggle class="col-auto" [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
 
-                <div class="col-lg-3 col-md-6" *ngIf="!customSize">
-                  <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
-                    <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">Length: {{fixSize.length}}, Width: {{fixSize.width}}, Amount: {{fixSize.amount}}</option>
-                  </select>
+                  <mat-slide-toggle class="col-auto" [(ngModel)]="releaseorder.fixRate" name="fixedRate" *ngIf="customSize">Fixed Rate</mat-slide-toggle>
                 </div>
-          
-                <mat-form-field class="col-lg-3 col-md-6" *ngIf="customSize">
-                  <input matInput type="number" id="customL" placeholder="Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
-                  <mat-error *ngIf="customLField.errors && customLField.errors.required">
-                    Length is required.
-                  </mat-error>
-                </mat-form-field>        
-                
-                <div class="col-lg-1 col-md-6" *ngIf="customSize">&times;</div>
-                
-                <mat-form-field class="col-lg-3 col-md-6" *ngIf="customSize">
-                  <input matInput type="number" id="customW" placeholder="Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
-                  <mat-error *ngIf="customWField.errors && customWField.errors.required">
-                    Width is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="row">
+                  <div class="col" *ngIf="!customSize">
+                    <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
+                      <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">Length: {{fixSize.length}}, Width: {{fixSize.width}}, Amount: {{fixSize.amount}}</option>
+                    </select>
+                  </div>
 
-                <div class="col-lg-2 col-md-6"> 
+                  <ng-container *ngIf="customSize">
+                    <mat-form-field class="col">
+                      <input matInput type="number" id="customL" placeholder="Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+                      <mat-error *ngIf="customLField.errors && customLField.errors.required">
+                        Length is required.
+                      </mat-error>
+                    </mat-form-field>        
+                    
+                    <div class="col-auto align-self-center">&times;</div>
+                    
+                    <mat-form-field class="col">
+                      <input matInput type="number" id="customW" placeholder="Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+                      <mat-error *ngIf="customWField.errors && customWField.errors.required">
+                        Width is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </ng-container>
+                </div>
+
+                <div> 
                   Total Space = {{totalSpace}}
                 </div>
-              </div>
+              </ng-container>
 
               <div class="row">
                 <div class="col-lg col-md-6">
@@ -370,11 +377,11 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div *ngIf="adCountPaidField.valid">
-                  <p class="col-lg-6 col-md-6">Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
-                </div>
-      
+              <div *ngIf="adCountPaidField.valid">
+                <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
+              </div>
+
+              <div class="row">      
                 <ng-container *ngIf="isTypeWords" class="row">
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
