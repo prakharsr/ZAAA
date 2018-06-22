@@ -37,7 +37,7 @@
             <div class="col">
               <div class="form-group">
                 <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
-                    <option *ngFor="let item of pullouts" [ngValue]="item.name">{{item.name}}</option>
+                    <option *ngFor="let item of pullouts" [ngValue]="item.Name">{{item.Name}}</option>
                   <option>{{others}}</option>
                 </select>
               </div>
