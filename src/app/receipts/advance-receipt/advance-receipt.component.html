@@ -4,230 +4,231 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<br>
-
-<div class="container">
+<div class="container-fluid">
   <form (ngSubmit)="submit()" #receiptForm="ngForm">
-    <div class="form-group">
-      <label for="paymentAmount">Amount</label>
-      <input type="number" class="form-control" id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-    </div>
-
-    <div *ngIf="paymentAmountField.invalid && (paymentAmountField.dirty || paymentAmountField.touched)" class="text-danger">
-      <div *ngIf="paymentAmountField.errors.required">
-        Amount is required.
-      </div>
-      <br>
-    </div>
-
-    <br>
-    
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Payment Details</mat-panel-title>
-          <mat-panel-description>Enter Payment details</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div class="form-group">
-          <label>Type</label>
-          <select class="form-control" name="paymentType" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-            <option *ngFor="let item of paymentTypes" [value]="item">{{item}}</option>
-          </select>
-        </div>
-
-        <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
-          <mat-form-field>
-            <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Enter Date" [(ngModel)]="receipt.paymentDate" required disabled>
-            <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
-            <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-            <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
-              Date is required.
-            </mat-error>
-          </mat-form-field>
-
-          <div class="form-group">
-            <label for="paymentCheque">{{receipt.paymentType}} Number</label>
-            <input type="text" class="form-control" id="paymentCheque" name="paymentCheque" placeholder="Enter {{receipt.paymentType}} Number" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
-          </div>
+    <div class="row">
+      <div class="col-lg col-md-6">
+          <br>
+          <mat-card>
+            <mat-card-title>Publication Details</mat-card-title>
+            
+            <mat-form-field>
+              <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+              <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
+                Media House Name is required.
+              </mat-error>
+            </mat-form-field>
+                
+            <div class="row">
+              <mat-form-field class="col-md">
+                <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="receipt.publicationEdition" required #publicationEditionField="ngModel">
+                <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
+                  Edition Name is required.
+                </mat-error>
+              </mat-form-field>
           
-          <div *ngIf="paymentChequeField.invalid && (paymentChequeField.dirty || paymentChequeField.touched)" class="text-danger">
-            <div *ngIf="paymentChequeField.errors.required">
-              {{receipt.paymentType}} Number is required.
-            </div>
-            <br>
-          </div>
-
-          <ng-container *ngIf="receipt.paymentType == 'Cheque'">
-            <div class="form-group">
-              <label for="bankName">Bank Name</label>
-              <input type="text" class="form-control" id="bankName" name="bankName" placeholder="Enter Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
+              <mat-form-field class="col-md">
+                <mat-select name="mediaType" [(ngModel)]="receipt.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                  Media type is required.
+                </mat-error>
+              </mat-form-field>
             </div>
             
-            <div *ngIf="bankNameField.invalid && (bankNameField.dirty || bankNameField.touched)" class="text-danger">
-              <div *ngIf="bankNameField.errors.required">
-                Bank Name is required.
-              </div>
-              <br>
+            <div class="row">
+              <mat-form-field class="col-md">
+                <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="receipt.publicationState" required #publicationStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col-md">
+                <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="receipt.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+                <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
+                  GSTIN is required.
+                </mat-error>
+                <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
+                  GSTIN should be 15 characters long.
+                </mat-error>
+              </mat-form-field>
             </div>
-          </ng-container>
-        </ng-container>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Publication Details</mat-panel-title>
-          <mat-panel-description>Enter Publication details</mat-panel-description>
-        </mat-expansion-panel-header>
-        
-        <div class="form-group">
-          <label for="publicationName">Name</label>
-          <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Publication Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-        </div>
-        
-        <div *ngIf="publicationNameField.invalid && (publicationNameField.dirty || publicationNameField.touched)" class="text-danger">
-          <div *ngIf="publicationNameField.errors.required">
-            Publication Name is required.
-          </div>
-          <br>
-        </div>
-        <div class="form-group">
-          <label for="publicationEdition">Edition</label>
-          <input type="text" class="form-control" id="publicationEdition" name="publicationEdition" placeholder="Enter Edition" [(ngModel)]="receipt.publicationEdition" required #publicationEditionField="ngModel">
-        </div>
-        
-        <div *ngIf="publicationEditionField.invalid && (publicationEditionField.dirty || publicationEditionField.touched)" class="text-danger">
-          <div *ngIf="publicationEditionField.errors.required">
-            Edition Name is required.
-          </div>
-          <br>
-        </div>
+
+            <ng-container *ngIf="mediaType == 'Print'">
+              <label>Pullout Name</label>
     
-        <div class="form-group">
-          <label for="publicationState">State</label>
-          <select class="form-control" id="publicationState" name="publicationState" [(ngModel)]="receipt.publicationState" required #publicationStateField="ngModel">
-            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-          </select>
-        </div>
-        
-        <div *ngIf="publicationStateField.invalid && (publicationStateField.dirty || publicationStateField.touched)" class="text-danger">
-          <div *ngIf="publicationStateField.errors.required">
-            State is required.
-          </div>
-          <br>
-        </div>
-        
-        <div class="form-group">
-          <label for="publicationGSTIN">GSTIN</label>
-          <input type="text" class="form-control" id="publicationGSTIN" name="publicationGSTIN" placeholder="Enter GST" [(ngModel)]="receipt.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-        </div>
-        
-        <div *ngIf="publicationGSTINField.invalid && (publicationGSTINField.dirty || publicationGSTINField.touched)" class="text-danger">
-          <div *ngIf="publicationGSTINField.errors.required">
-            GSTIN is required.
-          </div>
-          <div *ngIf="publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength">
-            GSTIN should be 15 characters long.
-          </div>
-          <br>
-        </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                        <option *ngFor="let item of pullouts" [ngValue]="item.Name">{{item.Name}}</option>
+                      <option>{{others}}</option>
+                    </select>
+                  </div>
+            
+                  <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
+                    <div *ngIf="pullOutNameField.errors.required">
+                      Pullout Name is required.
+                    </div>
+                    <br>
+                  </div>
+                </div>
+                <div class="col" *ngIf="dropdownPullOutName == others">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+                  </div>
+            
+                  <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
+                    <div *ngIf="specPullOutNameField.errors.required">
+                      Pullout Name is required.
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
 
-        <mat-action-row>
-          <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Client Details</mat-panel-title>
-          <mat-panel-description>Enter Client details</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div class="form-group">
-          <label for="clientName">Name</label>
-          <input type="text" class="form-control" [ngbTypeahead]="searchClient" id="clientName" placeholder="Enter Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+            <mat-card-actions>
+              <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
+            </mat-card-actions>
+          </mat-card>
         </div>
-        
-        <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
-          <div *ngIf="clientNameField.errors.required">
-            Name is required.
-          </div>
+        <div class="col-lg col-md-6">
           <br>
-        </div>
-    
-        <div class="form-group">
-          <label for="clientState">State</label>
-          <select class="form-control" id="clientState" name="clientState" [(ngModel)]="receipt.clientState" required #clientStateField="ngModel">
-            <option *ngFor="let state of stateApi.states" [value]="state">{{state}}</option>
-          </select>
-        </div>
-        
-        <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
-          <div *ngIf="clientStateField.errors.required">
-            State is required.
-          </div>
-          <br>
-        </div>
+          <mat-card>
+            <mat-card-title>Client Details</mat-card-title>
 
-        <div class="form-row">
-          <div class="{{receipt.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
             <mat-form-field>
-              <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="receipt.clientGSTIN.GSTType">
-                <mat-option value="URD">URD</mat-option>
-                <mat-option value="RD">RD</mat-option>
+              <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+              <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+                Name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <div class="row">
+              <mat-form-field class="col">
+                <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="receipt.clientState" required #clientStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+              <div class="{{receipt.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+                <mat-form-field>
+                  <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="receipt.clientGSTIN.GSTType">
+                    <mat-option value="URD">URD</mat-option>
+                    <mat-option value="RD">RD</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col" *ngIf="receipt.clientGSTIN.GSTType != 'URD'">
+                <mat-form-field>
+                  <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="receipt.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                  <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                    GSTIN is required.
+                  </mat-error>
+                  <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                    GSTIN should be 15 characters long.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <mat-card-actions>
+              <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg col-md-6">
+          <mat-card>
+            <mat-card-title>Executive Details</mat-card-title>
+            <mat-form-field class="col-lg col-md-6">
+              <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+              <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
+                Executive Name is required.
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="col-lg col-md-6">
+              <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="receipt.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+              <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
+                Executive Organisation is required.
+              </mat-error>
+            </mat-form-field>
+
+            <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+          </mat-card>
+        </div>
+        <div class="col-lg col-md-6">
+          <mat-card>
+            <label>Enter Amount</label>
+            <br>
+            <mat-form-field class="col-lg-4 col-md-6">
+              <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+              <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+                  Amount is required.
+              </mat-error>
+            </mat-form-field>
+            
+            <br>
+              
+            <label>Payment Details</label>
+            <br>
+          
+            <mat-form-field class="col-lg-4 col-md-6">
+              <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+                <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item}}</mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-          <div class="col" *ngIf="receipt.clientGSTIN.GSTType != 'URD'">
-            <mat-form-field>
-              <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="receipt.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-              <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-                GSTIN is required.
-              </mat-error>
-              <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-                GSTIN should be 15 characters long.
-              </mat-error>
-            </mat-form-field>
-          </div>
+      
+            <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
+              <div class="row">
+                <mat-form-field  class="col-lg col-md-6">
+                  <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="receipt.paymentDate" required disabled>
+                  <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
+                  <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
+                  <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+                    Date is required.
+                  </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field  class="col-lg col-md-6">
+                  <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
+                  <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
+                    No is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <label>Enter Amount</label>
+                <mat-form-field  class="col-lg col-md-6">
+                  <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+                  <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+                    Amount is required.
+                  </mat-error>
+                </mat-form-field>
+          
+                <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+                  <mat-form-field  class="col-lg col-md-6">
+                    <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
+                    <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
+                      Bank Name is required.
+                    </mat-error>
+                  </mat-form-field>
+                </ng-container>
+              </div>
+            </ng-container>
+          </mat-card>
         </div>
-
-        <mat-action-row>
-          <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Executive Details</mat-panel-title>
-          <mat-panel-description>Enter Executive details</mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div class="form-group">
-          <label for="executiveName">Executive Name</label>
-          <input type="text" class="form-control" [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Enter Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-        </div>
-        
-        <div *ngIf="executiveNameField.invalid && (executiveNameField.dirty || executiveNameField.touched)" class="text-danger">
-          <div *ngIf="executiveNameField.errors.required">
-            Executive Name is required.
-          </div>
-          <br>
-        </div>
-    
-        <div class="form-group">
-          <label for="executiveOrg">Executive Organisation</label>
-          <input type="text" class="form-control" id="executiveOrg" placeholder="Enter Executive Organisation" [(ngModel)]="receipt.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-        </div>
-        
-        <div *ngIf="executiveOrgField.invalid && (executiveOrgField.dirty || executiveOrgField.touched)" class="text-danger">
-          <div *ngIf="executiveOrgField.errors.required">
-            Executive Organisation is required.
-          </div>
-          <br>
-        </div>
-
-        <mat-action-row>
-          <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
-        </mat-action-row>
-      </mat-expansion-panel>
-    </mat-accordion>
+      </div>
 
     <br><br>
 
