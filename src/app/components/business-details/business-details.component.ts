@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firm, UserProfile } from 'app/models';
-import { ApiService, DialogService, NotificationService } from 'app/services';
+import { ApiService, DialogService, NotificationService, StateApiService } from 'app/services';
 import { environment } from 'environments/environment.prod';
 
 @Component({
@@ -15,10 +15,16 @@ export class BusinessDetailsComponent implements OnInit {
 
   profile = new Firm();
 
+  editAgencyDetails = false;
+  editContactDetails = false;
+  editRegAddr = false;
+  editOfficeAddr = false;
+
   constructor(private api: ApiService,
     private dialog: DialogService,
     private notifications: NotificationService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    public stateApi: StateApiService) {}
 
   ngOnInit() {
 

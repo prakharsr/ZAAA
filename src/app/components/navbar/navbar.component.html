@@ -1,167 +1,162 @@
-<div id="navbar" >
+<div id="navbar">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl != this.expectedUrl">
+    <div class="container-fluid">
+      <img src="assets/logo.jpg" class="ml-2" width="50" height="50">&nbsp;&nbsp;&nbsp;
+      <a class="navbar-brand text-light">AAMan</a>
+      <button class="navbar-toggler mr-2" (click)="toggleNavbar()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl != this.expectedUrl">
+      <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+        <ul class="navbar-nav mr-auto" *ngIf="api.isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()"></a>
+          </li>
+        </ul>
+        
+        <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
+        
+        <ul class="navbar-nav" *ngIf="api.isLoggedIn">
+          <li class="nav-item">
+            <button class="nav-link" mat-button [matMenuTriggerFor]="settings">
+              <mat-icon>settings</mat-icon>
+            </button>
+
+            <mat-menu #settings="matMenu">
+              <button mat-menu-item routerLink="/profile">Manage Profile</button>
+              <button mat-menu-item routerLink="/">Settings</button>
+              <button mat-menu-item routerLink="/" (click)="api.logout();collapseNavbar()">Log Out</button>
+            </mat-menu>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" mat-button [matMenuTriggerFor]="settings">
+              <mat-icon>settings</mat-icon>
+            </button>
+
+            <mat-menu #settings="matMenu">
+              <button mat-menu-item routerLink="/">Home</button>
+              <button mat-menu-item routerLink="/">Settings</button>
+              <button mat-menu-item routerLink="/login">Log In</button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl == this.expectedUrl">
     <div class="container">
-        <img src="assets/logo.jpg" width="50" height="50">&nbsp;&nbsp;&nbsp;
+      <div>
+        <img src="assets/logo.jpg" width="50" height="50">
         <a class="navbar-brand text-light">AAMan</a>
-        <button class="navbar-toggler" (click)="toggleNavbar()" type="button">
-            <span class="navbar-toggler-icon"></span>
+      </div>
+
+      <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
+        <table class="tablewrapper">
+          <tr>
+            <td class="text-lighter">Email or Phone</td>
+            <td class="text-lighter">Password</td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="form-control" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+            </td>
+            <td>
+              <input type="password" class="form-control" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+            </td>
+            <td>
+              <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="text-lighter" routerLink="/forgotPassword">Forgot your password?</a>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </nav>
+
+  <mat-toolbar *ngIf="api.isLoggedIn">
+    <div class="container-fluid">
+      <div class="x-overflow">
+        <button mat-icon-button class="nav-link" routerLink="/dashboard">
+          <mat-icon>home</mat-icon>
         </button>
 
-        <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
-            <ul class="navbar-nav mr-auto" *ngIf="api.isLoggedIn">
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" ></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
-            <ul class="navbar-nav" *ngIf="api.isLoggedIn">
-                <li class="nav-item">
-                    <button class="nav-link" mat-button [matMenuTriggerFor]="settings" >
-                        <mat-icon>settings</mat-icon>
-                    </button>        
-                
-                    <mat-menu #settings="matMenu">
-                        <button mat-menu-item routerLink="/profile">Manage Profile</button>
-                        <button mat-menu-item routerLink="/">Settings</button>
-                        <button mat-menu-item routerLink="/" (click)="api.logout();collapseNavbar()">Log Out</button>
-                    </mat-menu>                  
-                </li>
-                
-            </ul>
-            <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" mat-button [matMenuTriggerFor]="settings" >
-                        <mat-icon>settings</mat-icon>
-                    </button>        
-                
-                    <mat-menu #settings="matMenu">
-                        <button mat-menu-item routerLink="/">Home</button>
-                        <button mat-menu-item routerLink="/">Settings</button>
-                        <button mat-menu-item routerLink="/login">Log In</button>
-                    </mat-menu>    
-                 
-                </li>
-            </ul>
-        </div>
+        <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
+
+        <mat-menu #romenu="matMenu">
+          <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
+          <button mat-menu-item routerLink="/releaseorders">View Release Orders</button>
+          <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
+          <button mat-menu-item routerLink="/releaseorders/check">Insertion Check</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
+
+        <mat-menu #invmenu="matMenu">
+          <button mat-menu-item routerLink="/releaseorders/generated">Create Invoices</button>
+          <button mat-menu-item routerLink="/invoices">View Invoices</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="prcmenu">Payment Receipts</button>
+
+        <mat-menu #prcmenu="matMenu">
+          <button mat-menu-item routerLink="/invoices">Create Payment Receipt</button>
+          <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
+          <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
+          <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
+
+        <mat-menu #dirmenu="matMenu">
+          <button mat-menu-item routerLink="/dir/clients">Clients</button>
+          <button mat-menu-item routerLink="/dir/executives">Executives</button>
+          <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="rcmenu">Rate Cards</button>
+
+        <mat-menu #rcmenu="matMenu">
+          <button mat-menu-item routerLink="/ratecards/new">Create Rate Card</button>
+          <button mat-menu-item routerLink="/ratecards">View Rate Card</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="rootacmenu">Accounts</button>
+
+        <mat-menu #rootacmenu="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="purchase">Purchase</button>
+          <button mat-menu-item [matMenuTriggerFor]="sale">Sale</button>
+        </mat-menu>
+
+        <mat-menu #purchase="matMenu">
+          <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
+          <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
+          <button mat-menu-item routerLink="/accounts/notes/mediahouse">Credit/ Debit Notes</button>
+          <button mat-menu-item routerLink="/accounts/gst/month">GST</button>
+        </mat-menu>
+
+        <mat-menu #sale="matMenu">
+          <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
+          <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
+          <button mat-menu-item routerLink="/accounts/notes/client">Credit/ Debit Notes</button>
+          <button mat-menu-item routerLink="/accounts/gst/client">GST</button>
+        </mat-menu>
+      </div>
     </div>
-    </nav>
-
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl == this.expectedUrl">
-            <div class="container">
-              <div>
-                <img src="assets/logo.jpg" width="50" height="50">
-                <a class="navbar-brand text-light">AAMan</a>
-              </div>
-                
-              <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
-                <table class="tablewrapper">
-                  <tr>
-                    <td class="text-lighter">Email or Phone</td>
-                    <td class="text-lighter">Password</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="text" class="form-control" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
-                    </td>
-                    <td>
-                      <input type="password" class="form-control" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
-                    </td>
-                    <td>
-                      <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a class="text-lighter" routerLink="/forgotPassword">Forgot your password?</a>
-                    </td>
-                  </tr>
-                </table>
-              </form>
-            </div>
-          </nav>
-
-    <mat-toolbar *ngIf="api.isLoggedIn">
-        <div class="container">
-            <div class="x-overflow">
-
-                <button mat-icon-button class="nav-link" routerLink="/dashboard" >
-                    <mat-icon>home</mat-icon>
-                </button>   
-
-                <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
-            
-                <mat-menu #romenu="matMenu">
-                    <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
-                    <button mat-menu-item routerLink="/releaseorders">View Release Orders</button>
-                    <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
-                    <button mat-menu-item routerLink="/releaseorders/check">Insertion Check</button>
-                </mat-menu> 
-                
-                <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
-            
-                <mat-menu #invmenu="matMenu">
-                    <button mat-menu-item routerLink="/releaseorders/generated">Create Invoices</button>
-                    <button mat-menu-item routerLink="/invoices">View Invoices</button>
-                </mat-menu>
-                
-                <button mat-button [matMenuTriggerFor]="prcmenu">Payment Receipts</button>
-            
-                <mat-menu #prcmenu="matMenu">
-                    <button mat-menu-item routerLink="/invoices">Create Payment Receipt</button>    
-                    <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
-                    <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
-                    <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
-                </mat-menu> 
-            
-                <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
-            
-                <mat-menu #dirmenu="matMenu">
-                    <button mat-menu-item routerLink="/dir/clients">Clients</button>
-                    <button mat-menu-item routerLink="/dir/executives">Executives</button>
-                    <button mat-menu-item routerLink="/dir/media_houses">Media Houses</button>
-                </mat-menu> 
-
-                <button mat-button [matMenuTriggerFor]="rcmenu">Rate Cards</button>
-            
-                <mat-menu #rcmenu="matMenu">
-                    <button mat-menu-item routerLink="/ratecards/new">Create Rate Card</button>
-                    <button mat-menu-item routerLink="/ratecards">View Rate Card</button>
-                </mat-menu> 
-            
-                <button mat-button [matMenuTriggerFor]="rootacmenu">Accounts</button>
-                      
-                <mat-menu #rootacmenu="matMenu">
-                    <button mat-menu-item [matMenuTriggerFor]="purchase">Purchase</button>
-                    <button mat-menu-item [matMenuTriggerFor]="sale">Sale</button>
-                </mat-menu>    
-
-                <mat-menu #purchase="matMenu">
-                    <button mat-menu-item routerLink="/accounts/mediahouseinvoice">Media House Invoice</button>
-                    <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
-                    <button mat-menu-item routerLink="/accounts/notes/mediahouse">Credit/ Debit Notes</button>
-                    <button mat-menu-item routerLink="/accounts/gst/month">GST</button>
-                </mat-menu>
-
-                <mat-menu #sale="matMenu">
-                    <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
-                    <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
-                    <button mat-menu-item routerLink="/accounts/notes/client">Credit/ Debit Notes</button>
-                    <button mat-menu-item routerLink="/accounts/gst/client">GST</button>
-                </mat-menu>
-            </div>  
-        </div>
-    </mat-toolbar>
+  </mat-toolbar>
 </div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>

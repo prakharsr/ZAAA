@@ -1,157 +1,362 @@
 <mat-toolbar>  
     <mat-toolbar-row>
-        <div class="container">Firm Profile</div>
+        <div class="container-fluid">Business Details</div>
     </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="container">
-
-<button class="fab bg-info" *ngIf="admin" routerLink="/firm/edit">
-  <mat-icon>edit</mat-icon>
-</button>
+<div class="container-fluid">
 
 <br>
 
+<form>
+<div class="row">
+  <div class="col-lg">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Agency Details</div>
+          <div class="col-auto" *ngIf="!editAgencyDetails">
+            <button class="btn btn-sm btn-outline-info" (click)="editAgencyDetails = true"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+      </div>
+      
+      <ng-container *ngIf="!editAgencyDetails">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="text-muted">Firm Name</div>
+            <div>{{profile.name || '--'}}</div>            
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Tag Line</div>
+            <div>{{profile.tagline || '--'}}</div>            
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Display / NickName</div>
+            <div>{{profile.nickname || '--'}}</div>            
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Incorporation Date</div>
+            <div>{{profile.incDate | date}}</div>            
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Website</div>
+            <div>{{profile.website || '--'}}</div>            
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Pan No.</div>
+            <div>{{profile.panNo || '--'}}</div>            
+          </li>    
+          <li class="list-group-item">
+            <div class="text-muted">GSTIN</div>
+            <div>{{profile.GSTIN.GSTType || '--'}} {{profile.GSTIN.GSTNo}}</div>            
+          </li>
+        </ul>
+      </ng-container>
+     
+      <ng-container *ngIf="editAgencyDetails">
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput type="text" name="firmName" placeholder="Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
+            <mat-error *ngIf="firmNameField.errors && firmNameField.errors.required">
+              Firm Name is required.
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" name="tagline" placeholder="Tagline" [(ngModel)]="profile.tagline" #taglineField="ngModel">
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" name="nickname" placeholder="Nickname" [(ngModel)]="profile.nickname" #nicknameField="ngModel">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="incDateField" name="incDate" placeholder="Incorporation Date" [(ngModel)]="profile.incDate" disabled>
+            <mat-datepicker-toggle matSuffix [for]="incDateField"></mat-datepicker-toggle>
+            <mat-datepicker #incDateField disabled="false"></mat-datepicker>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" name="website" placeholder="Website" [(ngModel)]="profile.website" #websiteField="ngModel">
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" name="panNo" placeholder="PAN Number" [(ngModel)]="profile.panNo" minlength="10" maxlength="10" required #panNoField="ngModel">
+            <mat-error *ngIf="panNoField.errors && panNoField.errors.required">
+              PAN Number is required.
+            </mat-error>
+            <mat-error *ngIf="panNoField.errors && (panNoField.errors.minlength || panNoField.errors.maxlength)">
+              PAN Number should be 10 characters long.
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-row">
+            <div class="{{profile.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+              <mat-form-field>
+                <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="profile.GSTIN.GSTType">
+                  <mat-option value="URD">URD</mat-option>
+                  <mat-option value="RD">RD</mat-option>
+                  <mat-option value="CRD">CRD</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col" *ngIf="profile.GSTIN.GSTType != 'URD'">
+              <mat-form-field>
+                <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="profile.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                  GSTIN is required.
+                </mat-error>
+                <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                  GSTIN should be 15 characters long.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Contact Details</div>
+          <div class="col-auto" *ngIf="!editContactDetails">
+            <button class="btn btn-sm btn-outline-info" (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+      </div>
+      
+      <ng-container *ngIf="!editContactDetails">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="text-muted">Email</div>
+            <div>{{profile.email || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Mobile 1</div>
+            <div>{{profile.phone || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Mobile 2</div>
+            <div>{{profile.OtherMobile || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">STD Number</div>
+            <div>{{profile.stdNo || '--'}}</div>
+          </li>           
+          <li class="list-group-item">
+            <div class="text-muted">LandLine Number</div>
+            <div>{{profile.landlineNo || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Fax</div>
+            <div>{{profile.fax || '--'}}</div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="editContactDetails">
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="profile.email" required #emailField="ngModel" verify-email>
+            <mat-error *ngIf="emailField.errors && emailField.errors.required">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="emailField.errors && emailField.errors.email">
+              Invalid Email.
+            </mat-error>
+          </mat-form-field>
+
+          <button class="btn btn-sm btn-outline-info" type="button" (click)="profile.email = user.email">Copy from User</button>
+
+          <br><br>
+      
+          <mat-form-field>
+            <span matPrefix>+91 &nbsp;</span>
+            <input matInput type="tel" [(ngModel)]="profile.phone" pattern="^\d{10}$" maxlength="10" minlength="10" name="phone" placeholder="Mobile 1" #phoneField="ngModel">
+            <mat-error *ngIf="phoneField.errors">
+              Mobile 1 is empty or invalid.
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <span matPrefix>+91 &nbsp;</span>
+            <input matInput type="tel" [(ngModel)]="profile.OtherMobile" pattern="^\d{10}$" maxlength="10" minlength="10" name="phone2" placeholder="Mobile 2" #phone2Field="ngModel">
+            <mat-error *ngIf="phone2Field.errors">
+              Mobile 2 is invalid.
+            </mat-error>
+          </mat-form-field>
+  
+          <div class="form-row">
+            <div class="col-3">
+              <mat-form-field>
+                <input matInput type="tel" name="stdNo" placeholder="STD No" minlength="3" maxlength="5" [(ngModel)]="profile.stdNo" #stdNoField="ngModel">
+              </mat-form-field>
+            </div>
+        
+            <div class="col-9">
+              <mat-form-field>
+                <input matInput type="tel" name="landlineNo" minlength="6" maxlength="8" placeholder="Landline Number" [(ngModel)]="profile.landlineNo" #landlineNoField="ngModel">
+              </mat-form-field>
+            </div>
+          </div>        
+        
+          <mat-form-field>
+            <input matInput type="number" name="fax" placeholder="Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Registered Address <small>(for Documents)</small></div>
+          <div class="col-auto" *ngIf="!editRegAddr">
+            <button class="btn btn-sm btn-outline-info" (click)="editRegAddr = true"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+      </div>
+      
+      <ng-container *ngIf="!editRegAddr">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            {{profile.registeredAddress.address || '--'}}
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">Pincode</div>
+            <div>{{profile.registeredAddress.pincode || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">City</div>
+            <div>{{profile.registeredAddress.city || '--'}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="text-muted">State</div>
+            <div>{{profile.registeredAddress.state || '--'}}</div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="editRegAddr">
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput type="text" name="registeredAddress" placeholder="Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
+            <mat-error *ngIf="registeredAddressField.errors && registeredAddressField.errors.required">
+              Registered Address is required.
+            </mat-error>
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="tel" minlength="6" maxlength="6" name="registeredPincode" placeholder="Pincode" [(ngModel)]="profile.registeredAddress.pincode" required #registeredPincodeField="ngModel">
+            <mat-error *ngIf="registeredPincodeField.errors && registeredPincodeField.errors.required">
+              Pincode is required.
+            </mat-error>
+            <mat-error *ngIf="registeredPincodeField.errors && (registeredPincodeField.errors.minlength || registeredPincodeField.errors.maxlength)">
+              Pincode should be 6 characters long.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input matInput type="text" name="registeredCity" placeholder="City" [(ngModel)]="profile.registeredAddress.city" required #registeredCityField="ngModel">
+            <mat-error *ngIf="registeredCityField.errors && registeredCityField.errors.required">
+              City is required.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="State" name="registeredState" [(ngModel)]="profile.registeredAddress.state" required #registeredStateField="ngModel">
+              <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registeredStateField.errors && registeredStateField.errors.required">
+              State is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="col-lg">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Office Address</div>
+          <div class="col-auto" *ngIf="!editOfficeAddr">
+            <button class="btn btn-sm btn-outline-info" (click)="editOfficeAddr = true"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+      </div>
+      
+      <ng-container *ngIf="!editOfficeAddr">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            {{profile.officeAddress.address || '--'}}
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Pincode</div>
+              <div class="col-md-8">{{profile.officeAddress.pincode || '--'}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">City</div>
+              <div class="col-md-8">{{profile.officeAddress.city || '--'}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">State</div>
+              <div class="col-md-8">{{profile.officeAddress.state || '--'}}</div>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="editOfficeAddr">
+        <div class="card-body">
+          <button type="button" mat-raised-button (click)="copyAddress()">Copy from Registered Details</button>
+          <br><br>
+  
+          <mat-form-field>
+            <input matInput type="text" name="officeAddress" placeholder="Office Address" [(ngModel)]="profile.officeAddress.address" #officeAddressField="ngModel">
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput type="tel" minlength="6" maxlength="6" name="officePincode" placeholder="Pincode" [(ngModel)]="profile.officeAddress.pincode" #officePincodeField="ngModel">
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput type="text" name="officeCity" placeholder="City" [(ngModel)]="profile.officeAddress.city" #officeCityField="ngModel">
+          </mat-form-field>
+        
+          <mat-form-field>
+            <mat-select placeholder="State" name="officeState" [(ngModel)]="profile.officeAddress.state" #officeStateField="ngModel">
+              <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="officeStateField.errors && officeStateField.errors.required">
+              State is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg"></div>
+</div>
+</form>
+
 <div class="row">
   <div class="col-lg-8 order-2 order-lg-1">
-    <div class="card mb-5">
-      <div class="card-header">Business Details</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Firm Name</div>
-            <div class="col-md-8">{{profile.name}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Tag Line</div>
-            <div class="col-md-8">{{profile.tagline}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Display / NickName</div>
-            <div class="col-md-8">{{profile.nickname}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Incorporation Date</div>
-            <div class="col-md-8">{{profile.incDate | date}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Email</div>
-            <div class="col-md-8">{{profile.email}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Mobile 1</div>
-            <div class="col-md-8">{{profile.phone}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Mobile 2</div>
-            <div class="col-md-8">{{profile.OtherMobile}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">STD Number</div>
-            <div class="col-md-8">{{profile.stdNo}}</div>
-          </div>
-        </li>           
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">LandLine Number</div>
-            <div class="col-md-8">{{profile.landlineNo}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Fax</div>
-            <div class="col-md-8">{{profile.fax}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Website</div>
-            <div class="col-md-8">{{profile.website}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Pan No.</div>
-            <div class="col-md-8">{{profile.panNo}}</div>
-          </div>
-        </li>    
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">GSTIN</div>
-            <div class="col-md-8">{{profile.GSTIN.GSTType}} {{profile.GSTIN.GSTNo}}</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card mb-5">
-      <div class="card-header">Registered Address</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          {{profile.registeredAddress.address}}
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Pincode</div>
-            <div class="col-md-8">{{profile.registeredAddress.pincode}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">City</div>
-            <div class="col-md-8">{{profile.registeredAddress.city}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">State</div>
-            <div class="col-md-8">{{profile.registeredAddress.state}}</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="card mb-5">
-      <div class="card-header">Office Address</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          {{profile.officeAddress.address}}
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Pincode</div>
-            <div class="col-md-8">{{profile.officeAddress.pincode}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">City</div>
-            <div class="col-md-8">{{profile.officeAddress.city}}</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">State</div>
-            <div class="col-md-8">{{profile.officeAddress.state}}</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
     <div class="card mb-5">
       <div class="card-header">Bank Details</div>
       <ul class="list-group list-group-flush">
