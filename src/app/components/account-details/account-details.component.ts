@@ -11,6 +11,7 @@ import { environment } from 'environments/environment';
 })
 export class AccountDetailsComponent implements OnInit {
 
+  backup = { name: "", designation: "" };
   profile = new UserProfile();
   editPersonalDetails = false;
 
@@ -23,6 +24,9 @@ export class AccountDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { user: UserProfile }) => {
       this.profile = data.user;
+
+      this.backup.name = this.profile.name;
+      this.backup.designation = this.profile.designation;
     });
   }
 
@@ -43,6 +47,9 @@ export class AccountDetailsComponent implements OnInit {
 
   cancel() {
     this.editPersonalDetails =  false;
+
+    this.profile.name = this.backup.name;
+    this.profile.designation = this.backup.designation;
   }
 
   uploadProfilePicture(files: FileList) {
