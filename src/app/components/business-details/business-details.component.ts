@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Firm, UserProfile } from 'app/models';
 
 import {
@@ -26,12 +26,15 @@ export class BusinessDetailsComponent implements OnInit {
   editContactDetails = false;
   editRegAddr = false;
   editOfficeAddr = false;
+  editBankDetails = false;
+  editSocialDetails = false;
 
   constructor(private ifscService: IfscService,
     private api: ApiService,
     private dialog: DialogService,
     private notifications: NotificationService,
     private route: ActivatedRoute,
+    private router: Router,
     public stateApi: StateApiService) {}
 
   ngOnInit() {
@@ -105,5 +108,35 @@ export class BusinessDetailsComponent implements OnInit {
     this.profile.officeAddress.city = this.profile.registeredAddress.city;
     this.profile.officeAddress.state = this.profile.registeredAddress.state;
     this.profile.officeAddress.pincode = this.profile.registeredAddress.pincode;
+  }
+
+  private goBack() {
+    this.router.navigateByUrl('/firm');
+  }
+
+  submit() {
+    this.api.setFirmProfile(this.profile).subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show("Saved");
+
+          this.editAgencyDetails = false;
+          this.editContactDetails = false;
+          this.editRegAddr = false;
+          this.editOfficeAddr = false;
+          this.editBankDetails = false;
+          this.editSocialDetails = false;
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+      }
+    );
+  }
+
+  cancel() {
+    this.goBack();
   }
 }

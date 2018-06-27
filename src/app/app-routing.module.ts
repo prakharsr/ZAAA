@@ -28,7 +28,6 @@ import {
 
 import {
   ProfileEditComponent,
-  FirmProfileEditComponent,
   TemplateSelectorComponent,
   PlanSelectorComponent
 } from 'app/admin';
@@ -83,15 +82,6 @@ const routes: Routes = [
     component: BusinessDetailsComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
-      user: UserProfileResolver
-    }
-  },
-  {
-    path: "firm/edit",
-    component: FirmProfileEditComponent,
-    canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      firm: FirmResolver,
       user: UserProfileResolver
     }
   },
