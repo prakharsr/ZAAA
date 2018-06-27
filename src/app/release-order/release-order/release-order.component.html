@@ -120,35 +120,25 @@
               </div>
 
               <ng-container *ngIf="mediaType == 'Print'">
-                <label>Pullout Name</label>
-      
                 <div class="form-row">
                   <div class="col">
-                    <div class="form-group">
-                      <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
-                          <option *ngFor="let item of pullouts" [ngValue]="item.Name">{{item.Name}}</option>
-                        <option>{{others}}</option>
-                      </select>
-                    </div>
-              
-                    <div *ngIf="pullOutNameField.invalid && (pullOutNameField.dirty || pullOutNameField.touched)" class="text-danger">
-                      <div *ngIf="pullOutNameField.errors.required">
-                        Pullout Name is required.
-                      </div>
-                      <br>
-                    </div>
+                    <mat-form-field>
+                      <mat-select placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                        <mat-option *ngFor="let item of pullouts" [value]="item.Name">{{item.Name}}</mat-option>
+                        <mat-option [value]="others">{{others}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="pullOutNameField.errors && pullOutNameField.errors.required">
+                          Pullout Name is required.
+                      </mat-error>
+                    </mat-form-field>
                   </div>
                   <div class="col" *ngIf="dropdownPullOutName == others">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
-                    </div>
-              
-                    <div *ngIf="specPullOutNameField.invalid && (specPullOutNameField.dirty || specPullOutNameField.touched)" class="text-danger">
-                      <div *ngIf="specPullOutNameField.errors.required">
+                    <mat-form-field>
+                      <input matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+                      <mat-error *ngIf="specPullOutNameField.errors && specPullOutNameField.errors.required">
                         Pullout Name is required.
-                      </div>
-                      <br>
-                    </div>
+                      </mat-error>
+                    </mat-form-field>
                   </div>
                 </div>
               </ng-container>
@@ -253,7 +243,7 @@
                     Edition is required.
                   </mat-error>
                 </mat-form-field>
-              </div>   
+              </div>
 
               <!-- <div class="row small" id="small_cat" *ngIf="selectedCategories[0]">
                 &nbsp;&nbsp;&nbsp;Categories :
@@ -339,22 +329,19 @@
               </ng-container>
 
               <div class="row">
-                <div class="col-lg col-md-6">
-                  <label>No of Paid Ads</label>
-                  <input type="number" class="form-control" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="Enter No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
-                </div>
-                
-                <div *ngIf="adCountPaidField.invalid && (adCountPaidField.dirty || adCountPaidField.touched)" class="text-danger">
-                  <div *ngIf="adCountPaidField.errors.required">
-                    No of Paid Ads is required.
-                  </div>
-                  <div *ngIf="adCountPaidField.errors.multipleOf">
-                    No of Paid Ads should be multiple of Paid Ads in Scheme.
-                  </div>
-                  <br>
+                <div class="col-md-6">
+                  <mat-form-field> 
+                    <input matInput type="number" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
+                    <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.required">
+                      No of Paid Ads is required.
+                    </mat-error>
+                    <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.multipleOf">
+                      No of Paid Ads should be multiple of Paid Ads in Scheme.
+                    </mat-error>
+                  </mat-form-field>                  
                 </div>
 
-                <mat-form-field class="col-lg-9 col-md-6"> 
+                <mat-form-field class="col-md-6"> 
                   <input type="text" matInput id="remark" name="remark" placeholder="Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
                 </mat-form-field>
               </div>
