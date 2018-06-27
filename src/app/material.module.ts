@@ -39,6 +39,7 @@ const modules = [
   MatTableModule,
   MatCardModule,
   MatSidenavModule,
+  MatButtonModule
 ]
 
 @NgModule({

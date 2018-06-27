@@ -18,6 +18,12 @@ import {
 export class FirmProfileEditComponent implements OnInit {
   profile = new Firm();
   user: UserProfile;
+  agencyDetailsEdit = false;
+  contactDetailsEdit = false;
+  registeredDetailsEdit = false;
+  officeDetailsEdit = false;
+  bankDetailsEdit = false;
+  socialDetailsEdit = false;
 
   constructor(private ifscService: IfscService,
     private api: ApiService,
