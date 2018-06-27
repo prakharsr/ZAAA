@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from 'app/models';
 import { ApiService, DialogService, NotificationService } from 'app/services';
 import { environment } from 'environments/environment';
@@ -12,16 +12,37 @@ import { environment } from 'environments/environment';
 export class AccountDetailsComponent implements OnInit {
 
   profile = new UserProfile();
+  editPersonalDetails = false;
 
   constructor(private api: ApiService,
     private dialog: DialogService,
     private notifications: NotificationService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { user: UserProfile }) => {
       this.profile = data.user;
     });
+  }
+
+  submit() {
+    this.api.setUserProfile(this.profile).subscribe(
+      data => {
+        if (data.success) {
+          this.editPersonalDetails =  false;
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+      }
+    );
+  }
+
+  cancel() {
+    this.editPersonalDetails =  false;
   }
 
   uploadProfilePicture(files: FileList) {

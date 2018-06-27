@@ -1,26 +1,29 @@
 <mat-toolbar>  
-    <mat-toolbar-row>
-        <div class="container">Home -> Manage Profile -> Account Details</div>
-    </mat-toolbar-row>
+  <mat-toolbar-row>
+      <div class="container-fluid">Home -> Manage Profile -> Account Details</div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
+
+
 <div class="container">
-  <br>
-  <div class="row">
-    <div class="col-lg col-md-6">
-      <div class="card mb-5">
-        <div class="card-header">
-          <div class="row justify-content-between">
-            <div class="col-auto">
-              Personal Details
-            </div>
-            <div class="col-auto" *ngIf="profile.isAdmin">
-              <a class="btn btn-info" routerLink="/profile/edit">
-                <mat-icon>edit</mat-icon> Edit
-              </a>
-            </div>
+
+<br>
+
+<div class="row">
+  <form (ngSubmit)="submit()" #profileForm="ngForm">
+  <div class="col-lg">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">Personal Details</div>
+          <div class="col-auto" *ngIf="!editPersonalDetails">
+            <button class="btn btn-sm btn-outline-info" (click)="editPersonalDetails = true"><mat-icon>edit</mat-icon></button>
           </div>
         </div>
+      </div>
+      
+      <ng-container *ngIf="!editPersonalDetails">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
@@ -41,42 +44,70 @@
             </div>
           </li>
         </ul>
-      </div>
+      </ng-container>
+     
+      <ng-container *ngIf="editPersonalDetails">
+        <div class="card-body">
+          <mat-form-field>
+            <input matInput type="text" name="name" placeholder="Name" [(ngModel)]="profile.name" required #nameField="ngModel">
+            <mat-error *ngIf="nameField.errors && nameField.errors.required">
+              Name is required.
+            </mat-error>
+          </mat-form-field>
+      
+          <mat-form-field>
+            <input matInput type="text" name="designation" placeholder="Designation" [(ngModel)]="profile.designation" required #designationField="ngModel">
+            <mat-error *ngIf="designationField.errors && designationField.errors.required">
+              Designation is required.
+            </mat-error>
+          </mat-form-field>
+      
+          <br><br>
+        
+          <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+      
+          <br><br>
+        </div>
+      </ng-container>
     </div>
-    <div class="col-lg col-md-6">
-      <div class="card mb-5">
-        <div class="card-header">
-          <div class="row justify-content-between">
-            <div class="col-auto">
-              Login Details
-            </div>
-            <div class="col-auto">
-              <a class="btn btn-danger" routerLink="/changePassword">
-                <mat-icon>vpn_key</mat-icon> Change Password
-              </a>
-            </div>
+  </div> 
+  </form>
+  <div class="col-lg-6">
+    <div class="card mb-5 mat-elevation-z3">
+      <div class="card-header">
+        <div class="row justify-content-between">
+          <div class="col-auto">
+            Login Details
+          </div>
+          <div class="col-auto">
+            <a class="btn btn-danger" routerLink="/changePassword">
+              <mat-icon>vpn_key</mat-icon> Change Password
+            </a>
           </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Email</div>
-              <div class="col-md-8">{{profile.email}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Contact</div>
-              <div class="col-md-8">{{profile.contact}}</div>
-            </div>
-          </li>
-        </ul>
       </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Email</div>
+            <div class="col-md-8">{{profile.email}}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-4">Contact</div>
+            <div class="col-md-8">{{profile.contact}}</div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
+</div>
+
   <div class="row">
     <div class="col-lg col-md-6">
-      <div class="card mb-5">
+      <div class="card mb-5 mat-elevation-z3">
         <div class="card-header">Profile Picture</div>
         <div class="card-body text-center">
           <img [src]="profile.photo" class="img-fluid max-w-200">
@@ -95,7 +126,7 @@
       </div>
     </div>
     <div class="col-lg col-md-6">
-      <div class="card mb-5">
+      <div class="card mb-5 mat-elevation-z3">
         <div class="card-header">Signature</div>
         <div class="card-body text-center">
           <img [src]="profile.sign" class="img-fluid max-w-200">

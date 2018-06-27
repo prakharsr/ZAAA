@@ -2,19 +2,6 @@
     font-style: italic;
 }
 
-mat-sidenav {
-    padding-right: 25px;
-    position: fixed;
-    z-index: 30;
-    top: 150px;
-}
-
-mat-toolbar {
-    position: fixed;
-    top: 115px;
-    z-index: 30;
-}
-
 mat-card {
     padding: 15px;
 }
