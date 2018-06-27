@@ -20,6 +20,7 @@ import { environment } from 'environments/environment.prod';
 export class BusinessDetailsComponent implements OnInit {
 
   user: UserProfile;
+  backup = new Firm();
   profile = new Firm();
 
   editAgencyDetails = false;
@@ -38,15 +39,14 @@ export class BusinessDetailsComponent implements OnInit {
     public stateApi: StateApiService) {}
 
   ngOnInit() {
-
     this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       this.profile = data.firm;
       this.user = data.user;
+      Object.assign(this.backup, this.profile);
     });
   }
 
   uploadLogo(files: FileList) {
-
     this.api.uploadFirmLogo(files.item(0)).subscribe(
       data => {
         if (data.success) {
@@ -110,8 +110,13 @@ export class BusinessDetailsComponent implements OnInit {
     this.profile.officeAddress.pincode = this.profile.registeredAddress.pincode;
   }
 
-  private goBack() {
-    this.router.navigateByUrl('/firm');
+  private stopEditing() {
+    this.editAgencyDetails = false;
+    this.editContactDetails = false;
+    this.editRegAddr = false;
+    this.editOfficeAddr = false;
+    this.editBankDetails = false;
+    this.editSocialDetails = false;
   }
 
   submit() {
@@ -120,12 +125,7 @@ export class BusinessDetailsComponent implements OnInit {
         if (data.success) {
           this.notifications.show("Saved");
 
-          this.editAgencyDetails = false;
-          this.editContactDetails = false;
-          this.editRegAddr = false;
-          this.editOfficeAddr = false;
-          this.editBankDetails = false;
-          this.editSocialDetails = false;
+          this.stopEditing();
         }
         else {
           console.log(data);
@@ -137,6 +137,8 @@ export class BusinessDetailsComponent implements OnInit {
   }
 
   cancel() {
-    this.goBack();
+    this.stopEditing();
+
+    Object.assign(this.profile, this.backup);
   }
 }
