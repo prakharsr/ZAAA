@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Firm, UserProfile } from 'app/models';
-import { ApiService, DialogService, NotificationService, StateApiService } from 'app/services';
+
+import {
+  ApiService,
+  DialogService,
+  NotificationService,
+  StateApiService,
+  IfscService
+} from 'app/services';
+
 import { environment } from 'environments/environment.prod';
 
 @Component({
@@ -11,31 +19,34 @@ import { environment } from 'environments/environment.prod';
 })
 export class BusinessDetailsComponent implements OnInit {
 
-  admin: boolean;
-
+  user: UserProfile;
+  backup = new Firm();
   profile = new Firm();
 
   editAgencyDetails = false;
   editContactDetails = false;
   editRegAddr = false;
   editOfficeAddr = false;
+  editBankDetails = false;
+  editSocialDetails = false;
 
-  constructor(private api: ApiService,
+  constructor(private ifscService: IfscService,
+    private api: ApiService,
     private dialog: DialogService,
     private notifications: NotificationService,
     private route: ActivatedRoute,
+    private router: Router,
     public stateApi: StateApiService) {}
 
   ngOnInit() {
-
     this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       this.profile = data.firm;
-      this.admin = data.user.isAdmin;
+      this.user = data.user;
+      Object.assign(this.backup, this.profile);
     });
   }
 
   uploadLogo(files: FileList) {
-
     this.api.uploadFirmLogo(files.item(0)).subscribe(
       data => {
         if (data.success) {
@@ -75,5 +86,59 @@ export class BusinessDetailsComponent implements OnInit {
         )
       }
     );
+  }
+
+  ifscChanged() {
+    if (this.profile.bankIfsc.length == 11) {
+      this.ifscService.getData(this.profile.bankIfsc).subscribe(
+        data => {
+          this.profile.bankName = data.BANK;
+          this.profile.bankBranchAddress = data.ADDRESS;
+        }
+      );
+    }
+    else {
+      this.profile.bankName = '';
+      this.profile.bankBranchAddress = '';
+    }
+  }
+
+  copyAddress() {
+    this.profile.officeAddress.address = this.profile.registeredAddress.address;
+    this.profile.officeAddress.city = this.profile.registeredAddress.city;
+    this.profile.officeAddress.state = this.profile.registeredAddress.state;
+    this.profile.officeAddress.pincode = this.profile.registeredAddress.pincode;
+  }
+
+  private stopEditing() {
+    this.editAgencyDetails = false;
+    this.editContactDetails = false;
+    this.editRegAddr = false;
+    this.editOfficeAddr = false;
+    this.editBankDetails = false;
+    this.editSocialDetails = false;
+  }
+
+  submit() {
+    this.api.setFirmProfile(this.profile).subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show("Saved");
+
+          this.stopEditing();
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+      }
+    );
+  }
+
+  cancel() {
+    this.stopEditing();
+
+    Object.assign(this.profile, this.backup);
   }
 }

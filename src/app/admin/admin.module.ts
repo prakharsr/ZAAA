@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
 import {
-  FirmProfileEditComponent,
   PlanSelectorComponent,
   TemplateSelectorItemComponent,
   TemplateSelectorComponent,
@@ -14,7 +13,6 @@ import {
     BaseModule
   ],
   declarations: [
-    FirmProfileEditComponent,
     PlanSelectorComponent,
     TemplateSelectorItemComponent,
     TemplateSelectorComponent,
