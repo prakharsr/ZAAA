@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Firm, UserProfile } from 'app/models';
 
 import {
@@ -35,7 +35,6 @@ export class BusinessDetailsComponent implements OnInit {
     private dialog: DialogService,
     private notifications: NotificationService,
     private route: ActivatedRoute,
-    private router: Router,
     public stateApi: StateApiService) {}
 
   ngOnInit() {
@@ -119,6 +118,15 @@ export class BusinessDetailsComponent implements OnInit {
     this.editSocialDetails = false;
   }
 
+  get editing() {
+    return this.editAgencyDetails
+     || this.editContactDetails
+     || this.editRegAddr
+     || this.editOfficeAddr
+     || this.editBankDetails
+     || this.editSocialDetails;
+  }
+
   submit() {
     this.api.setFirmProfile(this.profile).subscribe(
       data => {
@@ -126,6 +134,8 @@ export class BusinessDetailsComponent implements OnInit {
           this.notifications.show("Saved");
 
           this.stopEditing();
+
+          Object.assign(this.backup, this.profile);
         }
         else {
           console.log(data);

@@ -14,9 +14,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Agency Details</div>
-              <div class="col-auto" *ngIf="!editAgencyDetails && user.isAdmin">
+              <div class="col-auto" *ngIf="!editAgencyDetails && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editAgencyDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editAgencyDetails">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -122,9 +128,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Contact Details</div>
-              <div class="col-auto" *ngIf="!editContactDetails && user.isAdmin">
+              <div class="col-auto" *ngIf="!editContactDetails && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editContactDetails">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -216,9 +228,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Registered Address <small>(for Documents)</small></div>
-              <div class="col-auto" *ngIf="!editRegAddr && user.isAdmin">
+              <div class="col-auto" *ngIf="!editRegAddr && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editRegAddr = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editRegAddr">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -286,9 +304,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Office Address</div>
-              <div class="col-auto" *ngIf="!editOfficeAddr && user.isAdmin">
+              <div class="col-auto" *ngIf="!editOfficeAddr && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editOfficeAddr = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editOfficeAddr">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -355,9 +379,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Bank Details</div>
-              <div class="col-auto" *ngIf="!editBankDetails && user.isAdmin">
+              <div class="col-auto" *ngIf="!editBankDetails && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editBankDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editBankDetails">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -450,9 +480,15 @@
           <div class="card-header">
             <div class="row">
               <div class="col">Bank Details</div>
-              <div class="col-auto" *ngIf="!editSocialDetails && user.isAdmin">
+              <div class="col-auto" *ngIf="!editSocialDetails && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editSocialDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
+              <ng-container *ngIf="editSocialDetails">
+                <div class="col-auto">
+                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
             </div>
           </div>
           
@@ -511,8 +547,5 @@
         </div>
       </div>
     </div>
-
-    <button type="submit" *ngIf="user.isAdmin" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
-    <button type="button" *ngIf="user.isAdmin" class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
 </div>
