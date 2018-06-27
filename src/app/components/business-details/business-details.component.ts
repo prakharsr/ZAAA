@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Firm, UserProfile } from 'app/models';
-import { ApiService, DialogService, NotificationService, StateApiService } from 'app/services';
+
+import {
+  ApiService,
+  DialogService,
+  NotificationService,
+  StateApiService,
+  IfscService
+} from 'app/services';
+
 import { environment } from 'environments/environment.prod';
 
 @Component({
@@ -11,8 +19,7 @@ import { environment } from 'environments/environment.prod';
 })
 export class BusinessDetailsComponent implements OnInit {
 
-  admin: boolean;
-
+  user: UserProfile;
   profile = new Firm();
 
   editAgencyDetails = false;
@@ -20,7 +27,8 @@ export class BusinessDetailsComponent implements OnInit {
   editRegAddr = false;
   editOfficeAddr = false;
 
-  constructor(private api: ApiService,
+  constructor(private ifscService: IfscService,
+    private api: ApiService,
     private dialog: DialogService,
     private notifications: NotificationService,
     private route: ActivatedRoute,
@@ -30,7 +38,7 @@ export class BusinessDetailsComponent implements OnInit {
 
     this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       this.profile = data.firm;
-      this.admin = data.user.isAdmin;
+      this.user = data.user;
     });
   }
 
@@ -75,5 +83,27 @@ export class BusinessDetailsComponent implements OnInit {
         )
       }
     );
+  }
+
+  ifscChanged() {
+    if (this.profile.bankIfsc.length == 11) {
+      this.ifscService.getData(this.profile.bankIfsc).subscribe(
+        data => {
+          this.profile.bankName = data.BANK;
+          this.profile.bankBranchAddress = data.ADDRESS;
+        }
+      );
+    }
+    else {
+      this.profile.bankName = '';
+      this.profile.bankBranchAddress = '';
+    }
+  }
+
+  copyAddress() {
+    this.profile.officeAddress.address = this.profile.registeredAddress.address;
+    this.profile.officeAddress.city = this.profile.registeredAddress.city;
+    this.profile.officeAddress.state = this.profile.registeredAddress.state;
+    this.profile.officeAddress.pincode = this.profile.registeredAddress.pincode;
   }
 }
