@@ -18,7 +18,15 @@
         
         <ul class="navbar-nav" *ngIf="api.isLoggedIn">
           <li class="nav-item">
-            <button class="nav-link" mat-button [matMenuTriggerFor]="settings">
+            <button class="nav-link" mat-icon-button>
+              <mat-icon>help</mat-icon>
+            </button>
+
+            <button class="nav-link" mat-icon-button>
+              <mat-icon>notifications</mat-icon>
+            </button>
+
+            <button class="nav-link" mat-icon-button [matMenuTriggerFor]="settings">
               <mat-icon>settings</mat-icon>
             </button>
 
