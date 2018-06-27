@@ -5,11 +5,11 @@ import { ApiService, DialogService, NotificationService } from 'app/services';
 import { environment } from 'environments/environment.prod';
 
 @Component({
-  selector: 'app-firm-profile-view',
-  templateUrl: './firm-profile-view.component.html',
-  styleUrls: ['./firm-profile-view.component.css']
+  selector: 'app-business-details',
+  templateUrl: './business-details.component.html',
+  styleUrls: ['./business-details.component.css']
 })
-export class FirmProfileViewComponent implements OnInit {
+export class BusinessDetailsComponent implements OnInit {
 
   admin: boolean;
 

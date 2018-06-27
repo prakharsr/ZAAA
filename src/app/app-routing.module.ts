@@ -17,7 +17,9 @@ import {
   ForgotPswComponent,
   PhoneVerifyComponent,
   ProfileViewComponent,
-  FirmProfileViewComponent,
+  AccountDetailsComponent,
+  BusinessDetailsComponent,
+  UserDetailsComponent,
   DashboardComponent,
   ChangePswComponent,
   ResetPasswordComponent,
@@ -61,10 +63,26 @@ const routes: Routes = [
   },
   {
     path: "firm",
-    component: FirmProfileViewComponent,
+    component: BusinessDetailsComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
       firm: FirmResolver,
+      user: UserProfileResolver
+    }
+  },
+  {
+    path: "account",
+    component: AccountDetailsComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
+      user: UserProfileResolver
+    }
+  },
+  {
+    path: "user",
+    component: BusinessDetailsComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
       user: UserProfileResolver
     }
   },
