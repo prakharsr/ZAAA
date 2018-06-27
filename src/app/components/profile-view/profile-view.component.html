@@ -1,26 +1,40 @@
 <mat-toolbar>  
     <mat-toolbar-row>
-        <div class="container">Home -> Manage Profile</div>
+      <div class="container"><a routerLink="/">Home</a> <span class="text-muted mx-2">/</span> Manage Profile</div>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="container">
   <br>
-  <div class="card mb-5">
-    <div class="card-header">ACCOUNT</div>
+  <div class="card mb-3 mat-elevation-z1">
     <div class="card-body">
-      <div class="row justify-content-between">
-        <div class="col">To view and edit Account Details</div>
-        <a class="btn btn-info col-auto mr-3" routerLink="/account">View</a>
+      <div class="row">
+        <div class="col-auto text-primary mr-5">
+          <mat-icon style="font-size: 300%">person</mat-icon>
+        </div>
+        <div class="col">
+          <h5>Account</h5>
+          <p>To view and edit Account Details</p>
+        </div>
+        <div class="col-auto align-self-end">
+          <a class="btn btn-outline-info col-auto mr-3" routerLink="/account">View</a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card mb-5">
-    <div class="card-header">BUSINESS PROFILE</div>
+  <div class="card mb-3 mat-elevation-z1">
     <div class="card-body">
-      <div class="row justify-content-between">
-        <div class="col">To view and edit Firm Details</div>
-        <a class="btn btn-info col-auto mr-3" routerLink="/firm">View</a>
+      <div class="row">
+        <div class="col-auto text-primary mr-5">
+          <mat-icon style="font-size: 300%">business_center</mat-icon>
+        </div>
+        <div class="col">
+          <h5>Business Profile</h5>
+          <p>To view and edit Firm Details</p>
+        </div>
+        <div class="col-auto align-self-end">
+          <a class="btn btn-outline-info col-auto mr-3" routerLink="/firm">View</a>
+        </div>
       </div>
     </div>
   </div>
