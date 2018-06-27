@@ -11,56 +11,57 @@
     <div class="row">
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
+          <div class="card-body">
             <div class="row">
-              <div class="col">Agency Details</div>
+              <div class="col align-self-center">
+                <h5>Agency Details</h5>
+              </div>
               <div class="col-auto" *ngIf="!editAgencyDetails && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editAgencyDetails = true"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="editAgencyDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editAgencyDetails">
                 <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
             </div>
-          </div>
-          
-          <ng-container *ngIf="!editAgencyDetails">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="text-muted">Firm Name</div>
-                <div>{{profile.name || '--'}}</div>            
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Tag Line</div>
-                <div>{{profile.tagline || '--'}}</div>            
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Display / NickName</div>
-                <div>{{profile.nickname || '--'}}</div>            
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Incorporation Date</div>
-                <div>{{profile.incDate | date}}</div>            
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Website</div>
-                <div>{{profile.website || '--'}}</div>            
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Pan No.</div>
-                <div>{{profile.panNo || '--'}}</div>            
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">GSTIN</div>
-                <div>{{profile.GSTIN.GSTType || '--'}} {{profile.GSTIN.GSTNo}}</div>            
-              </li>
-            </ul>
-          </ng-container>
-        
-          <ng-container *ngIf="editAgencyDetails">
-            <div class="card-body">
+
+            <br>
+
+            <ng-container *ngIf="!editAgencyDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Firm Name</div>
+                <div>{{profile.name || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Tag Line</div>
+                <div>{{profile.tagline || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Display / NickName</div>
+                <div>{{profile.nickname || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Incorporation Date</div>
+                <div *ngIf="profile.incDate">{{profile.incDate | date}}</div>
+                <div *ngIf="!profile.incDate">--</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Website</div>
+                <div>{{profile.website || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Pan No.</div>
+                <div>{{profile.panNo || '--'}}</div>    
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">GSTIN</div>
+                <div>{{profile.GSTIN.GSTType || '--'}} {{profile.GSTIN.GSTNo}}</div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="editAgencyDetails">
               <mat-form-field>
                 <input matInput type="text" name="firmName" placeholder="Firm Name" [(ngModel)]="profile.name" required #firmNameField="ngModel">
                 <mat-error *ngIf="firmNameField.errors && firmNameField.errors.required">
@@ -118,8 +119,8 @@
                   </mat-form-field>
                 </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
       </div>
 
@@ -322,22 +323,16 @@
                 {{profile.officeAddress.address || '--'}}
               </li>
               <li class="list-group-item">
-                <div class="row">
-                  <div class="col-md-4">Pincode</div>
-                  <div class="col-md-8">{{profile.officeAddress.pincode || '--'}}</div>
-                </div>
+                <div class="text-muted">Pincode</div>
+                <div>{{profile.officeAddress.pincode || '--'}}</div>
               </li>
               <li class="list-group-item">
-                <div class="row">
-                  <div class="col-md-4">City</div>
-                  <div class="col-md-8">{{profile.officeAddress.city || '--'}}</div>
-                </div>
+                <div class="text-muted">City</div>
+                <div>{{profile.officeAddress.city || '--'}}</div>
               </li>
               <li class="list-group-item">
-                <div class="row">
-                  <div class="col-md-4">State</div>
-                  <div class="col-md-8">{{profile.officeAddress.state || '--'}}</div>
-                </div>
+                <div class="text-muted">State</div>
+                <div>{{profile.officeAddress.state || '--'}}</div>
               </li>
             </ul>
           </ng-container>
