@@ -37,6 +37,7 @@ mat-toolbar {
 
 mat-card {
     padding: 15px;
+    height: 100%;
 }
 
 mat-card-title {
