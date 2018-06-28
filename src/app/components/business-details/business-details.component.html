@@ -518,20 +518,28 @@
 
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">Logo</div>
-          <div class="card-body text-center">
-            <img [src]="profile.logo" class="img-fluid max-w-200">
-            
-            <br><br>
-            
-            <label for="logo-upload" *ngIf="user.isAdmin" class="btn btn-outline-info">
-              <mat-icon>file_upload</mat-icon>
-            </label>
-            <input type="file" *ngIf="user.isAdmin" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
+          <div class="card-body">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5>Logo</h5>
+              </div>
+              <ng-container *ngIf="user.isAdmin">
+                <div class="col-auto">
+                  <label for="logo-upload" mat-icon-button style="cursor: pointer;">
+                    <mat-icon>file_upload</mat-icon>
+                  </label>
+                  <input type="file" id="logo-upload" accept="image/*" class="hidden-file" (change)="uploadLogo($event.target.files)"/>
+      
+                  <button type="button" mat-icon-button color="warn" (click)="removeLogo()">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </ng-container>
+            </div>
 
-            <button *ngIf="user.isAdmin" class="btn btn-outline-danger mb-2" (click)="removeLogo()">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div class="text-center">
+              <img [src]="profile.logo" class="img-fluid max-w-200">
+            </div>
           </div>
         </div>
       </div>
