@@ -1,7 +1,7 @@
 .card-body {
     overflow-y: hidden;
     transition: 0.5s;
-    max-height: 600px;
+    max-height: 1000px;
 }
 
 .h-limit {
