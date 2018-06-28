@@ -365,7 +365,7 @@
     <div class="row">
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-body">
+          <div class="card-body" [class.h-limit]="!moreBankDetails && !editBankDetails">
             <div class="row">
               <div class="col align-self-center">
                 <h5>Bank Details</h5>
@@ -461,11 +461,15 @@
               </mat-form-field>
             </ng-container>
           </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editBankDetails" (click)="moreBankDetails = !moreBankDetails">
+            <span><mat-icon [class.rotate180]="moreBankDetails">expand_more</mat-icon></span> {{moreBankDetails ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
       
       <div class="col-lg col-md-6">
-        <div class="card mb-5 mat-elevation-z3">
+        <div class="card mb-5 mat-elevation-z3 h-extend">
           <div class="card-body">
             <div class="row">
               <div class="col align-self-center">
@@ -526,7 +530,7 @@
       </div>
 
       <div class="col-lg">
-        <div class="card mb-5 mat-elevation-z3">
+        <div class="card mb-5 mat-elevation-z3 h-extend">
           <div class="card-body">
             <div class="row">
               <div class="col align-self-center">

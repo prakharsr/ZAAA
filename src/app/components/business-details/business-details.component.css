@@ -15,3 +15,7 @@ mat-icon {
 .rotate180 {
     transform: rotate(180deg);
 }
+
+.h-extend {
+    min-height: 362px;
+}

@@ -32,6 +32,7 @@ export class BusinessDetailsComponent implements OnInit {
   moreAgencyDetails = false;
   moreContactDetails = false;
   moreAddr = false;
+  moreBankDetails = false;
 
   constructor(private ifscService: IfscService,
     private api: ApiService,
