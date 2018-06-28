@@ -365,52 +365,52 @@
     <div class="row">
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
+          <div class="card-body">
             <div class="row">
-              <div class="col">Bank Details</div>
+              <div class="col align-self-center">
+                <h5>Bank Details</h5>
+              </div>
               <div class="col-auto" *ngIf="!editBankDetails && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editBankDetails = true"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="editBankDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editBankDetails">
                 <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
             </div>
-          </div>
-          
-          <ng-container *ngIf="!editBankDetails">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="text-muted">Account Name</div>
-                <div>{{profile.bankAccountName || '--'}}</div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Account No.</div>
-                <div>{{profile.bankAccountNo || '--'}}</div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Bank Name</div>
-                <div>{{profile.bankName || '--'}}</div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">IFSC</div>
-                <div>{{profile.bankIfsc || '--'}}</div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Branch Address</div>
-                <div>{{profile.bankBranchAddress || '--'}}</div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Account Type</div>
-                <div>{{profile.bankAccountType || '--'}}</div>
-              </li>
-            </ul>
-          </ng-container>
 
-          <ng-container *ngIf="editBankDetails">
-            <div class="card-body">
+            <br>
+
+            <ng-container *ngIf="!editBankDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Account Name</div>
+                <div>{{profile.bankAccountName || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Account No.</div>
+                <div>{{profile.bankAccountNo || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Bank Name</div>
+                <div>{{profile.bankName || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">IFSC</div>
+                <div>{{profile.bankIfsc || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Branch Address</div>
+                <div>{{profile.bankBranchAddress || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Account Type</div>
+                <div>{{profile.bankAccountType || '--'}}</div>
+              </div>
+            </ng-container>
+  
+            <ng-container *ngIf="editBankDetails">
               <mat-form-field>
                 <input matInput type="text" name="bankAccountName" placeholder="Bank Account Name" [(ngModel)]="profile.bankAccountName" required #bankAccountNameField="ngModel">
                 <mat-error *ngIf="bankAccountNameField.errors && bankAccountNameField.errors.required">
@@ -459,56 +459,56 @@
                   <mat-option value="Savings">Savings</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
       </div>
       
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
+          <div class="card-body">
             <div class="row">
-              <div class="col">Social Details</div>
+              <div class="col align-self-center">
+                <h5>Social Details</h5>
+              </div>
               <div class="col-auto" *ngIf="!editSocialDetails && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editSocialDetails = true"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="editSocialDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editSocialDetails">
                 <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
             </div>
-          </div>
-          
-          <ng-container *ngIf="!editSocialDetails">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="text-muted">Facebook</div>
+
+            <br>
+
+            <ng-container *ngIf="!editSocialDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Facebook</div>
                 <div>
                   <a *ngIf="profile.facebook" href="{{profile.facebook}}" target="_blank">{{profile.facebook || '--'}}</a>
                   <span *ngIf="!profile.facebook">--</span>
                 </div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Twitter</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Twitter</div>
                 <div>
                   <a *ngIf="profile.twitter" href="{{profile.twitter}}" target="_blank">{{profile.twitter || '--'}}</a>
                   <span *ngIf="!profile.twitter">--</span>
                 </div>
-              </li>    
-              <li class="list-group-item">
-                <div class="text-muted">Others</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Others</div>
                 <div>
                   <a *ngIf="profile.other" href="{{profile.other}}" target="_blank">{{profile.other || '--'}}</a>
                   <span *ngIf="!profile.other">--</span>
                 </div>
-              </li>
-            </ul>
-          </ng-container>
-
-          <ng-container *ngIf="editSocialDetails">
-            <div class="card-body">
+              </div>
+            </ng-container>
+  
+            <ng-container *ngIf="editSocialDetails">
               <mat-form-field>
                 <input matInput type="text" name="facebook" placeholder="Facebook Link" [(ngModel)]="profile.facebook" #facebookField="ngModel">
               </mat-form-field>
@@ -520,8 +520,8 @@
               <mat-form-field>
                 <input matInput type="text" name="others" placeholder="Other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
               </mat-form-field>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
       </div>
 
