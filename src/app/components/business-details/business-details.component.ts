@@ -25,10 +25,13 @@ export class BusinessDetailsComponent implements OnInit {
 
   editAgencyDetails = false;
   editContactDetails = false;
-  editRegAddr = false;
-  editOfficeAddr = false;
+  editAddr = false;
   editBankDetails = false;
   editSocialDetails = false;
+
+  moreAgencyDetails = false;
+  moreContactDetails = false;
+  moreAddr = false;
 
   constructor(private ifscService: IfscService,
     private api: ApiService,
@@ -112,8 +115,7 @@ export class BusinessDetailsComponent implements OnInit {
   private stopEditing() {
     this.editAgencyDetails = false;
     this.editContactDetails = false;
-    this.editRegAddr = false;
-    this.editOfficeAddr = false;
+    this.editAddr = false;
     this.editBankDetails = false;
     this.editSocialDetails = false;
   }
@@ -121,8 +123,7 @@ export class BusinessDetailsComponent implements OnInit {
   get editing() {
     return this.editAgencyDetails
      || this.editContactDetails
-     || this.editRegAddr
-     || this.editOfficeAddr
+     || this.editAddr
      || this.editBankDetails
      || this.editSocialDetails;
   }

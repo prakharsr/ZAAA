@@ -1,17 +1,17 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container-fluid">Business Details</div>
+    <div class="container">Business Details</div>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="container-fluid">
+<div class="container">
   <br>
 
   <form (ngSubmit)="submit()" #profileForm="ngForm">
     <div class="row">
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-body">
+          <div class="card-body" [class.h-limit]="!moreAgencyDetails && !editAgencyDetails">
             <div class="row">
               <div class="col align-self-center">
                 <h5>Agency Details</h5>
@@ -121,57 +121,61 @@
               </div>
             </ng-container>
           </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editAgencyDetails" (click)="moreAgencyDetails = !moreAgencyDetails">
+            <span><mat-icon [class.rotate180]="moreAgencyDetails">expand_more</mat-icon></span> {{moreAgencyDetails ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
 
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
+          <div class="card-body" [class.h-limit]="!moreContactDetails && !editContactDetails">
             <div class="row">
-              <div class="col">Contact Details</div>
+              <div class="col align-self-center">
+                <h5>Contact Details</h5>
+              </div>
               <div class="col-auto" *ngIf="!editContactDetails && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editContactDetails">
                 <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
             </div>
-          </div>
-          
-          <ng-container *ngIf="!editContactDetails">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <div class="text-muted">Email</div>
-                <div>{{profile.email || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Mobile 1</div>
-                <div>{{profile.phone || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Mobile 2</div>
-                <div>{{profile.OtherMobile || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">STD Number</div>
-                <div>{{profile.stdNo || '--'}}</div>
-              </li>           
-              <li class="list-group-item">
-                <div class="text-muted">LandLine Number</div>
-                <div>{{profile.landlineNo || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Fax</div>
-                <div>{{profile.fax || '--'}}</div>
-              </li>
-            </ul>
-          </ng-container>
 
-          <ng-container *ngIf="editContactDetails">
-            <div class="card-body">
+            <br>
+
+            <ng-container *ngIf="!editContactDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Email</div>
+                <div>{{profile.email || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Mobile 1</div>
+                <div>{{profile.phone || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Mobile 2</div>
+                <div>{{profile.OtherMobile || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">STD Number</div>
+                <div>{{profile.stdNo || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">LandLine Number</div>
+                <div>{{profile.landlineNo || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Fax</div>
+                <div>{{profile.fax || '--'}}</div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="editContactDetails">
               <mat-form-field>
                 <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="profile.email" required #emailField="ngModel" verify-email>
                 <mat-error *ngIf="emailField.errors && emailField.errors.required">
@@ -181,9 +185,9 @@
                   Invalid Email.
                 </mat-error>
               </mat-form-field>
-
+  
               <button class="btn btn-sm btn-outline-info" type="button" (click)="profile.email = user.email">Copy from User</button>
-
+  
               <br><br>
           
               <mat-form-field>
@@ -219,50 +223,54 @@
               <mat-form-field>
                 <input matInput type="number" name="fax" placeholder="Fax" [(ngModel)]="profile.fax" #faxField="ngModel">
               </mat-form-field>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editContactDetails" (click)="moreContactDetails = !moreContactDetails">
+            <span><mat-icon [class.rotate180]="moreContactDetails">expand_more</mat-icon></span> {{moreContactDetails ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
 
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
+          <div class="card-body" [class.h-limit]="!moreAddr && !editAddr">
             <div class="row">
-              <div class="col">Registered Address <small>(for Documents)</small></div>
-              <div class="col-auto" *ngIf="!editRegAddr && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editRegAddr = true"><mat-icon>edit</mat-icon></button>
+              <div class="col align-self-center">
+                <h5>Registered Address <small>(for Documents)</small></h5>
               </div>
-              <ng-container *ngIf="editRegAddr">
+              <div class="col-auto" *ngIf="!editAddr && user.isAdmin && !editing">
+                <button mat-icon-button (click)="editAddr = true"><mat-icon>edit</mat-icon></button>
+              </div>
+              <ng-container *ngIf="editAddr">
                 <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
             </div>
-          </div>
-          
-          <ng-container *ngIf="!editRegAddr">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                {{profile.registeredAddress.address || '--'}}
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Pincode</div>
-                <div>{{profile.registeredAddress.pincode || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">City</div>
-                <div>{{profile.registeredAddress.city || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">State</div>
-                <div>{{profile.registeredAddress.state || '--'}}</div>
-              </li>
-            </ul>
-          </ng-container>
 
-          <ng-container *ngIf="editRegAddr">
-            <div class="card-body">
+            <br>
+    
+            <ng-container *ngIf="!editAddr">
+              <div class="mb-3">
+                {{profile.registeredAddress.address || '--'}}
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Pincode</div>
+                <div>{{profile.registeredAddress.pincode || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">City</div>
+                <div>{{profile.registeredAddress.city || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">State</div>
+                <div>{{profile.registeredAddress.state || '--'}}</div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="editAddr">
               <mat-form-field>
                 <input matInput type="text" name="registeredAddress" placeholder="Registered Address" [(ngModel)]="profile.registeredAddress.address" required #registeredAddressField="ngModel">
                 <mat-error *ngIf="registeredAddressField.errors && registeredAddressField.errors.required">
@@ -295,51 +303,32 @@
                   State is required.
                 </mat-error>
               </mat-form-field>
-            </div>
-          </ng-container>
-        </div>
-      </div>
+            </ng-container>
 
-      <div class="col-lg col-md-6">
-        <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
-            <div class="row">
-              <div class="col">Office Address</div>
-              <div class="col-auto" *ngIf="!editOfficeAddr && user.isAdmin && !editing">
-                <button class="btn btn-sm btn-outline-info" (click)="editOfficeAddr = true"><mat-icon>edit</mat-icon></button>
-              </div>
-              <ng-container *ngIf="editOfficeAddr">
-                <div class="col-auto">
-                  <button class="btn btn-sm btn-outline-success" type="submit" [disabled]="!profileForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button class="btn btn-sm btn-outline-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-          
-          <ng-container *ngIf="!editOfficeAddr">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
+            <br>
+
+            <h5>Office Address</h5>
+
+            <ng-container *ngIf="!editAddr">
+              <div class="mb-3">
                 {{profile.officeAddress.address || '--'}}
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">Pincode</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Pincode</div>
                 <div>{{profile.officeAddress.pincode || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">City</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">City</div>
                 <div>{{profile.officeAddress.city || '--'}}</div>
-              </li>
-              <li class="list-group-item">
-                <div class="text-muted">State</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">State</div>
                 <div>{{profile.officeAddress.state || '--'}}</div>
-              </li>
-            </ul>
-          </ng-container>
+              </div>
+            </ng-container>
 
-          <ng-container *ngIf="editOfficeAddr">
-            <div class="card-body">
-              <button type="button" mat-raised-button (click)="copyAddress()">Copy from Registered Details</button>
+            <ng-container *ngIf="editAddr">
+              <button type="button" mat-raised-button (click)="copyAddress()">Copy from Registered Address</button>
               <br><br>
       
               <mat-form-field>
@@ -362,8 +351,12 @@
                   State is required.
                 </mat-error>
               </mat-form-field>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editAddr" (click)="moreAddr = !moreAddr">
+            <span><mat-icon [class.rotate180]="moreAddr">expand_more</mat-icon></span> {{moreAddr ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
     </div>
@@ -474,7 +467,7 @@
         <div class="card mb-5 mat-elevation-z3">
           <div class="card-header">
             <div class="row">
-              <div class="col">Bank Details</div>
+              <div class="col">Social Details</div>
               <div class="col-auto" *ngIf="!editSocialDetails && user.isAdmin && !editing">
                 <button class="btn btn-sm btn-outline-info" (click)="editSocialDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
