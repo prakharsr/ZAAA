@@ -485,15 +485,24 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <div class="text-muted">Facebook</div>
-                <div><a href="{{profile.facebook}}" target="_blank">{{profile.facebook || '--'}}</a></div>
+                <div>
+                  <a *ngIf="profile.facebook" href="{{profile.facebook}}" target="_blank">{{profile.facebook || '--'}}</a>
+                  <span *ngIf="!profile.facebook">--</span>
+                </div>
               </li>    
               <li class="list-group-item">
                 <div class="text-muted">Twitter</div>
-                <div><a href="{{profile.twitter}}" target="_blank">{{profile.twitter || '--'}}</a></div>
+                <div>
+                  <a *ngIf="profile.twitter" href="{{profile.twitter}}" target="_blank">{{profile.twitter || '--'}}</a>
+                  <span *ngIf="!profile.twitter">--</span>
+                </div>
               </li>    
               <li class="list-group-item">
                 <div class="text-muted">Others</div>
-                <div><a href="{{profile.other}}" target="_blank">{{profile.other || '--'}}</a></div>
+                <div>
+                  <a *ngIf="profile.other" href="{{profile.other}}" target="_blank">{{profile.other || '--'}}</a>
+                  <span *ngIf="!profile.other">--</span>
+                </div>
               </li>
             </ul>
           </ng-container>
