@@ -3,7 +3,6 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">Create Invoice</div>
-        <!-- <button mat-icon-button class="col-justify-end" (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button> -->
       </div>
     </div>
   </mat-toolbar-row>
@@ -11,366 +10,260 @@
 
 <br>
 
-<div class="card mb-5">
-  <div class="card-header">
-    Calculations
-  </div>
-  <div class="card-body">
-    <div class="col-md-4">Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
-    <div class="col-md-4">Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
-    <div class="col-md-4">Gross Amount : ₹ {{grossAmount}}</div>
-    <label id="add_details">Extra Charges</label>
-  
-    <div class="text-muted" *ngIf="invoice.otherCharges.length == 0">
-      No Extra Charges
-    </div>
-  
-    <div *ngFor="let item of invoice.otherCharges; index as i" class="mb-1">
-      <div class="form-row">
-        <div class="col">
-          <mat-form-field>
-            <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
-            <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
-              Type is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field>
-            <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
-            <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
-              Amount is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-auto col-form-label">
-          <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-    
-    <br>
-    <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
-  
-    <label id="add_details">Discounts &amp; Charges</label>
+<form (ngSubmit)="submit()" #invoiceForm="ngForm">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md">
-        <div class="row">
-          <mat-form-field class="col-md-6">
-            <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
-            <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
-              Commission is required.
-            </mat-error>
-          </mat-form-field>
-          <div class="col-auto align-self-center">
-            <mat-checkbox name="commission100" [(ngModel)]="invoice.extraCharges.percentage">Percentage</mat-checkbox>
-          </div>
-        </div>
-        
+      <div class="col-lg">
+        <button type="button" class="btn-success">Search Release Order</button>
       </div>
-      <div class="col-md">
-        <div class="row">
-          <mat-form-field class="col-md-6">
-            <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
-            <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
-              Additional Charges is required.
-            </mat-error>
-          </mat-form-field>
-          <div class="col-auto align-self-center">
-            <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
+      <div class="col-lg">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-header">
+            Release Order ID : <a [routerLink]="['/releaseorders', invoice.releaseOrderId]">{{invoice.releaseOrderId}}</a>
           </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="col-md">
-        <div class="row">
-          <mat-form-field class="col-md-6">
-            <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
-            <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
-              Publication Discount is required.
-            </mat-error>
-          </mat-form-field>
-          <div class="col-auto align-self-center">
-            <mat-checkbox name="pubDiscount100" [(ngModel)]="invoice.publicationDiscount.percentage">Percentage</mat-checkbox>
-          </div>
-        </div>
-      </div>
-      <div class="col-md">
-        <div class="row">
-          <mat-form-field class="col-md-6">
-            <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
-            <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
-              Agency Discount is required.
-            </mat-error>
-          </mat-form-field>
-          <div class="col-auto align-self-center">
-            <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-      <div class="form-row">
-        <label class="col-3 col-form-label">Tax</label>
-        <div class="col-auto col-form-label">
-          <div class="form-check">
-            <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="invoice.taxIncluded">
-            <label class="form-check-label">Included</label>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <select class="form-control col-md-6" name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
-              <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
-            </select>
-          </div>
-  
-          <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
-            <div *ngIf="taxField.errors.required">
-              Tax is required.
+          <div class="card-body">
+            <div class="col-md-4">
+              Release Order Number : {{releaseOrder.releaseOrderNO}}
             </div>
-            <br>
+            <div class="col-md-4">
+              Release Order Date : {{releaseOrder.date}}
+            </div>
           </div>
         </div>
       </div>
-  </div>
-  <div class="card-footer">
-    <div class="col-md-4">Final Amount : (Gross Amount + Tax) ₹ {{netAmount}}</div>
-  </div>
-
-    <!-- <div class="form-row">
-      <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
-        <mat-form-field>
-          <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
-            <mat-option value="URD">URD</mat-option>
-            <mat-option value="RD">RD</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
-        <mat-form-field>
-          <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-          <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-            GSTIN is required.
-          </mat-error>
-          <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-            GSTIN should be 15 characters long.
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>  -->
-  </div>
-
-<br><br>
-<div class="container-fluid">
-  <form (ngSubmit)="submit()" #invoiceForm="ngForm">
+    </div>
     <div class="row">
-      <div class="col-lg col-md-6">
-        <br>
-        <mat-card>
-          <div class="row">
+      <div class="col-lg">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-header">
+            Release Order Details
+          </div>
+          <div class="card-body">
             <div class="col-md">
-              <label id="add_details">Select Insertions</label>
-              <div *ngFor="let item of availableInsertions">
-                <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
-                  {{toDate(item.insertion.date) | date}}
-                </mat-checkbox>
-              </div>
-              <div class="col-md">
-                <p>
-                  <strong>Media House:</strong> {{mediaHouse.pubName}} - {{mediaHouse.address.edition}}<br>
-                  <strong>Client:</strong> {{client.orgName}}<br>
-                  <strong>Executive:</strong> {{executive.executiveName}} - {{executive.orgName}}
-                </p>
-                <p>
-                  {{insertionCount}} Insertions
-                </p>
-              </div>
+              <p>
+                <strong>Media House:</strong> {{mediaHouse.pubName}} - {{mediaHouse.address.edition}}<br>
+                <strong>Client:</strong> {{client.orgName}}<br></p>
+                <div class="col-md-8">{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
             </div>
-          </div>
-        </mat-card>
-      </div>
-      <div class="col-lg col-md-6">
-      <br>
-      <mat-card>
-      <label id="add_details">Other Charges</label>
-
-      <div class="text-muted" *ngIf="invoice.otherCharges.length == 0">
-        No Other Charges
-      </div>
-
-      <div *ngFor="let item of invoice.otherCharges; index as i" class="mb-1">
-        <div class="form-row">
-          <div class="col">
-            <mat-form-field>
-              <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
-              <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
-                Type is required.
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field>
-              <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
-              <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
-                Amount is required.
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-auto col-form-label">
-            <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
           </div>
         </div>
       </div>
-      
-      <br>
-
-      <mat-card-actions>
-        <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
-      </mat-card-actions>
-
-      <mat-form-field>
-        <input matInput placeholder="Remark" name="otherRemark" [(ngModel)]="invoice.otherRemark">
-      </mat-form-field>
-    </mat-card>
+      <div class="col-lg">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-header">
+            Ad Details
+          </div>
+          <div class="card-body">
+            <label>Categories</label>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</li>
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory2">{{releaseOrder.adCategory2}}</li>
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory3">{{releaseOrder.adCategory3}}</li>
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory4">{{releaseOrder.adCategory4}}</li>
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory5">{{releaseOrder.adCategory5}}</li>
+              <li class="list-group-item" *ngIf="releaseOrder.adCategory6">{{releaseOrder.adCategory6}}</li>
+            </ul>
+            <div class="col-md-4">Ad Type: {{releaseOrder.adType}}</div>
+            <div class="col-md-4">Page Position: {{releaseOrder.adPosition}}</div>
+            <mat-form-field>
+              <input matInput type="text" id="caption" name="caption" placeholder="Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
+            </mat-form-field>
+            <div class="row">
+              <div class="col"> Ad Scheme Paid: {{releaseOrder.adSchemePaid}}</div>
+              <div class="col"> Ad Scheme Free: {{releaseOrder.adSchemeFree}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg col-md-6">
-      <br>
-      <mat-card>
-        <label id="add_details">Discounts &amp; Charges</label>
-        <div class="row">
-          <div class="col-md">
-            <div class="row">
-              <mat-form-field class="col-md-6">
-                <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
-                <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
-                  Commission is required.
-                </mat-error>
-              </mat-form-field>
-              <div class="col-auto align-self-center">
-                <mat-checkbox name="commission100" [(ngModel)]="invoice.extraCharges.percentage">Percentage</mat-checkbox>
-              </div>
-            </div>
-            
-          </div>
-          <div class="col-md">
-            <div class="row">
-              <mat-form-field class="col-md-6">
-                <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
-                <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
-                  Additional Charges is required.
-                </mat-error>
-              </mat-form-field>
-              <div class="col-auto align-self-center">
-                <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
-              </div>
-            </div>
+    <div class="col-lg">
+      <DIV class="card mb-5 mat-elevation-z3">
+        <div class="card-header">
+          Select Insertions
+        </div>
+        <div class="card-body">
+          <div *ngFor="let item of availableInsertions">
+            <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
+              {{toDate(item.insertion.date) | date}}
+            </mat-checkbox>
           </div>
         </div>
-      
-        <div class="row">
-          <div class="col-md">
-            <div class="row">
-              <mat-form-field class="col-md-6">
-                <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
-                <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
-                  Publication Discount is required.
-                </mat-error>
-              </mat-form-field>
-              <div class="col-auto align-self-center">
-                <mat-checkbox name="pubDiscount100" [(ngModel)]="invoice.publicationDiscount.percentage">Percentage</mat-checkbox>
-              </div>
+      </DIV>
+    </div>
+    <div class="row">
+      <div class="col-lg">
+        <div class="card mb-5 mat-elevation-z3">
+            <div class="card-header">
+              Calculations
             </div>
-          </div>
-          <div class="col-md">
-           <div class="row">
-              <mat-form-field class="col-md-6">
-                <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
-                <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
-                  Agency Discount is required.
-                </mat-error>
-              </mat-form-field>
-              <div class="col-auto align-self-center">
-                <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
-              </div>
-           </div>
-          </div>
-        </div>
-
-          <div class="form-row">
-            <label class="col-3 col-form-label">Tax</label>
-            <div class="col-auto col-form-label">
-              <div class="form-check">
-                <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="invoice.taxIncluded">
-                <label class="form-check-label">Included</label>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <select class="form-control col-md-6" name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
-                  <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
-                </select>
-              </div>
-      
-              <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
-                <div *ngIf="taxField.errors.required">
-                  Tax is required.
+            <div class="card-body">
+              <div class="col-md-4">Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
+              <div class="col-md-4">Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
+              <div class="colS-md-4">Gross Amount : ₹ {{grossAmount}}</div>
+              <br>
+              <div class="row">
+                <div class="col-md">
+                  <div class="row">
+                    <mat-form-field class="col-md-6">
+                      <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
+                      <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
+                        Commission is required.
+                      </mat-error>
+                    </mat-form-field>
+                    <div class="col-auto align-self-center">
+                      <mat-checkbox name="commission100" [(ngModel)]="invoice.extraCharges.percentage">Percentage</mat-checkbox>
+                    </div>
+                  </div>
+                  
                 </div>
-                <br>
+                <div class="col-md">
+                  <div class="row">
+                    <mat-form-field class="col-md-6">
+                      <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
+                      <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
+                        Additional Charges is required.
+                      </mat-error>
+                    </mat-form-field>
+                    <div class="col-auto align-self-center">
+                      <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
               </div>
+            
+              <div class="row">
+                <div class="col-md">
+                  <div class="row">
+                    <mat-form-field class="col-md-6">
+                      <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
+                      <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
+                        Publication Discount is required.
+                      </mat-error>
+                    </mat-form-field>
+                    <div class="col-auto align-self-center">
+                      <mat-checkbox name="pubDiscount100" [(ngModel)]="invoice.publicationDiscount.percentage">Percentage</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="row">
+                    <mat-form-field class="col-md-6">
+                      <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
+                      <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
+                        Agency Discount is required.
+                      </mat-error>
+                    </mat-form-field>
+                    <div class="col-auto align-self-center">
+                      <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <label id="add_details">Extra Charges</label>
+            
+              <div class="text-muted" *ngIf="invoice.otherCharges.length == 0">
+                No Extra Charges
+              </div>
+            
+              <div *ngFor="let item of invoice.otherCharges; index as i" class="mb-1">
+                <div class="form-row">
+                  <div class="col">
+                    <mat-form-field>
+                      <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
+                      <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
+                        Type is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field>
+                      <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
+                      <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
+                        Amount is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-auto">
+                    <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
+                  </div>
+                  <div class="col-auto col-form-label">
+                    <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+            
+                <div class="form-row">
+                  <label class="col-3 col-form-label">Tax</label>
+                  <div class="col-auto col-form-label">
+                    <div class="form-check">
+                      <input type="checkbox" name="taxIncluded" class="form-check-input" [(ngModel)]="invoice.taxIncluded">
+                      <label class="form-check-label">Included</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <select class="form-control col-md-6" name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
+                        <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
+                      </select>
+                    </div>
+            
+                    <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
+                      <div *ngIf="taxField.errors.required">
+                        Tax is required.
+                      </div>
+                      <br>
+                    </div>
+                  </div>
+                </div>
             </div>
+            <div class="card-footer">
+              <div class="col-md-4">Final Amount (Gross Amount + Tax):  ₹ {{netAmount}}</div>
+            </div>
+          
+              <!-- <div class="form-row">
+                <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+                  <mat-form-field>
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+                      <mat-option value="URD">URD</mat-option>
+                      <mat-option value="RD">RD</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
+                  <mat-form-field>
+                    <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                      GSTIN is required.
+                    </mat-error>
+                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                      GSTIN should be 15 characters long.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>  -->
+            </div>
+      </div>
+      <div class="col-lg">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-header">
+            Remark
           </div>
-      
-          <div class="form-row">
-            <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
-              <mat-form-field>
-                <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
-                  <mat-option value="URD">URD</mat-option>
-                  <mat-option value="RD">RD</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
-              <mat-form-field>
-                <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-                  GSTIN is required.
-                </mat-error>
-                <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-                  GSTIN should be 15 characters long.
-                </mat-error>
-              </mat-form-field>
-            </div>
-          </div> 
-      </mat-card>
+          <div class="card-body">
+            <mat-form-field>
+              <input matInput type="text" id="remark" name="remark" placeholder="For Invoice" [(ngModel)]="invoice.remark" #remarkField="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="For External Use" name="otherRemark" [(ngModel)]="invoice.otherRemark">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-lg col-md-6">
-      <br>
-      <mat-card>
-        <label id="add_details">Other Invoice Details</label>
-        <mat-form-field>
-          <input matInput type="text" id="caption" name="caption" placeholder="Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
-        </mat-form-field>
-      
-        <mat-form-field>
-          <input matInput type="text" id="remark" name="remark" placeholder="Remark" [(ngModel)]="invoice.remark" #remarkField="ngModel">
-        </mat-form-field>
-      </mat-card>
-    </div>
+    <button class="btn btn-success" type="submit" [disabled]="!invoiceForm.form.valid">Submit</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
   </div>
-
-  <br><br>
-
-  <button class="btn btn-success" type="submit" [disabled]="!invoiceForm.form.valid">Submit</button>
-  <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
-  </form>
- 
-</div>
+</form>
