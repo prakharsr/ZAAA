@@ -30,6 +30,14 @@ export class PaymentTotalResponse {
   list: PageData<PaymentsResponse>;
 }
 
+export class SummarySheetInsertion {
+  _id = "";
+  amount = 0;
+  recieptNumber = "";
+  recieptDate: Date;
+  paymentMode = "";
+}
+
 @Injectable()
 export class AccountsApiService {
 
@@ -239,7 +247,7 @@ export class AccountsApiService {
     }, { responseType: 'blob' });
   }
 
-  generateSummarySheet(insertions: { _id: string, amount: number }[]) {
+  generateSummarySheet(insertions: SummarySheetInsertion[]) {
     return this.api.post('/user/summarySheet', {
       mhis: insertions
     });
