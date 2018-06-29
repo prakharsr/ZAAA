@@ -29,6 +29,9 @@
         </div>
       </div>
     </div>
+
+    <br>
+
     <div class="row">
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
@@ -76,6 +79,9 @@
         </div>
       </div>
     </div>
+
+    <br><br>
+
     <div>
       <div class="card mb-5 mat-elevation-z3">
         <div class="card-header">
@@ -90,6 +96,9 @@
         </div>
       </div>
     </div>
+
+    <br>
+
     <div class="row">
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
@@ -100,65 +109,56 @@
             <div>Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
             <div>Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
             <div>Gross Amount : ₹ {{grossAmount}}</div>
+            
             <br>
+
             <div class="row">
-              <div class="col-md">
-                <div class="row">
-                  <mat-form-field class="col">
-                    <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
-                    <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
-                      Commission is required.
-                    </mat-error>
-                  </mat-form-field>
-                  <div class="col-auto align-self-center">
-                    <mat-checkbox name="commission100" [(ngModel)]="invoice.extraCharges.percentage">Percentage</mat-checkbox>
-                  </div>
-                </div>
-                
-              </div>
-              <div class="col-md">
-                <div class="row">
-                  <mat-form-field class="col">
-                    <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
-                    <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
-                      Additional Charges is required.
-                    </mat-error>
-                  </mat-form-field>
-                  <div class="col-auto align-self-center">
-                    <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
-                  </div>
-                </div>
+              <mat-form-field class="col">
+                <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
+                <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
+                  Commission is required.
+                </mat-error>
+              </mat-form-field>
+              <div class="col-auto align-self-center">
+                <mat-checkbox name="commission100" [(ngModel)]="invoice.extraCharges.percentage">Percentage</mat-checkbox>
               </div>
             </div>
 
+            <div class="row">
+              <mat-form-field class="col">
+                <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
+                <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
+                  Additional Charges is required.
+                </mat-error>
+              </mat-form-field>
+              <div class="col-auto align-self-center">
+                <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
+              </div>
+            </div>
+            
             <br>
           
             <div class="row">
-              <div class="col-md">
-                <div class="row">
-                  <mat-form-field class="col">
-                    <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
-                    <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
-                      Publication Discount is required.
-                    </mat-error>
-                  </mat-form-field>
-                  <div class="col-auto align-self-center">
-                    <mat-checkbox name="pubDiscount100" [(ngModel)]="invoice.publicationDiscount.percentage">Percentage</mat-checkbox>
-                  </div>
-                </div>
+              <mat-form-field class="col">
+                <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
+                <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
+                  Publication Discount is required.
+                </mat-error>
+              </mat-form-field>
+              <div class="col-auto align-self-center">
+                <mat-checkbox name="pubDiscount100" [(ngModel)]="invoice.publicationDiscount.percentage">Percentage</mat-checkbox>
               </div>
-              <div class="col-md">
-                <div class="row">
-                  <mat-form-field class="col">
-                    <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
-                    <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
-                      Agency Discount is required.
-                    </mat-error>
-                  </mat-form-field>
-                  <div class="col-auto align-self-center">
-                    <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
-                  </div>
-                </div>
+            </div>
+
+            <div class="row">
+              <mat-form-field class="col">
+                <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
+                <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
+                  Agency Discount is required.
+                </mat-error>
+              </mat-form-field>
+              <div class="col-auto align-self-center">
+                <mat-checkbox name="agencyDiscount100" [(ngModel)]="invoice.agencyDiscount1.percentage">Percentage</mat-checkbox>
               </div>
             </div>
 
@@ -266,6 +266,9 @@
         </div>
       </div>
     </div>
+
+    <br>
+
     <button class="btn btn-success" type="submit" [disabled]="!invoiceForm.form.valid">Submit</button>
     <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
   </div>
