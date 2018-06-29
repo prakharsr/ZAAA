@@ -31,31 +31,47 @@
 
   <br><br>
 
-  <div>
-    <button (click)="mediaHouse()" class="btn btn-primary btn-block">Media House</button>
-    <button (click)="client()" class="btn btn-primary btn-block">Client</button>
-    <button (click)="executive()" class="btn btn-primary btn-block">Executive</button>
-    <button (click)="invoice()" class="btn btn-primary btn-block">Invoice</button>
-    <button (click)="ro()" class="btn btn-primary btn-block">Release Order</button>
-    <button (click)="receipt()" class="btn btn-primary btn-block">Receipt</button>
-    <button (click)="mhi()" class="btn btn-primary btn-block">Media House Invoice</button>
-    <button (click)="mhNote()" class="btn btn-primary btn-block">Media House Notes</button>
-    <button (click)="clientNote()" class="btn btn-primary btn-block">Client Notes</button>
-    <button (click)="ratecard()" class="btn btn-primary btn-block">Ratecard</button>
+  <div class="row">
+    <div class="col">
+      <div class="card mat-elevation-z3">
+        <div class="card-body">
+          <h5>Sale</h5>
 
-    <div class="row">
-      <div class="form-group col">
-        <label>Insertion Period</label>
-        <select [(ngModel)]="insertionPeriod" class="form-control">
-          <option [ngValue]="0">Any Time</option>
-          <option [ngValue]="7">Past 7 days</option>
-          <option [ngValue]="15">Past 15 days</option>
-          <option [ngValue]="30">Past 30 days</option>
-        </select>
+          <br>
+
+          <button (click)="invoice()" class="btn btn-primary">Invoice</button>
+          <button (click)="receipt()" class="btn btn-primary">Receipt</button>
+        </div>
       </div>
-      <div class="col">
-        <button (click)="insertions()" class="btn btn-primary btn-block">Insertions</button>
+    </div>
+    <div class="col">
+      <div class="card mat-elevation-z3">
+        <div class="card-body">
+          <h5>Purchase</h5>
+
+          <br>
+
+          <button (click)="ro()" class="btn btn-primary">Release Order</button>
+          <button (click)="mhi()" class="btn btn-primary">Media House Invoice</button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div>
+    <div class="form-group">
+      <label>Insertion Period</label>
+      <select [(ngModel)]="insertionPeriod" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+    <div>
+      <button (click)="insertions()" class="btn btn-primary">Insertion Check</button>
     </div>
   </div>
 </div>
