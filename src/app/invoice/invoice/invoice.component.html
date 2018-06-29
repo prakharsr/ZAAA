@@ -1,9 +1,7 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">Create Invoice</div>
-      </div>
+    <div class="container">
+      Create Invoice
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -11,22 +9,21 @@
 <br>
 
 <form (ngSubmit)="submit()" #invoiceForm="ngForm">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-auto">
         <button type="button" class="btn btn-success">Search Release Order</button>
       </div>
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
-            Release Order ID : <a [routerLink]="['/releaseorders', invoice.releaseOrderId]">{{invoice.releaseOrderId}}</a>
-          </div>
           <div class="card-body">
-            <div>
-              Release Order Number : {{releaseOrder.releaseOrderNO}}
+            <div class="mb-3">
+              <div class="text-muted small">Release Order No</div>
+              <div>{{releaseOrder.releaseOrderNO}}</div>
             </div>
             <div>
-              Release Order Date : {{releaseOrder.date}}
+              <div class="text-muted small">Release Order Date</div>
+              <div>{{releaseOrder.date | date}}</div>
             </div>
           </div>
         </div>
@@ -35,15 +32,18 @@
     <div class="row">
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
-          <div class="card-header">
-            Release Order Details
-          </div>
           <div class="card-body">
-            <div class="col-md">
-              <p>
-                <strong>Media House:</strong> {{mediaHouse.pubName}} - {{mediaHouse.address.edition}}<br>
-                <strong>Client:</strong> {{client.orgName}}<br></p>
-                <div>{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
+            <div class="mb-3">
+              <div class="text-muted small">Publication</div>
+              <div>{{mediaHouse.pubName}} - {{mediaHouse.address.edition}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Client</div>
+              <div>{{client.orgName}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Client GSTIN</div>
+              <div>{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
             </div>
           </div>
         </div>
@@ -69,8 +69,8 @@
               <input matInput type="text" id="caption" name="caption" placeholder="Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
             </mat-form-field>
             <div class="row">
-              <div class="col"> Ad Scheme Paid: {{releaseOrder.adSchemePaid}}</div>
-              <div class="col"> Ad Scheme Free: {{releaseOrder.adSchemeFree}}</div>
+              <div class="col">Ad Scheme Paid: {{releaseOrder.adSchemePaid}}</div>
+              <div class="col">Ad Scheme Free: {{releaseOrder.adSchemeFree}}</div>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@
             <div class="row">
               <div class="col-md">
                 <div class="row">
-                  <mat-form-field class="col-md-6">
+                  <mat-form-field class="col">
                     <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
                     <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
                       Commission is required.
@@ -118,7 +118,7 @@
               </div>
               <div class="col-md">
                 <div class="row">
-                  <mat-form-field class="col-md-6">
+                  <mat-form-field class="col">
                     <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
                     <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
                       Additional Charges is required.
@@ -130,11 +130,13 @@
                 </div>
               </div>
             </div>
+
+            <br>
           
             <div class="row">
               <div class="col-md">
                 <div class="row">
-                  <mat-form-field class="col-md-6">
+                  <mat-form-field class="col">
                     <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
                     <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
                       Publication Discount is required.
@@ -147,7 +149,7 @@
               </div>
               <div class="col-md">
                 <div class="row">
-                  <mat-form-field class="col-md-6">
+                  <mat-form-field class="col">
                     <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
                     <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
                       Agency Discount is required.
