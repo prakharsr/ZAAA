@@ -19,6 +19,8 @@ export class SelectReleaseOrderComponent implements OnInit {
   edition;
   client;
 
+  roNo;
+
   pastDays = 0;
 
   constructor(private clientApi: ClientApiService,
@@ -89,7 +91,7 @@ export class SelectReleaseOrderComponent implements OnInit {
     
     let queryParams = new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, '', '', this.pastDays);
 
-    this.roApi.searchReleaseOrders(1, queryParams, true).subscribe(data => {
+    this.roApi.searchReleaseOrders(1, queryParams, true, this.roNo).subscribe(data => {
       this.releaseOrders = data.list;
     });
   }
