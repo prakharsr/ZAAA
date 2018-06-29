@@ -13,8 +13,8 @@
 <form (ngSubmit)="submit()" #invoiceForm="ngForm">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg">
-        <button type="button" class="btn-success">Search Release Order</button>
+      <div class="col-auto">
+        <button type="button" class="btn btn-success">Search Release Order</button>
       </div>
       <div class="col-lg">
         <div class="card mb-5 mat-elevation-z3">
@@ -22,10 +22,10 @@
             Release Order ID : <a [routerLink]="['/releaseorders', invoice.releaseOrderId]">{{invoice.releaseOrderId}}</a>
           </div>
           <div class="card-body">
-            <div class="col-md-4">
+            <div>
               Release Order Number : {{releaseOrder.releaseOrderNO}}
             </div>
-            <div class="col-md-4">
+            <div>
               Release Order Date : {{releaseOrder.date}}
             </div>
           </div>
@@ -43,7 +43,7 @@
               <p>
                 <strong>Media House:</strong> {{mediaHouse.pubName}} - {{mediaHouse.address.edition}}<br>
                 <strong>Client:</strong> {{client.orgName}}<br></p>
-                <div class="col-md-8">{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
+                <div>{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
             </div>
           </div>
         </div>
@@ -63,8 +63,8 @@
               <li class="list-group-item" *ngIf="releaseOrder.adCategory5">{{releaseOrder.adCategory5}}</li>
               <li class="list-group-item" *ngIf="releaseOrder.adCategory6">{{releaseOrder.adCategory6}}</li>
             </ul>
-            <div class="col-md-4">Ad Type: {{releaseOrder.adType}}</div>
-            <div class="col-md-4">Page Position: {{releaseOrder.adPosition}}</div>
+            <div>Ad Type: {{releaseOrder.adType}}</div>
+            <div>Page Position: {{releaseOrder.adPosition}}</div>
             <mat-form-field>
               <input matInput type="text" id="caption" name="caption" placeholder="Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
             </mat-form-field>
@@ -97,9 +97,9 @@
               Calculations
             </div>
             <div class="card-body">
-              <div class="col-md-4">Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
-              <div class="col-md-4">Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
-              <div class="colS-md-4">Gross Amount : ₹ {{grossAmount}}</div>
+              <div>Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
+              <div>Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
+              <div>Gross Amount : ₹ {{grossAmount}}</div>
               <br>
               <div class="row">
                 <div class="col-md">
@@ -221,7 +221,7 @@
                 </div>
             </div>
             <div class="card-footer">
-              <div class="col-md-4">Final Amount (Gross Amount + Tax):  ₹ {{netAmount}}</div>
+              <div>Final Amount (Gross Amount + Tax):  ₹ {{netAmount}}</div>
             </div>
           
               <!-- <div class="form-row">
