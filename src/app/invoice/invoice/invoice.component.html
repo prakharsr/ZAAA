@@ -10,25 +10,7 @@
 
 <form (ngSubmit)="submit()" #invoiceForm="ngForm">
   <div class="container">
-    <div class="row">
-      <div class="col-auto" *ngIf="!releaseOrder">
-        <button type="button" mat-raised-button (click)="selectRO()">Search Release Order</button>
-      </div>
-      <div class="col-lg" *ngIf="releaseOrder">
-        <div class="card mb-5 mat-elevation-z3">
-          <div class="card-body">
-            <div class="mb-3">
-              <div class="text-muted small">Release Order No</div>
-              <div>{{releaseOrder.releaseOrderNO}}</div>
-            </div>
-            <div>
-              <div class="text-muted small">Release Order Date</div>
-              <div>{{releaseOrder.date | date}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <button type="button" *ngIf="!releaseOrder" mat-raised-button (click)="selectRO()">Search Release Order</button>
 
     <br>
 
@@ -37,6 +19,14 @@
         <div class="col-lg">
           <div class="card mb-5 mat-elevation-z3">
             <div class="card-body">
+              <div class="mb-3">
+                <div class="text-muted small">Release Order No</div>
+                <div>{{releaseOrder.releaseOrderNO}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Release Order Date</div>
+                <div>{{releaseOrder.date | date}}</div>
+              </div>
               <div class="mb-3">
                 <div class="text-muted small">Publication</div>
                 <div>{{mediaHouse.pubName}} - {{mediaHouse.address.edition}}</div>
@@ -54,27 +44,55 @@
         </div>
         <div class="col-lg">
           <div class="card mb-5 mat-elevation-z3">
-            <div class="card-header">
-              Ad Details
-            </div>
             <div class="card-body">
-              <label>Categories</label>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</li>
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory2">{{releaseOrder.adCategory2}}</li>
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory3">{{releaseOrder.adCategory3}}</li>
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory4">{{releaseOrder.adCategory4}}</li>
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory5">{{releaseOrder.adCategory5}}</li>
-                <li class="list-group-item" *ngIf="releaseOrder.adCategory6">{{releaseOrder.adCategory6}}</li>
-              </ul>
-              <div>Ad Type: {{releaseOrder.adType}}</div>
-              <div>Page Position: {{releaseOrder.adPosition}}</div>
-              <mat-form-field>
-                <input matInput type="text" id="caption" name="caption" placeholder="Caption" [(ngModel)]="invoice.caption" #captionField="ngModel">
-              </mat-form-field>
+              <h5>Ad Details</h5>
+              <br>
+
+              <div class="mb-3">
+                <div class="text-muted small">Categories</div>
+                <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</span>
+                <span *ngIf="releaseOrder.adCategory2">, {{releaseOrder.adCategory2}}</span>
+                <span *ngIf="releaseOrder.adCategory3">, {{releaseOrder.adCategory3}}</span>
+                <span *ngIf="releaseOrder.adCategory4">, {{releaseOrder.adCategory4}}</span>
+                <span *ngIf="releaseOrder.adCategory5">, {{releaseOrder.adCategory5}}</span>
+                <span *ngIf="releaseOrder.adCategory6">, {{releaseOrder.adCategory6}}</span>
+              </div>
+              
               <div class="row">
-                <div class="col">Ad Scheme Paid: {{releaseOrder.adSchemePaid}}</div>
-                <div class="col">Ad Scheme Free: {{releaseOrder.adSchemeFree}}</div>
+                <div class="col">
+                  <div class="text-muted small">Ad Type</div>
+                  <div>{{releaseOrder.adType}}</div>
+                </div>
+                <div class="col" *ngIf="releaseOrder.adPosition">
+                  <div class="text-muted small">Page Position</div>
+                  <div>{{releaseOrder.adPosition}}</div>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="row">
+                <div class="col">
+                  <div class="text-muted small">Caption</div>
+                  <div>{{releaseOrder.caption || '--'}}</div>
+                </div>
+                <div class="col">
+                  <div class="text-muted small">Remark</div>
+                  <div>{{releaseOrder.remark || '--'}}</div>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="row">
+                <div class="col">
+                  <div class="text-muted small">Ad Scheme Paid</div>
+                  <div>{{releaseOrder.adSchemePaid}}</div>
+                </div>
+                <div class="col">
+                  <div class="text-muted small">Ad Scheme Free</div>
+                  <div>{{releaseOrder.adSchemeFree}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -107,8 +125,6 @@
               Calculations
             </div>
             <div class="card-body">
-              <div>Release Order Amount : ₹ {{releaseOrder.netAmountFigures}}</div>
-              <div>Ad Amount : ₹ {{releaseOrder.adGrossAmount}}</div>
               <div>Gross Amount : ₹ {{grossAmount}}</div>
               
               <br>
