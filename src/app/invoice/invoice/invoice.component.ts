@@ -83,6 +83,42 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
+  get roDiscountedAmount() {
+    let amount = this.releaseOrder.adGrossAmount;
+
+    amount -= (this.releaseOrder.agencyDiscount1 * this.releaseOrder.adGrossAmount) / 100;
+    amount -= (this.releaseOrder.agencyDiscount2 * this.releaseOrder.adGrossAmount) / 100;
+
+    return amount;
+  }
+
+  get finalRoAmount() {
+    let amount = this.roDiscountedAmount;
+
+    amount += this.finalRoTaxAmount;
+
+    return amount;
+  }
+
+  get finalRoTaxAmount() {
+    let taxAmount = 0;
+
+    taxAmount += (this.releaseOrder.taxAmount.primary * this.roDiscountedAmount) / 100;
+    taxAmount += (this.releaseOrder.taxAmount.secondary * taxAmount) / 100;
+
+    return taxAmount;
+  }
+
+  get roTaxDisplay() {
+    let tax = this.releaseOrder.taxAmount.primary + "%";
+
+    if (this.releaseOrder.taxAmount.secondary != 0) {
+      tax += " + " + this.releaseOrder.taxAmount.secondary + "%"
+    }
+
+    return tax;
+  }
+
   toDate(date: NgbDate) {
     return new Date(date.year, date.month - 1, date.day);
   }
