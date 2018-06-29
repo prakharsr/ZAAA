@@ -12,7 +12,7 @@
   <div class="container">
     <div class="row">
       <div class="col-auto" *ngIf="!releaseOrder">
-        <button type="button" class="btn btn-success">Search Release Order</button>
+        <button type="button" mat-raised-button (click)="selectRO()">Search Release Order</button>
       </div>
       <div class="col-lg" *ngIf="releaseOrder">
         <div class="card mb-5 mat-elevation-z3">
@@ -89,11 +89,11 @@
             Select Insertions
           </div>
           <div class="card-body">
-            <div *ngFor="let item of availableInsertions">
+            <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
               <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
                 {{toDate(item.insertion.date) | date}}
               </mat-checkbox>
-            </div>
+            </span>
           </div>
         </div>
       </div>

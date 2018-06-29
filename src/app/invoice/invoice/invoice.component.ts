@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { Invoice } from '../invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
-import { NotificationService, OptionsService } from 'app/services';
+import { NotificationService, OptionsService, DialogService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
 
 import {
@@ -11,8 +11,10 @@ import {
   ReleaseOrder,
   OtherCharges,
   TaxValues,
-  ReleaseOrderDir
+  ReleaseOrderDir,
+  ReleaseOrderApiService
 } from 'app/release-order';
+import { SelectReleaseOrderComponent } from '../select-release-order/select-release-order.component';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -37,7 +39,9 @@ export class InvoiceComponent implements OnInit {
     private notifications: NotificationService,
     private router: Router,
     private api: InvoiceApiService,
-    public options: OptionsService) { }
+    public options: OptionsService,
+    private dialog: DialogService,
+    private roApi: ReleaseOrderApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
@@ -183,4 +187,17 @@ export class InvoiceComponent implements OnInit {
     this.invoice.otherCharges.splice(i, 1);
   }
 
+  selectRO() {
+    this.dialog.show(SelectReleaseOrderComponent).subscribe((data: ReleaseOrder) => {
+      if (data) {
+        this.releaseOrder = data;
+
+        this.roApi.getReleaseOrderDir(this.releaseOrder.id).subscribe(dir => {
+          this.client = dir.client;
+          this.mediaHouse = dir.mediaHouse;
+          this.executive = dir.executive;
+        });
+      }
+    });
+  }
 }

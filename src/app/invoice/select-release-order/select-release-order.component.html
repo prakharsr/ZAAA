@@ -1,0 +1,63 @@
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<h2 mat-dialog-title>Select Release Order</h2>
+<mat-dialog-content>
+  <div class="form-row">
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <select [(ngModel)]="pastDays" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <p *ngIf="releaseOrders.length == 0" class="text-muted">
+    No Release Orders
+  </p>
+
+  <div class="mb-3 card" [class.border-info]="element == releaseorder" [class.mat-elevation-z3]="element == releaseorder" *ngFor="let element of releaseOrders" (click)="releaseorder = element" style="cursor: pointer;">
+    <div class="card-body">
+      <span class="text-muted">{{element.releaseOrderNO}}</span>
+
+      <br><br>
+      <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
+      <span class="text-muted">Client:</span> {{element.clientName}}
+      <br><br>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [disabled]="!releaseorder" [mat-dialog-close]="releaseorder">Submit</button>
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>

@@ -14,6 +14,7 @@ import {
   InvoiceDetailsComponent,
   InvoiceListComponent
 } from '.';
+import { SelectReleaseOrderComponent } from './select-release-order/select-release-order.component';
 
 @NgModule({
   imports: [
@@ -24,13 +25,17 @@ import {
   declarations: [
     InvoiceComponent,
     InvoiceDetailsComponent,
-    InvoiceListComponent
+    InvoiceListComponent,
+    SelectReleaseOrderComponent
   ],
   providers: [
     InvoiceApiService,
     InvoiceResolver,
     InvoiceListResolver,
     InvoiceDirResolver
+  ],
+  entryComponents: [
+    SelectReleaseOrderComponent
   ]
 })
 export class InvoiceModule { }
