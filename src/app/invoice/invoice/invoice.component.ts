@@ -41,33 +41,41 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
-      this.releaseOrder = data.resolved.releaseorder;
-      this.mediaHouse = data.resolved.mediaHouse;
-      this.client = data.resolved.client;
-      this.executive = data.resolved.executive;
+      if (data.resolved) {
+        this.init(data.resolved);
+      }
+    });
+  }
 
-      this.invoice.releaseOrderId = this.releaseOrder.id;
-      this.invoice.otherCharges = this.releaseOrder.otherCharges;
-      this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
-      this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
+  init(resolved: ReleaseOrderDir) {
+    this.releaseOrder = resolved.releaseorder;
+    this.mediaHouse = resolved.mediaHouse;
+    this.client = resolved.client;
+    this.executive = resolved.executive;
 
-      this.invoice.GSTIN = this.client.GSTIN;
+    this.invoice.releaseOrderId = this.releaseOrder.id;
+    this.invoice.otherCharges = this.releaseOrder.otherCharges;
+    this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
+    this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
 
-      this.taxes.forEach(element => {
-        if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
-          this.invoice.taxAmount = element;
-        }
-      });
-      
-      this.invoice.taxIncluded = this.releaseOrder.taxIncluded;
+    this.invoice.GSTIN = this.client.GSTIN;
 
-      this.invoice.taxType = this.mediaHouse.address.state == this.client.address.state ? 'SGST + CGST' : 'IGST';
+    this.taxes.forEach(element => {
+      if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
+        this.invoice.taxAmount = element;
+      }
+    });
+    
+    this.invoice.taxIncluded = this.releaseOrder.taxIncluded;
 
-      this.releaseOrder.insertions.forEach(element => {
-        if (!element.marked) {
-          this.availableInsertions.push(new AvailableInsertion(element));
-        }
-      });
+    this.invoice.taxType = this.mediaHouse.address.state == this.client.address.state ? 'SGST + CGST' : 'IGST';
+
+    this.releaseOrder.insertions.forEach(element => {
+      this.availableInsertions = [];
+
+      if (!element.marked) {
+        this.availableInsertions.push(new AvailableInsertion(element));
+      }
     });
   }
 
