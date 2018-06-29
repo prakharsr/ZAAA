@@ -45,10 +45,9 @@
         <div class="col-lg">
           <div class="card mb-5 mat-elevation-z3">
             <div class="card-body">
-              <h5>Ad Details</h5>
-              <br>
-
-              <div class="mb-3">
+              <h6>Ad Details</h6>
+              
+              <div class="my-3">
                 <div class="text-muted small">Categories</div>
                 <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</span>
                 <span *ngIf="releaseOrder.adCategory2">, {{releaseOrder.adCategory2}}</span>
@@ -181,14 +180,19 @@
 
               <br>
           
-              <label id="add_details">Extra Charges</label>
+              <div class="row">
+                <div class="col">
+                  <label id="add_details">Other Charges</label>
+                </div>
+                <div class="col-auto">
+                  <button mat-raised-button type="button" color="primary" (click)="addCharges()"><mat-icon>add</mat-icon> Add More</button>
+                </div>
+              </div>
             
               <div class="text-muted" *ngIf="invoice.otherCharges.length == 0">
-                No Extra Charges
+                No Other Charges
               </div>
-
-              <br>
-            
+        
               <div *ngFor="let item of invoice.otherCharges; index as i" class="mb-1">
                 <div class="form-row">
                   <div class="col">
@@ -207,9 +211,6 @@
                       </mat-error>
                     </mat-form-field>
                   </div>
-                  <div class="col-auto">
-                    <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
-                  </div>
                   <div class="col-auto col-form-label">
                     <button mat-icon-button color="warn" type="button" (click)="removeOtherCharge(i)">
                       <mat-icon>delete</mat-icon>
@@ -218,7 +219,8 @@
                 </div>
               </div>
               
-            
+              <br>
+                        
               <div class="form-row">
                 <label class="col-auto col-form-label mr-2">Tax</label>
                 <div class="col-auto col-form-label">
