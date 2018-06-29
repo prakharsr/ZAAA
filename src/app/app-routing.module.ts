@@ -19,7 +19,6 @@ import {
   ProfileViewComponent,
   AccountDetailsComponent,
   BusinessDetailsComponent,
-  UserDetailsComponent,
   DashboardComponent,
   ChangePswComponent,
   ResetPasswordComponent,
@@ -72,14 +71,6 @@ const routes: Routes = [
   {
     path: "account",
     component: AccountDetailsComponent,
-    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      user: UserProfileResolver
-    }
-  },
-  {
-    path: "user",
-    component: BusinessDetailsComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
       user: UserProfileResolver

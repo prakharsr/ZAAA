@@ -190,12 +190,8 @@ export class InvoiceComponent implements OnInit {
   selectRO() {
     this.dialog.show(SelectReleaseOrderComponent).subscribe((data: ReleaseOrder) => {
       if (data) {
-        this.releaseOrder = data;
-
-        this.roApi.getReleaseOrderDir(this.releaseOrder.id).subscribe(dir => {
-          this.client = dir.client;
-          this.mediaHouse = dir.mediaHouse;
-          this.executive = dir.executive;
+        this.roApi.getReleaseOrderDir(data.id).subscribe(dir => {
+          this.init(dir);
         });
       }
     });
