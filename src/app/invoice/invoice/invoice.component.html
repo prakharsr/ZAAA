@@ -19,25 +19,61 @@
         <div class="col-lg">
           <div class="card mb-5 mat-elevation-z3">
             <div class="card-body">
-              <div class="mb-3">
-                <div class="text-muted small">Release Order No</div>
-                <div>{{releaseOrder.releaseOrderNO}}</div>
+              <div class="row">
+                <div class="col">
+                  <div class="text-muted small">Release Order No</div>
+                  <div>{{releaseOrder.releaseOrderNO}}</div>
+                </div>
+                <div class="col-auto text-muted">{{releaseOrder.date | date}}</div>
               </div>
-              <div class="mb-3">
-                <div class="text-muted small">Release Order Date</div>
-                <div>{{releaseOrder.date | date}}</div>
+
+              <br>
+
+              <div class="row">
+                <div class="col-auto text-muted" style="margin-top: -10px;">To,</div>
+                <div class="col-auto">
+                  <div class="text-muted small">Publication Name</div>
+                  <div>{{mediaHouse.pubName}}</div>
+                </div>
+                <div class="col-auto">
+                  <div class="text-muted small">Edition</div>
+                  <div>{{mediaHouse.address.edition}}</div>
+                </div>
               </div>
-              <div class="mb-3">
-                <div class="text-muted small">Publication</div>
-                <div>{{mediaHouse.pubName}} - {{mediaHouse.address.edition}}</div>
+
+              <br>
+
+              <div class="form-row">
+                <div class="col-auto text-muted" style="margin-top: -10px; margin-right: 13px">For,</div>
+                <div class="col">
+                  <div class="text-muted small">Client Name</div>
+                  <div>{{client.orgName}}</div>
+                </div>
               </div>
-              <div class="mb-3">
-                <div class="text-muted small">Client</div>
-                <div>{{client.orgName}}</div>
-              </div>
-              <div class="mb-3">
-                <div class="text-muted small">Client GSTIN</div>
-                <div>{{client.GSTIN.GSTType}} {{client.GSTIN.GSTNo}}</div>
+
+              <br>
+              
+              <div class="form-row">
+                <div class="col-auto text-muted col-form-label" style="margin-right: 9px;">GST:</div>
+                <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
+                  <mat-form-field>
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+                      <mat-option value="URD">URD</mat-option>
+                      <mat-option value="RD">RD</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
+                  <mat-form-field>
+                    <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                      GSTIN is required.
+                    </mat-error>
+                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                      GSTIN should be 15 characters long.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
             </div>
           </div>
@@ -46,6 +82,17 @@
           <div class="card mb-5 mat-elevation-z3">
             <div class="card-body">
               <h6>Ad Details</h6>
+
+              <div class="row">
+                <div class="col">
+                  <div class="text-muted small">Media Type</div>
+                  <div>{{releaseOrder.mediaType}}</div>
+                </div>
+                <div class="col">
+                  <div class="text-muted small">Ad Type</div>
+                  <div>{{releaseOrder.adType}}</div>
+                </div>
+              </div>
               
               <div class="my-3">
                 <div class="text-muted small">Categories</div>
@@ -56,48 +103,23 @@
                 <span *ngIf="releaseOrder.adCategory5">, {{releaseOrder.adCategory5}}</span>
                 <span *ngIf="releaseOrder.adCategory6">, {{releaseOrder.adCategory6}}</span>
               </div>
+
+              <div class="mb-3">
+                <div class="text-muted small">Caption</div>
+                <div>{{releaseOrder.caption || '--'}}</div>
+              </div>
               
-              <div class="row">
-                <div class="col">
-                  <div class="text-muted small">Ad Type</div>
-                  <div>{{releaseOrder.adType}}</div>
-                </div>
-                <div class="col" *ngIf="releaseOrder.adPosition">
-                  <div class="text-muted small">Page Position</div>
-                  <div>{{releaseOrder.adPosition}}</div>
-                </div>
+              <div class="mb-3">
+                <span class="text-muted small">Scheme:</span> {{releaseOrder.adSchemePaid}} + {{releaseOrder.adSchemeFree}}
               </div>
-
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <div class="text-muted small">Caption</div>
-                  <div>{{releaseOrder.caption || '--'}}</div>
-                </div>
-                <div class="col">
-                  <div class="text-muted small">Remark</div>
-                  <div>{{releaseOrder.remark || '--'}}</div>
-                </div>
-              </div>
-
-              <br>
-
-              <div class="row">
-                <div class="col">
-                  <div class="text-muted small">Ad Scheme Paid</div>
-                  <div>{{releaseOrder.adSchemePaid}}</div>
-                </div>
-                <div class="col">
-                  <div class="text-muted small">Ad Scheme Free</div>
-                  <div>{{releaseOrder.adSchemeFree}}</div>
-                </div>
-              </div>
-
-              <br>
 
               <div class="text-muted small">Final Amount <small>(Gross Amount - Agency Discount + Tax)</small></div>
               <div>₹ {{finalRoAmount}}, <span class="text-muted">Tax:</span> ₹ {{finalRoTaxAmount}} ({{roTaxDisplay}})</div>
+
+              <br>
+
+              <div class="text-muted small">Remark</div>
+              <div>{{releaseOrder.remark || '--'}}</div>
             </div>
           </div>
         </div>
@@ -250,28 +272,6 @@
             <div class="card-footer">
               <div>Final Amount <small>(Gross Amount + Tax)</small>:  ₹ {{netAmount}}</div>
             </div>
-          
-            <!-- <div class="form-row">
-              <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
-                <mat-form-field>
-                  <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
-                    <mat-option value="URD">URD</mat-option>
-                    <mat-option value="RD">RD</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
-                <mat-form-field>
-                  <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                  <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-                    GSTIN is required.
-                  </mat-error>
-                  <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-                    GSTIN should be 15 characters long.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>  -->
           </div>
         </div>
         <div class="col-lg">
