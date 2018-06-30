@@ -232,4 +232,8 @@ export class InvoiceComponent implements OnInit {
       }
     });
   }
+
+  selectAllInsertions() {
+    this.availableInsertions.forEach(insertion => insertion.checked = true);
+  }
 }
