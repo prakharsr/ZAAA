@@ -40,6 +40,7 @@ export class Invoice {
     netAmountFigures = 0;
     netAmountWords = '';
 
+    FinalAmount = 0;
     FinalTaxAmount = 0;
 
     /*for payment reciept */

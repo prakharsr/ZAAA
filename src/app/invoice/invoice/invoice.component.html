@@ -95,7 +95,7 @@
               </div>
               
               <div class="my-3">
-                <div class="text-muted small">Categories</div>
+                <div class="text-muted small">Category</div>
                 <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</span>
                 <span *ngIf="releaseOrder.adCategory2">, {{releaseOrder.adCategory2}}</span>
                 <span *ngIf="releaseOrder.adCategory3">, {{releaseOrder.adCategory3}}</span>
@@ -113,8 +113,14 @@
                 <span class="text-muted small">Scheme:</span> {{releaseOrder.adSchemePaid}} + {{releaseOrder.adSchemeFree}}
               </div>
 
-              <div class="text-muted small">Final Amount <small>(Gross Amount - Agency Discount + Tax)</small></div>
-              <div>₹ {{finalRoAmount}}, <span class="text-muted">Tax:</span> ₹ {{finalRoTaxAmount}} ({{roTaxDisplay}})</div>
+              <div class="text-muted small">R.O. Amount</div>
+              <div>
+                ₹ {{finalRoAmount}}
+                <span class="text-muted small">({{releaseOrder.adGrossAmount}} - {{releaseOrder.adGrossAmount - roDiscountedAmount}} + {{finalRoTaxAmount}})</span>
+              </div>
+              <div class="text-muted small">
+                <small>Gross Amount - ({{roDiscountDisplay}}) Agency Discount + ({{roTaxDisplay}}) Tax</small>
+              </div>
 
               <br>
 
@@ -157,7 +163,9 @@
               Calculations
             </div>
             <div class="card-body">
-              <div>Gross Amount : ₹ {{grossAmount}}</div>
+              <div>
+                <span class="text-muted">Insertion Amount:</span> ₹ {{insertionAmount}}
+              </div>
               
               <br>
 
@@ -184,8 +192,14 @@
                   <mat-checkbox name="additionalCharges100" [(ngModel)]="invoice.additionalCharges.percentage">Percentage</mat-checkbox>
                 </div>
               </div>
-              
+
               <br>
+
+              <div>
+                <span class="text-muted">Gross Amount:</span> ₹ {{grossAmount}}
+              </div>
+              
+              <br><br>
             
               <div class="row">
                 <mat-form-field class="col">
@@ -276,7 +290,13 @@
               </div>
             </div>
             <div class="card-footer">
-              <div>Final Amount <small>(Gross Amount + Tax)</small>:  ₹ {{netAmount}}</div>
+              <div>
+                Final Amount:  ₹ {{finalAmount}} /-
+                <span>({{netAmount}} + {{finalTaxAmount}})</span>
+              </div>
+              <div>
+                <small>(Net Amount + Tax)</small>
+              </div>
             </div>
           </div>
         </div>
@@ -287,10 +307,10 @@
             </div>
             <div class="card-body">
               <mat-form-field>
-                <input matInput type="text" id="remark" name="remark" placeholder="For Invoice" [(ngModel)]="invoice.remark" #remarkField="ngModel">
+                <textarea matInput id="remark" name="remark" placeholder="For Invoice" [(ngModel)]="invoice.remark" #remarkField="ngModel"></textarea>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="For External Use" name="otherRemark" [(ngModel)]="invoice.otherRemark">
+                <textarea matInput placeholder="For External Use" name="otherRemark" [(ngModel)]="invoice.otherRemark"></textarea>
               </mat-form-field>
             </div>
           </div>
