@@ -1,4 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~material-design-icons/iconfont/material-icons.css";
 
 .max-w-200 {
     max-width: 200px;
