@@ -46,13 +46,13 @@
     No Invoices
   </p>
 
-  <div class="card mb-3 mat-elevation-z3" *ngFor="let invoice of invoices">
+  <div class="card mb-3" *ngFor="let element of invoices" [class.border-info]="element == invoice" [class.mat-elevation-z3]="element == invoice" (click)="invoice = element" style="cursor: pointer;">
     <div class="card-body">
-      {{invoice.invoiceNO}}
+      <span class="text-muted">{{element.invoiceNO}}</span>
       
       <br><br>
-      <span class="text-muted">Publication:</span> {{invoice.publicationName}} - {{invoice.publicationEdition}}<br>
-      <span class="text-muted">Client:</span> {{invoice.clientName}}
+      <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
+      <span class="text-muted">Client:</span> {{element.clientName}}
     </div>
   </div>
 </mat-dialog-content>
