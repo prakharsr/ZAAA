@@ -27,7 +27,11 @@
 </ng-template>
 
 <div class="container">
-  <button class="fab" routerLink="/receipts/new" *ngIf="advance">
+  <button class="fab" routerLink="/receipts/advance/new" *ngIf="advance">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button class="fab" routerLink="/receipts/new" *ngIf="!advance">
     <mat-icon>add</mat-icon>
   </button>
 

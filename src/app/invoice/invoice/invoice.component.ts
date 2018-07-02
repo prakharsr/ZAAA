@@ -230,9 +230,9 @@ export class InvoiceComponent implements OnInit {
     this.invoice.adGrossAmount = this.grossAmount;
     this.invoice.netAmountFigures = this.netAmount;
     this.invoice.netAmountWords = this.options.amountToWords(this.invoice.netAmountFigures);
-    this.invoice.pendingAmount = this.invoice.netAmountFigures;
     this.invoice.FinalTaxAmount = this.finalTaxAmount;
     this.invoice.FinalAmount = this.finalAmount;
+    this.invoice.pendingAmount = this.invoice.FinalAmount + this.invoice.FinalTaxAmount;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
     let base: Observable<any> = this.createInvoice();

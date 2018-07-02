@@ -14,3 +14,9 @@ mat-card-title {
 label {
     font-size: 15px;
 }
+
+@media (min-width: 768px) {
+    mat-card {
+        height: 100%;
+    }
+}
