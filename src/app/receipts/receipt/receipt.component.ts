@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentReceipt } from '../payment-receipt';
 import { Invoice, InvoiceDir } from 'app/invoice';
@@ -19,24 +19,24 @@ export class ReceiptComponent implements OnInit {
   client: Client;
   executive: Executive;
 
+  @Input() set invoiceDir(invoiceDir: InvoiceDir) {
+    this.invoice = invoiceDir.invoice;
+    this.mediaHouse = invoiceDir.mediaHouse;
+    this.client = invoiceDir.client;
+    this.executive = invoiceDir.executive;
+    this.receipt.invoiceID = this.invoice.id;
+
+    this.receipt.paymentType = this.paymentTypes[0];
+    this.receipt.paymentAmount = this.invoice.pendingAmount;
+  }
+
+  ngOnInit() { }
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private api: ReceiptsApiService,
     private notifications: NotificationService,
     private options: OptionsService) { }
-
-  ngOnInit() {
-    this.route.data.subscribe((data: { resolved: InvoiceDir }) => {
-      this.invoice = data.resolved.invoice;
-      this.mediaHouse = data.resolved.mediaHouse;
-      this.client = data.resolved.client;
-      this.executive = data.resolved.executive;
-      this.receipt.invoiceID = this.invoice.id;
-
-      this.receipt.paymentType = this.paymentTypes[0];
-      this.receipt.paymentAmount = this.invoice.pendingAmount;
-    });
-  }
 
   submit () {
     this.receipt.paymentAmountWords = this.options.amountToWords(this.receipt.paymentAmount);

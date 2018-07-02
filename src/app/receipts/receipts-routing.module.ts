@@ -14,6 +14,7 @@ import {
   ReceiptComponent,
   ReceiptDetailsComponent
 } from '.';
+import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 
 const routes: Routes = [
   {
@@ -64,10 +65,16 @@ const routes: Routes = [
           resolved: ReceiptListResolver
         }
       },
-      { path: 'new', component: AdvanceReceiptComponent },
+      {
+        path: 'new',
+        data: {
+          advance: true
+        },
+        component: CreateReceiptComponent
+      },
       {
         path: 'new/:id',
-        component: ReceiptComponent,
+        component: CreateReceiptComponent,
         resolve: {
           resolved: InvoiceDirResolver
         }

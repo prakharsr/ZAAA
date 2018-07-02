@@ -1,0 +1,17 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">Create Payment Receipt</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <mat-checkbox [(ngModel)]="advance" *ngIf="!invoiceDir">Advance</mat-checkbox>
+</div>
+
+<br>
+
+<app-advance-receipt *ngIf="advance"></app-advance-receipt>
+
+<app-receipt *ngIf="!advance" [invoiceDir]="invoiceDir"></app-receipt>

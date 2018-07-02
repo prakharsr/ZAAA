@@ -14,6 +14,7 @@ import {
   ReceiptComponent,
   ReceiptDetailsComponent
 } from '.';
+import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {
     ReceiptListComponent,
     ReceiptDetailsComponent,
     AdvanceReceiptComponent,
-    LinkAdvanceComponent
+    LinkAdvanceComponent,
+    CreateReceiptComponent
   ],
   providers: [
     ReceiptsApiService,
