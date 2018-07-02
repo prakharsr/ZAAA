@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentReceipt } from '../payment-receipt';
-import { Invoice, InvoiceDir } from 'app/invoice';
+import { Invoice, InvoiceDir, InvoiceApiService } from 'app/invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
 import { ReceiptsApiService } from '../receipts-api.service';
-import { NotificationService, OptionsService } from 'app/services';
+import { NotificationService, OptionsService, DialogService } from 'app/services';
+import { SelectInvoiceComponent } from '../select-invoice/select-invoice.component';
 
 @Component({
   selector: 'app-receipt',
@@ -38,11 +39,12 @@ export class ReceiptComponent implements OnInit {
 
   ngOnInit() { }
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
+  constructor(private router: Router,
     private api: ReceiptsApiService,
+    private invoiceApi: InvoiceApiService,
     private notifications: NotificationService,
-    private options: OptionsService) { }
+    private options: OptionsService,
+    private dialog: DialogService) { }
 
   submit () {
     this.receipt.paymentAmountWords = this.options.amountToWords(this.receipt.paymentAmount);
@@ -69,5 +71,13 @@ export class ReceiptComponent implements OnInit {
 
   paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
 
-  selectInvoice() { }
+  selectInvoice() {
+    this.dialog.show(SelectInvoiceComponent).subscribe((data: Invoice) => {
+      if (data) {
+        this.invoiceApi.getInvoiceDir(data.id).subscribe(dir => {
+          this.init(dir);
+        });
+      }
+    });
+  }
 }

@@ -15,6 +15,7 @@ import {
   ReceiptDetailsComponent
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
+import { SelectInvoiceComponent } from './select-invoice/select-invoice.component';
 
 @NgModule({
   imports: [
@@ -28,12 +29,16 @@ import { CreateReceiptComponent } from './create-receipt/create-receipt.componen
     ReceiptDetailsComponent,
     AdvanceReceiptComponent,
     LinkAdvanceComponent,
-    CreateReceiptComponent
+    CreateReceiptComponent,
+    SelectInvoiceComponent
   ],
   providers: [
     ReceiptsApiService,
     ReceiptResolver,
     ReceiptListResolver
+  ],
+  entryComponents: [
+    SelectInvoiceComponent
   ]
 })
 export class ReceiptsModule { }
