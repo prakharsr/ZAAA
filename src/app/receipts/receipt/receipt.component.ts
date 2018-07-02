@@ -20,6 +20,12 @@ export class ReceiptComponent implements OnInit {
   executive: Executive;
 
   @Input() set invoiceDir(invoiceDir: InvoiceDir) {
+    if (invoiceDir) {
+      this.init(invoiceDir);
+    }
+  }
+
+  init(invoiceDir: InvoiceDir) {
     this.invoice = invoiceDir.invoice;
     this.mediaHouse = invoiceDir.mediaHouse;
     this.client = invoiceDir.client;
@@ -62,4 +68,6 @@ export class ReceiptComponent implements OnInit {
   }
 
   paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+
+  selectInvoice() { }
 }

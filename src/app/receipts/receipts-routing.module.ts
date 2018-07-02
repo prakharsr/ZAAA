@@ -39,6 +39,7 @@ const routes: Routes = [
               resolved: ReceiptListResolver
             }
           },
+          { path: 'new', component: CreateReceiptComponent },
           {
             path: 'link/:id',
             children: [
@@ -65,13 +66,7 @@ const routes: Routes = [
           resolved: ReceiptListResolver
         }
       },
-      {
-        path: 'new',
-        data: {
-          advance: true
-        },
-        component: CreateReceiptComponent
-      },
+      { path: 'new', component: CreateReceiptComponent },
       {
         path: 'new/:id',
         component: CreateReceiptComponent,

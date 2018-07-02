@@ -1,5 +1,7 @@
 <div class="container">
-  <form (ngSubmit)="submit()" #receiptForm="ngForm">
+  <button *ngIf="!invoice" type="button" mat-raised-button color="primary" (click)="selectInvoice()">Select Invoice</button>
+
+  <form (ngSubmit)="submit()" #receiptForm="ngForm" *ngIf="invoice">
     <mat-card>
       <p><strong>Pending Amount:</strong> ₹ {{invoice.pendingAmount}}</p>
     
