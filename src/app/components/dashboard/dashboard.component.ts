@@ -14,17 +14,19 @@ export class DashboardComponent implements OnInit {
 
   invoiceData;
   duesData;
-  mhiData;
 
   payments1 = {
-    show: false,
     collected: 0,
     shadow: 0,
     completed: 0,
   }
 
   payments2 = {
-    show: false,
+    pending: 0,
+    received: 0
+  }
+
+  mhi1 = {
     pending: 0,
     received: 0
   }
@@ -43,7 +45,14 @@ export class DashboardComponent implements OnInit {
 
     this.updatePayments();
 
-    this.mhiData = this.dashboardApi.getMhiData();
+    this.dashboardApi.getMhiData().subscribe(data => {
+      let total1 = data.pendingAmount + data.collectedAmount;
+
+      if (total1 != 0) {
+        this.mhi1.pending = data.pendingAmount * 100 / total1;
+        this.mhi1.received = data.collectedAmount * 100 / total1;
+      }
+    });
   }
 
   private updatePayments() {
@@ -51,7 +60,6 @@ export class DashboardComponent implements OnInit {
       let total1 = data.collectedAmount + data.shadow + data.completed;
       
       if (total1 != 0) {
-        this.payments1.show = true;
         this.payments1.collected = data.collectedAmount * 100 / total1;
         this.payments1.shadow = data.shadow * 100 / total1;
         this.payments1.completed = data.completed * 100 / total1;
@@ -60,7 +68,6 @@ export class DashboardComponent implements OnInit {
       let total2 = data.collectedAmount + data.pendingAmount;
       
       if (total2 != 0) {
-        this.payments2.show = true;
         this.payments2.received = data.collectedAmount * 100 / total2;
         this.payments2.pending = data.pendingAmount * 100 / total2;
       }

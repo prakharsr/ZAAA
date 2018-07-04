@@ -79,7 +79,7 @@
 
           <br>
 
-          <ng-container *ngIf="payments1.show">
+          <ng-container>
             <div class="progress">
               <div class="progress-bar progress-bar-striped" [style.width]="payments1.collected + '%'"></div>
               <div class="progress-bar bg-warning" [style.width]="payments1.shadow + '%'"></div>
@@ -95,7 +95,7 @@
 
           <br>
 
-          <ng-container *ngIf="payments2.show">
+          <ng-container>
             <div class="progress">
               <div class="progress-bar bg-warning" [style.width]="payments2.pending + '%'"></div>
               <div class="progress-bar progress-bar-striped bg-success" [style.width]="payments1.received + '%'"></div>
@@ -123,15 +123,17 @@
 
           <br>
 
-          <div class="progress">
-            <div class="progress-bar bg-warning" style="width: 65%"></div>
-            <div class="progress-bar progress-bar-striped bg-success" style="width: 35%"></div>
-          </div>
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar bg-warning" [style.width]="mhi1.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [style.width]="mhi1.received + '%'"></div>
+            </div>
 
-          <div class="row">
-            <div class="col text-warning small">Pending</div>
-            <div class="col-auto text-success small">Received</div>
-          </div>
+            <div class="row">
+              <div class="col text-warning small">Pending</div>
+              <div class="col-auto text-success small">Received</div>
+            </div>
+          </ng-container>
 
           <br>
 
@@ -175,5 +177,4 @@
 
   <div><pre>{{invoiceData | async | json}}</pre></div>
   <div><pre>{{duesData | async | json}}</pre></div>
-  <div><pre>{{mhiData | async | json}}</pre></div>
 </div>
