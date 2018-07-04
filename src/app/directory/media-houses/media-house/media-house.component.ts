@@ -14,6 +14,9 @@ export class MediaHouseComponent implements OnInit {
   mediaHouse = new MediaHouse();
   
   id: string;
+  edit = false;
+
+  MainPullout = new Pullout;
 
   periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -39,6 +42,7 @@ export class MediaHouseComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
+        this.edit = true
 
         this.route.data.subscribe((data: { mediaHouse: MediaHouse }) => {
           this.mediaHouse = data.mediaHouse;
@@ -47,6 +51,7 @@ export class MediaHouseComponent implements OnInit {
       }
       else {
         this.mediaHouse.mediaType = this.mediaTypes[0];
+        this.addMainPullout();
       }
     });
   }
@@ -69,6 +74,11 @@ export class MediaHouseComponent implements OnInit {
     this.mediaHouse.scheduling.push(new MediaHouseScheduling());
   }
 
+  addMainPullout() {
+    this.MainPullout.Name = 'Main';
+    this.mediaHouse.pullouts.push(this.MainPullout);
+  }
+
   addPullouts() {
     this.mediaHouse.pullouts.push(new Pullout());
   }
@@ -81,7 +91,7 @@ export class MediaHouseComponent implements OnInit {
     this.mediaHouse.scheduling.splice(i, 1);
   }
   
-  submit () {
+  private createMediaHouse() {
     this.api.createMediaHouse(this.mediaHouse).subscribe(
       data => {
         if (data.success) {
@@ -96,6 +106,30 @@ export class MediaHouseComponent implements OnInit {
       }
     )
   }
+
+  private editMediaHouse() {
+    this.api.editMediaHouse(this.mediaHouse).subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show("Saved");
+          this.stopEditing();
+          Object.assign(this.backup, this.mediaHouse);
+        }
+        else {
+          console.log(data);
+          this.notifications.show(data.msg);
+        }
+      }
+    )
+  }
+
+  submit () {
+    if (this.edit) {
+      this.editMediaHouse();
+    }
+    else this.createMediaHouse();
+  }
+
 
   cancel() {
     this.stopEditing();

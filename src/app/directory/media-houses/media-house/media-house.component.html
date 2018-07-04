@@ -179,7 +179,6 @@
               </div>
       
               <br>
-              <div class="text-muted" *ngIf="mediaHouse.pullouts.length == 0">No Pullouts</div>
       
               <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
                 <div class="col-auto align-self-center">#{{i + 1}}</div>
@@ -188,7 +187,7 @@
                     <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Name" [(ngModel)]="item.Name" required #pulloutsField="ngModel">
                   </mat-form-field>
                   <mat-form-field>
-                    <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel" required>
+                    <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel">
                       <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
@@ -205,7 +204,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-auto align-self-center">
-                  <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
+                  <button mat-icon-button color="warn" type="button" [disabled]="mediaHouse.pullouts.length < 2" (click)="removePullouts(i)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
