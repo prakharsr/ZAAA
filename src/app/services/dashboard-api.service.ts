@@ -3,6 +3,12 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
+export class InvoiceGenData {
+  count = 0;
+  totalAmount = 0;
+  generated = 0;
+}
+
 export class PaymentsData {
   shadow = 0;
   collectedAmount = 0;
@@ -22,8 +28,18 @@ export class DashboardApiService {
 
   constructor(private api: ApiService) { }
 
-  getInvoiceData() {
-    return this.api.post('/user/dashboard/invoice', { });
+  getInvoiceData() : Observable<InvoiceGenData> {
+    return this.api.post('/user/dashboard/invoice', { }).pipe(
+      map(data => {
+        let result = new InvoiceGenData();
+
+        if (data.success) {
+          Object.assign(result, data.invoices[0]);
+        }
+
+        return result;
+      })
+    );
   }
 
   getDuesData() {

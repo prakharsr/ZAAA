@@ -12,8 +12,12 @@ export class DashboardComponent implements OnInit {
 
   admin: boolean;
 
-  invoiceData;
   duesData;
+
+  invoices1 = {
+    generated: 0,
+    pending: 0
+  }
 
   payments1 = {
     collected: 0,
@@ -39,7 +43,13 @@ export class DashboardComponent implements OnInit {
       this.admin = data.user.isAdmin;
     });
 
-    this.invoiceData = this.dashboardApi.getInvoiceData();
+    this.dashboardApi.getInvoiceData().subscribe(data => {
+      console.log(data);
+      if (data.count != 0) {
+        this.invoices1.generated = data.generated * 100 / data.count;
+        this.invoices1.pending = 100 - this.invoices1.generated;
+      }
+    });
 
     this.duesData = this.dashboardApi.getDuesData();
 

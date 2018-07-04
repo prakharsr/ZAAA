@@ -23,8 +23,8 @@
           <br>
 
           <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" style="width: 35%"></div>
-            <div class="progress-bar bg-warning" style="width: 65%"></div>
+            <div class="progress-bar progress-bar-striped bg-success" [style.width]="invoices1.generated + '%'"></div>
+            <div class="progress-bar bg-warning" [style.width]="invoices1.pending + '%'"></div>
           </div>
 
           <div class="row">
@@ -175,6 +175,5 @@
 <div class="container-fluid">
   <br><br><br>
 
-  <div><pre>{{invoiceData | async | json}}</pre></div>
   <div><pre>{{duesData | async | json}}</pre></div>
 </div>
