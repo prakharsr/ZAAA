@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { Invoice } from '../invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
-import { NotificationService, OptionsService, DialogService } from 'app/services';
+import { NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
 
 import {
@@ -41,7 +48,8 @@ export class InvoiceComponent implements OnInit {
     private api: InvoiceApiService,
     public options: OptionsService,
     private dialog: DialogService,
-    private roApi: ReleaseOrderApiService) { }
+    private roApi: ReleaseOrderApiService,
+    private windowService: WindowService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
@@ -79,6 +87,81 @@ export class InvoiceComponent implements OnInit {
 
       if (!element.marked) {
         this.availableInsertions.push(new AvailableInsertion(element));
+      }
+    });
+  }
+
+  save() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.goBack();
+      }
+    });
+  }
+
+  saveAndGen() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.invoice);
+      }
+    });
+  }
+
+  saveAndSendMsg() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.sendMsg(this.invoice);
+      }
+    });
+  }
+  
+  preview() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.invoice, true);
+      }
+    });
+  }
+
+  gen(invoice: Invoice, preview = false) {
+    this.api.generate(invoice).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
+      }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = this.windowService.window.URL.createObjectURL(blob);
+
+        let a = this.windowService.window.document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        this.windowService.window.document.body.appendChild(a);
+        a.href = url;
+        if (preview) {
+          a.setAttribute("target", "_blank");
+        }
+        else {
+          a.download = 'invoice.pdf';
+        }
+        a.click();
+      }
+    });
+  }
+
+  sendMsg(invoice: Invoice) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.sendMail(invoice, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
+
+            this.notifications.show(data.msg);
+          }
+        });
       }
     });
   }
@@ -137,7 +220,7 @@ export class InvoiceComponent implements OnInit {
     this.router.navigateByUrl('/invoices');
   }
 
-  submit() {
+  submit() : Observable<any> {
     if (!this.availableInsertions.some(val => val.checked)) {
       this.notifications.show('No Insertions selected');
 
@@ -152,16 +235,26 @@ export class InvoiceComponent implements OnInit {
     this.invoice.pendingAmount = this.invoice.FinalAmount + this.invoice.FinalTaxAmount;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
 
-    this.api.createInvoice(this.invoice).subscribe(data => {
-      if (data.success) {
-        this.goBack();
-      }
-      else {
-        console.log(data);
+    let base: Observable<any> = this.createInvoice();
 
-        this.notifications.show(data.msg);
-      }
-    });
+    return base;
+  }
+
+  private createInvoice() {
+    return this.api.createInvoice(this.invoice).pipe(
+      map(data => {
+        if (data.success) {
+          this.invoice.id = data.msg;
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+
+        return data;
+      })
+    );
   }
 
   cancel() {
