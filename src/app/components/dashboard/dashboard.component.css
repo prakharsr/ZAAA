@@ -1,5 +1,11 @@
-.btn {
-    display: block;
-    margin-bottom: 30px;
-    padding: 20px 0;
+.links .btn {
+    margin-bottom: 15px;
+    margin-right: 10px;
+    padding: 0 5px;
+}
+
+@media (min-width: 768px) {
+    .card {
+        height: 100%;
+    }
 }
