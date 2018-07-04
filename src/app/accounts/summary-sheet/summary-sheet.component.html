@@ -43,13 +43,42 @@
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <strong>Publication:</strong><br> {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
+              <div class="text-muted small">Publication</div>
+              {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
             </div>
             <div class="col-auto">
               {{insertion.insertions.insertionDate | date}}
             </div>
+          </div>
+
+          <br>
+
+          <div class="form-row">            
             <div class="col">
-              <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>
+              <div class="form-group">
+                <label>Amount</label>
+                <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Receipt Number</label>
+                <input type="text" class="form-control" name="receiptNo" [(ngModel)]="insertion.receiptNo" placeholder="Receipt Number">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Receipt Date</label>
+                <input type="date" class="form-control" name="receiptDate" [(ngModel)]="insertion.receiptDate" placeholder="Receipt Date" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Payment Mode</label>
+                <select class="form-control" name="paymentMode" [(ngModel)]="insertion.paymentMode" placeholder="Payment Mode">
+                  <option *ngFor="let item of paymentTypes" [ngValue]="item">{{item}}</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

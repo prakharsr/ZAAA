@@ -1,0 +1,23 @@
+.x-overflow {
+    overflow-x: auto;
+}
+
+#navbar {
+    position: fixed;
+    z-index: 30;
+    right: -17px;
+    border-radius: 0;
+    width: auto;
+    left: -17px;
+}
+input.ng-invalid.form-control, select.ng-invalid {
+    border-left: 1px solid #ced4da;
+  }
+  
+  input.ng-valid.form-control, select.ng-valid {
+    border-left: 1px solid #ced4da;
+  }
+  
+  .text-lighter {
+    color: #edf0f5;
+  }

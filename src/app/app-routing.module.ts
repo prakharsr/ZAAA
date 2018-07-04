@@ -17,7 +17,9 @@ import {
   ForgotPswComponent,
   PhoneVerifyComponent,
   ProfileViewComponent,
-  FirmProfileViewComponent,
+  AccountDetailsComponent,
+  BusinessDetailsComponent,
+  UserDetailsComponent,
   DashboardComponent,
   ChangePswComponent,
   ResetPasswordComponent,
@@ -26,10 +28,11 @@ import {
 
 import {
   ProfileEditComponent,
-  FirmProfileEditComponent,
   TemplateSelectorComponent,
   PlanSelectorComponent
 } from 'app/admin';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: "firm",
-    component: FirmProfileViewComponent,
+    component: BusinessDetailsComponent,
     canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
       firm: FirmResolver,
@@ -67,11 +70,18 @@ const routes: Routes = [
     }
   },
   {
-    path: "firm/edit",
-    component: FirmProfileEditComponent,
-    canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard],
+    path: "account",
+    component: AccountDetailsComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
     resolve: {
-      firm: FirmResolver,
+      user: UserProfileResolver
+    }
+  },
+  {
+    path: "user",
+    component: BusinessDetailsComponent,
+    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
+    resolve: {
       user: UserProfileResolver
     }
   },
@@ -87,6 +97,20 @@ const routes: Routes = [
   { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
   { path: 'reset_password/:token', component: ResetPasswordComponent },
+  {
+    path: 'tickets',
+    children: [
+      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      {
+        path: 'list/:page',
+        component: TicketListComponent
+      },
+      {
+        path: 'new',
+        component: CreateTicketComponent
+      }
+    ]
+  },
   { path: '**', component: NotFoundComponent }
 ];
 

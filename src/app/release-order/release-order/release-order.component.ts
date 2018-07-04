@@ -10,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { StateApiService, NotificationService, OptionsService } from 'app/services';
+import { StateApiService, NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
+import { CategoriesDetails } from '../categories-details/categories-details.component';
 
 import {
   Category,
@@ -26,7 +27,8 @@ import {
   Executive,
   ClientApiService,
   MediaHouseApiService,
-  ExecutiveApiService
+  ExecutiveApiService,
+  Pullout
 } from 'app/directory';
 
 @Component({
@@ -41,9 +43,16 @@ export class ReleaseOrderComponent implements OnInit {
   edit = false;
   id: string;
 
-  fixedCategoriesLevel = -1;
+  releaseOrder = new ReleaseOrder();
 
   selectedCategories: Category[] = [null, null, null, null, null, null];
+  categories: Category[];
+  fixedCategoriesLevel = -1;
+
+  others = "Others";
+
+  dropdownPullOutName: string;
+  customPullOutName = 'Main';
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -54,7 +63,9 @@ export class ReleaseOrderComponent implements OnInit {
     private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
     private notifications: NotificationService,
-    public options: OptionsService) { }
+    public options: OptionsService,
+    private dialog: DialogService,
+    private windowService: WindowService) { }
 
   get isTypeWords() {
 
@@ -91,8 +102,111 @@ export class ReleaseOrderComponent implements OnInit {
     return false;
   }
 
+  toDate(date: NgbDate) {
+    return new Date(date.year, date.month - 1, date.day);
+  }
+
+
+  private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
+    if (releaseOrder.generated) {
+      return of(true);
+    }
+
+    return this.dialog.showYesNo('Confirm Generation', "Release Order will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
+  }
+
+  save() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.goBack();
+      }
+    });
+  }
+
+  saveAndGen() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.releaseorder);
+      }
+    });
+  }
+
+  saveAndSendMsg() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.sendMsg(this.releaseorder);
+      }
+    });
+  }
+  
+  preview() {
+    this.submit().subscribe(data => {
+      if (data.success) {
+        this.gen(this.releaseorder, true);
+      }
+    });
+  }
+
+  gen(releaseOrder: ReleaseOrder, preview = false) {
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.api.generate(releaseOrder).subscribe(data => {
+          if (data.msg) {
+            this.notifications.show(data.msg);
+    
+            releaseOrder.generated = true;
+          }
+          else {
+            console.log(data);
+            
+            let blob = new Blob([data], { type: 'application/pdf' });
+            let url = this.windowService.window.URL.createObjectURL(blob);
+    
+            let a = this.windowService.window.document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            this.windowService.window.document.body.appendChild(a);
+            a.href = url;
+
+            if (preview) {
+              a.setAttribute("target", "_blank");
+            }
+            else {
+              a.download = 'releaseorder.pdf';
+            }
+
+            a.click();
+          }
+        });
+      }
+    })
+  }
+
+  sendMsg(releaseOrder: ReleaseOrder) {
+    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+      if (confirm) {
+        this.dialog.getMailingDetails().subscribe(mailingDetails => {
+          if (mailingDetails) {
+            this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+              if (data.success) {
+                this.notifications.show("Sent Successfully");
+
+                releaseOrder.generated = true;
+              }
+              else {
+                console.log(data);
+
+                this.notifications.show(data.msg);
+              }
+            });
+          }
+        });
+      }
+    });
+  }
+
   ngOnInit() {
     this.categories = this.options.categories;
+    this.dropdownPullOutName = this.others;
 
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
@@ -138,8 +252,6 @@ export class ReleaseOrderComponent implements OnInit {
     this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
       this.releaseorder = data.releaseOrder;
 
-      let insertionBkp = this.releaseorder.insertions;
-
       this.buildCategoryTree([
         this.releaseorder.adCategory1,
         this.releaseorder.adCategory2,
@@ -148,6 +260,8 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.adCategory5,
         this.releaseorder.adCategory6
       ]);
+
+      let insertionBkp = this.releaseorder.insertions;
 
       if (this.releaseorder.adSizeCustom) {
         this.customSize = true;
@@ -194,6 +308,8 @@ export class ReleaseOrderComponent implements OnInit {
       this.executive = dirExecutive;
 
       this.releaseorder.insertions = insertionBkp;
+
+      this.customPullOutName = this.releaseorder.pulloutName;
     });
   }
 
@@ -209,6 +325,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
       this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
+      this.customPullOutName = rateCard.pullOutName;
 
       this.releaseorder.paymentType = this.paymentTypes[0];
       this.selectedTax = this.taxes[0];
@@ -359,8 +476,6 @@ export class ReleaseOrderComponent implements OnInit {
     return formatted;
   }
 
-  categories: Category[];
-
   getCategory(index: number) {
     return this.selectedCategories[index];
   }
@@ -391,6 +506,16 @@ export class ReleaseOrderComponent implements OnInit {
   set category5(category: Category) { this.setCategory(4, category); }
   set category6(category: Category) { this.setCategory(5, category); }
 
+  getCategories() {
+    this.dialog.getCategoriesDetails().subscribe(data => {
+      this.setCategoriesDetails(data);
+    });
+  }
+
+  setCategoriesDetails(details: CategoriesDetails) {
+    this.selectedCategories = details.selectedCategories;
+  }
+  
   private goBack() {
     this.router.navigateByUrl(this.edit ? '/releaseorders/' + this.id : '/releaseorders');
   }
@@ -400,34 +525,37 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private createReleaseOrder() {
-    this.api.createReleaseOrder(this.releaseorder).subscribe(
-      data => {
+    return this.api.createReleaseOrder(this.releaseorder).pipe(
+      map(data => {
         if (data.success) {
-          this.goBack();
+          this.releaseorder.id = data.msg;
         }
         else {
           console.log(data);
 
           this.notifications.show(data.msg);
         }
-      }
+
+        return data;
+      })
     );
   }
 
   private editReleaseOrder() {
-    this.api.editReleaseOrder(this.releaseorder).subscribe(
-      data => {
+    return this.api.editReleaseOrder(this.releaseorder).pipe(
+      map(data => {
         if (data.success) {
-          this.goBack();
         }
         else {
           this.notifications.show(data.msg);
         }
-      }
+
+        return data;
+      })
     )
   }
 
-  submit () {
+  submit () : Observable<any> {
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
@@ -446,6 +574,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.publicationName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.releaseorder.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
+
+    this.releaseorder.pulloutName = this.dropdownPullOutName == this.others ? this.customPullOutName : this.dropdownPullOutName;
 
     if (this.customSize) {
       this.releaseorder.adSizeL = this.customSizeL;
@@ -468,10 +598,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
 
-    if (this.edit) {
-      this.editReleaseOrder();
-    }
-    else this.createReleaseOrder();
+    let base: Observable<any> = this.edit ? this.editReleaseOrder() : this.createReleaseOrder();
+
+    return base;
   }
 
   searchMediaHouse = (text: Observable<string>) => {
@@ -483,6 +612,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   mediaHouse;
 
+  pullouts: Pullout[] = [];
+
   initMediaHouse(result: MediaHouse) {
     if (result.address) {
       this.releaseorder.publicationEdition = result.address.edition;
@@ -490,6 +621,10 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.publicationGSTIN = result.GSTIN;
 
       this.releaseorder.adEdition = result.address.edition;
+    }
+
+    if (result.pullouts) {
+      this.pullouts = result.pullouts;
     }
 
     this.mediaType = result.mediaType;
@@ -646,6 +781,16 @@ export class ReleaseOrderComponent implements OnInit {
     return this.findInsertion(date) != -1;
   }
 
+  getInsertions() {
+    this.dialog.getInsertionDetails({
+      insertions: this.releaseorder.insertions.map(insertion => new Insertion(insertion.date)),
+      availableAds: this.availableAds,
+      timeLimit: !this.customScheme && this.selectedScheme && this.selectedScheme.timeLimit
+    }).subscribe(data => {
+      this.releaseorder.insertions = data;
+    });
+  }
+
   fixSizes: FixSize[] = [];
 
   customSize = false;
@@ -710,7 +855,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   get grossAmountWithoutPremium() {
     if (this.isTypeLen) {
-      if (this.customSize) {
+      if (this.customSize && !this.releaseorder.fixRate) {
         return this.releaseorder.rate * this.totalSpace;
       }
       else {

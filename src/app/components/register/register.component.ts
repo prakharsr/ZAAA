@@ -13,6 +13,11 @@ export class RegisterComponent implements OnInit {
   email: string;
   acceptTnC: boolean;
 
+  emailOrPhone: string;
+  password: string;
+
+  hidePassword = true;
+
   constructor(private api: ApiService,
     private router: Router,
     private notifications: NotificationService) { }
@@ -29,6 +34,21 @@ export class RegisterComponent implements OnInit {
       data => {
         if (data.success) {
           this.GoToDashboard();
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+      }
+    );
+  }
+
+  loginSubmit() {
+    this.api.login(this.emailOrPhone, this.password).subscribe(
+      data => {
+        if (data.success) {
+          this.router.navigateByUrl('dashboard');
         }
         else {
           console.log(data);

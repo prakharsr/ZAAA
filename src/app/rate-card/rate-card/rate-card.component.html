@@ -16,29 +16,19 @@
           <mat-panel-description>Enter Booking Center</mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div class="form-group">
-          <label>Media House Name</label>
-          <input type="text" class="form-control" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Enter Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-        </div>
-  
-        <div *ngIf="mediaHouseNameField.invalid && (mediaHouseNameField.dirty || mediaHouseNameField.touched)" class="text-danger">
-          <div *ngIf="mediaHouseNameField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+          <mat-error *ngIf="mediaHouseNameField.errors && mediaHouseNameField.errors.required">
             Media House Name is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
-        <div class="form-group">
-          <label>Edition</label>
-          <input type="text" class="form-control" id="bookingEdition" [ngbTypeahead]="searchEdition" placeholder="Enter Edition" [(ngModel)]="edition" name="bookingEdition" required #bookingEditionField="ngModel" [resultFormatter]="editionResultFormatter" [inputFormatter]="editionInputFormatter">
-        </div>
-  
-        <div *ngIf="bookingEditionField.invalid && (bookingEditionField.dirty || bookingEditionField.touched)" class="text-danger">
-          <div *ngIf="bookingEditionField.errors.required">
+        <mat-form-field>
+          <input matInput type="text" id="bookingEdition" [ngbTypeahead]="searchEdition" placeholder="Edition" [(ngModel)]="edition" name="bookingEdition" required #bookingEditionField="ngModel" [resultFormatter]="editionResultFormatter" [inputFormatter]="editionInputFormatter">
+          <mat-error *ngIf="bookingEditionField.errors && bookingEditionField.errors.required">
             Booking Edition is required.
-          </div>
-          <br>
-        </div>
+          </mat-error>
+        </mat-form-field>
 
         <ng-container *ngIf="mediaType == 'Print'">
           <label>Pullout Name</label>
@@ -47,7 +37,7 @@
             <div class="col">
               <div class="form-group">
                 <select class="form-control" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
-                    <option *ngFor="let item of pullouts" [ngValue]="item.name">{{item.name}}</option>
+                    <option *ngFor="let item of pullouts" [ngValue]="item.Name">{{item.Name}}</option>
                   <option>{{others}}</option>
                 </select>
               </div>
@@ -82,31 +72,28 @@
 
         <div class="form-row">    
           <div class="col-md">
-            <div class="form-group">
-              <label>Media Type</label>
-              <select class="form-control" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
-                <option *ngFor="let item of mediaTypes" [value]="item">{{item}}</option>
-              </select>
+            <mat-form-field>
+              <mat-select name="mediaType" placeholder="Media Type" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             </div>
-          </div>
           <div class="col-md">
-            <div class="form-group">
-              <label>Ad Type</label>
-              <select class="form-control" name="adType" [(ngModel)]="rateCard.adType" id="adType" #adTypeField="ngModel" required>
-                <option *ngFor="let item of adTypes" [value]="item">{{item}}</option>
-              </select>
+            <mat-form-field>
+              <mat-select name="adType" placeholder="Ad Type" [(ngModel)]="rateCard.adType" id="adType" #adTypeField="ngModel" required>
+                <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             </div>
-          </div>
           <!-- Will be used in future -->
           <div class="col-md" *ngIf="false">
-            <div class="form-group">
-              <label>Rate Card Type</label>
-              <select class="form-control" name="rateCardType" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField="ngModel" required>
-                <option *ngFor="let item of rateCardTypes" [value]="item">{{item}}</option>
-              </select>
+            <mat-form-field>
+              <mat-select name="rateCardType" placeholder="Rate Card Type" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField="ngModel" required>
+                <mat-option *ngFor="let item of rateCardTypes" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             </div>
           </div>
-        </div>
 
         <br>
 
@@ -189,139 +176,108 @@
         <label>Rate</label>
         <div class="form-row">
           <div class="col">
-            <div class="form-group">
-              <input type="number" class="form-control" id="rate" placeholder="Enter Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
-            </div>
-      
-            <div *ngIf="rateField.invalid && (rateField.dirty || rateField.touched)" class="text-danger">
-              <div *ngIf="rateField.errors.required">
+            <mat-form-field>
+              <input matInput type="number" id="rate" placeholder="Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
+              <mat-error *ngIf="rateField.errors && rateField.errors.required">
                 Rate is empty or invalid.
-              </div>
-              <br>
-            </div>
+              </mat-error>
+            </mat-form-field>
+      
           </div>
           <div class="col">
-            <div class="form-group">
-              <select class="form-control" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField="ngModel" required>
-                <option *ngFor="let item of units" [value]="item">{{item}}</option>
-              </select>
+            <mat-form-field>
+              <mat-select placeholder="Unit" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField="ngModel" required>
+                <mat-option *ngFor="let item of units" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             </div>
           </div>
-        </div>
         
         <div *ngIf="isTypeTime">
           <div class="form-group">
-            <label>Ad Time</label>
-            <div class="form-group">
-              <select class="form-control" name="adTime" [(ngModel)]="rateCard.AdTime" id="adTime" #adTimeField="ngModel" required>
-                <option *ngFor="let item of adTimes" [value]="item">{{item}}</option>
-              </select>
+            <mat-form-field>
+              <mat-select placeholder="Ad Time" name="adTime" [(ngModel)]="rateCard.AdTime" id="adTime" #adTimeField="ngModel" required>
+                <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             </div>
           </div>
-        </div>
 
         <div *ngIf="isTypeWords">
           <div class="form-group">
-            <div class="form-group">
+            <mat-form-field>
               <label>Maximum Words / Lines</label>
-              <input type="number" class="form-control" id="maxWords" placeholder="Enter Maximum Words / Lines" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
-            </div>
-    
-            <div *ngIf="maxWordsField.invalid && (maxWordsField.dirty || maxWordsField.touched)" class="text-danger">
-              <div *ngIf="maxWordsField.errors.required">
+              <input matInput type="number" id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
+              <mat-error *ngIf="maxWordsField.errors && maxWordsField.errors.required">
                   Maximum Words / Lines is required.
-              </div>
-              <br>
-            </div>              
+              </mat-error>
+            </mat-form-field>
+    
           </div>
         </div>
 
         <div *ngIf="isTypeLen">
-          <div class="form-group">
-            <label>Position</label>
-            <select class="form-control" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
-              <option *ngFor="let item of positions" [value]="item">{{item}}</option>
-            </select>
-          </div>
-  
-          <div *ngIf="positionField.invalid && (positionField.dirty || positionField.touched)" class="text-danger">
-            <div *ngIf="positionField.errors.required">
+          <mat-form-field>
+            <mat-select placeholder="Position" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
+              <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="positionField.errors && positionField.errors.required">
               Position is required.
-            </div>
-            <br>
-          </div>
-
-          <div class="form-group">
-            <label>Hue</label>
-            <select class="form-control" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
-              <option *ngFor="let hue of hues" [value]="hue">{{hue}}</option>
-            </select>
-          </div>
+            </mat-error>
+          </mat-form-field>
   
-          <div *ngIf="hueField.invalid && (hueField.dirty || hueField.touched)" class="text-danger">
-            <div *ngIf="hueField.errors.required">
+          <mat-form-field>
+            <mat-select placeholder="Hue" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
+              <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hueField.errors && hueField.errors.required">
               Hue is required.
-            </div>
-            <br>
-          </div>
+            </mat-error>
+          </mat-form-field>
 
           <label>Minimum Size Limit</label>
           <div class="form-row">
             <div class="col">
-              <div class="form-group">
-                <input type="number" class="form-control" id="minLength" placeholder="Enter Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
-              </div>
-      
-              <div *ngIf="minLengthField.invalid && (minLengthField.dirty || minLengthField.touched)" class="text-danger">
-                <div *ngIf="minLengthField.errors.required">
+              <mat-form-field>
+                <input matInput type="number" id="minLength" placeholder="Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
+                <mat-error *ngIf="minLengthField.errors && minLengthField.errors.required">
                   Minimum Length is required.
-                </div>
-                <br>
-              </div>
+                </mat-error>
+              </mat-form-field>
       
             </div>
             <div class="col-auto form-text">&times;</div>
             <div class="col">
-              <div class="form-group">
-                <input type="number" class="form-control" id="minWidth" placeholder="Enter Minimum Width" [(ngModel)]="rateCard.minWidth" name="minWidth" required #minWidthField="ngModel">
-              </div>
-      
-              <div *ngIf="minWidthField.invalid && (minWidthField.dirty || minWidthField.touched)" class="text-danger">
-                <div *ngIf="minWidthField.errors.required">
+              <mat-form-field>
+                <input matInput type="number" id="minWidth" placeholder="Minimum Width" [(ngModel)]="rateCard.minWidth" name="minWidth" required #minWidthField="ngModel">
+                <mat-error *ngIf="minWidthField.errors && minWidthField.errors.required">
                   Minimum Width is required.
-                </div>
-                <br>
-              </div>
+                </mat-error>
+              </mat-form-field>
+      
             </div>
           </div>
           
           <label>Maximum Size Limit</label>
           <div class="form-row">
             <div class="col">
-              <div class="form-group">
-                <input type="number" class="form-control" id="maxLength" placeholder="Enter Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
-              </div>
-      
-              <div *ngIf="maxLengthField.invalid && (maxLengthField.dirty || maxLengthField.touched)" class="text-danger">
-                <div *ngIf="maxLengthField.errors.required">
+              <mat-form-field>
+                <input matInput type="number" id="maxLength" placeholder="Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
+                <mat-error *ngIf="maxLengthField.errors && maxLengthField.errors.required">
                   Maximum Length is required.
-                </div>
-                <br>
-              </div>
+                </mat-error>
+              </mat-form-field>
       
             </div>
             <div class="col-auto form-text">&times;</div>
             <div class="col">
-              <div class="form-group">
-                <input type="number" class="form-control" id="maxWidth" placeholder="Enter Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
-              </div>
-      
-              <div *ngIf="maxWidthField.invalid && (maxWidthField.dirty || maxWidthField.touched)" class="text-danger">
-                <div *ngIf="maxWidthField.errors.required">
+              <mat-form-field>
+                <input matInput type="number" id="maxWidth" placeholder="Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
+                <mat-error *ngIf="maxWidthField.errors && maxWidthField.errors.required">
                   Maximum Width is required.
-                </div>
-                <br>
-              </div>
+                </mat-error>
+              </mat-form-field>
+      
             </div>
           </div>
         </div>

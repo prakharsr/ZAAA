@@ -1,34 +1,59 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Login</h1>
-  </div>
-</div>
+<div class="bg-color"></div>
 
 <div class="container">
-  <form (ngSubmit)="submit()" #loginForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Email Address or Phone" name="emailPhone" [(ngModel)]="emailOrPhone" type='text' required #emailOrPhoneField="ngModel">
-      <mat-error *ngIf="emailOrPhoneField.errors && emailOrPhoneField.errors.required">
-        Email or Phone is required.
-      </mat-error>
-    </mat-form-field>
+  <br><br>
 
-    <div class="form-group">
-      <p class="float-right"><a tabindex="-1" routerLink="/forgotPassword">Forgot Password</a></p>
+  <div class="card mat-elevation-z1 bg-white">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" #loginForm="ngForm">
+
+        <br>
+
+        <h1 class="display-4 text-center">Login</h1>
+        
+        <br>
+
+        <div class="form-group">
+          <label for="user-name">Email/Phone</label>
+
+          <input type="text" class="form-control" id="user-name" placeholder="Enter email/phone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+          <div *ngIf="emailOrPhoneField.invalid && (emailOrPhoneField.dirty || emailOrPhoneField.touched)" class="text-danger">
+            <div *ngIf="emailOrPhoneField.errors.required">
+              Email or Phone is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+          <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+            <div *ngIf="passwordField.errors.required">
+              Password is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <br>
+        
+        <button class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid" id="loginBtn">Login</button>
+
+        <br>
+
+        <div class="row">
+          <div class="col text-right">
+            <a routerLink="/forgotPassword">Forgot Password?</a>
+          </div>
+          <div class="col">
+            <a routerLink="/register">Sign Up</a>
+          </div>
+        </div>
+
+        <br>
+      </form>
     </div>
-
-    <mat-form-field>
-      <input matInput placeholder="Password" name="password" [(ngModel)]="password" [type]="hidePassword ? 'password' : 'text'" required #passwordField="ngModel">
-      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-      <mat-error *ngIf="passwordField.errors && passwordField.errors.required">
-        Password is required.
-      </mat-error>
-    </mat-form-field>
-
-    <br><br>
-    <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
-  </form>
-
-  <br>
-  <p>Don't have an account, create <a routerLink="/register">one</a>.</p>
+  </div>
 </div>

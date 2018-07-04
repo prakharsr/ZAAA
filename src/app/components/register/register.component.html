@@ -1,45 +1,44 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Sign Up</h1>
-    <p class="lead">For Advertsing Agency Administrators</p>
-  </div>
-</div>
+<div class="bg-color"></div>
 
 <div class="container">
-  <form (ngSubmit)="submit()" #signUpForm="ngForm">
-    <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
-      <mat-error *ngIf="nameField.errors && nameField.errors.required">
-        Name is required.
-      </mat-error>
-    </mat-form-field>
+  <div class="row justify-content-end">
+    <div class="col-md-9 col-lg-6 col-xl-5">
+      <br><br>
+      <h1 class="display-4">Sign Up</h1>
 
-    <mat-form-field>
-      <input matInput placeholder="Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
-      <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
-      <mat-error *ngIf="emailField.errors && emailField.errors.required">
-        Email is required.
-      </mat-error>
-      <mat-error *ngIf="emailField.errors && emailField.errors.email">
-        Invalid Email.
-      </mat-error>
-    </mat-form-field>
+      <form (ngSubmit)="submit()" #signUpForm="ngForm">
+        <mat-form-field>
+          <input matInput type="text" id="name" placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+          <mat-error *ngIf="nameField.errors && nameField.errors.required">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
 
-    <br><br>
+        <mat-form-field>
+          <input matInput placeholder="Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
+          <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
+          <mat-error *ngIf="emailField.errors && emailField.errors.required">
+            Email is required.
+          </mat-error>
+          <mat-error *ngIf="emailField.errors && emailField.errors.email">
+            Invalid Email.
+          </mat-error>
+        </mat-form-field>
 
-    <mat-checkbox class="my-2" name="acceptTnC" [(ngModel)]="acceptTnC" required #acceptTnCField="ngModel">Accept Terms and Conditions</mat-checkbox>
+        <br><br>
+        
+        <p class="small">By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
+        
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!signUpForm.form.valid">Sign Up</button>
+        </div>
 
-    <div *ngIf="acceptTnCField.invalid && (acceptTnCField.dirty || acceptTnCField.touched)" class="text-danger">
-      <div *ngIf="acceptTnCField.errors.required">
-        Accept Terms and Conditions to continue.
-      </div>
+        <p class="small">Already have an account, <a routerLink="/login">Login</a>.</p>
+
+        <br>
+
+        <p class="small">Click to view our <a routerLink="">Subscription plans</a>.</p>
+      </form>
     </div>
-
-    <br><br>
-
-    <button type="submit" class="btn btn-success" [disabled]="!signUpForm.form.valid">Sign Up</button>
-  </form>
-
-  <br>
-  <p>Already have an account, <a routerLink="/login">Login</a>.</p>
+  </div>
 </div>

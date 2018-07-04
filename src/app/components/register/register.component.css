@@ -1,0 +1,20 @@
+.bg-color {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #edf0f5;
+}
+
+input.ng-invalid.form-control, select.ng-invalid {
+  border-left: 1px solid #ced4da;
+}
+
+input.ng-valid.form-control, select.ng-valid {
+  border-left: 1px solid #ced4da;
+}
+
+.text-lighter {
+  color: #edf0f5;
+}

@@ -1,3 +1,5 @@
+<livechat-widget licenseId="9872505"></livechat-widget>
+
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">AAMan</h1>
@@ -6,16 +8,10 @@
     <p>A complete solution for Advertising Agencies.</p>
     <br>
     <p class="lead">
+      <a class="btn btn-info btn-lg" *ngIf="api.isLoggedIn" routerLink="/profile">My Profile</a>
       <a class="btn btn-info btn-lg" *ngIf="api.isLoggedIn" routerLink="/dashboard">Dashboard</a>
+      <a class="btn btn-info btn-lg" *ngIf="!api.isLoggedIn" routerLink="/login">Login</a>
       <a class="btn btn-info btn-lg" *ngIf="!api.isLoggedIn" routerLink="/register">Register</a>
     </p>
-  </div>
-</div>
-
-<div class="container">
-  <br>
-
-  <div class="text-center">
-    <img src="assets/logo.jpg" width="150" height="150">
   </div>
 </div>

@@ -1,0 +1,145 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container"><a routerLink="/">Home</a> <span class="text-muted mx-2">/</span> <a routerLink="/profile">Manage Profile</a> <span class="text-muted mx-2">/</span> Account Details</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <br>
+
+  <div class="row">
+    <div class="col-lg">
+      <form (ngSubmit)="submit()" #profileForm="ngForm">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-header">
+            <div class="row">
+              <div class="col">Personal Details</div>
+              <div class="col-auto" *ngIf="!editPersonalDetails">
+                <button class="btn btn-sm btn-outline-info" *ngIf="profile.isAdmin" (click)="editPersonalDetails = true"><mat-icon>edit</mat-icon></button>
+              </div>
+            </div>
+          </div>
+          
+          <ng-container *ngIf="!editPersonalDetails">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-4">Name</div>
+                  <div class="col-md-8">
+                    {{profile.name}}
+                    
+                    <span class="text-muted">
+                      ({{profile.isAdmin ? 'ADMIN' : 'Co-User'}})
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-4">Designation</div>
+                  <div class="col-md-8">{{profile.designation}}</div>
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+        
+          <ng-container *ngIf="editPersonalDetails">
+            <div class="card-body">
+              <mat-form-field>
+                <input matInput type="text" name="name" placeholder="Name" [(ngModel)]="profile.name" required #nameField="ngModel">
+                <mat-error *ngIf="nameField.errors && nameField.errors.required">
+                  Name is required.
+                </mat-error>
+              </mat-form-field>
+          
+              <mat-form-field>
+                <input matInput type="text" name="designation" placeholder="Designation" [(ngModel)]="profile.designation" required #designationField="ngModel">
+                <mat-error *ngIf="designationField.errors && designationField.errors.required">
+                  Designation is required.
+                </mat-error>
+              </mat-form-field>
+          
+              <br><br>
+            
+              <button type="submit" class="btn btn-success" [disabled]="!profileForm.form.valid">Save</button>
+              <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+          
+              <br><br>
+            </div>
+          </ng-container>
+        </div>
+      </form>
+    </div> 
+    <div class="col-lg">
+      <div class="card mb-5 mat-elevation-z3">
+        <div class="card-header">
+          <div class="row justify-content-between">
+            <div class="col-auto">
+              Login Details
+            </div>
+            <div class="col-auto">
+              <a class="btn btn-danger" routerLink="/changePassword">
+                <mat-icon>vpn_key</mat-icon> Change Password
+              </a>
+            </div>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Email</div>
+              <div class="col-md-8">{{profile.email}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Contact</div>
+              <div class="col-md-8">{{profile.contact}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg">
+      <div class="card mb-5 mat-elevation-z3">
+        <div class="card-header">Profile Picture</div>
+        <div class="card-body text-center">
+          <img [src]="profile.photo" class="img-fluid max-w-200">
+    
+          <br><br>
+          
+          <label for="profile-upload" class="btn btn-outline-info">
+            <mat-icon>file_upload</mat-icon>
+          </label>
+          <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
+
+          <button class="btn btn-outline-danger mb-2" (click)="removeProfilePicture()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg">
+      <div class="card mb-5 mat-elevation-z3">
+        <div class="card-header">Signature</div>
+        <div class="card-body text-center">
+          <img [src]="profile.sign" class="img-fluid max-w-200">
+      
+          <br><br>
+          
+          <label for="sign-upload" class="btn btn-outline-info">
+            <mat-icon>file_upload</mat-icon>
+          </label>
+          <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
+
+          <button class="btn btn-outline-danger mb-2" (click)="removeSign()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

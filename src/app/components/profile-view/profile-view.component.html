@@ -1,100 +1,49 @@
 <mat-toolbar>  
     <mat-toolbar-row>
-        <div class="container">User Profile</div>
+      <div class="container"><a routerLink="/">Home</a> <span class="text-muted mx-2">/</span> Manage Profile</div>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <div class="container">
   <br>
-  <div class="row">
-    <div class="col-xl-6">
-      <div class="card mb-5">
-        <div class="card-header">Personal Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Name</div>
-              <div class="col-md-8">
-                {{profile.name}}
-                
-                <span class="text-muted">
-                  ({{profile.isAdmin ? 'ADMIN' : 'Co-User'}})
-                </span>
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Designation</div>
-              <div class="col-md-8">{{profile.designation}}</div>
-            </div>
-          </li>
-        </ul>
-        <div class="card-body" *ngIf="profile.isAdmin">
-          <a class="btn btn-info" routerLink="/profile/edit">
-            <mat-icon>edit</mat-icon> Edit
-          </a>
+  <div class="card mb-3 mat-elevation-z1">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto text-primary mr-5">
+          <mat-icon style="font-size: 300%">person</mat-icon>
         </div>
-      </div>
-      <div class="card mb-5">
-          <div class="card-header">Login Details</div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Email</div>
-                <div class="col-md-8">{{profile.email}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Contact</div>
-                <div class="col-md-8">{{profile.contact}}</div>
-              </div>
-            </li>
-          </ul>
-          <div class="card-body">
-            <a class="btn btn-danger" routerLink="/changePassword">
-              <mat-icon>vpn_key</mat-icon> Change Password
-            </a>
-          </div>
+        <div class="col">
+          <h5>Account</h5>
+          <p>To view and edit Account Details</p>
         </div>
-    </div>
-    <div class="col-xl-3">
-      <div class="card mb-5">
-        <div class="card-header">Profile Picture</div>
-        <div class="card-body text-center">
-          <img [src]="profile.photo" class="img-fluid max-w-200">
-    
-          <br><br>
-          
-          <label for="profile-upload" class="btn btn-outline-info">
-            <mat-icon>file_upload</mat-icon>
-          </label>
-          <input type="file" id="profile-upload" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
-
-          <button class="btn btn-outline-danger mb-2" (click)="removeProfilePicture()">
-            <mat-icon>delete</mat-icon>
-          </button>
+        <div class="col-auto align-self-end">
+          <a class="btn btn-outline-info col-auto mr-3" routerLink="/account">View</a>
         </div>
       </div>
     </div>
-    <div class="col-xl-3">
-      <div class="card mb-5">
-        <div class="card-header">Signature</div>
-        <div class="card-body text-center">
-          <img [src]="profile.sign" class="img-fluid max-w-200">
-      
-          <br><br>
-          
-          <label for="sign-upload" class="btn btn-outline-info">
-            <mat-icon>file_upload</mat-icon>
-          </label>
-          <input type="file" id="sign-upload" class="hidden-file" accept="image/*" (change)="uploadSign($event.target.files)"/>
-
-          <button class="btn btn-outline-danger mb-2" (click)="removeSign()">
-            <mat-icon>delete</mat-icon>
-          </button>
+  </div>
+  <div class="card mb-3 mat-elevation-z1">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto text-primary mr-5">
+          <mat-icon style="font-size: 300%">business_center</mat-icon>
         </div>
+        <div class="col">
+          <h5>Business Profile</h5>
+          <p>To view and edit Firm Details</p>
+        </div>
+        <div class="col-auto align-self-end">
+          <a class="btn btn-outline-info col-auto mr-3" routerLink="/firm">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-5">
+    <div class="card-header">USER</div>
+    <div class="card-body">
+      <div class="row justify-content-between">
+        <div class="col">To view and edit User Details</div>
+        <a class="btn btn-info col-auto mr-3" routerLink="/user">View</a>
       </div>
     </div>
   </div>

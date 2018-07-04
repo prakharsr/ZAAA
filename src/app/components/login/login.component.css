@@ -1,0 +1,108 @@
+.bg-color {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-color: #edf0f5;
+	z-index: -1;
+}
+
+input.ng-invalid.form-control, select.ng-invalid {
+    border-left: 1px solid #ced4da;
+}
+
+input.ng-valid.form-control, select.ng-valid {
+    border-left: 1px solid #ced4da;
+}
+
+.card {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+/* body {
+	box-sizing: border-box;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.login-form {
+	width: fit-content;
+	height: 400px;
+	background: lightskyblue;
+	border-radius: 20px;
+	position: relative;
+	margin: 100px auto;
+	box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.25);
+	padding: 20px;
+}
+
+input {
+	display: inline;
+	margin: 0px;
+	width: 190px;
+	border: 0;
+	font-size: 12px;
+	letter-spacing: 1.5px;
+}
+
+label {
+	display: block;
+	background: #fff;
+	color: #000;
+	border: 0;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	border-radius: 5px;
+	margin: 15px 10px;
+	font-size: 14px;
+}
+
+#loginBtn {
+	display: block;
+	background: #fff;
+	color: #000;
+	border: 0;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 600;
+	border-radius: 5px;
+	margin: 10px;
+	cursor: pointer;
+	width: 100px;
+	border: 1px solid white;
+	box-shadow: inset 0 0 1px 1px black;
+}
+
+h1 {
+	color: white;
+	margin: 20px 10px;
+	font-size: 40px;
+	font-weight: 900;
+	letter-spacing: 3px;
+	margin-top: 0;
+	text-align: center;
+	text-shadow: 1px 0px 2px rgba(0, 0, 0, 0.5), -1px 0px 2px rgba(0, 0, 0, 0.5),
+		0px -1px 2px rgba(0, 0, 0, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+a {
+	float: right;
+	margin: 10px;
+}
+
+p {
+	margin: 10px;
+	float: left;
+}
+
+#signUP {
+	float: none;
+	margin: 0;
+} */

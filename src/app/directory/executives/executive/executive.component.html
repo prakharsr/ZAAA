@@ -21,7 +21,7 @@
       <div class="form-row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName" #orgNameField="ngModel">
+            <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName" required #orgNameField="ngModel">
             <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
               Organisation Name is required.
             </mat-error>

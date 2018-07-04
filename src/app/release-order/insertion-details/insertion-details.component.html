@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Insertion Details</h2>
+
+<mat-dialog-content>
+  <ng-container >
+    <div class="form-row">
+      <div class="col">
+        <h4>Insertions ({{injected.insertions.length}} / {{injected.availableAds}})</h4>
+      </div>    
+    </div>
+    
+    <ng-template #insertionTemplate let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+      <span class="custom-day"
+            [class.focused]="focused"
+            [class.selected]="isSelected(date)"
+            [class.text-muted]="date.month !== currentMonth || disabled">
+        {{ date.day }}
+      </span>
+    </ng-template>
+    
+    <ngb-datepicker [(ngModel)]="currentInsertionDate"
+                    name="currentInsertionDate"
+                    [dayTemplate]="insertionTemplate"
+                    (select)="addInsertion($event)"></ngb-datepicker>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="injected.insertions">Submit</button>  
+</mat-dialog-actions>

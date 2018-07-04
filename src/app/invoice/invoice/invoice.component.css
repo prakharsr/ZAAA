@@ -1,0 +1,20 @@
+.list-group-item div:first-child {
+    font-style: italic;
+}
+
+mat-card {
+    padding: 15px;
+}
+
+mat-card-title {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+#add_details {
+    font-weight: bolder;
+}
+
+label {
+    font-size: 15px;
+}

@@ -7,6 +7,9 @@ import { MailingDetails } from 'app/models';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
 import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
+import { CategoriesDetails, CategoriesDetailsComponent } from 'app/release-order/categories-details/categories-details.component';
+import { InsertionDetailsComponent, InsertionInjection } from 'app/release-order/insertion-details/insertion-details.component';
+import { Insertion } from 'app/release-order';
 
 @Injectable()
 export class DialogService {
@@ -47,6 +50,20 @@ export class DialogService {
   getBillingDetails() : Observable<BillingDetails> {
     return this.dialog.open(BillingDetailsComponent, {
       disableClose: true
+    }).afterClosed();
+  }
+
+  getCategoriesDetails() : Observable<CategoriesDetails> {
+    return this.dialog.open(CategoriesDetailsComponent, {
+      disableClose: true,
+      width: '600px'
+    }).afterClosed();
+  }
+
+  getInsertionDetails(data: InsertionInjection) : Observable<Insertion[]> {
+    return this.dialog.open(InsertionDetailsComponent, {
+      disableClose: true,
+      data: data
     }).afterClosed();
   }
 

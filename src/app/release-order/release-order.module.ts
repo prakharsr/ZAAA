@@ -14,7 +14,9 @@ import {
   InsertionCheckComponent,
   ReleaseOrderComponent,
   ReleaseOrderDetailsComponent,
-  ReleaseOrderListComponent
+  ReleaseOrderListComponent,
+  CategoriesDetailsComponent,
+  InsertionDetailsComponent
 } from '.';
 
 @NgModule({
@@ -35,7 +37,9 @@ import {
     ReleaseOrderComponent,
     ReleaseOrderListComponent,
     ReleaseOrderDetailsComponent,
-    InsertionCheckComponent
+    InsertionCheckComponent,
+    CategoriesDetailsComponent,
+    InsertionDetailsComponent
   ]
 })
 export class ReleaseOrderModule { }

@@ -5,13 +5,16 @@ import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageData } from 'app/models';
 import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order';
-import { AccountsApiService } from '../accounts-api.service';
+import { AccountsApiService, SummarySheetInsertion } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
 
 class InsertionWithAmount extends InsertionCheckItem {
   amount = 0;
+  receiptNo = "";
+  receiptDate = new Date();
+  paymentMode = "Cash";
 }
 
 @Component({
@@ -29,6 +32,8 @@ export class SummarySheetComponent implements OnInit {
   mediaHouse;
   edition;
 
+  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+
   constructor(private mediaHouseApi: MediaHouseApiService,
     private route: ActivatedRoute,
     private router: Router,
@@ -36,6 +41,9 @@ export class SummarySheetComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
+    let now = new Date();
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
     this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams }}) => {
       data.resolved.list.list.forEach(element => {
         element.entries.forEach(entry => {
@@ -48,7 +56,10 @@ export class SummarySheetComponent implements OnInit {
             publicationEdition: entry.publicationEdition,
             publicationName: entry.publicationName,
             insertions: entry.insertions,
-            amount: 0
+            amount: 0,
+            receiptNo: "",
+            receiptDate: today,
+            paymentMode: "Cash"
           });
         });
       });
@@ -109,10 +120,13 @@ export class SummarySheetComponent implements OnInit {
   }
 
   submit() {
-    let mapped: { _id: string, amount: number }[] = this.insertions.map(insertion => {
+    let mapped: SummarySheetInsertion[] = this.insertions.map(insertion => {
       return {
         _id: insertion.insertions._id,
-        amount: insertion.amount
+        amount: insertion.amount,
+        recieptNumber: insertion.receiptNo,
+        recieptDate: insertion.receiptDate,
+        paymentMode: insertion.paymentMode
       }
     });
 
