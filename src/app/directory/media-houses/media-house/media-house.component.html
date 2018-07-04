@@ -7,7 +7,7 @@
 <div class="container">
   <br>
 
-  <form (ngSubmit)="submit()" #dirFormfprofile="ngForm">
+  <form (ngSubmit)="submit()" #dirForm="ngForm">
     <div class="row">
       <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
@@ -21,7 +21,7 @@
               </div>
               <ng-container *ngIf="editPublicationDetails">
                 <div class="col-auto">
-                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
@@ -134,7 +134,7 @@
               </div>
               <ng-container *ngIf="editPulloutDetails">
                 <div class="col-auto">
-                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
@@ -233,7 +233,7 @@
               </div>
               <ng-container *ngIf="editContactDetails">
                 <div class="col-auto">
-                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
@@ -342,7 +342,7 @@
               </div>
               <ng-container *ngIf="editSchedulingDetails">
                 <div class="col-auto">
-                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
                 </div>
               </ng-container>
@@ -455,5 +455,8 @@
         </div>
       </div>
     </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
 </div>
