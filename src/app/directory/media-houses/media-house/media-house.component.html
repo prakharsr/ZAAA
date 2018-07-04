@@ -1,236 +1,459 @@
-<form (ngSubmit)="submit()" #dirForm="ngForm">
-  <div class="row">
-    <div class="col-md">
-      <h2 *ngIf="edit">Edit Media House</h2>
-      <h2 *ngIf="!edit">Add Media House</h2>
-      <br>
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container"><span class="text-muted mx-2">Media House Details</span></div>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-      <mat-form-field>
-        <input matInput type="text" name="pubName" placeholder="Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
-        <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
-          Publication Name is required.
-        </mat-error>
-      </mat-form-field>
+<div class="container">
+  <br>
 
-      <div class="form-row">
-        <div class="col">
-          <mat-form-field>
-            <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
-            <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
-              Organisation Name is required.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-auto align-self-center">
-          <button class="btn btn-sm btn-outline-info" type="button" (click)="mediaHouse.orgName = mediaHouse.pubName">Copy from above</button>
+  <form (ngSubmit)="submit()" #dirFormfprofile="ngForm">
+    <div class="row">
+      <div class="col-lg col-md-6">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-body" [class.h-limit]="!morePublicationDetails && !editPublicationDetails">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5>Publication Details</h5>
+              </div>
+              <div class="col-auto" *ngIf="!editPublicationDetails && !editing">
+                <button mat-icon-button (click)="editPublicationDetails = true"><mat-icon>edit</mat-icon></button>
+              </div>
+              <ng-container *ngIf="editPublicationDetails">
+                <div class="col-auto">
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
+            </div>
+
+            <br>
+
+            <ng-container *ngIf="!editPublicationDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Organization Name</div>
+                <div>{{mediaHouse.orgName || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Publisher Name</div>
+                <div>{{mediaHouse.pubName || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Nick Name</div>
+                <div>{{mediaHouse.nickName || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">Media Type</div>
+                <div>{{mediaHouse.mediaType || '--'}}</div>
+              </div>              
+              <div class="mb-3">
+                <div class="text-muted small">GSTIN</div>
+                <div>{{mediaHouse.GSTIN.GSTNo || '--'}}</div>    
+              </div>
+              <div class="mb-3" *ngIf="mediaHouse.mediaType != 'Print'">
+                <div class="text-muted small">Language</div>
+                <div>{{mediaHouse.Language || '--'}}</div>    
+              </div>  
+              <div class="mb-3">
+                <div class="text-muted small">Remark</div>
+                <div>{{mediaHouse.Remark || '--'}}</div>    
+              </div>   
+            </ng-container>
+
+            <ng-container *ngIf="editPublicationDetails">
+              <mat-form-field>
+                <input matInput type="text" name="pubName" placeholder="Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
+                <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
+                  Publication Name is required.
+                </mat-error>
+              </mat-form-field>
+        
+              <div class="form-row">
+                <div class="col">
+                  <mat-form-field>
+                    <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
+                    <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+                      Organisation Name is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-auto align-self-center">
+                  <button class="btn btn-sm btn-outline-info" type="button" (click)="mediaHouse.orgName = mediaHouse.pubName">Copy from above</button>
+                </div>
+              </div>
+            
+              <mat-form-field>
+                <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
+              </mat-form-field>
+            
+              <mat-form-field>
+                <mat-select placeholder="Media Type" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
+                  <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                  Media type is required.
+                </mat-error>
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                  GSTIN is required.
+                </mat-error>
+                <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                  GSTIN should be 15 characters long.
+                </mat-error>
+              </mat-form-field>
+                      
+              <mat-form-field *ngIf="mediaHouse.mediaType != 'Print'">
+                <input matInput type="text" placeholder="Language" [(ngModel)]="mediaHouse.Language" name="lang">
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput placeholder="Remark" name="remark" [(ngModel)]="mediaHouse.Remark">
+              </mat-form-field>
+        
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editPublicationDetails" (click)="morePublicationDetails = !morePublicationDetails">
+            <span><mat-icon [class.rotate180]="morePublicationDetails">expand_more</mat-icon></span> {{morePublicationDetails ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
-    
-      <mat-form-field>
-        <input matInput type="text" name="nickName" placeholder="Nick Name" [(ngModel)]="mediaHouse.nickName" #nickNameField="ngModel">
-      </mat-form-field>
-    
-      <mat-form-field>
-        <mat-select placeholder="Media Type" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
-          <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
-          Media type is required.
-        </mat-error>
-      </mat-form-field>
 
-      <mat-form-field>
-        <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-        <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
-          GSTIN is required.
-        </mat-error>
-        <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-          GSTIN should be 15 characters long.
-        </mat-error>
-      </mat-form-field>
+      <div class="col-lg col-md-6">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-body" [class.h-limit]="!morePulloutDetails && !editPulloutDetails">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5>Pullout Details</h5>
+              </div>
+              <div class="col-auto" *ngIf="!editPulloutDetails && !editing">
+                <button mat-icon-button (click)="editPulloutDetails = true"><mat-icon>edit</mat-icon></button>
+              </div>
+              <ng-container *ngIf="editPulloutDetails">
+                <div class="col-auto">
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
+            </div>
 
-      <div class="form-row">
-        <div class="col-4">
-          <mat-form-field>
-            <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
-          </mat-form-field>
-        </div>
-        <div class="col-8">
-          <mat-form-field>
-            <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
-          </mat-form-field>
+            <br>
+
+            <ng-container *ngIf="!editPulloutDetails && mediaHouse.mediaType == 'Print'">
+              <div *ngFor="let item of mediaHouse.pullouts; index as i">
+                <div class="mb-3">
+                  <div class="text-muted small">#{{i}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Name</div>
+                  <div>{{item.Name || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Frequency</div>
+                  <div>{{item.Frequency || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Language</div>
+                  <div>{{item.Language || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Remark</div>
+                  <div>{{item.remark || '--'}}</div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="editPulloutDetails && mediaHouse.mediaType == 'Print'">
+              <div class="row">
+                <div class="col">
+                  <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
+                </div>
+                <div class="col-auto">
+                  <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+      
+              <br>
+              <div class="text-muted" *ngIf="mediaHouse.pullouts.length == 0">No Pullouts</div>
+      
+              <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
+                <div class="col-auto align-self-center">#{{i + 1}}</div>
+                <div class="col">
+                  <mat-form-field>
+                    <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Name" [(ngModel)]="item.Name" required #pulloutsField="ngModel">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel" required>
+                      <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
+                      Frequency is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field>
+                    <input matInput type="text" placeholder="Language" [(ngModel)]="item.Language" name="lang-{{i}}" #langField="ngModel">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput type="text" placeholder="Remarks" [(ngModel)]="item.Remark" name="freqRemark-{{i}}" #freqRemarkField="ngModel">
+                  </mat-form-field>
+                </div>
+                <div class="col-auto align-self-center">
+                  <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editPulloutDetails" (click)="morePulloutDetails = !morePulloutDetails">
+            <span><mat-icon [class.rotate180]="morePulloutDetails">expand_more</mat-icon></span> {{morePulloutDetails ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
-
-      <mat-form-field *ngIf="mediaHouse.mediaType != 'Print'">
-        <input matInput type="text" placeholder="Language" [(ngModel)]="mediaHouse.Language" name="lang">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Remark" name="remark" [(ngModel)]="mediaHouse.Remark">
-      </mat-form-field>
-    
-      <br><br>
-
-      <h3 class="mb-3">Address</h3>
-    
-      <mat-form-field>
-        <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" #addressField="ngModel">
-        <mat-error *ngIf="addressField.errors && addressField.errors.required">
-          Address is required.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
-        <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
-          Pincode is required.
-        </mat-error>
-        <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
-          Pincode should be 6 characters long.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
-        <mat-error *ngIf="cityField.errors && cityField.errors.required">
-          City is required.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
-          <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="stateField.errors && stateField.errors.required">
-          State is required.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
-        <mat-error *ngIf="editionField.errors && editionField.errors.required">
-          Edition is required.
-        </mat-error>
-      </mat-form-field>
-
-      <br><br>
-
-      <ng-container *ngIf="mediaHouse.mediaType == 'Print'">
-        <div class="row">
-          <div class="col">
-            <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
-          </div>
-          <div class="col-auto">
-            <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
-
-        <br>
-        <div class="text-muted" *ngIf="mediaHouse.pullouts.length == 0">No Pullouts</div>
-
-        <div class="form-row" *ngFor="let item of mediaHouse.pullouts; index as i">
-          <div class="col-auto align-self-center">#{{i + 1}}</div>
-          <div class="col">
-            <mat-form-field>
-              <input matInput type="text" name="s-{{i}}-pullouts" placeholder="Name" [(ngModel)]="item.Name" required #pulloutsField="ngModel">
-            </mat-form-field>
-            <mat-form-field>
-              <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel" required>
-                <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
-                Frequency is required.
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field>
-              <input matInput type="text" placeholder="Language" [(ngModel)]="item.Language" name="lang-{{i}}" #langField="ngModel">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput type="text" placeholder="Remarks" [(ngModel)]="item.Remark" name="freqRemark-{{i}}" #freqRemarkField="ngModel">
-            </mat-form-field>
-          </div>
-          <div class="col-auto align-self-center">
-            <button mat-icon-button color="warn" type="button" (click)="removePullouts(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-
-        <br><br>
-      </ng-container>
     </div>
-    <div class="col-md">
-      <br>
 
-      <div class="row">
-        <div class="col">
-          <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
-        </div>
-        <div class="col-auto">
-          <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
-            <mat-icon>add</mat-icon>
+    <div class="row">
+      <div class="col-lg col-md-6">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-body" [class.h-limit]="!moreContactDetails && !editContactDetails">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5>Contact Details</h5>
+              </div>
+              <div class="col-auto" *ngIf="!editContactDetails && !editing">
+                <button mat-icon-button (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
+              </div>
+              <ng-container *ngIf="editContactDetails">
+                <div class="col-auto">
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
+            </div>
+
+            <br>
+
+            <ng-container *ngIf="!editContactDetails">
+              <div class="mb-3">
+                <div class="text-muted small">Address</div>
+                <div>{{mediaHouse.address.address || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Pincode</div>
+                <div>{{mediaHouse.address.pincode || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">City</div>
+                <div>{{mediaHouse.address.city || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">State</div>
+                <div>{{mediaHouse.address.state || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Office Landline</div>
+                <div>{{mediaHouse.officeStdNo  || '--  '}} {{mediaHouse.officeLandLine || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Edition</div>
+                <div>{{mediaHouse.address.edition || '--'}}</div>
+              </div>
+            </ng-container>
+  
+            <ng-container *ngIf="editContactDetails">
+              <mat-form-field>
+                <textarea matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" #addressField="ngModel"></textarea>
+                <mat-error *ngIf="addressField.errors && addressField.errors.required">
+                  Address is required.
+                </mat-error>
+              </mat-form-field>
+          
+                <mat-form-field>
+                  <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
+                  <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
+                    Pincode is required.
+                  </mat-error>
+                  <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
+                    Pincode should be 6 characters long.
+                  </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field>
+                  <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
+                  <mat-error *ngIf="cityField.errors && cityField.errors.required">
+                    City is required.
+                  </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field>
+                  <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
+                    <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="stateField.errors && stateField.errors.required">
+                    State is required.
+                  </mat-error>
+                </mat-form-field>
+          
+                <div class="form-row">
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-8">
+                    <mat-form-field>
+                      <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <mat-form-field>
+                  <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
+                  <mat-error *ngIf="editionField.errors && editionField.errors.required">
+                    Edition is required.
+                  </mat-error>
+                </mat-form-field>
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editContactDetails" (click)="moreContactDetails = !moreContactDetails">
+            <span><mat-icon [class.rotate180]="moreContactDetails">expand_more</mat-icon></span> {{moreContactDetails ? 'Less' : 'More'}}
           </button>
         </div>
       </div>
       
-      <br>
-      
-      <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
-        No Schedulings
-      </div>
+      <div class="col-lg col-md-6">
+        <div class="card mb-5 mat-elevation-z3">
+          <div class="card-body" [class.h-limit]="!moreSchedulingDetails && !editSchedulingDetails">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5>Scheduling Details</h5>
+              </div>
+              <div class="col-auto" *ngIf="!editSchedulingDetails && !editing">
+                <button mat-icon-button (click)="editSchedulingDetails = true"><mat-icon>edit</mat-icon></button>
+              </div>
+              <ng-container *ngIf="editSchedulingDetails">
+                <div class="col-auto">
+                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirFormfprofile.form.valid"><mat-icon>check</mat-icon></button>
+                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+                </div>
+              </ng-container>
+            </div>
 
-      <br>
+            <br>
 
-      <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
-        <div class="card-header">
-          <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
-            <mat-icon>delete</mat-icon>
+            <ng-container *ngIf="!editSchedulingDetails">
+                <div *ngFor="let scheduling of mediaHouse.scheduling; index as i">
+                  <div class="mb-3">
+                    <div class="text-muted small">#{{i + 1}}</div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="text-muted small">Person</div>
+                    <div>{{scheduling.person || '--'}}</div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="text-muted small">Designation</div>
+                    <div>{{scheduling.designation || '--'}}</div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="text-muted small">Desk Extension</div>
+                    <div>{{scheduling.deskExtension || '--'}}</div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="text-muted small">Mobile</div>
+                    <div>{{scheduling.mobileNo || '--'}}</div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="text-muted small">Email</div>
+                    <div>{{scheduling.email || '--'}}</div>
+                  </div>
+                </div>
+            </ng-container>
+  
+            <ng-container *ngIf="editSchedulingDetails">
+  
+              <div class="col-md">
+                  <br>
+            
+                  <div class="row">
+                    <div class="col">
+                      <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
+                    </div>
+                    <div class="col-auto">
+                      <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <br>
+                  
+                  <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
+                    No Schedulings
+                  </div>
+            
+                  <br>
+            
+                  <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
+                    <div class="card-header">
+                      <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      #{{i + 1}}
+                    </div>
+                    <div class="card-body">
+                      <mat-form-field>
+                        <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
+                        <mat-error *ngIf="personField.errors && personField.errors.required">
+                          Person is required.
+                        </mat-error>
+                      </mat-form-field>
+            
+                      <mat-form-field>
+                        <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+                      </mat-form-field>
+            
+                      <mat-form-field>
+                        <span matPrefix>+91 &nbsp;</span>
+                        <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+                        <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
+                          Phone Number is empty or invalid.
+                        </mat-error>
+                      </mat-form-field>
+            
+                      <mat-form-field>
+                        <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+                      </mat-form-field>
+            
+                      <mat-form-field>
+                        <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+                        <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                          Email is required.
+                        </mat-error>
+                        <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                          Invalid Email.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+            </ng-container>
+          </div>
+
+          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editSchedulingDetails" (click)="moreSchedulingDetails = !moreSchedulingDetails">
+            <span><mat-icon [class.rotate180]="moreSchedulingDetails">expand_more</mat-icon></span> {{moreSchedulingDetails ? 'Less' : 'More'}}
           </button>
-          #{{i + 1}}
-        </div>
-        <div class="card-body">
-          <mat-form-field>
-            <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
-            <mat-error *ngIf="personField.errors && personField.errors.required">
-              Person is required.
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-          </mat-form-field>
-
-          <mat-form-field>
-            <span matPrefix>+91 &nbsp;</span>
-            <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-            <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
-              Phone Number is empty or invalid.
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-            <mat-error *ngIf="emailField.errors && emailField.errors.required">
-              Email is required.
-            </mat-error>
-            <mat-error *ngIf="emailField.errors && emailField.errors.email">
-              Invalid Email.
-            </mat-error>
-          </mat-form-field>
         </div>
       </div>
     </div>
-  </div>
-
-  <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
-  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-</form>
+  </form>
+</div>

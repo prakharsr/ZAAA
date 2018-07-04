@@ -15,10 +15,19 @@ export class MediaHouseComponent implements OnInit {
   
   id: string;
 
-  edit = false;
-
   periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
   mediaTypes = ['Print', 'Air', 'Electronic'];
+
+  editPublicationDetails = false;
+  editPulloutDetails = false;
+  editContactDetails = false;
+  editSchedulingDetails = false;
+
+  morePublicationDetails = false;
+  morePulloutDetails = false;
+  moreContactDetails = false;
+
+  backup = new MediaHouse();
 
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
@@ -31,16 +40,29 @@ export class MediaHouseComponent implements OnInit {
       if (params.has('id')) {
         this.id = params.get('id');
 
-        this.edit = true;
-
         this.route.data.subscribe((data: { mediaHouse: MediaHouse }) => {
           this.mediaHouse = data.mediaHouse;
+          Object.assign(this.backup, this.mediaHouse);
         });
       }
       else {
         this.mediaHouse.mediaType = this.mediaTypes[0];
       }
     });
+  }
+
+  private stopEditing() {
+    this.editPublicationDetails = false;
+    this.editPulloutDetails = false;
+    this.editContactDetails = false;
+    this.editSchedulingDetails = false;
+  }
+
+  get editing() {
+    return this.editPublicationDetails
+     || this.editPulloutDetails
+     || this.editContactDetails
+     || this.editSchedulingDetails;
   }
 
   addScheduling() {
@@ -59,45 +81,26 @@ export class MediaHouseComponent implements OnInit {
     this.mediaHouse.scheduling.splice(i, 1);
   }
   
-  private goBack() {
-    this.router.navigateByUrl(this.edit ? '/dir/media_houses/' + this.id : '/dir/media_houses');
-  }
-
-  private createMediaHouse() {
+  submit () {
     this.api.createMediaHouse(this.mediaHouse).subscribe(
       data => {
         if (data.success) {
-          this.goBack();
+          this.notifications.show("Saved");
+          this.stopEditing();
+          Object.assign(this.backup, this.mediaHouse);
         }
         else {
+          console.log(data);
           this.notifications.show(data.msg);
         }
       }
     )
-  }
-
-  private editMediaHouse() {
-    this.api.editMediaHouse(this.mediaHouse).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
-  submit () {
-    if (this.edit) {
-      this.editMediaHouse();
-    }
-    else this.createMediaHouse();
   }
 
   cancel() {
-    this.goBack();
+    this.stopEditing();
+
+    Object.assign(this.backup, this.mediaHouse);
   }
 
 }
