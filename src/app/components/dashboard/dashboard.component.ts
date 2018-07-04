@@ -41,27 +41,29 @@ export class DashboardComponent implements OnInit {
 
     this.duesData = this.dashboardApi.getDuesData();
 
-    this.dashboardApi.getPaymentsData().subscribe(data => {
-      this.payments1.show = true;
+    this.updatePayments();
 
+    this.mhiData = this.dashboardApi.getMhiData();
+  }
+
+  private updatePayments() {
+    this.dashboardApi.getPaymentsData().subscribe(data => {      
       let total1 = data.collectedAmount + data.shadow + data.completed;
-
+      
       if (total1 != 0) {
+        this.payments1.show = true;
         this.payments1.collected = data.collectedAmount * 100 / total1;
         this.payments1.shadow = data.shadow * 100 / total1;
         this.payments1.completed = data.completed * 100 / total1;
       }
 
       let total2 = data.collectedAmount + data.pendingAmount;
-
+      
       if (total2 != 0) {
         this.payments2.show = true;
         this.payments2.received = data.collectedAmount * 100 / total2;
         this.payments2.pending = data.pendingAmount * 100 / total2;
       }
     });
-
-    this.mhiData = this.dashboardApi.getMhiData();
   }
-
 }
