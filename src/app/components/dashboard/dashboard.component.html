@@ -1,50 +1,179 @@
-<mat-toolbar>  
-    <mat-toolbar-row>
-        <div class="container">Dashboard</div>
-    </mat-toolbar-row>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="container">Dashboard</div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
+<br>
+
 <div class="container">
-    <br>
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-primary" routerLink="/profile">Manage Profile</a>
+  <div class="row">
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Invoices</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" [style.width]="invoices1.generated + '%'"></div>
+            <div class="progress-bar bg-warning" [style.width]="invoices1.pending + '%'"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-success small">Generated</div>
+            <div class="col-auto text-warning small">Pending</div>
+          </div>
+
+          <br>
+
+          <div class="progress">
+            <div class="progress-bar bg-warning" style="width: 65%"></div>
+            <div class="progress-bar progress-bar-striped" style="width: 35%"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-warning small">Due</div>
+            <div class="col-auto text-primary small">Overdue</div>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-success" routerLink="/firm">Firm Profile</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-warning" routerLink="/coUsers">Co-Users</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-info" routerLink="/dir">Directory</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-danger" routerLink="/ratecards">Rate Cards</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-primary" routerLink="/releaseorders">Release Orders</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-success" routerLink="/releaseorders/check">Insertion Check</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-warning" routerLink="/invoices">Invoices</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-info" routerLink="/receipts">Payment Receipts</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="admin">
-            <a class="btn btn-danger" routerLink="/templates">Templates</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-dark" routerLink="/accounts">Accounts</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-outline-info" routerLink="/reports">Reports</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-outline-success" routerLink="/tickets">Tickets</a>
-        </div> 
+      </div>
     </div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Sales <small>(Release Orders)</small></h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Payments</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+            </div>
+          </div>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped" [style.width]="payments1.collected + '%'"></div>
+              <div class="progress-bar bg-warning" [style.width]="payments1.shadow + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [style.width]="payments1.completed + '%'"></div>
+            </div>
+
+            <div class="row">
+              <div class="col text-primary small">Collected</div>
+              <div class="col text-warning small">Shadow</div>
+              <div class="col-auto text-success small">Completed</div>
+            </div>
+          </ng-container>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar bg-warning" [style.width]="payments2.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [style.width]="payments1.received + '%'"></div>
+            </div>
+          </ng-container>
+
+          <div class="row">
+            <div class="col text-warning small">Pending</div>
+            <div class="col-auto text-success small">Received</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Sales <small>(Media House Invoices)</small></h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+            </div>
+          </div>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar bg-warning" [style.width]="mhi1.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [style.width]="mhi1.received + '%'"></div>
+            </div>
+
+            <div class="row">
+              <div class="col text-warning small">Pending</div>
+              <div class="col-auto text-success small">Received</div>
+            </div>
+          </ng-container>
+
+          <br>
+
+          <h6>Payments</h6>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" style="width: 65%"></div>
+            <div class="progress-bar bg-warning" style="width: 35%"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-success small">Paid</div>
+            <div class="col-auto text-warning small">Unpaid</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+<div class="container links">
+  <a class="btn btn-outline-primary" routerLink="/profile">Manage Profile</a>
+  <a class="btn btn-outline-success" routerLink="/firm">Firm Profile</a>
+  <a class="btn btn-outline-warning" routerLink="/coUsers">Co-Users</a>
+  <a class="btn btn-outline-info" routerLink="/dir">Directory</a>
+  <a class="btn btn-outline-danger" routerLink="/ratecards">Rate Cards</a>
+  <a class="btn btn-outline-primary" routerLink="/releaseorders">Release Orders</a>
+  <a class="btn btn-outline-success" routerLink="/releaseorders/check">Insertion Check</a>
+  <a class="btn btn-outline-warning" routerLink="/invoices">Invoices</a>
+  <a class="btn btn-outline-info" routerLink="/receipts">Payment Receipts</a>
+  <a class="btn btn-outline-danger" *ngIf="admin" routerLink="/templates">Templates</a>
+  <a class="btn btn-outline-dark" routerLink="/accounts">Accounts</a>
+  <a class="btn btn-outline-info" routerLink="/reports">Reports</a>
+  <a class="btn btn-outline-success" routerLink="/tickets">Tickets</a>
+</div>
+
+<div class="container-fluid">
+  <br><br><br>
+
+  <div><pre>{{duesData | async | json}}</pre></div>
 </div>
