@@ -6,13 +6,11 @@ import {
 
   ClientListComponent,
   ClientComponent,
-  ClientDetailsComponent,
   ClientResolver,
   ClientListResolver,
 
   ExecutiveListComponent,
   ExecutiveComponent,
-  ExecutiveDetailsComponent,
   ExecutiveResolver,
   ExecutiveListResolver,
 
@@ -44,15 +42,8 @@ const routes: Routes = [
           },
           { path: 'new', component: ClientComponent },
           {
-            path: 'edit/:id',
-            component: ClientComponent,
-            resolve: {
-              client: ClientResolver
-            }
-          },
-          {
             path: ':id',
-            component: ClientDetailsComponent,
+            component: ClientComponent,
             resolve: {
               client: ClientResolver
             }
@@ -78,16 +69,8 @@ const routes: Routes = [
             }
           },
           {
-            path: 'edit/:id',
-            component: ExecutiveComponent,
-            resolve: {
-              executive: ExecutiveResolver,
-              firm: FirmResolver
-            }
-          },
-          {
             path: ':id',
-            component: ExecutiveDetailsComponent,
+            component: ExecutiveComponent,
             resolve: {
               executive: ExecutiveResolver
             }

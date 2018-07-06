@@ -7,14 +7,12 @@ import {
 
   ClientListComponent,
   ClientComponent,
-  ClientDetailsComponent,
   ClientResolver,
   ClientListResolver,
   ClientApiService,
 
   ExecutiveListComponent,
   ExecutiveComponent,
-  ExecutiveDetailsComponent,
   ExecutiveResolver,
   ExecutiveListResolver,
   ExecutiveApiService,
@@ -37,9 +35,7 @@ import {
     MediaHouseComponent,
     DirComponent,
     ClientListComponent,
-    ClientDetailsComponent,
     ExecutiveListComponent,
-    ExecutiveDetailsComponent,
     MediaHouseListComponent
   ],
   providers: [
