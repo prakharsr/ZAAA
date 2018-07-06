@@ -25,12 +25,12 @@
 
             <ng-container *ngIf="!editExecutiveDetails">
               <div class="mb-3">
-                <div class="text-muted small">Organization Name</div>
-                <div>{{executive.orgName || '--'}}</div>
-              </div>          
-              <div class="mb-3">
                 <div class="text-muted small">Executive Name</div>
                 <div>{{executive.executiveName || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Organization Name</div>
+                <div>{{executive.orgName || '--'}}</div>
               </div>
               <div class="mb-3">
                 <div class="text-muted small">Designation</div>
@@ -128,9 +128,10 @@
               </div>              
               <div class="mb-3">
                 <div class="text-muted small">Profile Picture</div>
+                <br>
                 <img [src]="executive.photo" class="img-fluid max-w-200">
   
-                <br>
+                <br><br>
                 
                 <label for="profile-upload" class="btn btn-outline-info">
                     Upload
