@@ -21,7 +21,6 @@ import {
 
   MediaHouseListComponent,
   MediaHouseComponent,
-  MediaHouseDetailsComponent,
   MediaHouseResolver,
   MediaHouseListResolver,
   MediaHouseApiService
@@ -41,8 +40,7 @@ import {
     ClientDetailsComponent,
     ExecutiveListComponent,
     ExecutiveDetailsComponent,
-    MediaHouseListComponent,
-    MediaHouseDetailsComponent
+    MediaHouseListComponent
   ],
   providers: [
     ClientApiService,

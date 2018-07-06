@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { StateApiService, NotificationService } from 'app/services';
@@ -13,9 +13,10 @@ import { Observable } from 'rxjs/Observable';
 export class MediaHouseComponent implements OnInit {
 
   mediaHouse = new MediaHouse();
+  backup = new MediaHouse();
   
   id: string;
-  edit = false;
+  new = false;
 
   MainPullout = new Pullout();
 
@@ -31,9 +32,7 @@ export class MediaHouseComponent implements OnInit {
   morePulloutDetails = false;
   moreContactDetails = false;
   moreSchedulingDetails = false;
-
-  backup = new MediaHouse();
-
+  
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     public stateApi: StateApiService,
@@ -46,7 +45,6 @@ export class MediaHouseComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
-        this.edit = true
 
         this.route.data.subscribe((data: { mediaHouse: MediaHouse }) => {
           this.mediaHouse = data.mediaHouse;
@@ -54,8 +52,11 @@ export class MediaHouseComponent implements OnInit {
         });
       }
       else {
+        this.new = true;
         this.mediaHouse.mediaType = this.mediaTypes[0];
         this.addMainPullout();
+
+        this.editPublicationDetails = this.editPulloutDetails = this.editContactDetails = this.editSchedulingDetails = true;
       }
     });
   }
@@ -97,10 +98,10 @@ export class MediaHouseComponent implements OnInit {
   submit () {
     let base: Observable<any>;
 
-    if (this.edit) {
-      base = this.api.editMediaHouse(this.mediaHouse);
+    if (this.new) {
+      base = this.api.createMediaHouse(this.mediaHouse);
     }
-    else base = this.api.createMediaHouse(this.mediaHouse);
+    else base = this.api.editMediaHouse(this.mediaHouse);
 
     base.subscribe(
       data => {
@@ -120,11 +121,11 @@ export class MediaHouseComponent implements OnInit {
     )
   }
 
-
   cancel() {
     this.stopEditing();
 
     Object.assign(this.mediaHouse, this.backup);
   }
 
+  cancelCreate() {}
 }

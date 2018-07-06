@@ -18,7 +18,6 @@ import {
 
   MediaHouseListComponent,
   MediaHouseComponent,
-  MediaHouseDetailsComponent,
   MediaHouseResolver,
   MediaHouseListResolver
 } from '.';
@@ -127,15 +126,8 @@ const routes: Routes = [
           },
           { path: 'new', component: MediaHouseComponent },
           {
-            path: 'edit/:id',
-            component: MediaHouseComponent,
-            resolve: {
-              mediaHouse: MediaHouseResolver
-            }
-          },
-          {
             path: ':id',
-            component: MediaHouseDetailsComponent,
+            component: MediaHouseComponent,
             resolve: {
               mediaHouse: MediaHouseResolver
             }

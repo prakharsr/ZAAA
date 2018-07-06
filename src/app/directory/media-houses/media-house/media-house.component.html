@@ -1,9 +1,3 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container"><span class="text-muted mx-2">Media House Details</span></div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <div class="container">
   <br>
 
@@ -19,7 +13,7 @@
               <div class="col-auto" *ngIf="!editPublicationDetails && !editing">
                 <button mat-icon-button (click)="editPublicationDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
-              <ng-container *ngIf="editPublicationDetails">
+              <ng-container *ngIf="editPublicationDetails && !new">
                 <div class="col-auto">
                   <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
@@ -31,13 +25,13 @@
 
             <ng-container *ngIf="!editPublicationDetails">
               <div class="mb-3">
+                <div class="text-muted small">Publisher Name</div>
+                <div>{{mediaHouse.pubName || '--'}}</div>
+              </div>          
+              <div class="mb-3">
                 <div class="text-muted small">Organization Name</div>
                 <div>{{mediaHouse.orgName || '--'}}</div>
               </div>
-              <div class="mb-3">
-                <div class="text-muted small">Publisher Name</div>
-                <div>{{mediaHouse.pubName || '--'}}</div>
-              </div>              
               <div class="mb-3">
                 <div class="text-muted small">Nick Name</div>
                 <div>{{mediaHouse.nickName || '--'}}</div>
@@ -123,7 +117,7 @@
       </div>
 
       <div class="col-lg col-md-6">
-        <div class="card mb-5 mat-elevation-z3">
+        <div class="card mb-5 mat-elevation-z3 h-extend">
           <div class="card-body" [class.h-limit]="!morePulloutDetails && !editPulloutDetails">
             <div class="row">
               <div class="col align-self-center">
@@ -132,7 +126,7 @@
               <div class="col-auto" *ngIf="!editPulloutDetails && !editing">
                 <button mat-icon-button (click)="editPulloutDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
-              <ng-container *ngIf="editPulloutDetails">
+              <ng-container *ngIf="editPulloutDetails && !new">
                 <div class="col-auto">
                   <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
@@ -167,15 +161,8 @@
             </ng-container>
 
             <ng-container *ngIf="editPulloutDetails && mediaHouse.mediaType == 'Print'">
-              <div class="row">
-                <div class="col">
-                  <h4>Pullouts ({{mediaHouse.pullouts.length}})</h4>
-                </div>
-                <div class="col-auto">
-                  <button type="button" (click)="addPullouts()" class="btn btn-outline-info">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </div>
+              <div class="text-muted">
+                {{mediaHouse.pullouts.length || 'No'}} Pullout(s)
               </div>
       
               <br>
@@ -209,6 +196,10 @@
                   </button>
                 </div>
               </div>
+
+              <button mat-raised-button type="button" color="primary" (click)="addPullouts()">
+                <mat-icon>add</mat-icon> Add More
+              </button>
             </ng-container>
           </div>
 
@@ -230,7 +221,7 @@
               <div class="col-auto" *ngIf="!editContactDetails && !editing">
                 <button mat-icon-button (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
-              <ng-container *ngIf="editContactDetails">
+              <ng-container *ngIf="editContactDetails && !new">
                 <div class="col-auto">
                   <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
@@ -330,7 +321,7 @@
       </div>
       
       <div class="col-lg col-md-6">
-        <div class="card mb-5 mat-elevation-z3">
+        <div class="card mb-5 mat-elevation-z3 h-extend">
           <div class="card-body" [class.h-limit]="!moreSchedulingDetails && !editSchedulingDetails">
             <div class="row">
               <div class="col align-self-center">
@@ -339,7 +330,7 @@
               <div class="col-auto" *ngIf="!editSchedulingDetails && !editing">
                 <button mat-icon-button (click)="editSchedulingDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
-              <ng-container *ngIf="editSchedulingDetails">
+              <ng-container *ngIf="editSchedulingDetails && !new">
                 <div class="col-auto">
                   <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
                   <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
@@ -350,6 +341,10 @@
             <br>
 
             <ng-container *ngIf="!editSchedulingDetails">
+              <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
+                No Schedulings
+              </div>
+
               <div *ngFor="let scheduling of mediaHouse.scheduling; index as i">
                 <div class="mb-3">
                   <div class="text-muted small">#{{i + 1}}</div>
@@ -377,72 +372,59 @@
               </div>
             </ng-container>
   
-            <ng-container *ngIf="editSchedulingDetails">
-              <div class="col-md">
-                <br>
-          
-                <div class="row">
-                  <div class="col">
-                    <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
-                  </div>
-                  <div class="col-auto">
-                    <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
-                      <mat-icon>add</mat-icon>
-                    </button>
-                  </div>
+            <ng-container *ngIf="editSchedulingDetails">       
+              <div class="text-muted">
+                {{mediaHouse.scheduling.length || 'No'}} Scheduling(s)
+              </div>
+
+              <br>
+        
+              <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
+                <div class="card-header">
+                  <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  #{{i + 1}}
                 </div>
-                
-                <br>
-                
-                <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
-                  No Schedulings
-                </div>
-          
-                <br>
-          
-                <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
-                  <div class="card-header">
-                    <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    #{{i + 1}}
-                  </div>
-                  <div class="card-body">
-                    <mat-form-field>
-                      <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
-                      <mat-error *ngIf="personField.errors && personField.errors.required">
-                        Person is required.
-                      </mat-error>
-                    </mat-form-field>
-          
-                    <mat-form-field>
-                      <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-                    </mat-form-field>
-          
-                    <mat-form-field>
-                      <span matPrefix>+91 &nbsp;</span>
-                      <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-                      <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
-                        Phone Number is empty or invalid.
-                      </mat-error>
-                    </mat-form-field>
-          
-                    <mat-form-field>
-                      <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
-                    </mat-form-field>
-          
-                    <mat-form-field>
-                      <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-                      <mat-error *ngIf="emailField.errors && emailField.errors.required">
-                        Email is required.
-                      </mat-error>
-                      <mat-error *ngIf="emailField.errors && emailField.errors.email">
-                        Invalid Email.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+                <div class="card-body">
+                  <mat-form-field>
+                    <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
+                    <mat-error *ngIf="personField.errors && personField.errors.required">
+                      Person is required.
+                    </mat-error>
+                  </mat-form-field>
+        
+                  <mat-form-field>
+                    <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+                  </mat-form-field>
+        
+                  <mat-form-field>
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+                    <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
+                      Phone Number is empty or invalid.
+                    </mat-error>
+                  </mat-form-field>
+        
+                  <mat-form-field>
+                    <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+                  </mat-form-field>
+        
+                  <mat-form-field>
+                    <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+                    <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                      Email is required.
+                    </mat-error>
+                    <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                      Invalid Email.
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
+
+              <button mat-raised-button type="button" color="primary" (click)="addScheduling()">
+                <mat-icon>add</mat-icon> Add More
+              </button>
             </ng-container>
           </div>
 
@@ -453,7 +435,9 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
-    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    <ng-container *ngIf="new">
+      <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+      <button class="btn btn-danger" type="button" (click)="cancelCreate()">Cancel</button>
+    </ng-container>
   </form>
 </div>
