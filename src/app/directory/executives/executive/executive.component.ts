@@ -4,7 +4,6 @@ import { Executive } from '../executive';
 import { Firm } from 'app/models';
 import { ExecutiveApiService } from '../executive-api.service';
 import { NotificationService } from 'app/services';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-executive',
@@ -16,7 +15,6 @@ export class ExecutiveComponent implements OnInit {
   executive = new Executive();
   firm: Firm;
   backup = new Executive();
-  // dobModel;
 
   id: string;
   new = false;
@@ -63,62 +61,40 @@ export class ExecutiveComponent implements OnInit {
      || this.editContactDetails
   }
 
-  private goBack() {
-    this.router.navigateByUrl(this.new ? '/dir/executives/' + this.id : '/dir/executives');
-  }
-
-  private createExecutive() {
-    this.api.createExecutive(this.executive).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
-  private editExecutive() {
-    this.api.editExecutive(this.executive).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
   submit() {
-    let base: Observable<any>;
-
     if (this.new) {
-      base = this.api.createExecutive(this.executive);
+      this.api.createExecutive(this.executive).subscribe(
+        data => {
+          if (data.success) {
+            this.goToList();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
+        }
+      );
     }
-    else base = this.api.editExecutive(this.executive);
-
-    base.subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show("Saved");
-        
-          this.stopEditing();
-        
-          Object.assign(this.backup, this.executive);
-        }
-        else {
-          console.log(data);
+    else {
+      this.api.editExecutive(this.executive).subscribe(
+        data => {
+          if (data.success) {
+            this.notifications.show("Saved");
           
-          this.notifications.show(data.msg);
+            this.stopEditing();
+          
+            Object.assign(this.backup, this.executive);
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
         }
-      }
-    )
+      );
+    }
   }
-
 
   cancel() {
     this.stopEditing();
@@ -126,8 +102,11 @@ export class ExecutiveComponent implements OnInit {
     Object.assign(this.executive, this.backup);
   }
 
-  cancelCreate() {
-    this.goBack();
+  private goToList() {
+    this.router.navigateByUrl('/dir/executives');
   }
 
+  cancelCreate() {
+    this.goToList();
+  }
 }
