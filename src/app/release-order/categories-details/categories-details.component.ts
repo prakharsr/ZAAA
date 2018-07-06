@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Address } from 'app/models';
 
 // Prevent circular dependency
 import { StateApiService } from 'app/services/state-api.service';
