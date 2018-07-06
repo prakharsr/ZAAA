@@ -275,51 +275,51 @@
                 </mat-error>
               </mat-form-field>
           
-                <mat-form-field>
-                  <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
-                  <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
-                    Pincode is required.
-                  </mat-error>
-                  <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
-                    Pincode should be 6 characters long.
-                  </mat-error>
-                </mat-form-field>
-          
-                <mat-form-field>
-                  <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
-                  <mat-error *ngIf="cityField.errors && cityField.errors.required">
-                    City is required.
-                  </mat-error>
-                </mat-form-field>
-          
-                <mat-form-field>
-                  <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
-                    <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="stateField.errors && stateField.errors.required">
-                    State is required.
-                  </mat-error>
-                </mat-form-field>
-          
-                <div class="form-row">
-                  <div class="col-4">
-                    <mat-form-field>
-                      <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
-                    </mat-form-field>
-                  </div>
-                  <div class="col-8">
-                    <mat-form-field>
-                      <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
-                    </mat-form-field>
-                  </div>
+              <mat-form-field>
+                <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
+                <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
+                  Pincode is required.
+                </mat-error>
+                <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
+                  Pincode should be 6 characters long.
+                </mat-error>
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
+                <mat-error *ngIf="cityField.errors && cityField.errors.required">
+                  City is required.
+                </mat-error>
+              </mat-form-field>
+        
+              <mat-form-field>
+                <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="stateField.errors && stateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+        
+              <div class="form-row">
+                <div class="col-4">
+                  <mat-form-field>
+                    <input matInput type="tel" minlength="3" maxlength="5" name="officeStdNo" placeholder="STD No" [(ngModel)]="mediaHouse.officeStdNo" #officeStdNoField="ngModel">
+                  </mat-form-field>
                 </div>
+                <div class="col-8">
+                  <mat-form-field>
+                    <input matInput type="tel" minlength="6" maxlength="8" name="officeLandLine" placeholder="Office Landline Number" [(ngModel)]="mediaHouse.officeLandLine" #officeLandLineField="ngModel">
+                  </mat-form-field>
+                </div>
+              </div>
 
-                <mat-form-field>
-                  <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
-                  <mat-error *ngIf="editionField.errors && editionField.errors.required">
-                    Edition is required.
-                  </mat-error>
-                </mat-form-field>
+              <mat-form-field>
+                <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
+                <mat-error *ngIf="editionField.errors && editionField.errors.required">
+                  Edition is required.
+                </mat-error>
+              </mat-form-field>
             </ng-container>
           </div>
 
@@ -350,101 +350,99 @@
             <br>
 
             <ng-container *ngIf="!editSchedulingDetails">
-                <div *ngFor="let scheduling of mediaHouse.scheduling; index as i">
-                  <div class="mb-3">
-                    <div class="text-muted small">#{{i + 1}}</div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="text-muted small">Person</div>
-                    <div>{{scheduling.person || '--'}}</div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="text-muted small">Designation</div>
-                    <div>{{scheduling.designation || '--'}}</div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="text-muted small">Desk Extension</div>
-                    <div>{{scheduling.deskExtension || '--'}}</div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="text-muted small">Mobile</div>
-                    <div>{{scheduling.mobileNo || '--'}}</div>
-                  </div>
-                  <div class="mb-3">
-                    <div class="text-muted small">Email</div>
-                    <div>{{scheduling.email || '--'}}</div>
-                  </div>
+              <div *ngFor="let scheduling of mediaHouse.scheduling; index as i">
+                <div class="mb-3">
+                  <div class="text-muted small">#{{i + 1}}</div>
                 </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Person</div>
+                  <div>{{scheduling.person || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Designation</div>
+                  <div>{{scheduling.designation || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Desk Extension</div>
+                  <div>{{scheduling.deskExtension || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Mobile</div>
+                  <div>{{scheduling.mobileNo || '--'}}</div>
+                </div>
+                <div class="mb-3">
+                  <div class="text-muted small">Email</div>
+                  <div>{{scheduling.email || '--'}}</div>
+                </div>
+              </div>
             </ng-container>
   
             <ng-container *ngIf="editSchedulingDetails">
-  
               <div class="col-md">
-                  <br>
-            
-                  <div class="row">
-                    <div class="col">
-                      <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
-                    </div>
-                    <div class="col-auto">
-                      <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
-                        <mat-icon>add</mat-icon>
-                      </button>
-                    </div>
+                <br>
+          
+                <div class="row">
+                  <div class="col">
+                    <h4>Scheduling ({{mediaHouse.scheduling.length}})</h4>
                   </div>
-                  
-                  <br>
-                  
-                  <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
-                    No Schedulings
-                  </div>
-            
-                  <br>
-            
-                  <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
-                    <div class="card-header">
-                      <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      #{{i + 1}}
-                    </div>
-                    <div class="card-body">
-                      <mat-form-field>
-                        <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
-                        <mat-error *ngIf="personField.errors && personField.errors.required">
-                          Person is required.
-                        </mat-error>
-                      </mat-form-field>
-            
-                      <mat-form-field>
-                        <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-                      </mat-form-field>
-            
-                      <mat-form-field>
-                        <span matPrefix>+91 &nbsp;</span>
-                        <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-                        <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
-                          Phone Number is empty or invalid.
-                        </mat-error>
-                      </mat-form-field>
-            
-                      <mat-form-field>
-                        <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
-                      </mat-form-field>
-            
-                      <mat-form-field>
-                        <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-                        <mat-error *ngIf="emailField.errors && emailField.errors.required">
-                          Email is required.
-                        </mat-error>
-                        <mat-error *ngIf="emailField.errors && emailField.errors.email">
-                          Invalid Email.
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
+                  <div class="col-auto">
+                    <button type="button" (click)="addScheduling()" class="btn btn-outline-info">
+                      <mat-icon>add</mat-icon>
+                    </button>
                   </div>
                 </div>
-
+                
+                <br>
+                
+                <div class="text-muted" *ngIf="mediaHouse.scheduling.length == 0">
+                  No Schedulings
+                </div>
+          
+                <br>
+          
+                <div *ngFor="let item of mediaHouse.scheduling; index as i" class="card mb-4">
+                  <div class="card-header">
+                    <button class="btn btn-outline-danger float-right" type="button" (click)="removeScheduling(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    #{{i + 1}}
+                  </div>
+                  <div class="card-body">
+                    <mat-form-field>
+                      <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
+                      <mat-error *ngIf="personField.errors && personField.errors.required">
+                        Person is required.
+                      </mat-error>
+                    </mat-form-field>
+          
+                    <mat-form-field>
+                      <input matInput type="text" id="designation-{{i}}" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+                    </mat-form-field>
+          
+                    <mat-form-field>
+                      <span matPrefix>+91 &nbsp;</span>
+                      <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
+                      <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
+                        Phone Number is empty or invalid.
+                      </mat-error>
+                    </mat-form-field>
+          
+                    <mat-form-field>
+                      <input matInput type="text" id="deskExtension-{{i}}" name="s-{{i}}-deskExtension" placeholder="Desk Extension" [(ngModel)]="item.deskExtension" #deskExtensionField="ngModel">
+                    </mat-form-field>
+          
+                    <mat-form-field>
+                      <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+                      <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                        Email is required.
+                      </mat-error>
+                      <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                        Invalid Email.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
             </ng-container>
           </div>
 
@@ -455,7 +453,7 @@
       </div>
     </div>
 
-  <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
-  <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
+    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
   </form>
 </div>

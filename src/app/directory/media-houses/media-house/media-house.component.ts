@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { StateApiService, NotificationService } from 'app/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-media-house',
@@ -16,7 +17,7 @@ export class MediaHouseComponent implements OnInit {
   id: string;
   edit = false;
 
-  MainPullout = new Pullout;
+  MainPullout = new Pullout();
 
   periods = ['Daily', 'Weekly', 'BiWeekly', 'Monthly'];
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -29,14 +30,17 @@ export class MediaHouseComponent implements OnInit {
   morePublicationDetails = false;
   morePulloutDetails = false;
   moreContactDetails = false;
+  moreSchedulingDetails = false;
 
   backup = new MediaHouse();
 
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
-    private router: Router,
     public stateApi: StateApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService) {
+   
+    this.MainPullout.Name = 'Main';
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -75,7 +79,6 @@ export class MediaHouseComponent implements OnInit {
   }
 
   addMainPullout() {
-    this.MainPullout.Name = 'Main';
     this.mediaHouse.pullouts.push(this.MainPullout);
   }
 
@@ -90,51 +93,38 @@ export class MediaHouseComponent implements OnInit {
   removeScheduling(i: number) {
     this.mediaHouse.scheduling.splice(i, 1);
   }
-  
-  private createMediaHouse() {
-    this.api.createMediaHouse(this.mediaHouse).subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show("Saved");
-          this.stopEditing();
-          Object.assign(this.backup, this.mediaHouse);
-        }
-        else {
-          console.log(data);
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
-  private editMediaHouse() {
-    this.api.editMediaHouse(this.mediaHouse).subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show("Saved");
-          this.stopEditing();
-          Object.assign(this.backup, this.mediaHouse);
-        }
-        else {
-          console.log(data);
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
 
   submit () {
+    let base: Observable<any>;
+
     if (this.edit) {
-      this.editMediaHouse();
+      base = this.api.editMediaHouse(this.mediaHouse);
     }
-    else this.createMediaHouse();
+    else base = this.api.createMediaHouse(this.mediaHouse);
+
+    base.subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show("Saved");
+        
+          this.stopEditing();
+        
+          Object.assign(this.backup, this.mediaHouse);
+        }
+        else {
+          console.log(data);
+          
+          this.notifications.show(data.msg);
+        }
+      }
+    )
   }
 
 
   cancel() {
     this.stopEditing();
 
-    Object.assign(this.backup, this.mediaHouse);
+    Object.assign(this.mediaHouse, this.backup);
   }
 
 }
