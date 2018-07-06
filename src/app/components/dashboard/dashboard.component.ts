@@ -13,7 +13,14 @@ export class DashboardComponent implements OnInit {
   admin: boolean;
 
   duesData;
-  roChartData;
+
+  roChartResults: {
+    name: string,
+    series: {
+      name: any,
+      value: number
+    }[]
+  }[];
 
   invoices1 = {
     generated: 0,
@@ -45,7 +52,6 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dashboardApi.getInvoiceData().subscribe(data => {
-      console.log(data);
       if (data.count != 0) {
         this.invoices1.generated = data.generated * 100 / data.count;
         this.invoices1.pending = 100 - this.invoices1.generated;
@@ -54,7 +60,36 @@ export class DashboardComponent implements OnInit {
 
     this.duesData = this.dashboardApi.getDuesData();
 
-    this.roChartData = this.dashboardApi.getRoChartData();
+    this.dashboardApi.getRoChartData().subscribe(data => {
+      if (data.success) {
+        this.roChartResults = [
+          {
+            name: 'Generated',
+            series: []
+          },
+          {
+            name: 'Total',
+            series: []
+          }
+        ];
+
+        let d : {
+          _id: {
+            day: string,
+            month: string,
+            year: string
+          },
+          count: number,
+          totalAmount: number,
+          generated: number
+        }[] = data.releaseOrders;
+
+        d.forEach(element => {
+          this.roChartResults[0].series.push({ name: element._id.day, value: element.generated });
+          this.roChartResults[1].series.push({ name: element._id.day, value: element.totalAmount });
+        });
+      }
+    });
 
     this.updatePayments();
 

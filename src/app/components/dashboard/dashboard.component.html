@@ -57,6 +57,13 @@
               <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
             </div>
           </div>
+
+          <ngx-charts-line-chart [results]="roChartResults"
+            [view]="[400, 300]"
+            [xAxis]="true"
+            [yAxis]="true"
+            [autoScale]="true">
+          </ngx-charts-line-chart>
         </div>
       </div>
     </div>
@@ -176,5 +183,4 @@
   <br><br><br>
 
   <div><pre>{{duesData | async | json}}</pre></div>
-  <div><pre>{{roChartData | async | json}}</pre></div>
 </div>
