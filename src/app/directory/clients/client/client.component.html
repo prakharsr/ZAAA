@@ -195,7 +195,7 @@
   
             <ng-container *ngIf="editContactDetails">
               <mat-form-field>
-                <input matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" #addressField="ngModel">
+                <textarea matInput type="text" name="address" placeholder="Address" [(ngModel)]="client.address.address" #addressField="ngModel"></textarea>
               </mat-form-field>
         
               <mat-form-field>
