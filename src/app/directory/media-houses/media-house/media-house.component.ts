@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { StateApiService, NotificationService } from 'app/services';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-media-house',
@@ -14,6 +13,52 @@ export class MediaHouseComponent implements OnInit {
 
   mediaHouse = new MediaHouse();
   backup = new MediaHouse();
+  backupPullouts: Pullout[] = [];
+  backupSchedulings: MediaHouseScheduling[] = [];
+
+  private makeBackup() {
+    Object.assign(this.backup, this.mediaHouse);
+
+    this.backupPullouts = [];
+    this.mediaHouse.pullouts.forEach(pullout => {
+      let item = new Pullout();
+
+      Object.assign(item, pullout);
+
+      this.backupPullouts.push(item);
+    });
+
+    this.backupSchedulings = [];
+    this.mediaHouse.scheduling.forEach(scheduling => {
+      let item = new MediaHouseScheduling();
+
+      Object.assign(item, scheduling);
+
+      this.backupSchedulings.push(item);
+    });
+  }
+
+  private restoreBackup() {
+    Object.assign(this.mediaHouse, this.backup);
+   
+    this.mediaHouse.pullouts = [];
+    this.backupPullouts.forEach(pullout => {
+      let item = new Pullout();
+
+      Object.assign(item, pullout);
+
+      this.mediaHouse.pullouts.push(item);
+    });
+    
+    this.mediaHouse.scheduling = [];
+    this.backupSchedulings.forEach(scheduling => {
+      let item = new MediaHouseScheduling();
+
+      Object.assign(item, scheduling);
+
+      this.mediaHouse.scheduling.push(item);
+    });
+  }
   
   id: string;
   new = false;
@@ -36,7 +81,8 @@ export class MediaHouseComponent implements OnInit {
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     public stateApi: StateApiService,
-    private notifications: NotificationService) {
+    private notifications: NotificationService,
+    private router: Router) {
    
     this.MainPullout.Name = 'Main';
   }
@@ -48,7 +94,7 @@ export class MediaHouseComponent implements OnInit {
 
         this.route.data.subscribe((data: { mediaHouse: MediaHouse }) => {
           this.mediaHouse = data.mediaHouse;
-          Object.assign(this.backup, this.mediaHouse);
+          this.makeBackup();
         });
       }
       else {
@@ -57,6 +103,8 @@ export class MediaHouseComponent implements OnInit {
         this.addMainPullout();
 
         this.editPublicationDetails = this.editPulloutDetails = this.editContactDetails = this.editSchedulingDetails = true;
+
+        this.makeBackup();
       }
     });
   }
@@ -96,36 +144,51 @@ export class MediaHouseComponent implements OnInit {
   }
 
   submit () {
-    let base: Observable<any>;
-
     if (this.new) {
-      base = this.api.createMediaHouse(this.mediaHouse);
+      this.api.createMediaHouse(this.mediaHouse).subscribe(
+        data => {
+          if (data.success) {
+            this.goToList();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
+        }
+      );
     }
-    else base = this.api.editMediaHouse(this.mediaHouse);
-
-    base.subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show("Saved");
-        
-          this.stopEditing();
-        
-          Object.assign(this.backup, this.mediaHouse);
-        }
-        else {
-          console.log(data);
+    else {
+      this.api.editMediaHouse(this.mediaHouse).subscribe(
+        data => {
+          if (data.success) {
+            this.notifications.show("Saved");
           
-          this.notifications.show(data.msg);
+            this.stopEditing();
+          
+            this.makeBackup();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
         }
-      }
-    )
+      );
+    }
   }
 
   cancel() {
     this.stopEditing();
 
-    Object.assign(this.mediaHouse, this.backup);
+    this.restoreBackup();
   }
 
-  cancelCreate() {}
+  private goToList() {
+    this.router.navigateByUrl('/dir/media_houses');
+  }
+
+  cancelCreate() {
+    this.goToList();
+  }
 }
