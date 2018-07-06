@@ -147,185 +147,6 @@
       </div>
 
       <div class="col-lg col-md-6">
-        <div class="card mb-5 mat-elevation-z3 h-extend">
-          <div class="card-body" [class.h-limit]="!moreContactPersonDetails && !editContactPersonDetails">
-            <div class="row">
-              <div class="col align-self-center">
-                <h5>Contact Persons ({{client.contactpersons.length}})</h5>
-              </div>
-              <div class="col-auto">
-                <button type="button" (click)="addContactPerson()" class="btn btn-outline-info">
-                  <mat-icon>add</mat-icon> Add More
-                </button>
-              </div>
-              <div class="col-auto" *ngIf="!editContactPersonDetails && !editing">
-                <button mat-icon-button (click)="editContactPersonDetails = true"><mat-icon>edit</mat-icon></button>
-              </div>
-              <ng-container *ngIf="editContactPersonDetails && !new">
-                <div class="col-auto">
-                  <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
-                  <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
-                </div>
-              </ng-container>
-            </div>
-
-            <br>
-
-            <ng-container *ngIf="!editContactPersonDetails">
-              <div *ngFor="let contactPerson of client.contactpersons; index as i">
-                <div class="mb-3">
-                  <div class="text-muted small">Contact Person {{i + 1}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Name</div>
-                  <div>{{contactPerson.Name || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Designation</div>
-                  <div>{{contactPerson.designation || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Department</div>
-                  <div>{{contactPerson.department || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Mobile</div>
-                  <div>{{contactPerson.mobileNo || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Email</div>
-                  <div>{{contactPerson.email || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Date of Birth</div>
-                  <div>{{contactPerson.dob | date}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Anniversary</div>
-                  <div>{{contactPerson.anniversaryDate | date}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Mobile</div>
-                  <div>{{contactPerson.mobileNo || '--'}}</div>
-                </div>
-                <div class="mb-3">
-                  <div class="text-muted small">Profile Picture</div>
-                  <img [src]="contactPerson.photo" class="img-fluid max-w-200">
-  
-                  <br>
-        
-                  <label for="profile-upload-{{i}}" class="btn btn-outline-info">
-                    Upload
-                  </label>
-                  <input type="file" id="profile-upload-{{i}}" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="editContactPersonDetails">
-              <div *ngIf="client.contactpersons.length == 0" class="text-muted">
-                No Contact Persons
-              </div>
-      
-              <br>
-      
-              <div *ngFor="let item of client.contactpersons; index as i" class="card mb-4">
-                <div class="card-header">
-                  <div class="row">
-                    <div class="col-auto align-self-center text-muted">#{{i + 1}}</div>
-                    <div class="col align-self-center">{{item.name}}</div>
-                    <div class="col-auto">
-                      <button mat-icon-button color="warn" type="button" (click)="removeContactPerson(i)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  
-                  <label>Business Details</label>
-            
-                  <mat-form-field>
-                    <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
-                    <mat-error *ngIf="nameField.errors && nameField.errors.required">
-                      Name is required.
-                    </mat-error>
-                  </mat-form-field>
-                
-                  <mat-form-field>
-                    <input matInput type="text" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
-                  </mat-form-field>
-            
-                  <mat-form-field>
-                    <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
-                    <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
-                      Department is required.
-                    </mat-error>
-                  </mat-form-field>
-
-                  <label>Contact Details</label>
-            
-                  <div class="form-row">
-                    <div class="col-4">
-                      <mat-form-field>
-                        <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
-                        <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
-                          STD No is required.
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-8">
-                      <mat-form-field>
-                        <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="Landline Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
-                        <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
-                          Landline is required.
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                
-                  <mat-form-field>
-                    <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
-                  </mat-form-field>
-            
-                  <mat-form-field>
-                    <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-                    <mat-error *ngIf="emailField.errors && emailField.errors.required">
-                      Email is required.
-                    </mat-error>
-                    <mat-error *ngIf="emailField.errors && emailField.errors.email">
-                      Invalid Email.
-                    </mat-error>
-                  </mat-form-field>
-                   
-                  <label>Personal Details</label>
-
-                  <mat-form-field>
-                    <input matInput [matDatepicker]="dobField" placeholder="DOB" [(ngModel)]="item.dob" name="dob-{{i}}" disabled>
-                    <mat-datepicker-toggle matSuffix [for]="dobField"></mat-datepicker-toggle>
-                    <mat-datepicker #dobField disabled="false"></mat-datepicker>
-                  </mat-form-field>
-            
-                  <mat-form-field>
-                    <input matInput [matDatepicker]="anniversaryDateField" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" name="anniversaryDate-{{i}}" disabled>
-                    <mat-datepicker-toggle matSuffix [for]="anniversaryDateField"></mat-datepicker-toggle>
-                    <mat-datepicker #anniversaryDateField disabled="false"></mat-datepicker>
-                  </mat-form-field>
-                   
-                </div>
-              </div>
-            </ng-container>
-          </div>
-
-          <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editContactPersonDetails" (click)="moreContactPersonDetails = !moreContactPersonDetails">
-            <span><mat-icon [class.rotate180]="moreContactPersonDetails">expand_more</mat-icon></span> {{moreContactPersonDetails ? 'Less' : 'More'}}
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg col-md-6">
         <div class="card mb-5 mat-elevation-z3">
           <div class="card-body" [class.h-limit]="!moreContactDetails && !editContactDetails">
             <div class="row">
@@ -423,6 +244,187 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="card mb-5 mat-elevation-z3 h-extend">
+      <div class="card-body" [class.h-limit]="!moreContactPersonDetails && !editContactPersonDetails">
+        <div class="row">
+          <div class="col align-self-center">
+            <h5>Contact Persons</h5>
+          </div>
+          <div class="col-auto" *ngIf="!editContactPersonDetails && !editing">
+            <button mat-icon-button (click)="editContactPersonDetails = true"><mat-icon>edit</mat-icon></button>
+          </div>
+          <ng-container *ngIf="editContactPersonDetails && !new">
+            <div class="col-auto">
+              <button mat-icon-button class="text-success" type="submit" [disabled]="!dirForm.form.valid"><mat-icon>check</mat-icon></button>
+              <button mat-icon-button class="text-danger" type="button" (click)="cancel()"><mat-icon>close</mat-icon></button>
+            </div>
+          </ng-container>
+        </div>
+
+        <br>
+
+        <ng-container *ngIf="!editContactPersonDetails">
+          <div *ngIf="client.contactpersons.length == 0" class="text-muted">
+            No Contact Persons
+          </div>
+
+          <div *ngFor="let contactPerson of client.contactpersons; index as i">
+            <div class="mb-3">
+              <div class="text-muted small">Contact Person {{i + 1}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Name</div>
+              <div>{{contactPerson.Name || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Designation</div>
+              <div>{{contactPerson.designation || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Department</div>
+              <div>{{contactPerson.department || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Mobile</div>
+              <div>{{contactPerson.mobileNo || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Email</div>
+              <div>{{contactPerson.email || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Date of Birth</div>
+              <div>{{contactPerson.dob | date}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Anniversary</div>
+              <div>{{contactPerson.anniversaryDate | date}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Mobile</div>
+              <div>{{contactPerson.mobileNo || '--'}}</div>
+            </div>
+            <div class="mb-3">
+              <div class="text-muted small">Profile Picture</div>
+              <img [src]="contactPerson.photo" class="img-fluid max-w-200">
+
+              <br>
+    
+              <label for="profile-upload-{{i}}" class="btn btn-outline-info">
+                Upload
+              </label>
+              <input type="file" id="profile-upload-{{i}}" class="hidden-file" accept="image/*" (change)="uploadProfilePicture($event.target.files)"/>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="editContactPersonDetails">
+          <div class="row">
+            <div class="col text-muted">
+              {{client.contactpersons.length || 'No'}} Contact Person(s)
+            </div>
+            <div class="col-auto">
+              <button type="button" mat-raised-button color="primary" (click)="addContactPerson()">
+                <mat-icon>add</mat-icon> Add More
+              </button>
+            </div>
+          </div>
+  
+          <br>
+  
+          <div *ngFor="let item of client.contactpersons; index as i" class="card mb-4">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-auto align-self-center text-muted">#{{i + 1}}</div>
+                <div class="col align-self-center">{{item.name}}</div>
+                <div class="col-auto">
+                  <button mat-icon-button color="warn" type="button" (click)="removeContactPerson(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              
+              <label>Business Details</label>
+        
+              <mat-form-field>
+                <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
+                <mat-error *ngIf="nameField.errors && nameField.errors.required">
+                  Name is required.
+                </mat-error>
+              </mat-form-field>
+            
+              <mat-form-field>
+                <input matInput type="text" name="s-{{i}}-designation" placeholder="Designation" [(ngModel)]="item.designation" #designationField="ngModel">
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
+                <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
+                  Department is required.
+                </mat-error>
+              </mat-form-field>
+
+              <label>Contact Details</label>
+        
+              <div class="form-row">
+                <div class="col-4">
+                  <mat-form-field>
+                    <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
+                    <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                      STD No is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-8">
+                  <mat-form-field>
+                    <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="Landline Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
+                    <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                      Landline is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            
+              <mat-form-field>
+                <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" #mobileNoField="ngModel">
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
+                <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                  Email is required.
+                </mat-error>
+                <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                  Invalid Email.
+                </mat-error>
+              </mat-form-field>
+                
+              <label>Personal Details</label>
+
+              <mat-form-field>
+                <input matInput [matDatepicker]="dobField" placeholder="DOB" [(ngModel)]="item.dob" name="dob-{{i}}" disabled>
+                <mat-datepicker-toggle matSuffix [for]="dobField"></mat-datepicker-toggle>
+                <mat-datepicker #dobField disabled="false"></mat-datepicker>
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput [matDatepicker]="anniversaryDateField" placeholder="Anniversary Date" [(ngModel)]="item.anniversaryDate" name="anniversaryDate-{{i}}" disabled>
+                <mat-datepicker-toggle matSuffix [for]="anniversaryDateField"></mat-datepicker-toggle>
+                <mat-datepicker #anniversaryDateField disabled="false"></mat-datepicker>
+              </mat-form-field>
+                
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <button type="button" class="btn btn-light btn-sm text-info" *ngIf="!editContactPersonDetails" (click)="moreContactPersonDetails = !moreContactPersonDetails">
+        <span><mat-icon [class.rotate180]="moreContactPersonDetails">expand_more</mat-icon></span> {{moreContactPersonDetails ? 'Less' : 'More'}}
+      </button>
     </div>
 
     <ng-container *ngIf="new">
