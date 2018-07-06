@@ -123,6 +123,10 @@ export class MediaHouseComponent implements OnInit {
      || this.editSchedulingDetails;
   }
 
+  private goBack() {
+    this.router.navigateByUrl(this.new ? '/dir/media_houses/' + this.id : '/dir/media_house');
+  }
+
   addScheduling() {
     this.mediaHouse.scheduling.push(new MediaHouseScheduling());
   }
