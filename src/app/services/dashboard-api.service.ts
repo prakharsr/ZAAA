@@ -28,6 +28,10 @@ export class DashboardApiService {
 
   constructor(private api: ApiService) { }
 
+  getRoChartData() {
+    return this.api.post('/user/dashboard/releaseorder', { });
+  }
+
   getInvoiceData() : Observable<InvoiceGenData> {
     return this.api.post('/user/dashboard/invoice', { }).pipe(
       map(data => {

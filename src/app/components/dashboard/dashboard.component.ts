@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   admin: boolean;
 
   duesData;
+  roChartData;
 
   invoices1 = {
     generated: 0,
@@ -52,6 +53,8 @@ export class DashboardComponent implements OnInit {
     });
 
     this.duesData = this.dashboardApi.getDuesData();
+
+    this.roChartData = this.dashboardApi.getRoChartData();
 
     this.updatePayments();
 
