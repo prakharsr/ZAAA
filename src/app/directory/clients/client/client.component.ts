@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ContactPerson } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { StateApiService, NotificationService } from 'app/services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-client',
@@ -12,10 +13,19 @@ import { StateApiService, NotificationService } from 'app/services';
 export class ClientComponent implements OnInit {
 
   client = new Client();
+  backup = new Client();
 
   id: string;
 
-  edit = false;
+  new = false;
+
+  editClientDetails = false;
+  editContactDetails = false;
+  editContactPersonDetails = false;
+
+  moreClientDetails = false;
+  moreContactDetails = false;
+  moreContactPersonDetails = false;
 
   constructor(private api: ClientApiService,
     private route: ActivatedRoute,
@@ -26,56 +36,73 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
-        this.edit = true;
+        this.id = params.get('id');
 
         this.route.data.subscribe((data: { client: Client }) => {
           this.client = data.client;
+          Object.assign(this.backup, this.client);
         });
 
-        this.id = params.get('id');
       }
-      else this.client.contactpersons = [new ContactPerson()];
+      else {
+        this.new = true;
+        this.client.contactpersons = [new ContactPerson()];
+
+        this.editClientDetails = this.editContactDetails = this.editContactPersonDetails = true;
+      } 
+      
     });
   }
 
+  private stopEditing() {
+    this.editClientDetails = false;
+    this.editContactDetails = false;
+    this.editContactPersonDetails = false;
+  }
+
+  get editing() {
+    return this.editClientDetails
+     || this.editContactDetails
+     || this.editContactPersonDetails;
+  }
+
   private goBack() {
-    this.router.navigateByUrl(this.edit ? '/dir/clients/' + this.id : '/dir/clients');
-  }
-
-  private createClient() {
-    this.api.createClient(this.client).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
-  private editClient() {
-    this.api.editClient(this.client).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
+    this.router.navigateByUrl(this.new ? '/dir/clients/' + this.id : '/dir/clients');
   }
 
   submit () {
-    if (this.edit) {
-      this.editClient();
+    let base: Observable<any>;
+
+    if (this.new) {
+      base = this.api.createClient(this.client);
     }
-    else this.createClient();
+    else base = this.api.editClient(this.client);
+
+    base.subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show("Saved");
+        
+          this.stopEditing();
+        
+          Object.assign(this.backup, this.client);
+        }
+        else {
+          console.log(data);
+          
+          this.notifications.show(data.msg);
+        }
+      }
+    )
   }
 
   cancel() {
+    this.stopEditing();
+
+    Object.assign(this.client, this.backup);
+  }
+
+  cancelCreate() {
     this.goBack();
   }
 

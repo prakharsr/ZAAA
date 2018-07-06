@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { StateApiService, NotificationService } from 'app/services';
@@ -36,6 +36,7 @@ export class MediaHouseComponent implements OnInit {
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     public stateApi: StateApiService,
+    private router: Router,
     private notifications: NotificationService) {
    
     this.MainPullout.Name = 'Main';
@@ -73,6 +74,10 @@ export class MediaHouseComponent implements OnInit {
      || this.editPulloutDetails
      || this.editContactDetails
      || this.editSchedulingDetails;
+  }
+
+  private goBack() {
+    this.router.navigateByUrl(this.new ? '/dir/media_houses/' + this.id : '/dir/media_house');
   }
 
   addScheduling() {
@@ -127,5 +132,7 @@ export class MediaHouseComponent implements OnInit {
     Object.assign(this.mediaHouse, this.backup);
   }
 
-  cancelCreate() {}
+  cancelCreate() {
+    this.goBack();
+  }
 }
