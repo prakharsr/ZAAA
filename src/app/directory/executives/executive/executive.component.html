@@ -25,12 +25,12 @@
 
             <ng-container *ngIf="!editExecutiveDetails">
               <div class="mb-3">
-                <div class="text-muted small">Organization Name</div>
-                <div>{{executive.orgName || '--'}}</div>
-              </div>          
-              <div class="mb-3">
                 <div class="text-muted small">Executive Name</div>
                 <div>{{executive.executiveName || '--'}}</div>
+              </div>
+              <div class="mb-3">
+                <div class="text-muted small">Organization Name</div>
+                <div>{{executive.orgName || '--'}}</div>
               </div>
               <div class="mb-3">
                 <div class="text-muted small">Designation</div>
@@ -94,7 +94,7 @@
           <div class="card-body" [class.h-limit]="!moreContactDetails && !editContactDetails">
             <div class="row">
               <div class="col align-self-center">
-                <h5>Contact & Personal Details</h5>
+                <h5>Contact &amp; Personal Details</h5>
               </div>
               <div class="col-auto" *ngIf="!editContactDetails && !editing">
                 <button mat-icon-button (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
@@ -120,17 +120,18 @@
               </div> 
               <div class="mb-3">
                 <div class="text-muted small">Date of Birth</div>
-                <div>{{executive.dob | date}}</div>
+                <div>{{(executive.dob | date) || '--'}}</div>
               </div>
               <div class="mb-3">
                 <div class="text-muted small">Anniversary</div>
-                <div>{{executive.anniversaryDate | date}}</div>
+                <div>{{(executive.anniversaryDate | date) || '--'}}</div>
               </div>              
               <div class="mb-3">
                 <div class="text-muted small">Profile Picture</div>
+                <br>
                 <img [src]="executive.photo" class="img-fluid max-w-200">
   
-                <br>
+                <br><br>
                 
                 <label for="profile-upload" class="btn btn-outline-info">
                     Upload

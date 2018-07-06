@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ContactPerson } from '../client';
 import { ClientApiService } from '../client-api.service';
 import { StateApiService, NotificationService } from 'app/services';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-client',
@@ -14,6 +13,33 @@ export class ClientComponent implements OnInit {
 
   client = new Client();
   backup = new Client();
+  backupContactPersons: ContactPerson[] = [];
+
+  private makeBackup() {
+    Object.assign(this.backup, this.client);
+
+    this.backupContactPersons = [];
+    this.client.contactpersons.forEach(person => {
+      let item = new ContactPerson();
+
+      Object.assign(item, person);
+
+      this.backupContactPersons.push(item);
+    });
+  }
+
+  private restoreBackup() {
+    Object.assign(this.client, this.backup);
+
+    this.client.contactpersons = [];
+    this.backupContactPersons.forEach(person => {
+      let item = new ContactPerson();
+
+      Object.assign(item, person);
+
+      this.client.contactpersons.push(item);
+    });
+  }
 
   id: string;
 
@@ -40,7 +66,7 @@ export class ClientComponent implements OnInit {
 
         this.route.data.subscribe((data: { client: Client }) => {
           this.client = data.client;
-          Object.assign(this.backup, this.client);
+          this.makeBackup();
         });
 
       }
@@ -49,8 +75,9 @@ export class ClientComponent implements OnInit {
         this.client.contactpersons = [new ContactPerson()];
 
         this.editClientDetails = this.editContactDetails = this.editContactPersonDetails = true;
-      } 
-      
+
+        this.makeBackup();
+      }
     });
   }
 
@@ -66,51 +93,60 @@ export class ClientComponent implements OnInit {
      || this.editContactPersonDetails;
   }
 
-  private goBack() {
-    this.router.navigateByUrl(this.new ? '/dir/clients/' + this.id : '/dir/clients');
+  private goToList() {
+    this.router.navigateByUrl('/dir/clients/');
   }
 
   submit () {
-    let base: Observable<any>;
-
     if (this.new) {
-      base = this.api.createClient(this.client);
+      this.api.createClient(this.client).subscribe(
+        data => {
+          if (data.success) {
+            this.goToList();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
+        }
+      );
     }
-    else base = this.api.editClient(this.client);
-
-    base.subscribe(
-      data => {
-        if (data.success) {
-          this.notifications.show("Saved");
-        
-          this.stopEditing();
-        
-          Object.assign(this.backup, this.client);
-        }
-        else {
-          console.log(data);
+    else {
+      this.api.editClient(this.client).subscribe(
+        data => {
+          if (data.success) {
+            this.notifications.show("Saved");
           
-          this.notifications.show(data.msg);
+            this.stopEditing();
+          
+            this.makeBackup();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
         }
-      }
-    )
+      );
+    }
   }
 
   cancel() {
     this.stopEditing();
 
-    Object.assign(this.client, this.backup);
+    this.restoreBackup();
   }
 
   cancelCreate() {
-    this.goBack();
+    this.goToList();
   }
 
   addContactPerson(){
     this.client.contactpersons.push(new ContactPerson());
   }
+
   removeContactPerson(i: number){
     this.client.contactpersons.splice(i, 1);
   }
-
 }
