@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
     collected: 0,
     shadow: 0,
     completed: 0,
+    received: 0
   }
 
   payments2 = {
