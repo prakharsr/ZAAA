@@ -91,6 +91,8 @@ const validators = [
     MailingDetailsComponent,
     DialogComponent,
     BillingDetailsComponent,
+    CategoriesDetailsComponent,
+    InsertionDetailsComponent,
     validators,
     PaginationComponent
   ],
