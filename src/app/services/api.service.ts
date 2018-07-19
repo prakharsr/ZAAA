@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
-import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-import { LoaderService } from './loader.service';
-import { NotificationService } from './notification.service';
 import { environment } from 'environments/environment';
 import { BillingDetails } from 'app/components';
 
@@ -20,117 +16,36 @@ import {
   PageData
 } from 'app/models';
 
-const AuthTokenKey = "auth_token";
+import { AuthTokenManager } from './auth-token-manager.service';
 
 @Injectable()
 export class ApiService {
-  private _authToken: string;
-
-  private get authToken() : string {
-    if (!this._authToken)
-    {
-      this._authToken = localStorage.getItem(AuthTokenKey);
-    }
-
-    return this._authToken;
-  }
+  private authTokenKey = "auth_token";
 
   get isLoggedIn() : boolean {
-    if (this.authToken)
-        return true;
-      
-    return false;
+    return this.authTokenManager.isLoggedIn(this.authTokenKey);
   }
 
-  private set authToken(authToken: string) {
-    if (!authToken) {
-      this._authToken = '';
-      localStorage.removeItem(AuthTokenKey);
-    }
-    else {
-      this._authToken = authToken;
-      localStorage.setItem(AuthTokenKey, authToken);
-    }
+  constructor(private authTokenManager: AuthTokenManager) { }
+
+  post(url: string, body: any, extra = {}) {
+    return this.authTokenManager.post(url, body, this.authTokenKey, extra);
   }
 
-  constructor(private http: HttpClient,
-    private loaderService: LoaderService,
-    private notifications: NotificationService) { }
-
-  private get headers() {
-    return { headers: { Authorization: this.authToken }};
+  patch(url: string, body: any) {
+    return this.authTokenManager.patch(url, body, this.authTokenKey);
   }
 
-  private apply(obj: Observable<any>) {
-    return obj.pipe(
-      retry(2)
-    ).catch(err => {
-      console.log(err);
-
-      this.notifications.show('Connection to ther server failed!');
-
-      return Observable.throw(err);
-    })
-    .finally(() => this.loaderService.hide())  
+  get(url: string) {
+    return this.authTokenManager.get(url, this.authTokenKey);
   }
 
-  post(url: string, body: any, extra = {}) : Observable<any> {
-
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.post(environment.apiUrl + url, body, {
-          ...this.headers,
-          ...extra
-        }));
-    }
-    else {
-      return this.apply(this.http.post(environment.apiUrl + url, body));
-    }
+  delete(url: string) {
+    return this.authTokenManager.delete(url, this.authTokenKey);
   }
 
-  patch(url: string, body: any) : Observable<any> {
-
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.patch(environment.apiUrl + url, body, this.headers));
-    }
-    else {
-      return this.apply(this.http.patch(environment.apiUrl + url, body));
-    }
-  }
-
-  get(url: string) : Observable<any> {
-    
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.get(environment.apiUrl + url, this.headers));
-    }
-    else {
-      return this.apply(this.http.get(environment.apiUrl + url));
-    }
-  }
-
-  delete(url: string) : Observable<any> {
-
-    this.loaderService.show();
-
-    return this.apply(this.http.delete(environment.apiUrl + url, this.headers));
-  }
-
-  fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
-
-    this.loaderService.show();
-
-    const formData = new FormData();
-    formData.append(key, fileToUpload, fileToUpload.name);
-
-    return this.apply(this.http.post(environment.apiUrl + url, formData, this.headers));
+  fileUpload(url: string, key: string, fileToUpload: File) {
+    return this.authTokenManager.fileUpload(url, key, fileToUpload, this.authTokenKey);
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {
@@ -161,7 +76,7 @@ export class ApiService {
     return base.pipe(
       map(data => {
         if (data.success) {
-          this.authToken = data.token;
+          this.authTokenManager.setAuthToken(this.authTokenKey, data.token);
 
           data.token = '';
         }
@@ -194,7 +109,7 @@ export class ApiService {
   }
 
   logout() {
-    this.authToken = '';
+    this.authTokenManager.setAuthToken(this.authTokenKey, '');
   }
 
   get plans() : Observable<any> {

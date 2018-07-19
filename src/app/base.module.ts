@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, Validator }   from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
@@ -45,7 +45,9 @@ import {
   VerifyMultipleOfDirective,
   VerifyEqualsDirective
 } from './validators';
+
 import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
+import { AuthTokenManager } from './services/auth-token-manager.service';
 
 const validators = [
   VerifyEmailDirective,
@@ -67,6 +69,7 @@ const validators = [
     NgxChartsModule
   ],
   providers: [
+    AuthTokenManager,
     ApiService,
     WindowService,
     RazorPayService,
