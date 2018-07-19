@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import {of} from 'rxjs/observable/of';
 import { ReleaseOrder } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { DialogService, NotificationService, WindowService } from 'app/services';
+import { DialogService, NotificationService } from 'app/services';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
@@ -46,8 +44,7 @@ export class ReleaseOrderListComponent implements OnInit {
     private router: Router,
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
-    private executiveApi: ExecutiveApiService,
-    private windowService: WindowService) { }
+    private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }}) => {
@@ -191,11 +188,11 @@ export class ReleaseOrderListComponent implements OnInit {
             console.log(data);
             
             let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
+            let url = URL.createObjectURL(blob);
     
-            let a = this.windowService.window.document.createElement('a');
+            let a = document.createElement('a');
             a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
+            document.body.appendChild(a);
             a.download = 'releaseorder.pdf';
             a.href = url;
             a.click();

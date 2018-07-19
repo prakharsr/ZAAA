@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { Invoice } from '../invoice';
-import { NotificationService, DialogService, WindowService } from 'app/services';
+import { NotificationService, DialogService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from 'app/release-order';
@@ -44,8 +44,7 @@ export class InvoiceListComponent implements OnInit {
     private router: Router,
     private notifications: NotificationService,
     private dialog: DialogService,
-    private api: InvoiceApiService,
-    private windowService: WindowService) { }
+    private api: InvoiceApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<Invoice>, search: ReleaseOrderSearchParams }}) => {
@@ -153,11 +152,11 @@ export class InvoiceListComponent implements OnInit {
         console.log(data);
         
         let blob = new Blob([data], { type: 'application/pdf' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
 
-        let a = this.windowService.window.document.createElement('a');
+        let a = document.createElement('a');
         a.setAttribute('style', 'display:none;');
-        this.windowService.window.document.body.appendChild(a);
+        document.body.appendChild(a);
         a.download = 'invoice.pdf';
         a.href = url;
         a.click();

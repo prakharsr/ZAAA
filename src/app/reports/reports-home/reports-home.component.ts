@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportsApiService } from '../reports-api.service';
 import { Observable } from 'rxjs/Observable';
-import { NotificationService, WindowService } from 'app/services';
+import { NotificationService } from 'app/services';
 
 @Component({
   selector: 'app-reports-home',
@@ -15,8 +15,7 @@ export class ReportsHomeComponent implements OnInit {
   insertionPeriod = 0;
 
   constructor(private api: ReportsApiService,
-    private notifications: NotificationService,
-    private windowService: WindowService) { }
+    private notifications: NotificationService) { }
 
   ngOnInit() {
   }
@@ -30,11 +29,11 @@ export class ReportsHomeComponent implements OnInit {
         console.log(data);
         
         let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
 
-        let a = this.windowService.window.document.createElement('a');
+        let a = document.createElement('a');
         a.setAttribute('style', 'display:none;');
-        this.windowService.window.document.body.appendChild(a);
+        document.body.appendChild(a);
         a.download = 'report.xlsx';
         a.href = url;
         a.click();

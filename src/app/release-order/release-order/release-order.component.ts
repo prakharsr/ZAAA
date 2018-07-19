@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { StateApiService, NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
+import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
 import { CategoriesDetails } from '../categories-details/categories-details.component';
 
 import {
@@ -64,8 +64,7 @@ export class ReleaseOrderComponent implements OnInit {
     public stateApi: StateApiService,
     private notifications: NotificationService,
     public options: OptionsService,
-    private dialog: DialogService,
-    private windowService: WindowService) { }
+    private dialog: DialogService) { }
 
   get isTypeWords() {
 
@@ -160,11 +159,11 @@ export class ReleaseOrderComponent implements OnInit {
             console.log(data);
             
             let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
+            let url = URL.createObjectURL(blob);
     
-            let a = this.windowService.window.document.createElement('a');
+            let a = document.createElement('a');
             a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
+            document.body.appendChild(a);
             a.href = url;
 
             if (preview) {

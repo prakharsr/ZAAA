@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -10,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { Invoice } from '../invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
-import { NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
+import { NotificationService, OptionsService, DialogService } from 'app/services';
 import { InvoiceApiService } from '../invoice-api.service';
 
 import {
@@ -48,8 +47,7 @@ export class InvoiceComponent implements OnInit {
     private api: InvoiceApiService,
     public options: OptionsService,
     private dialog: DialogService,
-    private roApi: ReleaseOrderApiService,
-    private windowService: WindowService) { }
+    private roApi: ReleaseOrderApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
@@ -132,11 +130,11 @@ export class InvoiceComponent implements OnInit {
         console.log(data);
         
         let blob = new Blob([data], { type: 'application/pdf' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
 
-        let a = this.windowService.window.document.createElement('a');
+        let a = document.createElement('a');
         a.setAttribute('style', 'display:none;');
-        this.windowService.window.document.body.appendChild(a);
+        document.body.appendChild(a);
         a.href = url;
         if (preview) {
           a.setAttribute("target", "_blank");

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { PaymentReceipt } from '../payment-receipt';
-import { NotificationService, DialogService, WindowService } from 'app/services';
+import { NotificationService, DialogService } from 'app/services';
 import { ReceiptsApiService } from '../receipts-api.service';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from 'app/release-order';
@@ -46,8 +46,7 @@ export class ReceiptListComponent implements OnInit {
     private router: Router,
     private notifications: NotificationService,
     private dialog: DialogService,
-    private api: ReceiptsApiService,
-    private windowService: WindowService) { }
+    private api: ReceiptsApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<PaymentReceipt>, search: ReleaseOrderSearchParams }, advance: boolean}) => {
@@ -156,11 +155,11 @@ export class ReceiptListComponent implements OnInit {
         console.log(data);
         
         let blob = new Blob([data], { type: 'application/pdf' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
 
-        let a = this.windowService.window.document.createElement('a');
+        let a = document.createElement('a');
         a.setAttribute('style', 'display:none;');
-        this.windowService.window.document.body.appendChild(a);
+        document.body.appendChild(a);
         a.download = 'receipt.pdf';
         a.href = url;
         a.click();

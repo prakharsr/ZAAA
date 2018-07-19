@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators/map';
 import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-import { WindowService } from './window.service';
 import { LoaderService } from './loader.service';
 import { NotificationService } from './notification.service';
 import { environment } from 'environments/environment';
@@ -30,7 +29,7 @@ export class ApiService {
   private get authToken() : string {
     if (!this._authToken)
     {
-      this._authToken = this.windowService.window.localStorage.getItem(AuthTokenKey);
+      this._authToken = localStorage.getItem(AuthTokenKey);
     }
 
     return this._authToken;
@@ -46,16 +45,15 @@ export class ApiService {
   private set authToken(authToken: string) {
     if (!authToken) {
       this._authToken = '';
-      this.windowService.window.localStorage.removeItem(AuthTokenKey);
+      localStorage.removeItem(AuthTokenKey);
     }
     else {
       this._authToken = authToken;
-      this.windowService.window.localStorage.setItem(AuthTokenKey, authToken);
+      localStorage.setItem(AuthTokenKey, authToken);
     }
   }
 
   constructor(private http: HttpClient,
-    private windowService: WindowService,
     private loaderService: LoaderService,
     private notifications: NotificationService) { }
 
