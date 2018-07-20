@@ -1,1 +1,12 @@
-<app-commonlogin (submit)="submit($event)"></app-commonlogin>
+<app-commonlogin (submit)="submit($event)">
+    <div class="row">
+        <div class="col text-right">
+            <a routerLink="/forgotPassword">Forgot Password?</a>
+        </div>
+        <div class="col">
+            <a routerLink="/register">Sign Up</a>
+        </div>
+    </div>
+
+    <br>
+</app-commonlogin>
