@@ -17,6 +17,10 @@ export class NavbarComponent implements OnInit {
   isRegister = false;
   isSuperAdmin = false;
 
+  get showToolbar() {
+    return !this.isSuperAdmin && this.api.isLoggedIn;
+  }
+
   constructor(public api: ApiService,
     private router: Router,
     private notifications: NotificationService) { }

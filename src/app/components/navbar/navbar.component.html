@@ -95,7 +95,7 @@
     </div>
   </nav>
 
-  <mat-toolbar *ngIf="!isSuperAdmin && api.isLoggedIn">
+  <mat-toolbar *ngIf="showToolbar">
     <div class="container-fluid">
       <div class="x-overflow">
         <button mat-icon-button class="nav-link" routerLink="/dashboard">
@@ -167,4 +167,7 @@
   </mat-toolbar>
 </div>
 
-<br><br><br><br><br>
+<br><br><br>
+<ng-container *ngIf="showToolbar">
+  <br><br>
+</ng-container>
