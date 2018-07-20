@@ -16,6 +16,10 @@ export class MediaHouseComponent implements OnInit {
   backupPullouts: Pullout[] = [];
   backupSchedulings: MediaHouseScheduling[] = [];
 
+  get permitEdit() {
+    return !this.global || this.isSuperAdmin;
+  }
+
   private makeBackup() {
     Object.assign(this.backup, this.mediaHouse);
 
@@ -77,6 +81,9 @@ export class MediaHouseComponent implements OnInit {
   morePulloutDetails = false;
   moreContactDetails = false;
   moreSchedulingDetails = false;
+
+  global = false;
+  isSuperAdmin = false;
   
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
@@ -88,6 +95,11 @@ export class MediaHouseComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.data.subscribe((data: { global: boolean, superAdmin: boolean }) => {
+      this.isSuperAdmin = data.superAdmin;
+      this.global = data.global;
+    });
+
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
