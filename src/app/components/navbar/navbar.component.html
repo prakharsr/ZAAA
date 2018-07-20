@@ -1,8 +1,8 @@
 <div id="navbar">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl != this.expectedUrl">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="!isRegister">
     <div class="container-fluid">
       <img src="assets/logo.jpg" class="ml-2" width="50" height="50">&nbsp;&nbsp;&nbsp;
-      <a class="navbar-brand text-light" routerLink="/">AAMan</a>
+      <a class="navbar-brand text-light" routerLink="/">AAMan<span *ngIf="isSuperAdmin"> Super Admin</span></a>
       <button class="navbar-toggler mr-2" (click)="toggleNavbar()" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,7 +26,7 @@
               <mat-icon>notifications</mat-icon>
             </button>
 
-            <button class="nav-link" mat-icon-button [matMenuTriggerFor]="settings">
+            <button class="nav-link" *ngIf="!isSuperAdmin" mat-icon-button [matMenuTriggerFor]="settings">
               <mat-icon>settings</mat-icon>
             </button>
 
@@ -61,7 +61,7 @@
     </div>
   </nav>
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="this.pageUrl == this.expectedUrl">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="isRegister">
     <div class="container">
       <div>
         <img src="assets/logo.jpg" width="50" height="50">
@@ -95,7 +95,7 @@
     </div>
   </nav>
 
-  <mat-toolbar *ngIf="api.isLoggedIn">
+  <mat-toolbar *ngIf="!isSuperAdmin && api.isLoggedIn">
     <div class="container-fluid">
       <div class="x-overflow">
         <button mat-icon-button class="nav-link" routerLink="/dashboard">

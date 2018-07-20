@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, NotificationService } from 'app/services';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { UserProfile } from '../../models';
+import { Router, NavigationEnd, Route } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,24 +10,24 @@ import { UserProfile } from '../../models';
 export class NavbarComponent implements OnInit {
 
   isNavbarCollapsed = true;
-  admin : boolean;
-  pageUrl="";
-  expectedUrl = "/register";
 
   emailOrPhone: string;
   password: string;
 
-  hidePassword = true;
+  isRegister = false;
+  isSuperAdmin = false;
 
-  constructor(public api: ApiService, private router: Router, private route: ActivatedRoute, private notifications: NotificationService) { }
+  constructor(public api: ApiService,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.pageUrl = event.urlAfterRedirects;
+        this.isRegister = event.urlAfterRedirects == "/register";
+        this.isSuperAdmin = event.urlAfterRedirects.startsWith("/superadmin");
       } 
     });
-    console.log(this.pageUrl);
   }
 
   collapseNavbar() {
