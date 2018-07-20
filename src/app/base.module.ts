@@ -48,6 +48,7 @@ import {
 
 import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
 import { AuthTokenManager } from './services/auth-token-manager.service';
+import { CommonLoginComponent } from './components/commonlogin/commonlogin.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -94,7 +95,8 @@ const validators = [
     CategoriesDetailsComponent,
     InsertionDetailsComponent,
     validators,
-    PaginationComponent
+    PaginationComponent,
+    CommonLoginComponent
   ],
   exports: [
     CommonModule,
@@ -106,7 +108,8 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    NgxChartsModule
+    NgxChartsModule,
+    CommonLoginComponent
   ],
   entryComponents: [
     DialogComponent,

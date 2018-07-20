@@ -12,4 +12,6 @@ export class SuperAdminLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() { }
+
 }
