@@ -80,9 +80,9 @@ export class InvoiceComponent implements OnInit {
 
     this.invoice.taxType = this.mediaHouse.address.state == this.client.address.state ? 'SGST + CGST' : 'IGST';
 
+    this.availableInsertions = [];
+    
     this.releaseOrder.insertions.forEach(element => {
-      this.availableInsertions = [];
-
       if (!element.marked) {
         this.availableInsertions.push(new AvailableInsertion(element));
       }
