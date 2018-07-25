@@ -10,7 +10,7 @@
               <div class="col align-self-center">
                 <h5>Publication Details</h5>
               </div>
-              <div class="col-auto" *ngIf="!editPublicationDetails && !editing">
+              <div class="col-auto" *ngIf="!editPublicationDetails && !editing && permitEdit">
                 <button mat-icon-button (click)="editPublicationDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editPublicationDetails && !new">
@@ -123,7 +123,7 @@
               <div class="col align-self-center">
                 <h5>Pullout Details</h5>
               </div>
-              <div class="col-auto" *ngIf="!editPulloutDetails && !editing">
+              <div class="col-auto" *ngIf="!editPulloutDetails && !editing && permitEdit">
                 <button mat-icon-button (click)="editPulloutDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editPulloutDetails && !new">
@@ -218,7 +218,7 @@
               <div class="col align-self-center">
                 <h5>Contact Details</h5>
               </div>
-              <div class="col-auto" *ngIf="!editContactDetails && !editing">
+              <div class="col-auto" *ngIf="!editContactDetails && !editing && permitEdit">
                 <button mat-icon-button (click)="editContactDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editContactDetails && !new">
@@ -327,7 +327,7 @@
               <div class="col align-self-center">
                 <h5>Scheduling Details</h5>
               </div>
-              <div class="col-auto" *ngIf="!editSchedulingDetails && !editing">
+              <div class="col-auto" *ngIf="!editSchedulingDetails && !editing && permitEdit">
                 <button mat-icon-button (click)="editSchedulingDetails = true"><mat-icon>edit</mat-icon></button>
               </div>
               <ng-container *ngIf="editSchedulingDetails && !new">
