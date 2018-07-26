@@ -28,24 +28,28 @@ export class ApiService {
 
   constructor(private authTokenManager: AuthTokenManager) { }
 
+  private makeUrl(url: string) {
+    return environment.apiUrl + url;
+  }
+
   post(url: string, body: any, extra = {}) {
-    return this.authTokenManager.post(url, body, this.authTokenKey, extra);
+    return this.authTokenManager.post(this.makeUrl(url), body, this.authTokenKey, extra);
   }
 
   patch(url: string, body: any) {
-    return this.authTokenManager.patch(url, body, this.authTokenKey);
+    return this.authTokenManager.patch(this.makeUrl(url), body, this.authTokenKey);
   }
 
   get(url: string) {
-    return this.authTokenManager.get(url, this.authTokenKey);
+    return this.authTokenManager.get(this.makeUrl(url), this.authTokenKey);
   }
 
   delete(url: string) {
-    return this.authTokenManager.delete(url, this.authTokenKey);
+    return this.authTokenManager.delete(this.makeUrl(url), this.authTokenKey);
   }
 
   fileUpload(url: string, key: string, fileToUpload: File) {
-    return this.authTokenManager.fileUpload(url, key, fileToUpload, this.authTokenKey);
+    return this.authTokenManager.fileUpload(this.makeUrl(url), key, fileToUpload, this.authTokenKey);
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {

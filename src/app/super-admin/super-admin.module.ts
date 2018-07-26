@@ -7,6 +7,7 @@ import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
 import { SuperAdminLoginComponent } from './super-admin-login/super-admin-login.component';
 import { DirectoryModule } from 'app/directory/directory.module';
+import { CreateAdminComponent } from './create-admin/create-admin.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DirectoryModule } from 'app/directory/directory.module';
   declarations: [
     AdCategoriesComponent,
     SuperAdminDashboardComponent,
-    SuperAdminLoginComponent
+    SuperAdminLoginComponent,
+    CreateAdminComponent
   ],
   providers: [
     SuperAdminApiService,

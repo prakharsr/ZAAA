@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthTokenManager } from 'app/services/auth-token-manager.service';
+import { Observable } from 'rxjs/Observable';
+import { environment } from 'environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class SuperAdminApiService {
@@ -11,23 +14,53 @@ export class SuperAdminApiService {
 
   constructor(private authTokenManager: AuthTokenManager) { }
 
+  private makeUrl(url: string) {
+    return environment.adminApiUrl + url;
+  }
+
   post(url: string, body: any, extra = {}) {
-    return this.authTokenManager.post(url, body, this.authTokenKey, extra);
+    return this.authTokenManager.post(this.makeUrl(url), body, this.authTokenKey, extra);
   }
 
   patch(url: string, body: any) {
-    return this.authTokenManager.patch(url, body, this.authTokenKey);
+    return this.authTokenManager.patch(this.makeUrl(url), body, this.authTokenKey);
   }
 
   get(url: string) {
-    return this.authTokenManager.get(url, this.authTokenKey);
+    return this.authTokenManager.get(this.makeUrl(url), this.authTokenKey);
   }
 
   delete(url: string) {
-    return this.authTokenManager.delete(url, this.authTokenKey);
+    return this.authTokenManager.delete(this.makeUrl(url), this.authTokenKey);
   }
 
   fileUpload(url: string, key: string, fileToUpload: File) {
-    return this.authTokenManager.fileUpload(url, key, fileToUpload, this.authTokenKey);
+    return this.authTokenManager.fileUpload(this.makeUrl(url), key, fileToUpload, this.authTokenKey);
+  }
+
+  login(emailOrPhone: string, password: string): Observable<any> {
+    
+    let base : Observable<any>;
+
+    if (emailOrPhone.indexOf('@') != -1) {
+      base = this.post("/user/login", { email: emailOrPhone, password: password });
+    }
+    else base = this.post("/user/login", { phone: emailOrPhone, password: password });
+
+    return this.extractToken(base);
+  }
+
+  private extractToken(base: Observable<any>) : Observable<any> {
+    return base.pipe(
+      map(data => {
+        if (data.success) {
+          this.authTokenManager.setAuthToken(this.authTokenKey, data.token);
+
+          data.token = '';
+        }
+
+        return data;
+      })
+    );
   }
 }

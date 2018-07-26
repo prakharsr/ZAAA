@@ -57,13 +57,13 @@ export class AuthTokenManager {
 
     if (this.getAuthToken(authTokenKey))
     {
-        return this.apply(this.http.post(environment.apiUrl + url, body, {
+        return this.apply(this.http.post(url, body, {
           ...this.getHeaders(authTokenKey),
           ...extra
         }));
     }
     else {
-      return this.apply(this.http.post(environment.apiUrl + url, body));
+      return this.apply(this.http.post(url, body));
     }
   }
 
@@ -73,10 +73,10 @@ export class AuthTokenManager {
 
     if (this.getAuthToken(authTokenKey))
     {
-        return this.apply(this.http.patch(environment.apiUrl + url, body, this.getHeaders(authTokenKey)));
+        return this.apply(this.http.patch(url, body, this.getHeaders(authTokenKey)));
     }
     else {
-      return this.apply(this.http.patch(environment.apiUrl + url, body));
+      return this.apply(this.http.patch(url, body));
     }
   }
 
@@ -86,10 +86,10 @@ export class AuthTokenManager {
 
     if (this.getAuthToken(authTokenKey))
     {
-        return this.apply(this.http.get(environment.apiUrl + url, this.getHeaders(authTokenKey)));
+        return this.apply(this.http.get(url, this.getHeaders(authTokenKey)));
     }
     else {
-      return this.apply(this.http.get(environment.apiUrl + url));
+      return this.apply(this.http.get(url));
     }
   }
 
@@ -97,7 +97,7 @@ export class AuthTokenManager {
 
     this.loaderService.show();
 
-    return this.apply(this.http.delete(environment.apiUrl + url, this.getHeaders(authTokenKey)));
+    return this.apply(this.http.delete(url, this.getHeaders(authTokenKey)));
   }
 
   fileUpload(url: string, key: string, fileToUpload: File, authTokenKey: string) : Observable<any> {
@@ -107,6 +107,6 @@ export class AuthTokenManager {
     const formData = new FormData();
     formData.append(key, fileToUpload, fileToUpload.name);
 
-    return this.apply(this.http.post(environment.apiUrl + url, formData, this.getHeaders(authTokenKey)));
+    return this.apply(this.http.post(url, formData, this.getHeaders(authTokenKey)));
   }
 }
