@@ -857,6 +857,9 @@ export class ReleaseOrderComponent implements OnInit {
       if (this.customSize && !this.releaseorder.fixRate) {
         return this.releaseorder.rate * this.totalSpace;
       }
+      else if (this.customSize && this.releaseorder.fixRate) {
+        return this.releaseorder.rate;
+      }
       else {
         return this.selectedSize.amount;
       }
