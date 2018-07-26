@@ -22,14 +22,7 @@
 
     <div class="form-group">
       <label>Details</label>
-      <input type="text" class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" required #detailsField="ngModel">
-    </div>
-
-    <div *ngIf="detailsField.invalid && (detailsField.dirty || detailsField.touched)" class="text-danger">
-      <div *ngIf="detailsField.errors.required">
-        Details is required.
-      </div>
-      <br>
+      <textarea class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" #detailsField="ngModel"></textarea>
     </div>
 
     <br><br>

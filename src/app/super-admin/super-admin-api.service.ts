@@ -38,14 +38,25 @@ export class SuperAdminApiService {
     return this.authTokenManager.fileUpload(this.makeUrl(url), key, fileToUpload, this.authTokenKey);
   }
 
+  signup(name: string, email: string, password: string) : Observable<any>
+  {
+    const base = this.post('/signup', {
+      name: name,
+      email: email,
+      password: password
+    });
+
+    return this.extractToken(base);
+  }
+
   login(emailOrPhone: string, password: string): Observable<any> {
     
     let base : Observable<any>;
 
     if (emailOrPhone.indexOf('@') != -1) {
-      base = this.post("/user/login", { email: emailOrPhone, password: password });
+      base = this.post("/login", { email: emailOrPhone, password: password });
     }
-    else base = this.post("/user/login", { phone: emailOrPhone, password: password });
+    else base = this.post("/login", { phone: emailOrPhone, password: password });
 
     return this.extractToken(base);
   }

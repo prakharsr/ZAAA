@@ -11,5 +11,12 @@
     <mat-icon>add</mat-icon>
   </button>
 
-  <pre>{{res | async | json}}</pre>
+  <mat-card *ngFor="let ticket of (res | async).list" class="mb-3 mat-elevation-z3">    
+    <mat-card-title>{{ticket.subject}}</mat-card-title>
+    <p>{{ticket.details}}</p>
+    <p class="text-muted small">{{ticket.createdAt | date}}</p>
+    <p>Status: {{ticket.status}}</p>
+  </mat-card>
+
+  <p>Pagination: 1</p>
 </div>
