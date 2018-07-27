@@ -43,8 +43,6 @@ export class ReleaseOrderComponent implements OnInit {
   edit = false;
   id: string;
 
-  releaseOrder = new ReleaseOrder();
-
   selectedCategories: Category[] = [null, null, null, null, null, null];
   categories: Category[];
   fixedCategoriesLevel = -1;
@@ -137,14 +135,6 @@ export class ReleaseOrderComponent implements OnInit {
       }
     });
   }
-  
-  preview() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.genPreview(this.releaseorder);
-      }
-    });
-  }
 
   gen(releaseOrder: ReleaseOrder, preview = false) {
     this.confirmGeneration(releaseOrder).subscribe(confirm => {
@@ -180,21 +170,31 @@ export class ReleaseOrderComponent implements OnInit {
     })
   }
 
-  genPreview(releaseOrder: ReleaseOrder) {
-    console.log(releaseOrder);
-            
-    let blob = new Blob([releaseOrder], { type: 'application/pdf' });
-    let url = URL.createObjectURL(blob);
+  genPreview() {
+    console.log(this.releaseorder);
 
-    let a = document.createElement('a');
-    a.setAttribute('style', 'display:none;');
-    document.body.appendChild(a);
-    a.href = url;
+    this.presave();
 
-    a.setAttribute("target", "_blank");
-    
-    a.click();
+    console.log(this.releaseorder);
 
+    this.api.previewROPdf(this.releaseorder).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
+      }
+      else {
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = URL.createObjectURL(blob);
+
+        let a = document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        document.body.appendChild(a);
+        a.href = url;
+
+        a.setAttribute("target", "_blank");
+
+        a.click();
+      }
+    });
   }
 
   sendMsg(releaseOrder: ReleaseOrder) {
@@ -571,7 +571,7 @@ export class ReleaseOrderComponent implements OnInit {
     )
   }
 
-  submit () : Observable<any> {
+  private presave() {
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
@@ -613,6 +613,10 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemeFree = this.selectedScheme.Free;
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
+  }
+
+  submit () : Observable<any> {
+    this.presave();
 
     let base: Observable<any> = this.edit ? this.editReleaseOrder() : this.createReleaseOrder();
 

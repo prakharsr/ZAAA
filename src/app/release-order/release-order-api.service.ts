@@ -46,6 +46,12 @@ export class ReleaseOrderApiService {
     );
   }
 
+  previewROPdf(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorders/preview', {
+      releaseOrder: releaseOrder
+    }, { responseType: 'blob' });
+  }
+
   getReleaseOrderDir(id: string): Observable<ReleaseOrderDir> {
     return this.api.get('/user/releaseorder/' + id).pipe(
       map(data => data.success ? {
