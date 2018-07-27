@@ -141,7 +141,7 @@ export class ReleaseOrderComponent implements OnInit {
   preview() {
     this.submit().subscribe(data => {
       if (data.success) {
-        this.gen(this.releaseorder, true);
+        this.genPreview(this.releaseorder);
       }
     });
   }
@@ -178,6 +178,23 @@ export class ReleaseOrderComponent implements OnInit {
         });
       }
     })
+  }
+
+  genPreview(releaseOrder: ReleaseOrder) {
+    console.log(releaseOrder);
+            
+    let blob = new Blob([releaseOrder], { type: 'application/pdf' });
+    let url = URL.createObjectURL(blob);
+
+    let a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    a.href = url;
+
+    a.setAttribute("target", "_blank");
+    
+    a.click();
+
   }
 
   sendMsg(releaseOrder: ReleaseOrder) {
