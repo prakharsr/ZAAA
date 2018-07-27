@@ -107,7 +107,6 @@
         <mat-menu #romenu="matMenu">
           <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
           <button mat-menu-item routerLink="/releaseorders">View Release Orders</button>
-          <button mat-menu-item routerLink="/releaseorders/generated">Generated Release Orders</button>
           <button mat-menu-item routerLink="/releaseorders/check">Insertion Check</button>
         </mat-menu>
 
@@ -123,8 +122,6 @@
         <mat-menu #prcmenu="matMenu">
           <button mat-menu-item routerLink="/receipts/new">Create Payment Receipt</button>
           <button mat-menu-item routerLink="/receipts">View Payment Receipts</button>
-          <button mat-menu-item routerLink="/receipts/advance">Advance Receipts</button>
-          <button mat-menu-item routerLink="/receipts/new">Create Advance Receipt</button>
         </mat-menu>
 
         <button mat-button [matMenuTriggerFor]="dirmenu">Directory</button>
