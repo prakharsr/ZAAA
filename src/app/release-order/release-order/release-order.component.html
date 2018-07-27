@@ -151,61 +151,53 @@
 
           <div class="col-lg col-md-6">
             <br>
-            <mat-card style="background-color: #f6fbfd;">
+            <mat-card>
               <mat-card-title>Client Details</mat-card-title>
-
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" [ngbTypeahead]="searchClient" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-
-                <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
-                  <div *ngIf="clientNameField.errors.required">
-                    Name is required.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col">
-                  <label>State</label>
-                  <select name="clientState" class="form-control" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
-                    <option *ngFor="let state of stateApi.states" [ngValue]="state">{{state}}</option>
-                  </select>
   
-                  <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
-                    <div *ngIf="clientStateField.errors.required">
-                      State is required.
-                    </div>
-                  </div>
-                </div>
+             <div class="row">
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+                <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+                  Name is required.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field class="col-lg col-md-6">
+                <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+             </div>
+  
+              <div class="form-row">
                 <div class="{{releaseorder.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
-                  <div class="form-group">
-                    <label>GST Type</label>
-                    <select class="form-control" placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
-                      <option value="URD">URD</option>
-                      <option value="RD">RD</option>
-                    </select>
-                  </div>
+                  <mat-form-field class="col-lg col-md-6">
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
+                      <mat-option value="URD">URD</mat-option>
+                      <mat-option value="RD">RD</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col" *ngIf="releaseorder.clientGSTIN.GSTType != 'URD'">
-                  <div class="form-group">
-                    <label>GSTIN</label>
-                    <input type="text" class="form-control" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-    
-                    <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-                      <div *ngIf="gstNoField.errors.required">
-                        GSTIN is required.
-                      </div>
-                      <div *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-                        GSTIN should be 15 characters long.
-                      </div>
-                    </div>
-                  </div>
+                  <mat-form-field class="col-lg col-md-6">
+                    <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                      GSTIN is required.
+                    </mat-error>
+                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                      GSTIN should be 15 characters long.
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
-
-              <button type="button" class="btn btn-outline-info mat-elevation-z3 rounded-0" style="font-size: 12px" (click)="addClient()">Add to Directory</button>
-            </mat-card>
+  
+              <mat-card-actions>
+                <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
+              </mat-card-actions>
+          </mat-card>
           </div>
         </div>
 
