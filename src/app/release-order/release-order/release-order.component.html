@@ -601,18 +601,14 @@
                   </div>
                 </div>
                 <div class="col">
-                  <div class="form-group">
-                    <select class="form-control" name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                      <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
-                    </select>
-                  </div>
-          
-                  <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
-                    <div *ngIf="taxField.errors.required">
+                  <mat-form-field>
+                    <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
+                      <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="taxField.errors && taxField.errors.required">
                       Tax is required.
-                    </div>
-                    <br>
-                  </div>
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
 
