@@ -328,7 +328,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   get finalAmount() {
-    return this.netAmount + this.finalTaxAmount;
+    return this.finalTaxAmount;
   }
 
   removeOtherCharge(i: number) {
