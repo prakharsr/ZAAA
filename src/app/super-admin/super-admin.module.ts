@@ -8,6 +8,7 @@ import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admi
 import { SuperAdminLoginComponent } from './super-admin-login/super-admin-login.component';
 import { DirectoryModule } from 'app/directory/directory.module';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
+import { GlobalMediaHouseComponent } from './global-media-house/global-media-house.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
     AdCategoriesComponent,
     SuperAdminDashboardComponent,
     SuperAdminLoginComponent,
-    CreateAdminComponent
+    CreateAdminComponent,
+    GlobalMediaHouseComponent
   ],
   providers: [
     SuperAdminApiService,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
@@ -84,6 +84,8 @@ export class MediaHouseComponent implements OnInit {
 
   global = false;
   isSuperAdmin = false;
+
+  @Output() submitGlobal = new EventEmitter<MediaHouse>();
   
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
@@ -161,18 +163,23 @@ export class MediaHouseComponent implements OnInit {
 
   submit () {
     if (this.new) {
-      this.api.createMediaHouse(this.mediaHouse).subscribe(
-        data => {
-          if (data.success) {
-            this.goToList();
+      if (this.isSuperAdmin) {
+        this.submitGlobal.emit(this.mediaHouse);
+      }
+      else {
+        this.api.createMediaHouse(this.mediaHouse).subscribe(
+          data => {
+            if (data.success) {
+              this.goToList();
+            }
+            else {
+              console.log(data);
+              
+              this.notifications.show(data.msg);
+            }
           }
-          else {
-            console.log(data);
-            
-            this.notifications.show(data.msg);
-          }
-        }
-      );
+        );
+      }
     }
     else {
       this.api.editMediaHouse(this.mediaHouse).subscribe(

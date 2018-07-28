@@ -5,6 +5,7 @@ import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
 import { SuperAdminLoginComponent } from './super-admin-login/super-admin-login.component';
 import { MediaHouseListComponent, MediaHouseListResolver } from 'app/directory';
+import { GlobalMediaHouseComponent } from './global-media-house/global-media-house.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
             resolve: {
               list: MediaHouseListResolver
             }
-          }
+          },
+          { path: 'new', component: GlobalMediaHouseComponent }
         ]
       }
     ]
