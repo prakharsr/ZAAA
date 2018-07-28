@@ -11,7 +11,7 @@
     <mat-icon>add</mat-icon>
   </button>
 
-  <mat-card *ngFor="let ticket of (res | async).list" class="mb-3 mat-elevation-z3">
+  <mat-card *ngFor="let ticket of list" class="mb-3 mat-elevation-z3">
     <div class="row">
       <div class="col">{{ticket.subject}}</div>
       <div class="col-auto">
@@ -27,5 +27,5 @@
     </span>
   </mat-card>
 
-  <p>Pagination: 1</p>
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
 </div>
