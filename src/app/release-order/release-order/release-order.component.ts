@@ -139,13 +139,12 @@ export class ReleaseOrderComponent implements OnInit {
   gen(releaseOrder: ReleaseOrder, preview = false) {
     this.confirmGeneration(releaseOrder).subscribe(confirm => {
       if (confirm) {
-        this.api.generate(releaseOrder).subscribe(data => {
+        this.api.generatePdf(releaseOrder).subscribe(data => {
           if (data.msg) {
-            this.notifications.show(data.msg);
-    
-            releaseOrder.generated = true;
+            this.notifications.show(data.msg);    
           }
           else {
+            releaseOrder.generated = true;
             console.log(data);
             
             let blob = new Blob([data], { type: 'application/pdf' });

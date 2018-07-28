@@ -181,10 +181,10 @@ export class ReleaseOrderListComponent implements OnInit {
         this.api.generatePdf(releaseOrder).subscribe(data => {
           if (data.msg) {
             this.notifications.show(data.msg);
-    
-            releaseOrder.generated = true;
           }
           else {
+            releaseOrder.generated = true;
+
             console.log(data);
             
             let blob = new Blob([data], { type: 'application/pdf' });
