@@ -4,8 +4,7 @@ import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
 import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
 import { SuperAdminLoginComponent } from './super-admin-login/super-admin-login.component';
-import { MediaHouseListComponent, MediaHouseListResolver } from 'app/directory';
-import { GlobalMediaHouseComponent } from './global-media-house/global-media-house.component';
+import { MediaHouseListComponent, MediaHouseListResolver, MediaHouseComponent } from 'app/directory';
 
 const routes: Routes = [
   {
@@ -28,7 +27,7 @@ const routes: Routes = [
               list: MediaHouseListResolver
             }
           },
-          { path: 'new', component: GlobalMediaHouseComponent }
+          { path: 'new', component: MediaHouseComponent }
         ]
       }
     ]

@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaHouse, MediaHouseScheduling, Pullout } from '../media-house';
 import { MediaHouseApiService } from '../media-house-api.service';
 import { StateApiService, NotificationService } from 'app/services';
+import { SuperAdminApiService } from '../../../super-admin/super-admin-api.service';
 
 @Component({
   selector: 'app-media-house',
@@ -84,14 +85,13 @@ export class MediaHouseComponent implements OnInit {
 
   global = false;
   isSuperAdmin = false;
-
-  @Output() submitGlobal = new EventEmitter<MediaHouse>();
   
   constructor(private api: MediaHouseApiService,
     private route: ActivatedRoute,
     public stateApi: StateApiService,
     private notifications: NotificationService,
-    private router: Router) {
+    private router: Router,
+    private superAdminApi: SuperAdminApiService) {
    
     this.MainPullout.Name = 'Main';
   }
@@ -164,7 +164,18 @@ export class MediaHouseComponent implements OnInit {
   submit () {
     if (this.new) {
       if (this.isSuperAdmin) {
-        this.submitGlobal.emit(this.mediaHouse);
+        this.superAdminApi.createGlobalMediaHouse(this.mediaHouse).subscribe(
+          data => {
+            if (data.success) {
+              this.router.navigateByUrl('/superadmin/media_houses');
+            }
+            else {
+              console.log(data);
+              
+              this.notifications.show(data.msg);
+            }
+          }
+        );
       }
       else {
         this.api.createMediaHouse(this.mediaHouse).subscribe(
@@ -182,22 +193,38 @@ export class MediaHouseComponent implements OnInit {
       }
     }
     else {
-      this.api.editMediaHouse(this.mediaHouse).subscribe(
-        data => {
-          if (data.success) {
-            this.notifications.show("Saved");
-          
-            this.stopEditing();
-          
-            this.makeBackup();
+      if (this.isSuperAdmin) {
+        this.superAdminApi.updateGlobalMediaHouse(this.mediaHouse).subscribe(
+          data => {
+            if (data.success) {
+              this.notifications.show('Updated');
+            }
+            else {
+              console.log(data);
+              
+              this.notifications.show(data.msg);
+            }
           }
-          else {
-            console.log(data);
+        );
+      }
+      else {
+        this.api.editMediaHouse(this.mediaHouse).subscribe(
+          data => {
+            if (data.success) {
+              this.notifications.show("Saved");
             
-            this.notifications.show(data.msg);
+              this.stopEditing();
+            
+              this.makeBackup();
+            }
+            else {
+              console.log(data);
+              
+              this.notifications.show(data.msg);
+            }
           }
-        }
-      );
+        );
+      }
     }
   }
 

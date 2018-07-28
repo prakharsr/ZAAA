@@ -3,7 +3,8 @@ import { AuthTokenManager } from 'app/services/auth-token-manager.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from 'environments/environment';
 import { map } from 'rxjs/operators';
-import { MediaHouseApiService, MediaHouse } from '../directory';
+import { MediaHouse } from 'app/directory/media-houses/media-house';
+import { MediaHouseApiService } from 'app/directory/media-houses/media-house-api.service';
 
 @Injectable()
 export class SuperAdminApiService {

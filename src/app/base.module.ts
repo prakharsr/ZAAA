@@ -49,6 +49,7 @@ import {
 import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
 import { AuthTokenManager } from './services/auth-token-manager.service';
 import { CommonLoginComponent } from './components/commonlogin/commonlogin.component';
+import { SuperAdminApiService } from './super-admin/super-admin-api.service';
 
 const validators = [
   VerifyEmailDirective,
@@ -86,7 +87,8 @@ const validators = [
     FirmResolver,
     UserProfileResolver,
     OptionsService,
-    FirmUsersResolver
+    FirmUsersResolver,
+    SuperAdminApiService
   ],
   declarations: [
     MailingDetailsComponent,
