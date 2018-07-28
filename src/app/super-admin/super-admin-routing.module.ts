@@ -3,9 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
 import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
-import { MediaHouseListComponent, MediaHouseListResolver, MediaHouseComponent, MediaHouseResolver } from 'app/directory';
 import { LoginComponent } from 'app/components';
-import { RateCardListComponent, RateCardListResolver, RateCardComponent, RateCardResolver } from '../rate-card';
+
+import {
+  MediaHouseListComponent,
+  MediaHouseListResolver,
+  MediaHouseComponent,
+  MediaHouseResolver
+} from 'app/directory';
+
+import {
+  RateCardListComponent,
+  RateCardListResolver,
+  RateCardComponent,
+  RateCardResolver,
+  RateCardDetailsComponent
+} from 'app/rate-card';
 
 const routes: Routes = [
   {
@@ -52,10 +65,24 @@ const routes: Routes = [
           },
           { path: 'new', component: RateCardComponent },
           {
-            path: ':id',
+            path: 'new/:copy',
             component: RateCardComponent,
             resolve: {
-              mediaHouse: RateCardResolver
+              rateCard: RateCardResolver
+            }
+          },
+          {
+            path: 'edit/:id',
+            component: RateCardComponent,
+            resolve: {
+              rateCard: RateCardResolver
+            }
+          },
+          {
+            path: ':id',
+            component: RateCardDetailsComponent,
+            resolve: {
+              rateCard: RateCardResolver
             }
           }
         ]

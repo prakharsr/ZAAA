@@ -25,10 +25,10 @@ export class RateCardListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   query: string;
   searchFailed = false;
+
+  isSuperAdmin = false;
 
   constructor(private api: RateCardApiService,
     private dialog: DialogService,
@@ -36,15 +36,13 @@ export class RateCardListComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: PageData<RateCard>, global: boolean }) => {
-        this.global = data.global;
-        this.ratecards = data.list.list;
-        this.pageCount = data.list.pageCount;
-        this.page = data.list.page;
-  
-        this.dummyArray = Array(this.pageCount);
-      });
-      
+    this.route.data.subscribe((data: { list: PageData<RateCard>, global: boolean, superAdmin: boolean }) => {
+      this.global = data.global;
+      this.ratecards = data.list.list;
+      this.pageCount = data.list.pageCount;
+      this.page = data.list.page;
+      this.isSuperAdmin = data.superAdmin;
+    });      
   }
 
   search = (text: Observable<string>) =>
@@ -59,11 +57,11 @@ export class RateCardListComponent implements OnInit {
           }));
 
   inputFormatter = (result: RateCard) => {
-    this.router.navigateByUrl('/ratecards/' + result.id);
+    this.router.navigate([this.isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', result.id]);
   }
 
   private navigateToReleaseOrder(ratecard: RateCard) {
-    this.router.navigateByUrl('/releaseorders/fromRateCard/' + ratecard.id);
+    this.router.navigate(['/releaseorders/fromRateCard', ratecard.id]);
   }
 
   createReleaseOrder(ratecard: RateCard) {
@@ -104,6 +102,6 @@ export class RateCardListComponent implements OnInit {
   }
 
   navigate(i: number) {
-    this.router.navigate(['/ratecards/list', i]);
+    this.router.navigate([this.isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'list', i]);
   }
 }
