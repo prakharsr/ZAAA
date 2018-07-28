@@ -78,6 +78,10 @@ export class SuperAdminApiService {
   }
 
   createGlobalMediaHouse(mediaHouse: MediaHouse) {
-    return this.post('/global/media_house', this.mediaHouseApi.createPostArgs(mediaHouse));
+    return this.post('/globalmediahouse/create', this.mediaHouseApi.createPostArgs(mediaHouse));
+  }
+
+  updateGlobalMediaHouse(mediaHouse: MediaHouse) {
+    return this.post('/globalmediahouse/update', this.mediaHouseApi.editPostArgs(mediaHouse));
   }
 }

@@ -19,18 +19,34 @@ export class GlobalMediaHouseComponent implements OnInit {
   }
 
   submit(mediaHouse: MediaHouse) {
-    this.api.createGlobalMediaHouse(mediaHouse).subscribe(
-      data => {
-        if (data.success) {
-          this.router.navigateByUrl('/superadmin/media_houses');
+    if (mediaHouse.id) {
+      this.api.updateGlobalMediaHouse(mediaHouse).subscribe(
+        data => {
+          if (data.success) {
+            this.notifications.show('Updated');
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
         }
-        else {
-          console.log(data);
-          
-          this.notifications.show(data.msg);
+      );
+    }
+    else {
+      this.api.createGlobalMediaHouse(mediaHouse).subscribe(
+        data => {
+          if (data.success) {
+            this.router.navigateByUrl('/superadmin/media_houses');
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
 }

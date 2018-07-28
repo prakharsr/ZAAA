@@ -95,13 +95,17 @@ export class MediaHouseApiService {
   }
 
   editMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
+    return this.api.patch('/user/mediahouse/', this.editPostArgs(mediaHouse));
+  }
+
+  editPostArgs(mediaHouse: MediaHouse) {
     let scheduling = [];
 
     if (mediaHouse.scheduling) {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
     
-    return this.api.patch('/user/mediahouse/', {
+    return {
       id: mediaHouse.id,
       pullouts: mediaHouse.pullouts,
       OrganizationName: mediaHouse.orgName,
@@ -115,7 +119,7 @@ export class MediaHouseApiService {
       Scheduling: scheduling,
       Remark: mediaHouse.Remark,
       Language: mediaHouse.Language
-    })
+    };
   }
 
   getMediaHouse(id: string) : Observable<MediaHouse> {
