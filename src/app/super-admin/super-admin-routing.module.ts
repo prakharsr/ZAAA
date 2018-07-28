@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
 import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
-import { MediaHouseListComponent, MediaHouseListResolver, MediaHouseComponent } from 'app/directory';
+import { MediaHouseListComponent, MediaHouseListResolver, MediaHouseComponent, MediaHouseResolver } from 'app/directory';
 import { LoginComponent } from 'app/components';
+import { RateCardListComponent, RateCardListResolver, RateCardComponent, RateCardResolver } from '../rate-card';
 
 const routes: Routes = [
   {
@@ -27,7 +28,36 @@ const routes: Routes = [
               list: MediaHouseListResolver
             }
           },
-          { path: 'new', component: MediaHouseComponent }
+          { path: 'new', component: MediaHouseComponent },
+          {
+            path: ':id',
+            component: MediaHouseComponent,
+            resolve: {
+              mediaHouse: MediaHouseResolver
+            }
+          }
+        ]
+      },
+      {
+        path: 'ratecards',
+        data: { global: true },
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          {
+            path: 'list/:page',
+            component: RateCardListComponent,
+            resolve: {
+              list: RateCardListResolver
+            }
+          },
+          { path: 'new', component: RateCardComponent },
+          {
+            path: ':id',
+            component: RateCardComponent,
+            resolve: {
+              mediaHouse: RateCardResolver
+            }
+          }
         ]
       }
     ]

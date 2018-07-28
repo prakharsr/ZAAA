@@ -48,9 +48,6 @@ import {
     ClientListResolver,
     ExecutiveListResolver,
     MediaHouseListResolver
-  ],
-  exports: [
-    MediaHouseComponent
   ]
 })
 export class DirectoryModule { }
