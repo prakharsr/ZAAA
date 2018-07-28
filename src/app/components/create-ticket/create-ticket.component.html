@@ -8,22 +8,16 @@
 
 <div class="container">
   <form (ngSubmit)="submit()" #ticketForm="ngForm">
-    <div class="form-group">
-      <label>Subject</label>
-      <input type="text" class="form-control" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
-    </div>
-
-    <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.touched)" class="text-danger">
-      <div *ngIf="subjectField.errors.required">
+    <mat-form-field>
+      <input matInput type="text" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
+      <mat-error *ngIf="subjectField.errors && subjectField.errors.required">
         Subject is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label>Details</label>
-      <textarea class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" #detailsField="ngModel"></textarea>
-    </div>
+    <mat-form-field>
+      <textarea matInput class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" #detailsField="ngModel"></textarea>
+    </mat-form-field>
 
     <br><br>
 
