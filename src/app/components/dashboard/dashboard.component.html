@@ -59,12 +59,13 @@
             </div>
           </div>
 
-          <ngx-charts-line-chart [results]="roChartResults"
-            [view]="[400, 300]"
-            [xAxis]="true"
-            [yAxis]="true"
-            [autoScale]="true">
-          </ngx-charts-line-chart>
+          <div style="height: 300px">
+            <ngx-charts-line-chart [results]="roChartResults"
+              [xAxis]="true"
+              [yAxis]="true"
+              [autoScale]="true">
+            </ngx-charts-line-chart>
+          </div>
         </div>
       </div>
     </div>

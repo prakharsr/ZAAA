@@ -22,7 +22,7 @@
     "@angular/router": "^5.0.0",
     "@livechat/angular-widget": "0.0.6",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
-    "@swimlane/ngx-charts": "^8.1.0",
+    "@swimlane/ngx-charts": "^7.3.0",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
     "hammerjs": "^2.0.8",
