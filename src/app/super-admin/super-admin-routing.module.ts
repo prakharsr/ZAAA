@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdCategoriesComponent } from './ad-categories/ad-categories.component';
 import { SuperAdminGuard } from './super-admin-guard.service';
 import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admin-dashboard.component';
-import { SuperAdminLoginComponent } from './super-admin-login/super-admin-login.component';
 import { MediaHouseListComponent, MediaHouseListResolver, MediaHouseComponent } from 'app/directory';
+import { LoginComponent } from 'app/components';
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'login', component: SuperAdminLoginComponent }
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

@@ -48,7 +48,6 @@ import {
 
 import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
 import { AuthTokenManager } from './services/auth-token-manager.service';
-import { CommonLoginComponent } from './components/commonlogin/commonlogin.component';
 import { SuperAdminApiService } from './super-admin/super-admin-api.service';
 
 const validators = [
@@ -97,8 +96,7 @@ const validators = [
     CategoriesDetailsComponent,
     InsertionDetailsComponent,
     validators,
-    PaginationComponent,
-    CommonLoginComponent
+    PaginationComponent
   ],
   exports: [
     CommonModule,
@@ -110,8 +108,7 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    NgxChartsModule,
-    CommonLoginComponent
+    NgxChartsModule
   ],
   entryComponents: [
     DialogComponent,
