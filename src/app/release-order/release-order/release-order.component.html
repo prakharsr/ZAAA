@@ -65,7 +65,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="container-fluid">
+    <div [class.container-fluid]="sidenav.opened" [class.container]="!sidenav.opened">
       <form (ngSubmit)="submit()" #roForm="ngForm">
         <div class="row">
           <div class="col-lg col-md-6">
