@@ -12,13 +12,17 @@ export class MediaHouseApiService {
   constructor(private api: ApiService) { }
 
   createMediaHouse(mediaHouse: MediaHouse) : Observable<any> {
+    return this.api.post('/user/mediahouse', this.createPostArgs(mediaHouse));
+  }
+
+  createPostArgs(mediaHouse: MediaHouse) {
     let scheduling = [];
     
     if (mediaHouse.scheduling) {
       mediaHouse.scheduling.forEach(element => scheduling.push(this.schedulingToBody(element)));
     }
 
-    return this.api.post('/user/mediahouse', {
+    return {
       pullouts: mediaHouse.pullouts,
       organizationName: mediaHouse.orgName,
       publicationName: mediaHouse.pubName,
@@ -31,7 +35,7 @@ export class MediaHouseApiService {
       GSTIN: mediaHouse.GSTIN,
       Remark: mediaHouse.Remark,
       Language: mediaHouse.Language
-    });
+    };
   }
 
   private bodyToScheduling(body: any) : MediaHouseScheduling {

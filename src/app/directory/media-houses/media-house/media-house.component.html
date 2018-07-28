@@ -1,6 +1,8 @@
 <div class="container">
   <br>
 
+  <h3 *ngIf="isSuperAdmin" class="mb-3" style="font-weight: lighter">Global Media House</h3>
+
   <form (ngSubmit)="submit()" #dirForm="ngForm">
     <div class="row">
       <div class="col-lg col-md-6">

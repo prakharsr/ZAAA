@@ -3,6 +3,7 @@ import { AuthTokenManager } from 'app/services/auth-token-manager.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from 'environments/environment';
 import { map } from 'rxjs/operators';
+import { MediaHouseApiService, MediaHouse } from '../directory';
 
 @Injectable()
 export class SuperAdminApiService {
@@ -12,7 +13,8 @@ export class SuperAdminApiService {
     return this.authTokenManager.isLoggedIn(this.authTokenKey);
   }
 
-  constructor(private authTokenManager: AuthTokenManager) { }
+  constructor(private authTokenManager: AuthTokenManager,
+    private mediaHouseApi: MediaHouseApiService) { }
 
   private makeUrl(url: string) {
     return environment.adminApiUrl + url;
@@ -73,5 +75,9 @@ export class SuperAdminApiService {
         return data;
       })
     );
+  }
+
+  createGlobalMediaHouse(mediaHouse: MediaHouse) {
+    return this.post('/global/media_house', this.mediaHouseApi.createPostArgs(mediaHouse));
   }
 }
