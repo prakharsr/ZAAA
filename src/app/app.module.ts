@@ -17,7 +17,6 @@ import { AppComponent } from './app.component';
 
 import {
   HomeComponent,
-  LoginComponent,
   RegisterComponent,
   ForgotPswComponent,
   PhoneVerifyComponent,
@@ -43,7 +42,6 @@ import { DashboardApiService } from './services/dashboard-api.service';
     NavbarComponent,
     HomeComponent,
     PhoneVerifyComponent,
-    LoginComponent,
     RegisterComponent,
     ProfileViewComponent,
     DashboardComponent,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogService, OptionsService } from 'app/services';
-import { Category } from 'app/rate-card';
+import { DialogService, NotificationService } from 'app/services';
+import { SuperAdminApiService } from '../super-admin-api.service';
+import { AdCategory } from '../../models/ad-category';
 
 @Component({
   selector: 'app-ad-categories',
@@ -9,58 +10,70 @@ import { Category } from 'app/rate-card';
 })
 export class AdCategoriesComponent implements OnInit {
 
-  constructor(private dialog: DialogService, private options: OptionsService) { }
+  constructor(private dialog: DialogService,
+    private api: SuperAdminApiService,
+    private notification: NotificationService) { }
 
   ngOnInit() {
-    this.categories = this.options.categories;
+    this.api.getCategories(0, null).subscribe(data => {
+      this.categories[0] = data;
+    })
   }
 
-  categories: Category[];
+  categories = [[], [], [], [], [], []];
   
-  selectedCategories: Category[] = [null, null, null, null, null, null];
+  selectedCategories: AdCategory[] = [null, null, null, null, null, null];
 
-  setCategory(index: number, category: Category) {
-    if (this.selectedCategories[index] == category) {
-      return;
-    }
-
+  selectCategory(index: number, category: AdCategory) {
     this.selectedCategories[index] = category;
 
-    for (let i = index + 1; i < this.selectedCategories.length; ++i) {
-      this.setCategory(i, null);
+    let nextIndex = index + 1;
+
+    for (let i = nextIndex; i < this.selectedCategories.length; ++i) {
+      this.categories[i] = null;
+    }
+
+    if (nextIndex < this.selectedCategories.length) {
+      this.selectCategory(nextIndex, null);
+
+      if (category) {
+        this.api.getCategories(nextIndex, category).subscribe(data => {
+          this.categories[nextIndex] = data;
+        });
+      }
     }
   }
 
   inputText : string[] = [null, null, null, null, null, null];
 
   addCategory(index: number) {
-    if (index == 0) {
-      this.categories.push(new Category(this.inputText[index]));
-    }
-    else {
-      this.selectedCategories[index - 1].subcategories.push(new Category(this.inputText[index]));
-    }
+    let item = {
+      level: index,
+      name: this.inputText[index],
+      _id: "",
+      parent: index == 0 ? null : this.selectedCategories[index - 1]._id
+    };
 
-    this.inputText[index] = null;
+    this.api.createCategory(item).subscribe(data => {
+      if (data.success) {
+        this.categories[index].push(item);
+
+        this.inputText[index] = null;
+      }
+      else {
+        console.log(data);
+
+        this.notification.show(data.msg);
+      }
+    });    
   }
 
-  deleteCategory(index: number, category: Category) {
-    this.dialog.confirmDeletion("Are you sure want to delete this category?").subscribe(
+  deleteCategory(index: number, category: AdCategory) {
+    this.dialog.confirmDeletion("Are you sure want to delete this category and all its subcategories?").subscribe(
       confirm => {
         if (!confirm) {
           return;
         }
-
-        if (index == 0) {
-          this.categories.splice(this.categories.indexOf(category), 1);
-        }
-        else {
-          let arr = this.selectedCategories[index - 1].subcategories;
-
-          arr.splice(arr.indexOf(category, 1));          
-        }
-
-        this.setCategory(index, null);
       }
     );
   }

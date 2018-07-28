@@ -34,7 +34,8 @@ import {
   MailingDetailsComponent,
   DialogComponent,
   BillingDetailsComponent,
-  PaginationComponent
+  PaginationComponent,
+  LoginComponent
 } from './components';
 
 import {
@@ -96,7 +97,8 @@ const validators = [
     CategoriesDetailsComponent,
     InsertionDetailsComponent,
     validators,
-    PaginationComponent
+    PaginationComponent,
+    LoginComponent
   ],
   exports: [
     CommonModule,
@@ -108,7 +110,8 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    NgxChartsModule
+    NgxChartsModule,
+    LoginComponent
   ],
   entryComponents: [
     DialogComponent,
