@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { map } from 'rxjs/operators';
 import { MediaHouse } from 'app/directory/media-houses/media-house';
 import { MediaHouseApiService } from 'app/directory/media-houses/media-house-api.service';
+import { AdCategory } from '../models/ad-category';
 
 @Injectable()
 export class SuperAdminApiService {
@@ -84,5 +85,26 @@ export class SuperAdminApiService {
 
   updateGlobalMediaHouse(mediaHouse: MediaHouse) {
     return this.post('/globalmediahouse/update', this.mediaHouseApi.editPostArgs(mediaHouse));
+  }
+
+  getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
+    return this.post('/categories', {
+      level: level,
+      parent: parent._id
+    }).pipe(
+      map(data => {
+        let result: AdCategory[] = [];
+
+        if (data.success) {
+          result = data.categories;
+        }
+
+        return result;
+      })
+    );
+  }
+
+  createCategory(category: AdCategory) {
+    return this.post('/category', category);
   }
 }
