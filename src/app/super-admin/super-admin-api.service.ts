@@ -88,7 +88,7 @@ export class SuperAdminApiService {
   }
 
   getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
-    return this.post('/categories', {
+    return this.post('/category/list', {
       level: level,
       parent: parent == null ? '' : parent._id
     }).pipe(
@@ -105,6 +105,14 @@ export class SuperAdminApiService {
   }
 
   createCategory(category: AdCategory) {
-    return this.post('/category', category);
+    return this.post('/category', category).pipe(
+      map(data => {
+        if (data.success) {
+          category._id = data.category._id;
+        }
+
+        return data;
+      })
+    );
   }
 }
