@@ -1,10 +1,10 @@
 <mat-toolbar>  
   <mat-toolbar-row>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col" *ngIf="!edit">Create Rate Card</div>
-        <div class="col" *ngIf="edit">Edit Rate Card</div>
-      </div>
+      <span *ngIf="!edit">Create </span>
+      <span *ngIf="edit">Edit </span>
+      <span *ngIf="isSuperAdmin">Global </span>
+      <span>Rate Card</span>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
