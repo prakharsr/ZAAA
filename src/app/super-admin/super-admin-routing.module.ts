@@ -19,6 +19,7 @@ import {
   RateCardResolver,
   RateCardDetailsComponent
 } from 'app/rate-card';
+import { CreateAdminComponent } from './create-admin/create-admin.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,13 @@ const routes: Routes = [
               rateCard: RateCardResolver
             }
           }
+        ]
+      },
+      {
+        path: 'admins',
+        children: [
+          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          { path: 'new', component: CreateAdminComponent }
         ]
       }
     ]
