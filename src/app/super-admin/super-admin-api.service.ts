@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { MediaHouse } from 'app/directory/media-houses/media-house';
 import { MediaHouseApiService } from 'app/directory/media-houses/media-house-api.service';
 import { AdCategory } from '../models/ad-category';
+import { RateCard } from 'app/rate-card/rate-card';
+import { RateCardApiService } from 'app/rate-card/rate-card-api.service';
 
 @Injectable()
 export class SuperAdminApiService {
@@ -16,7 +18,8 @@ export class SuperAdminApiService {
   }
 
   constructor(private authTokenManager: AuthTokenManager,
-    private mediaHouseApi: MediaHouseApiService) { }
+    private mediaHouseApi: MediaHouseApiService,
+    private rateCardApi: RateCardApiService) { }
 
   private makeUrl(url: string) {
     return environment.adminApiUrl + url;
@@ -85,6 +88,14 @@ export class SuperAdminApiService {
 
   updateGlobalMediaHouse(mediaHouse: MediaHouse) {
     return this.post('/globalmediahouse/update', this.mediaHouseApi.editPostArgs(mediaHouse));
+  }
+
+  createGlobalRateCard(rateCard: RateCard) {
+    return this.post('/globalratecard/create', this.rateCardApi.createPostArgs(rateCard));
+  }
+
+  updateGlobalRateCard(rateCard: RateCard) {
+    return this.post('/globalratecard/update', this.rateCardApi.editPostArgs(rateCard));
   }
 
   getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
