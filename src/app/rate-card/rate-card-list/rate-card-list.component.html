@@ -49,7 +49,7 @@
             <button mat-menu-item (click)="createReleaseOrder(ratecard)">
               <mat-icon>add</mat-icon> Create Release Order
             </button>
-            <ng-container *ngIf="!global">
+            <ng-container *ngIf="!global || (global && isSuperAdmin)">
               <button mat-menu-item [routerLink]="[isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'edit', ratecard.id]">
                 <mat-icon>edit</mat-icon> Edit
               </button>

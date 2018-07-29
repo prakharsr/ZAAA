@@ -11,6 +11,7 @@ import { RateCard } from '../rate-card';
 import { RateCardApiService } from '../rate-card-api.service';
 import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
+import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
 
 @Component({
   selector: 'app-rate-card-list',
@@ -31,6 +32,7 @@ export class RateCardListComponent implements OnInit {
   isSuperAdmin = false;
 
   constructor(private api: RateCardApiService,
+    private superAdminApi: SuperAdminApiService,
     private dialog: DialogService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -87,7 +89,14 @@ export class RateCardListComponent implements OnInit {
       if (!confirm)
         return;
 
-      this.api.deleteRateCard(ratecard).subscribe(
+      let base: Observable<any>;
+
+      if (this.isSuperAdmin) {
+        base = this.superAdminApi.deleteGlobalRateCard(ratecard);
+      }
+      else base = this.api.deleteRateCard(ratecard);
+
+      base.subscribe(
         data => {
           if (data.success) {
             this.ratecards = this.ratecards.filter(c => c.id !== ratecard.id);

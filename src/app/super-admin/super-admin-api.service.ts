@@ -98,6 +98,10 @@ export class SuperAdminApiService {
     return this.post('/globalratecard/update', this.rateCardApi.editPostArgs(rateCard));
   }
 
+  deleteGlobalRateCard(rateCard: RateCard) {
+    return this.delete('/globalratecard/delete/' + rateCard.id);
+  }
+
   getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
     return this.post('/category/list', {
       level: level,
