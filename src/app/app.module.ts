@@ -35,6 +35,8 @@ import { ReportsModule } from './reports/reports.module';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { DashboardApiService } from './services/dashboard-api.service';
+import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
+import { DirRoutingModule } from './directory/dir-routing.module';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,9 @@ import { DashboardApiService } from './services/dashboard-api.service';
     ReceiptsModule,
     AccountsModule,
     ReportsModule,
+
+    DirRoutingModule,
+    RateCardRoutingModule,
     AppRoutingModule
   ],
   providers: [
