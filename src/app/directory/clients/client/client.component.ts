@@ -94,7 +94,7 @@ export class ClientComponent implements OnInit {
   }
 
   private goToList() {
-    this.router.navigateByUrl('/dir/clients/');
+    this.router.navigateByUrl('/dir/clients');
   }
 
   submit () {
