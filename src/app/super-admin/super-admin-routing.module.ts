@@ -20,6 +20,7 @@ import {
   RateCardDetailsComponent
 } from 'app/rate-card';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
+import { TicketListComponent } from '../components/ticket-list/ticket-list.component';
 
 const routes: Routes = [
   {
@@ -93,6 +94,36 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'list/1', pathMatch: 'full' },
           { path: 'new', component: CreateAdminComponent }
+        ]
+      },
+      {
+        path: 'tickets',
+        children: [
+          { path: '', redirectTo: 'pending/1', pathMatch: 'full' },
+          {
+            path: 'pending',
+            data: { status: 0 },
+            children: [
+              { path: '', redirectTo: '1', pathMatch: 'full' },
+              { path: ':page', component: TicketListComponent }
+            ]
+          },
+          {
+            path: 'resolved',
+            data: { status: 1 },
+            children: [
+              { path: '', redirectTo: '1', pathMatch: 'full' },
+              { path: ':page', component: TicketListComponent }
+            ]
+          },
+          {
+            path: 'disputed',
+            data: { status: 2 },
+            children: [
+              { path: '', redirectTo: '1', pathMatch: 'full' },
+              { path: ':page', component: TicketListComponent }
+            ]
+          }
         ]
       }
     ]

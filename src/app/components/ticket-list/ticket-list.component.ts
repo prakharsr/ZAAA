@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'app/services';
+import { ApiService, NotificationService } from 'app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from '../../models';
+import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
+import { Observable } from '../../../../node_modules/rxjs/Observable';
 
 @Component({
   selector: 'app-ticket-list',
@@ -14,17 +16,34 @@ export class TicketListComponent implements OnInit {
   page = 0;
   pageCount = 0;
 
+  isSuperAdmin = false;
+  status = 0;
+
   constructor(private api: ApiService,
+    private superAdminApi: SuperAdminApiService,
+    private notification: NotificationService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.page = Number(params.get('page'));
+    this.route.data.subscribe((data: { superAdmin: boolean, status: number }) => {
+      this.isSuperAdmin = data.superAdmin;
+      this.status = data.status;
 
-      this.api.queryTickets(1, 0).subscribe(data => {
-        this.list = data.list;
-        this.pageCount = data.pageCount;
+      this.route.paramMap.subscribe(params => {
+        this.page = Number(params.get('page'));
+  
+        let base: Observable<any>;
+
+        if (this.isSuperAdmin) {
+          base = this.superAdminApi.queryTickets(this.page, 0, this.status);
+        }
+        else base = this.api.queryTickets(this.page, 0);
+
+        base.subscribe(data => {
+          this.list = data.list;
+          this.pageCount = data.pageCount;
+        });
       });
     });
   }
@@ -33,4 +52,13 @@ export class TicketListComponent implements OnInit {
     this.router.navigate(['/tickets/list', i]);
   }
 
+  changeStatus(ticket: Ticket, status: number) {
+    this.superAdminApi.ticketStatus(ticket, status).subscribe(data => {
+      if (!data.success) {
+        console.log(data);
+
+        this.notification.show(data.msg);
+      }
+    });
+  }
 }

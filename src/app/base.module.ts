@@ -50,6 +50,8 @@ import {
 import { CategoriesDetailsComponent, InsertionDetailsComponent } from './release-order';
 import { AuthTokenManager } from './services/auth-token-manager.service';
 import { SuperAdminApiService } from './super-admin/super-admin-api.service';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { RouterModule } from '@angular/router';
 
 const validators = [
   VerifyEmailDirective,
@@ -63,6 +65,7 @@ const validators = [
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     NgbModule.forRoot(),
     FormsModule,
     HttpClientModule,
@@ -98,10 +101,12 @@ const validators = [
     InsertionDetailsComponent,
     validators,
     PaginationComponent,
-    LoginComponent
+    LoginComponent,
+    TicketListComponent
   ],
   exports: [
     CommonModule,
+    RouterModule,
     NgbModule,
     FormsModule,
     HttpClientModule,
@@ -110,8 +115,7 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    NgxChartsModule,
-    LoginComponent
+    NgxChartsModule
   ],
   entryComponents: [
     DialogComponent,

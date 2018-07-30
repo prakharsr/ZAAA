@@ -8,6 +8,7 @@ import { MediaHouseApiService } from 'app/directory/media-houses/media-house-api
 import { AdCategory } from '../models/ad-category';
 import { RateCard } from 'app/rate-card/rate-card';
 import { RateCardApiService } from 'app/rate-card/rate-card-api.service';
+import { Ticket, PageData } from '../models';
 
 @Injectable()
 export class SuperAdminApiService {
@@ -129,5 +130,42 @@ export class SuperAdminApiService {
         return data;
       })
     );
+  }
+
+  ticketStatus(ticket: Ticket, status: number) {
+    return this.post('/ticket/status', {
+      id: ticket._id,
+      status: status
+    }).pipe(
+      map(data => {
+        if (data.success) {
+          ticket.status = status;
+        }
+
+        return data;
+      })
+    );
+  }
+
+  queryTickets(page: number, insertionPeriod: number, status: number) : Observable<PageData<Ticket>> {
+    return this.post('/ticket/list', {
+      insertionPeriod: insertionPeriod,
+      page: page,
+      status: status
+    }).map(data => {
+      let tickets: Ticket[] = [];
+
+      if (data.success) {
+        data.tickets.forEach(element => {
+          let ticket = new Ticket();
+
+          Object.assign(ticket, element);
+
+          tickets.push(ticket);
+        });
+      }
+
+      return new PageData<Ticket>(tickets, data.perPage, data.page, data.pageCount);
+    });
   }
 }
