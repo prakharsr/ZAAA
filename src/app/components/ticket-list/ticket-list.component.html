@@ -30,15 +30,25 @@
       <div class="col-auto">
         <span class="text-muted small">{{ticket.createdAt | date}}</span><br>
       </div>
+      <div class="col-auto">
+        <span class="small">
+          <span *ngIf="ticket.status == 0" class="text-warning">Pending</span>
+          <span *ngIf="ticket.status == 1" class="text-success">Resolved</span>
+          <span *ngIf="ticket.status == 2" class="text-danger">Disputed</span>
+        </span>
+      </div>
     </div>
     
     <span class="small">{{ticket.details}}</span><br>
-    <span class="small">
-      <span *ngIf="ticket.status == 0" class="text-warning">Pending</span>
-      <span *ngIf="ticket.status == 1" class="text-success">Resolved</span>
-      <span *ngIf="ticket.status == 2" class="text-danger">Disputed</span>
-    </span>
+
+    <div *ngIf="ticket.status == 0 && isSuperAdmin" class="text-right">
+      <span class="small mr-2">Mark as:</span>
+      <button (click)="changeStatus(ticket, 1)" class="btn btn-success btn-sm">Resolved</button>
+      <button (click)="changeStatus(ticket, 2)" class="btn btn-danger btn-sm">Disputed</button>
+    </div>
   </mat-card>
+
+  <br>
 
   <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
 </div>
