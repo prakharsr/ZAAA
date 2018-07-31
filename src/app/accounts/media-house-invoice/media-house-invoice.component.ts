@@ -39,7 +39,9 @@ export class MediaHouseInvoiceComponent implements OnInit {
   }
 
   roNoFormatter = (releaseOrder: ReleaseOrder) => {
-    this.insertionCheckList = releaseOrder.insertions.map(insertion => {
+    this.insertionCheckList = releaseOrder.insertions
+      .filter(insertion => !insertion.mhimarked)
+      .map(insertion => {
       return {
         insertion: insertion,
         checked: false
