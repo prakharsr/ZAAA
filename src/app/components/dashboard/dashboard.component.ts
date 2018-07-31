@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardApi.getInvoiceData().subscribe(data => {
       if (data.count != 0) {
-        this.invoices1.generated = data.generated * 100 / data.count;
+        this.invoices1.generated = data.generated * 100 / data.totalAmount;
         this.invoices1.pending = 100 - this.invoices1.generated;
       }
     });
