@@ -26,6 +26,6 @@
 
     <br>
 
-    <button class="btn btn-outline-info" (click)="show()">Proceed</button>
+    <button class="btn btn-outline-info" [disabled]="!canProceed" (click)="show()">Proceed</button>
   </div>
 </div>

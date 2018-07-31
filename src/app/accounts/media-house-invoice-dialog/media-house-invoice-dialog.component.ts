@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MediaHouseInvoice } from '../media-house-invoice';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { ReleaseOrder } from 'app/release-order';
 
 @Component({
   selector: 'app-media-house-invoice-dialog',
@@ -10,7 +12,7 @@ export class MediaHouseInvoiceDialogComponent implements OnInit {
 
   details = new MediaHouseInvoice();
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { ro: ReleaseOrder }) { }
 
   ngOnInit() {
   }

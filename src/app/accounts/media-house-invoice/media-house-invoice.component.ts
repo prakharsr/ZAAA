@@ -53,8 +53,14 @@ export class MediaHouseInvoiceComponent implements OnInit {
     return releaseOrder.releaseOrderNO;
   }
 
+  get canProceed() {
+    return this.insertionCheckList.some(insertion => insertion.checked);
+  }
+
   show() {
-    this.dialog.show(MediaHouseInvoiceDialogComponent)
+    this.dialog.show(MediaHouseInvoiceDialogComponent, {
+      data: { ro: this.releaseOrder }
+    })
       .subscribe((invoice: MediaHouseInvoice) => {
         invoice.insertions = this.insertionCheckList
           .filter(item => item.checked)
