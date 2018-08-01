@@ -7,6 +7,7 @@ import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admi
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { RateCardModule } from '../rate-card/rate-card.module';
 import { DirectoryModule } from '../directory/directory.module';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { DirectoryModule } from '../directory/directory.module';
   declarations: [
     AdCategoriesComponent,
     SuperAdminDashboardComponent,
-    CreateAdminComponent
+    CreateAdminComponent,
+    AdminListComponent
   ],
   providers: [
     SuperAdminGuard
