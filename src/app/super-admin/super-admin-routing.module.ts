@@ -115,14 +115,6 @@ const routes: Routes = [
               { path: '', redirectTo: '1', pathMatch: 'full' },
               { path: ':page', component: TicketListComponent }
             ]
-          },
-          {
-            path: 'disputed',
-            data: { status: 2 },
-            children: [
-              { path: '', redirectTo: '1', pathMatch: 'full' },
-              { path: ':page', component: TicketListComponent }
-            ]
           }
         ]
       }

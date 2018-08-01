@@ -14,7 +14,6 @@
   <nav mat-tab-nav-bar class="x-overflow" *ngIf="isSuperAdmin">
     <a mat-tab-link routerLink="/superadmin/tickets/pending" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Pending</a>
     <a mat-tab-link routerLink="/superadmin/tickets/resolved" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Resolved</a>
-    <a mat-tab-link routerLink="/superadmin/tickets/disputed" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">Disputed</a>
   </nav>
 
   <br>
@@ -34,7 +33,6 @@
         <span class="small">
           <span *ngIf="ticket.status == 0" class="text-warning">Pending</span>
           <span *ngIf="ticket.status == 1" class="text-success">Resolved</span>
-          <span *ngIf="ticket.status == 2" class="text-danger">Disputed</span>
         </span>
       </div>
     </div>
@@ -44,7 +42,6 @@
     <div *ngIf="ticket.status == 0 && isSuperAdmin" class="text-right">
       <span class="small mr-2">Mark as:</span>
       <button (click)="changeStatus(ticket, 1)" class="btn btn-success btn-sm">Resolved</button>
-      <button (click)="changeStatus(ticket, 2)" class="btn btn-danger btn-sm">Disputed</button>
     </div>
   </mat-card>
 
