@@ -3,29 +3,45 @@
 <div class="container">
   <div class="row justify-content-end">
     <div class="col-md-9 col-lg-6 col-xl-5">
-      <br><br>
+      <br><br><br>
       <h1 class="display-4">Sign Up</h1>
 
       <form (ngSubmit)="submit()" #signUpForm="ngForm">
-        <mat-form-field>
-          <input matInput type="text" id="name" placeholder="Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
-          <mat-error *ngIf="nameField.errors && nameField.errors.required">
-            Name is required.
-          </mat-error>
-        </mat-form-field>
+        <br>
 
-        <mat-form-field>
-          <input matInput placeholder="Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
-          <mat-hint>An auto-generated password will be sent to this Email.</mat-hint>
-          <mat-error *ngIf="emailField.errors && emailField.errors.required">
-            Email is required.
-          </mat-error>
-          <mat-error *ngIf="emailField.errors && emailField.errors.email">
-            Invalid Email.
-          </mat-error>
-        </mat-form-field>
+        <div class="form-group">
+          <label>Name</label>
 
-        <br><br>
+          <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+          <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+            <div *ngIf="nameField.errors.required">
+              Name is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+
+          <input type="email" class="form-control" placeholder="Enter Email" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+            <div *ngIf="emailField.errors.required">
+              Email is required.
+            </div>
+            <br>
+          </div>
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+            <div *ngIf="emailField.errors.email">
+              Invalid Email.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="text-muted small">An auto-generated password will be sent to this Email.</div>
+
+        <br>
         
         <p class="small">By clicking Sign Up, you agree to our <a routerLink="">Terms and Conditions</a>.</p>
         

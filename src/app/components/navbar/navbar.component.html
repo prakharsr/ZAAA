@@ -71,23 +71,23 @@
       <form (ngSubmit)="loginSubmit()" #loginForm="ngForm">
         <table class="tablewrapper">
           <tr>
-            <td class="text-lighter">Email or Phone</td>
-            <td class="text-lighter">Password</td>
+            <td class="text-lighter small">Email or Phone</td>
+            <td class="text-lighter small">Password</td>
           </tr>
           <tr>
             <td>
-              <input type="text" class="form-control" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
+              <input type="text" class="form-control form-control-sm" placeholder="Enter email/phone" id="emailPhone" [(ngModel)]="emailOrPhone" name="emailPhone" required #emailOrPhoneField="ngModel">
             </td>
             <td>
-              <input type="password" class="form-control" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+              <input type="password" class="form-control form-control-sm" placeholder="Enter password" id="password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
             </td>
             <td>
-              <button class="btn btn-success" [disabled]="!loginForm.form.valid">Login</button>
+              <button class="btn btn-sm btn-success" [disabled]="!loginForm.form.valid">Login</button>
             </td>
           </tr>
           <tr>
             <td>
-              <a class="text-lighter" routerLink="/forgotPassword">Forgot your password?</a>
+              <a class="text-lighter small" routerLink="/forgotPassword">Forgot your password?</a>
             </td>
           </tr>
         </table>
