@@ -8,6 +8,7 @@ import { MediaHouseInvoice } from '../media-house-invoice';
 import { AccountsApiService } from '../accounts-api.service';
 import { MediaHouseInvoiceDialogComponent } from '../media-house-invoice-dialog/media-house-invoice-dialog.component';
 import { of } from 'rxjs/observable/of';
+import { map } from '../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-media-house-invoice',
@@ -34,7 +35,9 @@ export class MediaHouseInvoiceComponent implements OnInit {
   searchRO = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => this.roApi.searchByNo(term))
+      .switchMap(term => this.roApi.searchByNo(term).pipe(
+        map(data => data.filter(ro => !ro.cancelled))
+      ))
       .catch(() => of([]));
   }
 

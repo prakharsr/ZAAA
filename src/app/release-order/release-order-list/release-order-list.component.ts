@@ -275,4 +275,16 @@ export class ReleaseOrderListComponent implements OnInit {
       }
     });
   }
+
+  cancel(releaseOrder: ReleaseOrder) {
+    this.dialog.showYesNo("Confirm Cancellation", "Do you want to cancel this Release Order? This cannot be undone.").subscribe(confirm => {
+      if (confirm) {
+        this.api.cancel(releaseOrder).subscribe(data => {
+          if (!data.success) {
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
+  }
 }
