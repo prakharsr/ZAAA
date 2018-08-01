@@ -39,6 +39,8 @@ export class InvoiceComponent implements OnInit {
   client: Client;
   executive: Executive;
 
+  creditDays = 0;
+
   availableInsertions: AvailableInsertion[] = [];
 
   constructor(private route: ActivatedRoute,
@@ -231,6 +233,8 @@ export class InvoiceComponent implements OnInit {
     this.invoice.FinalTaxAmount = this.finalTaxAmount;
     this.invoice.FinalAmount = this.finalAmount;
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
+    this.invoice.paymentDate = new Date();
+    this.invoice.paymentDate.setDate(this.invoice.paymentDate.getDate() + this.creditDays);
 
     let base: Observable<any> = this.createInvoice();
 

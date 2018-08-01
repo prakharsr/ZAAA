@@ -298,6 +298,17 @@
         </div>
         <div class="col-lg">
           <div class="card mb-5 mat-elevation-z3">
+              <div class="card-header">
+                Other
+              </div>
+            <div class="card-body">
+              <mat-form-field>
+                <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
+                <mat-error *ngIf="creditDaysField.errors && creditDaysField.errors.required">
+                  Credit Days is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
             <div class="card-header">
               Remark
             </div>
