@@ -20,4 +20,11 @@ export class MediaHouseInvoiceDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  get totalAmount() {
+    return this.details.insertions.reduce((a, b) => a + b.netAmount, 0);
+  }
+
+  get totalTax() {
+    return this.details.insertions.reduce((a, b) => a + b.taxAmount, 0);
+  }
 }

@@ -5,6 +5,9 @@ export class Insertion {
 
     mhimarked = false;
     _id = null;
+
+    netAmount = 0;
+    taxAmount = 0;
 }
 
 export class TaxValues

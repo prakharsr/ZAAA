@@ -38,6 +38,16 @@
       <div *ngFor="let insertion of details.insertions" class="small">
         {{insertion.insertionDate | date}}
       </div>
+
+      <br><br>
+
+      <div class="small text-muted">Total Amount</div>
+      <div>₹ {{totalAmount}}</div>
+
+      <br>
+
+      <div class="small text-muted">Total Tax</div>
+      <div>₹ {{totalTax}}</div>
     </div>
     <div class="col-3">
       <div class="mb-2"><div class="text-muted small">RO No:</div> {{data.ro.releaseOrderNO}}</div>
