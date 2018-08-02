@@ -12,7 +12,10 @@ export class MediaHouseInvoiceDialogComponent implements OnInit {
 
   details = new MediaHouseInvoice();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { ro: ReleaseOrder }) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { ro: ReleaseOrder, insertions }) {
+    this.details.releaseOrderId = data.ro.id;
+    this.details.insertions = data.insertions;
+  }
 
   ngOnInit() {
   }

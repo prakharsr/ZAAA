@@ -2,7 +2,7 @@
 
 <mat-dialog-content>
   <div class="row">
-    <div class="col">
+    <div class="col-6">
       <form #mediaHouseInvoiceForm="ngForm">
         <mat-form-field>
           <input matInput placeholder="Invoice Number" [(ngModel)]="details.MHINo" name="invoiceNo" required #invoiceNoField="ngModel">
@@ -32,7 +32,14 @@
         </mat-form-field>
       </form>
     </div>
-    <div class="col-auto">
+    <div class="col-3">
+      <h6>Insertions</h6>
+
+      <div *ngFor="let insertion of details.insertions" class="small">
+        {{insertion.insertionDate | date}}
+      </div>
+    </div>
+    <div class="col-3">
       <div class="mb-2"><div class="text-muted small">RO No:</div> {{data.ro.releaseOrderNO}}</div>
       <div class="mb-2"><div class="text-muted small">Date:</div> {{data.ro.date | date}}</div>
       <div class="mb-2"><div class="text-muted small">Payment Type:</div> {{data.ro.paymentType}}</div>

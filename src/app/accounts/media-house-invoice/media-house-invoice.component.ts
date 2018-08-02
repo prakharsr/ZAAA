@@ -61,24 +61,22 @@ export class MediaHouseInvoiceComponent implements OnInit {
   }
 
   show() {
+    let insertions = this.insertionCheckList
+    .filter(item => item.checked)
+    .map(item => {
+      return{
+        ...item.insertion,
+        insertionDate: this.toDate(item.insertion.date),
+        Amount: 0,
+        collectedAmount: 0,
+        pendingAmount: 0,
+      }
+    });
+
     this.dialog.show(MediaHouseInvoiceDialogComponent, {
-      data: { ro: this.releaseOrder }
-    })
-      .subscribe((invoice: MediaHouseInvoice) => {
-        invoice.insertions = this.insertionCheckList
-          .filter(item => item.checked)
-          .map(item => {
-            return{
-              ...item.insertion,
-              insertionDate: this.toDate(item.insertion.date),
-              Amount: 0,
-              collectedAmount: 0,
-              pendingAmount: 0,
-            }
-          });
-
-        invoice.releaseOrderId = this.selectedRoId;
-
+      data: { ro: this.releaseOrder, insertions: insertions }
+    }).subscribe((invoice: MediaHouseInvoice) => {
+      if (invoice) {
         this.api.createMediaHouseInvoice(invoice).subscribe(data => {
           if (data.success) {
             this.router.navigate(['/accounts/mediahouseinvoice']);
@@ -89,6 +87,7 @@ export class MediaHouseInvoiceComponent implements OnInit {
             this.notifications.show(data.msg);
           }
         });
+      }
     });
   }
   

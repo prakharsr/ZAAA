@@ -128,7 +128,13 @@ export class DashboardComponent implements OnInit {
         this.paidUnpaid.unpaid = data.UnpaidAmount * 100 / total;
       }
     });
+
+    this.res2 = this.dashboardApi.getMhiChequeDetails();
+    this.res4 = this.dashboardApi.getReceiptChequeDetails();
   }
+
+  res2;
+  res4;
 
   private updatePayments() {
     this.dashboardApi.getPaymentsData().subscribe(data => {      
