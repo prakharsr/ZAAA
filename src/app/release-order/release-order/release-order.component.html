@@ -14,28 +14,22 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened="true" position="end">
-    <div class="card bg-info sticky-top" style="top: 50px">
+    <div class="card bg-info sticky-top" style="top: 50px; width: 365px;">
       <div class="card-header text-light small">
         Calculations
       </div>
       <ul class="list-group list-group-flush small">
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount</div>
-            <div class="col-md-8 text-muted">{{netAmount}} ({{taxDisplay}})</div>
-          </div>
+          <div class="small text-muted">Net Amount = Amount + Tax</div>
+          <div>₹ {{displayTotal}} = {{displayAmount}} + {{displayTax}}</div>
         </li>
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount in Words</div>
-            <div class="col-md-8 text-muted">{{options.amountToWords(netAmount)}} ({{taxDisplay}})</div>
-          </div>
+          <div class="small text-muted">Net Amount in Words</div>
+          <div>{{options.amountToWords(netAmount)}} ({{taxDisplay}})</div>
         </li>
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Client Payment</div>
-            <div class="col-md-8 text-muted">{{clientPayment}}</div>
-          </div>
+          <div class="small text-muted">Client Payment</div>
+          <div>₹ {{clientPayment}}</div>
         </li>
       </ul>
       <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">

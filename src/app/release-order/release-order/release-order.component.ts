@@ -960,8 +960,7 @@ export class ReleaseOrderComponent implements OnInit {
   taxes: TaxValues[] = [
     new TaxValues(5),
     new TaxValues(10),
-    new TaxValues(14),
-    new TaxValues(28, 18)
+    new TaxValues(18)
   ];
 
   selectedTax: TaxValues;
@@ -1057,5 +1056,29 @@ export class ReleaseOrderComponent implements OnInit {
         this.notifications.show(data.msg);
       }
     });
+  }
+
+  private round2(num: number) {
+    return Math.round(num * 100) / 100
+  }
+
+  get displayAmount() {
+    let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
+
+    return this.releaseorder.taxIncluded
+      ? this.netAmount
+      : this.round2(100 * this.netAmount / (100 + taxplus));
+  }
+
+  get displayTax() {
+    let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
+
+    return this.releaseorder.taxIncluded
+      ? this.round2(this.netAmount * taxplus / 100)
+      : this.round2(taxplus * this.netAmount / (100 + taxplus));
+  }
+
+  get displayTotal() {
+    return Math.ceil(this.displayAmount + this.displayTax);
   }
 }

@@ -274,8 +274,7 @@ export class InvoiceComponent implements OnInit {
   taxes: TaxValues[] = [
     new TaxValues(5),
     new TaxValues(10),
-    new TaxValues(14),
-    new TaxValues(28, 18)
+    new TaxValues(18)
   ];
 
   get insertionCount() {
