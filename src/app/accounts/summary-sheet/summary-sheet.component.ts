@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageData } from 'app/models';
 import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order';
 import { AccountsApiService, SummarySheetInsertion } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
@@ -24,9 +23,6 @@ class InsertionWithAmount extends InsertionCheckItem {
 })
 export class SummarySheetComponent implements OnInit {
 
-  page: number;
-  pageCount: number;
-
   insertions: InsertionWithAmount[] = [];
 
   mediaHouse;
@@ -44,8 +40,8 @@ export class SummarySheetComponent implements OnInit {
     let now = new Date();
     let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams }}) => {
-      data.resolved.list.list.forEach(element => {
+    this.route.data.subscribe((data: { resolved: { list: MediaHouseInvoiceItem[], search: ReleaseOrderSearchParams }}) => {
+      data.resolved.list.forEach(element => {
         element.entries.forEach(entry => {
           this.insertions.push({
             _id: element._id,
@@ -63,9 +59,6 @@ export class SummarySheetComponent implements OnInit {
           });
         });
       });
-      
-      this.page = data.resolved.list.page;
-      this.pageCount = data.resolved.list.pageCount;
 
       let pub = new MediaHouse();
       pub.pubName = data.resolved.search.mediaHouse;

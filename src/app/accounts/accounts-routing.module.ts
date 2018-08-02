@@ -15,7 +15,6 @@ import {
 } from '.';
 
 import { FirmResolver, FirmUsersResolver } from 'app/services';
-import { ReceiptListResolver } from 'app/receipts';
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
 import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
@@ -183,17 +182,11 @@ const routes: Routes = [
       },
       {
         path: 'summarysheet',
-        children: [
-          { path: '', redirectTo: '1', pathMatch: 'full' },
-          {
-            path: ':page',
-            component: SummarySheetComponent,
-            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-            resolve: {
-              resolved: SummarySheetListResolver
-            }
-          }
-        ]
+        component: SummarySheetComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        resolve: {
+          resolved: SummarySheetListResolver
+        }
       }
     ]
   }

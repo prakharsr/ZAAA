@@ -42,9 +42,8 @@ export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<MediaHouseInvoiceItem[]> {
+  searchSummarySheet(params: ReleaseOrderSearchParams) : Observable<MediaHouseInvoiceItem[]> {
     return this.api.post('/user/summarySheet/search', {
-      page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
       insertionPeriod: params.past
