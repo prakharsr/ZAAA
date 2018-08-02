@@ -3,6 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { UserProfile } from 'app/models';
 import { DashboardApiService } from '../../services/dashboard-api.service';
 
+export class ChartDataItem {
+  name = "";
+  value = 0;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,14 +17,9 @@ export class DashboardComponent implements OnInit {
 
   admin: boolean;
 
-  duesData;
-
   roChartResults: {
     name: string,
-    series: {
-      name: any,
-      value: number
-    }[]
+    series: ChartDataItem[]
   }[];
 
   invoices1 = {
@@ -44,6 +44,11 @@ export class DashboardComponent implements OnInit {
     received: 0
   }
 
+  dueOverdue = {
+    due: 0,
+    overdue: 0
+  }
+
   constructor(private route: ActivatedRoute,
     private dashboardApi: DashboardApiService) { }
 
@@ -53,13 +58,20 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dashboardApi.getInvoiceData().subscribe(data => {
-      if (data.count != 0) {
+      if (data.totalAmount != 0) {
         this.invoices1.generated = data.generated * 100 / data.totalAmount;
         this.invoices1.pending = 100 - this.invoices1.generated;
       }
     });
 
-    this.duesData = this.dashboardApi.getDuesData();
+    this.dashboardApi.getDuesData().subscribe(data => {
+      let total = data.DueAmount + data.OverDueAmount;
+
+      if (total != 0) {
+        this.dueOverdue.due = data.DueAmount * 100 / total;
+        this.dueOverdue.overdue = data.OverDueAmount * 100 / total;
+      }
+    });
 
     this.dashboardApi.getRoChartData().subscribe(data => {
       if (data.success) {

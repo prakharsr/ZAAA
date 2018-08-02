@@ -23,6 +23,12 @@ export class MhiData {
   pendingAmount = 0;
 }
 
+export class DuesData {
+  count: 2;
+  OverDueAmount: 0;
+  DueAmount: 0;
+}
+
 @Injectable()
 export class DashboardApiService {
 
@@ -46,8 +52,18 @@ export class DashboardApiService {
     );
   }
 
-  getDuesData() {
-    return this.api.post('/user/dashboard/clientDues', { });
+  getDuesData(): Observable<DuesData> {
+    return this.api.post('/user/dashboard/clientDues', { }).pipe(
+      map(data => {
+        let result = new DuesData();
+
+        if (data.success) {
+          Object.assign(result, data.receipt[0]);
+        }
+
+        return result;
+      })
+    );
   }
 
   getPaymentsData() : Observable<PaymentsData> {

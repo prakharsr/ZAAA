@@ -34,10 +34,9 @@
 
           <br>
 
-          <span class="text-muted small">NOT IMPLEMENTED</span>
           <div class="progress">
-            <div class="progress-bar bg-warning" style="width: 65%"></div>
-            <div class="progress-bar progress-bar-striped" style="width: 35%"></div>
+            <div class="progress-bar bg-warning" [style.width]="dueOverdue.due + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-danger" [style.width]="dueOverdue.overdue + '%'"></div>
           </div>
 
           <div class="row">
@@ -170,20 +169,8 @@
   <a class="btn btn-outline-primary" routerLink="/profile">Manage Profile</a>
   <a class="btn btn-outline-success" routerLink="/firm">Firm Profile</a>
   <a class="btn btn-outline-warning" routerLink="/coUsers">Co-Users</a>
-  <a class="btn btn-outline-info" routerLink="/dir">Directory</a>
-  <a class="btn btn-outline-danger" routerLink="/ratecards">Rate Cards</a>
-  <a class="btn btn-outline-primary" routerLink="/releaseorders">Release Orders</a>
-  <a class="btn btn-outline-success" routerLink="/releaseorders/check">Insertion Check</a>
-  <a class="btn btn-outline-warning" routerLink="/invoices">Invoices</a>
-  <a class="btn btn-outline-info" routerLink="/receipts">Payment Receipts</a>
   <a class="btn btn-outline-danger" *ngIf="admin" routerLink="/templates">Templates</a>
   <a class="btn btn-outline-dark" routerLink="/accounts">Accounts</a>
   <a class="btn btn-outline-info" routerLink="/reports">Reports</a>
   <a class="btn btn-outline-success" routerLink="/tickets">Tickets</a>
-</div>
-
-<div class="container-fluid">
-  <br><br><br>
-
-  <div><pre>{{duesData | async | json}}</pre></div>
 </div>
