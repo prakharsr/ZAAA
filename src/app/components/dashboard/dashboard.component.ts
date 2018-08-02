@@ -112,11 +112,11 @@ export class DashboardComponent implements OnInit {
     this.updatePayments();
 
     this.dashboardApi.getMhiData().subscribe(data => {
-      let total1 = data.pendingAmount + data.collectedAmount;
+      let total = data.pendingAmount + data.collectedAmount;
 
-      if (total1 != 0) {
-        this.mhi1.pending = data.pendingAmount * 100 / total1;
-        this.mhi1.received = data.collectedAmount * 100 / total1;
+      if (total != 0) {
+        this.mhi1.pending = data.pendingAmount * 100 / total;
+        this.mhi1.received = data.collectedAmount * 100 / total;
       }
     });
 

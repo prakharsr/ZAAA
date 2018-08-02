@@ -113,4 +113,20 @@ export class DashboardApiService {
       })
     );
   }
+
+  getReceiptCheque() {
+    return this.api.post('/user/dashboard/receiptCheque', { });
+  }
+
+  getReceiptChequeDetails() {
+    return this.api.post('/user/dashboard/receiptChequeDetails', { });
+  }
+
+  getMhiChequeDetails() {
+    return this.api.post('/user/dashboard/mediahouseInvoiceChequeDetails', { });
+  }
+
+  getMhiCheque() {
+    return this.api.post('/user/dashboard/mhiCheque', { });
+  }  
 }
