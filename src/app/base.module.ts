@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
 import { LivechatWidgetModule } from '@livechat/angular-widget';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LineChartModule } from '@swimlane/ngx-charts';
 
 import {
   ApiService,
@@ -71,7 +71,7 @@ const validators = [
     HttpClientModule,
     MaterialModule,
     LivechatWidgetModule,
-    NgxChartsModule
+    LineChartModule
   ],
   providers: [
     AuthTokenManager,
@@ -115,7 +115,7 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    NgxChartsModule
+    LineChartModule
   ],
   entryComponents: [
     DialogComponent,
