@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
-import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
 import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
@@ -43,7 +42,7 @@ export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
+  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<MediaHouseInvoiceItem[]> {
     return this.api.post('/user/summarySheet/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -57,7 +56,7 @@ export class AccountsApiService {
           mediahouseinvoices = data.insertions;
         }
 
-        return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
+        return mediahouseinvoices;
       })
     );
   }
