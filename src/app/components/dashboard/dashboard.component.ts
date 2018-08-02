@@ -49,6 +49,11 @@ export class DashboardComponent implements OnInit {
     overdue: 0
   }
 
+  paidUnpaid = {
+    paid: 0,
+    unpaid: 0
+  }
+
   constructor(private route: ActivatedRoute,
     private dashboardApi: DashboardApiService) { }
 
@@ -112,6 +117,15 @@ export class DashboardComponent implements OnInit {
       if (total1 != 0) {
         this.mhi1.pending = data.pendingAmount * 100 / total1;
         this.mhi1.received = data.collectedAmount * 100 / total1;
+      }
+    });
+
+    this.dashboardApi.getPaidUnpaid().subscribe(data => {
+      let total = data.PaidAmount + data.UnpaidAmount;
+
+      if (total != 0) {
+        this.paidUnpaid.paid = data.PaidAmount * 100 / total;
+        this.paidUnpaid.unpaid = data.UnpaidAmount * 100 / total;
       }
     });
   }

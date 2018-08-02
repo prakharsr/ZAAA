@@ -24,9 +24,15 @@ export class MhiData {
 }
 
 export class DuesData {
-  count: 2;
-  OverDueAmount: 0;
-  DueAmount: 0;
+  count = 0;
+  OverDueAmount = 0;
+  DueAmount = 0;
+}
+
+export class PaidUnpaidData {
+  count = 0;
+  UnpaidAmount = 0;
+  PaidAmount = 0;
 }
 
 @Injectable()
@@ -84,6 +90,20 @@ export class DashboardApiService {
     return this.api.post('/user/dashboard/mediahouseinvoice', { }).pipe(
       map(data => {
         let result = new MhiData();
+
+        if (data.success) {
+          Object.assign(result, data.mhinvoices[0]);
+        }
+
+        return result;
+      })
+    );
+  }
+
+  getPaidUnpaid(): Observable<PaidUnpaidData> {
+    return this.api.post('/user/dashboard/paidUnpaid', { }).pipe(
+      map(data => {
+        let result = new PaidUnpaidData();
 
         if (data.success) {
           Object.assign(result, data.mhinvoices[0]);
