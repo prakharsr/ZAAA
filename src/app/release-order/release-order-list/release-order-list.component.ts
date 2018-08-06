@@ -16,6 +16,11 @@ import {
   MediaHouseApiService,
   ExecutiveApiService
 } from 'app/directory';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+
+class RoExpandable extends ReleaseOrder {
+  expanded = false;
+}
 
 @Component({
   selector: 'app-release-order-list',
@@ -24,7 +29,7 @@ import {
 })
 export class ReleaseOrderListComponent implements OnInit {
 
-  releaseOrders: ReleaseOrder[] = [];
+  releaseOrders: RoExpandable[] = [];
 
   pageCount: number;
   page: number;
@@ -72,7 +77,12 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   private init(data: PageData<ReleaseOrder>) {
-    this.releaseOrders = data.list;
+    this.releaseOrders = data.list.map(item => {
+      return {
+        ...item,
+        expanded: false
+      };
+    });
 
     this.pageCount = data.pageCount;
     this.page = data.page;
@@ -286,5 +296,9 @@ export class ReleaseOrderListComponent implements OnInit {
         });
       }
     });
+  }
+
+  toDate(date: NgbDate) {
+    return new Date(date.year, date.month - 1, date.day);
   }
 }

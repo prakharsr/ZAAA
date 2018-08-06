@@ -94,7 +94,7 @@
           <span class="text-muted">Client:</span> {{element.clientName}}
           <br><br>
         </div>
-        <div class="col-auto">
+        <div class="col-auto text-right">
           <mat-menu #releaseOrderMenu="matMenu">
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="pdf(element)">
               <mat-icon>save_alt</mat-icon> Download
@@ -122,8 +122,23 @@
           <button mat-icon-button [matMenuTriggerFor]="releaseOrderMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
+
+          <br><br>
+
+          <button type="button" class="btn btn-light btn-sm text-info" (click)="element.expanded = !element.expanded">
+            <span><mat-icon [class.rotate180]="element.expanded">expand_more</mat-icon></span> {{element.expanded ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
+
+      <table class="table table-sm my-3" *ngIf="element.expanded">
+        <tr>
+          <th>Insertions</th>
+        </tr>
+        <tr *ngFor="let insertion of element.insertions">
+          <td>{{toDate(insertion.date) | date}}</td>
+        </tr>
+      </table>
 
       <button (click)="generate(element)" class="btn btn-outline-success" *ngIf="!element.generated">Generate</button>
     </div>
