@@ -32,9 +32,6 @@ export class PaymentTotalResponse {
 export class SummarySheetInsertion {
   _id = "";
   amount = 0;
-  recieptNumber = "";
-  recieptDate: Date;
-  paymentMode = "";
 }
 
 @Injectable()

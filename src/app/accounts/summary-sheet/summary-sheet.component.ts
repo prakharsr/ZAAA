@@ -11,9 +11,6 @@ import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
 
 class InsertionWithAmount extends InsertionCheckItem {
   amount = 0;
-  receiptNo = "";
-  receiptDate = new Date();
-  paymentMode = "Cash";
 }
 
 @Component({
@@ -28,8 +25,6 @@ export class SummarySheetComponent implements OnInit {
   mediaHouse;
   edition;
 
-  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
-
   constructor(private mediaHouseApi: MediaHouseApiService,
     private route: ActivatedRoute,
     private router: Router,
@@ -37,9 +32,6 @@ export class SummarySheetComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    let now = new Date();
-    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
     this.route.data.subscribe((data: { resolved: { list: MediaHouseInvoiceItem[], search: ReleaseOrderSearchParams }}) => {
       data.resolved.list.forEach(element => {
         element.entries.forEach(entry => {
@@ -52,10 +44,7 @@ export class SummarySheetComponent implements OnInit {
             publicationEdition: entry.publicationEdition,
             publicationName: entry.publicationName,
             insertions: entry.insertions,
-            amount: 0,
-            receiptNo: "",
-            receiptDate: today,
-            paymentMode: "Cash"
+            amount: 0
           });
         });
       });
@@ -116,10 +105,7 @@ export class SummarySheetComponent implements OnInit {
     let mapped: SummarySheetInsertion[] = this.insertions.map(insertion => {
       return {
         _id: insertion.insertions._id,
-        amount: insertion.amount,
-        recieptNumber: insertion.receiptNo,
-        recieptDate: insertion.receiptDate,
-        paymentMode: insertion.paymentMode
+        amount: insertion.amount
       }
     });
 
