@@ -30,6 +30,7 @@ import {
   ExecutiveApiService,
   Pullout
 } from 'app/directory';
+import { PreviewComponent } from '../../components/preview/preview.component';
 
 @Component({
   selector: 'app-release-order',
@@ -176,23 +177,27 @@ export class ReleaseOrderComponent implements OnInit {
 
     console.log(this.releaseorder);
 
-    this.api.previewROPdf(this.releaseorder).subscribe(data => {
-      if (data.msg) {
-        this.notifications.show(data.msg);
-      }
-      else {
-        let blob = new Blob([data], { type: 'application/pdf' });
-        let url = URL.createObjectURL(blob);
+    // this.api.previewROPdf(this.releaseorder).subscribe(data => {
+    //   if (data.msg) {
+    //     this.notifications.show(data.msg);
+    //   }
+    //   else {
+    //     let blob = new Blob([data], { type: 'application/pdf' });
+    //     let url = URL.createObjectURL(blob);
 
-        let a = document.createElement('a');
-        a.setAttribute('style', 'display:none;');
-        document.body.appendChild(a);
-        a.href = url;
+    //     let a = document.createElement('a');
+    //     a.setAttribute('style', 'display:none;');
+    //     document.body.appendChild(a);
+    //     a.href = url;
 
-        a.setAttribute("target", "_blank");
+    //     a.setAttribute("target", "_blank");
 
-        a.click();
-      }
+    //     a.click();
+    //   }
+    // });
+
+    this.api.previewROhtml(this.releaseorder).subscribe(data => {
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe();
     });
   }
 
@@ -1066,16 +1071,16 @@ export class ReleaseOrderComponent implements OnInit {
     let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
 
     return this.releaseorder.taxIncluded
-      ? this.netAmount
-      : this.round2(100 * this.netAmount / (100 + taxplus));
+      ? this.round2(100 * this.netAmount / (100 + taxplus))
+      : this.netAmount;
   }
 
   get displayTax() {
     let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
 
     return this.releaseorder.taxIncluded
-      ? this.round2(this.netAmount * taxplus / 100)
-      : this.round2(taxplus * this.netAmount / (100 + taxplus));
+      ? this.round2(taxplus * this.netAmount / (100 + taxplus))
+      : this.round2(this.netAmount * taxplus / 100);
   }
 
   get displayTotal() {
