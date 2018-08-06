@@ -53,6 +53,7 @@ import { SuperAdminApiService } from './super-admin/super-admin-api.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { RouterModule } from '@angular/router';
 import { PreviewComponent } from './components/preview/preview.component';
+import { TestimonialComponent } from './components/testimonial/testimonial.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -104,7 +105,8 @@ const validators = [
     PaginationComponent,
     LoginComponent,
     TicketListComponent,
-    PreviewComponent
+    PreviewComponent,
+    TestimonialComponent
   ],
   exports: [
     CommonModule,
