@@ -52,6 +52,7 @@ import { AuthTokenManager } from './services/auth-token-manager.service';
 import { SuperAdminApiService } from './super-admin/super-admin-api.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { RouterModule } from '@angular/router';
+import { TestimonialComponent } from './components/testimonial/testimonial.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -102,7 +103,8 @@ const validators = [
     validators,
     PaginationComponent,
     LoginComponent,
-    TicketListComponent
+    TicketListComponent,
+    TestimonialComponent
   ],
   exports: [
     CommonModule,
@@ -122,7 +124,8 @@ const validators = [
     CategoriesDetailsComponent,
     MailingDetailsComponent,
     BillingDetailsComponent,
-    InsertionDetailsComponent
+    InsertionDetailsComponent,
+    TestimonialComponent
   ]
 })
 export class BaseModule { }
