@@ -1,3 +1,11 @@
 .mat-column-action {
   max-width: 24px;
 }
+
+mat-icon {
+  transition: 0.3s;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
