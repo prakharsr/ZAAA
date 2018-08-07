@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { ReleaseOrderSearchParams } from 'app/release-order';
-import { MediaHouseInvoiceItem } from './media-house-invoice-item';
-import { AccountsApiService } from './accounts-api.service';
+import { AccountsApiService, SummarySheetResponse } from './accounts-api.service';
 
 class Result {
-  list: MediaHouseInvoiceItem[];
+  list: SummarySheetResponse[];
   search: ReleaseOrderSearchParams;
 }
 

@@ -4,14 +4,9 @@ import {of} from 'rxjs/observable/of';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order';
-import { AccountsApiService, SummarySheetInsertion } from '../accounts-api.service';
+import { AccountsApiService, SummarySheetInsertion, SummarySheetResponse } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
-
-class InsertionWithAmount extends InsertionCheckItem {
-  amount = 0;
-}
 
 @Component({
   selector: 'app-summary-sheet',
@@ -20,7 +15,7 @@ class InsertionWithAmount extends InsertionCheckItem {
 })
 export class SummarySheetComponent implements OnInit {
 
-  insertions: InsertionWithAmount[] = [];
+  summarySheet: SummarySheetResponse[] = [];
 
   mediaHouse;
   edition;
@@ -32,22 +27,17 @@ export class SummarySheetComponent implements OnInit {
     private notifications: NotificationService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: MediaHouseInvoiceItem[], search: ReleaseOrderSearchParams }}) => {
-      data.resolved.list.forEach(element => {
-        element.entries.forEach(entry => {
-          this.insertions.push({
-            _id: element._id,
-            clientName: entry.clientName,
-            checked: entry.checked,
-            executiveName: entry.executiveName,
-            executiveOrg: entry.executiveOrg,
-            publicationEdition: entry.publicationEdition,
-            publicationName: entry.publicationName,
-            insertions: entry.insertions,
-            amount: 0
+    this.route.data.subscribe((data: { resolved: { list: SummarySheetResponse[], search: ReleaseOrderSearchParams }}) => {
+      this.summarySheet = data.resolved.list;
+
+      if (this.summarySheet.entries) {
+        this.summarySheet.forEach(item => {
+          item.entries.forEach(entry => {
+            entry.SheetAmount = 0; // This will be filled here
+            entry.checked = false;
           });
         });
-      });
+      }
 
       let pub = new MediaHouse();
       pub.pubName = data.resolved.search.mediaHouse;
@@ -57,8 +47,8 @@ export class SummarySheetComponent implements OnInit {
     });
   }
 
-  search(pageNo: number) {
-    this.router.navigate(['/accounts/summarysheet/', pageNo], {
+  search() {
+    this.router.navigate(['/accounts/summarysheet/'], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, 0)
     })
   }
@@ -102,12 +92,22 @@ export class SummarySheetComponent implements OnInit {
   }
 
   submit() {
-    let mapped: SummarySheetInsertion[] = this.insertions.map(insertion => {
-      return {
-        _id: insertion.insertions._id,
-        amount: insertion.amount
-      }
+    let mapped: SummarySheetInsertion[] = [];
+
+    this.summarySheet.forEach(item => {
+      item.entries.filter(entry => entry.checked).forEach(entry => {
+        mapped.push({
+          _id: entry._id,
+          amount: entry.SheetAmount
+        });
+      })
     });
+
+    if (mapped.length == 0) {
+      this.notifications.show('Nothing to submit');
+
+      return;
+    }
 
     this.api.generateSummarySheet(mapped).subscribe(data => {
       if (data.success) {

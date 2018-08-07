@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { ApiService } from 'app/services';
 import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
-import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
 import { CreditDebitNote } from './credit-debit-note';
 import { MediaHouseInvoice } from '.';
@@ -34,25 +33,51 @@ export class SummarySheetInsertion {
   amount = 0;
 }
 
+export class SummarySheetResponse {
+  collectedAmount = 0;
+  count = 0;
+  pendingAmount = 0;
+
+  entries: {
+    Amount: number;
+    MHIGrossAmount: number,
+    MHINo: string,
+    collectedAmount: number,
+    insertionDate: Date,
+    pendingAmount: number,
+
+    SheetAmount: number, // will be filled in summary sheet view
+    checked: boolean,
+
+    _id: string
+  }[] = [];
+
+  _id = {
+    roId: "",
+    publicationName: "",
+    publicationEdition: ""
+  }
+}
+
 @Injectable()
 export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchSummarySheet(params: ReleaseOrderSearchParams) : Observable<MediaHouseInvoiceItem[]> {
+  searchSummarySheet(params: ReleaseOrderSearchParams) : Observable<SummarySheetResponse[]> {
     return this.api.post('/user/summarySheet/search', {
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
       insertionPeriod: params.past
     }).pipe(
       map(data => {
-        let mediahouseinvoices : MediaHouseInvoiceItem[] = [];
+        let result: SummarySheetResponse[] = [];
 
         if (data.success) {
-          mediahouseinvoices = data.insertions;
+          result = data.insertions;
         }
 
-        return mediahouseinvoices;
+        return result;
       })
     );
   }

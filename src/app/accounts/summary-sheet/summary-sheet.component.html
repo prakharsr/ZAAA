@@ -25,38 +25,43 @@
     </div>
 
     <div class="col-auto">
-      <button class="btn btn-info" (click)="search(1)">
+      <button class="btn btn-info" (click)="search()">
         <mat-icon>search</mat-icon>
       </button>
     </div>
   </div>
 
-  <br><br>
-
   <form #ssForm="ngForm" (ngSubmit)="submit()">
-    <button type="submit" class="btn btn-success" [disabled]="!ssForm.form.valid">Submit</button>
+    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid">
+      <mat-icon>check</mat-icon>
+    </button>
 
-    <br><br>
+    <br>
 
-    <div *ngFor="let insertion of insertions">
+    <div *ngFor="let item of summarySheet; index as i">
       <div class="card mb-3 mat-elevation-z3">
         <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <div class="text-muted small">Publication</div>
-              {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
-            </div>
-            <div class="col-auto">
-              {{insertion.insertions.insertionDate | date}}
-            </div>
-          </div>
+          <div class="text-muted small">Publication</div>
+          {{item._id.publicationName}} - {{item._id.publicationEdition}}
 
-          <br>
+          <br><br>
 
-          <div class="form-group">
-            <label>Amount</label>
-            <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>
-          </div>
+          <table class="table table-sm">
+            <tr>
+              <th></th>
+              <th>Date</th>
+              <th>Amount</th>
+            </tr>
+            <tr *ngFor="let entry of item.entries; index as j">
+              <td>
+                <mat-checkbox name="checked-{{i}}-{{j}}" [(ngModel)]="entry.checked"></mat-checkbox>
+              </td>
+              <td>{{entry.insertionDate | date}}</td>
+              <td>
+                <input type="number" name="amount-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
