@@ -242,6 +242,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.releaseOrderNO = "";
         this.releaseorder.id = "";
         this.releaseorder.generated = false;
+        this.releaseorder.cancelled = false;
         this.releaseorder.date = new Date();
 
         this.releaseorder.insertions = this.releaseorder.insertions.map(insertion => new Insertion(insertion.date));
@@ -651,7 +652,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.pullouts = result.pullouts;
     }
 
-    this.mediaType = result.mediaType;
+    if (this.mediaType != result.mediaType) {
+      this.mediaType = result.mediaType;
+    }
   }
 
   get mediaType() {
