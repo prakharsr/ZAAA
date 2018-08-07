@@ -17,6 +17,10 @@
   
   <br>
 
+  <div *ngIf="insertionCheckList.length == 0" class="text-muted">
+    No Pending Insertions
+  </div>
+
   <div *ngIf="insertionCheckList.length">
     <h3>Select Insertions</h3>
     <br>
