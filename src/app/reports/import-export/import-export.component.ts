@@ -37,20 +37,51 @@ export class ImportExportComponent implements OnInit {
     });
   }
 
+  private import(base: Observable<any>) {
+    base.subscribe(
+      data => {
+        if (data.success) {
+          this.notifications.show('Imported successfully');
+        }
+        else {
+          console.log(data);
+
+          this.notifications.show(data.msg);
+        }
+      }
+    );
+  }
+
   mhExport() {
     this.download('media-house-export.xlsx', this.api.mediaHouseExport());
+  }
+
+  mhImport(files: FileList) {
+    this.import(this.api.mediaHouseImport(files.item(0)));
   }
 
   clientExport() {
     this.download('client-export.xlsx', this.api.clientExport());
   }
 
+  clientImport(files: FileList) {
+    this.import(this.api.clientImport(files.item(0)));
+  }
+
   executiveExport() {
     this.download('executive-export.xlsx', this.api.executiveExport());
   }
 
+  executiveImport(files: FileList) {
+    this.import(this.api.executiveImport(files.item(0)));
+  }
+
   rateCardExport() {
     this.download('rate-card-export.xlsx', this.api.ratecardExport());
+  }
+
+  rateCardImport(files: FileList) {
+    this.import(this.api.ratecardImport(files.item(0)));
   }
 
 }

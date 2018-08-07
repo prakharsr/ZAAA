@@ -14,8 +14,23 @@
   <h3 style="font-weight: lighter">Excel Import</h3>
   <br>
 
-  <button class="btn btn-outline-info disabled">Media Houses</button>
-  <button class="btn btn-outline-info disabled">Clients</button>
-  <button class="btn btn-outline-info disabled">Executives</button>
-  <button class="btn btn-outline-info disabled">Rate Cards</button>
+  <label for="mh-upload" class="btn btn-outline-info">
+    Media Houses
+  </label>
+  <input type="file" id="mh-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="mhImport($event.target.files)"/>
+
+  <label for="client-upload" class="btn btn-outline-info">
+    Clients
+  </label>
+  <input type="file" id="client-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="clientImport($event.target.files)"/>
+
+  <label for="executive-upload" class="btn btn-outline-info">
+    Executives
+  </label>
+  <input type="file" id="executive-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="executiveImport($event.target.files)"/>
+
+  <label for="rc-upload" class="btn btn-outline-info">
+    Rate Cards
+  </label>
+  <input type="file" id="rc-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="rateCardImport($event.target.files)"/>
 </div>
