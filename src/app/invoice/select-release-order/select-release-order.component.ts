@@ -91,7 +91,7 @@ export class SelectReleaseOrderComponent implements OnInit {
     
     let queryParams = new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, '', '', this.pastDays);
 
-    this.roApi.searchReleaseOrders(1, queryParams, true, this.roNo).subscribe(data => {
+    this.roApi.searchReleaseOrders(1, queryParams, true, this.roNo, true).subscribe(data => {
       this.releaseOrders = data.list.filter(ro => !ro.cancelled);
     });
   }
