@@ -134,9 +134,15 @@
       <table class="table table-sm my-3" *ngIf="element.expanded">
         <tr>
           <th>Insertions</th>
+          <th></th>
         </tr>
         <tr *ngFor="let insertion of element.insertions">
           <td>{{toDate(insertion.date) | date}}</td>
+          <td class="text-right">
+            <span *ngIf="insertion.marked" class="text-success">
+              <mat-icon>check</mat-icon>
+            </span>
+          </td>
         </tr>
       </table>
 
