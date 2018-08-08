@@ -140,13 +140,19 @@
               <div class="col-auto">
                 <h6>Select Insertions</h6>
                 
-                <button mat-raised-button color="primary" type="button" (click)="selectAllInsertions()">Select All</button>
+                <button mat-raised-button color="primary" type="button" class="mb-3" (click)="selectAllInsertions()">Select All</button>
               </div>
               <div class="col">
                 <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
                   <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
                     {{toDate(item.insertion.date) | date}}
                   </mat-checkbox>
+                </span>
+
+                <br>
+
+                <span class="mr-3 mb-3 text-muted" *ngFor="let item of markedInsertions">
+                  {{item | date}}
                 </span>
               </div>
             </div>

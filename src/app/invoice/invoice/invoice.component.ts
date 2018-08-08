@@ -42,6 +42,7 @@ export class InvoiceComponent implements OnInit {
   creditDays = 0;
 
   availableInsertions: AvailableInsertion[] = [];
+  markedInsertions: Date[] = [];
 
   constructor(private route: ActivatedRoute,
     private notifications: NotificationService,
@@ -88,6 +89,7 @@ export class InvoiceComponent implements OnInit {
       if (!element.marked) {
         this.availableInsertions.push(new AvailableInsertion(element));
       }
+      else this.markedInsertions.push(this.toDate(element.date));
     });
   }
 
