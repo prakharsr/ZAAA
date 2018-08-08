@@ -664,7 +664,16 @@ export class ReleaseOrderComponent implements OnInit {
   set mediaType(mediaType: string) {
     this.releaseorder.mediaType = mediaType;
 
-    this.releaseorder.adType = this.adTypes[0];
+    this.adType = this.adTypes[0];
+  }
+
+  get adType() {
+    return this.releaseorder.adType;
+  }
+
+  set adType(adType: string) {
+    this.releaseorder.adType = adType;
+    this.releaseorder.unit = this.units[0];
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
