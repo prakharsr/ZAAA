@@ -171,8 +171,10 @@ export class InvoiceComponent implements OnInit {
   get roDiscountedAmount() {
     let amount = this.releaseOrder.adGrossAmount;
 
-    amount -= (this.releaseOrder.agencyDiscount1 * this.releaseOrder.adGrossAmount) / 100;
-    amount -= (this.releaseOrder.agencyDiscount2 * this.releaseOrder.adGrossAmount) / 100;
+    amount -= (this.releaseOrder.agencyDiscount1 * amount) / 100;
+    amount -= (this.releaseOrder.agencyDiscount2 * amount) / 100;
+
+    amount -= (this.releaseOrder.publicationDiscount * amount) / 100;
 
     return amount;
   }
@@ -202,6 +204,10 @@ export class InvoiceComponent implements OnInit {
     }
 
     return tax;
+  }
+
+  get pubDiscountDisplay() {
+    return this.releaseOrder.publicationDiscount + "%";
   }
 
   get roTaxDisplay() {
