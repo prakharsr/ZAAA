@@ -502,13 +502,13 @@
                   <span *ngIf="!profile.twitter">--</span>
                 </div>
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <div class="text-muted small">Others</div>
                 <div>
                   <a *ngIf="profile.other" href="{{profile.other}}" target="_blank">{{profile.other || '--'}}</a>
                   <span *ngIf="!profile.other">--</span>
                 </div>
-              </div>
+              </div> -->
             </ng-container>
   
             <ng-container *ngIf="editSocialDetails">
@@ -520,9 +520,9 @@
                 <input matInput type="text" name="twitter" placeholder="Twitter Link" [(ngModel)]="profile.twitter" #twitterField="ngModel">
               </mat-form-field>
             
-              <mat-form-field>
+              <!-- <mat-form-field>
                 <input matInput type="text" name="others" placeholder="Other social Link" [(ngModel)]="profile.other" #otherField="ngModel">
-              </mat-form-field>
+              </mat-form-field> -->
             </ng-container>
           </div>
         </div>
