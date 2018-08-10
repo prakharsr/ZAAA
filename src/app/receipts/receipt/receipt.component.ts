@@ -20,6 +20,8 @@ export class ReceiptComponent implements OnInit {
   client: Client;
   executive: Executive;
 
+  pastReceipts: PaymentReceipt[] = [];
+
   @Output() invoiceSelected = new EventEmitter();
 
   @Input() set invoiceDir(invoiceDir: InvoiceDir) {
@@ -39,6 +41,8 @@ export class ReceiptComponent implements OnInit {
 
     this.receipt.paymentType = this.paymentTypes[0];
     this.receipt.paymentAmount = this.invoice.pendingAmount;
+
+    this.api.getPayedReceipts(this.invoice).subscribe(data => this.pastReceipts = data);
   }
 
   ngOnInit() { }
