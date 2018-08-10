@@ -41,8 +41,16 @@
     <div *ngFor="let item of summarySheet; index as i">
       <div class="card mb-3 mat-elevation-z3">
         <div class="card-body">
-          <div class="text-muted small">Publication</div>
-          {{item._id.publicationName}} - {{item._id.publicationEdition}}
+          <div class="row">
+            <div class="col">
+              <div class="text-muted small">Publication</div>
+              {{item._id.publicationName}} - {{item._id.publicationEdition}}
+            </div>
+            <div class="col-auto text-right">
+              <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>
+              <span class="text-muted">Pending Amount</span>: ₹ {{item.pendingAmount}}
+            </div>
+          </div>
 
           <br><br>
 
@@ -50,16 +58,24 @@
             <tr>
               <th></th>
               <th>Date</th>
+              <th>Total Amount</th>
+              <th>Collected Amount</th>
+              <th>Pending Amount</th>
               <th>Amount</th>
+              <th>Balance</th>
             </tr>
             <tr *ngFor="let entry of item.entries; index as j">
               <td>
                 <mat-checkbox name="checked-{{i}}-{{j}}" [(ngModel)]="entry.checked"></mat-checkbox>
               </td>
               <td>{{entry.insertionDate | date}}</td>
+              <td>₹ {{entry.Amount}}</td>
+              <td>₹ {{entry.collectedAmount}}</td>
+              <td>₹ {{entry.pendingAmount}}</td>
               <td>
                 <input type="number" name="amount-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>
+              <td>₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
             </tr>
           </table>
         </div>
