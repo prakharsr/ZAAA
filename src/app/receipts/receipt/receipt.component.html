@@ -5,10 +5,19 @@
     <div class="col-md">
       <form (ngSubmit)="submit()" #receiptForm="ngForm">
         <mat-card class="mat-elevation-z3">
-          <p><strong>Pending Amount:</strong> ₹ {{invoice.pendingAmount}}</p>
-        
+          <div class="row">
+            <div class="col">
+              <div class="text-muted small">Total Amount</div>
+              <div class="mb-2">₹ {{invoice.FinalAmount}}</div>
+            </div>
+            <div class="col-auto">
+              <div class="text-muted small">Pending Amount</div>
+              <div class="mb-2">₹ {{invoice.pendingAmount}}</div>
+            </div>
+          </div>
+
           <br>
-        
+
           <mat-form-field>
             <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
             <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
@@ -16,10 +25,10 @@
             </mat-error>
           </mat-form-field>
       
-          <br>
-    
-          <strong>Payment Details</strong>
           <br><br>
+    
+          <h5>Payment Details</h5>
+          <br>
     
           <mat-form-field>
             <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
