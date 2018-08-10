@@ -213,4 +213,17 @@ export class ReceiptListComponent implements OnInit {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
   }
+
+  cancel(receipt: PaymentReceipt) {
+    this.api.cancel(receipt).subscribe(data => {
+      if (data.success) {
+        this.notifications.show('Cancelled');
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    });
+  }
 }

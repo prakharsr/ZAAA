@@ -89,6 +89,11 @@
       <div class="row">
         <div class="col">
           <a [routerLink]="['/receipts', receipt.id]">{{receipt.receiptNO}}</a>
+
+          <ng-container *ngIf="receipt.isCancelled">
+            <br>
+            <span class="text-danger">CANCELLED</span>
+          </ng-container>
         </div>
         <div class="col-auto">
           <mat-menu #receiptMenu="matMenu">
@@ -97,6 +102,9 @@
             </button>
             <button mat-menu-item (click)="sendMsg(receipt)">
               <mat-icon>mail</mat-icon> Send Email
+            </button>
+            <button mat-menu-item (click)="cancel(receipt)" *ngIf="!advance">
+              <mat-icon>cancel</mat-icon> Cancel
             </button>
           </mat-menu>
           
