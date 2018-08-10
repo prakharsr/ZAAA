@@ -12,6 +12,8 @@ export class CreateReceiptComponent implements OnInit {
   advance = false;
   invoiceDir: InvoiceDir;
 
+  allowAdvance = true;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
