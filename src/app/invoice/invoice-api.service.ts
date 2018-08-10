@@ -34,7 +34,7 @@ export class InvoiceApiService {
     return this.api.get('/user/invoice/' + id).map(data => data.success ? this.bodyToInvoice(data.invoice) : null);
   }
 
-  searchInvoices(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<Invoice>> {
+  searchInvoices(page: number, params: ReleaseOrderSearchParams, hasPendingAmount = false) : Observable<PageData<Invoice>> {
     return this.api.post('/user/invoice/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -42,7 +42,8 @@ export class InvoiceApiService {
       clientName: params.client,
       executiveName: params.executive,
       executiveOrg: params.executiveOrg,
-      date: params.past
+      date: params.past,
+      hasPendingAmount: hasPendingAmount
     }).pipe(
       map(data => {
         let invoices : Invoice[] = [];

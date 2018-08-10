@@ -90,7 +90,7 @@ export class SelectInvoiceComponent implements OnInit {
     
     let queryParams = new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, '', '', this.pastDays);
 
-    this.invoiceApi.searchInvoices(1, queryParams).subscribe(data => {
+    this.invoiceApi.searchInvoices(1, queryParams, true).subscribe(data => {
       this.invoices = data.list;
     });
   }
