@@ -54,7 +54,7 @@
 
           <br><br>
 
-          <table class="table table-sm">
+          <table class="table table-sm table-responsive-md">
             <tr>
               <th></th>
               <th>Date</th>
@@ -68,14 +68,14 @@
               <td>
                 <mat-checkbox name="checked-{{i}}-{{j}}" [(ngModel)]="entry.checked"></mat-checkbox>
               </td>
-              <td>{{entry.insertionDate | date}}</td>
-              <td>₹ {{entry.Amount}}</td>
-              <td>₹ {{entry.collectedAmount}}</td>
-              <td>₹ {{entry.pendingAmount}}</td>
+              <td style="white-space: nowrap;">{{entry.insertionDate | date}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.Amount}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.collectedAmount}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.pendingAmount}}</td>
               <td>
                 <input type="number" name="amount-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>
-              <td>₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
             </tr>
           </table>
         </div>

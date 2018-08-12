@@ -50,15 +50,15 @@
 
       <br><br>
 
-      <table class="table table-sm">
+      <table class="table table-sm  table-responsive-md">
         <tr>
           <th>Insertion Date</th>
           <th>Payment Mode</th>
-          <th>Receipt No</th>
+          <th style="white-space: nowrap;">Receipt No</th>
           <th>Receipt Date</th>
         </tr>
         <tr *ngFor="let entry of item.entries; index as j">
-          <td>{{entry.insertionDate | date}}</td>
+          <td style="white-space: nowrap;">{{entry.insertionDate | date}}</td>
           <td>{{entry.paymentMode}}</td>
           <td>
             <input type="text" name="rno-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptNumber" placeholder="Receipt No">
