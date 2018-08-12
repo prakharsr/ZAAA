@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountsApiService, MhReceiptResponse } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
 import { ReleaseOrderSearchParams } from 'app/release-order';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-media-house-receipt',
@@ -20,7 +22,8 @@ export class MediaHouseReceiptComponent implements OnInit {
   constructor(private mediaHouseApi: MediaHouseApiService,
     private route: ActivatedRoute,
     private api: AccountsApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: MhReceiptResponse[], search: ReleaseOrderSearchParams }}) => {
@@ -32,6 +35,50 @@ export class MediaHouseReceiptComponent implements OnInit {
 
       this.mediaHouse = this.edition = pub;
     });
+  }
+
+  search() {
+    this.router.navigate(['/accounts/mediahousereceipts/'], {
+      queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, 0)
+    })
+  }
+
+  searchMediaHouse = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHouses(term))
+      .catch(() => of([]));
+  }
+
+  private get mediaHouseName() {
+    if (this.mediaHouse instanceof String) {
+      return this.mediaHouse;
+    }
+
+    return this.mediaHouse ? this.mediaHouse.pubName : null;
+  }
+
+  searchEdition = (text: Observable<string>) => {
+    return text.debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => this.mediaHouseApi.searchMediaHousesByEdition(term, this.mediaHouseName))
+      .catch(() => of([]));
+  }
+
+  editionFormatter = (mediaHouse: MediaHouse) => mediaHouse.address.edition;
+
+  mediaHouseNameFormatter = (mediaHouse: MediaHouse) => {
+    this.edition = mediaHouse;
+
+    return mediaHouse.pubName;
+  }
+
+  private get editionName() {
+    if (this.edition instanceof String) {
+      return this.edition;
+    }
+
+    return this.edition ? (this.edition.address ? this.edition.address.edition : null) : null;
   }
 
 }

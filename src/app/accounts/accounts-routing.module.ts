@@ -56,6 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'mediahousereceipts',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         component: MediaHouseReceiptComponent,
         resolve: {
           resolved: MhReceiptListResolver

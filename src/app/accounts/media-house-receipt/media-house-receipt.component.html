@@ -1,7 +1,33 @@
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
 <div class="container">
   <br>
 
   <h3 style="font-weight: lighter">Media House Receipts</h3>
+
+  <br>
+
+  <div class="form-row">
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <br>
 
