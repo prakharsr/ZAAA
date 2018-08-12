@@ -1014,6 +1014,8 @@ export class ReleaseOrderComponent implements OnInit {
     obj.address.state = this.releaseorder.publicationState;
     obj.GSTIN = this.releaseorder.publicationGSTIN;
     obj.mediaType = this.releaseorder.mediaType;
+    let pullout = this.dropdownPullOutName == this.others ? this.customPullOutName : this.dropdownPullOutName;
+    obj.pullouts = [{ Name: pullout, Frequency: "Daily", Language: "", Remark: "" }];
 
     this.mediaHouseApi.createMediaHouse(obj).subscribe(data => {
       if (data.success) {
