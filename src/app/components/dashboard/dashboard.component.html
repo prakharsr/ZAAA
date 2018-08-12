@@ -216,14 +216,12 @@
               <th>Amount</th>
               <th>Bank Acc Name</th>
             </tr>
-            <ng-container *ngFor="let parent of mhiCheques">
-              <tr *ngFor="let item of parent.entries">
-                <td>{{item.ChequeNo}}</td>
-                <td>{{item.ChequeDate | date}}</td>
-                <td>₹ {{item.ChequeAmount}}</td>
-                <td>{{item.ChequeBank}}</td>
-              </tr>
-            </ng-container>
+            <tr *ngFor="let item of mhiCheques">
+              <td>{{item._id.ChequeNo}}</td>
+              <td>{{item._id.ChequeDate | date}}</td>
+              <td>₹ {{item._id.ChequeAmount}}</td>
+              <td>{{item._id.ChequeBank}}</td>
+            </tr>
           </table>
         </div>
       </div>
