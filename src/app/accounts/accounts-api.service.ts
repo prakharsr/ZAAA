@@ -59,6 +59,34 @@ export class SummarySheetResponse {
   }
 }
 
+export class MhReceiptResponse {
+  _id: {
+    roId: "",
+    publicationName: "",
+    publicationEdition: "",
+    MHINo: ""
+  }
+  count: 1;
+  pendingAmount: 0;
+  collectedAmount: 0;
+  entries: {
+    insertionDate: Date,
+    Amount: number,
+    pendingAmount: number,
+    collectedAmount: number,
+    receiptNumber: number,
+    receiptDate: Date,
+    paymentMode: string,
+    paymentDate: Date,
+    paymentAmount: number,
+    paymentNo: string,
+    paymentBankName: string,
+    _id: string,
+    MHIDate: Date,
+    MHIGrossAmount: number
+  } []
+}
+
 @Injectable()
 export class AccountsApiService {
 
@@ -72,6 +100,24 @@ export class AccountsApiService {
     }).pipe(
       map(data => {
         let result: SummarySheetResponse[] = [];
+
+        if (data.success) {
+          result = data.insertions;
+        }
+
+        return result;
+      })
+    );
+  }
+
+  searchMediaHouseReceipts(params: ReleaseOrderSearchParams) : Observable<MhReceiptResponse[]> {
+    return this.api.post('/user/mediahouseReceipts/search', {
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      insertionPeriod: params.past
+    }).pipe(
+      map(data => {
+        let result: MhReceiptResponse[] = [];
 
         if (data.success) {
           result = data.insertions;

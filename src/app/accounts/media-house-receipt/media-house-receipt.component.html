@@ -1,0 +1,47 @@
+<div class="container">
+  <br>
+
+  <h3 style="font-weight: lighter">Media House Receipts</h3>
+
+  <br>
+
+  <div class="card mat-elevation-z3 mb-3" *ngFor="let item of list; index as i">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto">
+          <div class="text-muted small">MHI No</div>
+          {{item._id.MHINo}}
+        </div>
+        <div class="col">
+          <div class="text-muted small">Publication</div>
+          {{item._id.publicationName}} - {{item._id.publicationEdition}}
+        </div>
+        <div class="col-auto text-right">
+          <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>
+          <span class="text-muted">Pending Amount</span>: ₹ {{item.pendingAmount}}
+        </div>
+      </div>
+
+      <br><br>
+
+      <table class="table table-sm">
+        <tr>
+          <th>Insertion Date</th>
+          <th>Payment Mode</th>
+          <th>Receipt No</th>
+          <th>Receipt Date</th>
+        </tr>
+        <tr *ngFor="let entry of item.entries; index as j">
+          <td>{{entry.insertionDate | date}}</td>
+          <td>{{entry.paymentMode}}</td>
+          <td>
+            <input type="text" name="rno-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptNumber" placeholder="Receipt No">
+          </td>
+          <td>
+            <input type="date" name="rdate-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptDate" placeholder="Receipt Date">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

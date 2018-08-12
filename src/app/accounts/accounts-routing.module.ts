@@ -24,6 +24,8 @@ import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
 import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
 import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
+import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
+import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -51,6 +53,13 @@ const routes: Routes = [
           },
           { path: 'new', component: MediaHouseInvoiceComponent }
         ]
+      },
+      {
+        path: 'mediahousereceipts',
+        component: MediaHouseReceiptComponent,
+        resolve: {
+          resolved: MhReceiptListResolver
+        }
       },
       {
         path: 'clientreceipts',
