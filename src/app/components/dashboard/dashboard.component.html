@@ -195,7 +195,39 @@
         </div>
       </div>
     </div>
-    <div class="col-md"></div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Media House Invoice Cheques</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+            </div>
+          </div>
+
+          <br>
+
+          <table class="table table-sm">
+            <tr>
+              <th>No</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Bank Acc Name</th>
+            </tr>
+            <ng-container *ngFor="let parent of mhiCheques">
+              <tr *ngFor="let item of parent.entries">
+                <td>{{item.ChequeNo}}</td>
+                <td>{{item.ChequeDate | date}}</td>
+                <td>₹ {{item.ChequeAmount}}</td>
+                <td>{{item.ChequeBank}}</td>
+              </tr>
+            </ng-container>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -208,5 +240,3 @@
   <a class="btn btn-outline-success" routerLink="/import-export">Import Export</a>
   <a class="btn btn-outline-success" routerLink="/testimonial">Testimonials</a>
 </div>
-
-<pre>{{res2 | async | json}}</pre>

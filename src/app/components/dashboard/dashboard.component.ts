@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   receiptCheques = [];
+  mhiCheques = [];
 
   constructor(private route: ActivatedRoute,
     private dashboardApi: DashboardApiService) { }
@@ -131,7 +132,11 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.res2 = this.dashboardApi.getMhiChequeDetails();
+    this.dashboardApi.getMhiChequeDetails().subscribe(data => {
+      if (data.success) {
+        this.mhiCheques = data.mhis;
+      }
+    });
     
     this.dashboardApi.getReceiptChequeDetails().subscribe(data => {
       if (data.success) {
@@ -139,8 +144,6 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
-  res2;
 
   private updatePayments() {
     this.dashboardApi.getPaymentsData().subscribe(data => {      
