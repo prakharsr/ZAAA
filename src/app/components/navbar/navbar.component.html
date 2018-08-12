@@ -1,5 +1,5 @@
 <div id="navbar">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-info" *ngIf="!isRegister">
+  <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #007bffb7" *ngIf="!isRegister">
     <div class="container-fluid">
       <img src="assets/logo.jpg" class="ml-2" width="50" height="50">&nbsp;&nbsp;&nbsp;
       <a class="navbar-brand text-light" [routerLink]="isSuperAdmin ? '/superadmin' : '/'">AAMan<span *ngIf="isSuperAdmin"> Super Admin</span></a>
