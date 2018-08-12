@@ -54,6 +54,8 @@ export class DashboardComponent implements OnInit {
     unpaid: 0
   }
 
+  receiptCheques = [];
+
   constructor(private route: ActivatedRoute,
     private dashboardApi: DashboardApiService) { }
 
@@ -130,11 +132,15 @@ export class DashboardComponent implements OnInit {
     });
 
     this.res2 = this.dashboardApi.getMhiChequeDetails();
-    this.res4 = this.dashboardApi.getReceiptChequeDetails();
+    
+    this.dashboardApi.getReceiptChequeDetails().subscribe(data => {
+      if (data.success) {
+        this.receiptCheques = data.receipts
+      }
+    });
   }
 
   res2;
-  res4;
 
   private updatePayments() {
     this.dashboardApi.getPaymentsData().subscribe(data => {      
