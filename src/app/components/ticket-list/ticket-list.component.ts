@@ -3,7 +3,7 @@ import { ApiService, NotificationService } from 'app/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from '../../models';
 import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
-import { Observable } from '../../../../node_modules/rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-ticket-list',
