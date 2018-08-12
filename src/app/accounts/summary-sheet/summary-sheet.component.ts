@@ -3,10 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 import { AccountsApiService, SummarySheetInsertion, SummarySheetResponse } from '../accounts-api.service';
-import { NotificationService } from 'app/services';
+import { NotificationService, DialogService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import { PaymentDetailsDialogComponent, PaymentDetails } from '../payment-details-dialog/payment-details-dialog.component';
 
 @Component({
   selector: 'app-summary-sheet',
@@ -24,7 +25,8 @@ export class SummarySheetComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: AccountsApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private dialog: DialogService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: SummarySheetResponse[], search: ReleaseOrderSearchParams }}) => {
@@ -109,14 +111,18 @@ export class SummarySheetComponent implements OnInit {
       return;
     }
 
-    this.api.generateSummarySheet(mapped).subscribe(data => {
-      if (data.success) {
-        this.notifications.show('Success');
-      }
-      else {
-        console.log(data);
-
-        this.notifications.show(data.msg);
+    this.dialog.show(PaymentDetailsDialogComponent, { width: '400px' }).subscribe((data: PaymentDetails) => {
+      if (data) {
+        this.api.generateSummarySheet(data, mapped).subscribe(data => {
+          if (data.success) {
+            this.notifications.show('Success');
+          }
+          else {
+            console.log(data);
+    
+            this.notifications.show(data.msg);
+          }
+        });
       }
     });
   }

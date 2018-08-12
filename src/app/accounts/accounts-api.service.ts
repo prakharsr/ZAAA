@@ -7,6 +7,7 @@ import { PageData, MailingDetails } from 'app/models';
 import { PaymentReceipt } from '../receipts';
 import { CreditDebitNote } from './credit-debit-note';
 import { MediaHouseInvoice } from '.';
+import { PaymentDetails } from './payment-details-dialog/payment-details-dialog.component';
 
 export class PaymentsResponse {
   publicationName = "";
@@ -319,9 +320,10 @@ export class AccountsApiService {
     }, { responseType: 'blob' });
   }
 
-  generateSummarySheet(insertions: SummarySheetInsertion[]) {
+  generateSummarySheet(paymentDetails: PaymentDetails, insertions: SummarySheetInsertion[]) {
     return this.api.post('/user/summarySheet', {
-      mhis: insertions
+      mhis: insertions,
+      ...paymentDetails
     });
   }
 

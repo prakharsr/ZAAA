@@ -27,6 +27,7 @@ import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media
 import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
 import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
 import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
+import { PaymentDetailsDialogComponent } from './payment-details-dialog/payment-details-dialog.component';
 
 @NgModule({
   imports: [
@@ -46,9 +47,13 @@ import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
     CreateNoteComponent,
     SummarySheetComponent,
     MediaHouseInvoiceListComponent,
-    MediaHouseReceiptComponent
+    MediaHouseReceiptComponent,
+    PaymentDetailsDialogComponent
   ],
-  entryComponents: [MediaHouseInvoiceDialogComponent],
+  entryComponents: [
+    MediaHouseInvoiceDialogComponent,
+    PaymentDetailsDialogComponent
+  ],
   providers: [
     AccountsApiService,
     SummarySheetListResolver,
