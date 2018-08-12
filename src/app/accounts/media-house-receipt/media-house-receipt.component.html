@@ -13,6 +13,10 @@
 
   <br>
 
+  <button class="fab bg-success" (click)="submit()">
+    <mat-icon>check</mat-icon>
+  </button>
+
   <div class="form-row">
     <div class="form-group col">
       <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>

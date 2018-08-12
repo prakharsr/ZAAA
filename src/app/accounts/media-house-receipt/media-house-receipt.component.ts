@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountsApiService, MhReceiptResponse } from '../accounts-api.service';
+import { AccountsApiService, MhReceiptResponse, MhiReceiptInsertion } from '../accounts-api.service';
 import { NotificationService } from 'app/services';
 import { ReleaseOrderSearchParams } from 'app/release-order';
 import { Observable } from 'rxjs/Observable';
@@ -81,4 +81,34 @@ export class MediaHouseReceiptComponent implements OnInit {
     return this.edition ? (this.edition.address ? this.edition.address.edition : null) : null;
   }
 
+  submit() {
+    let mapped: MhiReceiptInsertion[] = [];
+
+    this.list.forEach(item => {
+      item.entries.filter(entry => entry.receiptNumber != null).forEach(entry => {
+        mapped.push({
+          _id: entry._id,
+          receiptDate: entry.receiptDate,
+          receiptNumber: entry.receiptNumber
+        });
+      })
+    });
+
+    if (mapped.length == 0) {
+      this.notifications.show('Nothing to submit');
+
+      return;
+    }
+
+    this.api.updateMhiReceipts(mapped).subscribe(data => {
+      if (data.success) {
+        this.notifications.show('Success');
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    });
+  }
 }

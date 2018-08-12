@@ -33,6 +33,12 @@ export class SummarySheetInsertion {
   amount = 0;
 }
 
+export class MhiReceiptInsertion {
+  _id = "";
+  receiptDate: Date;
+  receiptNumber = "";
+}
+
 export class SummarySheetResponse {
   collectedAmount = 0;
   count = 0;
@@ -74,7 +80,7 @@ export class MhReceiptResponse {
     Amount: number,
     pendingAmount: number,
     collectedAmount: number,
-    receiptNumber: number,
+    receiptNumber: string,
     receiptDate: Date,
     paymentMode: string,
     paymentDate: Date,
@@ -317,5 +323,11 @@ export class AccountsApiService {
     return this.api.post('/user/summarySheet', {
       mhis: insertions
     });
+  }
+
+  updateMhiReceipts(insertions: MhiReceiptInsertion[]) {
+    return this.api.post('/user/mediahouseReceipts', {
+      mhis: insertions
+    })
   }
 }
