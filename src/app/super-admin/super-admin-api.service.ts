@@ -48,13 +48,11 @@ export class SuperAdminApiService {
 
   signup(name: string, email: string, password: string) : Observable<any>
   {
-    const base = this.post('/signup', {
+    return this.post('/signup', {
       name: name,
       email: email,
       password: password
     });
-
-    return this.extractToken(base);
   }
 
   login(emailOrPhone: string, password: string): Observable<any> {
@@ -167,5 +165,19 @@ export class SuperAdminApiService {
 
       return new PageData<Ticket>(tickets, data.perPage, data.page, data.pageCount);
     });
+  }
+
+  get admins(): Observable<any[]> {
+    return this.get('/admins').pipe(
+      map(data => {
+        let result = [];
+
+        if (data.success) {
+          result = data.admins;
+        }
+
+        return result;
+      })
+    );
   }
 }

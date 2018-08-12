@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SuperAdminApiService } from '../super-admin-api.service';
 
 @Component({
   selector: 'app-admin-list',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminListComponent implements OnInit {
 
-  constructor() { }
+  list = [];
+
+  constructor(private api: SuperAdminApiService) { }
 
   ngOnInit() {
+    this.api.admins.subscribe(data => this.list = data);
   }
 
 }

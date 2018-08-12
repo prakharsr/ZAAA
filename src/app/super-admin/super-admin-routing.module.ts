@@ -21,6 +21,7 @@ import {
 } from 'app/rate-card';
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { TicketListComponent } from '../components/ticket-list/ticket-list.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 
 const routes: Routes = [
   {
@@ -92,7 +93,8 @@ const routes: Routes = [
       {
         path: 'admins',
         children: [
-          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          { path: 'list', component: AdminListComponent },
           { path: 'new', component: CreateAdminComponent }
         ]
       },
