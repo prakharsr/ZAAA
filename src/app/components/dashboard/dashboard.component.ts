@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   }[];
 
   invoices1 = {
+    genAmount: 0,
+    pendingAmount: 0,
     generated: 0,
     pending: 0
   }
@@ -67,6 +69,9 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardApi.getInvoiceData().subscribe(data => {
       if (data.totalAmount != 0) {
+        this.invoices1.genAmount = Math.ceil(data.generated);
+        this.invoices1.pendingAmount = Math.ceil(data.totalAmount - data.generated);
+
         this.invoices1.generated = data.generated * 100 / data.totalAmount;
         this.invoices1.pending = 100 - this.invoices1.generated;
       }

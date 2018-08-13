@@ -23,8 +23,8 @@
           <br>
 
           <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" [style.width]="invoices1.generated + '%'"></div>
-            <div class="progress-bar bg-warning" [style.width]="invoices1.pending + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + invoices1.genAmount" [style.width]="invoices1.generated + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + invoices1.pendingAmount" [style.width]="invoices1.pending + '%'"></div>
           </div>
 
           <div class="row">
