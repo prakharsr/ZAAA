@@ -14,7 +14,9 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="card mb-3">
-        <div class="card-header">Publication Details</div>
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', releaseOrder.mediahouseID]">Publication Details</a>
+        </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
@@ -52,7 +54,9 @@
 
     <div class="col-lg-6">
       <div class="card mb-3">
-        <div class="card-header">Client Details</div>
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/clients', releaseOrder.clientID]">Client Details</a>
+        </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
@@ -75,7 +79,9 @@
         </ul>
       </div>
       <div class="card mb-3">
-        <div class="card-header">Executive Details</div>
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/executives', releaseOrder.executiveID]">Executive Details</a>
+        </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <div class="row">
@@ -252,7 +258,7 @@
           <li class="list-group-item" *ngFor="let item of releaseOrder.insertions">
             <div class="row">
               <div class="col">{{toDate(item.date) | date}}</div>
-              <div class="col-auto text-success" *ngIf="item.marked">
+              <div class="col-auto text-success" matTooltip="Invoice Created" *ngIf="item.marked">
                 <mat-icon>check</mat-icon>
               </div>
             </div>
@@ -376,10 +382,7 @@
         <div class="card-header">Scheme</div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <div class="row">
-              <div class="col">Paid: {{releaseOrder.adSchemePaid}}</div>
-              <div class="col">Free: {{releaseOrder.adSchemeFree}}</div>
-            </div>
+            {{releaseOrder.adSchemePaid}} Paid + {{releaseOrder.adSchemeFree}} Free
           </li>
         </ul>
       </div>
@@ -392,7 +395,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item" *ngFor="let item of releaseOrder.otherCharges">
                 <div class="row">
-                    <div class="col-md-8">{{item.chargeType}}</div>
+                  <div class="col-md-8">{{item.chargeType}}</div>
                   <div class="col-md-4">₹ {{item.amount}}</div>                  
                 </div>
               </li>

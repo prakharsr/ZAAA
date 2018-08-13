@@ -159,8 +159,6 @@ export class ReleaseOrder {
 
     generated = false;
 
-    mediaHouseInvoiceID: string;
-
     cancelled = false;
 }
 
