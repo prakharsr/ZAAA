@@ -101,7 +101,7 @@
           <div class="card mb-3" *ngFor="let item of pastReceipts">
             <div class="card-body">
               <div class="row">
-                <div class="col text-muted">{{item.receiptNO}}</div>
+                <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
                 <div class="col-auto text-muted small">{{item.createdAt | date}}</div>
               </div>
               <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>

@@ -82,22 +82,6 @@ export class ReceiptsApiService {
       id: receipt.id
     }, { responseType: 'blob' });
   }
-  
-  getPayedReceipts(invoice: Invoice): Observable<PaymentReceipt[]> {
-    return this.api.post('/user/receipt/pre', {
-      invoiceID: invoice.id
-    }).pipe(
-      map(data => {
-        let result : PaymentReceipt[] = [];
-
-        if (data.success) {
-          result = data.receipts;
-        }
-
-        return result;
-      })
-    );
-  }
 
   cancel(receipt: PaymentReceipt) {
     return this.api.post('/user/receipt/cancel', {

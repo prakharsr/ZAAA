@@ -7,6 +7,7 @@ import { Invoice } from './invoice';
 import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
 import { InvoiceDir } from './invoice-dir-resolver.service';
+import { PaymentReceipt } from '../receipts';
 
 @Injectable()
 export class InvoiceApiService {
@@ -80,6 +81,22 @@ export class InvoiceApiService {
         client: this.clientApi.bodyToClient(data.client),
         executive: this.executiveApi.bodyToExecutive(data.executive)
        } : null)
+    );
+  }
+
+  getPayedReceipts(invoice: Invoice): Observable<PaymentReceipt[]> {
+    return this.api.post('/user/receipt/pre', {
+      invoiceID: invoice.id
+    }).pipe(
+      map(data => {
+        let result : PaymentReceipt[] = [];
+
+        if (data.success) {
+          result = data.receipts;
+        }
+
+        return result;
+      })
     );
   }
 }

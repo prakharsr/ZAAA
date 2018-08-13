@@ -9,21 +9,10 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Invoice Details</div>
+      <div class="small text-muted">{{invoice.date | date}}</div>
+
+      <div class="card my-3">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Date</div>
-              <div class="col-md-8">{{invoice.date | date}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Release Order Id</div>
-              <div class="col-md-8"><a [routerLink]="['/releaseorders', invoice.releaseOrderId]">{{invoice.releaseOrderId}}</a></div>
-            </div>
-          </li>       
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-4">Ad Gross Amount</div>
@@ -77,32 +66,11 @@
           </li>
           <li class="list-group-item">
             <div class="row">
-              <div class="col-md-4">Caption</div>
-              <div class="col-md-8">{{invoice.caption}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Remark</div>
-              <div class="col-md-8">{{invoice.remark}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Other Remark</div>
-              <div class="col-md-8">{{invoice.otherRemark}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount In Figures</div>
-              <div class="col-md-8">₹ {{invoice.netAmountFigures}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount In Words</div>
-              <div class="col-md-8">{{invoice.netAmountWords}}</div>
+              <div class="col-md-4">Net Amount</div>
+              <div class="col-md-8">
+                ₹ {{invoice.netAmountFigures}}<br>
+                Rupees {{invoice.netAmountWords}}
+              </div>
             </div>
           </li>
           <li class="list-group-item">
@@ -123,19 +91,58 @@
               <div class="col-md-8">₹ {{invoice.pendingAmount}}</div>
             </div>
           </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Caption</div>
+              <div class="col-md-8">{{invoice.caption}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Remark</div>
+              <div class="col-md-8">{{invoice.remark}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Other Remark</div>
+              <div class="col-md-8">{{invoice.otherRemark}}</div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Insertions</div>
+      <button [routerLink]="['/releaseorders', invoice.releaseOrderId]" class="btn btn-outline-primary">View Release Order</button>
+
+      <br><br>
+
+      <h5>Insertions</h5>
+
+      <div class="card my-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let item of invoice.insertions">
             {{toDate(item.date) | date}}
           </li>
         </ul>
       </div>
+
+      <ng-container *ngIf="receipts.length != 0">
+        <br>
+
+        <h5>Receipts</h5>
+
+        <div class="card mb-3" *ngFor="let item of receipts">
+          <div class="card-body">
+            <div class="row">
+              <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
+              <div class="col-auto text-muted small">{{item.createdAt | date}}</div>
+            </div>
+            <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

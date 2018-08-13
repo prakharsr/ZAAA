@@ -42,7 +42,7 @@ export class ReceiptComponent implements OnInit {
     this.receipt.paymentType = this.paymentTypes[0];
     this.receipt.paymentAmount = this.invoice.pendingAmount;
 
-    this.api.getPayedReceipts(this.invoice).subscribe(data => this.pastReceipts = data);
+    this.invoiceApi.getPayedReceipts(this.invoice).subscribe(data => this.pastReceipts = data);
   }
 
   ngOnInit() { }
