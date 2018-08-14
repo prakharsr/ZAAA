@@ -102,7 +102,7 @@
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="sendMsg(element)">
               <mat-icon>mail</mat-icon> Send Email
             </button>
-            <button mat-menu-item *ngIf="element.generated" [routerLink]="['/releaseorders/new', element.id]">
+            <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
               <mat-icon>add</mat-icon> Copy into New
             </button>
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="createInvoice(element)">

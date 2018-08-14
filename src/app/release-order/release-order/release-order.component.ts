@@ -164,6 +164,8 @@ export class ReleaseOrderComponent implements OnInit {
             }
 
             a.click();
+
+            this.router.navigate(['/releaseorders', this.releaseorder.id]);
           }
         });
       }
@@ -211,6 +213,8 @@ export class ReleaseOrderComponent implements OnInit {
                 this.notifications.show("Sent Successfully");
 
                 releaseOrder.generated = true;
+
+                this.router.navigate(['/releaseorders', this.releaseorder.id]);
               }
               else {
                 console.log(data);
