@@ -186,15 +186,6 @@ export class ReceiptListComponent implements OnInit {
   }
 
   cancel(receipt: PaymentReceipt) {
-    this.api.cancel(receipt).subscribe(data => {
-      if (data.success) {
-        this.notifications.show('Cancelled');
-      }
-      else {
-        console.log(data);
-
-        this.notifications.show(data.msg);
-      }
-    });
+    receiptGen.cancel(receipt, this.api, this.notifications, this.dialog);
   }
 }

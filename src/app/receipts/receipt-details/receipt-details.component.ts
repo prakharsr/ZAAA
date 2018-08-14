@@ -32,4 +32,8 @@ export class ReceiptDetailsComponent implements OnInit {
   sendMsg() {
     receiptGen.sendMsg(this.receipt, this.api, this.notifications, this.dialog);
   }
+
+  cancel() {
+    receiptGen.cancel(this.receipt, this.api, this.notifications, this.dialog);
+  }
 }

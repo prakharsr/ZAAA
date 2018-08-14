@@ -5,6 +5,10 @@
     <div class="col-lg-6">
       <h3 style="font-weight: lighter">Payment Receipt: {{receipt.receiptNO}}</h3>
 
+      <ng-container *ngIf="receipt.isCancelled">
+        <div class="text-danger">CANCELLED</div>
+      </ng-container>
+
       <br>
     </div>
     <div class="col-lg-6">
@@ -15,6 +19,10 @@
       </button>
       <button mat-raised-button color="primary" (click)="sendMsg()" class="bg-info">
         <mat-icon>mail</mat-icon> Send Mail
+      </button>
+      
+      <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!receipt.isCancelled">
+        <mat-icon>cancel</mat-icon> Cancel
       </button>
 
       <br><br>

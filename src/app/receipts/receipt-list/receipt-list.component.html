@@ -103,7 +103,7 @@
             <button mat-menu-item (click)="sendMsg(receipt)">
               <mat-icon>mail</mat-icon> Send Email
             </button>
-            <button mat-menu-item (click)="cancel(receipt)" *ngIf="!advance">
+            <button mat-menu-item (click)="cancel(receipt)" *ngIf="!receipt.isCancelled && !advance">
               <mat-icon>cancel</mat-icon> Cancel
             </button>
           </mat-menu>
