@@ -6,42 +6,44 @@
       <h3 style="font-weight: lighter">Payment Receipt: {{receipt.receiptNO}}</h3>
 
       <br>
-    
-      <div>
-        <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}}
-      </div>
-
-      <div class="mb-5">
-        <span class="text-muted">Amount in words:</span> Rupees {{receipt.paymentAmountWords}}
-      </div>
-    
-      <h5>Payment Details</h5>
-
-      <div class="card my-3">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="text-muted small">Type</div>
-            <div>{{receipt.paymentType}}</div>
-          </li>
-          <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
-            <li class="list-group-item">
-              <div class="text-muted small">Date</div>
-              <div>{{receipt.paymentDate | date}}</div>
-            </li>          
-            <li class="list-group-item">
-              <div class="text-muted small">{{receipt.paymentType}} Number</div>
-              <div>{{receipt.paymentNo}}</div>
-            </li>
-            <li class="list-group-item" *ngIf="receipt.paymentType == 'Cheque'">
-              <div class="text-muted small">Bank Name</div>
-              <div>{{receipt.paymentBankName}}</div>
-            </li>
-          </ng-container>          
-        </ul>
-      </div>
     </div>
     <div class="col-lg-6">
-      <button [routerLink]="['/invoices', receipt.invoiceID]" class="btn btn-outline-primary">View Invoice</button>
+      <button mat-raised-button color="primary" class="bg-primary" [routerLink]="['/invoices', receipt.invoiceID]">View Invoice</button>
+
+      <button mat-raised-button color="primary" (click)="gen()" class="bg-success">
+        <mat-icon>get_app</mat-icon> Download
+      </button>
+      <button mat-raised-button color="primary" (click)="sendMsg()" class="bg-info">
+        <mat-icon>mail</mat-icon> Send Mail
+      </button>
+
+      <br><br>
     </div>
   </div>
+
+  <div>
+    <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}}
+  </div>
+
+  <div class="mb-4">
+    <span class="text-muted">Amount in words:</span> Rupees {{receipt.paymentAmountWords}}
+  </div>
+
+  <h5>Payment Details</h5>
+
+  <div class="text-muted small mt-3">Type</div>
+  <div>{{receipt.paymentType}}</div>
+
+  <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
+    <div class="text-muted small mt-2">Date</div>
+    <div>{{receipt.paymentDate | date}}</div>
+  
+    <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
+    <div>{{receipt.paymentNo}}</div>
+  
+    <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+      <div class="text-muted small mt-2">Bank Name</div>
+      <div>{{receipt.paymentBankName}}</div>
+    </ng-container>
+  </ng-container>
 </div>

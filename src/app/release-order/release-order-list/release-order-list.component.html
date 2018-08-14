@@ -97,7 +97,7 @@
         <div class="col-auto text-right">
           <mat-menu #releaseOrderMenu="matMenu">
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="pdf(element)">
-              <mat-icon>save_alt</mat-icon> Download
+              <mat-icon>get_app</mat-icon> Download
             </button>
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="sendMsg(element)">
               <mat-icon>mail</mat-icon> Send Email
