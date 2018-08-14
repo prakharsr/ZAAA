@@ -167,7 +167,8 @@ export class ReleaseOrderApiService {
       executiveName: params.executive,
       executiveOrg: params.executiveOrg,
       insertionPeriod: params.past,
-      releaseOrderNO: releaseOrderNO
+      releaseOrderNO: releaseOrderNO,
+      generated: true
     }).pipe(
       map(data => {
         let insertions : InsertionCheckItem[] = [];

@@ -3,6 +3,7 @@ export class InsertionCheckItem {
     clientName = "";
     publicationName = "";
     publicationEdition = "";
+    releaseOrderNO = "";
     insertions = {
         date: {
             year: 0,
