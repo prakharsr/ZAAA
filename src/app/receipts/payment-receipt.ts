@@ -14,6 +14,8 @@ export class PaymentReceipt {
     paymentBankName = "";
 
     isCancelled = false;
+
+    advanced = false;
 }
 
 export class AdvanceReceipt extends PaymentReceipt {

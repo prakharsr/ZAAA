@@ -5,6 +5,9 @@
     <div class="col-lg-6">
       <h3 style="font-weight: lighter">Payment Receipt: {{receipt.receiptNO}}</h3>
 
+      <ng-container *ngIf="receipt.advanced">
+        <div class="text-info">ADVANCE</div>
+      </ng-container>
       <ng-container *ngIf="receipt.isCancelled">
         <div class="text-danger">CANCELLED</div>
       </ng-container>
@@ -12,7 +15,7 @@
       <br>
     </div>
     <div class="col-lg-6">
-      <button mat-raised-button color="primary" class="bg-primary" [routerLink]="['/invoices', receipt.invoiceID]">View Invoice</button>
+      <button mat-raised-button color="primary" class="bg-primary" *ngIf="!receipt.advanced" [routerLink]="['/invoices', receipt.invoiceID]">View Invoice</button>
 
       <button mat-raised-button color="primary" (click)="gen()" class="bg-success">
         <mat-icon>get_app</mat-icon> Download
@@ -21,7 +24,7 @@
         <mat-icon>mail</mat-icon> Send Mail
       </button>
       
-      <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!receipt.isCancelled">
+      <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!receipt.isCancelled && !receipt.advanced">
         <mat-icon>cancel</mat-icon> Cancel
       </button>
 
@@ -29,29 +32,119 @@
     </div>
   </div>
 
-  <div>
-    <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}}
+  <div class="row">
+    <div class="col-lg-6">
+      <div>
+        <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}}
+      </div>
+    
+      <div class="mb-4">
+        <span class="text-muted">Amount in words:</span> Rupees {{receipt.paymentAmountWords}}
+      </div>
+    
+      <h5>Payment Details</h5>
+    
+      <div class="text-muted small mt-3">Type</div>
+      <div>{{receipt.paymentType}}</div>
+    
+      <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
+        <div class="text-muted small mt-2">Date</div>
+        <div>{{receipt.paymentDate | date}}</div>
+      
+        <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
+        <div>{{receipt.paymentNo}}</div>
+      
+        <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+          <div class="text-muted small mt-2">Bank Name</div>
+          <div>{{receipt.paymentBankName}}</div>
+        </ng-container>
+      </ng-container>
+
+      <br><br>
+    </div>
+    <div class="col-lg-6" *ngIf="receipt.advanced">
+      <div class="card mb-3">
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', receipt.mediahouseID]">Publication Details</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{receipt.publicationName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Edition</div>
+              <div class="col-md-8">{{receipt.publicationEdition}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">State</div>
+              <div class="col-md-8">{{receipt.publicationState}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">GSTIN</div>
+              <div class="col-md-8">{{receipt.publicationGSTIN.GSTNo}}</div>
+            </div>
+          </li>          
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Media Type</div>
+              <div class="col-md-8">{{receipt.mediaType}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    
+      <div class="card mb-3">
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/clients', receipt.clientID]">Client Details</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{receipt.clientName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">State</div>
+              <div class="col-md-8">{{receipt.clientState}}</div>
+            </div>
+          </li>          
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">GSTIN</div>
+              <div class="col-md-8">{{receipt.clientGSTIN.GSTType}} {{receipt.clientGSTIN.GSTNo}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/executives', receipt.executiveID]">Executive Details</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Name</div>
+              <div class="col-md-8">{{receipt.executiveName}}</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4">Organization</div>
+              <div class="col-md-8">{{receipt.executiveOrg}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-
-  <div class="mb-4">
-    <span class="text-muted">Amount in words:</span> Rupees {{receipt.paymentAmountWords}}
-  </div>
-
-  <h5>Payment Details</h5>
-
-  <div class="text-muted small mt-3">Type</div>
-  <div>{{receipt.paymentType}}</div>
-
-  <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
-    <div class="text-muted small mt-2">Date</div>
-    <div>{{receipt.paymentDate | date}}</div>
-  
-    <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
-    <div>{{receipt.paymentNo}}</div>
-  
-    <ng-container *ngIf="receipt.paymentType == 'Cheque'">
-      <div class="text-muted small mt-2">Bank Name</div>
-      <div>{{receipt.paymentBankName}}</div>
-    </ng-container>
-  </ng-container>
 </div>

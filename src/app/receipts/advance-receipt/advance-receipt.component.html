@@ -104,14 +104,14 @@
       <div class="col-lg col-md-6">
         <mat-card class="mat-elevation-z5">
           <mat-card-title>Executive Details</mat-card-title>
-          <mat-form-field class="col-lg col-md-6">
+          <mat-form-field>
             <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
             <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
               Executive Name is required.
             </mat-error>
           </mat-form-field>
           
-          <mat-form-field class="col-lg col-md-6">
+          <mat-form-field>
             <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="receipt.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
             <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
               Executive Organisation is required.
