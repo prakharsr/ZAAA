@@ -18,11 +18,11 @@
         
         <ul class="navbar-nav" *ngIf="api.isLoggedIn">
           <li class="nav-item">
-            <button class="nav-link" mat-icon-button>
+            <button class="nav-link" mat-icon-button *ngIf="!isSuperAdmin">
               <mat-icon>help</mat-icon>
             </button>
 
-            <button class="nav-link" mat-icon-button>
+            <button class="nav-link" mat-icon-button *ngIf="!isSuperAdmin">
               <mat-icon>notifications</mat-icon>
             </button>
 
@@ -35,6 +35,8 @@
               <button mat-menu-item routerLink="/">Settings</button>
               <button mat-menu-item routerLink="/" (click)="api.logout();collapseNavbar()">Log Out</button>
             </mat-menu>
+
+            <a *ngIf="isSuperAdmin" class="nav-link" routerLink="/" (click)="superAdminApi.logout();collapseNavbar()">Log Out</a>
           </li>
         </ul>
 

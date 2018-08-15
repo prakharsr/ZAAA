@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, NotificationService } from 'app/services';
 import { Router, NavigationEnd, Route } from '@angular/router';
+import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
   }
 
   constructor(public api: ApiService,
+    public superAdminApi: SuperAdminApiService,
     private router: Router,
     private notifications: NotificationService) { }
 
