@@ -42,6 +42,8 @@ export class ReleaseOrderListComponent implements OnInit {
 
   pastDays = 0;
 
+  collapsed = true;
+
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
     private route: ActivatedRoute,

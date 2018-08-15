@@ -56,6 +56,10 @@
         top: calc(50% - 7px);
         left: calc(50% - 7px);
     }
+
+    .mobile-collapse {
+        display: none;
+    }
 }
 
 input.ng-invalid.form-control, select.ng-invalid {
