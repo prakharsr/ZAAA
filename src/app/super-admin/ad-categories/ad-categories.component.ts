@@ -17,6 +17,10 @@ export class AdCategoriesComponent implements OnInit {
   ngOnInit() {
     this.api.getCategories(0, null).subscribe(data => {
       this.categories[0] = data;
+
+      if (this.categories[0] && this.categories[0].length) {
+        this.selectCategory(0, this.categories[0][0]);
+      }
     })
   }
 

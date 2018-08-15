@@ -1,21 +1,19 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container">Manage Categories</div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<br>
-
 <div class="container">
+  <br>
+  <h3 style="font-weight: lighter">Manage Categories</h3>
+  <br>
+
   <div class="row">
     <ng-container *ngFor="let cats of categories; index as i">
       <div class="col-md" *ngIf="i == 0 || selectedCategories[i - 1] != null">
+        <h5 style="font-weight: lighter">Level {{i + 1}}</h5>
+        <br>
         <form class="form-row" (ngSubmit)="addCategory(i)" #categoryForm="ngForm">
           <div class="col">
-            <input [(ngModel)]="inputText[i]" class="form-control" name="category-{{i}}" required>
+            <input [(ngModel)]="inputText[i]" class="form-control" placeholder="Add Category" name="category-{{i}}" required>
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-outline-info" [disabled]="!categoryForm.form.valid">
+            <button type="submit" mat-mini-fab color="primary" [disabled]="!categoryForm.form.valid">
               <mat-icon>add</mat-icon>
             </button>
           </div>
