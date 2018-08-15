@@ -4,7 +4,6 @@ import { LoaderService } from "./loader.service";
 import { NotificationService } from "./notification.service";
 import { Observable } from "rxjs/Observable";
 import { retry } from "rxjs/operators";
-import { environment } from "environments/environment";
 
 @Injectable()
 export class AuthTokenManager {

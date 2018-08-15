@@ -1,0 +1,23 @@
+<div class="container">
+  <br>
+
+  <h3 style="font-weight: lighter">Send Notification</h3>
+
+  <form (ngSubmit)="submit()" #notifyForm="ngForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Title" [(ngModel)]="title" name="title" required #titleField="ngModel">
+      <mat-error *ngIf="titleField.errors && titleField.errors.required">
+        Title is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Body" [(ngModel)]="body" name="body" #bodyField="ngModel"></textarea>
+    </mat-form-field>
+
+    <br><br>
+
+    <button class="btn btn-success" type="submit" [disabled]="!notifyForm.form.valid">Submit</button>
+    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+  </form>
+</div>

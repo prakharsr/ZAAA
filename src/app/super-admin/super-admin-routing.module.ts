@@ -22,6 +22,7 @@ import {
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { TicketListComponent } from '../components/ticket-list/ticket-list.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
+import { SendNotificationComponent } from './send-notification/send-notification.component';
 
 const routes: Routes = [
   {
@@ -119,7 +120,8 @@ const routes: Routes = [
             ]
           }
         ]
-      }
+      },
+      { path: 'notify', component: SendNotificationComponent }
     ]
   },
   { path: 'login', component: LoginComponent, data: { superAdmin: true } }

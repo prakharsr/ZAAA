@@ -180,4 +180,11 @@ export class SuperAdminApiService {
       })
     );
   }
+
+  sendNotification(title: string, body: string) {
+    return this.post('/notifications/send', {
+      title: title,
+      notifBody: body
+    });
+  }
 }
