@@ -22,7 +22,7 @@
               <mat-icon>help</mat-icon>
             </button>
 
-            <button class="nav-link" mat-icon-button *ngIf="!isSuperAdmin">
+            <button class="nav-link" mat-icon-button (click)="openNotifications()" *ngIf="!isSuperAdmin" #notifyBtn>
               <mat-icon>notifications</mat-icon>
             </button>
 

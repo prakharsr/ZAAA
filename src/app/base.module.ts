@@ -54,6 +54,7 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { RouterModule } from '@angular/router';
 import { PreviewComponent } from './components/preview/preview.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 const validators = [
   VerifyEmailDirective,
@@ -106,7 +107,8 @@ const validators = [
     LoginComponent,
     TicketListComponent,
     PreviewComponent,
-    TestimonialComponent
+    TestimonialComponent,
+    NotificationsComponent
   ],
   exports: [
     CommonModule,
@@ -127,7 +129,8 @@ const validators = [
     MailingDetailsComponent,
     BillingDetailsComponent,
     InsertionDetailsComponent,
-    PreviewComponent
+    PreviewComponent,
+    NotificationsComponent
   ]
 })
 export class BaseModule { }
