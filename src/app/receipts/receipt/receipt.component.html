@@ -19,7 +19,7 @@
           <br>
 
           <mat-form-field>
-            <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+            <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required [verify-max]="invoice.pendingAmount" [verify-min]="0" #paymentAmountField="ngModel">
             <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
               Amount is required.
             </mat-error>
