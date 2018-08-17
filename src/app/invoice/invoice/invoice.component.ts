@@ -68,8 +68,8 @@ export class InvoiceComponent implements OnInit {
 
     this.invoice.releaseOrderId = this.releaseOrder.id;
     this.invoice.otherCharges = this.releaseOrder.otherCharges;
-    this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
-    this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
+    // this.invoice.publicationDiscount.amount = this.releaseOrder.publicationDiscount;
+    // this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
 
     this.invoice.GSTIN = this.client.GSTIN;
 
