@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MailingDetails } from 'app/models';
 
 // Import individually to prevent circular dependency
@@ -67,7 +67,7 @@ export class DialogService {
     }).afterClosed();
   }
 
-  show<T>(component: any, config?: { data?: any, width?: string, height?: string }) : Observable<T> {
+  show<T>(component: any, config?: MatDialogConfig) : Observable<T> {
     return this.dialog.open(component, config).afterClosed();
   }
 }

@@ -351,4 +351,10 @@ export class ApiService {
       return new PageData<Ticket>(tickets, data.perPage, data.page, data.pageCount);
     });
   }
+
+  get notifications() {
+    return this.post('/user/notifications', {
+      page: 1
+    });
+  }
 }
