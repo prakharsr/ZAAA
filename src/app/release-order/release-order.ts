@@ -160,6 +160,10 @@ export class ReleaseOrder {
     generated = false;
 
     cancelled = false;
+    
+    mediahouseID = "";
+    clientID = "";
+    executiveID = "";
 }
 
 export class OtherCharges {
