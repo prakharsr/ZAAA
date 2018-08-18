@@ -55,6 +55,7 @@ import { RouterModule } from '@angular/router';
 import { PreviewComponent } from './components/preview/preview.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SafeHtmlPipe } from './safe-html-pipe';
 
 const validators = [
   VerifyEmailDirective,
@@ -108,7 +109,8 @@ const validators = [
     TicketListComponent,
     PreviewComponent,
     TestimonialComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    SafeHtmlPipe
   ],
   exports: [
     CommonModule,
@@ -121,7 +123,8 @@ const validators = [
     validators,
     PaginationComponent,
     LivechatWidgetModule,
-    LineChartModule
+    LineChartModule,
+    SafeHtmlPipe
   ],
   entryComponents: [
     DialogComponent,

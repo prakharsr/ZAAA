@@ -30,7 +30,7 @@ import {
   ExecutiveApiService,
   Pullout
 } from 'app/directory';
-import { PreviewComponent } from '../../components/preview/preview.component';
+import { PreviewComponent } from 'app/components/preview/preview.component';
 
 @Component({
   selector: 'app-release-order',
@@ -47,6 +47,8 @@ export class ReleaseOrderComponent implements OnInit {
   selectedCategories: Category[] = [null, null, null, null, null, null];
   categories: Category[];
   fixedCategoriesLevel = -1;
+
+  submitting = false;
 
   others = "Others";
 
@@ -122,109 +124,80 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   saveAndGen() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.releaseorder);
-      }
-    });
-  }
-
-  saveAndSendMsg() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.sendMsg(this.releaseorder);
-      }
-    });
-  }
-
-  gen(releaseOrder: ReleaseOrder, preview = false) {
-    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+    // Confirm
+    this.confirmGeneration(this.releaseorder).subscribe(confirm => {
       if (confirm) {
-        this.api.generatePdf(releaseOrder).subscribe(data => {
-          if (data.msg) {
-            this.notifications.show(data.msg);    
-          }
-          else {
-            releaseOrder.generated = true;
-            console.log(data);
-            
-            let blob = new Blob([data], { type: 'application/pdf' });
-            let url = URL.createObjectURL(blob);
+        // Save
+        this.submit().subscribe(data => {
+          if (data.success) {
+            // Generate
+            this.api.generatePdf(this.releaseorder).subscribe(data => {
+              if (data.msg) {
+                this.notifications.show(data.msg);    
+              }
+              else {
+                this.releaseorder.generated = true;
+                console.log(data);
+                
+                let blob = new Blob([data], { type: 'application/pdf' });
+                let url = URL.createObjectURL(blob);
+        
+                let a = document.createElement('a');
+                a.setAttribute('style', 'display:none;');
+                document.body.appendChild(a);
+                a.href = url;
     
-            let a = document.createElement('a');
-            a.setAttribute('style', 'display:none;');
-            document.body.appendChild(a);
-            a.href = url;
-
-            if (preview) {
-              a.setAttribute("target", "_blank");
-            }
-            else {
-              a.download = 'releaseorder.pdf';
-            }
-
-            a.click();
-
-            this.router.navigate(['/releaseorders', this.releaseorder.id]);
+                a.download = 'releaseorder.pdf';
+    
+                a.click();
+    
+                this.router.navigate(['/releaseorders', this.releaseorder.id]);
+              }
+            });
           }
         });
       }
     })
   }
 
-  genPreview() {
-    console.log(this.releaseorder);
-
-    this.presave();
-
-    console.log(this.releaseorder);
-
-    // this.api.previewROPdf(this.releaseorder).subscribe(data => {
-    //   if (data.msg) {
-    //     this.notifications.show(data.msg);
-    //   }
-    //   else {
-    //     let blob = new Blob([data], { type: 'application/pdf' });
-    //     let url = URL.createObjectURL(blob);
-
-    //     let a = document.createElement('a');
-    //     a.setAttribute('style', 'display:none;');
-    //     document.body.appendChild(a);
-    //     a.href = url;
-
-    //     a.setAttribute("target", "_blank");
-
-    //     a.click();
-    //   }
-    // });
-
-    this.api.previewROhtml(this.releaseorder).subscribe(data => {
-      this.dialog.show(PreviewComponent, { data: data.content }).subscribe();
-    });
-  }
-
-  sendMsg(releaseOrder: ReleaseOrder) {
-    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+  saveAndSendMsg() {
+    // Confirm
+    this.confirmGeneration(this.releaseorder).subscribe(confirm => {
       if (confirm) {
+        // Mailing Details
         this.dialog.getMailingDetails().subscribe(mailingDetails => {
           if (mailingDetails) {
-            this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+            // Save
+            this.submit().subscribe(data => {
               if (data.success) {
-                this.notifications.show("Sent Successfully");
-
-                releaseOrder.generated = true;
-
-                this.router.navigate(['/releaseorders', this.releaseorder.id]);
-              }
-              else {
-                console.log(data);
-
-                this.notifications.show(data.msg);
+                // Mail
+                this.api.sendMail(this.releaseorder, mailingDetails).subscribe(data => {
+                  if (data.success) {
+                    this.notifications.show("Sent Successfully");
+    
+                    this.releaseorder.generated = true;
+    
+                    this.router.navigate(['/releaseorders', this.releaseorder.id]);
+                  }
+                  else {
+                    console.log(data);
+    
+                    this.notifications.show(data.msg);
+                  }
+                });
               }
             });
           }
         });
       }
+    });
+  }
+
+  genPreview() {
+    this.presave();
+
+    this.api.previewROhtml(this.releaseorder).subscribe(data => {
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe();
     });
   }
 
@@ -625,6 +598,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   submit () : Observable<any> {
+    this.submitting = true;
+
     this.presave();
 
     let base: Observable<any> = this.edit ? this.editReleaseOrder() : this.createReleaseOrder();
