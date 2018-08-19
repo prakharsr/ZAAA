@@ -68,7 +68,7 @@
               <mat-card-title>Publication Details</mat-card-title>
               
               <mat-form-field>
-                <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+                <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
                 <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
                   Media House Name is required.
                 </mat-error>
@@ -76,14 +76,14 @@
                   
               <div class="row">
                 <mat-form-field class="col-md">
-                  <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
+                  <input [disabled]="edit" matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
                   <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
                     Edition Name is required.
                   </mat-error>
                 </mat-form-field>
             
                 <mat-form-field class="col-md">
-                  <mat-select name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-select [disabled]="edit" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
                     <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
@@ -94,7 +94,7 @@
               
               <div class="row">
                 <mat-form-field class="col-md">
-                  <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
+                  <mat-select [disabled]="edit" id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
                     <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
@@ -103,7 +103,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-md">
-                  <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+                  <input [disabled]="edit" matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
                   <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
                     GSTIN is required.
                   </mat-error>
@@ -117,7 +117,7 @@
                 <div class="form-row">
                   <div class="col">
                     <mat-form-field>
-                      <mat-select placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                      <mat-select [disabled]="edit" placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
                         <mat-option *ngFor="let item of pullouts" [value]="item.Name">{{item.Name}}</mat-option>
                         <mat-option [value]="others">{{others}}</mat-option>
                       </mat-select>
@@ -128,7 +128,7 @@
                   </div>
                   <div class="col" *ngIf="dropdownPullOutName == others">
                     <mat-form-field>
-                      <input matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+                      <input [disabled]="edit" matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
                       <mat-error *ngIf="specPullOutNameField.errors && specPullOutNameField.errors.required">
                         Pullout Name is required.
                       </mat-error>
@@ -137,7 +137,7 @@
                 </div>
               </ng-container>
 
-              <mat-card-actions>
+              <mat-card-actions *ngIf="!edit">
                 <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
               </mat-card-actions>
             </mat-card>
@@ -150,14 +150,14 @@
     
               <div class="row">
                 <mat-form-field class="col-lg col-md-6">
-                  <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+                  <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
                   <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
                     Name is required.
                   </mat-error>
                 </mat-form-field>
                 
                 <mat-form-field class="col-lg col-md-6">
-                  <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+                  <mat-select [disabled]="edit" id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
                     <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
@@ -169,7 +169,7 @@
               <div class="form-row">
                 <div class="{{releaseorder.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
                   <mat-form-field>
-                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
+                    <mat-select [disabled]="edit" placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
                       <mat-option value="URD">URD</mat-option>
                       <mat-option value="RD">RD</mat-option>
                     </mat-select>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="col" *ngIf="releaseorder.clientGSTIN.GSTType != 'URD'">
                   <mat-form-field>
-                    <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <input [disabled]="edit" matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
                     <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
                       GSTIN is required.
                     </mat-error>
@@ -188,7 +188,7 @@
                 </div>
               </div>
   
-              <mat-card-actions>
+              <mat-card-actions *ngIf="!edit">
                 <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
               </mat-card-actions>
           </mat-card>
@@ -666,20 +666,20 @@
 
               <div class="row">
                 <mat-form-field class="col-lg col-md-6">
-                  <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+                  <input [disabled]="edit" type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
                   <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
                     Executive Name is required.
                   </mat-error>
                 </mat-form-field>
                 
                 <mat-form-field class="col-lg col-md-6">
-                  <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+                  <input [disabled]="edit" type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
                   <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
                     Executive Organisation is required.
                   </mat-error>
                 </mat-form-field>
 
-                <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+                <button *ngIf="!edit" mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
               </div>
 
               <div *ngFor="let item of releaseorder.otherCharges; index as i" class="mb-1">
