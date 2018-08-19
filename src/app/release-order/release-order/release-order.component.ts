@@ -120,6 +120,7 @@ export class ReleaseOrderComponent implements OnInit {
       if (data.success) {
         this.goBack();
       }
+      else this.submitting = false;
     });
   }
 
@@ -155,6 +156,7 @@ export class ReleaseOrderComponent implements OnInit {
               }
             });
           }
+          else this.submitting = false;
         });
       }
     })
@@ -186,6 +188,7 @@ export class ReleaseOrderComponent implements OnInit {
                   }
                 });
               }
+              else this.submitting = false;
             });
           }
         });
