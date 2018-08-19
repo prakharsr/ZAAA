@@ -31,6 +31,7 @@ import {
   Pullout
 } from 'app/directory';
 import { PreviewComponent } from 'app/components/preview/preview.component';
+import { UserProfile, Firm } from '../../models';
 
 @Component({
   selector: 'app-release-order',
@@ -232,6 +233,16 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.initNew();
+
+        this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
+          this.releaseorder.paymentBankName = data.firm.bankName;
+
+          let exe = new Executive();
+          exe.executiveName = data.user.name;
+          exe.orgName = data.firm.name;
+
+          this.executive = exe;
+        });
       }
     });
   }

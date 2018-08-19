@@ -14,6 +14,7 @@ import {
   ReleaseOrderDetailsComponent,
   ReleaseOrderListComponent
 } from '.';
+import { UserProfileResolver, FirmResolver } from '../services';
 
 const routes: Routes = [
   {
@@ -63,7 +64,14 @@ const routes: Routes = [
           resolved: ReleaseOrderListResolver
         }
       },
-      { path: 'new', component: ReleaseOrderComponent },
+      {
+        path: 'new',
+        component: ReleaseOrderComponent,
+        resolve: {
+          user: UserProfileResolver,
+          firm: FirmResolver
+        }
+      },
       {
         path: 'new/:copy',
         component: ReleaseOrderComponent,
