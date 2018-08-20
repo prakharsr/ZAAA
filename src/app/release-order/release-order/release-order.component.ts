@@ -201,7 +201,21 @@ export class ReleaseOrderComponent implements OnInit {
     this.presave();
 
     this.api.previewROhtml(this.releaseorder).subscribe(data => {
-      this.dialog.show(PreviewComponent, { data: data.content }).subscribe();
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
+        switch (response) {
+          case 'save':
+            this.save();
+            break;
+
+          case 'dl':
+            this.saveAndGen();
+            break;
+
+          case 'mail':
+            this.saveAndSendMsg();
+            break;
+        }
+      });
     });
   }
 
