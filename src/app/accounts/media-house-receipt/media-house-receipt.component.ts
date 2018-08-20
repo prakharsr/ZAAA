@@ -19,6 +19,8 @@ export class MediaHouseReceiptComponent implements OnInit {
   mediaHouse;
   edition;
 
+  collapsed = true;
+
   constructor(private mediaHouseApi: MediaHouseApiService,
     private route: ActivatedRoute,
     private api: AccountsApiService,

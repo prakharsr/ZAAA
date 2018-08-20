@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Summary Sheet</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Summary Sheet</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -15,7 +24,7 @@
 </ng-template>
 
 <div class="container">
-  <div class="form-row">
+  <div class="form-row" [class.mobile-collapse]="collapsed">
     <div class="form-group col">
       <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
     </div>

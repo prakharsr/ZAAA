@@ -1,3 +1,20 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container">
+      <div class="row">
+        <div class="col">Media House Receipts</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
 <ng-template #rtMediaHouse let-r="result">
   {{r.pubName}} - {{r.address.edition}}
 </ng-template>
@@ -7,17 +24,12 @@
 </ng-template>
 
 <div class="container">
-  <br>
-
-  <h3 style="font-weight: lighter">Media House Receipts</h3>
-
-  <br>
 
   <button class="fab bg-success" (click)="submit()">
     <mat-icon>check</mat-icon>
   </button>
 
-  <div class="form-row">
+  <div class="form-row" [class.mobile-collapse]="collapsed">
     <div class="form-group col">
       <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
     </div>

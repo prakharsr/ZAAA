@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Credit / Debit Notes</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Credit / Debit Notes</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -34,7 +43,7 @@
 
   <br>
 
-  <div class="form-row">
+  <div class="form-row" [class.mobile-collapse]="collapsed">
     <ng-container *ngIf="clientNote">
       <div class="form-group col">
         <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />

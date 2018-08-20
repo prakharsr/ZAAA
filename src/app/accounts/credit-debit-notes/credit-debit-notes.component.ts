@@ -27,6 +27,9 @@ export class CreditDebitNotesComponent implements OnInit {
   page: number;
   pageCount: number;
 
+
+  collapsed = true;
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private clientApi: ClientApiService,

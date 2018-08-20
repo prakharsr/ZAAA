@@ -25,6 +25,8 @@ export class ExecutiveInvoicePaymentsComponent implements OnInit {
 
   list: PaymentsResponse[] = [];
 
+  collapsed = true;
+
   constructor(private api: AccountsApiService,
     private executiveApi: ExecutiveApiService,
     private route: ActivatedRoute,
