@@ -29,6 +29,8 @@ export class MediaHouseInvoiceListComponent implements OnInit {
 
   list: MhiExpandable[] = [];
 
+  collapsed = true;
+
   constructor(private api: AccountsApiService,
     private route: ActivatedRoute,
     private router: Router,

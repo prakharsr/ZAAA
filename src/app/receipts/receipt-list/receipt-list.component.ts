@@ -40,6 +40,8 @@ export class ReceiptListComponent implements OnInit {
 
   pastDays = 0;
 
+  collapsed = true;
+
   constructor(private route: ActivatedRoute,
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
