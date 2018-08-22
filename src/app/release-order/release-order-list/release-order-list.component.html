@@ -159,6 +159,7 @@
       </table>
 
       <button (click)="generate(element)" class="btn btn-outline-success" *ngIf="!element.generated">Generate</button>
+      <button [routerLink]="['/releaseorders', element.id]" class="btn btn-outline-primary">View</button>
     </div>
   </div>
 

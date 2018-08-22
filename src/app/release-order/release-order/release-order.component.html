@@ -36,6 +36,13 @@
         Categories
       </div>
       <ul class="list-group list-group-flush small d-none d-lg-block">
+        <li class="list-group-item">
+          <ng-container *ngFor="let cat of selectedCategories; index as i">
+            <span *ngIf="cat">
+              <span *ngIf="index != 0">&gt;</span>{{cat.name}}
+            </span>
+          </ng-container>
+        </li>
         <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
         <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
         <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
@@ -103,7 +110,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-md">
-                  <input [disabled]="edit" matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+                  <input [disabled]="edit" matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GSTIN" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
                   <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
                     GSTIN is required.
                   </mat-error>
@@ -148,24 +155,22 @@
             <mat-card>
               <mat-card-title>Client Details</mat-card-title>
     
-              <div class="row">
-                <mat-form-field class="col-lg col-md-6">
-                  <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-                  <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
-                    Name is required.
-                  </mat-error>
-                </mat-form-field>
-                
-                <mat-form-field class="col-lg col-md-6">
-                  <mat-select [disabled]="edit" id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
-                    <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
-                    State is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-  
+              <mat-form-field>
+                <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+                <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+                  Name is required.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-select [disabled]="edit" id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+              
               <div class="form-row">
                 <div class="{{releaseorder.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
                   <mat-form-field>
@@ -177,7 +182,7 @@
                 </div>
                 <div class="col" *ngIf="releaseorder.clientGSTIN.GSTType != 'URD'">
                   <mat-form-field>
-                    <input [disabled]="edit" matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <input [disabled]="edit" matInput type="text" name="gstNo" placeholder="GSTIN" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
                     <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
                       GSTIN is required.
                     </mat-error>
@@ -284,8 +289,6 @@
                     </mat-error>
                   </mat-form-field>          
                 </div>
-
-                <button type="button" class="col-lg-3 col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions *</button>
               </div>
 
               <ng-container *ngIf="isTypeLen">
@@ -536,7 +539,8 @@
                 </div>
                 <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox>
               </ng-container>
-            
+
+              <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>
             </mat-card>
           </div>
         </div>
