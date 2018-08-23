@@ -13,7 +13,13 @@ export class PaymentReceipt {
     paymentAmountWords = "";
     paymentBankName = "";
 
-    isCancelled = false;
+    get isCancelled() {
+        return this.status == 2;
+    }
+
+    set isCancelled(cancel: boolean) {
+        this.status = cancel ? 2 : 0;
+    }
 
     advanced = false;
 }

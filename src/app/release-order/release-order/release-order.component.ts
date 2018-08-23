@@ -336,6 +336,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.insertions = insertionBkp;
 
       this.customPullOutName = this.releaseorder.pulloutName;
+
+      // hack
+      this.releaseorder.rate = this.releaseorder.rate;
     });
   }
 
@@ -534,7 +537,9 @@ export class ReleaseOrderComponent implements OnInit {
 
   getCategories() {
     this.dialog.getCategoriesDetails().subscribe(data => {
-      this.setCategoriesDetails(data);
+      if (data) {
+        this.setCategoriesDetails(data);
+      }
     });
   }
 
@@ -840,8 +845,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   selectedSize: FixSize;
 
-  customSizeL = 0;
-  customSizeW = 0;
+  customSizeL: number;
+  customSizeW: number;
 
   schemes: Scheme[] = [];
 

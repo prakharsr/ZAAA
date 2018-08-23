@@ -1,5 +1,5 @@
 <div id="navbar">
-  <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #2196f3" *ngIf="!isRegister">
+  <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #1976d2" *ngIf="!isRegister">
     <div class="container-fluid">
       <img src="assets/logo.jpg" class="ml-2" width="50" height="50">&nbsp;&nbsp;&nbsp;
       <a class="navbar-brand text-light" [routerLink]="isSuperAdmin ? '/superadmin' : '/'">AAMan<span *ngIf="isSuperAdmin"> Super Admin</span></a>
@@ -97,7 +97,7 @@
     </div>
   </nav>
 
-  <mat-toolbar *ngIf="showToolbar">
+  <mat-toolbar class="nav-toolbar" *ngIf="showToolbar">
     <div class="container-fluid">
       <div class="x-overflow">
         <button mat-icon-button class="nav-link" matTooltip="Dashboard" routerLink="/dashboard">
@@ -169,6 +169,6 @@
 </div>
 
 <br><br><br>
-<ng-container *ngIf="showToolbar">
+<div class="mb-2" *ngIf="showToolbar">
   <br><br>
-</ng-container>
+</div>
