@@ -537,7 +537,9 @@ export class ReleaseOrderComponent implements OnInit {
 
   getCategories() {
     this.dialog.getCategoriesDetails().subscribe(data => {
-      this.setCategoriesDetails(data);
+      if (data) {
+        this.setCategoriesDetails(data);
+      }
     });
   }
 

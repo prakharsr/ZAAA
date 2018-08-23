@@ -55,7 +55,6 @@ export class DialogService {
 
   getCategoriesDetails() : Observable<CategoriesDetails> {
     return this.dialog.open(CategoriesDetailsComponent, {
-      disableClose: true,
       width: '600px'
     }).afterClosed();
   }

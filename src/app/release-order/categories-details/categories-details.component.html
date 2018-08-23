@@ -73,5 +73,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>  
   <button mat-button [disabled]="!categoriesForm.form.valid" [mat-dialog-close]="details">Submit</button>  
 </mat-dialog-actions>
