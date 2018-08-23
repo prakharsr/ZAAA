@@ -67,6 +67,12 @@ export class InvoiceApiService {
     });
   }
 
+  previewInvoicehtml(invoice: Invoice) {
+    return this.api.post('/user/invoice/previewHtml', {
+      invoice: Invoice
+    });
+  }
+
   generate(invoice: Invoice) {
     return this.api.post('/user/invoice/download', {
       id: invoice.id
