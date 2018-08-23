@@ -203,13 +203,13 @@
               <mat-card-title>Ad Details</mat-card-title>
 
               <div class="form-row">
-                <mat-form-field class="col-lg col-md-6">
+                <mat-form-field class="col">
                   <mat-select matInput name="adType" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="col-lg col-md-6" *ngIf="mediaType == 'Print'">
+                <mat-form-field class="col" *ngIf="mediaType == 'Print'">
                   <mat-select matInput name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
                     <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
                   </mat-select>
@@ -218,22 +218,39 @@
                   </mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="col-lg col-md-6" *ngIf="isTypeLen">
-                  <mat-select matInput name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-                    <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
+                <mat-form-field class="col" *ngIf="isTypeTime">
+                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
+                    <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="hueField.errors && hueField.errors.required">
-                    Hue is required.
-                  </mat-error>
                 </mat-form-field>
               </div>
 
-              <mat-form-field>
-                <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
-                <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
-                  Edition is required.
-                </mat-error>
-              </mat-form-field>
+              <div class="form-row">
+                <mat-form-field class="col" *ngIf="isTypeTime">
+                  <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
+                  <mat-error *ngIf="durationField.errors && durationField.errors.required">
+                    Duration is required.
+                  </mat-error>
+                </mat-form-field>
+                <div class="col" *ngIf="isTypeLen">
+                  <mat-form-field>
+                    <mat-select matInput name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+                      <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hueField.errors && hueField.errors.required">
+                      Hue is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field>
+                    <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
+                    <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
+                      Edition is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
 
               <div class="form-row">
                 <mat-form-field class="col">
@@ -333,21 +350,6 @@
               <div *ngIf="adCountPaidField.valid">
                 <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
               </div>
-
-              <ng-container *ngIf="isTypeTime" class="row">
-                <mat-form-field class="col-lg-3 col-md-6">
-                  <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
-                  <mat-error *ngIf="durationField.errors && durationField.errors.required">
-                    Duration is required.
-                  </mat-error>
-                </mat-form-field>
-          
-                <mat-form-field class="col-lg-3 col-md-6">
-                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
-                    <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </ng-container>
 
               <mat-form-field> 
                 <input type="text" matInput id="remark" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
