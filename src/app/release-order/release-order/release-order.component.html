@@ -296,11 +296,14 @@
 
               <ng-container *ngIf="isTypeLen">
                 <div class="row">
-                  <label class="col-auto">Ad Size</label>
-                  
-                  <mat-slide-toggle class="col-auto" [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
-                </div>
-                <div class="row">
+                  <div class="col-auto">
+                    <label class="mb-0">Ad Size</label><br>
+                    
+                    <mat-slide-toggle [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">
+                      <span class="small">Custom</span>
+                    </mat-slide-toggle>
+                  </div>
+
                   <div class="col" *ngIf="!customSize">
                     <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
                       <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">Length: {{fixSize.length}}, Width: {{fixSize.width}}, Amount: {{fixSize.amount}}</option>
@@ -308,21 +311,27 @@
                   </div>
 
                   <ng-container *ngIf="customSize">
-                    <mat-form-field class="col">
-                      <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
-                      <mat-error *ngIf="customLField.errors && customLField.errors.required">
-                        Length is required.
-                      </mat-error>
-                    </mat-form-field>        
-                    
-                    <div class="col-auto align-self-center">&times;</div>
-                    
-                    <mat-form-field class="col">
-                      <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
-                      <mat-error *ngIf="customWField.errors && customWField.errors.required">
-                        Width is required.
-                      </mat-error>
-                    </mat-form-field>
+                    <div class="col">
+                      <div class="form-row">
+                        <div class="col-6">
+                          <mat-form-field>
+                            <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+                            <mat-error *ngIf="customLField.errors && customLField.errors.required">
+                              Length is required.
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        
+                        <div class="col-6">
+                          <mat-form-field>
+                            <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+                            <mat-error *ngIf="customWField.errors && customWField.errors.required">
+                              Width is required.
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
                   </ng-container>
                 </div>
 
