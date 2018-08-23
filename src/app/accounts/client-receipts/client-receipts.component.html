@@ -62,14 +62,16 @@
         </div>
         <div class="col-auto">          
           <span *ngIf="receipt.status == 0" class="text-muted">Collected</span>
-          <span *ngIf="receipt.status == 1" class="text-success">Accepted</span>
-          <span *ngIf="receipt.status == 2" class="text-danger">Rejected</span>
+          <span *ngIf="receipt.status == 1" class="text-success">Completed</span>
+          <span *ngIf="receipt.status == 2" class="text-danger">Cancelled</span>
+          <span *ngIf="receipt.status == 3" class="text-danger">Shadow</span>
         </div>
       </div>
     </div>
     <div class="card-footer text-right">
-      <button (click)="mark(receipt, 1)" class="btn btn-success">Accept</button>
-      <button (click)="mark(receipt, 2)" class="btn btn-danger">Reject</button>
+      <button (click)="mark(receipt, 1)" class="btn btn-success">Complete</button>
+      <button (click)="mark(receipt, 2)" class="btn btn-danger">Cancel</button>
+      <button (click)="mark(receipt, 3)" class="btn btn-danger">Shadow</button>
     </div>
   </div>
     
