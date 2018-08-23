@@ -295,7 +295,7 @@
               </div>
 
               <ng-container *ngIf="isTypeLen">
-                <div class="row">
+                <div class="form-row">
                   <div class="col-auto">
                     <label class="mb-0">Ad Size</label><br>
                     
@@ -333,10 +333,11 @@
                       </div>
                     </div>
                   </ng-container>
-                </div>
 
-                <div *ngIf="totalSpace"> 
-                  Total Space = {{totalSpace}}
+                  <div class="col-auto small" *ngIf="totalSpace">
+                    <span class="text-muted">Total Space</span><br>
+                    {{totalSpace}} sqcm
+                  </div>
                 </div>
               </ng-container>
 
