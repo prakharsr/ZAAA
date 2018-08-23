@@ -228,19 +228,21 @@
                 </mat-form-field>
               </div>
 
-              <div class="row">
+              <mat-form-field>
+                <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
+                <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
+                  Edition is required.
+                </mat-error>
+              </mat-form-field>
+
+              <div class="form-row">
                 <mat-form-field class="col">
                   <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
                 </mat-form-field>
 
-                <button type="button" mat-raised-button class="col-auto" (click)="getCategories()">Categories</button>
-                
-                <mat-form-field class="col"> 
-                  <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
-                  <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
-                    Edition is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="col-auto">
+                  <button type="button" mat-raised-button color="primary" (click)="getCategories()">Categories</button>
+                </div>
               </div>
 
               <br>
@@ -307,7 +309,7 @@
                   </ng-container>
                 </div>
 
-                <div> 
+                <div *ngIf="totalSpace"> 
                   Total Space = {{totalSpace}}
                 </div>
               </ng-container>
@@ -332,11 +334,26 @@
                 <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
               </div>
 
+              <ng-container *ngIf="isTypeTime" class="row">
+                <mat-form-field class="col-lg-3 col-md-6">
+                  <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
+                  <mat-error *ngIf="durationField.errors && durationField.errors.required">
+                    Duration is required.
+                  </mat-error>
+                </mat-form-field>
+          
+                <mat-form-field class="col-lg-3 col-md-6">
+                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
+                    <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+
               <mat-form-field> 
                 <input type="text" matInput id="remark" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
               </mat-form-field>
 
-              <div class="row">      
+              <!-- <div class="row">       -->
                 <!-- <ng-container *ngIf="isTypeWords" class="row">
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
@@ -352,22 +369,7 @@
                     </mat-error>
                   </mat-form-field>            
                 </ng-container> -->
-    
-                <ng-container *ngIf="isTypeTime" class="row">
-                  <mat-form-field class="col-lg-3 col-md-6">
-                    <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
-                    <mat-error *ngIf="durationField.errors && durationField.errors.required">
-                      Duration is required.
-                    </mat-error>
-                  </mat-form-field>
-            
-                  <mat-form-field class="col-lg-3 col-md-6">
-                    <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
-                      <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </ng-container>
-              </div>            
+              <!-- </div>             -->
             </mat-card>
           </div>
 
@@ -505,7 +507,7 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br><br>
+                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br>
               </ng-container>
 
               <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>

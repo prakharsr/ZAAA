@@ -845,8 +845,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   selectedSize: FixSize;
 
-  customSizeL = 0;
-  customSizeW = 0;
+  customSizeL: number;
+  customSizeW: number;
 
   schemes: Scheme[] = [];
 
