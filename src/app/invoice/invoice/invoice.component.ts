@@ -21,6 +21,7 @@ import {
   ReleaseOrderApiService
 } from 'app/release-order';
 import { SelectReleaseOrderComponent } from '../select-release-order/select-release-order.component';
+import { PreviewComponent } from '../../components/preview/preview.component';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -40,6 +41,8 @@ export class InvoiceComponent implements OnInit {
   executive: Executive;
 
   creditDays = 0;
+
+  submitting = false;
 
   availableInsertions: AvailableInsertion[] = [];
   markedInsertions: Date[] = [];
@@ -98,6 +101,7 @@ export class InvoiceComponent implements OnInit {
       if (data.success) {
         this.goBack();
       }
+      else this.submitting = false;
     });
   }
 
@@ -106,6 +110,7 @@ export class InvoiceComponent implements OnInit {
       if (data.success) {
         this.gen(this.invoice);
       }
+      else this.submitting = false;
     });
   }
 
@@ -114,16 +119,32 @@ export class InvoiceComponent implements OnInit {
       if (data.success) {
         this.sendMsg(this.invoice);
       }
+      else this.submitting = false;
     });
   }
-  
-  preview() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.invoice, true);
-      }
+
+  genPreview() {
+    this.presave();
+
+    this.api.previewInvoicehtml(this.invoice).subscribe(data => {
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
+        switch (response) {
+          case 'save':
+            this.save();
+            break;
+
+          case 'dl':
+            this.saveAndGen();
+            break;
+
+          case 'mail':
+            this.saveAndSendMsg();
+            break;
+        }
+      });
     });
   }
+
 
   gen(invoice: Invoice, preview = false) {
     this.api.generate(invoice).subscribe(data => {
@@ -228,7 +249,7 @@ export class InvoiceComponent implements OnInit {
     this.router.navigateByUrl('/invoices');
   }
 
-  submit() : Observable<any> {
+  presave() {
     if (!this.availableInsertions.some(val => val.checked)) {
       this.notifications.show('No Insertions selected');
 
@@ -243,10 +264,15 @@ export class InvoiceComponent implements OnInit {
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
     this.invoice.paymentDate = new Date();
     this.invoice.paymentDate.setDate(this.invoice.paymentDate.getDate() + this.creditDays);
+  }
 
-    let base: Observable<any> = this.createInvoice();
+  submit() : Observable<any> {
+    
+    this.submitting = true;
 
-    return base;
+    this.presave();
+
+    return this.createInvoice();
   }
 
   private createInvoice() {
