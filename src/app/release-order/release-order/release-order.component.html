@@ -14,7 +14,7 @@
 
 <mat-sidenav-container class="mt-1">
   <mat-sidenav #sidenav mode="side" opened="true" position="end">
-    <div class="card bg-info sticky-top" style="top: 50px; width: 365px;">
+    <div class="card bg-primary sticky-top" style="top: 50px; width: 365px;">
       <div class="card-header text-light small">
         Final Calculations
       </div>
@@ -35,20 +35,14 @@
       <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">
         Categories
       </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block">
+      <ul class="list-group list-group-flush small d-none d-lg-block" *ngIf="selectedCategories[0]">
         <li class="list-group-item">
           <ng-container *ngFor="let cat of selectedCategories; index as i">
             <span *ngIf="cat">
-              <span *ngIf="index != 0">&gt;</span>{{cat.name}}
+              <span *ngIf="i != 0">&gt; </span>{{cat.name}}
             </span>
           </ng-container>
         </li>
-        <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
       </ul>
       <div class="card-header text-light small d-none d-lg-block" *ngIf="releaseorder.insertions.length">
         Insertions
@@ -81,7 +75,7 @@
                 </mat-error>
               </mat-form-field>
                   
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-md">
                   <input [disabled]="edit" matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
                   <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
@@ -99,7 +93,7 @@
                 </mat-form-field>
               </div>
               
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-md">
                   <mat-select [disabled]="edit" id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
                     <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
@@ -208,7 +202,7 @@
             <mat-card>
               <mat-card-title>Ad Details</mat-card-title>
 
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-lg col-md-6">
                   <mat-select matInput name="adType" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
@@ -249,16 +243,6 @@
                 </mat-form-field>
               </div>
 
-              <!-- <div class="row small" id="small_cat" *ngIf="selectedCategories[0]">
-                &nbsp;&nbsp;&nbsp;Categories :
-                <div *ngIf="selectedCategories[0]">  {{selectedCategories[0].name}}</div>
-                <div *ngIf="selectedCategories[1]">, {{selectedCategories[1].name}}</div>
-                <div *ngIf="selectedCategories[2]">, {{selectedCategories[2].name}}</div>
-                <div *ngIf="selectedCategories[3]">, {{selectedCategories[3].name}}</div>
-                <div *ngIf="selectedCategories[4]">, {{selectedCategories[4].name}}</div>
-                <div *ngIf="selectedCategories[5]">, {{selectedCategories[5].name}}</div>
-              </div> -->
-              
               <br>
 
               <div class="row">
@@ -306,7 +290,7 @@
 
                   <ng-container *ngIf="customSize">
                     <mat-form-field class="col">
-                      <input matInput type="number" id="customL" placeholder="Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+                      <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
                       <mat-error *ngIf="customLField.errors && customLField.errors.required">
                         Length is required.
                       </mat-error>
@@ -315,7 +299,7 @@
                     <div class="col-auto align-self-center">&times;</div>
                     
                     <mat-form-field class="col">
-                      <input matInput type="number" id="customW" placeholder="Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+                      <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
                       <mat-error *ngIf="customWField.errors && customWField.errors.required">
                         Width is required.
                       </mat-error>
@@ -340,33 +324,17 @@
                     </mat-error>
                   </mat-form-field>                  
                 </div>
-
-                <mat-form-field class="col-md-6"> 
-                  <input type="text" matInput id="remark" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
-                </mat-form-field>
               </div>
 
               <br>
 
-              <div class="d-lg-none">
-                <label>Insertions</label>
-                <div *ngIf="releaseorder.insertions">
-                  <ul class="list-group list-group-flush small">
-                    <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
-                      <div class="row">
-                        <div class="col">{{toDate(item.date) | date}}</div>
-                        <div class="col-auto text-success" *ngIf="item.marked">
-                          <mat-icon>check</mat-icon>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
               <div *ngIf="adCountPaidField.valid">
                 <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
               </div>
+
+              <mat-form-field> 
+                <input type="text" matInput id="remark" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+              </mat-form-field>
 
               <div class="row">      
                 <!-- <ng-container *ngIf="isTypeWords" class="row">
@@ -537,7 +505,7 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox>
+                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br><br>
               </ng-container>
 
               <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>
