@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="card-footer text-right">
+    <div *ngIf="receipt.status == 3 || receipt.status == 0 " class="card-footer text-right">
       <button (click)="mark(receipt, 1)" class="btn btn-success">Complete</button>
       <button (click)="mark(receipt, 2)" class="btn btn-danger">Cancel</button>
       <button (click)="mark(receipt, 3)" class="btn btn-warning">Shadow</button>
