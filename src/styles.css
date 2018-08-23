@@ -82,3 +82,13 @@ mat-icon {
 button[mat-icon-button] {
     outline: none !important;
 }
+
+.mat-toolbar {
+    background-color: #64b5f6;
+    color: white;
+}
+
+.nav-toolbar {
+    background-color: #2196f3;
+    color: white;
+}

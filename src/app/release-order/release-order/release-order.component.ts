@@ -336,6 +336,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.insertions = insertionBkp;
 
       this.customPullOutName = this.releaseorder.pulloutName;
+
+      // hack
+      this.releaseorder.rate = this.releaseorder.rate;
     });
   }
 

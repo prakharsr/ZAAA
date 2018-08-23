@@ -36,7 +36,7 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'superadmin',
     loadChildren: 'app/super-admin/super-admin.module#SuperAdminModule'
