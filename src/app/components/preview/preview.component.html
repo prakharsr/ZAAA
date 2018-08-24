@@ -14,7 +14,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button class="text-light bg-success" mat-dialog-close="save">Save</button>  
+  <button mat-button class="text-light bg-success" mat-dialog-close="save">Save</button>
+  <button mat-button class="text-light bg-danger" [mat-dialog-close]="null">Edit</button>
   <button mat-button class="text-light bg-primary" mat-dialog-close="dl">Download</button>  
   <button mat-button class="text-light bg-info" mat-dialog-close="mail">Send Email</button>  
 </mat-dialog-actions>
