@@ -22,38 +22,45 @@ export class DashboardComponent implements OnInit {
     series: ChartDataItem[]
   }[];
 
-  invoices1 = {
+  invoicesData = {
     genAmount: 0,
     pendingAmount: 0,
     generated: 0,
     pending: 0
   }
 
-  payments1 = {
+  paymentsData = {
     collected: 0,
     shadow: 0,
     completed: 0,
-    received: 0
+    received: 0,
+    pending: 0,
+    collectedAmount: 0,
+    shadowAmount: 0,
+    completedAmount: 0,
+    receivedAmount: 0,
+    pendingAmount: 0
   }
 
-  payments2 = {
+  mhiData = {
     pending: 0,
-    received: 0
-  }
-
-  mhi1 = {
-    pending: 0,
-    received: 0
+    pendingAmount: 0,
+    received: 0,
+    receivedAmount: 0
   }
 
   dueOverdue = {
+    dueAmount: 0,
+    overdueAmount: 0,
     due: 0,
     overdue: 0
   }
 
   paidUnpaid = {
     paid: 0,
-    unpaid: 0
+    paidAmount: 0,
+    unpaid: 0,
+    unpaidAmount: 0
   }
 
   receiptCheques = [];
@@ -69,15 +76,18 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardApi.getInvoiceData().subscribe(data => {
       if (data.totalAmount != 0) {
-        this.invoices1.genAmount = Math.ceil(data.generated);
-        this.invoices1.pendingAmount = Math.ceil(data.totalAmount - data.generated);
+        this.invoicesData.genAmount = data.generated;
+        this.invoicesData.pendingAmount = data.totalAmount - data.generated;
 
-        this.invoices1.generated = data.generated * 100 / data.totalAmount;
-        this.invoices1.pending = 100 - this.invoices1.generated;
+        this.invoicesData.generated = data.generated * 100 / data.totalAmount;
+        this.invoicesData.pending = 100 - this.invoicesData.generated;
       }
     });
 
     this.dashboardApi.getDuesData().subscribe(data => {
+      this.dueOverdue.dueAmount = data.DueAmount;
+      this.dueOverdue.overdueAmount = data.OverDueAmount;
+
       let total = data.DueAmount + data.OverDueAmount;
 
       if (total != 0) {
@@ -120,15 +130,21 @@ export class DashboardComponent implements OnInit {
     this.updatePayments();
 
     this.dashboardApi.getMhiData().subscribe(data => {
+      this.mhiData.pendingAmount = data.pendingAmount;
+      this.mhiData.receivedAmount = data.collectedAmount;
+
       let total = data.pendingAmount + data.collectedAmount;
 
       if (total != 0) {
-        this.mhi1.pending = data.pendingAmount * 100 / total;
-        this.mhi1.received = data.collectedAmount * 100 / total;
+        this.mhiData.pending = data.pendingAmount * 100 / total;
+        this.mhiData.received = data.collectedAmount * 100 / total;
       }
     });
 
     this.dashboardApi.getPaidUnpaid().subscribe(data => {
+      this.paidUnpaid.paidAmount = data.PaidAmount;
+      this.paidUnpaid.unpaidAmount = data.UnpaidAmount;
+
       let total = data.PaidAmount + data.UnpaidAmount;
 
       if (total != 0) {
@@ -151,20 +167,26 @@ export class DashboardComponent implements OnInit {
   }
 
   private updatePayments() {
-    this.dashboardApi.getPaymentsData().subscribe(data => {      
-      let total1 = data.collectedAmount + data.shadow + data.completed;
+    this.dashboardApi.getPaymentsData().subscribe(data => {
+      this.paymentsData.collectedAmount = data.collected;
+      this.paymentsData.pendingAmount = data.pending;
+      this.paymentsData.shadowAmount = data.shadow;
+      this.paymentsData.receivedAmount = data.received;
+      this.paymentsData.completedAmount = data.completed;
+
+      let total1 = data.collected + data.shadow + data.completed;
       
       if (total1 != 0) {
-        this.payments1.collected = data.collectedAmount * 100 / total1;
-        this.payments1.shadow = data.shadow * 100 / total1;
-        this.payments1.completed = data.completed * 100 / total1;
+        this.paymentsData.collected = data.collected * 100 / total1;
+        this.paymentsData.shadow = data.shadow * 100 / total1;
+        this.paymentsData.completed = data.completed * 100 / total1;
       }
 
-      let total2 = data.collectedAmount + data.pendingAmount;
+      let total2 = data.received + data.pending;
       
       if (total2 != 0) {
-        this.payments2.received = data.collectedAmount * 100 / total2;
-        this.payments2.pending = data.pendingAmount * 100 / total2;
+        this.paymentsData.received = data.received * 100 / total2;
+        this.paymentsData.pending = data.pending * 100 / total2;
       }
     });
   }
