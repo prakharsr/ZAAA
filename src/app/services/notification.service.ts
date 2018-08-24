@@ -8,7 +8,7 @@ export class NotificationService {
 
   show(message: string) {
     this.snackbar.open(message, "Dismiss", {
-      horizontalPosition: 'right',
+      // horizontalPosition: 'right',
       duration: 3000
     });
   }
