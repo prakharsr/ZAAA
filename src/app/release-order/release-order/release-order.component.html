@@ -371,8 +371,9 @@
 
               <br>
 
-              <mat-form-field> 
-                <input type="text" matInput id="remark" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+              <mat-form-field hintLabel="Max 100 characters"> 
+                <input type="text" matInput id="remark" maxlength="100" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+                <mat-hint align="end">{{releaseorder.remark?.length || 0}}/100</mat-hint>
               </mat-form-field>
 
               <!-- <div class="row">       -->
@@ -718,9 +719,10 @@
                 </div>
               </div>
               
-              <br>           
-              <mat-form-field>
-                <input matInput placeholder="Remark" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+              <br>
+              <mat-form-field hintLabel="Max 100 characters">
+                <input matInput placeholder="Remark" maxlength="100" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+                <mat-hint align="end">{{releaseorder.otherRemark?.length || 0}}/100</mat-hint>
               </mat-form-field>
             </mat-card>
           </div>
