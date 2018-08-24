@@ -10,6 +10,12 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
+<ng-template #addPersonSvg>
+  <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="#fff" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
+  </svg>
+</ng-template>
+
 <br><br>
 
 <mat-sidenav-container class="mt-1">
@@ -138,9 +144,11 @@
                 </div>
               </ng-container>
 
-              <mat-card-actions *ngIf="!edit">
-                <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
-              </mat-card-actions>
+              <div class="text-right">
+                <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addMediaHouse()" matTooltip="Add to Directory">
+                  <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                </button>
+              </div>
             </mat-card>
           </div>
 
@@ -186,10 +194,16 @@
                   </mat-form-field>
                 </div>
               </div>
-  
-              <mat-card-actions *ngIf="!edit">
-                <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
-              </mat-card-actions>
+
+              <div class="d-none d-md-block mt-2">
+                <br><br>
+              </div>
+
+              <div class="text-right">
+                <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addClient()" matTooltip="Add to Directory">
+                  <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                </button>
+              </div>
           </mat-card>
           </div>
         </div>
@@ -713,7 +727,9 @@
                 </div>
 
                 <div class="col-auto">
-                  <button *ngIf="!edit" mat-raised-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+                  <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addExecutive()" matTooltip="Add to Directory">
+                    <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                  </button>
                 </div>
               </div>
               
