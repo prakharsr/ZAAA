@@ -69,7 +69,7 @@ export class InvoiceApiService {
 
   previewInvoicehtml(invoice: Invoice) {
     return this.api.post('/user/invoice/previewHtml', {
-      invoice: Invoice
+      invoice: invoice
     });
   }
 

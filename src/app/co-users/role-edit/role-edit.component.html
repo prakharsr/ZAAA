@@ -11,6 +11,32 @@
 
   <br>
 
-  <button type="submit" class="btn btn-success" (click)="submit()">Update</button>
-  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+  <div class="d-none d-md-block">
+    <button type="submit" mat-raised-button color="primary" class="bg-success" (click)="submit()">
+      <mat-icon>check</mat-icon> Update
+    </button>
+
+    <button type="button" mat-raised-button color="warn" (click)="onCancel()">
+      <mat-icon>cancel</mat-icon> Cancel
+    </button>
+  </div>
 </div>
+
+<mat-toolbar class="d-md-none fixed-bottom">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col">
+        <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" (click)="submit()">
+          <mat-icon>check</mat-icon>
+          <div class="small">Update</div>
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="onCancel()">
+          <mat-icon>cancel</mat-icon>
+          <div class="small">Cancel</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

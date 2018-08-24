@@ -179,8 +179,36 @@
     </div>
 
     <ng-container *ngIf="new">
-      <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
-      <button class="btn btn-danger" type="button" (click)="cancelCreate()">Cancel</button>
+
+      <div class="d-none d-md-block">
+        <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!dirForm.form.valid">
+          <mat-icon>check</mat-icon> Save
+        </button>
+  
+        <button type="button" mat-raised-button color="warn" (click)="cancelCreate()">
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+
+      </div>
     </ng-container>
   </form>
 </div>
+
+<mat-toolbar class="d-md-none fixed-bottom">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!dirForm.form.valid" color="primary">
+          <mat-icon>check</mat-icon>
+          <div class="small">Save</div>
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancelCreate()">
+          <mat-icon>cancel</mat-icon>
+          <div class="small">Cancel</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
