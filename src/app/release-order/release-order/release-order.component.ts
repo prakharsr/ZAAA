@@ -712,19 +712,13 @@ export class ReleaseOrderComponent implements OnInit {
     return [];
   }
 
-  get adTimes() {
-    return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-  }
+  adTimes = ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
 
-  get positions() {
-    let result = ['Classified', 'Back Page', 'Jacket', 'Prime Time'];
-
-    for (let i = 1; i <= 8; ++i) {
-      result.push('Page ' + i);
-    }
-
-    return result;
-  }
+  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
+             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
+             'Entertainment','Automobile','Education','Health','Editorial','World','National',
+             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
+             'Right Hand Side','Left Hand Side' ];
 
   get units() {
     let result = [];
