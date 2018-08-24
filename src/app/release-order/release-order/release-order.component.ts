@@ -632,6 +632,12 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   submit () : Observable<any> {
+    if (this.releaseorder.insertions.length < this.availableAds) {
+      this.notifications.show(`Please select ${this.availableAds} insertion(s)`);
+
+      return of({});
+    }
+
     this.submitting = true;
 
     this.presave();
