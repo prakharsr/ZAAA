@@ -66,7 +66,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div [class.container-fluid]="sidenav.opened" [class.container]="!sidenav.opened">
-      <form (ngSubmit)="submit()" #roForm="ngForm">
+      <form (ngSubmit)="submitted = true" #roForm="ngForm">
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
@@ -194,7 +194,7 @@
                 </div>
               </div>
 
-              <div class="d-none d-md-block my-2">
+              <div class="d-none d-lg-block my-2">
                 <br><br>
               </div>
 
@@ -744,7 +744,7 @@
         <br><br>
 
         <div class="d-none d-md-block">
-          <button color="primary" type="button" mat-raised-button class="bg-success" [disabled]="submitting || !roForm.form.valid">
+          <button color="primary" type="submit" mat-raised-button class="bg-success" (click)="handleSubmit(roForm.form.valid, submit)" [disabled]="submitting">
             <mat-icon>check</mat-icon> Save
           </button>
       
@@ -752,15 +752,15 @@
             <mat-icon>cancel</mat-icon> Cancel
           </button>
 
-          <button color="primary" type="button" mat-raised-button [disabled]="submitting || !roForm.form.valid" (click)="genPreview()" class="bg-warning">
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, genPreview)" class="bg-warning">
             <mat-icon>assignment</mat-icon> Preview
           </button>
 
-          <button color="primary" type="button" mat-raised-button [disabled]="submitting || !roForm.form.valid" (click)="saveAndGen()" class="bg-primary">
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, saveAndGen)" class="bg-primary">
             <mat-icon>get_app</mat-icon> Download
           </button>
 
-          <button color="primary" type="button" mat-raised-button [disabled]="submitting || !roForm.form.valid" (click)="saveAndSendMsg()" class="bg-info">
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, saveAndSendMsg)" class="bg-info">
             <mat-icon>mail</mat-icon> Send Mail
           </button>
           
@@ -774,7 +774,7 @@
   <div class="container-fluid">
     <div class="form-row">
       <div class="col">
-        <button color="primary" type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting || !roForm.form.valid" color="primary">
+        <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, submit)" color="primary">
           <mat-icon>check</mat-icon>
           <div class="small">Save</div>
         </button>
@@ -786,19 +786,19 @@
         </button>
       </div>
       <div class="col">
-        <button color="primary" type="button" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting || !roForm.form.valid" (click)="saveAndGen()">
+        <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, genPreview)">
           <mat-icon>assignment</mat-icon>
           <div class="small">Preview</div>
         </button>
       </div>
       <div class="col">
-        <button color="primary" type="button" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting || !roForm.form.valid" (click)="saveAndGen()">
+        <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, saveAndGen)">
           <mat-icon>get_app</mat-icon>
           <div class="small">Download</div>
         </button>
       </div>
       <div class="col">
-        <button color="primary" type="button" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting || !roForm.form.valid" (click)="saveAndSendMsg()">
+        <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, saveAndSendMsg)">
           <mat-icon>mail</mat-icon>
           <div class="small">Send Mail</div>
         </button>

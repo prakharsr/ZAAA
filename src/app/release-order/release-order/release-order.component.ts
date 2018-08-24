@@ -40,6 +40,9 @@ import { UserProfile, Firm } from '../../models';
 })
 export class ReleaseOrderComponent implements OnInit {
 
+  // Dummy variable
+  submitted = false;
+
   releaseorder = new ReleaseOrder();
   query: string;
   edit = false;
@@ -1112,5 +1115,12 @@ export class ReleaseOrderComponent implements OnInit {
 
   get displayTotal() {
     return Math.ceil(this.displayAmount + this.displayTax);
+  }
+
+  handleSubmit(valid: boolean, callback: () => void) {
+    if (valid) {
+      callback();
+    }
+    else this.notifications.show('Fix errors before submitting');
   }
 }
