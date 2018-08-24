@@ -118,7 +118,7 @@
               <mat-icon>add</mat-icon> Create Invoice
             </button>
             <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
-              <mat-icon>file_copy</mat-icon> Copy into New
+              <mat-icon>content_copy</mat-icon> Copy into New
             </button>
             <button mat-menu-item *ngIf="element.generated && !element.cancelled" class="text-danger" (click)="cancel(element)">
               <mat-icon>cancel</mat-icon> Cancel
