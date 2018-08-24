@@ -11,10 +11,10 @@ export class InvoiceGenData {
 
 export class PaymentsData {
   shadow = 0;
-  collectedAmount = 0;
+  collected = 0;
   completed = 0;
-  totalAmount = 0;
-  pendingAmount = 0;
+  pending = 0;
+  received = 0;
 }
 
 export class MhiData {

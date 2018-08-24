@@ -23,8 +23,8 @@
           <br>
 
           <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + invoices1.genAmount" [style.width]="invoices1.generated + '%'"></div>
-            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + invoices1.pendingAmount" [style.width]="invoices1.pending + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + invoicesData.genAmount" [style.width]="invoicesData.generated + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + invoicesData.pendingAmount" [style.width]="invoicesData.pending + '%'"></div>
           </div>
 
           <div class="row">
@@ -35,8 +35,8 @@
           <br>
 
           <div class="progress">
-            <div class="progress-bar bg-warning" [style.width]="dueOverdue.due + '%'"></div>
-            <div class="progress-bar progress-bar-striped bg-danger" [style.width]="dueOverdue.overdue + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + dueOverdue.dueAmount" [style.width]="dueOverdue.due + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-danger" [matTooltip]="'₹ ' + dueOverdue.overdueAmount" [style.width]="dueOverdue.overdue + '%'"></div>
           </div>
 
           <div class="row">
@@ -89,9 +89,9 @@
 
           <ng-container>
             <div class="progress">
-              <div class="progress-bar progress-bar-striped" [style.width]="payments1.collected + '%'"></div>
-              <div class="progress-bar bg-warning" [style.width]="payments1.shadow + '%'"></div>
-              <div class="progress-bar progress-bar-striped bg-success" [style.width]="payments1.completed + '%'"></div>
+              <div class="progress-bar progress-bar-striped" [matTooltip]="'₹ ' + paymentsData.collectedAmount" [style.width]="paymentsData.collected + '%'"></div>
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.shadowAmount" [style.width]="paymentsData.shadow + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.completedAmount" [style.width]="paymentsData.completed + '%'"></div>
             </div>
 
             <div class="row">
@@ -105,8 +105,8 @@
 
           <ng-container>
             <div class="progress">
-              <div class="progress-bar bg-warning" [style.width]="payments2.pending + '%'"></div>
-              <div class="progress-bar progress-bar-striped bg-success" [style.width]="payments1.received + '%'"></div>
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.pendingAmount" [style.width]="paymentsData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.receivedAmount" [style.width]="paymentsData.received + '%'"></div>
             </div>
           </ng-container>
 
@@ -133,8 +133,8 @@
 
           <ng-container>
             <div class="progress">
-              <div class="progress-bar bg-warning" [style.width]="mhi1.pending + '%'"></div>
-              <div class="progress-bar progress-bar-striped bg-success" [style.width]="mhi1.received + '%'"></div>
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + mhiData.pendingAmount" [style.width]="mhiData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + mhiData.receivedAmount" [style.width]="mhiData.received + '%'"></div>
             </div>
 
             <div class="row">
@@ -148,8 +148,8 @@
           <h6>Payments</h6>
 
           <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" [style.width]="paidUnpaid.paid + '%'"></div>
-            <div class="progress-bar bg-warning" [style.width]="paidUnpaid.unpaid + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paidUnpaid.paidAmount" [style.width]="paidUnpaid.paid + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paidUnpaid.unpaidAmount" [style.width]="paidUnpaid.unpaid + '%'"></div>
           </div>
 
           <div class="row">
@@ -178,7 +178,7 @@
 
           <br>
 
-          <table class="table table-sm">
+          <table class="table table-sm table-responsive">
             <tr>
               <th>No</th>
               <th>Date</th>
@@ -186,7 +186,9 @@
               <th>Bank Acc Name</th>
             </tr>
             <tr *ngFor="let item of receiptCheques">
-              <td>{{item.paymentNo}}</td>
+              <td matTooltip="View Payment Receipt">
+                <a [routerLink]="['/receipts', item._id]">{{item.paymentNo}}</a>
+              </td>
               <td>{{item.paymentDate | date}}</td>
               <td>₹ {{item.paymentAmount}}</td>
               <td>{{item.paymentBankName}}</td>
@@ -209,7 +211,7 @@
 
           <br>
 
-          <table class="table table-sm">
+          <table class="table table-sm table-responsive">
             <tr>
               <th>No</th>
               <th>Date</th>
