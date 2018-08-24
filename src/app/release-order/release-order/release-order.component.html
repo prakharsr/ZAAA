@@ -54,12 +54,11 @@
         Insertions
       </div>
       <ul class="list-group list-group-flush small d-none d-lg-block"  *ngIf="releaseorder.insertions.length">
-        <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
+        <li class="list-group-item">
           <div class="row">
-            <div class="col">{{toDate(item.date) | date}}</div>
-            <div class="col-auto text-success" *ngIf="item.marked">
-              <mat-icon>check</mat-icon>
-            </div>
+            <span *ngFor="let item of releaseorder.insertions; last as isLast" class="col-4">
+              {{toDate(item.date) | date:'d-MMM-y'}}<span *ngIf="!isLast">,</span>
+            </span>
           </div>
         </li>
       </ul>
