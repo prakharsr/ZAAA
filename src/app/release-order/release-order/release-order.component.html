@@ -25,7 +25,7 @@
         </li>
         <li class="list-group-item">
           <div class="small text-muted">Net Amount in Words</div>
-          <div>{{options.amountToWords(netAmount)}} ({{taxDisplay}})</div>
+          <div>{{options.amountToWords(displayTotal)}} ({{taxDisplay}})</div>
         </li>
         <li class="list-group-item">
           <div class="small text-muted">Client Payment (without Tax)</div>
@@ -594,7 +594,7 @@
                 <div class="col">
                   <mat-form-field>
                     <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                      <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></mat-option>
+                      <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
                     </mat-select>
                     <mat-error *ngIf="taxField.errors && taxField.errors.required">
                       Tax is required.
@@ -632,12 +632,10 @@
                   </mat-form-field>
                 </div>
                 <div class="row">
-                  <mat-form-field  class="col-lg col-md-6">
-                    <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="releaseorder.paymentAmount" required #paymentAmountField="ngModel">
-                    <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
-                      Amount is required.
-                    </mat-error>
-                  </mat-form-field>
+                  <div class="col-lg col-md-6 small">
+                    <span class="text-muted">Amount</span><br>
+                    ₹ {{clientPayment}}
+                  </div>
             
                   <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
                     <mat-form-field  class="col-lg col-md-6">

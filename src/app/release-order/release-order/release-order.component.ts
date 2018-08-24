@@ -270,8 +270,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adHue = this.hues[0];
     this.releaseorder.unit = this.units[0];
     this.releaseorder.adPosition = this.positions[0];
-    this.selectedTax = this.taxes[0];
-    this.releaseorder.paymentType = this.paymentTypes[0];
+    this.selectedTax = this.taxes[1];
+    this.releaseorder.paymentType = 'Credit';
   }
 
   private initFromReleaseOrder() {
@@ -592,6 +592,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adGrossAmount = this.grossAmount;
     this.releaseorder.netAmountFigures = this.netAmount;
     this.releaseorder.netAmountWords = this.options.amountToWords(this.netAmount);
+    this.releaseorder.clientPayment = this.releaseorder.paymentAmount = this.clientPayment;
 
     this.releaseorder.taxAmount = this.selectedTax;
 
@@ -987,8 +988,8 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   taxes: TaxValues[] = [
+    new TaxValues(0),
     new TaxValues(5),
-    new TaxValues(10),
     new TaxValues(18)
   ];
 
@@ -1011,7 +1012,7 @@ export class ReleaseOrderComponent implements OnInit {
 
     amount -= (this.releaseorder.publicationDiscount * amount / 100);
 
-    return amount;
+    return Math.ceil(amount);
   }
 
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
