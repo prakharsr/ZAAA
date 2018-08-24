@@ -363,7 +363,7 @@
                     </div>
                     <div *ngIf="adCountPaidField.valid" class="col-6 small">
                       <span class="text-muted">Total Ads</span><br>
-                      {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)
+                      <small>{{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</small>
                     </div>
                   </div>
                 </div>
@@ -545,7 +545,7 @@
             <mat-card>
               <mat-card-title>Ad Calculations</mat-card-title>
 
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-lg-3 col-md-6">
                   <input type="number" matInput id="rate" placeholder="Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
                   <mat-error *ngIf="rateField.errors && rateField.errors.required">
@@ -559,23 +559,23 @@
                 </mat-form-field>
 
                 <mat-slide-toggle class="col-auto" [(ngModel)]="releaseorder.fixRate" name="fixedRate" *ngIf="isTypeLen && customSize">Fixed Rate</mat-slide-toggle>
-              </div>  
-              <div class="row">
+
                 <mat-form-field class="col-lg-4 col-md-6">
                   <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
                   <mat-error *ngIf="publicationDiscountField.errors && publicationDiscountField.errors.required">
                     Media House Discount is required.
                   </mat-error>
                 </mat-form-field>
-                
-                <mat-form-field class="col-lg-4 col-md-6">
+              </div>  
+              <div class="form-row">                
+                <mat-form-field class="col-6">
                   <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
                   <mat-error *ngIf="agencyDiscount1Field.errors && agencyDiscount1Field.errors.required">
                     Agency Discount is required.
                   </mat-error>
                 </mat-form-field>
             
-                <mat-form-field class="col-lg-4 col-md-6">
+                <mat-form-field class="col-6">
                   <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
                   <mat-error *ngIf="agencyDiscount2Field.errors && agencyDiscount2Field.errors.required">
                     Additional Agency Discount is required.
@@ -694,7 +694,7 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-row">
-                    <div class="col-md">
+                    <div class="col-6">
                       <mat-form-field>
                         <input [disabled]="edit" type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
                         <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
@@ -702,7 +702,7 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-                    <div class="col-md">
+                    <div class="col-6">
                       <mat-form-field>
                         <input [disabled]="edit" type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
                         <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
