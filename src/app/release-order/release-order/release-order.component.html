@@ -84,7 +84,7 @@
                 </mat-form-field>
             
                 <mat-form-field class="col-md">
-                  <mat-select [disabled]="edit" name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-select [disabled]="edit" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
                     <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
