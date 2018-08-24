@@ -88,6 +88,10 @@ button[mat-icon-button] {
     color: white;
 }
 
+.mat-toolbar.fixed-bottom {
+    background-color: #f1edec;
+}
+
 .nav-toolbar {
     background-color: #2196f3;
     color: white;
