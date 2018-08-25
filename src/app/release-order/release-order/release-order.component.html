@@ -31,7 +31,7 @@
         </li>
         <li class="list-group-item">
           <div class="small text-muted">Net Amount in Words</div>
-          <div>{{options.amountToWords(displayTotal)}} ({{taxDisplay}})</div>
+          <div>Rupees {{options.amountToWords(displayTotal)}} <span *ngIf="selectedTax.primary">({{taxDisplay}})</span></div>
         </li>
         <li class="list-group-item">
           <div class="small text-muted">Client Payment (without Tax)</div>
@@ -561,22 +561,22 @@
 
               <div class="form-row">
                 <mat-form-field class="col-lg-3 col-md-6">
-                  <input type="number" matInput id="rate" placeholder="Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
-                  <mat-error *ngIf="rateField.errors && rateField.errors.required">
+                  <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+                  <mat-error *ngIf="rateField.errors?.required">
                     Rate is required.
                   </mat-error>
                 </mat-form-field>
-                <mat-form-field class="col-lg-3 col-md-6"> 
+                <!-- <mat-form-field class="col-lg-3 col-md-6"> 
                   <mat-select matInput name="unit" [(ngModel)]="releaseorder.unit" id="unit" #unitField="ngModel" required>
                     <mat-option *ngFor="let item of units" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-slide-toggle class="col-auto" [(ngModel)]="releaseorder.fixRate" name="fixedRate" *ngIf="isTypeLen && customSize">Fixed Rate</mat-slide-toggle>
 
                 <mat-form-field class="col-lg-4 col-md-6">
                   <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
-                  <mat-error *ngIf="publicationDiscountField.errors && publicationDiscountField.errors.required">
+                  <mat-error *ngIf="publicationDiscountField?.required">
                     Media House Discount is required.
                   </mat-error>
                 </mat-form-field>
@@ -584,7 +584,7 @@
               <div class="form-row">                
                 <mat-form-field class="col-6">
                   <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
-                  <mat-error *ngIf="agencyDiscount1Field.errors && agencyDiscount1Field.errors.required">
+                  <mat-error *ngIf="agencyDiscount1Field?.required">
                     Agency Discount is required.
                   </mat-error>
                 </mat-form-field>

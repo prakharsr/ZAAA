@@ -271,7 +271,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.AdTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
     this.releaseorder.adHue = this.hues[0];
-    this.releaseorder.unit = this.units[0];
+    // this.releaseorder.unit = this.units[0];
     this.releaseorder.adPosition = this.positions[0];
     this.selectedTax = this.taxes[1];
     this.releaseorder.paymentType = 'Credit';
@@ -695,7 +695,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   set adType(adType: string) {
     this.releaseorder.adType = adType;
-    this.releaseorder.unit = this.units[0];
+    // this.releaseorder.unit = this.units[0];
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -723,23 +723,37 @@ export class ReleaseOrderComponent implements OnInit {
              'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
              'Right Hand Side','Left Hand Side' ];
 
-  get units() {
-    let result = [];
+  // get units() {
+  //   let result = [];
 
+  //   if (this.isTypeLen) {
+  //     result.push('Sqcm');
+  //   }
+
+  //   if (this.isTypeWords) {
+  //     result.push('Words');
+  //     result.push('Lines');
+  //   }
+
+  //   if (this.isTypeTime) {
+  //     result.push('sec');
+  //   }
+
+  //   return result;
+  // }
+
+  get rateText() {
     if (this.isTypeLen) {
-      result.push('Sqcm');
+      return "Rate per sqcm";
     }
 
     if (this.isTypeWords) {
-      result.push('Words');
-      result.push('Lines');
+      return "Rate per insertion";
     }
 
     if (this.isTypeTime) {
-      result.push('sec');
+      return "Rate per sec";
     }
-
-    return result;
   }
 
   mediaHouseInputFormatter = (result: MediaHouse) => {
