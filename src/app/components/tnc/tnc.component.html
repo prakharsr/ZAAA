@@ -1,0 +1,77 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container"><a class="text-light" routerLink="/">Home</a> <span class="text-muted mx-2">/</span> <a class="text-light" routerLink="/profile">Manage Profile</a> <span class="text-muted mx-2">/</span> Terms &amp; Conditions</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <form (ngSubmit)="submit()" #tncForm>
+    <mat-card class="mat-elevation-z3">
+      <mat-form-field>
+        <input matInput type="text" name="jurisdiction" [(ngModel)]="jurisdiction" placeholder="Jurisdiction">
+      </mat-form-field>
+    </mat-card>
+
+    <div class="row">
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Release Orders</mat-card-title>
+          <mat-form-field *ngFor="let item of ro; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="ro-{{i}}" placeholder="Line {{i + 1}}">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>6.</span> {{jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Invoices</mat-card-title>
+          <mat-form-field *ngFor="let item of invoice; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="invoice-{{i}}" placeholder="Line {{i + 1}}">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>6.</span> {{jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Payment Receipts</mat-card-title>
+          <mat-form-field *ngFor="let item of pr; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="pr-{{i}}" placeholder="Line {{i + 1}}">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>6.</span> {{jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Advance Receipts</mat-card-title>
+          <mat-form-field *ngFor="let item of advance; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="advance-{{i}}" placeholder="Line {{i + 1}}">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>4.</span> {{jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </form>
+</div>

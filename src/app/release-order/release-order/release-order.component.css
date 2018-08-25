@@ -2,26 +2,6 @@
     font-style: italic;
 }
 
-/* @media (max-width: 991px) {
-    #calculations {
-        position: fixed;
-        top: 105px;
-        z-index: 30;
-        right: -17px;
-        border-radius: 0;
-        width: auto;
-        left: -17px;
-    }
-
-    mat-toolbar {
-        margin-top: 260px;
-    }
-} */
-
-/* #calculations {
-    z-index: 30;
-} */
-
 mat-sidenav {
     padding-right: 25px;
     position: fixed;
