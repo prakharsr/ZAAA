@@ -1,5 +1,5 @@
 @media (min-width: 768px) {
-    mat-card, .card {
+    mat-card {
         height: 100%;
     }
 }
