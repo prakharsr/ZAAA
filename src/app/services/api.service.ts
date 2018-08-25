@@ -20,10 +20,10 @@ import { AuthTokenManager } from './auth-token-manager.service';
 
 export class TnC {
   Jurisdiction = "";
-  ROterms: string[] = [];
-  INterms: string[] = [];
-  PRterms: string[] = [];
-  ARterms: string[] = [];
+  ROterms: { content: string }[] = [];
+  INterms: { content: string }[] = [];
+  PRterms: { content: string }[] = [];
+  ARterms: { content: string }[] = [];
 }
 
 @Injectable()
@@ -372,7 +372,20 @@ export class ApiService {
         let result = new TnC();
 
         if (data.success) {
-          result = data;
+          result.Jurisdiction = data.Jurisdiction;
+          
+          result.ROterms = data.ROterms.map(M => {
+            return { content: M };
+          })
+          result.INterms = data.INterms.map(M => {
+            return { content: M };
+          })
+          result.PRterms = data.PRterms.map(M => {
+            return { content: M };
+          })
+          result.ARterms = data.ARterms.map(M => {
+            return { content: M };
+          })
         }
 
         return result;
@@ -381,6 +394,12 @@ export class ApiService {
   }
 
   setTnc(tnc: TnC) {
-    return this.post('/firm/terms', tnc);
+    return this.post('/firm/terms', {
+      Jurisdiction: tnc.Jurisdiction,
+      ROterms: tnc.ROterms.map(M => M.content),
+      INterms: tnc.INterms.map(M => M.content),
+      PRterms: tnc.PRterms.map(M => M.content),
+      ARterms: tnc.ARterms.map(M => M.content)
+    });
   }
 }

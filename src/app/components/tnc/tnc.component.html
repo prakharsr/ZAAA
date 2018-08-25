@@ -21,7 +21,7 @@
           <mat-card-title>Release Orders</mat-card-title>
           <mat-form-field *ngFor="let item of tnc.ROterms; index as i">
             <span matPrefix>{{i + 1}}.&nbsp;</span>
-            <input matInput type="text" name="ro-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="tnc.ROterms[i]">
+            <input matInput type="text" name="ro-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
           </mat-form-field>
           <div class="mt-3">
             <span>{{tnc.ROterms.length + 1}}.</span> {{tnc.Jurisdiction}}
@@ -34,7 +34,7 @@
           <mat-card-title>Invoices</mat-card-title>
           <mat-form-field *ngFor="let item of tnc.INterms; index as i">
             <span matPrefix>{{i + 1}}.&nbsp;</span>
-            <input matInput type="text" name="invoice-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="tnc.INterms[i]">
+            <input matInput type="text" name="invoice-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
           </mat-form-field>
           <div class="mt-3">
             <span>{{tnc.INterms.length + 1}}.</span> {{tnc.Jurisdiction}}
@@ -52,7 +52,7 @@
           <mat-card-title>Payment Receipts</mat-card-title>
           <mat-form-field *ngFor="let item of tnc.PRterms; index as i">
             <span matPrefix>{{i + 1}}.&nbsp;</span>
-            <input matInput type="text" name="pr-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="tnc.PRterms[i]">
+            <input matInput type="text" name="pr-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
           </mat-form-field>
           <div class="mt-3">
             <span>{{tnc.PRterms.length + 1}}.</span> {{tnc.Jurisdiction}}
@@ -65,7 +65,7 @@
           <mat-card-title>Advance Receipts</mat-card-title>
           <mat-form-field *ngFor="let item of tnc.ARterms; index as i">
             <span matPrefix>{{i + 1}}.&nbsp;</span>
-            <input matInput type="text" name="ar-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="tnc.ARterms[i]">
+            <input matInput type="text" name="ar-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
           </mat-form-field>
           <div class="mt-3">
             <span>{{tnc.ARterms.length + 1}}.</span> {{tnc.Jurisdiction}}
@@ -73,5 +73,9 @@
         </mat-card>
       </div>
     </div>
+
+    <br><br>
+
+    <button type="button" mat-raised-button color="warn" (click)="reset()">Reset</button>
   </form>
 </div>
