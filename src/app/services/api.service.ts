@@ -18,6 +18,14 @@ import {
 
 import { AuthTokenManager } from './auth-token-manager.service';
 
+export class TnC {
+  Jurisdiction = "";
+  ROterms: string[] = [];
+  INterms: string[] = [];
+  PRterms: string[] = [];
+  ARterms: string[] = [];
+}
+
 @Injectable()
 export class ApiService {
   private authTokenKey = "auth_token";
@@ -356,5 +364,23 @@ export class ApiService {
     return this.post('/user/notifications', {
       page: 1
     });
+  }
+
+  get tnc(): Observable<TnC> {
+    return this.get('/firm/terms').pipe(
+      map(data => {
+        let result = new TnC();
+
+        if (data.success) {
+          result = data;
+        }
+
+        return result;
+      })
+    );
+  }
+
+  setTnc(tnc: TnC) {
+    return this.post('/firm/terms', tnc);
   }
 }

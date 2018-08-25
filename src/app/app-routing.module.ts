@@ -80,7 +80,14 @@ const routes: Routes = [
     }
   },
   // { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
-  { path: 'tnc', component: TncComponent, canActivate: [AdminGuard] },
+  {
+    path: 'tnc',
+    component: TncComponent,
+    canActivate: [AdminGuard],
+    resolve: {
+      firm: FirmResolver
+    }
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
