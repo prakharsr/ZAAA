@@ -49,7 +49,7 @@
             <ng-container *ngIf="editExecutiveDetails">
               <mat-form-field>
                 <input matInput placeholder="Executive Name" name="executiveName" [(ngModel)]="executive.executiveName" required #executiveNameField="ngModel">
-                <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
+                <mat-error *ngIf="executiveNameField.errors?.required">
                   Executive Name is required.
                 </mat-error>
               </mat-form-field>
@@ -58,7 +58,7 @@
                 <div class="col">
                   <mat-form-field>
                     <input matInput placeholder="Organisation Name" name="orgName" [(ngModel)]="executive.orgName" required #orgNameField="ngModel">
-                    <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+                    <mat-error *ngIf="orgNameField.errors?.required">
                       Organisation Name is required.
                     </mat-error>
                   </mat-form-field>
@@ -152,7 +152,7 @@
         
               <mat-form-field>
                 <input matInput placeholder="Email" [(ngModel)]="executive.email" name="email" verify-email #emailField="ngModel">
-                <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                <mat-error *ngIf="emailField.errors?.email">
                   Invalid Email.
                 </mat-error>
               </mat-form-field>

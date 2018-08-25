@@ -20,7 +20,7 @@
 
           <mat-form-field>
             <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required [verify-max]="invoice.pendingAmount" [verify-min]="0" #paymentAmountField="ngModel">
-            <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+            <mat-error *ngIf="paymentAmountField.errors?.required">
               Amount is required.
             </mat-error>
           </mat-form-field>
@@ -42,14 +42,14 @@
                 <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="receipt.paymentDate" required disabled>
                 <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
                 <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-                <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+                <mat-error *ngIf="paymentDateField.errors?.required">
                   Date is required.
                 </mat-error>
               </mat-form-field>
         
               <mat-form-field class="col-lg col-md-6">
                 <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
-                <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
+                <mat-error *ngIf="paymentChequeField.errors?.required">
                   No is required.
                 </mat-error>
               </mat-form-field>
@@ -57,7 +57,7 @@
             <div class="row">
               <mat-form-field class="col-lg col-md-6">
                 <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-                <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+                <mat-error *ngIf="paymentAmountField.errors?.required">
                   Amount is required.
                 </mat-error>
               </mat-form-field>
@@ -65,7 +65,7 @@
               <ng-container *ngIf="receipt.paymentType == 'Cheque'">
                 <mat-form-field class="col-lg col-md-6">
                   <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
-                  <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
+                  <mat-error *ngIf="bankNameField.errors?.required">
                     Bank Name is required.
                   </mat-error>
                 </mat-form-field>

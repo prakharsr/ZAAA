@@ -8,7 +8,7 @@
           
           <mat-form-field>
             <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-            <!-- <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
+            <!-- <mat-error *ngIf="publicationNameField.errors?.required">
               Media House Name is required.
             </mat-error> -->
           </mat-form-field>
@@ -16,7 +16,7 @@
           <div class="row">
             <mat-form-field class="col-md">
               <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="receipt.publicationEdition" #publicationEditionField="ngModel">
-              <!-- <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
+              <!-- <mat-error *ngIf="publicationEditionField.errors?.required">
                 Edition Name is required.
               </mat-error> -->
             </mat-form-field>
@@ -28,17 +28,17 @@
               <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="receipt.publicationState" #publicationStateField="ngModel">
                 <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
               </mat-select>
-              <!-- <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
+              <!-- <mat-error *ngIf="publicationStateField.errors?.required">
                 State is required.
               </mat-error> -->
             </mat-form-field>
 
             <mat-form-field class="col-md">
               <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="receipt.publicationGSTIN.GSTNo" minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-              <!-- <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
+              <!-- <mat-error *ngIf="publicationGSTINField.errors?.required">
                 GSTIN is required.
               </mat-error>
-              <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
+              <mat-error *ngIf="publicationGSTINField.errors?.minlength || publicationGSTINField.errors.maxlength)">
                 GSTIN should be 15 characters long.
               </mat-error> -->
             </mat-form-field>
@@ -56,7 +56,7 @@
 
           <mat-form-field>
             <input matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-            <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+            <mat-error *ngIf="clientNameField.errors?.required">
               Name is required.
             </mat-error>
           </mat-form-field>
@@ -66,7 +66,7 @@
               <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="receipt.clientState" required #clientStateField="ngModel">
                 <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
               </mat-select>
-              <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+              <mat-error *ngIf="clientStateField.errors?.required">
                 State is required.
               </mat-error>
             </mat-form-field>
@@ -81,10 +81,10 @@
             <div class="col" *ngIf="receipt.clientGSTIN.GSTType != 'URD'">
               <mat-form-field>
                 <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="receipt.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                <mat-error *ngIf="gstNoField.errors?.required">
                   GSTIN is required.
                 </mat-error>
-                <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
                   GSTIN should be 15 characters long.
                 </mat-error>
               </mat-form-field>
@@ -106,14 +106,14 @@
           <mat-card-title>Executive Details</mat-card-title>
           <mat-form-field>
             <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-            <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
+            <mat-error *ngIf="executiveNameField.errors?.required">
               Executive Name is required.
             </mat-error>
           </mat-form-field>
           
           <mat-form-field>
             <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="receipt.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-            <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
+            <mat-error *ngIf="executiveOrgField.errors?.required">
               Executive Organisation is required.
             </mat-error>
           </mat-form-field>
@@ -127,7 +127,7 @@
           <br>
           <mat-form-field>
             <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-            <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+            <mat-error *ngIf="paymentAmountField.errors?.required">
                 Amount is required.
             </mat-error>
           </mat-form-field>
@@ -149,14 +149,14 @@
                 <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="receipt.paymentDate" required disabled>
                 <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
                 <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-                <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+                <mat-error *ngIf="paymentDateField.errors?.required">
                   Date is required.
                 </mat-error>
               </mat-form-field>
         
               <mat-form-field  class="col-lg col-md-6">
                 <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
-                <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
+                <mat-error *ngIf="paymentChequeField.errors?.required">
                   No is required.
                 </mat-error>
               </mat-form-field>
@@ -164,7 +164,7 @@
             <div class="row">
               <mat-form-field  class="col-lg col-md-6">
                 <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-                <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
+                <mat-error *ngIf="paymentAmountField.errors?.required">
                   Amount is required.
                 </mat-error>
               </mat-form-field>
@@ -172,7 +172,7 @@
               <ng-container *ngIf="receipt.paymentType == 'Cheque'">
                 <mat-form-field  class="col-lg col-md-6">
                   <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
-                  <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
+                  <mat-error *ngIf="bankNameField.errors?.required">
                     Bank Name is required.
                   </mat-error>
                 </mat-form-field>

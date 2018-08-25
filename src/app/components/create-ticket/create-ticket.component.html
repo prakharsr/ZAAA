@@ -10,7 +10,7 @@
   <form (ngSubmit)="submit()" #ticketForm="ngForm">
     <mat-form-field>
       <input matInput type="text" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
-      <mat-error *ngIf="subjectField.errors && subjectField.errors.required">
+      <mat-error *ngIf="subjectField.errors?.required">
         Subject is required.
       </mat-error>
     </mat-form-field>

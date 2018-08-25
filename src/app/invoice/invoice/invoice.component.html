@@ -66,10 +66,10 @@
                 <div class="col" *ngIf="invoice.GSTIN.GSTType != 'URD'">
                   <mat-form-field>
                     <input matInput type="text" name="gstNo" placeholder="Client GST Number" [(ngModel)]="invoice.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                    <mat-error *ngIf="gstNoField.errors?.required">
                       GSTIN is required.
                     </mat-error>
-                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                    <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
                       GSTIN should be 15 characters long.
                     </mat-error>
                   </mat-form-field>
@@ -178,7 +178,7 @@
               <div class="row">
                 <mat-form-field class="col">
                   <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
-                  <mat-error *ngIf="commissionField.errors && commissionField.errors.required">
+                  <mat-error *ngIf="commissionField.errors?.required">
                     Commission is required.
                   </mat-error>
                 </mat-form-field>
@@ -190,7 +190,7 @@
               <div class="row">
                 <mat-form-field class="col">
                   <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
-                  <mat-error *ngIf="additionalChargesField.errors && additionalChargesField.errors.required">
+                  <mat-error *ngIf="additionalChargesField.errors?.required">
                     Additional Charges is required.
                   </mat-error>
                 </mat-form-field>
@@ -210,7 +210,7 @@
               <div class="row">
                 <mat-form-field class="col">
                   <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
-                  <mat-error *ngIf="pubDiscountField.errors && pubDiscountField.errors.required">
+                  <mat-error *ngIf="pubDiscountField.errors?.required">
                     Publication Discount is required.
                   </mat-error>
                 </mat-form-field>
@@ -222,7 +222,7 @@
               <div class="row">
                 <mat-form-field class="col">
                   <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
-                  <mat-error *ngIf="agencyDiscountField.errors && agencyDiscountField.errors.required">
+                  <mat-error *ngIf="agencyDiscountField.errors?.required">
                     Agency Discount is required.
                   </mat-error>
                 </mat-form-field>
@@ -251,7 +251,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
-                      <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
+                      <mat-error *ngIf="otherChargesTypeField.errors?.required">
                         Type is required.
                       </mat-error>
                     </mat-form-field>
@@ -259,7 +259,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
-                      <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
+                      <mat-error *ngIf="otherChargesField.errors?.required">
                         Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -284,7 +284,7 @@
                     <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
                       <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></mat-option>
                     </mat-select>
-                    <mat-error *ngIf="taxField.errors && taxField.errors.required">
+                    <mat-error *ngIf="taxField.errors?.required">
                       Tax is required.
                     </mat-error>
                   </mat-form-field>
@@ -310,7 +310,7 @@
             <div class="card-body">
               <mat-form-field>
                 <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
-                <mat-error *ngIf="creditDaysField.errors && creditDaysField.errors.required">
+                <mat-error *ngIf="creditDaysField.errors?.required">
                   Credit Days is required.
                 </mat-error>
               </mat-form-field>

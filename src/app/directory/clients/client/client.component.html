@@ -65,7 +65,7 @@
             <ng-container *ngIf="editClientDetails">
               <mat-form-field>
                 <input matInput type="text" name="orgName" placeholder="Client Name" [(ngModel)]="client.orgName" required #orgNameField="ngModel">
-                <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+                <mat-error *ngIf="orgNameField.errors?.required">
                   Client Name is required.
                 </mat-error>
               </mat-form-field>
@@ -74,7 +74,7 @@
                 <div class="col">
                   <mat-form-field>
                     <input matInput type="text" name="companyName" placeholder="Company Name" [(ngModel)]="client.companyName" required #companyNameField="ngModel">
-                    <mat-error *ngIf="companyNameField.errors && companyNameField.errors.required">
+                    <mat-error *ngIf="companyNameField.errors?.required">
                       Company Name is required.
                     </mat-error>
                   </mat-form-field>
@@ -127,10 +127,10 @@
                 <div class="col" *ngIf="client.GSTIN.GSTType != 'URD'">
                   <mat-form-field>
                     <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="client.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                    <mat-error *ngIf="gstNoField.errors?.required">
                       GSTIN is required.
                     </mat-error>
-                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                    <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
                       GSTIN should be 15 characters long.
                     </mat-error>
                   </mat-form-field>
@@ -200,17 +200,17 @@
         
               <mat-form-field>
                 <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="client.address.pincode" #pincodeField="ngModel">
-                <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
+                <mat-error *ngIf="pincodeField.errors?.required">
                   Pincode is required.
                 </mat-error>
-                <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
+                <mat-error *ngIf="pincodeField.errors?.minlength || pincodeField.errors?.maxlength">
                   Pincode should be 6 characters long.
                 </mat-error>
               </mat-form-field>
           
               <mat-form-field>
                 <input matInput type="text" name="city" placeholder="City" [(ngModel)]="client.address.city" required #cityField="ngModel">
-                <mat-error *ngIf="cityField.errors && cityField.errors.required">
+                <mat-error *ngIf="cityField.errors?.required">
                   City is required.
                 </mat-error>
               </mat-form-field>
@@ -219,7 +219,7 @@
                 <mat-select placeholder = "State" name="state" [(ngModel)]="client.address.state" required #stateField="ngModel">
                   <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="stateField.errors && stateField.errors.required">
+                <mat-error *ngIf="stateField.errors?.required">
                   State is required.
                 </mat-error>
               </mat-form-field>
@@ -352,7 +352,7 @@
         
               <mat-form-field>
                 <input matInput type="text" name="s-{{i}}-name" placeholder="Name" [(ngModel)]="item.name" required #nameField="ngModel">
-                <mat-error *ngIf="nameField.errors && nameField.errors.required">
+                <mat-error *ngIf="nameField.errors?.required">
                   Name is required.
                 </mat-error>
               </mat-form-field>
@@ -363,7 +363,7 @@
         
               <mat-form-field>
                 <input matInput type="text" name="s-{{i}}-department" placeholder="Department" [(ngModel)]="item.department" required #departmentField="ngModel">
-                <mat-error *ngIf="departmentField.errors && departmentField.errors.required">
+                <mat-error *ngIf="departmentField.errors?.required">
                   Department is required.
                 </mat-error>
               </mat-form-field>
@@ -374,7 +374,7 @@
                 <div class="col-4">
                   <mat-form-field>
                     <input matInput type="tel" minlength="3" maxlength="5" name="s-{{i}}-personStdNo" placeholder="STD No" [(ngModel)]="item.personStdNo" required #personStdNoField="ngModel">
-                    <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                    <mat-error *ngIf="personStdNoField.errors?.required">
                       STD No is required.
                     </mat-error>
                   </mat-form-field>
@@ -382,7 +382,7 @@
                 <div class="col-8">
                   <mat-form-field>
                     <input matInput type="tel" minlength="6" maxlength="8" name="s-{{i}}-personLandLine" placeholder="Landline Number" [(ngModel)]="item.personLandLine" required #personLandLineField="ngModel">
-                    <mat-error *ngIf="personStdNoField.errors && personStdNoField.errors.required">
+                    <mat-error *ngIf="personLandLineField.errors?.required">
                       Landline is required.
                     </mat-error>
                   </mat-form-field>
@@ -395,10 +395,10 @@
         
               <mat-form-field>
                 <input matInput type="email" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-                <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                <mat-error *ngIf="emailField.errors?.required">
                   Email is required.
                 </mat-error>
-                <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                <mat-error *ngIf="emailField.errors?.email">
                   Invalid Email.
                 </mat-error>
               </mat-form-field>

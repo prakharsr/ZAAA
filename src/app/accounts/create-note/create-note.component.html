@@ -27,7 +27,7 @@
 
       <mat-form-field>
         <input matInput type="text" id="invoiceNo" placeholder="Enter Invoice No" [(ngModel)]="note.invoiceNO" name="invoiceNo" required #invoiceNoField="ngModel">
-        <mat-error *ngIf="invoiceNoField.errors && invoiceNoField.errors.required">
+        <mat-error *ngIf="invoiceNoField.errors?.required">
           Invoice No is required.
         </mat-error>
       </mat-form-field>
@@ -47,7 +47,7 @@
 
       <mat-form-field>
         <input matInput type="text" id="releaseOrderNo" placeholder="Enter Release Order No" [(ngModel)]="note.releaseOrderNO" name="releaseOrderNo" required #releaseOrderNoField="ngModel">
-        <mat-error *ngIf="releaseOrderNoField.errors && releaseOrderNoField.errors.required">
+        <mat-error *ngIf="releaseOrderNoField.errors?.required">
           Release Order No is required.
         </mat-error>
       </mat-form-field>
@@ -56,7 +56,7 @@
 
     <mat-form-field>
       <input matInput type="number" id="amount" placeholder="Enter Amount" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
-      <mat-error *ngIf="amountField.errors && amountField.errors.required">
+      <mat-error *ngIf="amountField.errors?.required">
         Amount is required.
       </mat-error>
     </mat-form-field>

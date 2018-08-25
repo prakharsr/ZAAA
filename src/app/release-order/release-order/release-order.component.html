@@ -75,7 +75,7 @@
               
               <mat-form-field>
                 <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-                <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
+                <mat-error *ngIf="publicationNameField.errors?.required">
                   Media House Name is required.
                 </mat-error>
               </mat-form-field>
@@ -83,7 +83,7 @@
               <div class="form-row">
                 <mat-form-field class="col-md">
                   <input [disabled]="edit" matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
-                  <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
+                  <mat-error *ngIf="publicationEditionField.errors?.required">
                     Edition Name is required.
                   </mat-error>
                 </mat-form-field>
@@ -92,7 +92,7 @@
                   <mat-select [disabled]="edit" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
                     <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                  <mat-error *ngIf="mediaTypeField.errors?.required">
                     Media type is required.
                   </mat-error>
                 </mat-form-field>
@@ -103,17 +103,17 @@
                   <mat-select [disabled]="edit" id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
                     <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
+                  <mat-error *ngIf="publicationStateField.errors?.required">
                     State is required.
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-md">
                   <input [disabled]="edit" matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GSTIN" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-                  <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
+                  <mat-error *ngIf="publicationGSTINField.errors?.required">
                     GSTIN is required.
                   </mat-error>
-                  <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
+                  <mat-error *ngIf="publicationGSTINField.errors?.minlength || publicationGSTINField.errors?.maxlength">
                     GSTIN should be 15 characters long.
                   </mat-error>
                 </mat-form-field>
@@ -127,7 +127,7 @@
                         <mat-option *ngFor="let item of pullouts" [value]="item.Name">{{item.Name}}</mat-option>
                         <mat-option [value]="others">{{others}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="pullOutNameField.errors && pullOutNameField.errors.required">
+                      <mat-error *ngIf="pullOutNameField.errors?.required">
                           Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
@@ -135,7 +135,7 @@
                   <div class="col" *ngIf="dropdownPullOutName == others">
                     <mat-form-field>
                       <input [disabled]="edit" matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
-                      <mat-error *ngIf="specPullOutNameField.errors && specPullOutNameField.errors.required">
+                      <mat-error *ngIf="specPullOutNameField.errors?.required">
                         Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
@@ -158,7 +158,7 @@
     
               <mat-form-field>
                 <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-                <mat-error *ngIf="clientNameField.errors && clientNameField.errors.required">
+                <mat-error *ngIf="clientNameField.errors?.required">
                   Name is required.
                 </mat-error>
               </mat-form-field>
@@ -167,7 +167,7 @@
                 <mat-select [disabled]="edit" id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
                   <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="clientStateField.errors && clientStateField.errors.required">
+                <mat-error *ngIf="clientStateField.errors?.required">
                   State is required.
                 </mat-error>
               </mat-form-field>
@@ -184,10 +184,10 @@
                 <div class="col" *ngIf="releaseorder.clientGSTIN.GSTType != 'URD'">
                   <mat-form-field>
                     <input [disabled]="edit" matInput type="text" name="gstNo" placeholder="GSTIN" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                    <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                    <mat-error *ngIf="gstNoField.errors?.required">
                       GSTIN is required.
                     </mat-error>
-                    <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                    <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
                       GSTIN should be 15 characters long.
                     </mat-error>
                   </mat-form-field>
@@ -226,7 +226,7 @@
                   <mat-select matInput name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
                     <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="positionField.errors && positionField.errors.required">
+                  <mat-error *ngIf="positionField.errors?.required">
                     Position is required.
                   </mat-error>
                 </mat-form-field>
@@ -241,7 +241,7 @@
               <div class="form-row">
                 <mat-form-field class="col" *ngIf="isTypeTime">
                   <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
-                  <mat-error *ngIf="durationField.errors && durationField.errors.required">
+                  <mat-error *ngIf="durationField.errors?.required">
                     Duration is required.
                   </mat-error>
                 </mat-form-field>
@@ -250,7 +250,7 @@
                     <mat-select matInput name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
                       <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="hueField.errors && hueField.errors.required">
+                    <mat-error *ngIf="hueField.errors?.required">
                       Hue is required.
                     </mat-error>
                   </mat-form-field>
@@ -258,7 +258,7 @@
                 <div class="col">
                   <mat-form-field>
                     <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
-                    <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
+                    <mat-error *ngIf="adEditionField.errors?.required">
                       Edition is required.
                     </mat-error>
                   </mat-form-field>
@@ -299,7 +299,7 @@
                         <div class="col-6">
                           <mat-form-field>
                             <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
-                            <mat-error *ngIf="customLField.errors && customLField.errors.required">
+                            <mat-error *ngIf="customLField.errors?.required">
                               Length is required.
                             </mat-error>
                           </mat-form-field>
@@ -308,7 +308,7 @@
                         <div class="col-6">
                           <mat-form-field>
                             <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
-                            <mat-error *ngIf="customWField.errors && customWField.errors.required">
+                            <mat-error *ngIf="customWField.errors?.required">
                               Width is required.
                             </mat-error>
                           </mat-form-field>
@@ -344,7 +344,7 @@
                     <div class="col-6">
                       <mat-form-field>
                         <input matInput type="number" id="customPaid" placeholder="Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
-                        <mat-error *ngIf="customPaidField.errors && customPaidField.errors.required">
+                        <mat-error *ngIf="customPaidField.errors?.required">
                           Paid is required.
                         </mat-error>
                       </mat-form-field>
@@ -353,7 +353,7 @@
                     <div class="col-6">
                       <mat-form-field>
                         <input matInput type="number" id="customFree" placeholder="Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
-                        <mat-error *ngIf="customFreeField.errors && customFreeField.errors.required">
+                        <mat-error *ngIf="customFreeField.errors?.required">
                           Free is required.
                         </mat-error>
                       </mat-form-field>          
@@ -366,10 +366,10 @@
                     <div class="col-6">
                       <mat-form-field> 
                         <input matInput type="number" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
-                        <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.required">
+                        <mat-error *ngIf="adCountPaidField.errors?.required">
                           No of Paid Ads is required.
                         </mat-error>
-                        <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.multipleOf">
+                        <mat-error *ngIf="adCountPaidField.errors?.multipleOf">
                           No of Paid Ads should be multiple of Paid Ads in Scheme.
                         </mat-error>
                       </mat-form-field>
@@ -393,14 +393,14 @@
                 <!-- <ng-container *ngIf="isTypeWords" class="row">
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
-                    <mat-error *ngIf="maxWordsField.errors && maxWordsField.errors.required">
+                    <mat-error *ngIf="maxWordsField.errors?.required">
                       Maximum Words / Lines is empty or invalid.
                     </mat-error>
                   </mat-form-field>
             
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="words" placeholder="No of Words / Lines" [(ngModel)]="releaseorder.AdWords" name="words" required #wordsField="ngModel">
-                    <mat-error *ngIf="wordsField.errors && wordsField.errors.required">
+                    <mat-error *ngIf="wordsField.errors?.required">
                       No of Words / Lines is empty or invalid.
                     </mat-error>
                   </mat-form-field>            
@@ -423,7 +423,7 @@
                       <div class="col">
                         <mat-form-field>
                           <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
-                          <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
+                          <mat-error *ngIf="premiumBoxField.errors?.required">
                             Box Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -438,7 +438,7 @@
                       <div class="col">
                         <mat-form-field>
                           <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
-                          <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
+                          <mat-error *ngIf="premiumBaseColourField.errors?.required">
                             Base Colour Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -453,7 +453,7 @@
                       <div class="col">
                         <mat-form-field>
                           <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
-                          <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
+                          <mat-error *ngIf="premiumCheckMarkField.errors?.required">
                             Check Mark Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -469,7 +469,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdField.errors && premiumEmailIdField.errors.required">
+                      <mat-error *ngIf="premiumEmailIdField.errors?.required">
                         Email Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -477,7 +477,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdQuantityField.errors && premiumEmailIdQuantityField.errors.required">
+                      <mat-error *ngIf="premiumEmailIdQuantityField.errors?.errors.required">
                         No. of Emails is required.
                       </mat-error>
                     </mat-form-field>
@@ -490,7 +490,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteField.errors && premiumWebsiteField.errors.required">
+                      <mat-error *ngIf="premiumWebsiteField.errors?.required">
                         Website Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -498,7 +498,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteQuantityField.errors && premiumWebsiteQuantityField.errors.required">
+                      <mat-error *ngIf="premiumWebsiteQuantityField.errors?.errors.required">
                         No. of Website is required.
                       </mat-error>
                     </mat-form-field>
@@ -511,7 +511,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsField.errors && premiumExtraWordsField.errors.required">
+                      <mat-error *ngIf="premiumExtraWordsField.errors?.required">
                         Extra Words / Lines Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -519,7 +519,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsQuantityField.errors && premiumExtraWordsQuantityField.errors.required">
+                      <mat-error *ngIf="premiumExtraWordsQuantityField.errors?.required">
                         No. Extra Words / Lines is required.
                       </mat-error>
                     </mat-form-field>
@@ -537,7 +537,7 @@
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                       <span matSuffix>{{releaseorder.PremiumCustom.Percentage ? '%' : ''}}</span>
-                      <mat-error *ngIf="premiumAmountField.errors && premiumAmountField.errors.required">
+                      <mat-error *ngIf="premiumAmountField.errors?.required">
                         Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -591,7 +591,7 @@
             
                 <mat-form-field class="col-6">
                   <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
-                  <mat-error *ngIf="agencyDiscount2Field.errors && agencyDiscount2Field.errors.required">
+                  <mat-error *ngIf="agencyDiscount2Field.errors?.required">
                     Additional Agency Discount is required.
                   </mat-error>
                 </mat-form-field>
@@ -609,7 +609,7 @@
                     <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
                       <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
                     </mat-select>
-                    <mat-error *ngIf="taxField.errors && taxField.errors.required">
+                    <mat-error *ngIf="taxField.errors?.required">
                       Tax is required.
                     </mat-error>
                   </mat-form-field>
@@ -632,14 +632,14 @@
                     <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="releaseorder.paymentDate" required disabled>
                     <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
                     <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-                    <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+                    <mat-error *ngIf="paymentDateField.errors?.required">
                       Date is required.
                     </mat-error>
                   </mat-form-field>
             
                   <mat-form-field  class="col-lg col-md-6">
                     <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="releaseorder.paymentNo" required #paymentChequeField="ngModel">
-                    <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
+                    <mat-error *ngIf="paymentChequeField.errors?.required">
                       No is required.
                     </mat-error>
                   </mat-form-field>
@@ -653,7 +653,7 @@
                   <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
                     <mat-form-field  class="col-lg col-md-6">
                       <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="releaseorder.paymentBankName" required #bankNameField="ngModel">
-                      <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
+                      <mat-error *ngIf="bankNameField.errors?.required">
                         Bank Name is required.
                       </mat-error>
                     </mat-form-field>
@@ -678,7 +678,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
-                      <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
+                      <mat-error *ngIf="otherChargesTypeField.errors?.required">
                         Type is required.
                       </mat-error>
                     </mat-form-field>
@@ -686,7 +686,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
-                      <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
+                      <mat-error *ngIf="otherChargesField.errors?.required">
                         Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -709,7 +709,7 @@
                     <div class="col-6">
                       <mat-form-field>
                         <input [disabled]="edit" type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-                        <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
+                        <mat-error *ngIf="executiveNameField.errors?.required">
                           Executive Name is required.
                         </mat-error>
                       </mat-form-field>
@@ -717,7 +717,7 @@
                     <div class="col-6">
                       <mat-form-field>
                         <input [disabled]="edit" type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-                        <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
+                        <mat-error *ngIf="executiveOrgField.errors?.required">
                           Executive Organisation is required.
                         </mat-error>
                       </mat-form-field>
