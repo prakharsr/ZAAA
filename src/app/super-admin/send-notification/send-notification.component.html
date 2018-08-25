@@ -6,7 +6,7 @@
   <form (ngSubmit)="submit()" #notifyForm="ngForm">
     <mat-form-field>
       <input matInput type="text" placeholder="Title" [(ngModel)]="title" name="title" required #titleField="ngModel">
-      <mat-error *ngIf="titleField.errors && titleField.errors.required">
+      <mat-error *ngIf="titleField.errors?.required">
         Title is required.
       </mat-error>
     </mat-form-field>

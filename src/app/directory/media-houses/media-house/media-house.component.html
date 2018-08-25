@@ -59,7 +59,7 @@
             <ng-container *ngIf="editPublicationDetails">
               <mat-form-field>
                 <input matInput type="text" name="pubName" placeholder="Publication Name" [(ngModel)]="mediaHouse.pubName" required #pubNameField="ngModel">
-                <mat-error *ngIf="pubNameField.errors && pubNameField.errors.required">
+                <mat-error *ngIf="pubNameField.errors?.required">
                   Publication Name is required.
                 </mat-error>
               </mat-form-field>
@@ -68,7 +68,7 @@
                 <div class="col">
                   <mat-form-field>
                     <input matInput type="text" name="orgName" placeholder="Organisation Name" [(ngModel)]="mediaHouse.orgName" required #orgNameField="ngModel">
-                    <mat-error *ngIf="orgNameField.errors && orgNameField.errors.required">
+                    <mat-error *ngIf="orgNameField.errors?.required">
                       Organisation Name is required.
                     </mat-error>
                   </mat-form-field>
@@ -86,17 +86,17 @@
                 <mat-select placeholder="Media Type" name="mediaType" [(ngModel)]="mediaHouse.mediaType" required #mediaTypeField="ngModel">
                   <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                <mat-error *ngIf="mediaTypeField.errors?.required">
                   Media type is required.
                 </mat-error>
               </mat-form-field>
         
               <mat-form-field>
                 <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="mediaHouse.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-                <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+                <mat-error *ngIf="gstNoField.errors?.required">
                   GSTIN is required.
                 </mat-error>
-                <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+                <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
                   GSTIN should be 15 characters long.
                 </mat-error>
               </mat-form-field>
@@ -179,7 +179,7 @@
                     <mat-select placeholder="Frequency" name="freqPeriod-{{i}}" [(ngModel)]="item.Frequency" #freqPeriodField="ngModel">
                       <mat-option *ngFor="let item of periods" [value]="item">{{item}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="freqPeriodField.errors && freqPeriodField.errors.required">
+                    <mat-error *ngIf="freqPeriodField.errors?.required">
                       Frequency is required.
                     </mat-error>
                   </mat-form-field>
@@ -263,24 +263,24 @@
             <ng-container *ngIf="editContactDetails">
               <mat-form-field>
                 <textarea matInput type="text" name="address" placeholder="Address" [(ngModel)]="mediaHouse.address.address" #addressField="ngModel"></textarea>
-                <mat-error *ngIf="addressField.errors && addressField.errors.required">
+                <mat-error *ngIf="addressField.errors?.required">
                   Address is required.
                 </mat-error>
               </mat-form-field>
           
               <mat-form-field>
                 <input matInput type="tel" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" [(ngModel)]="mediaHouse.address.pincode" #pincodeField="ngModel">
-                <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
+                <mat-error *ngIf="pincodeField.errors?.required">
                   Pincode is required.
                 </mat-error>
-                <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
+                <mat-error *ngIf="pincodeField.errors?.minlength || pincodeField.errors?.maxlength">
                   Pincode should be 6 characters long.
                 </mat-error>
               </mat-form-field>
         
               <mat-form-field>
                 <input matInput type="text" name="city" placeholder="City" [(ngModel)]="mediaHouse.address.city" #cityField="ngModel">
-                <mat-error *ngIf="cityField.errors && cityField.errors.required">
+                <mat-error *ngIf="cityField.errors?.required">
                   City is required.
                 </mat-error>
               </mat-form-field>
@@ -289,7 +289,7 @@
                 <mat-select placeholder="State" name="state" [(ngModel)]="mediaHouse.address.state" required #stateField="ngModel">
                   <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="stateField.errors && stateField.errors.required">
+                <mat-error *ngIf="stateField.errors?.required">
                   State is required.
                 </mat-error>
               </mat-form-field>
@@ -309,7 +309,7 @@
 
               <mat-form-field>
                 <input matInput type="text" name="edition" placeholder="Edition" [(ngModel)]="mediaHouse.address.edition" required #editionField="ngModel">
-                <mat-error *ngIf="editionField.errors && editionField.errors.required">
+                <mat-error *ngIf="editionField.errors?.required">
                   Edition is required.
                 </mat-error>
               </mat-form-field>
@@ -391,7 +391,7 @@
                 <div class="card-body">
                   <mat-form-field>
                     <input matInput type="text" id="person-{{i}}" name="s-{{i}}-person" placeholder="Person" [(ngModel)]="item.person" required #personField="ngModel">
-                    <mat-error *ngIf="personField.errors && personField.errors.required">
+                    <mat-error *ngIf="personField.errors?.required">
                       Person is required.
                     </mat-error>
                   </mat-form-field>
@@ -403,7 +403,7 @@
                   <mat-form-field>
                     <span matPrefix>+91 &nbsp;</span>
                     <input matInput type="tel"  pattern="^((\+91)|0|)\d{10}$" id="mobileNo-{{i}}"  maxlength="10" minlength="10" name="s-{{i}}-mobileNo" placeholder="Mobile Number" [(ngModel)]="item.mobileNo" required #mobileNoField="ngModel">
-                    <mat-error *ngIf="mobileNoField.errors && mobileNoField.errors.required">
+                    <mat-error *ngIf="mobileNoField.errors?.required">
                       Phone Number is empty or invalid.
                     </mat-error>
                   </mat-form-field>
@@ -414,10 +414,10 @@
         
                   <mat-form-field>
                     <input matInput type="email" id="email-{{i}}" name="s-{{i}}-email" placeholder="Email" [(ngModel)]="item.email" required #emailField="ngModel" verify-email>
-                    <mat-error *ngIf="emailField.errors && emailField.errors.required">
+                    <mat-error *ngIf="emailField.errors?.required">
                       Email is required.
                     </mat-error>
-                    <mat-error *ngIf="emailField.errors && emailField.errors.email">
+                    <mat-error *ngIf="emailField.errors?.email">
                       Invalid Email.
                     </mat-error>
                   </mat-form-field>
@@ -438,8 +438,36 @@
     </div>
 
     <ng-container *ngIf="new">
-      <button type="submit" class="btn btn-success" [disabled]="!dirForm.form.valid">Save</button>
-      <button class="btn btn-danger" type="button" (click)="cancelCreate()">Cancel</button>
+
+      <div class="d-none d-md-block">
+        <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!dirForm.form.valid">
+          <mat-icon>check</mat-icon> Save
+        </button>
+  
+        <button type="button" mat-raised-button color="warn" (click)="cancelCreate()">
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+      </div>
+
     </ng-container>
   </form>
 </div>
+
+<mat-toolbar class="d-md-none fixed-bottom">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!dirForm.form.valid" color="primary">
+          <mat-icon>check</mat-icon>
+          <div class="small">Save</div>
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancelCreate()">
+          <mat-icon>cancel</mat-icon>
+          <div class="small">Cancel</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

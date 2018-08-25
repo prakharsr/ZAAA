@@ -34,6 +34,7 @@ import {
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
+import { TncComponent } from './components/tnc/tnc.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -78,7 +79,15 @@ const routes: Routes = [
       user: UserProfileResolver
     }
   },
-  { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
+  // { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
+  {
+    path: 'tnc',
+    component: TncComponent,
+    canActivate: [AdminGuard],
+    resolve: {
+      firm: FirmResolver
+    }
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,

@@ -10,7 +10,7 @@
   <form (ngSubmit)="submit()" #ticketForm="ngForm">
     <mat-form-field>
       <input matInput type="text" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
-      <mat-error *ngIf="subjectField.errors && subjectField.errors.required">
+      <mat-error *ngIf="subjectField.errors?.required">
         Subject is required.
       </mat-error>
     </mat-form-field>
@@ -21,7 +21,33 @@
 
     <br><br>
 
-    <button class="btn btn-success" type="submit" [disabled]="!ticketForm.form.valid">Submit</button>
-    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+    <div class="d-none d-md-block">
+      <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!ticketForm.form.valid">
+        <mat-icon>check</mat-icon> Submit
+      </button>
+
+      <button type="button" mat-raised-button color="warn" (click)="cancel()">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </div>
   </form>
 </div>
+
+<mat-toolbar class="d-md-none fixed-bottom">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!ticketForm.form.valid" color="primary">
+          <mat-icon>check</mat-icon>
+          <div class="small">Save</div>
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+          <mat-icon>cancel</mat-icon>
+          <div class="small">Cancel</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

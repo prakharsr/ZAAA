@@ -1,6 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~material-design-icons/iconfont/material-icons.css";
 
+body {
+    background-color: #fafafa;
+}
+
 .max-w-200 {
     max-width: 200px;
 }
@@ -86,6 +90,10 @@ button[mat-icon-button] {
 .mat-toolbar {
     background-color: #64b5f6;
     color: white;
+}
+
+.mat-toolbar.fixed-bottom {
+    background-color: #f1edec;
 }
 
 .nav-toolbar {

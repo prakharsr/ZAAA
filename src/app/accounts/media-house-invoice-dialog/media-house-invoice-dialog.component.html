@@ -6,7 +6,7 @@
       <form #mediaHouseInvoiceForm="ngForm">
         <mat-form-field>
           <input matInput placeholder="Invoice Number" [(ngModel)]="details.MHINo" name="invoiceNo" required #invoiceNoField="ngModel">
-          <mat-error *ngIf="invoiceNoField.errors && invoiceNoField.errors.required">
+          <mat-error *ngIf="invoiceNoField.errors?.required">
             Invoice Number is required.
           </mat-error>
         </mat-form-field>
@@ -19,14 +19,14 @@
 
         <mat-form-field>
           <input type="number" matInput placeholder="Amount" [(ngModel)]="details.MHIGrossAmount" name="amount" required #amountField="ngModel">
-          <mat-error *ngIf="amountField.errors && amountField.errors.required">
+          <mat-error *ngIf="amountField.errors?.required">
             Amount is required.
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.MHITaxAmount" name="taxAmount" required #taxAmountField="ngModel">
-          <mat-error *ngIf="taxAmountField.errors && taxAmountField.errors.required">
+          <mat-error *ngIf="taxAmountField.errors?.required">
             Tax Amount is required.
           </mat-error>
         </mat-form-field>

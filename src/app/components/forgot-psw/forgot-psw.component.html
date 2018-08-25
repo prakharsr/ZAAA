@@ -9,10 +9,10 @@
   <form (ngSubmit)="submit()" #forgotPswForm="ngForm">
     <mat-form-field>
       <input matInput placeholder="Email Address" [(ngModel)]="email" name="email" required verify-email #emailField="ngModel">
-      <mat-error *ngIf="emailField.errors && emailField.errors.required">
+      <mat-error *ngIf="emailField.errors?.required">
         Email is required.
       </mat-error>
-      <mat-error *ngIf="emailField.errors && emailField.errors.email">
+      <mat-error *ngIf="emailField.errors?.email">
         Invalid Email.
       </mat-error>
     </mat-form-field>

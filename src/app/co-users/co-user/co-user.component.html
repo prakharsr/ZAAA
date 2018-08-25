@@ -14,7 +14,7 @@
           <mat-card-title>Co-User Details</mat-card-title>
           <mat-form-field>
             <input matInput type="text" name="name" placeholder="Name" [(ngModel)]="coUser.name" required #nameField="ngModel">
-            <mat-error *ngIf="nameField.errors && nameField.errors.required">
+            <mat-error *ngIf="nameField.errors?.required">
               Name is required.
             </mat-error>
           </mat-form-field>
@@ -25,10 +25,10 @@
       
           <mat-form-field>
             <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="coUser.email" required #emailField="ngModel" verify-email>
-            <mat-error *ngIf="emailField.errors && emailField.errors.required">
+            <mat-error *ngIf="emailField.errors?.required">
               Email is required.
             </mat-error>
-            <mat-error *ngIf="emailField.errors && emailField.errors.email">
+            <mat-error *ngIf="emailField.errors?.email">
               Invalid Email.
             </mat-error>
           </mat-form-field>
@@ -36,7 +36,7 @@
           <mat-form-field>
             <span matPrefix>+91 &nbsp;</span>
             <input matInput type="tel" pattern="^\d{10}$" maxlength="10" minlength="10" name="phone" placeholder="Phone Number" [(ngModel)]="coUser.phone" required #phoneField="ngModel">
-            <mat-error *ngIf="phoneField.errors && phoneField.errors.required">
+            <mat-error *ngIf="phoneField.errors?.required">
               Phone Number is empty or invalid.
             </mat-error>
           </mat-form-field>
@@ -58,7 +58,33 @@
     </div>
     <br><br>
 
-    <button type="submit" class="btn btn-success" [disabled]="!newCoUserForm.form.valid">Add</button>
-    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    <div class="d-none d-md-block">
+      <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!newCoUserForm.form.valid">
+        <mat-icon>add</mat-icon> Add
+      </button>
+
+      <button type="button" mat-raised-button color="warn" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </div>
   </form>
 </div>
+
+<mat-toolbar class="d-md-none fixed-bottom">
+  <div class="container-fluid">
+    <div class="form-row">
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!newCoUserForm.form.valid" color="primary">
+          <mat-icon>add</mat-icon>
+          <div class="small">Add</div>
+        </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="onCancel()">
+          <mat-icon>cancel</mat-icon>
+          <div class="small">Cancel</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

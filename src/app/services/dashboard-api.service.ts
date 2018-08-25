@@ -40,12 +40,16 @@ export class DashboardApiService {
 
   constructor(private api: ApiService) { }
 
-  getRoChartData() {
-    return this.api.post('/user/dashboard/releaseorder', { });
+  getRoChartData(filter = 1) {
+    return this.api.post('/user/dashboard/releaseorder', {
+      filter: filter
+    });
   }
 
-  getInvoiceData() : Observable<InvoiceGenData> {
-    return this.api.post('/user/dashboard/invoice', { }).pipe(
+  getInvoiceData(filter = 1) : Observable<InvoiceGenData> {
+    return this.api.post('/user/dashboard/invoice', {
+      filter: filter
+    }).pipe(
       map(data => {
         let result = new InvoiceGenData();
 
@@ -58,8 +62,10 @@ export class DashboardApiService {
     );
   }
 
-  getDuesData(): Observable<DuesData> {
-    return this.api.post('/user/dashboard/clientDues', { }).pipe(
+  getDuesData(filter = 1): Observable<DuesData> {
+    return this.api.post('/user/dashboard/clientDues', {
+      filter: filter
+    }).pipe(
       map(data => {
         let result = new DuesData();
 
@@ -72,8 +78,10 @@ export class DashboardApiService {
     );
   }
 
-  getPaymentsData() : Observable<PaymentsData> {
-    return this.api.post('/user/dashboard/clientPayments', { }).pipe(
+  getPaymentsData(filter = 1) : Observable<PaymentsData> {
+    return this.api.post('/user/dashboard/clientPayments', {
+      filter: filter
+    }).pipe(
       map(data => {
         let result = new PaymentsData();
 
@@ -86,8 +94,10 @@ export class DashboardApiService {
     );
   }
 
-  getMhiData(): Observable<MhiData> {
-    return this.api.post('/user/dashboard/mediahouseinvoice', { }).pipe(
+  getMhiData(filter = 1): Observable<MhiData> {
+    return this.api.post('/user/dashboard/mediahouseinvoice', {
+      filter: filter
+    }).pipe(
       map(data => {
         let result = new MhiData();
 
@@ -100,8 +110,10 @@ export class DashboardApiService {
     );
   }
 
-  getPaidUnpaid(): Observable<PaidUnpaidData> {
-    return this.api.post('/user/dashboard/paidUnpaid', { }).pipe(
+  getPaidUnpaid(filter = 1): Observable<PaidUnpaidData> {
+    return this.api.post('/user/dashboard/paidUnpaid', {
+      filter: filter
+    }).pipe(
       map(data => {
         let result = new PaidUnpaidData();
 
@@ -114,19 +126,27 @@ export class DashboardApiService {
     );
   }
 
-  getReceiptCheque() {
-    return this.api.post('/user/dashboard/receiptCheque', { });
+  getReceiptCheque(filter = 1) {
+    return this.api.post('/user/dashboard/receiptCheque', {
+      filter: filter
+    });
   }
 
-  getReceiptChequeDetails() {
-    return this.api.post('/user/dashboard/receiptChequeDetails', { });
+  getReceiptChequeDetails(filter = 1) {
+    return this.api.post('/user/dashboard/receiptChequeDetails', {
+      filter: filter
+    });
   }
 
-  getMhiChequeDetails() {
-    return this.api.post('/user/dashboard/mediahouseInvoiceChequeDetails', { });
+  getMhiChequeDetails(filter = 1) {
+    return this.api.post('/user/dashboard/mediahouseInvoiceChequeDetails', {
+      filter: filter
+    });
   }
 
-  getMhiCheque() {
-    return this.api.post('/user/dashboard/mhiCheque', { });
+  getMhiCheque(filter = 1) {
+    return this.api.post('/user/dashboard/mhiCheque', {
+      filter: filter
+    });
   }  
 }

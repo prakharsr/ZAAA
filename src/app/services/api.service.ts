@@ -18,6 +18,14 @@ import {
 
 import { AuthTokenManager } from './auth-token-manager.service';
 
+export class TnC {
+  Jurisdiction = "";
+  ROterms: { content: string }[] = [];
+  INterms: { content: string }[] = [];
+  PRterms: { content: string }[] = [];
+  ARterms: { content: string }[] = [];
+}
+
 @Injectable()
 export class ApiService {
   private authTokenKey = "auth_token";
@@ -355,6 +363,43 @@ export class ApiService {
   get notifications() {
     return this.post('/user/notifications', {
       page: 1
+    });
+  }
+
+  get tnc(): Observable<TnC> {
+    return this.get('/firm/terms').pipe(
+      map(data => {
+        let result = new TnC();
+
+        if (data.success) {
+          result.Jurisdiction = data.Jurisdiction;
+          
+          result.ROterms = data.ROterms.map(M => {
+            return { content: M };
+          })
+          result.INterms = data.INterms.map(M => {
+            return { content: M };
+          })
+          result.PRterms = data.PRterms.map(M => {
+            return { content: M };
+          })
+          result.ARterms = data.ARterms.map(M => {
+            return { content: M };
+          })
+        }
+
+        return result;
+      })
+    );
+  }
+
+  setTnc(tnc: TnC) {
+    return this.post('/firm/terms', {
+      Jurisdiction: tnc.Jurisdiction,
+      ROterms: tnc.ROterms.map(M => M.content),
+      INterms: tnc.INterms.map(M => M.content),
+      PRterms: tnc.PRterms.map(M => M.content),
+      ARterms: tnc.ARterms.map(M => M.content)
     });
   }
 }

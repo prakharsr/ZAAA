@@ -4,31 +4,31 @@
   <form #mailingDetailsForm="ngForm">
     <mat-form-field>
       <input matInput placeholder="To" [(ngModel)]="details.to" name="to" required verify-email #toField="ngModel">
-      <mat-error *ngIf="toField.errors && toField.errors.required">
+      <mat-error *ngIf="toField.errors?.required">
         Receipent is required.
       </mat-error>
-      <mat-error *ngIf="toField.errors && toField.errors.email">
+      <mat-error *ngIf="toField.errors?.email">
         Invalid Email.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="CC" [(ngModel)]="details.cc" name="cc" verify-email #ccField="ngModel">
-      <mat-error *ngIf="ccField.errors && ccField.errors.email">
+      <mat-error *ngIf="ccField.errors?.email">
         Invalid Email.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="BCC" [(ngModel)]="details.bcc" name="bcc" verify-email #bccField="ngModel">
-      <mat-error *ngIf="bccField.errors && bccField.errors.email">
+      <mat-error *ngIf="bccField.errors?.email">
         Invalid Email.
       </mat-error>
     </mat-form-field>
 
     <!-- <mat-form-field>
       <input matInput placeholder="Subject" [(ngModel)]="details.subject" name="subject" required #subjectField="ngModel">
-      <mat-error *ngIf="subjectField.errors && subjectField.errors.required">
+      <mat-error *ngIf="subjectField.errors?.required">
         Subject is required.
       </mat-error>
     </mat-form-field>

@@ -36,6 +36,7 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import { DashboardApiService } from './services/dashboard-api.service';
 import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
 import { DirRoutingModule } from './directory/dir-routing.module';
+import { TncComponent } from './components/tnc/tnc.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { DirRoutingModule } from './directory/dir-routing.module';
     NotFoundComponent,
     ResetPasswordComponent,
     LoaderComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    TncComponent
   ],
   imports: [
     BrowserModule,
