@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TnC, ApiService } from 'app/services';
-import { ActivatedRoute } from '@angular/router';
+import { TnC, ApiService, NotificationService } from 'app/services';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Firm } from 'app/models';
 
 @Component({
@@ -14,7 +14,9 @@ export class TncComponent implements OnInit {
   firm: Firm;
 
   constructor(private api: ApiService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private notifications: NotificationService) { }
 
   ngOnInit() {
     this.api.tnc.subscribe(data => {
@@ -81,9 +83,22 @@ export class TncComponent implements OnInit {
     });
   }
 
-  resetPRterms() {}
+  resetPRterms() {
+    this.tnc.PRterms = [
+      'Receipts are subject to realisation of Cheque/DD/NEFT.'
+    ].map(M => {
+      return { content: M };
+    });
+  }
 
-  resetARterms() {}
+  resetARterms() {
+    this.tnc.ARterms = [
+      'Receipts are subject to realisation of Cheque/DD/NEFT.',
+      'Receipts are subject to media house.'
+    ].map(M => {
+      return { content: M };
+    });
+  }
 
   reset() {
     this.resetJurisdiction();
@@ -93,5 +108,26 @@ export class TncComponent implements OnInit {
     this.resetARterms();
   }
 
-  submit () {}
+  private goBack() {
+    this.router.navigateByUrl('/profile');
+  }
+
+  submit () {
+    this.api.setTnc(this.tnc).subscribe(data => {
+      if (data.success) {
+        this.notifications.show('Updated successfully');
+
+        this.goBack();
+      }
+      else {
+        console.log(data);
+
+        this.notifications.show(data.msg);
+      }
+    });
+  }
+
+  cancel() {
+    this.goBack();
+  }
 }
