@@ -1117,9 +1117,25 @@ export class ReleaseOrderComponent implements OnInit {
     return Math.ceil(this.displayAmount + this.displayTax);
   }
 
-  handleSubmit(valid: boolean, callback: () => void) {
+  handleSubmit(valid: boolean, callbackName: string) {
     if (valid) {
-      callback();
+      switch (callbackName) {
+        case 'save':
+          this.submit();
+          break;
+        
+        case 'dl':
+          this.saveAndGen();
+          break;
+        
+        case 'preview':
+          this.genPreview();
+          break;
+
+        case 'mail':
+          this.saveAndSendMsg();
+          break;
+      }
     }
     else this.notifications.show('Fix errors before submitting');
   }
