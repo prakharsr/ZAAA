@@ -6,6 +6,10 @@
 
 <br>
 
+<button class="fab bg-info" (click)="refresh()" matTooltip="Refresh">
+  <mat-icon>refresh</mat-icon>
+</button>
+
 <div class="container">
   <div class="row">
     <div class="col-md">
@@ -16,7 +20,24 @@
               <h5>Invoices</h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="invoiceFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #invoiceFilter="matMenu">
+                <button mat-menu-item (click)="setInvoiceFilter(1)" [class.text-primary]="currentInvoiceFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(2)" [class.text-primary]="currentInvoiceFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(3)" [class.text-primary]="currentInvoiceFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(4)" [class.text-primary]="currentInvoiceFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
             </div>
           </div>
 
@@ -54,7 +75,27 @@
               <h5>Sales <small>(Release Orders)</small></h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="roChartFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #roChartFilter="matMenu">
+                <button mat-menu-item (click)="setROChartFilter(1)" [class.text-primary]="currentROChartFilter == 1">
+                  Financial Year
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(2)" [class.text-primary]="currentROChartFilter == 2">
+                  Q1
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(3)" [class.text-primary]="currentROChartFilter == 3">
+                  Q2
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(4)" [class.text-primary]="currentROChartFilter == 4">
+                  Q3
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(5)" [class.text-primary]="currentROChartFilter == 5">
+                  Q4
+                </button>
+              </mat-menu>
             </div>
           </div>
 
@@ -81,7 +122,24 @@
               <h5>Payments</h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="paymentsFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #paymentsFilter="matMenu">
+                <button mat-menu-item (click)="setPaymentsFilter(1)" [class.text-primary]="currentPaymentsFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(2)" [class.text-primary]="currentPaymentsFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(3)" [class.text-primary]="currentPaymentsFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(4)" [class.text-primary]="currentPaymentsFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
             </div>
           </div>
 
@@ -125,7 +183,24 @@
               <h5>Sales <small>(Media House Invoices)</small></h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="mhiFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #mhiFilter="matMenu">
+                <button mat-menu-item (click)="setMhiFilter(1)" [class.text-primary]="currentMhiFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(2)" [class.text-primary]="currentMhiFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(3)" [class.text-primary]="currentMhiFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(4)" [class.text-primary]="currentMhiFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
             </div>
           </div>
 
@@ -172,7 +247,21 @@
               <h5>Receipt Cheques</h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="receiptChequesFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #receiptChequesFilter="matMenu">
+                <button mat-menu-item (click)="setReceiptChequesFilter(1)" [class.text-primary]="currentReceiptChequesFilter == 1">
+                  Upto Today
+                </button>
+                <button mat-menu-item (click)="setReceiptChequesFilter(2)" [class.text-primary]="currentReceiptChequesFilter == 2">
+                  Next 7 Days
+                </button>
+                <button mat-menu-item (click)="setReceiptChequesFilter(3)" [class.text-primary]="currentReceiptChequesFilter == 3">
+                  Next 15 Days
+                </button>
+              </mat-menu>
             </div>
           </div>
 
@@ -205,7 +294,21 @@
               <h5>Media House Invoice Cheques</h5>
             </div>
             <div class="col-auto">
-              <button mat-icon-button type="button"><mat-icon>filter_list</mat-icon></button>
+              <button mat-icon-button type="button" [matMenuTriggerFor]="mhiChequesFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #mhiChequesFilter="matMenu">
+                <button mat-menu-item (click)="setMhiChequesFilter(1)" [class.text-primary]="currentMhiChequesFilter == 1">
+                  Upto Today
+                </button>
+                <button mat-menu-item (click)="setMhiChequesFilter(2)" [class.text-primary]="currentMhiChequesFilter == 2">
+                  Next 7 Days
+                </button>
+                <button mat-menu-item (click)="setMhiChequesFilter(3)" [class.text-primary]="currentMhiChequesFilter == 3">
+                  Next 15 Days
+                </button>
+              </mat-menu>
             </div>
           </div>
 
