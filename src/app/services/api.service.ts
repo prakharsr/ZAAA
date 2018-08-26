@@ -17,6 +17,7 @@ import {
 } from 'app/models';
 
 import { AuthTokenManager } from './auth-token-manager.service';
+import { AdCategory } from '../models/ad-category';
 
 export class TnC {
   Jurisdiction = "";
@@ -401,5 +402,26 @@ export class ApiService {
       PRterms: tnc.PRterms.map(M => M.content),
       ARterms: tnc.ARterms.map(M => M.content)
     });
+  }
+
+  getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
+    return this.post('/user/releaseorder/categories', {
+      level: level,
+      parent: parent == null ? '' : parent._id
+    }).pipe(
+      map(data => {
+        let result: AdCategory[] = [];
+
+        if (data.success) {
+          result = data.categories;
+        }
+
+        return result;
+      })
+    );
+  }
+
+  searchCategories(keyword: string): Observable<AdCategory[][]> {
+    return this.get('/category/search/' + keyword);
   }
 }

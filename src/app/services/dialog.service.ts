@@ -7,7 +7,7 @@ import { MailingDetails } from 'app/models';
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
 import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
-import { CategoriesDetails, CategoriesDetailsComponent } from 'app/release-order/categories-details/categories-details.component';
+import { CategoriesDetails, CategoriesDetailsComponent, CategoriesInjection } from 'app/release-order/categories-details/categories-details.component';
 import { InsertionDetailsComponent, InsertionInjection } from 'app/release-order/insertion-details/insertion-details.component';
 import { Insertion } from 'app/release-order';
 
@@ -53,9 +53,10 @@ export class DialogService {
     }).afterClosed();
   }
 
-  getCategoriesDetails() : Observable<CategoriesDetails> {
+  getCategoriesDetails(data: CategoriesInjection) : Observable<CategoriesDetails> {
     return this.dialog.open(CategoriesDetailsComponent, {
-      width: '600px'
+      width: '600px',
+      data: data
     }).afterClosed();
   }
 
