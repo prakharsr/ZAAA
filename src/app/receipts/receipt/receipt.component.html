@@ -77,7 +77,7 @@
         <br>
       
         <div class="d-none d-md-block">
-          <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!receiptForm.form.valid">
+          <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!receiptForm.form.valid">
             <mat-icon>check</mat-icon> Save
           </button>
     
@@ -87,6 +87,25 @@
         </div>
 
         <br><br>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!receiptForm.form.valid" color="primary">
+                  <mat-icon>check</mat-icon>
+                  <div class="small">Save</div>
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar>
       </form>
     </div>
     <div class="col-md">
@@ -117,25 +136,5 @@
         </ng-container>
       </mat-card>
     </div>
-
-    <mat-toolbar class="d-md-none fixed-bottom">
-      <div class="container-fluid">
-        <div class="form-row">
-          <div class="col">
-            <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!receiptForm.form.valid" color="primary">
-              <mat-icon>check</mat-icon>
-              <div class="small">Save</div>
-            </button>
-          </div>
-          <div class="col">
-            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              <div class="small">Cancel</div>
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-toolbar>
-
   </div>
 </div>

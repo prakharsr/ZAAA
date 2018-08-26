@@ -59,7 +59,7 @@
     <br><br>
 
     <div class="d-none d-md-block">
-      <button type="button" mat-raised-button color="primary" class="bg-success" [disabled]="!newCoUserForm.form.valid">
+      <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!newCoUserForm.form.valid">
         <mat-icon>add</mat-icon> Add
       </button>
 
@@ -67,24 +67,24 @@
         <mat-icon>cancel</mat-icon> Cancel
       </button>
     </div>
+
+    <mat-toolbar class="d-md-none fixed-bottom">
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="col">
+            <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!newCoUserForm.form.valid" color="primary">
+              <mat-icon>add</mat-icon>
+              <div class="small">Add</div>
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="onCancel()">
+              <mat-icon>cancel</mat-icon>
+              <div class="small">Cancel</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
   </form>
 </div>
-
-<mat-toolbar class="d-md-none fixed-bottom">
-  <div class="container-fluid">
-    <div class="form-row">
-      <div class="col">
-        <button type="button" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!newCoUserForm.form.valid" color="primary">
-          <mat-icon>add</mat-icon>
-          <div class="small">Add</div>
-        </button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="onCancel()">
-          <mat-icon>cancel</mat-icon>
-          <div class="small">Cancel</div>
-        </button>
-      </div>
-    </div>
-  </div>
-</mat-toolbar>
