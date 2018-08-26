@@ -1000,7 +1000,7 @@ export class ReleaseOrderComponent implements OnInit {
     if (valid) {
       switch (callbackName) {
         case 'save':
-          this.submit();
+          this.save();
           break;
         
         case 'dl':

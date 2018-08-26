@@ -762,48 +762,46 @@
 
           <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')" class="mb-2 bg-info">
             <mat-icon>mail</mat-icon> Send Mail
-          </button>
-          
+          </button>          
         </div>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'save')" color="primary">
+                  <mat-icon>check</mat-icon>
+                  <div class="small">Save</div>
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'preview')">
+                  <mat-icon>assignment</mat-icon>
+                  <div class="small">Preview</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'dl')">
+                  <mat-icon>get_app</mat-icon>
+                  <div class="small">Download</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')">
+                  <mat-icon>mail</mat-icon>
+                  <div class="small">Send Mail</div>
+                </button>
+              </div>    
+            </div>
+          </div>
+        </mat-toolbar>
       </form>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<mat-toolbar class="d-md-none fixed-bottom">
-  <div class="container-fluid">
-    <div class="form-row">
-      <div class="col">
-        <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'save')" color="primary">
-          <mat-icon>check</mat-icon>
-          <div class="small">Save</div>
-        </button>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
-          <mat-icon>cancel</mat-icon>
-          <div class="small">Cancel</div>
-        </button>
-      </div>
-      <div class="col">
-        <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'preview')">
-          <mat-icon>assignment</mat-icon>
-          <div class="small">Preview</div>
-        </button>
-      </div>
-      <div class="col">
-        <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'dl')">
-          <mat-icon>get_app</mat-icon>
-          <div class="small">Download</div>
-        </button>
-      </div>
-      <div class="col">
-        <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')">
-          <mat-icon>mail</mat-icon>
-          <div class="small">Send Mail</div>
-        </button>
-      </div>
-    
-    </div>
-  </div>
-</mat-toolbar>
