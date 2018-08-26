@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { AdCategory } from 'app/models/ad-category';
 import { ApiService } from '../../services/api.service';
@@ -60,20 +60,37 @@ export class CategoriesDetailsComponent implements OnInit {
     return text.debounceTime(300)
       .distinctUntilChanged()
       .pipe(
-        map(term => this.api.searchCategories(term))
+        switchMap(term => this.api.searchCategories(term))
       )
       .catch(() => of([]));
   }
 
-  categoryInputFormatter = (result: AdCategory[]) => {
-    for (let i = 0; i < result.length; ++i) {
-      if (result[i]) {
-        this.setCategory(i, result[i]);
+  categoryInputFormatter = (result: AdCategory[] ) => {
+    this.initFromArray(0, result);
+
+    return result[result.length - 1].name;
+  }
+
+  initFromArray(index: number, arr: AdCategory[]) {
+    if (index >= arr.length) {
+      if (index < this.categories.length) {
+        this.setCategory(index, null);
       }
-      else break;
+
+      return
     }
 
-    return this.format(result);
+    this.details.selectedCategories[index] = this.categories[index].find(M => M._id == arr[index]._id);
+
+    let nextIndex = index + 1;
+
+    if (nextIndex < this.categories.length) {
+      this.api.getCategories(nextIndex, arr[index]).subscribe(data => {
+        this.categories[nextIndex] = data;
+
+        this.initFromArray(nextIndex, arr);
+      })
+    }
   }
 
   format(categories: AdCategory[]): string {

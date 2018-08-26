@@ -422,6 +422,16 @@ export class ApiService {
   }
 
   searchCategories(keyword: string): Observable<AdCategory[][]> {
-    return this.get('/category/search/' + keyword);
+    return keyword ? this.get('/category/search/' + keyword).pipe(
+      map(data => {
+        let result: AdCategory[][] = [];
+
+        if (data.success) {
+          result = data.categories;
+        }
+
+        return result;
+      })
+    ) : of([]);
   }
 }
