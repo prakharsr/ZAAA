@@ -564,35 +564,35 @@
           <div class="col-lg col-md-6">
             <br>
             <mat-card class="mat-elevation-z4">
-              <mat-card-title>Ad Calculations</mat-card-title>
+              <mat-card-title>
+                <div class="row">
+                  <div class="col">Ad Calculations</div>
+                  <div class="col-auto" *ngIf="isTypeLen && customSize">
+                    <mat-slide-toggle [(ngModel)]="releaseorder.fixRate" name="fixedRate">
+                      <small>Fixed Rate</small>
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+              </mat-card-title>
 
               <div class="form-row">
-                <div class="col">
-                  <div class="form-row">
-                    <mat-form-field class="col-12">
-                      <span matPrefix>₹&nbsp;</span>
-                      <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
-                      <mat-error *ngIf="rateField.errors?.required">
-                        Rate is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+                <div class="col-6">
+                  <mat-form-field>
+                    <span matPrefix>₹&nbsp;</span>
+                    <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+                    <mat-error *ngIf="rateField.errors?.required">
+                      Rate is required.
+                    </mat-error>
+                  </mat-form-field>
                 </div>
-                <div class="col-auto align-self-center" *ngIf="isTypeLen && customSize">
-                  <mat-slide-toggle [(ngModel)]="releaseorder.fixRate" name="fixedRate">
-                    <small>Fixed Rate</small>
-                  </mat-slide-toggle>
-                </div>
-                <div class="col">
-                  <div class="form-row">
-                    <mat-form-field class="col-12">
-                      <span matSuffix>%</span>
-                      <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
-                      <mat-error *ngIf="publicationDiscountField?.required">
-                        Media House Discount is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+                <div class="col-6">
+                  <mat-form-field>
+                    <span matSuffix>%</span>
+                    <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+                    <mat-error *ngIf="publicationDiscountField?.required">
+                      Media House Discount is required.
+                    </mat-error>
+                  </mat-form-field>
                 </div>
                 
                 <!-- <mat-form-field class="col-lg-3 col-md-6"> 
@@ -602,26 +602,26 @@
                 </mat-form-field> -->
               </div>
 
-              <div class="row">
-                <div class="col-6">                  
-                  <div class="form-row">                
-                    <mat-form-field class="col-6">
-                      <span matSuffix>%</span>
-                      <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
-                      <mat-error *ngIf="agencyDiscount1Field?.required">
-                        Agency Discount is required.
-                      </mat-error>
-                    </mat-form-field>
-                
-                    <mat-form-field class="col-6">
-                      <span matSuffix>%</span>
-                      <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
-                      <mat-error *ngIf="agencyDiscount2Field.errors?.required">
-                        Additional Agency Discount is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
+              <div class="form-row">                
+                <mat-form-field class="col-6">
+                  <span matSuffix>%</span>
+                  <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+                  <mat-error *ngIf="agencyDiscount1Field?.required">
+                    Agency Discount is required.
+                  </mat-error>
+                </mat-form-field>
+            
+                <mat-form-field class="col-6">
+                  <span matSuffix>%</span>
+                  <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+                  <mat-error *ngIf="agencyDiscount2Field.errors?.required">
+                    Additional Agency Discount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
+              <div class="row">
+                <div class="col-6">
                   <label>Tax</label>
 
                   <div class="form-row">
@@ -642,7 +642,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-6"></div>
+                <div class="col-6">
+                  <ng-container *ngIf="isTypeLen && totalSpace && availableAds">
+                    <div *ngIf="releaseorder.fixRate && perSqcmRate">
+                      <span class="text-muted">Per sqcm Rate:</span> ₹ {{perSqcmRate}}
+                    </div>
+                    <div *ngIf="!releaseorder.fixRate && perInsertionRate">
+                      <span class="text-muted">Per insertion Rate:</span> ₹ {{perInsertionRate}}
+                    </div>
+                  </ng-container>
+                </div>
               </div>
 
               <label id="add_details">Payment Details</label>

@@ -1019,4 +1019,12 @@ export class ReleaseOrderComponent implements OnInit {
     }
     else this.notifications.show('Fix errors before submitting');
   }
+
+  get perInsertionRate() {
+    return Math.ceil(this.displayTotal / this.availableAds);
+  }
+
+  get perSqcmRate() {
+    return Math.ceil(this.perInsertionRate / this.totalSpace);
+  }
 }
