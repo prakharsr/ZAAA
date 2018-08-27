@@ -17,4 +17,6 @@ export class PreviewComponent implements OnInit {
   ngOnInit() {
   }
 
+  zoom = false;
+
 }

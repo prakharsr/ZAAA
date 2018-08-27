@@ -2,6 +2,11 @@
   <div class="row">
     <div class="col">Preview</div>
     <div class="col-auto">
+      <button class="zoom-btn" mat-mini-fab color="primary" (click)="zoom = !zoom">
+        <mat-icon>{{zoom ? 'zoom_out' : 'zoom_in'}}</mat-icon>
+      </button>
+    </div>
+    <div class="col-auto">
       <button mat-icon-button [mat-dialog-close]="null">
         <mat-icon>close</mat-icon>
       </button>
@@ -10,7 +15,7 @@
 </h2>
 
 <mat-dialog-content>
-  <div class="container-fluid" [innerHtml]="content | safehtml"></div>
+  <div [innerHtml]="content | safehtml" class="container-fluid" [class.zoomed]="zoom"></div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
