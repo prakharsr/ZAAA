@@ -723,6 +723,7 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
                       <mat-error *ngIf="otherChargesField.errors?.required">
                         Amount is required.
@@ -737,9 +738,11 @@
                 </div>
               </div>
               
-              <div class="mt-2 mb-4">
+              <div class="mt-2">
                 <button mat-raised-button type="button" color="primary" (click)="addCharges()">Add More</button>
               </div>
+
+              <hr>
               
               <div class="form-row">
                 <div class="col">
@@ -770,7 +773,8 @@
                 </div>
               </div>
               
-              <br>
+              <hr>
+              
               <mat-form-field hintLabel="Max 100 characters">
                 <input matInput placeholder="Remark" maxlength="100" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
                 <mat-hint align="end">{{releaseorder.otherRemark?.length || 0}}/100</mat-hint>
