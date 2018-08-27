@@ -350,7 +350,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.AdTime = rateCard.AdTime;
       this.releaseorder.rate = rateCard.rate;
-      this.releaseorder.unit = rateCard.unit;
+      //this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
       this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
