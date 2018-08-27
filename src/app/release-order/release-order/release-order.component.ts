@@ -108,7 +108,6 @@ export class ReleaseOrderComponent implements OnInit {
     return new Date(date.year, date.month - 1, date.day);
   }
 
-
   private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
     if (releaseOrder.generated) {
       return of(true);
@@ -272,6 +271,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adPosition = this.positions[0];
     this.selectedTax = this.taxes[1];
     this.releaseorder.paymentType = 'Credit';
+
+    this.releaseorder.rate = null;
   }
 
   private initFromReleaseOrder() {

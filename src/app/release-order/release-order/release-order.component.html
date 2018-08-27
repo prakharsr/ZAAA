@@ -422,6 +422,7 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
                           <mat-error *ngIf="premiumBoxField.errors?.required">
                             Box Premium Amount is required.
@@ -437,6 +438,7 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
                           <mat-error *ngIf="premiumBaseColourField.errors?.required">
                             Base Colour Premium Amount is required.
@@ -452,6 +454,7 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
                           <mat-error *ngIf="premiumCheckMarkField.errors?.required">
                             Check Mark Premium Amount is required.
@@ -468,6 +471,7 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
                       <mat-error *ngIf="premiumEmailIdField.errors?.required">
                         Email Premium Amount is required.
@@ -489,6 +493,7 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
                       <mat-error *ngIf="premiumWebsiteField.errors?.required">
                         Website Premium Amount is required.
@@ -510,6 +515,7 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
                       <mat-error *ngIf="premiumExtraWordsField.errors?.required">
                         Extra Words / Lines Premium Amount is required.
@@ -536,6 +542,7 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
+                      <span matPrefix>{{releaseorder.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
                       <span matSuffix>{{releaseorder.PremiumCustom.Percentage ? '%' : ''}}</span>
                       <mat-error *ngIf="premiumAmountField.errors?.required">
                         Premium Amount is required.
@@ -563,6 +570,7 @@
                 <div class="col">
                   <div class="form-row">
                     <mat-form-field class="col-12">
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
                       <mat-error *ngIf="rateField.errors?.required">
                         Rate is required.
@@ -578,6 +586,7 @@
                 <div class="col">
                   <div class="form-row">
                     <mat-form-field class="col-12">
+                      <span matSuffix>%</span>
                       <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
                       <mat-error *ngIf="publicationDiscountField?.required">
                         Media House Discount is required.
@@ -594,10 +603,10 @@
               </div>
 
               <div class="row">
-                <div class="col-6">
-                  
+                <div class="col-6">                  
                   <div class="form-row">                
                     <mat-form-field class="col-6">
+                      <span matSuffix>%</span>
                       <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
                       <mat-error *ngIf="agencyDiscount1Field?.required">
                         Agency Discount is required.
@@ -605,28 +614,31 @@
                     </mat-form-field>
                 
                     <mat-form-field class="col-6">
+                      <span matSuffix>%</span>
                       <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
                       <mat-error *ngIf="agencyDiscount2Field.errors?.required">
                         Additional Agency Discount is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
+
+                  <label>Tax</label>
+
                   <div class="form-row">
-                    <label class="col-3 col-form-label">Tax</label>
-                    <div class="col-auto col-form-label">
-                      <div class="form-check">
-                        <mat-checkbox class="my-2" name="taxIncluded" [(ngModel)]="releaseorder.taxIncluded" >Included</mat-checkbox>
-                      </div>
+                    <div class="col-auto">
+                      <mat-checkbox class="my-2" name="taxIncluded" [(ngModel)]="releaseorder.taxIncluded">
+                        <small>Included</small>
+                      </mat-checkbox>
                     </div>
                     <div class="col">
-                      <mat-form-field>
-                        <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                          <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="taxField.errors?.required">
-                          Tax is required.
-                        </mat-error>
-                      </mat-form-field>
+                      <div class="form-row">
+                        <div class="col-12">
+                          <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
+                            <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
+                          </mat-select>
+                          <hr style="margin-top: 0; border-bottom: 1px solid #333333">
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -673,7 +685,7 @@
 
                   <div class="col-6 small">
                     <span class="text-muted">Amount</span><br>
-                    ₹ {{clientPayment}}
+                    ₹ {{clientPayment || '0'}}
                   </div>            
                 </div>
               </ng-container>

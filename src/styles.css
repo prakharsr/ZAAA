@@ -62,7 +62,7 @@ input.ng-valid.form-control, select.ng-valid {
 
 mat-form-field, mat-slide-toggle {
     width: 100%;
-    margin: 0px 0;
+    margin: 1px 0px;
 }
 
 mat-icon {
