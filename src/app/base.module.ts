@@ -55,6 +55,7 @@ import { PreviewComponent } from './components/preview/preview.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { SafeHtmlPipe } from './safe-html-pipe';
+import { NgBootstrapModule } from './ng-bootstrap.module';
 
 const validators = [
   VerifyEmailDirective,
@@ -65,25 +66,11 @@ const validators = [
   VerifyEqualsDirective
 ];
 
-import {
-  NgbRatingModule,
-  NgbDatepickerModule,
-  NgbTypeaheadModule,
-  NgbCollapseModule
-} from '@ng-bootstrap/ng-bootstrap';
-
-const ngbModules = [
-  NgbRatingModule,
-  NgbDatepickerModule,
-  NgbTypeaheadModule,
-  NgbCollapseModule
-]
-
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    ngbModules,
+    NgBootstrapModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
@@ -128,10 +115,10 @@ const ngbModules = [
   exports: [
     CommonModule,
     RouterModule,
-    ngbModules,
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    NgBootstrapModule,
     MailingDetailsComponent,
     validators,
     PaginationComponent,
