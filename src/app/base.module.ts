@@ -56,6 +56,7 @@ import { TestimonialComponent } from './components/testimonial/testimonial.compo
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { SafeHtmlPipe } from './safe-html-pipe';
 import { NgBootstrapModule } from './ng-bootstrap.module';
+import { PaymentModePipe } from './payment-mode-pipe';
 
 const validators = [
   VerifyEmailDirective,
@@ -65,6 +66,11 @@ const validators = [
   VerifyMultipleOfDirective,
   VerifyEqualsDirective
 ];
+
+const pipes = [
+  SafeHtmlPipe,
+  PaymentModePipe
+]
 
 @NgModule({
   imports: [
@@ -110,7 +116,7 @@ const validators = [
     PreviewComponent,
     TestimonialComponent,
     NotificationsComponent,
-    SafeHtmlPipe
+    pipes
   ],
   exports: [
     CommonModule,
@@ -124,7 +130,7 @@ const validators = [
     PaginationComponent,
     LivechatWidgetModule,
     LineChartModule,
-    SafeHtmlPipe
+    pipes
   ],
   entryComponents: [
     DialogComponent,

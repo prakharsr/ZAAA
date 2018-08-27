@@ -659,7 +659,7 @@
               <div class="row">
                 <mat-form-field class="col-6">
                   <mat-select name="paymentType" placeholder="Type" [(ngModel)]="releaseorder.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-                    <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item}}</mat-option>
+                    <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item | paymentMode}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
