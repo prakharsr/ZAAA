@@ -11,7 +11,6 @@ import {
 import { FirmResolver, UserProfileResolver } from 'app/services';
 
 import {
-  HomeComponent,
   LoginComponent,
   RegisterComponent,
   ForgotPswComponent,
@@ -27,7 +26,6 @@ import {
 
 import {
   ProfileEditComponent,
-  TemplateSelectorComponent,
   PlanSelectorComponent
 } from 'app/admin';
 
@@ -35,6 +33,13 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { TncComponent } from './components/tnc/tnc.component';
+import { DirRoutingModule } from './directory/dir-routing.module';
+import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
+import { CoUsersRoutingModule } from './co-users/co-users-routing.module';
+import { ReleaseOrderRoutingModule } from './release-order/release-order-routing.module';
+import { InvoiceRoutingModule } from './invoice/invoice-routing.module';
+import { ReceiptsRoutingModule } from './receipts/receipts-routing.module';
+import { ReportsRoutingModule } from './reports/reports-routing.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -79,7 +84,6 @@ const routes: Routes = [
       user: UserProfileResolver
     }
   },
-  // { path: 'templates', component: TemplateSelectorComponent, canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard] },
   {
     path: 'tnc',
     component: TncComponent,
@@ -118,7 +122,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [
+    DirRoutingModule,
+    CoUsersRoutingModule,
+    RateCardRoutingModule,
+    ReleaseOrderRoutingModule,
+    InvoiceRoutingModule,
+    ReceiptsRoutingModule,
+    ReportsRoutingModule,
+    RouterModule.forRoot(routes)
+  ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule { }

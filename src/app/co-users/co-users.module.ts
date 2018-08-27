@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
-import { CoUsersRoutingModule } from './co-users-routing.module';
 
 import {
   CoUserComponent,
@@ -13,8 +12,7 @@ import {
 
 @NgModule({
   imports: [
-    BaseModule,
-    CoUsersRoutingModule,
+    BaseModule
   ],
   declarations: [
     CoUsersComponent,

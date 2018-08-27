@@ -34,8 +34,6 @@ import {
 import { ReportsModule } from './reports/reports.module';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { DashboardApiService } from './services/dashboard-api.service';
-import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
-import { DirRoutingModule } from './directory/dir-routing.module';
 import { TncComponent } from './components/tnc/tnc.component';
 
 @NgModule({
@@ -70,9 +68,6 @@ import { TncComponent } from './components/tnc/tnc.component';
     ReceiptsModule,
     AccountsModule,
     ReportsModule,
-
-    DirRoutingModule,
-    RateCardRoutingModule,
     AppRoutingModule
   ],
   providers: [
