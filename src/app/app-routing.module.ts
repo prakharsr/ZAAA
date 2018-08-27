@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'superadmin',
     loadChildren: 'app/super-admin/super-admin.module#SuperAdminModule'
   },
+  {
+    path: 'accounts',
+    loadChildren: 'app/accounts/accounts.module#AccountsModule'
+  },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPswComponent },

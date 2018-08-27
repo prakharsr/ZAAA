@@ -10,7 +10,6 @@ import { RateCardModule } from './rate-card/rate-card.module';
 import { ReleaseOrderModule } from './release-order/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ReceiptsModule } from './receipts/receipts.module';
-import { AccountsModule } from './accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -66,7 +65,6 @@ import { TncComponent } from './components/tnc/tnc.component';
     ReleaseOrderModule,
     InvoiceModule,
     ReceiptsModule,
-    AccountsModule,
     ReportsModule,
     AppRoutingModule
   ],
