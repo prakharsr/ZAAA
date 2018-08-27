@@ -1,15 +1,33 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container">Release Order: {{releaseOrder.releaseOrderNO}}</div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <br>
 
 <div class="container">
   <button *ngIf="!releaseOrder.generated" class="fab bg-info" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
     <mat-icon>edit</mat-icon>
   </button>
+
+  <mat-card class="mat-elevation-z3">
+    <div class="row">
+      <div class="col-md">
+        <h5 style="font-weight: lighter">Release Order: {{releaseOrder.releaseOrderNO}}</h5>
+
+
+      </div>
+      <div class="col-md">
+        <div class="small text-muted mt-2">Tax Amount</div>
+        <div>{{taxDisplay}}</div>
+        
+        <div class="small text-muted mt-2">Ad Gross Amount</div>
+        <div>₹ {{releaseOrder.adGrossAmount}}</div>
+        
+        <div class="small text-muted mt-2">Net Amount in Figures</div>
+        <div>₹ {{releaseOrder.netAmountFigures}}</div>
+        <div>Rupees {{releaseOrder.netAmountWords}}</div>
+        
+        <div class="small text-muted mt-2">Client Payment</div>
+        <div>₹ {{releaseOrder.clientPayment}}</div>
+      </div>
+    </div>
+  </mat-card>
 
   <div class="row">
     <div class="col-lg-6">
@@ -143,7 +161,7 @@
           </div>
         </div>
 
-        <div class="small text-muted mt-2">Remark</div>
+        <div class="small text-muted mt-2">Remark (for Release Order)</div>
         <div>{{releaseOrder.remark || '--'}}</div>
       </mat-card>
     </div>
@@ -171,7 +189,7 @@
           </tr>
           <tr *ngIf="releaseOrder.PremiumWebsite.Included">
             <td class="text-muted pr-5">Website</td>
-            <td> ₹ {{releaseOrder.PremiumWebsite.Amount}} x{{releaseOrder.PremiumWebsite.Quantity}}</td>
+            <td>₹ {{releaseOrder.PremiumWebsite.Amount}} x{{releaseOrder.PremiumWebsite.Quantity}}</td>
           </tr>
           <tr *ngIf="releaseOrder.PremiumExtraWords.Included">
             <td class="text-muted pr-5">Extra Words / Lines</td>
@@ -205,6 +223,58 @@
       <br>
       <mat-card class="mat-elevation-z3">
         <label class="text-muted">Ad Calculations</label>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">{{rateText}}</div>
+            <div>₹ {{releaseOrder.rate}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Media House Discount</div>
+            <div>{{releaseOrder.publicationDiscount}} %</div>
+          </div>
+        </div>
+        
+        <div class="row">        
+          <div class="col">
+            <div class="small text-muted mt-2">Agency Discount</div>
+            <div>{{releaseOrder.agencyDiscount1}} %</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Additional Agency Discount</div>
+            <div>{{releaseOrder.agencyDiscount2}} %</div>
+          </div>
+        </div>
+
+        <hr>
+
+        <label class="text-muted">Payment Details</label>
+        <div class="small text-muted mt-2">Type</div>
+        <div>{{releaseOrder.paymentType | paymentMode}}</div>
+        
+        <ng-container *ngIf="releaseOrder.paymentType == 'Cheque' || releaseOrder.paymentType == 'NEFT'">
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-2">Date</div>
+              <div>{{releaseOrder.paymentDate | date}}</div>
+            </div>
+            <div class="col">
+              <div class="small text-muted mt-2">Number</div>
+              <div>{{releaseOrder.paymentNo}}</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-2">Amount</div>
+              <div>{{releaseOrder.paymentAmount}}</div>
+            </div>
+            <div class="col" *ngIf="releaseOrder.paymentType == 'Cheque'">
+              <div class="small text-muted mt-2">Bank Name</div>
+              <div>{{releaseOrder.paymentBankName}}</div>
+            </div>
+          </div>
+        </ng-container>
       </mat-card>
     </div>
     <div class="col-lg-6">
@@ -247,120 +317,6 @@
         <div class="small text-muted mt-3">Remark</div>
         <div>{{releaseOrder.otherRemark || '--'}}</div>
       </mat-card>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Ad Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate</div>
-              <div class="col-md-8">{{releaseOrder.rate}} {{releaseOrder.unit}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Tax Amount</div>
-              <div class="col-md-8">{{taxDisplay}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Gross Amount</div>
-              <div class="col-md-8">₹ {{releaseOrder.adGrossAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount in Figures</div>
-              <div class="col-md-8">₹ {{releaseOrder.netAmountFigures}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount in Words</div>
-              <div class="col-md-8">{{releaseOrder.netAmountWords}}</div>
-            </div>
-          </li>          
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Discounts</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Publication Discount</div>
-            <div class="col-md-8">{{releaseOrder.publicationDiscount}} %</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Agency Discount 1</div>
-            <div class="col-md-8">{{releaseOrder.agencyDiscount1}} %</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Agency Discount 2</div>
-            <div class="col-md-8">{{releaseOrder.agencyDiscount2}} %</div>
-          </div>
-        </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Payment Details</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Type</div>
-              <div class="col-md-8">{{releaseOrder.paymentType}}</div>
-            </div>
-          </li>
-          <div *ngIf="releaseOrder.paymentType == 'Cheque' || releaseOrder.paymentType == 'NEFT'">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Date</div>
-                <div class="col-md-8">{{releaseOrder.paymentDate | date}}</div>
-              </div>
-            </li>          
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Number</div>
-                <div class="col-md-8">{{releaseOrder.paymentNo}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Cheque Amount</div>
-                <div class="col-md-8">{{releaseOrder.paymentAmount}}</div>
-              </div>
-            </li>  
-            <li class="list-group-item" *ngIf="releaseOrder.paymentType == 'Cheque'">
-              <div class="row">
-                <div class="col-md-4">Bank Name</div>
-                <div class="col-md-8">{{releaseOrder.paymentBankName}}</div>
-              </div>
-            </li>  
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Client Payment</div>
-                <div class="col-md-8">₹ {{releaseOrder.clientPayment}}</div>
-              </div>
-            </li>
-          </div>          
-        </ul>
-      </div>
     </div>
   </div>
 </div>

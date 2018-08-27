@@ -108,7 +108,6 @@ export class ReleaseOrderComponent implements OnInit {
     return new Date(date.year, date.month - 1, date.day);
   }
 
-
   private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
     if (releaseOrder.generated) {
       return of(true);
@@ -272,6 +271,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adPosition = this.positions[0];
     this.selectedTax = this.taxes[1];
     this.releaseorder.paymentType = 'Credit';
+
+    this.releaseorder.rate = null;
   }
 
   private initFromReleaseOrder() {
@@ -350,7 +351,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.AdTime = rateCard.AdTime;
       this.releaseorder.rate = rateCard.rate;
-      this.releaseorder.unit = rateCard.unit;
+      //this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
       this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
@@ -609,7 +610,7 @@ export class ReleaseOrderComponent implements OnInit {
 
   get rateText() {
     if (this.isTypeLen) {
-      return "Rate per sqcm";
+      return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
     }
 
     if (this.isTypeWords) {
@@ -1017,5 +1018,13 @@ export class ReleaseOrderComponent implements OnInit {
       }
     }
     else this.notifications.show('Fix errors before submitting');
+  }
+
+  get perInsertionRate() {
+    return Math.ceil(this.displayTotal / this.availableAds);
+  }
+
+  get perSqcmRate() {
+    return Math.ceil(this.perInsertionRate / this.totalSpace);
   }
 }

@@ -29,7 +29,7 @@ import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'accounts',
+    path: '',
     canActivate: [AuthGuard],
     children: [
       {

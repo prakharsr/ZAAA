@@ -32,7 +32,7 @@
     
           <mat-form-field>
             <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-              <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item}}</mat-option>
+              <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item | paymentMode}}</mat-option>
             </mat-select>
           </mat-form-field>
     

@@ -42,7 +42,7 @@
       <h5>Payment Details</h5>
     
       <div class="text-muted small mt-3">Type</div>
-      <div>{{receipt.paymentType}}</div>
+      <div>{{receipt.paymentType | paymentMode}}</div>
     
       <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
         <div class="text-muted small mt-2">Date</div>

@@ -18,7 +18,7 @@ import {
 
 const routes: Routes = [
   {
-    path: 'coUsers',
+    path: '',
     canActivate: [
       AuthGuard,
       PhoneVerifyGuard,

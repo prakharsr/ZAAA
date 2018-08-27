@@ -94,14 +94,18 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+            </div>
+            <div *ngIf="element.generated" class="col-auto text-muted">{{element.generatedAt | date}}</div>
+          </div>
 
           <ng-container *ngIf="element.cancelled">
-            <br>
             <span class="text-danger">CANCELLED</span>
           </ng-container>
 
-          <br><br>
+          <br>
           <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
           <br><br>

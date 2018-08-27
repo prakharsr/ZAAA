@@ -16,9 +16,7 @@ body {
 }
 
 .fab {
-    width: 70px;
-    height: 70px;
-    text-align: center;
+    padding: 20px;
     border: none;
     outline: none;
     color: white;
@@ -34,12 +32,6 @@ body {
     display: block;
 }
 
-.fab .fa {
-    position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 8px);
-}
-
 .fab:hover {
     transform: scale(1.1);
 }
@@ -50,15 +42,9 @@ body {
 
 @media (max-width:767px) {
     .fab {
-        width: 50px;
-        height: 50px;
+        padding: 15px;
         right: 30px;
         bottom: 30px;
-    }
-
-    .fab .fa {
-        top: calc(50% - 7px);
-        left: calc(50% - 7px);
     }
 
     .mobile-collapse {
@@ -76,7 +62,7 @@ input.ng-valid.form-control, select.ng-valid {
 
 mat-form-field, mat-slide-toggle {
     width: 100%;
-    margin: 0px 0;
+    margin: 1px 0px;
 }
 
 mat-icon {
