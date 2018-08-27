@@ -9,10 +9,12 @@ import {
   CoUserApiService,
   CoUsersResolver
 } from '.';
+import { CoUsersRoutingModule } from './co-users-routing.module';
 
 @NgModule({
   imports: [
-    BaseModule
+    BaseModule,
+    CoUsersRoutingModule
   ],
   declarations: [
     CoUsersComponent,

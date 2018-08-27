@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BaseModule } from './base.module';
 import { AdminModule } from './admin/admin.module';
 import { DirectoryModule } from './directory/directory.module';
-import { CoUsersModule } from './co-users/co-users.module';
 import { RateCardModule } from './rate-card/rate-card.module';
 import { ReleaseOrderModule } from './release-order/release-order.module';
 import { InvoiceModule } from './invoice/invoice.module';
@@ -60,7 +59,6 @@ import { TncComponent } from './components/tnc/tnc.component';
     BaseModule,
     AdminModule,
     DirectoryModule,
-    CoUsersModule,
     RateCardModule,
     ReleaseOrderModule,
     InvoiceModule,

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 import {
   AuthGuard,
@@ -35,7 +35,6 @@ import { TestimonialComponent } from './components/testimonial/testimonial.compo
 import { TncComponent } from './components/tnc/tnc.component';
 import { DirRoutingModule } from './directory/dir-routing.module';
 import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
-import { CoUsersRoutingModule } from './co-users/co-users-routing.module';
 import { ReleaseOrderRoutingModule } from './release-order/release-order-routing.module';
 import { InvoiceRoutingModule } from './invoice/invoice-routing.module';
 import { ReceiptsRoutingModule } from './receipts/receipts-routing.module';
@@ -50,6 +49,10 @@ const routes: Routes = [
   {
     path: 'accounts',
     loadChildren: 'app/accounts/accounts.module#AccountsModule'
+  },
+  {
+    path: 'coUsers',
+    loadChildren: 'app/co-users/co-users.module#CoUsersModule'
   },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
@@ -128,13 +131,14 @@ const routes: Routes = [
 @NgModule({
   imports: [
     DirRoutingModule,
-    CoUsersRoutingModule,
     RateCardRoutingModule,
     ReleaseOrderRoutingModule,
     InvoiceRoutingModule,
     ReceiptsRoutingModule,
     ReportsRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
   ],
   exports: [ RouterModule ]
 })
