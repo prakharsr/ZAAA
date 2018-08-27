@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -66,11 +65,25 @@ const validators = [
   VerifyEqualsDirective
 ];
 
+import {
+  NgbRatingModule,
+  NgbDatepickerModule,
+  NgbTypeaheadModule,
+  NgbCollapseModule
+} from '@ng-bootstrap/ng-bootstrap';
+
+const ngbModules = [
+  NgbRatingModule,
+  NgbDatepickerModule,
+  NgbTypeaheadModule,
+  NgbCollapseModule
+]
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule.forRoot(),
+    ngbModules,
     FormsModule,
     HttpClientModule,
     MaterialModule,
@@ -115,7 +128,7 @@ const validators = [
   exports: [
     CommonModule,
     RouterModule,
-    NgbModule,
+    ngbModules,
     FormsModule,
     HttpClientModule,
     MaterialModule,
