@@ -3,8 +3,11 @@ import { NgbDate } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date";
 export class Insertion {
     constructor(public date: NgbDate, public marked = false, public state = 0) {}
 
-    mediaHouseInvoiceID: string;
+    mhimarked = false;
     _id = null;
+
+    netAmount = 0;
+    taxAmount = 0;
 }
 
 export class TaxValues
@@ -155,6 +158,12 @@ export class ReleaseOrder {
     clientPayment = 0;
 
     generated = false;
+
+    cancelled = false;
+    
+    mediahouseID = "";
+    clientID = "";
+    executiveID = "";
 }
 
 export class OtherCharges {

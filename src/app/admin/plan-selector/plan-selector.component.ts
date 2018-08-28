@@ -1,12 +1,10 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import { Plan, Firm } from 'app/models';
 
 import {
   ApiService,
   RazorPayService,
-  WindowService,
   DialogService
 } from 'app/services';
 
@@ -32,7 +30,6 @@ export class PlanSelectorComponent implements OnInit {
     private razorPay: RazorPayService,
     private appRef: ApplicationRef,
     private router: Router,
-    private winRef: WindowService,
     private dialog: DialogService) { }
 
   ngOnInit() {
@@ -71,7 +68,7 @@ export class PlanSelectorComponent implements OnInit {
           data => {
             this.api.generatePaymentInvoice().subscribe(data => {
               // redirect
-              this.winRef.window.location.pathname = '/dashboard';
+              location.pathname = '/dashboard';
               
               this.appRef.tick();
             });

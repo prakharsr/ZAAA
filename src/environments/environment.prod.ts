@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   razorPay: "rzp_test_86QLf2LFy65g2j",
-  apiUrl:  "https://aaman-208409.appspot.com/api",
-  uploadsBaseUrl:  "https://aaman-208409.appspot.com"
+  apiUrl:  "https://adagencymanager.com/api",
+  adminApiUrl: "https://adagencymanager.com/adminapi",
+  uploadsBaseUrl:  "https://adagencymanager.com"
 };

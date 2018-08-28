@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Summary Sheet</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Summary Sheet</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -15,7 +24,7 @@
 </ng-template>
 
 <div class="container">
-  <div class="form-row">
+  <div class="form-row" [class.mobile-collapse]="collapsed">
     <div class="form-group col">
       <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
     </div>
@@ -25,68 +34,61 @@
     </div>
 
     <div class="col-auto">
-      <button class="btn btn-info" (click)="search(1)">
+      <button class="btn btn-info" (click)="search()">
         <mat-icon>search</mat-icon>
       </button>
     </div>
   </div>
 
-  <br><br>
-
   <form #ssForm="ngForm" (ngSubmit)="submit()">
-    <button type="submit" class="btn btn-success" [disabled]="!ssForm.form.valid">Submit</button>
+    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid">
+      <mat-icon>check</mat-icon>
+    </button>
 
-    <br><br>
+    <br>
 
-    <div *ngFor="let insertion of insertions">
+    <div *ngFor="let item of summarySheet; index as i">
       <div class="card mb-3 mat-elevation-z3">
         <div class="card-body">
           <div class="row">
             <div class="col">
               <div class="text-muted small">Publication</div>
-              {{insertion.publicationName}} - {{insertion.publicationEdition}}<br>
+              {{item._id.publicationName}} - {{item._id.publicationEdition}}
             </div>
-            <div class="col-auto">
-              {{insertion.insertions.insertionDate | date}}
+            <div class="col-auto text-right">
+              <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>
+              <span class="text-muted">Pending Amount</span>: ₹ {{item.pendingAmount}}
             </div>
           </div>
 
-          <br>
+          <br><br>
 
-          <div class="form-row">            
-            <div class="col">
-              <div class="form-group">
-                <label>Amount</label>
-                <input type="number" class="form-control" name="amount" [(ngModel)]="insertion.amount" placeholder="Amount" required>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label>Receipt Number</label>
-                <input type="text" class="form-control" name="receiptNo" [(ngModel)]="insertion.receiptNo" placeholder="Receipt Number">
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label>Receipt Date</label>
-                <input type="date" class="form-control" name="receiptDate" [(ngModel)]="insertion.receiptDate" placeholder="Receipt Date" required>
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label>Payment Mode</label>
-                <select class="form-control" name="paymentMode" [(ngModel)]="insertion.paymentMode" placeholder="Payment Mode">
-                  <option *ngFor="let item of paymentTypes" [ngValue]="item">{{item}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <table class="table table-sm table-responsive-md">
+            <tr>
+              <th></th>
+              <th>Date</th>
+              <th>Total Amount</th>
+              <th>Collected Amount</th>
+              <th>Pending Amount</th>
+              <th>Amount</th>
+              <th>Balance</th>
+            </tr>
+            <tr *ngFor="let entry of item.entries; index as j">
+              <td>
+                <mat-checkbox name="checked-{{i}}-{{j}}" [(ngModel)]="entry.checked"></mat-checkbox>
+              </td>
+              <td style="white-space: nowrap;">{{entry.insertionDate | date}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.Amount}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.collectedAmount}}</td>
+              <td style="white-space: nowrap;">₹ {{entry.pendingAmount}}</td>
+              <td>
+                <input type="number" name="amount-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
+              </td>
+              <td style="white-space: nowrap;">₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
   </form>
-
-  <br>
-
-  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="search($event)"></app-pagination>
 </div>

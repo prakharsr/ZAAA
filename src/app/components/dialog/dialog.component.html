@@ -1,9 +1,19 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
-<mat-dialog-content>{{data.message}}</mat-dialog-content>
+<mat-dialog-content style="max-width: 450px" class="mb-3">
+  {{data.message}}
+</mat-dialog-content>
 <mat-dialog-actions>
-  <button *ngIf="data.no" mat-button [mat-dialog-close]="false">No</button>
-  <button *ngIf="data.cancel" mat-button [mat-dialog-close]="false">Cancel</button>
+  <button *ngIf="data.no" mat-raised-button color="warn" [mat-dialog-close]="false">
+    <mat-icon>cancel</mat-icon> No
+  </button>
+  <button *ngIf="data.cancel" mat-raised-button color="warn" [mat-dialog-close]="false">
+    <mat-icon>cancel</mat-icon> Cancel
+  </button>
 
-  <button *ngIf="data.yes" mat-button [mat-dialog-close]="true">Yes</button>
-  <button *ngIf="data.ok" mat-button [mat-dialog-close]="true">Ok</button>
+  <button *ngIf="data.yes" mat-raised-button color="primary" class="bg-success" [mat-dialog-close]="true">
+    <mat-icon>check</mat-icon> Yes
+  </button>
+  <button *ngIf="data.ok" mat-raised-button color="primary" class="bg-success" [mat-dialog-close]="true">
+    <mat-icon>check</mat-icon> Ok
+  </button>
 </mat-dialog-actions>

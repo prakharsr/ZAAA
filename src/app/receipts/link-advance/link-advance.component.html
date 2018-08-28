@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col">
           Receipt: {{receipt.receiptNO}}<br>
-          {{receipt.paymentType}}<br>
+          {{receipt.paymentType | paymentMode}}<br>
           ₹ {{receipt.paymentAmount}}
         </div>
         <div class="col-auto">

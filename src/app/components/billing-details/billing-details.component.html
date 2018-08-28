@@ -4,7 +4,7 @@
   <form #billingDetailsForm="ngForm">
     <mat-form-field>
       <input matInput placeholder="Firm Name" [(ngModel)]="details.firmName" name="firmName" required #firmNameField="ngModel">
-      <mat-error *ngIf="firmNameField.errors && firmNameField.errors.required">
+      <mat-error *ngIf="firmNameField.errors?.required">
         Firm Name is required.
       </mat-error>
     </mat-form-field>
@@ -22,10 +22,10 @@
       <div class="col" *ngIf="details.GSTIN.GSTType != 'URD'">
         <mat-form-field>
           <input matInput type="text" name="gstNo" placeholder="GST Number" [(ngModel)]="details.GSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-          <mat-error *ngIf="gstNoField.errors && gstNoField.errors.required">
+          <mat-error *ngIf="gstNoField.errors?.required">
             GSTIN is required.
           </mat-error>
-          <mat-error *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
+          <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
             GSTIN should be 15 characters long.
           </mat-error>
         </mat-form-field>
@@ -36,24 +36,24 @@
   
     <mat-form-field>
       <input matInput placeholder="Billing Address" [(ngModel)]="details.billingAddress.address" name="billingAddress" required #billingAddressField="ngModel">
-      <mat-error *ngIf="billingAddressField.errors && billingAddressField.errors.required">
+      <mat-error *ngIf="billingAddressField.errors?.required">
         Billing Address is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Pincode" minlength="6" maxlength="6" [(ngModel)]="details.billingAddress.pincode" name="pincode" required #pincodeField="ngModel">
-      <mat-error *ngIf="pincodeField.errors && pincodeField.errors.required">
+      <mat-error *ngIf="pincodeField.errors?.required">
         Pincode is required.
       </mat-error>
-      <mat-error *ngIf="pincodeField.errors && (pincodeField.errors.minlength || pincodeField.errors.maxlength)">
+      <mat-error *ngIf="pincodeField.errors?.minlength || pincodeField.errors?.maxlength">
         Pincode should be 6 characters long.
       </mat-error>
     </mat-form-field>
   
     <mat-form-field>
       <input matInput placeholder="City" [(ngModel)]="details.billingAddress.city" name="city" required #cityField="ngModel">
-      <mat-error *ngIf="cityField.errors && cityField.errors.required">
+      <mat-error *ngIf="cityField.errors?.required">
         City is required.
       </mat-error>
     </mat-form-field>
@@ -62,7 +62,7 @@
       <mat-select placeholder="State" name="state" [(ngModel)]="details.billingAddress.state" required #stateField="ngModel">
         <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
       </mat-select>
-      <mat-error *ngIf="stateField.errors && stateField.errors.required">
+      <mat-error *ngIf="stateField.errors?.required">
         State is required.
       </mat-error>
     </mat-form-field>

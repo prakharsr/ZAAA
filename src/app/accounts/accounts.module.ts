@@ -25,6 +25,9 @@ import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
 import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
 import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
+import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
+import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
+import { PaymentDetailsDialogComponent } from './payment-details-dialog/payment-details-dialog.component';
 
 @NgModule({
   imports: [
@@ -43,9 +46,14 @@ import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolv
     AccountsGstComponent,
     CreateNoteComponent,
     SummarySheetComponent,
-    MediaHouseInvoiceListComponent
+    MediaHouseInvoiceListComponent,
+    MediaHouseReceiptComponent,
+    PaymentDetailsDialogComponent
   ],
-  entryComponents: [MediaHouseInvoiceDialogComponent],
+  entryComponents: [
+    MediaHouseInvoiceDialogComponent,
+    PaymentDetailsDialogComponent
+  ],
   providers: [
     AccountsApiService,
     SummarySheetListResolver,
@@ -54,7 +62,8 @@ import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolv
     ExecutivePaymentsListResolver,
     NotesListResolver,
     InvoiceTaxListResolver,
-    MediaHouseInvoiceListResolver
+    MediaHouseInvoiceListResolver,
+    MhReceiptListResolver
   ]
 })
 export class AccountsModule { }

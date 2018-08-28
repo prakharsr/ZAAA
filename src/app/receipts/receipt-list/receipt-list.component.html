@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Payment Receipts</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Payment Receipts</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -27,7 +36,11 @@
 </ng-template>
 
 <div class="container">
-  <button class="fab" routerLink="/receipts/new" *ngIf="advance">
+  <button class="fab" routerLink="/receipts/advance/new" *ngIf="advance">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button class="fab" routerLink="/receipts/new" *ngIf="!advance">
     <mat-icon>add</mat-icon>
   </button>
 
@@ -38,7 +51,7 @@
   
   <br>
 
-  <div class="form-row">
+  <div class="form-row" [class.mobile-collapse]="collapsed">
     <div class="form-group col-sm-6 col-md-4 col-xl">
       <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
     </div>
@@ -85,14 +98,22 @@
       <div class="row">
         <div class="col">
           <a [routerLink]="['/receipts', receipt.id]">{{receipt.receiptNO}}</a>
+
+          <ng-container *ngIf="receipt.isCancelled">
+            <br>
+            <span class="text-danger">CANCELLED</span>
+          </ng-container>
         </div>
         <div class="col-auto">
           <mat-menu #receiptMenu="matMenu">
             <button mat-menu-item (click)="gen(receipt)">
-              <mat-icon>save_alt</mat-icon> Download
+              <mat-icon>get_app</mat-icon> Download
             </button>
             <button mat-menu-item (click)="sendMsg(receipt)">
               <mat-icon>mail</mat-icon> Send Email
+            </button>
+            <button mat-menu-item (click)="cancel(receipt)" *ngIf="!receipt.isCancelled && !advance">
+              <mat-icon>cancel</mat-icon> Cancel
             </button>
           </mat-menu>
           

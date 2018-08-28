@@ -1,0 +1,13 @@
+<div class="container-fluid" style="max-height: 100%; overflow-y: auto">
+  <div class="card my-1" *ngFor="let item of list">
+    <div class="card-body p-2">
+      <div class="row">
+        <div class="col">
+          <span class="text-muted">{{item.title}}</span><br>
+          <span class="small">{{item.body}}</span>
+        </div>
+        <div class="col-auto small text-muted">{{item.createdAt | date}}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from 'app/guards';
 import { ReportsHomeComponent } from './reports-home/reports-home.component';
+import { ImportExportComponent } from './import-export/import-export.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,16 @@ const routes: Routes = [
       {
         path: '',
         component: ReportsHomeComponent
+      }
+    ]
+  },
+  {
+    path: 'import-export',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ImportExportComponent
       }
     ]
   }

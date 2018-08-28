@@ -17,15 +17,30 @@
   
   <br>
 
+  <div *ngIf="releaseOrder && insertionCheckList.length == 0" class="text-muted">
+    No Pending Insertions
+  </div>
+
   <div *ngIf="insertionCheckList.length">
     <h3>Select Insertions</h3>
     <br>
-    <div *ngFor="let item of insertionCheckList">
-      <mat-checkbox [(ngModel)]="item.checked">{{toDate(item.insertion.date) | date}}</mat-checkbox>
-    </div>
+    <table class="table">
+      <tr>
+        <th></th>
+        <th>Amount</th>
+        <th>Tax</th>
+      </tr>
+      <tr *ngFor="let item of insertionCheckList">
+        <td>
+          <mat-checkbox [(ngModel)]="item.checked">{{toDate(item.insertion.date) | date}}</mat-checkbox>
+        </td>
+        <td>₹ {{item.insertion.netAmount}}</td>
+        <td>₹ {{item.insertion.taxAmount}}</td>
+      </tr>
+    </table>
 
     <br>
 
-    <button class="btn btn-outline-info" (click)="show()">Proceed</button>
+    <button class="btn btn-outline-info" [disabled]="!canProceed" (click)="show()">Proceed</button>
   </div>
 </div>

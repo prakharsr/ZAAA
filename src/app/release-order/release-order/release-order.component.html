@@ -1,4 +1,4 @@
-<mat-toolbar>  
+<mat-toolbar class="ro-toolbar">  
   <mat-toolbar-row>
     <div class="container-fluid">
       <div class="row">
@@ -10,110 +10,110 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
+<ng-template #addPersonSvg>
+  <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="#fff" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
+  </svg>
+</ng-template>
+
 <br><br>
 
-<mat-sidenav-container>
+<mat-sidenav-container class="mt-1">
   <mat-sidenav #sidenav mode="side" opened="true" position="end">
-    <div class="card bg-info sticky-top" style="top: 50px">
+    <div class="card sticky-top" style="top: 50px; width: 365px; background-color: #2196f3">
       <div class="card-header text-light small">
-        Calculations
+        Final Calculations
       </div>
       <ul class="list-group list-group-flush small">
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount</div>
-            <div class="col-md-8 text-muted">{{netAmount}} ({{taxDisplay}})</div>
-          </div>
+          <div class="small text-muted">Net Amount = Amount + Tax</div>
+          <div>₹ {{displayTotal || '0'}} = {{displayAmount || '0'}} + {{displayTax || '0'}}</div>
         </li>
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount in Words</div>
-            <div class="col-md-8 text-muted">{{options.amountToWords(netAmount)}} ({{taxDisplay}})</div>
-          </div>
+          <div class="small text-muted">Net Amount in Words</div>
+          <div>Rupees {{options.amountToWords(displayTotal)}} <span *ngIf="selectedTax.primary">({{taxDisplay}})</span></div>
         </li>
         <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Client Payment</div>
-            <div class="col-md-8 text-muted">{{clientPayment}}</div>
-          </div>
+          <div class="small text-muted">Client Payment (without Tax)</div>
+          <div>₹ {{clientPayment || '0'}}</div>
         </li>
       </ul>
       <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">
         Categories
       </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block">
-        <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
+      <ul class="list-group list-group-flush small d-none d-lg-block" *ngIf="selectedCategories[0]">
+        <li class="list-group-item">
+          <ng-container *ngFor="let cat of selectedCategories; index as i">
+            <span *ngIf="cat">
+              <span *ngIf="i != 0">&gt; </span>{{cat}}
+            </span>
+          </ng-container>
+        </li>
       </ul>
       <div class="card-header text-light small d-none d-lg-block" *ngIf="releaseorder.insertions.length">
         Insertions
       </div>
       <ul class="list-group list-group-flush small d-none d-lg-block"  *ngIf="releaseorder.insertions.length">
-        <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
+        <li class="list-group-item">
           <div class="row">
-            <div class="col">{{toDate(item.date) | date}}</div>
-            <div class="col-auto text-success" *ngIf="item.marked">
-              <mat-icon>check</mat-icon>
-            </div>
+            <span *ngFor="let item of releaseorder.insertions; last as isLast" class="col-4">
+              {{toDate(item.date) | date:'d-MMM-y'}}<span *ngIf="!isLast">,</span>
+            </span>
           </div>
         </li>
       </ul>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="container-fluid">
-      <form (ngSubmit)="submit()" #roForm="ngForm">
+    <div [class.container-fluid]="sidenav.opened" [class.container]="!sidenav.opened">
+      <form (ngSubmit)="submitted = true" #roForm="ngForm">
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
-            <mat-card>
+            <mat-card class="mat-elevation-z4">
               <mat-card-title>Publication Details</mat-card-title>
               
               <mat-form-field>
-                <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-                <mat-error *ngIf="publicationNameField.errors && publicationNameField.errors.required">
+                <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #publicationNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+                <mat-error *ngIf="publicationNameField.errors?.required">
                   Media House Name is required.
                 </mat-error>
               </mat-form-field>
                   
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-md">
-                  <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
-                  <mat-error *ngIf="publicationEditionField.errors && publicationEditionField.errors.required">
+                  <input [disabled]="edit" matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="releaseorder.publicationEdition" required #publicationEditionField="ngModel">
+                  <mat-error *ngIf="publicationEditionField.errors?.required">
                     Edition Name is required.
                   </mat-error>
                 </mat-form-field>
             
                 <mat-form-field class="col-md">
-                  <mat-select name="mediaType" [(ngModel)]="releaseorder.mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-select [disabled]="edit" name="mediaType" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
                     <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="mediaTypeField.errors && mediaTypeField.errors.required">
+                  <mat-error *ngIf="mediaTypeField.errors?.required">
                     Media type is required.
                   </mat-error>
                 </mat-form-field>
               </div>
               
-              <div class="row">
+              <div class="form-row">
                 <mat-form-field class="col-md">
-                  <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
+                  <mat-select [disabled]="edit" id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="releaseorder.publicationState" required #publicationStateField="ngModel">
                     <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="publicationStateField.errors && publicationStateField.errors.required">
+                  <mat-error *ngIf="publicationStateField.errors?.required">
                     State is required.
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-md">
-                  <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-                  <mat-error *ngIf="publicationGSTINField.errors && publicationGSTINField.errors.required">
+                  <input [disabled]="edit" matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GSTIN" [(ngModel)]="releaseorder.publicationGSTIN.GSTNo" required minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+                  <mat-error *ngIf="publicationGSTINField.errors?.required">
                     GSTIN is required.
                   </mat-error>
-                  <mat-error *ngIf="publicationGSTINField.errors && (publicationGSTINField.errors.minlength || publicationGSTINField.errors.maxlength)">
+                  <mat-error *ngIf="publicationGSTINField.errors?.minlength || publicationGSTINField.errors?.maxlength">
                     GSTIN should be 15 characters long.
                   </mat-error>
                 </mat-form-field>
@@ -123,19 +123,19 @@
                 <div class="form-row">
                   <div class="col">
                     <mat-form-field>
-                      <mat-select placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                      <mat-select [disabled]="edit" placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
                         <mat-option *ngFor="let item of pullouts" [value]="item.Name">{{item.Name}}</mat-option>
                         <mat-option [value]="others">{{others}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="pullOutNameField.errors && pullOutNameField.errors.required">
+                      <mat-error *ngIf="pullOutNameField.errors?.required">
                           Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col" *ngIf="dropdownPullOutName == others">
                     <mat-form-field>
-                      <input matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
-                      <mat-error *ngIf="specPullOutNameField.errors && specPullOutNameField.errors.required">
+                      <input [disabled]="edit" matInput type="text" id="specPullOutName" placeholder="Enter Pullout Name" [(ngModel)]="customPullOutName" required name="specPullOutName" #specPullOutNameField="ngModel">
+                      <mat-error *ngIf="specPullOutNameField.errors?.required">
                         Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
@@ -143,69 +143,67 @@
                 </div>
               </ng-container>
 
-              <mat-card-actions>
-                <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
-              </mat-card-actions>
+              <div class="text-right">
+                <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addMediaHouse()" matTooltip="Add to Directory">
+                  <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                </button>
+              </div>
             </mat-card>
           </div>
 
           <div class="col-lg col-md-6">
             <br>
-            <mat-card style="background-color: #f6fbfd;">
+            <mat-card class="mat-elevation-z4">
               <mat-card-title>Client Details</mat-card-title>
-
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" [ngbTypeahead]="searchClient" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
-
-                <div *ngIf="clientNameField.invalid && (clientNameField.dirty || clientNameField.touched)" class="text-danger">
-                  <div *ngIf="clientNameField.errors.required">
-                    Name is required.
-                  </div>
-                </div>
-              </div>
-
+    
+              <mat-form-field>
+                <input [disabled]="edit" matInput type="text" [ngbTypeahead]="searchClient" id="clientName" placeholder="Client Name" [(ngModel)]="client" name="clientName" required #clientNameField="ngModel" [resultFormatter]="clientResultFormatter" [inputFormatter]="clientInputFormatter">
+                <mat-error *ngIf="clientNameField.errors?.required">
+                  Name is required.
+                </mat-error>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-select [disabled]="edit" id="clientState" name="clientState" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
+                  <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="clientStateField.errors?.required">
+                  State is required.
+                </mat-error>
+              </mat-form-field>
+              
               <div class="form-row">
-                <div class="form-group col">
-                  <label>State</label>
-                  <select name="clientState" class="form-control" placeholder="State" [(ngModel)]="releaseorder.clientState" required #clientStateField="ngModel">
-                    <option *ngFor="let state of stateApi.states" [ngValue]="state">{{state}}</option>
-                  </select>
-  
-                  <div *ngIf="clientStateField.invalid && (clientStateField.dirty || clientStateField.touched)" class="text-danger">
-                    <div *ngIf="clientStateField.errors.required">
-                      State is required.
-                    </div>
-                  </div>
-                </div>
                 <div class="{{releaseorder.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
-                  <div class="form-group">
-                    <label>GST Type</label>
-                    <select class="form-control" placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
-                      <option value="URD">URD</option>
-                      <option value="RD">RD</option>
-                    </select>
-                  </div>
+                  <mat-form-field>
+                    <mat-select [disabled]="edit" placeholder="GST Type" name="gstType" [(ngModel)]="releaseorder.clientGSTIN.GSTType">
+                      <mat-option value="URD">URD</mat-option>
+                      <mat-option value="RD">RD</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col" *ngIf="releaseorder.clientGSTIN.GSTType != 'URD'">
-                  <div class="form-group">
-                    <label>GSTIN</label>
-                    <input type="text" class="form-control" name="gstNo" placeholder="GST Number" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
-    
-                    <div *ngIf="gstNoField.invalid && (gstNoField.dirty || gstNoField.touched)" class="text-danger">
-                      <div *ngIf="gstNoField.errors.required">
-                        GSTIN is required.
-                      </div>
-                      <div *ngIf="gstNoField.errors && (gstNoField.errors.minlength || gstNoField.errors.maxlength)">
-                        GSTIN should be 15 characters long.
-                      </div>
-                    </div>
-                  </div>
+                  <mat-form-field>
+                    <input [disabled]="edit" matInput type="text" name="gstNo" placeholder="GSTIN" [(ngModel)]="releaseorder.clientGSTIN.GSTNo" required minlength="15" maxlength="15" #gstNoField="ngModel">
+                    <mat-error *ngIf="gstNoField.errors?.required">
+                      GSTIN is required.
+                    </mat-error>
+                    <mat-error *ngIf="gstNoField.errors?.minlength || gstNoField.errors?.maxlength">
+                      GSTIN should be 15 characters long.
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
 
-              <button type="button" class="btn btn-outline-info mat-elevation-z3 rounded-0" style="font-size: 12px" (click)="addClient()">Add to Directory</button>
-            </mat-card>
+              <div class="d-none d-lg-block my-2">
+                <br><br>
+              </div>
+
+              <div class="text-right">
+                <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addClient()" matTooltip="Add to Directory">
+                  <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                </button>
+              </div>
+          </mat-card>
           </div>
         </div>
 
@@ -214,103 +212,81 @@
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
-            <mat-card>
+            <mat-card class="mat-elevation-z4">
               <mat-card-title>Ad Details</mat-card-title>
 
-              <div class="row">
-                <mat-form-field class="col-lg col-md-6">
-                  <mat-select matInput name="adType" [(ngModel)]="releaseorder.adType" id="adType" #adTypeField="ngModel" required>
+              <div class="form-row">
+                <mat-form-field class="col">
+                  <mat-select matInput name="adType" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
-                <mat-form-field class="col-lg col-md-6" *ngIf="mediaType == 'Print'">
+                <mat-form-field class="col" *ngIf="mediaType == 'Print'">
                   <mat-select matInput name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
                     <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="positionField.errors && positionField.errors.required">
+                  <mat-error *ngIf="positionField.errors?.required">
                     Position is required.
                   </mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="col-lg col-md-6" *ngIf="isTypeLen">
-                  <mat-select matInput name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
-                    <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
+                <mat-form-field class="col" *ngIf="isTypeTime">
+                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
+                    <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="hueField.errors && hueField.errors.required">
-                    Hue is required.
-                  </mat-error>
                 </mat-form-field>
               </div>
 
-              <div class="row">
+              <div class="form-row">
+                <mat-form-field class="col" *ngIf="isTypeTime">
+                  <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
+                  <mat-error *ngIf="durationField.errors?.required">
+                    Duration is required.
+                  </mat-error>
+                </mat-form-field>
+                <div class="col" *ngIf="isTypeLen">
+                  <mat-form-field>
+                    <mat-select matInput name="hue" [(ngModel)]="releaseorder.adHue" id="hue" #hueField="ngModel" required>
+                      <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="hueField.errors?.required">
+                      Hue is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field>
+                    <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
+                    <mat-error *ngIf="adEditionField.errors?.required">
+                      Edition is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="form-row">
                 <mat-form-field class="col">
                   <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
                 </mat-form-field>
 
-                <button type="button" mat-raised-button class="col-auto" (click)="getCategories()">Categories *</button>
-                
-                <mat-form-field class="col"> 
-                  <input type="text" matInput id="adEdition" name="adEdition" placeholder="Edition" [(ngModel)]="releaseorder.adEdition" required #adEditionField="ngModel">
-                  <mat-error *ngIf="adEditionField.errors && adEditionField.errors.required">
-                    Edition is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="col-auto">
+                  <button type="button" mat-raised-button color="primary" (click)="getCategories()">Categories</button>
+                </div>
               </div>
 
-              <!-- <div class="row small" id="small_cat" *ngIf="selectedCategories[0]">
-                &nbsp;&nbsp;&nbsp;Categories :
-                <div *ngIf="selectedCategories[0]">  {{selectedCategories[0].name}}</div>
-                <div *ngIf="selectedCategories[1]">, {{selectedCategories[1].name}}</div>
-                <div *ngIf="selectedCategories[2]">, {{selectedCategories[2].name}}</div>
-                <div *ngIf="selectedCategories[3]">, {{selectedCategories[3].name}}</div>
-                <div *ngIf="selectedCategories[4]">, {{selectedCategories[4].name}}</div>
-                <div *ngIf="selectedCategories[5]">, {{selectedCategories[5].name}}</div>
-              </div> -->
-              
               <br>
 
-              <div class="row">
-                <h6 class="col-lg-2 col-md-6">Scheme</h6>
-                
-                <mat-slide-toggle class="col-lg-2 col-md-6" [(ngModel)]="customScheme" name="customScheme" [disabled]="schemes.length == 0">Custom</mat-slide-toggle>
-                
-                <div class="col-lg-3 col-md-6" *ngIf="!customScheme">
-                  <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
-                    <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}, Time Limit: {{scheme.timeLimit}}</option>
-                  </select>
-                </div>
-    
-                <div class="col-lg-2 col-md-6" *ngIf="customScheme">
-                  <mat-form-field>
-                    <input matInput type="number" id="customPaid" placeholder="Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
-                    <mat-error *ngIf="customPaidField.errors && customPaidField.errors.required">
-                      Paid is required.
-                    </mat-error>
-                  </mat-form-field>          
-                </div>
-
-                <div class="col-lg-2 col-md-6">
-                  <mat-form-field>
-                    <input matInput type="number" id="customFree" placeholder="Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
-                    <mat-error *ngIf="customFreeField.errors && customFreeField.errors.required">
-                      Free is required.
-                    </mat-error>
-                  </mat-form-field>          
-                </div>
-
-                <button type="button" class="col-lg-3 col-md-6" mat-button color="primary" (click)="getInsertions()">Insertions *</button>
-              </div>
-
               <ng-container *ngIf="isTypeLen">
-                <div class="row">
-                  <label class="col-auto">Ad Size</label>
-                  
-                  <mat-slide-toggle class="col-auto" [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">Custom</mat-slide-toggle>
+                <div class="form-row">
+                  <div class="col-auto">
+                    <label class="mb-0">Ad Size</label><br>
+                    
+                    <mat-slide-toggle [(ngModel)]="customSize" name="customSize" [disabled]="fixSizes.length == 0">
+                      <span class="small">Custom</span>
+                    </mat-slide-toggle>
+                  </div>
 
-                  <mat-slide-toggle class="col-auto" [(ngModel)]="releaseorder.fixRate" name="fixedRate" *ngIf="customSize">Fixed Rate</mat-slide-toggle>
-                </div>
-                <div class="row">
                   <div class="col" *ngIf="!customSize">
                     <select class="form-control" name="fixSize" [(ngModel)]="selectedSize" id="fixSize" #fixSizeField="ngModel" required>
                       <option *ngFor="let fixSize of fixSizes" [ngValue]="fixSize">Length: {{fixSize.length}}, Width: {{fixSize.width}}, Amount: {{fixSize.amount}}</option>
@@ -318,107 +294,124 @@
                   </div>
 
                   <ng-container *ngIf="customSize">
-                    <mat-form-field class="col">
-                      <input matInput type="number" id="customL" placeholder="Length" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
-                      <mat-error *ngIf="customLField.errors && customLField.errors.required">
-                        Length is required.
-                      </mat-error>
-                    </mat-form-field>        
-                    
-                    <div class="col-auto align-self-center">&times;</div>
-                    
-                    <mat-form-field class="col">
-                      <input matInput type="number" id="customW" placeholder="Width" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
-                      <mat-error *ngIf="customWField.errors && customWField.errors.required">
-                        Width is required.
-                      </mat-error>
-                    </mat-form-field>
+                    <div class="col">
+                      <div class="form-row">
+                        <div class="col-6">
+                          <mat-form-field>
+                            <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+                            <mat-error *ngIf="customLField.errors?.required">
+                              Length is required.
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                        
+                        <div class="col-6">
+                          <mat-form-field>
+                            <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+                            <mat-error *ngIf="customWField.errors?.required">
+                              Width is required.
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
                   </ng-container>
-                </div>
 
-                <div> 
-                  Total Space = {{totalSpace}}
+                  <div class="col-auto small" *ngIf="totalSpace">
+                    <span class="text-muted">Total Space</span><br>
+                    {{totalSpace}} sqcm
+                  </div>
                 </div>
               </ng-container>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field> 
-                    <input matInput type="number" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
-                    <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.required">
-                      No of Paid Ads is required.
-                    </mat-error>
-                    <mat-error *ngIf="adCountPaidField.errors && adCountPaidField.errors.multipleOf">
-                      No of Paid Ads should be multiple of Paid Ads in Scheme.
-                    </mat-error>
-                  </mat-form-field>                  
+              <div class="form-row">
+                <div class="col-auto">
+                  <label class="mb-0">Scheme</label><br>
+                  
+                  <mat-slide-toggle [(ngModel)]="customScheme" name="customScheme" [disabled]="schemes.length == 0">
+                    <span class="small">Custom</span>
+                  </mat-slide-toggle>
                 </div>
 
-                <mat-form-field class="col-md-6"> 
-                  <input type="text" matInput id="remark" name="remark" placeholder="Remark" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
-                </mat-form-field>
+                <div class="col" *ngIf="!customScheme">
+                  <select class="form-control" name="scheme" [(ngModel)]="selectedScheme" id="scheme" #schemeField="ngModel" required>
+                    <option *ngFor="let scheme of schemes" [ngValue]="scheme">Paid: {{scheme.paid}}, Free: {{scheme.Free}}, Time Limit: {{scheme.timeLimit}}</option>
+                  </select>
+                </div>
+
+                <div class="col" *ngIf="customScheme">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <mat-form-field>
+                        <input matInput type="number" id="customPaid" placeholder="Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
+                        <mat-error *ngIf="customPaidField.errors?.required">
+                          Paid is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+    
+                    <div class="col-6">
+                      <mat-form-field>
+                        <input matInput type="number" id="customFree" placeholder="Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
+                        <mat-error *ngIf="customFreeField.errors?.required">
+                          Free is required.
+                        </mat-error>
+                      </mat-form-field>          
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <mat-form-field> 
+                        <input matInput type="number" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
+                        <mat-error *ngIf="adCountPaidField.errors?.required">
+                          No of Paid Ads is required.
+                        </mat-error>
+                        <mat-error *ngIf="adCountPaidField.errors?.multipleOf">
+                          No of Paid Ads should be multiple of Paid Ads in Scheme.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div *ngIf="adCountPaidField.valid" class="col-6 small">
+                      <span class="text-muted">Total Ads</span><br>
+                      <small>{{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</small>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <br>
 
-              <div class="d-lg-none">
-                <label>Insertions</label>
-                <div *ngIf="releaseorder.insertions">
-                  <ul class="list-group list-group-flush small">
-                    <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
-                      <div class="row">
-                        <div class="col">{{toDate(item.date) | date}}</div>
-                        <div class="col-auto text-success" *ngIf="item.marked">
-                          <mat-icon>check</mat-icon>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <mat-form-field hintLabel="Max 100 characters"> 
+                <input type="text" matInput id="remark" maxlength="100" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+                <mat-hint align="end">{{releaseorder.remark?.length || 0}}/100</mat-hint>
+              </mat-form-field>
 
-              <div *ngIf="adCountPaidField.valid">
-                <p>Total Ads = {{availableAds}} ({{adCountPaid}} Paid + {{availableAds - adCountPaid}} Free)</p>
-              </div>
-
-              <div class="row">      
+              <!-- <div class="row">
                 <ng-container *ngIf="isTypeWords" class="row">
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="releaseorder.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
-                    <mat-error *ngIf="maxWordsField.errors && maxWordsField.errors.required">
+                    <mat-error *ngIf="maxWordsField.errors?.required">
                       Maximum Words / Lines is empty or invalid.
                     </mat-error>
                   </mat-form-field>
             
                   <mat-form-field class="col-lg-3 col-md-6">
                     <input type="number" matInput id="words" placeholder="No of Words / Lines" [(ngModel)]="releaseorder.AdWords" name="words" required #wordsField="ngModel">
-                    <mat-error *ngIf="wordsField.errors && wordsField.errors.required">
+                    <mat-error *ngIf="wordsField.errors?.required">
                       No of Words / Lines is empty or invalid.
                     </mat-error>
                   </mat-form-field>            
                 </ng-container>
-    
-                <ng-container *ngIf="isTypeTime" class="row">
-                  <mat-form-field class="col-lg-3 col-md-6">
-                    <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
-                    <mat-error *ngIf="durationField.errors && durationField.errors.required">
-                      Duration is required.
-                    </mat-error>
-                  </mat-form-field>
-            
-                  <mat-form-field class="col-lg-3 col-md-6">
-                    <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
-                      <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </ng-container>
-              </div>            
+              </div> -->
             </mat-card>
           </div>
 
           <div class="col-lg col-md-6">
             <br>
-            <mat-card>
+            <mat-card class="mat-elevation-z4">
               <mat-card-title>Premiums</mat-card-title>
               <ng-container *ngIf="isTypeWords">
                 <div class="row">
@@ -429,8 +422,9 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
-                          <mat-error *ngIf="premiumBoxField.errors && premiumBoxField.errors.required">
+                          <mat-error *ngIf="premiumBoxField.errors?.required">
                             Box Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -444,8 +438,9 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
-                          <mat-error *ngIf="premiumBaseColourField.errors && premiumBaseColourField.errors.required">
+                          <mat-error *ngIf="premiumBaseColourField.errors?.required">
                             Base Colour Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -459,8 +454,9 @@
                       </div>
                       <div class="col">
                         <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
                           <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
-                          <mat-error *ngIf="premiumCheckMarkField.errors && premiumCheckMarkField.errors.required">
+                          <mat-error *ngIf="premiumCheckMarkField.errors?.required">
                             Check Mark Premium Amount is required.
                           </mat-error>
                         </mat-form-field>
@@ -475,17 +471,18 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdField.errors && premiumEmailIdField.errors.required">
+                      <mat-error *ngIf="premiumEmailIdField.errors?.required">
                         Email Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col">
                     <mat-form-field>
-                      <input type="number" matInput placeholder="Quantity" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdQuantityField.errors && premiumEmailIdQuantityField.errors.required">
-                        Email Premium Quantity is required.
+                      <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
+                      <mat-error *ngIf="premiumEmailIdQuantityField.errors?.errors.required">
+                        No. of Emails is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -496,17 +493,18 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteField.errors && premiumWebsiteField.errors.required">
+                      <mat-error *ngIf="premiumWebsiteField.errors?.required">
                         Website Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col">
                     <mat-form-field>
-                      <input type="number" matInput placeholder="Quantity" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteQuantityField.errors && premiumWebsiteQuantityField.errors.required">
-                        Website Premium Quantity is required.
+                      <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
+                      <mat-error *ngIf="premiumWebsiteQuantityField.errors?.errors.required">
+                        No. of Website is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -517,17 +515,18 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsField.errors && premiumExtraWordsField.errors.required">
+                      <mat-error *ngIf="premiumExtraWordsField.errors?.required">
                         Extra Words / Lines Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col">
                     <mat-form-field>
-                      <input type="number" matInput placeholder="Quantity" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsQuantityField.errors && premiumExtraWordsQuantityField.errors.required">
-                        Extra Words / Lines Premium Quantity is required.
+                      <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
+                      <mat-error *ngIf="premiumExtraWordsQuantityField.errors?.required">
+                        No. Extra Words / Lines is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -543,16 +542,18 @@
                   <div class="col">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
+                      <span matPrefix>{{releaseorder.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
                       <span matSuffix>{{releaseorder.PremiumCustom.Percentage ? '%' : ''}}</span>
-                      <mat-error *ngIf="premiumAmountField.errors && premiumAmountField.errors.required">
+                      <mat-error *ngIf="premiumAmountField.errors?.required">
                         Premium Amount is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                 </div>
-                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox>
+                <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br>
               </ng-container>
-            
+
+              <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>
             </mat-card>
           </div>
         </div>
@@ -562,142 +563,152 @@
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
-            <mat-card>
-              <mat-card-title>Ad Rate and Discounts</mat-card-title>
+            <mat-card class="mat-elevation-z4">
+              <mat-card-title>
+                <div class="row">
+                  <div class="col">Ad Calculations</div>
+                  <div class="col-auto" *ngIf="isTypeLen && customSize">
+                    <mat-slide-toggle [(ngModel)]="releaseorder.fixRate" name="fixedRate">
+                      <small>Fixed Rate</small>
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+              </mat-card-title>
 
-              <div class="row">
-                <mat-form-field class="col-lg-3 col-md-6">
-                  <input type="number" matInput id="rate" placeholder="Rate" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
-                  <mat-error *ngIf="rateField.errors && rateField.errors.required">
-                    Rate is required.
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-3 col-md-6"> 
+              <div class="form-row">
+                <div class="col-6">
+                  <mat-form-field>
+                    <span matPrefix>₹&nbsp;</span>
+                    <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+                    <mat-error *ngIf="rateField.errors?.required">
+                      Rate is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field>
+                    <span matSuffix>%</span>
+                    <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+                    <mat-error *ngIf="publicationDiscountField?.required">
+                      Media House Discount is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                
+                <!-- <mat-form-field class="col-lg-3 col-md-6"> 
                   <mat-select matInput name="unit" [(ngModel)]="releaseorder.unit" id="unit" #unitField="ngModel" required>
                     <mat-option *ngFor="let item of units" [value]="item">{{item}}</mat-option>
                   </mat-select>
-                </mat-form-field>
-              </div>  
-              <div class="row">
-                <mat-form-field class="col-lg-4 col-md-6">
-                  <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Publication Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
-                  <mat-error *ngIf="publicationDiscountField.errors && publicationDiscountField.errors.required">
-                    Publication Discount is required.
-                  </mat-error>
-                </mat-form-field>
-                
-                <mat-form-field class="col-lg-4 col-md-6">
-                  <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount 1" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
-                  <mat-error *ngIf="agencyDiscount1Field.errors && agencyDiscount1Field.errors.required">
-                    Agency Discount 1 is required.
+                </mat-form-field> -->
+              </div>
+
+              <div class="form-row">                
+                <mat-form-field class="col-6">
+                  <span matSuffix>%</span>
+                  <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+                  <mat-error *ngIf="agencyDiscount1Field?.required">
+                    Agency Discount is required.
                   </mat-error>
                 </mat-form-field>
             
-                <mat-form-field class="col-lg-4 col-md-6">
-                  <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Agency Discount 2" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
-                  <mat-error *ngIf="agencyDiscount2Field.errors && agencyDiscount2Field.errors.required">
-                    Agency Discount 2 is required.
+                <mat-form-field class="col-6">
+                  <span matSuffix>%</span>
+                  <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+                  <mat-error *ngIf="agencyDiscount2Field.errors?.required">
+                    Additional Agency Discount is required.
                   </mat-error>
                 </mat-form-field>
               </div>
 
-              <div class="form-row">
-                <label class="col-3 col-form-label">Tax</label>
-                <div class="col-auto col-form-label">
-                  <div class="form-check">
-                    <mat-checkbox class="my-2" name="taxIncluded" [(ngModel)]="releaseorder.taxIncluded" >Included</mat-checkbox>
+              <div class="row">
+                <div class="col-6">
+                  <label>Tax</label>
+
+                  <div class="form-row">
+                    <div class="col-auto">
+                      <mat-checkbox class="my-2" name="taxIncluded" [(ngModel)]="releaseorder.taxIncluded">
+                        <small>Included</small>
+                      </mat-checkbox>
+                    </div>
+                    <div class="col">
+                      <div class="form-row">
+                        <div class="col-12">
+                          <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
+                            <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
+                          </mat-select>
+                          <hr style="margin-top: 0; border-bottom: 1px solid #333333">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col">
-                  <div class="form-group">
-                    <select class="form-control" name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                      <option *ngFor="let item of taxes" [ngValue]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></option>
-                    </select>
-                  </div>
-          
-                  <div *ngIf="taxField.invalid && (taxField.dirty || taxField.touched)" class="text-danger">
-                    <div *ngIf="taxField.errors.required">
-                      Tax is required.
+                <div class="col-6">
+                  <ng-container *ngIf="isTypeLen && totalSpace && availableAds">
+                    <div *ngIf="releaseorder.fixRate && perSqcmRate">
+                      <span class="text-muted">Per sqcm Rate:</span> ₹ {{perSqcmRate}}
                     </div>
-                    <br>
-                  </div>
+                    <div *ngIf="!releaseorder.fixRate && perInsertionRate">
+                      <span class="text-muted">Per insertion Rate:</span> ₹ {{perInsertionRate}}
+                    </div>
+                  </ng-container>
                 </div>
               </div>
 
-              <label id="add_details">Additional Details</label>
+              <label id="add_details">Payment Details</label>
 
               <div class="row">
-                <mat-form-field class="col-lg-4 col-md-6">
+                <mat-form-field class="col-6">
                   <mat-select name="paymentType" placeholder="Type" [(ngModel)]="releaseorder.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-                    <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item}}</mat-option>
+                    <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item | paymentMode}}</mat-option>
                   </mat-select>
                 </mat-form-field>
-            
-                <ng-container *ngIf="releaseorder.paymentType != 'Cash' && releaseorder.paymentType != 'Credit'">
+              </div>
+          
+              <ng-container *ngIf="releaseorder.paymentType != 'Cash' && releaseorder.paymentType != 'Credit'">
                 <div class="row">
-                  <mat-form-field  class="col-lg col-md-6">
+                  <mat-form-field  class="col-6">
                     <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="releaseorder.paymentDate" required disabled>
                     <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
                     <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-                    <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
+                    <mat-error *ngIf="paymentDateField.errors?.required">
                       Date is required.
                     </mat-error>
                   </mat-form-field>
             
-                  <mat-form-field  class="col-lg col-md-6">
+                  <mat-form-field  class="col-6">
                     <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="releaseorder.paymentNo" required #paymentChequeField="ngModel">
-                    <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
+                    <mat-error *ngIf="paymentChequeField.errors?.required">
                       No is required.
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="row">
-                  <mat-form-field  class="col-lg col-md-6">
-                    <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="releaseorder.paymentAmount" required #paymentAmountField="ngModel">
-                    <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
-                      Amount is required.
-                    </mat-error>
-                  </mat-form-field>
-            
                   <ng-container *ngIf="releaseorder.paymentType == 'Cheque'">
-                    <mat-form-field  class="col-lg col-md-6">
+                    <mat-form-field  class="col-6">
                       <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="releaseorder.paymentBankName" required #bankNameField="ngModel">
-                      <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
+                      <mat-error *ngIf="bankNameField.errors?.required">
                         Bank Name is required.
                       </mat-error>
                     </mat-form-field>
                   </ng-container>
+
+                  <div class="col-6 small">
+                    <span class="text-muted">Amount</span><br>
+                    ₹ {{clientPayment || '0'}}
+                  </div>            
                 </div>
               </ng-container>
-            </div>
             </mat-card>
           </div>
 
           <div class="col-lg col-md-6">
             <br>
-            <mat-card>
-              <mat-card-title>Other Charges</mat-card-title>
+            <mat-card class="mat-elevation-z4">
+              <mat-card-title>Additional Details (for Agency use)</mat-card-title>
+              <p>Other Charges</p>
 
               <div class="text-muted" *ngIf="releaseorder.otherCharges.length == 0">
                 No Other Charges
-              </div>
-
-              <div class="row">
-                <mat-form-field class="col-lg col-md-6">
-                  <input type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
-                  <mat-error *ngIf="executiveNameField.errors && executiveNameField.errors.required">
-                    Executive Name is required.
-                  </mat-error>
-                </mat-form-field>
-                
-                <mat-form-field class="col-lg col-md-6">
-                  <input type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
-                  <mat-error *ngIf="executiveOrgField.errors && executiveOrgField.errors.required">
-                    Executive Organisation is required.
-                  </mat-error>
-                </mat-form-field>
-
-                <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
               </div>
 
               <div *ngFor="let item of releaseorder.otherCharges; index as i" class="mb-1">
@@ -705,15 +716,16 @@
                   <div class="col">
                     <mat-form-field>
                       <input matInput placeholder="Type" name="otherChargesType-{{i}}" [(ngModel)]="item.chargeType" required #otherChargesTypeField="ngModel">
-                      <mat-error *ngIf="otherChargesTypeField.errors && otherChargesTypeField.errors.required">
+                      <mat-error *ngIf="otherChargesTypeField.errors?.required">
                         Type is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
-                      <mat-error *ngIf="otherChargesField.errors && otherChargesField.errors.required">
+                      <mat-error *ngIf="otherChargesField.errors?.required">
                         Amount is required.
                       </mat-error>
                     </mat-form-field>
@@ -726,80 +738,112 @@
                 </div>
               </div>
               
-              <br>           
-              <mat-form-field>
-                <input matInput placeholder="Remark" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+              <div class="mt-2">
+                <button mat-raised-button type="button" color="primary" (click)="addCharges()">Add More</button>
+              </div>
+
+              <hr>
+              
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <mat-form-field>
+                        <input [disabled]="edit" type="text" matInput [ngbTypeahead]="searchExecutive" id="executiveName" placeholder="Executive Name" [(ngModel)]="executive" name="executiveName" required #executiveNameField="ngModel" [resultFormatter]="executiveResultFormatter" [inputFormatter]="executiveInputFormatter">
+                        <mat-error *ngIf="executiveNameField.errors?.required">
+                          Executive Name is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                      <mat-form-field>
+                        <input [disabled]="edit" type="text" matInput id="executiveOrg" placeholder="Executive Organisation" [(ngModel)]="releaseorder.executiveOrg" name="executiveOrg" required #executiveOrgField="ngModel">
+                        <mat-error *ngIf="executiveOrgField.errors?.required">
+                          Executive Organisation is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addExecutive()" matTooltip="Add to Directory">
+                    <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+                  </button>
+                </div>
+              </div>
+              
+              <hr>
+              
+              <mat-form-field hintLabel="Max 100 characters">
+                <input matInput placeholder="Remark" maxlength="100" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+                <mat-hint align="end">{{releaseorder.otherRemark?.length || 0}}/100</mat-hint>
               </mat-form-field>
-
-              <mat-card-actions>
-                <button mat-button type="button" color="primary" (click)="addCharges()">Add More</button>
-              </mat-card-actions>
-
             </mat-card>
           </div>
         </div>
 
         <br><br>
 
-        <button type="button" (click)="save()" class="btn btn-success" [disabled]="!roForm.form.valid">Save</button>
-        <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
-        <button type="button" (click)="preview()"  class="btn btn-primary" [disabled]="!roForm.form.valid">Preview</button>
-        <button type="button" class="btn btn-success" (click)="saveAndGen()" [disabled]="!roForm.form.valid">Download</button>
-        <button type="button" class="btn btn-primary" (click)="saveAndSendMsg()" [disabled]="!roForm.form.valid">Send Email</button>
+        <div class="d-none d-md-block">
+          <button color="primary" type="submit" mat-raised-button class="mb-2 bg-success" (click)="handleSubmit(roForm.form.valid, 'save')" [disabled]="submitting">
+            <mat-icon>check</mat-icon> Save
+          </button>
+      
+          <button type="button" mat-raised-button color="warn" class="mb-2" (click)="cancel()">
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'preview')" class="mb-2 bg-warning">
+            <mat-icon>assignment</mat-icon> Preview
+          </button>
+
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'dl')" class="mb-2 bg-primary">
+            <mat-icon>get_app</mat-icon> Download
+          </button>
+
+          <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')" class="mb-2 bg-info">
+            <mat-icon>mail</mat-icon> Send Mail
+          </button>          
+        </div>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'save')" color="primary">
+                  <mat-icon>check</mat-icon>
+                  <div class="small">Save</div>
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'preview')">
+                  <mat-icon>assignment</mat-icon>
+                  <div class="small">Preview</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'dl')">
+                  <mat-icon>get_app</mat-icon>
+                  <div class="small">Download</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')">
+                  <mat-icon>mail</mat-icon>
+                  <div class="small">Send Mail</div>
+                </button>
+              </div>    
+            </div>
+          </div>
+        </mat-toolbar>
       </form>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-  <!-- <div class="col-lg-2 order-lg-last" id="calculations">
-    <div class="card bg-info mt-3 mb-5 sticky-top" style="top: 150px">
-      <div class="card-header text-light small">
-        Calculations
-      </div>
-      <ul class="list-group list-group-flush small">
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount</div>
-            <div class="col-md-8 text-muted">{{netAmount}} ({{taxDisplay}})</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Net Amount in Words</div>
-            <div class="col-md-8 text-muted">{{options.amountToWords(netAmount)}} ({{taxDisplay}})</div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-md-4">Client Payment</div>
-            <div class="col-md-8 text-muted">{{clientPayment}}</div>
-          </div>
-        </li>
-      </ul>
-      <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">
-        Categories
-      </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block">
-        <li class="list-group-item" *ngIf="selectedCategories[0]">{{selectedCategories[0].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[1]">{{selectedCategories[1].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[2]">{{selectedCategories[2].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[3]">{{selectedCategories[3].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[4]">{{selectedCategories[4].name}}</li>
-        <li class="list-group-item" *ngIf="selectedCategories[5]">{{selectedCategories[5].name}}</li>
-      </ul>
-      <div class="card-header text-light small d-none d-lg-block" *ngIf="releaseorder.insertions.length">
-        Insertions
-      </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block"  *ngIf="releaseorder.insertions.length">
-        <li class="list-group-item" *ngFor="let item of releaseorder.insertions">
-          <div class="row">
-            <div class="col">{{toDate(item.date) | date}}</div>
-            <div class="col-auto text-success" *ngIf="item.marked">
-              <mat-icon>check</mat-icon>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>  
-</div> -->

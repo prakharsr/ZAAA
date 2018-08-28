@@ -20,10 +20,6 @@ export * from './clients/client/client.component';
 export * from './executives/executive/executive.component';
 export * from './media-houses/media-house/media-house.component';
 
-export * from './clients/client-details/client-details.component';
-export * from './executives/executive-details/executive-details.component';
-export * from './media-houses/media-house-details/media-house-details.component';
-
 export * from './clients/client-list/client-list.component';
 export * from './executives/executive-list/executive-list.component';
 export * from './media-houses/media-house-list/media-house-list.component';

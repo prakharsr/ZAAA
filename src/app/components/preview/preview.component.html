@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>
+  <div class="row">
+    <div class="col">Preview</div>
+    <div class="col-auto">
+      <button mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</h2>
+
+<mat-dialog-content>
+  <div [innerHtml]="content | safehtml" class="container-fluid" [class.zoomed]="zoom"></div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="form-row">
+    <div class="col">
+      <button mat-button class="text-light bg-success" mat-dialog-close="save">
+        <mat-icon>save</mat-icon> Save
+      </button>
+      <button mat-button class="text-light bg-danger" [mat-dialog-close]="null">
+        <mat-icon>edit</mat-icon> Edit
+      </button>
+      <button mat-button class="text-light bg-primary" mat-dialog-close="dl">
+        <mat-icon>get_app</mat-icon> Download
+      </button>
+      <button mat-button class="text-light bg-info" mat-dialog-close="mail">
+        <mat-icon>mail</mat-icon> Send Email
+      </button>
+    </div>
+    <div class="col-auto">
+      <button class="zoom-btn" mat-mini-fab color="primary" (click)="zoom = !zoom">
+        <mat-icon>{{zoom ? 'zoom_out' : 'zoom_in'}}</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-dialog-actions>

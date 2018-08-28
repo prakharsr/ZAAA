@@ -15,7 +15,6 @@ import {
 } from '.';
 
 import { FirmResolver, FirmUsersResolver } from 'app/services';
-import { ReceiptListResolver } from 'app/receipts';
 import { ClientReceiptsListResolver } from './client-receipts-list-resolver.service';
 import { ClientPaymentsListResolver } from './client-payments-list-resolver.service';
 import { ExecutivePaymentsListResolver } from './executive-payments-list-resolver.service';
@@ -25,10 +24,12 @@ import { InvoiceTaxListResolver } from './invoice-tax-list-resolver.service';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
 import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
 import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolver.service';
+import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
+import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'accounts',
+    path: '',
     canActivate: [AuthGuard],
     children: [
       {
@@ -52,6 +53,14 @@ const routes: Routes = [
           },
           { path: 'new', component: MediaHouseInvoiceComponent }
         ]
+      },
+      {
+        path: 'mediahousereceipts',
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        component: MediaHouseReceiptComponent,
+        resolve: {
+          resolved: MhReceiptListResolver
+        }
       },
       {
         path: 'clientreceipts',
@@ -183,17 +192,11 @@ const routes: Routes = [
       },
       {
         path: 'summarysheet',
-        children: [
-          { path: '', redirectTo: '1', pathMatch: 'full' },
-          {
-            path: ':page',
-            component: SummarySheetComponent,
-            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-            resolve: {
-              resolved: SummarySheetListResolver
-            }
-          }
-        ]
+        component: SummarySheetComponent,
+        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        resolve: {
+          resolved: SummarySheetListResolver
+        }
       }
     ]
   }

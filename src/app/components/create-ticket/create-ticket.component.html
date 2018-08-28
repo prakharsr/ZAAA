@@ -8,33 +8,46 @@
 
 <div class="container">
   <form (ngSubmit)="submit()" #ticketForm="ngForm">
-    <div class="form-group">
-      <label>Subject</label>
-      <input type="text" class="form-control" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
-    </div>
-
-    <div *ngIf="subjectField.invalid && (subjectField.dirty || subjectField.touched)" class="text-danger">
-      <div *ngIf="subjectField.errors.required">
+    <mat-form-field>
+      <input matInput type="text" id="subject" placeholder="Enter Subject" [(ngModel)]="ticket.subject" name="subject" required #subjectField="ngModel">
+      <mat-error *ngIf="subjectField.errors?.required">
         Subject is required.
-      </div>
-      <br>
-    </div>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label>Details</label>
-      <input type="text" class="form-control" id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" required #detailsField="ngModel">
-    </div>
-
-    <div *ngIf="detailsField.invalid && (detailsField.dirty || detailsField.touched)" class="text-danger">
-      <div *ngIf="detailsField.errors.required">
-        Details is required.
-      </div>
-      <br>
-    </div>
+    <mat-form-field>
+      <textarea matInput id="details" placeholder="Enter Details" [(ngModel)]="ticket.details" name="details" #detailsField="ngModel"></textarea>
+    </mat-form-field>
 
     <br><br>
 
-    <button class="btn btn-success" type="submit" [disabled]="!ticketForm.form.valid">Submit</button>
-    <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+    <div class="d-none d-md-block">
+      <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!ticketForm.form.valid">
+        <mat-icon>check</mat-icon> Submit
+      </button>
+
+      <button type="button" mat-raised-button color="warn" (click)="cancel()">
+        <mat-icon>cancel</mat-icon> Cancel
+      </button>
+    </div>
+
+    <mat-toolbar class="d-md-none fixed-bottom">
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="col">
+            <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!ticketForm.form.valid" color="primary">
+              <mat-icon>check</mat-icon>
+              <div class="small">Save</div>
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+              <mat-icon>cancel</mat-icon>
+              <div class="small">Cancel</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
   </form>
 </div>

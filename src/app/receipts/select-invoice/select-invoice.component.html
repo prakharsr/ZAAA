@@ -1,0 +1,62 @@
+<ng-template #rtMediaHouse let-r="result">
+  {{r.pubName}} - {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtEdition let-r="result">
+  {{r.address.edition}}
+</ng-template>
+
+<ng-template #rtClient let-r="result">
+  {{r.orgName}}
+</ng-template>
+
+<h2 mat-dialog-title>Select Invoice</h2>
+<mat-dialog-content>
+  <div class="form-row">
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+    </div>
+
+    <div class="form-group col-sm-6 col-md-4 col-xl">
+      <select [(ngModel)]="pastDays" class="form-control">
+        <option [ngValue]="0">Any Time</option>
+        <option [ngValue]="7">Past 7 days</option>
+        <option [ngValue]="15">Past 15 days</option>
+        <option [ngValue]="30">Past 30 days</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button class="btn btn-info" (click)="search()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+  </div>
+      
+  <br>
+  <p *ngIf="invoices.length == 0" class="text-muted">
+    No Invoices
+  </p>
+
+  <div class="card mb-3" *ngFor="let element of invoices" [class.border-info]="element == invoice" [class.mat-elevation-z3]="element == invoice" (click)="invoice = element" style="cursor: pointer;">
+    <div class="card-body">
+      <span class="text-muted">{{element.invoiceNO}}</span>
+      
+      <br><br>
+      <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
+      <span class="text-muted">Client:</span> {{element.clientName}}
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="invoice" mat-button [mat-dialog-close]="invoice">Submit</button>
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>
+</mat-dialog-actions>

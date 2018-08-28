@@ -70,4 +70,18 @@ export class ReleaseOrderDetailsComponent implements OnInit {
 
     return false;
   }
+
+  get rateText() {
+    if (this.isTypeLen) {
+      return this.releaseOrder.fixRate ? "Rate per insertion" : "Rate per sqcm";
+    }
+
+    if (this.isTypeWords) {
+      return "Rate per insertion";
+    }
+
+    if (this.isTypeTime) {
+      return "Rate per sec";
+    }
+  }
 }

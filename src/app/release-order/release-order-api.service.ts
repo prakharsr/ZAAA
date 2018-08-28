@@ -46,6 +46,30 @@ export class ReleaseOrderApiService {
     );
   }
 
+  cancel(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorder/cancel', { id: releaseOrder.id }).pipe(
+      map(data => {
+        if (data.success) {
+          releaseOrder.cancelled = true;
+        }
+
+        return data;
+      })
+    );
+  }
+
+  previewROPdf(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorders/preview', {
+      releaseOrder: releaseOrder
+    }, { responseType: 'blob' });
+  }
+
+  previewROhtml(releaseOrder: ReleaseOrder) {
+    return this.api.post('/user/releaseorders/previewHtml', {
+      releaseOrder: releaseOrder
+    });
+  }
+
   getReleaseOrderDir(id: string): Observable<ReleaseOrderDir> {
     return this.api.get('/user/releaseorder/' + id).pipe(
       map(data => data.success ? {
@@ -91,7 +115,7 @@ export class ReleaseOrderApiService {
     return this.api.delete('/user/releaseorder/' + releaseOrder.id);
   }
 
-  searchReleaseOrders(page: number, params: ReleaseOrderSearchParams, generated: boolean) : Observable<PageData<ReleaseOrder>> {
+  searchReleaseOrders(page: number, params: ReleaseOrderSearchParams, generated: boolean, releaseOrderNO = "", marked = false) : Observable<PageData<ReleaseOrder>> {
     return this.api.post('/user/releaseorders/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -100,7 +124,9 @@ export class ReleaseOrderApiService {
       executiveName: params.executive,
       executiveOrg: params.executiveOrg,
       creationPeriod: params.past,
-      generated: generated
+      generated: generated,
+      releaseOrderNO: releaseOrderNO,
+      marked: marked
     }).pipe(
       map(data => {
         let releaseOrders : ReleaseOrder[] = [];
@@ -132,7 +158,7 @@ export class ReleaseOrderApiService {
     );
   }
 
-  searchInsertions(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<InsertionCheckItem>> {
+  searchInsertions(page: number, params: ReleaseOrderSearchParams, releaseOrderNO?: string) : Observable<PageData<InsertionCheckItem>> {
     return this.api.post('/user/releaseorders/insertions/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -140,7 +166,9 @@ export class ReleaseOrderApiService {
       clientName: params.client,
       executiveName: params.executive,
       executiveOrg: params.executiveOrg,
-      insertionPeriod: params.past
+      insertionPeriod: params.past,
+      releaseOrderNO: releaseOrderNO,
+      generated: true
     }).pipe(
       map(data => {
         let insertions : InsertionCheckItem[] = [];

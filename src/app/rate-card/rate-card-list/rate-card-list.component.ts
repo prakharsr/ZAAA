@@ -11,6 +11,7 @@ import { RateCard } from '../rate-card';
 import { RateCardApiService } from '../rate-card-api.service';
 import { DialogService } from 'app/services';
 import { PageData } from 'app/models';
+import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
 
 @Component({
   selector: 'app-rate-card-list',
@@ -25,26 +26,25 @@ export class RateCardListComponent implements OnInit {
   pageCount: number;
   page: number;
 
-  dummyArray;
-
   query: string;
   searchFailed = false;
 
+  isSuperAdmin = false;
+
   constructor(private api: RateCardApiService,
+    private superAdminApi: SuperAdminApiService,
     private dialog: DialogService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { list: PageData<RateCard>, global: boolean }) => {
-        this.global = data.global;
-        this.ratecards = data.list.list;
-        this.pageCount = data.list.pageCount;
-        this.page = data.list.page;
-  
-        this.dummyArray = Array(this.pageCount);
-      });
-      
+    this.route.data.subscribe((data: { list: PageData<RateCard>, global: boolean, superAdmin: boolean }) => {
+      this.global = data.global;
+      this.ratecards = data.list.list;
+      this.pageCount = data.list.pageCount;
+      this.page = data.list.page;
+      this.isSuperAdmin = data.superAdmin;
+    });      
   }
 
   search = (text: Observable<string>) =>
@@ -59,11 +59,11 @@ export class RateCardListComponent implements OnInit {
           }));
 
   inputFormatter = (result: RateCard) => {
-    this.router.navigateByUrl('/ratecards/' + result.id);
+    this.router.navigate([this.isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', result.id]);
   }
 
   private navigateToReleaseOrder(ratecard: RateCard) {
-    this.router.navigateByUrl('/releaseorders/fromRateCard/' + ratecard.id);
+    this.router.navigate(['/releaseorders/fromRateCard', ratecard.id]);
   }
 
   createReleaseOrder(ratecard: RateCard) {
@@ -89,7 +89,14 @@ export class RateCardListComponent implements OnInit {
       if (!confirm)
         return;
 
-      this.api.deleteRateCard(ratecard).subscribe(
+      let base: Observable<any>;
+
+      if (this.isSuperAdmin) {
+        base = this.superAdminApi.deleteGlobalRateCard(ratecard);
+      }
+      else base = this.api.deleteRateCard(ratecard);
+
+      base.subscribe(
         data => {
           if (data.success) {
             this.ratecards = this.ratecards.filter(c => c.id !== ratecard.id);
@@ -104,6 +111,6 @@ export class RateCardListComponent implements OnInit {
   }
 
   navigate(i: number) {
-    this.router.navigate(['/ratecards/list', i]);
+    this.router.navigate([this.isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'list', i]);
   }
 }

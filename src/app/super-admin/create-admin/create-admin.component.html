@@ -1,0 +1,60 @@
+<div class="bg-color"></div>
+
+<div class="container">
+  <br><br>
+
+  <div class="card mat-elevation-z1 bg-white">
+    <div class="card-body">
+      <form (ngSubmit)="submit()" #createAdminForm="ngForm">
+
+        <br>
+
+        <h1 class="display-4 text-center">Create Admin</h1>
+        
+        <br>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+
+          <input type="text" class="form-control" id="name" placeholder="Enter Name" [(ngModel)]="name" name="name" required #nameField="ngModel">
+          <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="text-danger">
+            <div *ngIf="nameField.errors.required">
+              Name is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+
+          <input type="text" class="form-control" id="email" placeholder="Enter Email" [(ngModel)]="email" name="email" required #emailField="ngModel">
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="text-danger">
+            <div *ngIf="emailField.errors.required">
+              Email is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <input type="password" class="form-control" id="password" placeholder="Enter Password" [(ngModel)]="password" name="password" required #passwordField="ngModel">
+          <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="text-danger">
+            <div *ngIf="passwordField.errors.required">
+              Password is required.
+            </div>
+            <br>
+          </div>
+        </div>
+
+        <br>
+        
+        <button class="btn btn-primary btn-block" [disabled]="!createAdminForm.form.valid">Create</button>
+
+        <br>
+      </form>
+    </div>
+  </div>
+</div>

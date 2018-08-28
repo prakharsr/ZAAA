@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators/map';
-import { retry } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-import { WindowService } from './window.service';
-import { LoaderService } from './loader.service';
-import { NotificationService } from './notification.service';
 import { environment } from 'environments/environment';
 import { BillingDetails } from 'app/components';
 
@@ -21,118 +16,49 @@ import {
   PageData
 } from 'app/models';
 
-const AuthTokenKey = "auth_token";
+import { AuthTokenManager } from './auth-token-manager.service';
+import { AdCategory } from '../models/ad-category';
+
+export class TnC {
+  Jurisdiction = "";
+  ROterms: { content: string }[] = [];
+  INterms: { content: string }[] = [];
+  PRterms: { content: string }[] = [];
+  ARterms: { content: string }[] = [];
+}
 
 @Injectable()
 export class ApiService {
-  private _authToken: string;
-
-  private get authToken() : string {
-    if (!this._authToken)
-    {
-      this._authToken = this.windowService.window.localStorage.getItem(AuthTokenKey);
-    }
-
-    return this._authToken;
-  }
+  private authTokenKey = "auth_token";
 
   get isLoggedIn() : boolean {
-    if (this.authToken)
-        return true;
-      
-    return false;
+    return this.authTokenManager.isLoggedIn(this.authTokenKey);
   }
 
-  private set authToken(authToken: string) {
-    if (!authToken) {
-      this._authToken = '';
-      this.windowService.window.localStorage.removeItem(AuthTokenKey);
-    }
-    else {
-      this._authToken = authToken;
-      this.windowService.window.localStorage.setItem(AuthTokenKey, authToken);
-    }
+  constructor(private authTokenManager: AuthTokenManager) { }
+
+  private makeUrl(url: string) {
+    return environment.apiUrl + url;
   }
 
-  constructor(private http: HttpClient,
-    private windowService: WindowService,
-    private loaderService: LoaderService,
-    private notifications: NotificationService) { }
-
-  private get headers() {
-    return { headers: { Authorization: this.authToken }};
+  post(url: string, body: any, extra = {}) {
+    return this.authTokenManager.post(this.makeUrl(url), body, this.authTokenKey, extra);
   }
 
-  private apply(obj: Observable<any>) {
-    return obj.pipe(
-      retry(2)
-    ).catch(err => {
-      console.log(err);
-
-      this.notifications.show('Connection to ther server failed!');
-
-      return Observable.throw(err);
-    })
-    .finally(() => this.loaderService.hide())  
+  patch(url: string, body: any) {
+    return this.authTokenManager.patch(this.makeUrl(url), body, this.authTokenKey);
   }
 
-  post(url: string, body: any, extra = {}) : Observable<any> {
-
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.post(environment.apiUrl + url, body, {
-          ...this.headers,
-          ...extra
-        }));
-    }
-    else {
-      return this.apply(this.http.post(environment.apiUrl + url, body));
-    }
+  get(url: string) {
+    return this.authTokenManager.get(this.makeUrl(url), this.authTokenKey);
   }
 
-  patch(url: string, body: any) : Observable<any> {
-
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.patch(environment.apiUrl + url, body, this.headers));
-    }
-    else {
-      return this.apply(this.http.patch(environment.apiUrl + url, body));
-    }
+  delete(url: string) {
+    return this.authTokenManager.delete(this.makeUrl(url), this.authTokenKey);
   }
 
-  get(url: string) : Observable<any> {
-    
-    this.loaderService.show();
-
-    if (this.authToken)
-    {
-        return this.apply(this.http.get(environment.apiUrl + url, this.headers));
-    }
-    else {
-      return this.apply(this.http.get(environment.apiUrl + url));
-    }
-  }
-
-  delete(url: string) : Observable<any> {
-
-    this.loaderService.show();
-
-    return this.apply(this.http.delete(environment.apiUrl + url, this.headers));
-  }
-
-  fileUpload(url: string, key: string, fileToUpload: File) : Observable<any> {
-
-    this.loaderService.show();
-
-    const formData = new FormData();
-    formData.append(key, fileToUpload, fileToUpload.name);
-
-    return this.apply(this.http.post(environment.apiUrl + url, formData, this.headers));
+  fileUpload(url: string, key: string, fileToUpload: File) {
+    return this.authTokenManager.fileUpload(this.makeUrl(url), key, fileToUpload, this.authTokenKey);
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {
@@ -163,7 +89,7 @@ export class ApiService {
     return base.pipe(
       map(data => {
         if (data.success) {
-          this.authToken = data.token;
+          this.authTokenManager.setAuthToken(this.authTokenKey, data.token);
 
           data.token = '';
         }
@@ -196,7 +122,7 @@ export class ApiService {
   }
 
   logout() {
-    this.authToken = '';
+    this.authTokenManager.setAuthToken(this.authTokenKey, '');
   }
 
   get plans() : Observable<any> {
@@ -433,5 +359,79 @@ export class ApiService {
 
       return new PageData<Ticket>(tickets, data.perPage, data.page, data.pageCount);
     });
+  }
+
+  get notifications() {
+    return this.post('/user/notifications', {
+      page: 1
+    });
+  }
+
+  get tnc(): Observable<TnC> {
+    return this.get('/firm/terms').pipe(
+      map(data => {
+        let result = new TnC();
+
+        if (data.success) {
+          result.Jurisdiction = data.Jurisdiction;
+          
+          result.ROterms = data.ROterms.map(M => {
+            return { content: M };
+          })
+          result.INterms = data.INterms.map(M => {
+            return { content: M };
+          })
+          result.PRterms = data.PRterms.map(M => {
+            return { content: M };
+          })
+          result.ARterms = data.ARterms.map(M => {
+            return { content: M };
+          })
+        }
+
+        return result;
+      })
+    );
+  }
+
+  setTnc(tnc: TnC) {
+    return this.post('/firm/terms', {
+      Jurisdiction: tnc.Jurisdiction,
+      ROterms: tnc.ROterms.map(M => M.content),
+      INterms: tnc.INterms.map(M => M.content),
+      PRterms: tnc.PRterms.map(M => M.content),
+      ARterms: tnc.ARterms.map(M => M.content)
+    });
+  }
+
+  getCategories(level: number, parent: AdCategory) : Observable<AdCategory[]> {
+    return this.post('/user/releaseorder/categories', {
+      level: level,
+      parent: parent == null ? '' : parent._id
+    }).pipe(
+      map(data => {
+        let result: AdCategory[] = [];
+
+        if (data.success) {
+          result = data.categories;
+        }
+
+        return result;
+      })
+    );
+  }
+
+  searchCategories(keyword: string): Observable<AdCategory[][]> {
+    return keyword ? this.get('/category/search/' + keyword).pipe(
+      map(data => {
+        let result: AdCategory[][] = [];
+
+        if (data.success) {
+          result = data.categories;
+        }
+
+        return result;
+      })
+    ) : of([]);
   }
 }

@@ -10,14 +10,14 @@
   <form (ngSubmit)="submit()" #profileForm="ngForm">
     <mat-form-field>
       <input matInput type="text" name="name" placeholder="Name" [(ngModel)]="profile.name" required #nameField="ngModel">
-      <mat-error *ngIf="nameField.errors && nameField.errors.required">
+      <mat-error *ngIf="nameField.errors?.required">
         Name is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput type="text" name="designation" placeholder="Designation" [(ngModel)]="profile.designation" required #designationField="ngModel">
-      <mat-error *ngIf="designationField.errors && designationField.errors.required">
+      <mat-error *ngIf="designationField.errors?.required">
         Designation is required.
       </mat-error>
     </mat-form-field>

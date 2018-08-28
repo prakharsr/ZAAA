@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MailingDetails } from 'app/models';
 
 // Import individually to prevent circular dependency
 import { DialogComponent } from '../components/dialog/dialog.component';
 import { MailingDetailsComponent } from '../components/mailing-details/mailing-details.component';
 import { BillingDetails, BillingDetailsComponent } from '../components/billing-details/billing-details.component';
-import { CategoriesDetails, CategoriesDetailsComponent } from 'app/release-order/categories-details/categories-details.component';
+import { CategoriesDetails, CategoriesDetailsComponent, CategoriesInjection } from 'app/release-order/categories-details/categories-details.component';
 import { InsertionDetailsComponent, InsertionInjection } from 'app/release-order/insertion-details/insertion-details.component';
 import { Insertion } from 'app/release-order';
 
@@ -53,10 +53,10 @@ export class DialogService {
     }).afterClosed();
   }
 
-  getCategoriesDetails() : Observable<CategoriesDetails> {
+  getCategoriesDetails(data: CategoriesInjection) : Observable<CategoriesDetails> {
     return this.dialog.open(CategoriesDetailsComponent, {
-      disableClose: true,
-      width: '600px'
+      width: '600px',
+      data: data
     }).afterClosed();
   }
 
@@ -67,7 +67,7 @@ export class DialogService {
     }).afterClosed();
   }
 
-  show<T>(component: any, config?: { data?: any, width?: string, height?: string }) : Observable<T> {
+  show<T>(component: any, config?: MatDialogConfig) : Observable<T> {
     return this.dialog.open(component, config).afterClosed();
   }
 }

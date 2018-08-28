@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import {of} from 'rxjs/observable/of';
 import { ReleaseOrder } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { DialogService, NotificationService, WindowService } from 'app/services';
+import { DialogService, NotificationService } from 'app/services';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from '../release-order-search-params';
 
@@ -18,6 +16,11 @@ import {
   MediaHouseApiService,
   ExecutiveApiService
 } from 'app/directory';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+
+class RoExpandable extends ReleaseOrder {
+  expanded = false;
+}
 
 @Component({
   selector: 'app-release-order-list',
@@ -26,7 +29,7 @@ import {
 })
 export class ReleaseOrderListComponent implements OnInit {
 
-  releaseOrders: ReleaseOrder[] = [];
+  releaseOrders: RoExpandable[] = [];
 
   pageCount: number;
   page: number;
@@ -39,6 +42,8 @@ export class ReleaseOrderListComponent implements OnInit {
 
   pastDays = 0;
 
+  collapsed = true;
+
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
     private route: ActivatedRoute,
@@ -46,8 +51,7 @@ export class ReleaseOrderListComponent implements OnInit {
     private router: Router,
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
-    private executiveApi: ExecutiveApiService,
-    private windowService: WindowService) { }
+    private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }}) => {
@@ -75,7 +79,12 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   private init(data: PageData<ReleaseOrder>) {
-    this.releaseOrders = data.list;
+    this.releaseOrders = data.list.map(item => {
+      return {
+        ...item,
+        expanded: false
+      };
+    });
 
     this.pageCount = data.pageCount;
     this.page = data.page;
@@ -184,18 +193,18 @@ export class ReleaseOrderListComponent implements OnInit {
         this.api.generatePdf(releaseOrder).subscribe(data => {
           if (data.msg) {
             this.notifications.show(data.msg);
-    
-            releaseOrder.generated = true;
           }
           else {
+            releaseOrder.generated = true;
+
             console.log(data);
             
             let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
+            let url = URL.createObjectURL(blob);
     
-            let a = this.windowService.window.document.createElement('a');
+            let a = document.createElement('a');
             a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
+            document.body.appendChild(a);
             a.download = 'releaseorder.pdf';
             a.href = url;
             a.click();
@@ -277,5 +286,21 @@ export class ReleaseOrderListComponent implements OnInit {
         this.notifications.show('Failed to Generate');
       }
     });
+  }
+
+  cancel(releaseOrder: ReleaseOrder) {
+    this.dialog.showYesNo("Confirm Cancellation", "Do you want to cancel this Release Order? This cannot be undone. If any Media House Invoice or Invoice has been created for this Release Order, it can not be cancelled.").subscribe(confirm => {
+      if (confirm) {
+        this.api.cancel(releaseOrder).subscribe(data => {
+          if (!data.success) {
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
+  }
+
+  toDate(date: NgbDate) {
+    return new Date(date.year, date.month - 1, date.day);
   }
 }

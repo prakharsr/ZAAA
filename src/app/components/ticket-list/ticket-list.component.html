@@ -4,12 +4,50 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
+<livechat-widget licenseId="9872505"></livechat-widget>
+
 <br>
 
 <div class="container">
-  <button class="fab" routerLink="/tickets/new">
+  <button class="fab" routerLink="/tickets/new" *ngIf="!isSuperAdmin">
     <mat-icon>add</mat-icon>
   </button>
 
-  <pre>{{res | async | json}}</pre>
+  <nav mat-tab-nav-bar class="x-overflow" *ngIf="isSuperAdmin">
+    <a mat-tab-link routerLink="/superadmin/tickets/pending" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Pending</a>
+    <a mat-tab-link routerLink="/superadmin/tickets/resolved" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Resolved</a>
+  </nav>
+
+  <br>
+
+  <div *ngIf="list.length == 0" class="text-muted">
+    No Tickets
+    <br><br>
+  </div>
+
+  <mat-card *ngFor="let ticket of list" class="mb-3 mat-elevation-z3">
+    <div class="row">
+      <div class="col">{{ticket.subject}}</div>
+      <div class="col-auto">
+        <span class="text-muted small">{{ticket.createdAt | date}}</span><br>
+      </div>
+      <div class="col-auto">
+        <span class="small">
+          <span *ngIf="ticket.status == 0" class="text-warning">Pending</span>
+          <span *ngIf="ticket.status == 1" class="text-success">Resolved</span>
+        </span>
+      </div>
+    </div>
+    
+    <span class="small">{{ticket.details}}</span><br>
+
+    <div *ngIf="ticket.status == 0 && isSuperAdmin" class="text-right">
+      <span class="small mr-2">Mark as:</span>
+      <button (click)="changeStatus(ticket, 1)" class="btn btn-success btn-sm">Resolved</button>
+    </div>
+  </mat-card>
+
+  <br>
+
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
 </div>

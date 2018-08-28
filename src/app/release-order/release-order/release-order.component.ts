@@ -10,8 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { ReleaseOrder, Insertion, TaxValues, OtherCharges } from '../release-order';
 import { ReleaseOrderApiService } from '../release-order-api.service';
-import { StateApiService, NotificationService, OptionsService, DialogService, WindowService } from 'app/services';
-import { CategoriesDetails } from '../categories-details/categories-details.component';
+import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
 
 import {
   Category,
@@ -30,6 +29,8 @@ import {
   ExecutiveApiService,
   Pullout
 } from 'app/directory';
+import { PreviewComponent } from 'app/components/preview/preview.component';
+import { UserProfile, Firm } from '../../models';
 
 @Component({
   selector: 'app-release-order',
@@ -38,16 +39,18 @@ import {
 })
 export class ReleaseOrderComponent implements OnInit {
 
+  // Dummy variable
+  submitted = false;
+
   releaseorder = new ReleaseOrder();
   query: string;
   edit = false;
   id: string;
 
-  releaseOrder = new ReleaseOrder();
-
-  selectedCategories: Category[] = [null, null, null, null, null, null];
-  categories: Category[];
+  selectedCategories: string[] = [null, null, null, null, null, null];
   fixedCategoriesLevel = -1;
+
+  submitting = false;
 
   others = "Others";
 
@@ -64,8 +67,7 @@ export class ReleaseOrderComponent implements OnInit {
     public stateApi: StateApiService,
     private notifications: NotificationService,
     public options: OptionsService,
-    private dialog: DialogService,
-    private windowService: WindowService) { }
+    private dialog: DialogService) { }
 
   get isTypeWords() {
 
@@ -106,7 +108,6 @@ export class ReleaseOrderComponent implements OnInit {
     return new Date(date.year, date.month - 1, date.day);
   }
 
-
   private confirmGeneration(releaseOrder: ReleaseOrder) : Observable<boolean> {
     if (releaseOrder.generated) {
       return of(true);
@@ -120,83 +121,75 @@ export class ReleaseOrderComponent implements OnInit {
       if (data.success) {
         this.goBack();
       }
+      else this.submitting = false;
     });
   }
 
   saveAndGen() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.releaseorder);
-      }
-    });
-  }
-
-  saveAndSendMsg() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.sendMsg(this.releaseorder);
-      }
-    });
-  }
-  
-  preview() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.releaseorder, true);
-      }
-    });
-  }
-
-  gen(releaseOrder: ReleaseOrder, preview = false) {
-    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+    // Confirm
+    this.confirmGeneration(this.releaseorder).subscribe(confirm => {
       if (confirm) {
-        this.api.generate(releaseOrder).subscribe(data => {
-          if (data.msg) {
-            this.notifications.show(data.msg);
+        // Save
+        this.submit().subscribe(data => {
+          if (data.success) {
+            // Generate
+            this.api.generatePdf(this.releaseorder).subscribe(data => {
+              if (data.msg) {
+                this.notifications.show(data.msg);    
+              }
+              else {
+                this.releaseorder.generated = true;
+                console.log(data);
+                
+                let blob = new Blob([data], { type: 'application/pdf' });
+                let url = URL.createObjectURL(blob);
+        
+                let a = document.createElement('a');
+                a.setAttribute('style', 'display:none;');
+                document.body.appendChild(a);
+                a.href = url;
     
-            releaseOrder.generated = true;
-          }
-          else {
-            console.log(data);
-            
-            let blob = new Blob([data], { type: 'application/pdf' });
-            let url = this.windowService.window.URL.createObjectURL(blob);
+                a.download = 'releaseorder.pdf';
     
-            let a = this.windowService.window.document.createElement('a');
-            a.setAttribute('style', 'display:none;');
-            this.windowService.window.document.body.appendChild(a);
-            a.href = url;
-
-            if (preview) {
-              a.setAttribute("target", "_blank");
-            }
-            else {
-              a.download = 'releaseorder.pdf';
-            }
-
-            a.click();
+                a.click();
+    
+                this.router.navigate(['/releaseorders', this.releaseorder.id]);
+              }
+            });
           }
+          else this.submitting = false;
         });
       }
     })
   }
 
-  sendMsg(releaseOrder: ReleaseOrder) {
-    this.confirmGeneration(releaseOrder).subscribe(confirm => {
+  saveAndSendMsg() {
+    // Confirm
+    this.confirmGeneration(this.releaseorder).subscribe(confirm => {
       if (confirm) {
+        // Mailing Details
         this.dialog.getMailingDetails().subscribe(mailingDetails => {
           if (mailingDetails) {
-            this.api.sendMail(releaseOrder, mailingDetails).subscribe(data => {
+            // Save
+            this.submit().subscribe(data => {
               if (data.success) {
-                this.notifications.show("Sent Successfully");
-
-                releaseOrder.generated = true;
+                // Mail
+                this.api.sendMail(this.releaseorder, mailingDetails).subscribe(data => {
+                  if (data.success) {
+                    this.notifications.show("Sent Successfully");
+    
+                    this.releaseorder.generated = true;
+    
+                    this.router.navigate(['/releaseorders', this.releaseorder.id]);
+                  }
+                  else {
+                    console.log(data);
+    
+                    this.notifications.show(data.msg);
+                  }
+                });
               }
-              else {
-                console.log(data);
-
-                this.notifications.show(data.msg);
-              }
+              else this.submitting = false;
             });
           }
         });
@@ -204,8 +197,29 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
 
+  genPreview() {
+    this.presave();
+
+    this.api.previewROhtml(this.releaseorder).subscribe(data => {
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
+        switch (response) {
+          case 'save':
+            this.save();
+            break;
+
+          case 'dl':
+            this.saveAndGen();
+            break;
+
+          case 'mail':
+            this.saveAndSendMsg();
+            break;
+        }
+      });
+    });
+  }
+
   ngOnInit() {
-    this.categories = this.options.categories;
     this.dropdownPullOutName = this.others;
 
     this.route.paramMap.subscribe(params => {
@@ -222,6 +236,7 @@ export class ReleaseOrderComponent implements OnInit {
         this.releaseorder.releaseOrderNO = "";
         this.releaseorder.id = "";
         this.releaseorder.generated = false;
+        this.releaseorder.cancelled = false;
         this.releaseorder.date = new Date();
 
         this.releaseorder.insertions = this.releaseorder.insertions.map(insertion => new Insertion(insertion.date));
@@ -231,6 +246,16 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.initNew();
+
+        this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
+          this.releaseorder.paymentBankName = data.firm.bankName;
+
+          let exe = new Executive();
+          exe.executiveName = data.user.name;
+          exe.orgName = data.firm.name;
+
+          this.executive = exe;
+        });
       }
     });
   }
@@ -242,10 +267,12 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.AdTime = this.adTimes[0];
     this.mediaType = this.mediaTypes[0];
     this.releaseorder.adHue = this.hues[0];
-    this.releaseorder.unit = this.units[0];
+    // this.releaseorder.unit = this.units[0];
     this.releaseorder.adPosition = this.positions[0];
-    this.selectedTax = this.taxes[0];
-    this.releaseorder.paymentType = this.paymentTypes[0];
+    this.selectedTax = this.taxes[1];
+    this.releaseorder.paymentType = 'Credit';
+
+    this.releaseorder.rate = null;
   }
 
   private initFromReleaseOrder() {
@@ -310,6 +337,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.insertions = insertionBkp;
 
       this.customPullOutName = this.releaseorder.pulloutName;
+
+      // hack
+      this.releaseorder.rate = this.releaseorder.rate;
     });
   }
 
@@ -321,7 +351,7 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adType = rateCard.adType;
       this.releaseorder.AdTime = rateCard.AdTime;
       this.releaseorder.rate = rateCard.rate;
-      this.releaseorder.unit = rateCard.unit;
+      //this.releaseorder.unit = rateCard.unit;
       this.releaseorder.adHue = rateCard.hue;
       this.releaseorder.adPosition = rateCard.position;
       this.releaseorder.AdWordsMax = rateCard.AdWordsMax;
@@ -370,150 +400,20 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   private buildCategoryTree(categories: string[]) {
-    let c : Category = this.categories.find(p => p.name == categories[0]);
-
-    if (c) {
-      this.category1 = c;
-
-      let i = 1;
-
-      while (i < categories.length && c.subcategories.length > 0) {
-        c = c.subcategories.find(p => p.name == categories[i]);
-
-        if (c) {
-          this.setCategory(i, c);
-
-          ++i;
-        }
-        else break;
-      }
+    for (let i = 0; i < categories.length; ++i) {
+      this.selectedCategories[i] = categories[i];
     }
   }
-
-  findSubCategories(category: Category, query: string): Category[] {
-    let result : Category[] = [];
-
-    if (category.name.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-      result.push(category);
-    }
-
-    if (category.subcategories) {
-      category.subcategories.forEach(subCategory => {
-        this.findSubCategories(subCategory, query).forEach(a => result.push(a));
-      });
-    }
-
-    return result;
-  }
-
-  findCategories(query: string): Category[]  {
-    let result : Category[] = [];
-
-    if (query) {
-      let base = this.categories;
-
-      if (this.fixedCategoriesLevel > -1) {
-        base = this.selectedCategories[this.fixedCategoriesLevel].subcategories;
-      }
-
-      base.forEach(element => {
-        this.findSubCategories(element, query).forEach(a => result.push(a));
-      });
-    }
-
-    return result;
-
-  }
-
-  searchCategories = (text: Observable<string>) => {
-    return text.debounceTime(300)
-      .distinctUntilChanged()
-      .pipe(
-        map(term => this.findCategories(term))
-      )
-      .catch(() => of([]));
-  }
-
-  categoryInputFormatter = (result: Category) => {
-    let stack : Category[] = [];
-
-    while (result) {
-      stack.push(result);
-      result = result.parent;
-    }
-
-    let j = this.fixedCategoriesLevel + 1;
-
-    while (j > 0) {
-      stack.pop();
-
-      --j;
-    }
-
-    let i = this.fixedCategoriesLevel + 1;
-
-    while (stack.length) {
-      this.setCategory(i, stack.pop());
-
-      ++i;
-    }
-  }
-
-  categoryResultFormatter = (result: Category) => {
-    let stack : Category[] = [];
-
-    while (result) {
-      stack.push(result);
-      result = result.parent;
-    }
-
-    let formatted = stack.pop().name;
-
-    while (stack.length) {
-      formatted += " > " + stack.pop().name;
-    }
-
-    return formatted;
-  }
-
-  getCategory(index: number) {
-    return this.selectedCategories[index];
-  }
-
-  setCategory(index: number, category: Category) {
-    if (this.selectedCategories[index] == category) {
-      return;
-    }
-
-    this.selectedCategories[index] = category;
-
-    for (let i = index + 1; i < this.selectedCategories.length; ++i) {
-      this.setCategory(i, null);
-    }
-  }
-
-  get category1() { return this.getCategory(0); }
-  get category2() { return this.getCategory(1); }
-  get category3() { return this.getCategory(2); }
-  get category4() { return this.getCategory(3); }
-  get category5() { return this.getCategory(4); }
-  get category6() { return this.getCategory(5); }
-
-  set category1(category: Category) { this.setCategory(0, category); }
-  set category2(category: Category) { this.setCategory(1, category); }
-  set category3(category: Category) { this.setCategory(2, category); }
-  set category4(category: Category) { this.setCategory(3, category); }
-  set category5(category: Category) { this.setCategory(4, category); }
-  set category6(category: Category) { this.setCategory(5, category); }
 
   getCategories() {
-    this.dialog.getCategoriesDetails().subscribe(data => {
-      this.setCategoriesDetails(data);
+    this.dialog.getCategoriesDetails({
+      categories: this.selectedCategories,
+      fixedLevel: this.fixedCategoriesLevel
+    }).subscribe(data => {
+      if (data) {
+        this.selectedCategories = data.selectedCategories.map(M => M ? M.name : null);
+      }
     });
-  }
-
-  setCategoriesDetails(details: CategoriesDetails) {
-    this.selectedCategories = details.selectedCategories;
   }
   
   private goBack() {
@@ -555,21 +455,22 @@ export class ReleaseOrderComponent implements OnInit {
     )
   }
 
-  submit () : Observable<any> {
+  private presave() {
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
     this.releaseorder.netAmountFigures = this.netAmount;
     this.releaseorder.netAmountWords = this.options.amountToWords(this.netAmount);
+    this.releaseorder.clientPayment = this.releaseorder.paymentAmount = this.clientPayment;
 
     this.releaseorder.taxAmount = this.selectedTax;
 
-    this.releaseorder.adCategory1 = this.selectedCategories[0] ? this.selectedCategories[0].name : null;
-    this.releaseorder.adCategory2 = this.selectedCategories[1] ? this.selectedCategories[1].name : null;
-    this.releaseorder.adCategory3 = this.selectedCategories[2] ? this.selectedCategories[2].name : null;
-    this.releaseorder.adCategory4 = this.selectedCategories[3] ? this.selectedCategories[3].name : null;
-    this.releaseorder.adCategory5 = this.selectedCategories[4] ? this.selectedCategories[4].name : null;
-    this.releaseorder.adCategory6 = this.selectedCategories[5] ? this.selectedCategories[5].name : null;
+    this.releaseorder.adCategory1 = this.selectedCategories[0];
+    this.releaseorder.adCategory2 = this.selectedCategories[1];
+    this.releaseorder.adCategory3 = this.selectedCategories[2];
+    this.releaseorder.adCategory4 = this.selectedCategories[3];
+    this.releaseorder.adCategory5 = this.selectedCategories[4];
+    this.releaseorder.adCategory6 = this.selectedCategories[5];
     
     this.releaseorder.publicationName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
     this.releaseorder.clientName = this.client.orgName ? this.client.orgName : this.client;
@@ -597,6 +498,18 @@ export class ReleaseOrderComponent implements OnInit {
       this.releaseorder.adSchemeFree = this.selectedScheme.Free;
       this.releaseorder.adSchemePaid = this.selectedScheme.paid;
     }
+  }
+
+  submit () : Observable<any> {
+    if (this.releaseorder.insertions.length < this.availableAds) {
+      this.notifications.show(`Please select ${this.availableAds} insertion(s)`);
+
+      return of({});
+    }
+
+    this.submitting = true;
+
+    this.presave();
 
     let base: Observable<any> = this.edit ? this.editReleaseOrder() : this.createReleaseOrder();
 
@@ -627,7 +540,9 @@ export class ReleaseOrderComponent implements OnInit {
       this.pullouts = result.pullouts;
     }
 
-    this.mediaType = result.mediaType;
+    if (this.mediaType != result.mediaType) {
+      this.mediaType = result.mediaType;
+    }
   }
 
   get mediaType() {
@@ -637,7 +552,16 @@ export class ReleaseOrderComponent implements OnInit {
   set mediaType(mediaType: string) {
     this.releaseorder.mediaType = mediaType;
 
-    this.releaseorder.adType = this.adTypes[0];
+    this.adType = this.adTypes[0];
+  }
+
+  get adType() {
+    return this.releaseorder.adType;
+  }
+
+  set adType(adType: string) {
+    this.releaseorder.adType = adType;
+    // this.releaseorder.unit = this.units[0];
   }
 
   mediaTypes = ['Print', 'Air', 'Electronic'];
@@ -657,37 +581,45 @@ export class ReleaseOrderComponent implements OnInit {
     return [];
   }
 
-  get adTimes() {
-    return ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-  }
+  adTimes = ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
 
-  get positions() {
-    let result = ['Classified', 'Back Page', 'Jacket', 'Prime Time'];
+  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
+             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
+             'Entertainment','Automobile','Education','Health','Editorial','World','National',
+             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
+             'Right Hand Side','Left Hand Side' ];
 
-    for (let i = 1; i <= 8; ++i) {
-      result.push('Page ' + i);
-    }
+  // get units() {
+  //   let result = [];
 
-    return result;
-  }
+  //   if (this.isTypeLen) {
+  //     result.push('Sqcm');
+  //   }
 
-  get units() {
-    let result = [];
+  //   if (this.isTypeWords) {
+  //     result.push('Words');
+  //     result.push('Lines');
+  //   }
 
+  //   if (this.isTypeTime) {
+  //     result.push('sec');
+  //   }
+
+  //   return result;
+  // }
+
+  get rateText() {
     if (this.isTypeLen) {
-      result.push('Sqcm');
+      return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
     }
 
     if (this.isTypeWords) {
-      result.push('Words');
-      result.push('Lines');
+      return "Rate per insertion";
     }
 
     if (this.isTypeTime) {
-      result.push('sec');
+      return "Rate per sec";
     }
-
-    return result;
   }
 
   mediaHouseInputFormatter = (result: MediaHouse) => {
@@ -797,8 +729,8 @@ export class ReleaseOrderComponent implements OnInit {
 
   selectedSize: FixSize;
 
-  customSizeL = 0;
-  customSizeW = 0;
+  customSizeL: number;
+  customSizeW: number;
 
   schemes: Scheme[] = [];
 
@@ -857,6 +789,9 @@ export class ReleaseOrderComponent implements OnInit {
     if (this.isTypeLen) {
       if (this.customSize && !this.releaseorder.fixRate) {
         return this.releaseorder.rate * this.totalSpace;
+      }
+      else if (this.customSize && this.releaseorder.fixRate) {
+        return this.releaseorder.rate;
       }
       else {
         return this.selectedSize.amount;
@@ -936,10 +871,9 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   taxes: TaxValues[] = [
+    new TaxValues(0),
     new TaxValues(5),
-    new TaxValues(10),
-    new TaxValues(14),
-    new TaxValues(28, 18)
+    new TaxValues(18)
   ];
 
   selectedTax: TaxValues;
@@ -961,7 +895,7 @@ export class ReleaseOrderComponent implements OnInit {
 
     amount -= (this.releaseorder.publicationDiscount * amount / 100);
 
-    return amount;
+    return Math.ceil(amount);
   }
 
   otherChargesTypes = ['Designing Charges', 'Extra Copy/Newspaper Charges', 'Certificate Charges'];
@@ -976,6 +910,8 @@ export class ReleaseOrderComponent implements OnInit {
     obj.address.state = this.releaseorder.publicationState;
     obj.GSTIN = this.releaseorder.publicationGSTIN;
     obj.mediaType = this.releaseorder.mediaType;
+    let pullout = this.dropdownPullOutName == this.others ? this.customPullOutName : this.dropdownPullOutName;
+    obj.pullouts = [{ Name: pullout, Frequency: "Daily", Language: "", Remark: "" }];
 
     this.mediaHouseApi.createMediaHouse(obj).subscribe(data => {
       if (data.success) {
@@ -1035,5 +971,60 @@ export class ReleaseOrderComponent implements OnInit {
         this.notifications.show(data.msg);
       }
     });
+  }
+
+  private round2(num: number) {
+    return Math.round(num * 100) / 100
+  }
+
+  get displayAmount() {
+    let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
+
+    return this.releaseorder.taxIncluded
+      ? this.round2(100 * this.netAmount / (100 + taxplus))
+      : this.netAmount;
+  }
+
+  get displayTax() {
+    let taxplus = this.selectedTax.primary + this.selectedTax.secondary;
+
+    return this.releaseorder.taxIncluded
+      ? this.round2(taxplus * this.netAmount / (100 + taxplus))
+      : this.round2(this.netAmount * taxplus / 100);
+  }
+
+  get displayTotal() {
+    return Math.ceil(this.displayAmount + this.displayTax);
+  }
+
+  handleSubmit(valid: boolean, callbackName: string) {
+    if (valid) {
+      switch (callbackName) {
+        case 'save':
+          this.save();
+          break;
+        
+        case 'dl':
+          this.saveAndGen();
+          break;
+        
+        case 'preview':
+          this.genPreview();
+          break;
+
+        case 'mail':
+          this.saveAndSendMsg();
+          break;
+      }
+    }
+    else this.notifications.show('Fix errors before submitting');
+  }
+
+  get perInsertionRate() {
+    return Math.ceil(this.displayTotal / this.availableAds);
+  }
+
+  get perSqcmRate() {
+    return Math.ceil(this.perInsertionRate / this.totalSpace);
   }
 }

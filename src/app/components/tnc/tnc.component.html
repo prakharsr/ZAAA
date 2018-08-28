@@ -1,0 +1,83 @@
+<mat-toolbar>  
+  <mat-toolbar-row>
+    <div class="container"><a class="text-light" routerLink="/">Home</a> <span class="text-muted mx-2">/</span> <a class="text-light" routerLink="/profile">Manage Profile</a> <span class="text-muted mx-2">/</span> Terms &amp; Conditions</div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br>
+
+<div class="container">
+  <form (ngSubmit)="submit()" #tncForm>
+    <mat-card class="mat-elevation-z3">
+      <mat-form-field>
+        <input matInput type="text" name="jurisdiction" [(ngModel)]="tnc.Jurisdiction" placeholder="Jurisdiction">
+      </mat-form-field>
+    </mat-card>
+
+    <div class="row">
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Release Orders</mat-card-title>
+          <mat-form-field *ngFor="let item of tnc.ROterms; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="ro-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>{{tnc.ROterms.length + 1}}.</span> {{tnc.Jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Invoices</mat-card-title>
+          <mat-form-field *ngFor="let item of tnc.INterms; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="invoice-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>{{tnc.INterms.length + 1}}.</span> {{tnc.Jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Payment Receipts</mat-card-title>
+          <mat-form-field *ngFor="let item of tnc.PRterms; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="pr-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>{{tnc.PRterms.length + 1}}.</span> {{tnc.Jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+      <div class="col">
+        <br>
+        <mat-card class="mat-elevation-z3">
+          <mat-card-title>Advance Receipts</mat-card-title>
+          <mat-form-field *ngFor="let item of tnc.ARterms; index as i">
+            <span matPrefix>{{i + 1}}.&nbsp;</span>
+            <input matInput type="text" name="ar-{{i}}" placeholder="Line {{i + 1}}" [(ngModel)]="item.content">
+          </mat-form-field>
+          <div class="mt-3">
+            <span>{{tnc.ARterms.length + 1}}.</span> {{tnc.Jurisdiction}}
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <br><br>
+
+    <button type="submit" mat-raised-button color="primary" class="bg-success">Save</button>
+    <button type="button" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button type="button" mat-raised-button color="primary" class="bg-warning" (click)="reset()">Reset</button>
+  </form>
+</div>

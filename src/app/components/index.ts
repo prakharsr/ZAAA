@@ -3,7 +3,6 @@ export * from './change-psw/change-psw.component';
 export * from './dashboard/dashboard.component';
 export * from './dialog/dialog.component';
 export * from './account-details/account-details.component';
-export * from './user-details/user-details.component';
 export * from './business-details/business-details.component';
 export * from './forgot-psw/forgot-psw.component';
 export * from './home/home.component';

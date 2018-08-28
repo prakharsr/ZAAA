@@ -1,50 +1,335 @@
-<mat-toolbar>  
-    <mat-toolbar-row>
-        <div class="container">Dashboard</div>
-    </mat-toolbar-row>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="container">Dashboard</div>
+  </mat-toolbar-row>
 </mat-toolbar>
 
+<br>
+
+<button class="fab bg-info" (click)="refresh()" matTooltip="Refresh">
+  <mat-icon>refresh</mat-icon>
+</button>
+
 <div class="container">
-    <br>
-    <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-primary" routerLink="/profile">Manage Profile</a>
+  <div class="row">
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Invoices</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="invoiceFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #invoiceFilter="matMenu">
+                <button mat-menu-item (click)="setInvoiceFilter(1)" [class.text-primary]="currentInvoiceFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(2)" [class.text-primary]="currentInvoiceFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(3)" [class.text-primary]="currentInvoiceFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setInvoiceFilter(4)" [class.text-primary]="currentInvoiceFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + invoicesData.genAmount" [style.width]="invoicesData.generated + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + invoicesData.pendingAmount" [style.width]="invoicesData.pending + '%'"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-success small">Generated</div>
+            <div class="col-auto text-warning small">Pending</div>
+          </div>
+
+          <br>
+
+          <div class="progress">
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + dueOverdue.dueAmount" [style.width]="dueOverdue.due + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-danger" [matTooltip]="'₹ ' + dueOverdue.overdueAmount" [style.width]="dueOverdue.overdue + '%'"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-warning small">Due</div>
+            <div class="col-auto text-primary small">Overdue</div>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-success" routerLink="/firm">Firm Profile</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-warning" routerLink="/coUsers">Co-Users</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-info" routerLink="/dir">Directory</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-danger" routerLink="/ratecards">Rate Cards</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-primary" routerLink="/releaseorders">Release Orders</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-success" routerLink="/releaseorders/check">Insertion Check</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-warning" routerLink="/invoices">Invoices</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-info" routerLink="/receipts">Payment Receipts</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6" *ngIf="admin">
-            <a class="btn btn-danger" routerLink="/templates">Templates</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-dark" routerLink="/accounts">Accounts</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-outline-info" routerLink="/reports">Reports</a>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <a class="btn btn-outline-success" routerLink="/tickets">Tickets</a>
-        </div> 
+      </div>
     </div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Sales <small>(Release Orders)</small></h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="roChartFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #roChartFilter="matMenu">
+                <button mat-menu-item (click)="setROChartFilter(1)" [class.text-primary]="currentROChartFilter == 1">
+                  Financial Year
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(2)" [class.text-primary]="currentROChartFilter == 2">
+                  Q1
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(3)" [class.text-primary]="currentROChartFilter == 3">
+                  Q2
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(4)" [class.text-primary]="currentROChartFilter == 4">
+                  Q3
+                </button>
+                <button mat-menu-item (click)="setROChartFilter(5)" [class.text-primary]="currentROChartFilter == 5">
+                  Q4
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <div style="height: 300px">
+            <ngx-charts-line-chart [results]="roChartResults"
+              [xAxis]="true"
+              [yAxis]="true"
+              [autoScale]="true">
+            </ngx-charts-line-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Payments</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="paymentsFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #paymentsFilter="matMenu">
+                <button mat-menu-item (click)="setPaymentsFilter(1)" [class.text-primary]="currentPaymentsFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(2)" [class.text-primary]="currentPaymentsFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(3)" [class.text-primary]="currentPaymentsFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setPaymentsFilter(4)" [class.text-primary]="currentPaymentsFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped" [matTooltip]="'₹ ' + paymentsData.collectedAmount" [style.width]="paymentsData.collected + '%'"></div>
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.shadowAmount" [style.width]="paymentsData.shadow + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.completedAmount" [style.width]="paymentsData.completed + '%'"></div>
+            </div>
+
+            <div class="row">
+              <div class="col text-primary small">Collected</div>
+              <div class="col text-warning small">Shadow</div>
+              <div class="col-auto text-success small">Completed</div>
+            </div>
+          </ng-container>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.pendingAmount" [style.width]="paymentsData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.receivedAmount" [style.width]="paymentsData.received + '%'"></div>
+            </div>
+          </ng-container>
+
+          <div class="row">
+            <div class="col text-warning small">Pending</div>
+            <div class="col-auto text-success small">Received</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Sales <small>(Media House Invoices)</small></h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="mhiFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #mhiFilter="matMenu">
+                <button mat-menu-item (click)="setMhiFilter(1)" [class.text-primary]="currentMhiFilter == 1">
+                  All Time
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(2)" [class.text-primary]="currentMhiFilter == 2">
+                  Ongoing Financial Year
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(3)" [class.text-primary]="currentMhiFilter == 3">
+                  Ongoing Quarter
+                </button>
+                <button mat-menu-item (click)="setMhiFilter(4)" [class.text-primary]="currentMhiFilter == 4">
+                  Ongoing Month
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <br>
+
+          <ng-container>
+            <div class="progress">
+              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + mhiData.pendingAmount" [style.width]="mhiData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + mhiData.receivedAmount" [style.width]="mhiData.received + '%'"></div>
+            </div>
+
+            <div class="row">
+              <div class="col text-warning small">Pending</div>
+              <div class="col-auto text-success small">Received</div>
+            </div>
+          </ng-container>
+
+          <br>
+
+          <h6>Payments</h6>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paidUnpaid.paidAmount" [style.width]="paidUnpaid.paid + '%'"></div>
+            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paidUnpaid.unpaidAmount" [style.width]="paidUnpaid.unpaid + '%'"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-success small">Paid</div>
+            <div class="col-auto text-warning small">Unpaid</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Receipt Cheques</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="receiptChequesFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #receiptChequesFilter="matMenu">
+                <button mat-menu-item (click)="setReceiptChequesFilter(1)" [class.text-primary]="currentReceiptChequesFilter == 1">
+                  Upto Today
+                </button>
+                <button mat-menu-item (click)="setReceiptChequesFilter(2)" [class.text-primary]="currentReceiptChequesFilter == 2">
+                  Next 7 Days
+                </button>
+                <button mat-menu-item (click)="setReceiptChequesFilter(3)" [class.text-primary]="currentReceiptChequesFilter == 3">
+                  Next 15 Days
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <br>
+
+          <table class="table table-sm table-responsive">
+            <tr>
+              <th>No</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Bank Acc Name</th>
+            </tr>
+            <tr *ngFor="let item of receiptCheques">
+              <td matTooltip="View Payment Receipt">
+                <a [routerLink]="['/receipts', item._id]">{{item.paymentNo}}</a>
+              </td>
+              <td>{{item.paymentDate | date}}</td>
+              <td>₹ {{item.paymentAmount}}</td>
+              <td>{{item.paymentBankName}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="card mb-3 mat-elevation-z3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h5>Media House Invoice Cheques</h5>
+            </div>
+            <div class="col-auto">
+              <button mat-icon-button type="button" [matMenuTriggerFor]="mhiChequesFilter">
+                <mat-icon>filter_list</mat-icon>
+              </button>
+
+              <mat-menu #mhiChequesFilter="matMenu">
+                <button mat-menu-item (click)="setMhiChequesFilter(1)" [class.text-primary]="currentMhiChequesFilter == 1">
+                  Upto Today
+                </button>
+                <button mat-menu-item (click)="setMhiChequesFilter(2)" [class.text-primary]="currentMhiChequesFilter == 2">
+                  Next 7 Days
+                </button>
+                <button mat-menu-item (click)="setMhiChequesFilter(3)" [class.text-primary]="currentMhiChequesFilter == 3">
+                  Next 15 Days
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+
+          <br>
+
+          <table class="table table-sm table-responsive">
+            <tr>
+              <th>No</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Bank Acc Name</th>
+            </tr>
+            <tr *ngFor="let item of mhiCheques">
+              <td>{{item._id.ChequeNo}}</td>
+              <td>{{item._id.ChequeDate | date}}</td>
+              <td>₹ {{item._id.ChequeAmount}}</td>
+              <td>{{item._id.ChequeBank}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

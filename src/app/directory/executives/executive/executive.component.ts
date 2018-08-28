@@ -14,12 +14,16 @@ export class ExecutiveComponent implements OnInit {
 
   executive = new Executive();
   firm: Firm;
-
-  // dobModel;
+  backup = new Executive();
 
   id: string;
+  new = false;
 
-  edit = false;
+  editExecutiveDetails = false;
+  editContactDetails = false;
+
+  moreExecutiveDetails = false;
+  moreContactDetails = false;
   
   constructor(private api: ExecutiveApiService,
     private route: ActivatedRoute,
@@ -31,14 +35,15 @@ export class ExecutiveComponent implements OnInit {
       if (params.has('id')) {
         this.id = params.get('id');
 
-        this.edit = true;
-
         this.route.data.subscribe((data: { executive: Executive, firm: Firm }) => {
           this.executive = data.executive;
           this.firm = data.firm;
+          Object.assign(this.backup, this.executive);
         });
       }
       else {
+        this.new = true;
+        this.editExecutiveDetails = this.editContactDetails = true;
         this.route.data.subscribe((data: { firm: Firm }) => {
           this.firm = data.firm;
         });
@@ -46,45 +51,62 @@ export class ExecutiveComponent implements OnInit {
     });
   }
 
-  private goBack() {
-    this.router.navigateByUrl(this.edit ? '/dir/executives/' + this.id : '/dir/executives');
+  private stopEditing() {
+    this.editExecutiveDetails = false;
+    this.editContactDetails = false;
   }
 
-  private createExecutive() {
-    this.api.createExecutive(this.executive).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
-  }
-
-  private editExecutive() {
-    this.api.editExecutive(this.executive).subscribe(
-      data => {
-        if (data.success) {
-          this.goBack();
-        }
-        else {
-          this.notifications.show(data.msg);
-        }
-      }
-    )
+  get editing() {
+    return this.editExecutiveDetails
+     || this.editContactDetails
   }
 
   submit() {
-    if (this.edit) {
-      this.editExecutive();
+    if (this.new) {
+      this.api.createExecutive(this.executive).subscribe(
+        data => {
+          if (data.success) {
+            this.goToList();
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
+        }
+      );
     }
-    else this.createExecutive();
+    else {
+      this.api.editExecutive(this.executive).subscribe(
+        data => {
+          if (data.success) {
+            this.notifications.show("Saved");
+          
+            this.stopEditing();
+          
+            Object.assign(this.backup, this.executive);
+          }
+          else {
+            console.log(data);
+            
+            this.notifications.show(data.msg);
+          }
+        }
+      );
+    }
   }
 
   cancel() {
-    this.goBack();
+    this.stopEditing();
+
+    Object.assign(this.executive, this.backup);
   }
 
+  private goToList() {
+    this.router.navigateByUrl('/dir/executives');
+  }
+
+  cancelCreate() {
+    this.goToList();
+  }
 }

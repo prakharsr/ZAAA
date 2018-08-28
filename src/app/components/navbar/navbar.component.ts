@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApiService, NotificationService } from 'app/services';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { UserProfile } from '../../models';
+import { Router, NavigationEnd } from '@angular/router';
+import { SuperAdminApiService } from 'app/super-admin/super-admin-api.service';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { NotificationsComponent } from '../notifications/notifications.component';
 
 @Component({
   selector: 'app-navbar',
@@ -11,24 +14,32 @@ import { UserProfile } from '../../models';
 export class NavbarComponent implements OnInit {
 
   isNavbarCollapsed = true;
-  admin : boolean;
-  pageUrl="";
-  expectedUrl = "/register";
 
   emailOrPhone: string;
   password: string;
 
-  hidePassword = true;
+  isRegister = false;
+  isSuperAdmin = false;
 
-  constructor(public api: ApiService, private router: Router, private route: ActivatedRoute, private notifications: NotificationService) { }
+  @ViewChild('notifyBtn', {read: ElementRef}) notifyBtn: ElementRef;
+
+  get showToolbar() {
+    return !this.isSuperAdmin && this.api.isLoggedIn;
+  }
+
+  constructor(public api: ApiService,
+    public superAdminApi: SuperAdminApiService,
+    private router: Router,
+    private notifications: NotificationService,
+    private overlay: Overlay) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.pageUrl = event.urlAfterRedirects;
+        this.isRegister = event.urlAfterRedirects == "/register";
+        this.isSuperAdmin = event.urlAfterRedirects.startsWith("/superadmin");
       } 
     });
-    console.log(this.pageUrl);
   }
 
   collapseNavbar() {
@@ -52,5 +63,37 @@ export class NavbarComponent implements OnInit {
         }
       }
     );
+  }
+
+  overlayRef: OverlayRef;
+
+  openNotifications() {
+    if (this.overlayRef) {
+      this.closeNotifications();
+    }
+    else {
+      this.overlayRef = this.overlay.create({
+        width: '300px',
+        height: '450px',
+        hasBackdrop: true,
+        backdropClass: 'mat-overlay-transparent-backdrop',
+        panelClass: ['mat-elevation-z8', 'bg-light'],
+        positionStrategy: this.overlay.position()
+          .connectedTo(this.notifyBtn,
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'top' }
+          ).withDirection('rtl')
+      });
+      let portal = new ComponentPortal(NotificationsComponent);
+      this.overlayRef.attach(portal);
+
+      this.overlayRef.backdropClick().subscribe(() => this.closeNotifications());
+    }
+  }
+
+  closeNotifications() {
+    this.overlayRef.dispose();
+
+    this.overlayRef = null;
   }
 }

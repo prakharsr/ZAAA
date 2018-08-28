@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Media House Invoices</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Media House Invoices</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -20,23 +29,27 @@
   </button>
 
   <br>
+ 
+  <div class="form-row" [class.mobile-collapse]="collapsed">
+    <div class="col">
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+        </div>
 
-  <div class="form-row">
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
-    </div>
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+        </div>
 
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
-    </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <select [(ngModel)]="pastDays" class="form-control">
-        <option [ngValue]="0">Any Time</option>
-        <option [ngValue]="7">Past 7 days</option>
-        <option [ngValue]="15">Past 15 days</option>
-        <option [ngValue]="30">Past 30 days</option>
-      </select>
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <select [(ngModel)]="pastDays" class="form-control">
+            <option [ngValue]="0">Any Time</option>
+            <option [ngValue]="7">Past 7 days</option>
+            <option [ngValue]="15">Past 15 days</option>
+            <option [ngValue]="30">Past 30 days</option>
+          </select>
+        </div>
+      </div>
     </div>
 
     <div class="col-auto">
@@ -46,22 +59,43 @@
     </div>
   </div>
 
+  <br>
+
   <div class="card mat-elevation-z3 mb-3" *ngFor="let item of list">
     <div class="card-body">
-      <strong>No:</strong> {{item.MHINo}}<br>
-      <strong>Date:</strong> {{item.MHIDate | date}}<br>
-      <strong>Gross Amount:</strong> {{item.MHIGrossAmount}}<br>
-      <strong>Tax Amount:</strong> {{item.MHITaxAmount}}<br><br>
-      <strong>Publication:</strong> {{item.publicationName}} - {{item.publicationEdition}}<br>
+      <div class="row">
+        <div class="col"><span class="text-muted">No:</span> {{item.MHINo}}</div>
+        <div class="col-auto text-muted">{{item.MHIDate | date}}</div>
+      </div>
+      <span class="text-muted">Gross Amount:</span> ₹ {{item.MHIGrossAmount}}<br>
+      <span class="text-muted">Tax Amount:</span> ₹ {{item.MHITaxAmount}}<br>
+
+      <div class="row">
+        <div class="col">
+          <span class="text-muted">Publication:</span> {{item.publicationName}} - {{item.publicationEdition}}<br>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-light btn-sm text-info" (click)="item.expanded = !item.expanded">
+            <span><mat-icon [class.rotate180]="item.expanded">expand_more</mat-icon></span> {{item.expanded ? 'Less' : 'More'}}
+          </button>
+        </div>
+      </div>
+
+      <table class="table table-sm mt-3" *ngIf="item.expanded">
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Collected</th>
+          <th>Pending</th>
+        </tr>
+        <tr *ngFor="let insertion of item.insertions">
+          <td>{{insertion.insertionDate | date}}</td>
+          <td>₹ {{insertion.Amount | number}}</td>
+          <td>₹ {{insertion.collectedAmount}}</td>
+          <td>₹ {{insertion.Amount - insertion.collectedAmount}}</td>
+        </tr>
+      </table>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let insertion of item.insertions">
-        <strong>Date:</strong> {{insertion.insertionDate | date}}<br>
-        <strong>Amount:</strong> ₹ {{insertion.Amount | number}}<br>
-        <strong>Collected:</strong> ₹ {{insertion.collectedAmount}}<br>
-        <strong>Pending:</strong> ₹ {{insertion.Amount - insertion.collectedAmount}}
-      </li>
-    </ul>
   </div>
 
   <br>

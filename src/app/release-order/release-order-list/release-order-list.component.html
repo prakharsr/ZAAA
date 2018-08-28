@@ -1,6 +1,15 @@
 <mat-toolbar>  
   <mat-toolbar-row>
-    <div class="container">Release Orders</div>
+    <div class="container">
+      <div class="row">
+        <div class="col">Release Orders</div>
+        <div class="col-auto">
+          <button mat-icon-button (click)="collapsed = !collapsed" class="d-md-none">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -27,36 +36,39 @@
 </ng-template>
 
 <div class="container">
-  <div class="form-row">
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+  <div class="form-row" [class.mobile-collapse]="collapsed">
+    <div class="col">
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
+        </div>
+    
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
+        </div>
+    
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+        </div>
+    
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="executive" [ngbTypeahead]="searchExecutive" placeholder="Executive" [resultTemplate]="rtExecutive" [inputFormatter]="executiveNameFormatter" />
+        </div>
+    
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
+        </div>
+    
+        <div class="form-group col-sm-6 col-md-4 col-xl">
+          <select [(ngModel)]="pastDays" class="form-control">
+            <option [ngValue]="0">Any Time</option>
+            <option [ngValue]="7">Past 7 days</option>
+            <option [ngValue]="15">Past 15 days</option>
+            <option [ngValue]="30">Past 30 days</option>
+          </select>
+        </div>
+      </div>
     </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
-    </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
-    </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="executive" [ngbTypeahead]="searchExecutive" placeholder="Executive" [resultTemplate]="rtExecutive" [inputFormatter]="executiveNameFormatter" />
-    </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <input type="text" class="form-control" [(ngModel)]="executiveOrg" [ngbTypeahead]="searchExecutiveOrg" placeholder="Executive Organisation" [resultTemplate]="rtExecutiveOrg" [inputFormatter]="executiveOrgFormatter" />
-    </div>
-
-    <div class="form-group col-sm-6 col-md-4 col-xl">
-      <select [(ngModel)]="pastDays" class="form-control">
-        <option [ngValue]="0">Any Time</option>
-        <option [ngValue]="7">Past 7 days</option>
-        <option [ngValue]="15">Past 15 days</option>
-        <option [ngValue]="30">Past 30 days</option>
-      </select>
-    </div>
-
     <div class="col-auto">
       <button class="btn btn-info" (click)="search(1)">
         <mat-icon>search</mat-icon>
@@ -82,26 +94,38 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
+            </div>
+            <div *ngIf="element.generated" class="col-auto text-muted">{{element.generatedAt | date}}</div>
+          </div>
 
-          <br><br>
+          <ng-container *ngIf="element.cancelled">
+            <span class="text-danger">CANCELLED</span>
+          </ng-container>
+
+          <br>
           <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
           <br><br>
         </div>
-        <div class="col-auto">
+        <div class="col-auto text-right">
           <mat-menu #releaseOrderMenu="matMenu">
-            <button mat-menu-item *ngIf="element.generated" (click)="pdf(element)">
-              <mat-icon>save_alt</mat-icon> Download
+            <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="pdf(element)">
+              <mat-icon>get_app</mat-icon> Download
             </button>
-            <button mat-menu-item *ngIf="element.generated" (click)="sendMsg(element)">
+            <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="sendMsg(element)">
               <mat-icon>mail</mat-icon> Send Email
             </button>
-            <button mat-menu-item *ngIf="element.generated" [routerLink]="['/releaseorders/new', element.id]">
-              <mat-icon>add</mat-icon> Copy into New
-            </button>
-            <button mat-menu-item *ngIf="element.generated" (click)="createInvoice(element)">
+            <button mat-menu-item *ngIf="element.generated && !element.cancelled" (click)="createInvoice(element)">
               <mat-icon>add</mat-icon> Create Invoice
+            </button>
+            <button mat-menu-item [routerLink]="['/releaseorders/new', element.id]">
+              <mat-icon>content_copy</mat-icon> Copy into New
+            </button>
+            <button mat-menu-item *ngIf="element.generated && !element.cancelled" class="text-danger" (click)="cancel(element)">
+              <mat-icon>cancel</mat-icon> Cancel
             </button>
             <button mat-menu-item *ngIf="!element.generated" [routerLink]="['/releaseorders/edit', element.id]">
               <mat-icon>edit</mat-icon> Edit
@@ -114,10 +138,32 @@
           <button mat-icon-button [matMenuTriggerFor]="releaseOrderMenu">
             <mat-icon>more_vert</mat-icon>
           </button>
+
+          <br><br>
+
+          <button type="button" class="btn btn-light btn-sm text-info" (click)="element.expanded = !element.expanded">
+            <span><mat-icon [class.rotate180]="element.expanded">expand_more</mat-icon></span> {{element.expanded ? 'Less' : 'More'}}
+          </button>
         </div>
       </div>
 
+      <table class="table table-sm my-3" *ngIf="element.expanded">
+        <tr>
+          <th>Insertions</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let insertion of element.insertions">
+          <td>{{toDate(insertion.date) | date}}</td>
+          <td class="text-right">
+            <span *ngIf="insertion.marked" class="text-success">
+              <mat-icon>check</mat-icon>
+            </span>
+          </td>
+        </tr>
+      </table>
+
       <button (click)="generate(element)" class="btn btn-outline-success" *ngIf="!element.generated">Generate</button>
+      <button [routerLink]="['/releaseorders', element.id]" class="btn btn-outline-primary">View</button>
     </div>
   </div>
 

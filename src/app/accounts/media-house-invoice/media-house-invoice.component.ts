@@ -8,6 +8,7 @@ import { MediaHouseInvoice } from '../media-house-invoice';
 import { AccountsApiService } from '../accounts-api.service';
 import { MediaHouseInvoiceDialogComponent } from '../media-house-invoice-dialog/media-house-invoice-dialog.component';
 import { of } from 'rxjs/observable/of';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-media-house-invoice',
@@ -34,12 +35,16 @@ export class MediaHouseInvoiceComponent implements OnInit {
   searchRO = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => this.roApi.searchByNo(term))
+      .switchMap(term => this.roApi.searchByNo(term).pipe(
+        map(data => data.filter(ro => !ro.cancelled))
+      ))
       .catch(() => of([]));
   }
 
   roNoFormatter = (releaseOrder: ReleaseOrder) => {
-    this.insertionCheckList = releaseOrder.insertions.map(insertion => {
+    this.insertionCheckList = releaseOrder.insertions
+      .filter(insertion => !insertion.mhimarked)
+      .map(insertion => {
       return {
         insertion: insertion,
         checked: false
@@ -51,23 +56,27 @@ export class MediaHouseInvoiceComponent implements OnInit {
     return releaseOrder.releaseOrderNO;
   }
 
+  get canProceed() {
+    return this.insertionCheckList.some(insertion => insertion.checked);
+  }
+
   show() {
-    this.dialog.show(MediaHouseInvoiceDialogComponent)
-      .subscribe((invoice: MediaHouseInvoice) => {
-        invoice.insertions = this.insertionCheckList
-          .filter(item => item.checked)
-          .map(item => {
-            return{
-              ...item.insertion,
-              insertionDate: this.toDate(item.insertion.date),
-              Amount: 0,
-              collectedAmount: 0,
-              pendingAmount: 0,
-            }
-          });
+    let insertions = this.insertionCheckList
+    .filter(item => item.checked)
+    .map(item => {
+      return{
+        ...item.insertion,
+        insertionDate: this.toDate(item.insertion.date),
+        Amount: 0,
+        collectedAmount: 0,
+        pendingAmount: 0,
+      }
+    });
 
-        invoice.releaseOrderId = this.selectedRoId;
-
+    this.dialog.show(MediaHouseInvoiceDialogComponent, {
+      data: { ro: this.releaseOrder, insertions: insertions }
+    }).subscribe((invoice: MediaHouseInvoice) => {
+      if (invoice) {
         this.api.createMediaHouseInvoice(invoice).subscribe(data => {
           if (data.success) {
             this.router.navigate(['/accounts/mediahouseinvoice']);
@@ -78,6 +87,7 @@ export class MediaHouseInvoiceComponent implements OnInit {
             this.notifications.show(data.msg);
           }
         });
+      }
     });
   }
   

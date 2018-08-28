@@ -3,7 +3,6 @@ import { BaseModule } from '../base.module';
 
 import { DirectoryModule } from 'app/directory/directory.module';
 import { RateCardModule } from 'app/rate-card/rate-card.module';
-import { ReleaseOrderRoutingModule } from './release-order-routing.module';
 
 import {
   InsertionListResolver,
@@ -15,16 +14,13 @@ import {
   ReleaseOrderComponent,
   ReleaseOrderDetailsComponent,
   ReleaseOrderListComponent,
-  CategoriesDetailsComponent,
-  InsertionDetailsComponent
 } from '.';
 
 @NgModule({
   imports: [
     BaseModule,
     DirectoryModule,
-    RateCardModule,
-    ReleaseOrderRoutingModule
+    RateCardModule
   ],
   providers: [
     ReleaseOrderApiService,
@@ -37,9 +33,7 @@ import {
     ReleaseOrderComponent,
     ReleaseOrderListComponent,
     ReleaseOrderDetailsComponent,
-    InsertionCheckComponent,
-    CategoriesDetailsComponent,
-    InsertionDetailsComponent
+    InsertionCheckComponent
   ]
 })
 export class ReleaseOrderModule { }

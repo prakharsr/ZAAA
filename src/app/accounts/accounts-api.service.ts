@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 import { ApiService } from 'app/services';
-import { ReleaseOrderSearchParams, InsertionCheckItem } from 'app/release-order';
+import { ReleaseOrderSearchParams } from 'app/release-order';
 import { PageData, MailingDetails } from 'app/models';
-import { MediaHouseInvoiceItem } from './media-house-invoice-item';
 import { PaymentReceipt } from '../receipts';
 import { CreditDebitNote } from './credit-debit-note';
 import { MediaHouseInvoice } from '.';
+import { PaymentDetails } from './payment-details-dialog/payment-details-dialog.component';
 
 export class PaymentsResponse {
   publicationName = "";
@@ -33,9 +32,66 @@ export class PaymentTotalResponse {
 export class SummarySheetInsertion {
   _id = "";
   amount = 0;
-  recieptNumber = "";
-  recieptDate: Date;
-  paymentMode = "";
+}
+
+export class MhiReceiptInsertion {
+  _id = "";
+  receiptDate: Date;
+  receiptNumber = "";
+}
+
+export class SummarySheetResponse {
+  collectedAmount = 0;
+  count = 0;
+  pendingAmount = 0;
+
+  entries: {
+    Amount: number;
+    MHIGrossAmount: number,
+    MHINo: string,
+    collectedAmount: number,
+    insertionDate: Date,
+    pendingAmount: number,
+
+    SheetAmount: number, // will be filled in summary sheet view
+    checked: boolean,
+
+    _id: string
+  }[] = [];
+
+  _id = {
+    roId: "",
+    publicationName: "",
+    publicationEdition: ""
+  }
+}
+
+export class MhReceiptResponse {
+  _id: {
+    roId: "",
+    publicationName: "",
+    publicationEdition: "",
+    MHINo: ""
+  }
+  count: 1;
+  pendingAmount: 0;
+  collectedAmount: 0;
+  entries: {
+    insertionDate: Date,
+    Amount: number,
+    pendingAmount: number,
+    collectedAmount: number,
+    receiptNumber: string,
+    receiptDate: Date,
+    paymentMode: string,
+    paymentDate: Date,
+    paymentAmount: number,
+    paymentNo: string,
+    paymentBankName: string,
+    _id: string,
+    MHIDate: Date,
+    MHIGrossAmount: number
+  } []
 }
 
 @Injectable()
@@ -43,21 +99,38 @@ export class AccountsApiService {
 
   constructor(private api: ApiService) { }
 
-  searchSummarySheet(page: number, params: ReleaseOrderSearchParams) : Observable<PageData<MediaHouseInvoiceItem>> {
+  searchSummarySheet(params: ReleaseOrderSearchParams) : Observable<SummarySheetResponse[]> {
     return this.api.post('/user/summarySheet/search', {
-      page: page,
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
       insertionPeriod: params.past
     }).pipe(
       map(data => {
-        let mediahouseinvoices : MediaHouseInvoiceItem[] = [];
+        let result: SummarySheetResponse[] = [];
 
         if (data.success) {
-          mediahouseinvoices = data.insertions;
+          result = data.insertions;
         }
 
-        return new PageData<MediaHouseInvoiceItem>(mediahouseinvoices, data.perPage, data.page, data.pageCount);
+        return result;
+      })
+    );
+  }
+
+  searchMediaHouseReceipts(params: ReleaseOrderSearchParams) : Observable<MhReceiptResponse[]> {
+    return this.api.post('/user/mediahouseReceipts/search', {
+      publicationName: params.mediaHouse,
+      publicationEdition: params.edition,
+      insertionPeriod: params.past
+    }).pipe(
+      map(data => {
+        let result: MhReceiptResponse[] = [];
+
+        if (data.success) {
+          result = data.insertions;
+        }
+
+        return result;
       })
     );
   }
@@ -247,9 +320,16 @@ export class AccountsApiService {
     }, { responseType: 'blob' });
   }
 
-  generateSummarySheet(insertions: SummarySheetInsertion[]) {
+  generateSummarySheet(paymentDetails: PaymentDetails, insertions: SummarySheetInsertion[]) {
     return this.api.post('/user/summarySheet', {
-      mhis: insertions
+      mhis: insertions,
+      ...paymentDetails
     });
+  }
+
+  updateMhiReceipts(insertions: MhiReceiptInsertion[]) {
+    return this.api.post('/user/mediahouseReceipts', {
+      mhis: insertions
+    })
   }
 }

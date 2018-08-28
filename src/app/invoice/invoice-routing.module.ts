@@ -36,6 +36,10 @@ const routes: Routes = [
         }
       },
       {
+        path: 'new',
+        component: InvoiceComponent
+      },
+      {
         path: ':id',
         component: InvoiceDetailsComponent,
         resolve: {

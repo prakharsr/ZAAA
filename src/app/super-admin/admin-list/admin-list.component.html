@@ -1,0 +1,19 @@
+<button class="fab" routerLink="/superadmin/admins/new">
+  <mat-icon>add</mat-icon>
+</button>
+
+<br>
+
+<div class="container">
+  <h3 style="font-weight: lighter">Admins</h3>
+
+  <br>
+
+  <div class="card mb-3 mat-elevation-z3" *ngFor="let item of list">
+    <div class="card-body">
+      <p class="text-muted">{{item.name | uppercase}}</p>
+      <p><mat-icon class="mr-2">mail</mat-icon> {{item.email}}</p>
+      <p><mat-icon class="mr-2">phone</mat-icon> {{item.phone}}</p>
+    </div>
+  </div>
+</div>

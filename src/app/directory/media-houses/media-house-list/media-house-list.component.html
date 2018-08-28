@@ -2,47 +2,56 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<button class="fab" routerLink="/superadmin/media_houses/new" *ngIf="isSuperAdmin">
+  <mat-icon>add</mat-icon>
+</button>
+
 <ng-template #rt let-r="result">
   {{r.pubName}} - {{r.address.edition}}
 </ng-template>
 
-<div class="form-group">
-  <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
-</div>
+<div [class.container]="isSuperAdmin">
+  <div *ngIf="isSuperAdmin">
+    <br>
+    <h2 style="font-weight: lighter">Global Media Houses</h2>
+    <br>
+  </div>
 
-<nav mat-tab-nav-bar class="x-overflow">
-  <a mat-tab-link routerLink="/dir/media_houses" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Local</a>
-  <a mat-tab-link routerLink="/dir/media_houses/global" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Global</a>
-</nav>
+  <div class="form-group">
+    <input id="search" type="text" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="query" [ngbTypeahead]="search" placeholder="Search" [resultTemplate]="rt" [inputFormatter]="inputFormatter" />
+  </div>
 
-<br>
-<p *ngIf="mediaHouses.length == 0" class="text-muted">
-  No Media Houses
-</p>
+  <nav mat-tab-nav-bar class="x-overflow" *ngIf="!isSuperAdmin">
+    <a mat-tab-link routerLink="/dir/media_houses" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Local</a>
+    <a mat-tab-link routerLink="/dir/media_houses/global" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Global</a>
+  </nav>
 
-<div class="card mb-3 mat-elevation-z3" *ngFor="let mediaHouse of mediaHouses">
-  <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <a [routerLink]="['/dir/media_houses', mediaHouse.id]">{{mediaHouse.pubName}}</a>
-        <p>{{mediaHouse.address.edition}}</p>
-      </div>
-      <div class="col-auto" *ngIf="!global">
-        <mat-menu #dirMenu="matMenu">
-          <button mat-menu-item [routerLink]="['/dir/media_houses/edit', mediaHouse.id]">
-            <mat-icon>edit</mat-icon> Edit
+  <br>
+  <p *ngIf="mediaHouses.length == 0" class="text-muted">
+    No Media Houses
+  </p>
+
+  <div class="card mb-3 mat-elevation-z3" *ngFor="let mediaHouse of mediaHouses">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="[isSuperAdmin ? '/superadmin' : '/dir', 'media_houses', mediaHouse.id]">{{mediaHouse.pubName}}</a>
+          <p>{{mediaHouse.address.edition}}</p>
+        </div>
+        <!-- <div class="col-auto" *ngIf="!global || isSuperAdmin">
+          <mat-menu #dirMenu="matMenu">
+            <button mat-menu-item class="text-danger" (click)="deleteMediaHouse(mediaHouse)">
+              <mat-icon>delete</mat-icon> Delete
+            </button>
+          </mat-menu>
+          
+          <button mat-icon-button [matMenuTriggerFor]="dirMenu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button mat-menu-item class="text-danger" (click)="deleteMediaHouse(mediaHouse)">
-            <mat-icon>delete</mat-icon> Delete
-          </button>
-        </mat-menu>
-        
-        <button mat-icon-button [matMenuTriggerFor]="dirMenu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
+        </div> -->
       </div>
     </div>
   </div>
-</div>
 
-<app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
+  <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>
+</div>

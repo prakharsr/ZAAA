@@ -12,6 +12,10 @@ export class RateCardApiService {
   constructor(private api: ApiService) { }
 
   createRateCard(rateCard: RateCard): Observable<any> {
+    return this.api.post('/user/ratecard', this.createPostArgs(rateCard));
+  }
+
+  createPostArgs(rateCard: RateCard) {
     let fixSizes = [],
       schemes = [],
       covered = [],
@@ -47,7 +51,7 @@ export class RateCardApiService {
       });
     });
 
-    return this.api.post('/user/ratecard', {
+    return {
       mediaType: rateCard.mediaType,
       adType: rateCard.adType,
       AdTime: rateCard.AdTime,
@@ -96,7 +100,7 @@ export class RateCardApiService {
       PremiumEmailId: rateCard.PremiumEmailId,
       PremiumWebsite: rateCard.PremiumWebsite,
       PremiumExtraWords: rateCard.PremiumExtraWords,
-    });
+    };
   }
 
   private bodyToRateCard(body: any): RateCard {
@@ -267,6 +271,10 @@ export class RateCardApiService {
   }
 
   editRateCard(rateCard: RateCard): Observable<any> {
+    return this.api.patch('/user/ratecard', this.editPostArgs(rateCard));
+  }
+
+  editPostArgs(rateCard: RateCard) {
     let fixSizes = [],
       schemes = [],
       covered = [],
@@ -302,7 +310,7 @@ export class RateCardApiService {
       });
     });
 
-    return this.api.patch('/user/ratecard', {
+    return {
       id: rateCard.id,
       MediaType: rateCard.mediaType,
       AdType: rateCard.adType,
@@ -352,6 +360,6 @@ export class RateCardApiService {
       PremiumEmailId: rateCard.PremiumEmailId,
       PremiumWebsite: rateCard.PremiumWebsite,
       PremiumExtraWords: rateCard.PremiumExtraWords
-    });
+    };
   }
 }

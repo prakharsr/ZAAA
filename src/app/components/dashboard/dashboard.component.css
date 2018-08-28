@@ -1,5 +1,5 @@
-.btn {
-    display: block;
-    margin-bottom: 30px;
-    padding: 20px 0;
+@media (min-width: 768px) {
+    .card {
+        height: 100%;
+    }
 }

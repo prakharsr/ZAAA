@@ -82,5 +82,18 @@ export class ReceiptsApiService {
       id: receipt.id
     }, { responseType: 'blob' });
   }
-  
+
+  cancel(receipt: PaymentReceipt) {
+    return this.api.post('/user/receipt/cancel', {
+      id: receipt.id
+    }).pipe(
+      map(data => {
+        if (data.success) {
+          receipt.isCancelled = true;
+        }
+
+        return data;
+      })
+    );
+  }
 }

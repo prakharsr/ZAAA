@@ -3,19 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
 import { MediaHouseApiService, MediaHouse } from 'app/directory';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PageData } from 'app/models';
-import { InsertionCheckItem, ReleaseOrderSearchParams } from 'app/release-order';
-import { AccountsApiService, SummarySheetInsertion } from '../accounts-api.service';
-import { NotificationService } from 'app/services';
+import { ReleaseOrderSearchParams } from 'app/release-order';
+import { AccountsApiService, SummarySheetInsertion, SummarySheetResponse } from '../accounts-api.service';
+import { NotificationService, DialogService } from 'app/services';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
-import { MediaHouseInvoiceItem } from '../media-house-invoice-item';
-
-class InsertionWithAmount extends InsertionCheckItem {
-  amount = 0;
-  receiptNo = "";
-  receiptDate = new Date();
-  paymentMode = "Cash";
-}
+import { PaymentDetailsDialogComponent, PaymentDetails } from '../payment-details-dialog/payment-details-dialog.component';
 
 @Component({
   selector: 'app-summary-sheet',
@@ -24,48 +16,32 @@ class InsertionWithAmount extends InsertionCheckItem {
 })
 export class SummarySheetComponent implements OnInit {
 
-  page: number;
-  pageCount: number;
-
-  insertions: InsertionWithAmount[] = [];
+  summarySheet: SummarySheetResponse[] = [];
 
   mediaHouse;
   edition;
 
-  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+  collapsed = true;
 
   constructor(private mediaHouseApi: MediaHouseApiService,
     private route: ActivatedRoute,
     private router: Router,
     private api: AccountsApiService,
-    private notifications: NotificationService) { }
+    private notifications: NotificationService,
+    private dialog: DialogService) { }
 
   ngOnInit() {
-    let now = new Date();
-    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    this.route.data.subscribe((data: { resolved: { list: SummarySheetResponse[], search: ReleaseOrderSearchParams }}) => {
+      this.summarySheet = data.resolved.list;
 
-    this.route.data.subscribe((data: { resolved: { list: PageData<MediaHouseInvoiceItem>, search: ReleaseOrderSearchParams }}) => {
-      data.resolved.list.list.forEach(element => {
-        element.entries.forEach(entry => {
-          this.insertions.push({
-            _id: element._id,
-            clientName: entry.clientName,
-            checked: entry.checked,
-            executiveName: entry.executiveName,
-            executiveOrg: entry.executiveOrg,
-            publicationEdition: entry.publicationEdition,
-            publicationName: entry.publicationName,
-            insertions: entry.insertions,
-            amount: 0,
-            receiptNo: "",
-            receiptDate: today,
-            paymentMode: "Cash"
+      if (this.summarySheet.entries) {
+        this.summarySheet.forEach(item => {
+          item.entries.forEach(entry => {
+            entry.SheetAmount = 0; // This will be filled here
+            entry.checked = false;
           });
         });
-      });
-      
-      this.page = data.resolved.list.page;
-      this.pageCount = data.resolved.list.pageCount;
+      }
 
       let pub = new MediaHouse();
       pub.pubName = data.resolved.search.mediaHouse;
@@ -75,8 +51,8 @@ export class SummarySheetComponent implements OnInit {
     });
   }
 
-  search(pageNo: number) {
-    this.router.navigate(['/accounts/summarysheet/', pageNo], {
+  search() {
+    this.router.navigate(['/accounts/summarysheet/'], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, null, null, null, 0)
     })
   }
@@ -120,24 +96,35 @@ export class SummarySheetComponent implements OnInit {
   }
 
   submit() {
-    let mapped: SummarySheetInsertion[] = this.insertions.map(insertion => {
-      return {
-        _id: insertion.insertions._id,
-        amount: insertion.amount,
-        recieptNumber: insertion.receiptNo,
-        recieptDate: insertion.receiptDate,
-        paymentMode: insertion.paymentMode
-      }
+    let mapped: SummarySheetInsertion[] = [];
+
+    this.summarySheet.forEach(item => {
+      item.entries.filter(entry => entry.checked).forEach(entry => {
+        mapped.push({
+          _id: entry._id,
+          amount: entry.SheetAmount
+        });
+      })
     });
 
-    this.api.generateSummarySheet(mapped).subscribe(data => {
-      if (data.success) {
-        this.notifications.show('Success');
-      }
-      else {
-        console.log(data);
+    if (mapped.length == 0) {
+      this.notifications.show('Nothing to submit');
 
-        this.notifications.show(data.msg);
+      return;
+    }
+
+    this.dialog.show(PaymentDetailsDialogComponent, { width: '400px' }).subscribe((data: PaymentDetails) => {
+      if (data) {
+        this.api.generateSummarySheet(data, mapped).subscribe(data => {
+          if (data.success) {
+            this.notifications.show('Success');
+          }
+          else {
+            console.log(data);
+    
+            this.notifications.show(data.msg);
+          }
+        });
       }
     });
   }

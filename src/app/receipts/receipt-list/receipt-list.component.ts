@@ -3,10 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { PaymentReceipt } from '../payment-receipt';
-import { NotificationService, DialogService, WindowService } from 'app/services';
+import { NotificationService, DialogService } from 'app/services';
 import { ReceiptsApiService } from '../receipts-api.service';
 import { PageData } from 'app/models';
 import { ReleaseOrderSearchParams } from 'app/release-order';
+import * as receiptGen from '../receipt-gen';
 
 import {
   Client,
@@ -39,6 +40,8 @@ export class ReceiptListComponent implements OnInit {
 
   pastDays = 0;
 
+  collapsed = true;
+
   constructor(private route: ActivatedRoute,
     private clientApi: ClientApiService,
     private mediaHouseApi: MediaHouseApiService,
@@ -46,8 +49,7 @@ export class ReceiptListComponent implements OnInit {
     private router: Router,
     private notifications: NotificationService,
     private dialog: DialogService,
-    private api: ReceiptsApiService,
-    private windowService: WindowService) { }
+    private api: ReceiptsApiService) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { resolved: { list: PageData<PaymentReceipt>, search: ReleaseOrderSearchParams }, advance: boolean}) => {
@@ -148,41 +150,11 @@ export class ReceiptListComponent implements OnInit {
   }
 
   gen(receipt: PaymentReceipt) {
-    this.api.generate(receipt).subscribe(data => {
-      if (data.msg) {
-        this.notifications.show(data.msg);
-      }
-      else {
-        console.log(data);
-        
-        let blob = new Blob([data], { type: 'application/pdf' });
-        let url = this.windowService.window.URL.createObjectURL(blob);
-
-        let a = this.windowService.window.document.createElement('a');
-        a.setAttribute('style', 'display:none;');
-        this.windowService.window.document.body.appendChild(a);
-        a.download = 'receipt.pdf';
-        a.href = url;
-        a.click();
-      }
-    });
+    receiptGen.generate(receipt, this.api, this.notifications);
   }
 
   sendMsg(receipt: PaymentReceipt) {
-    this.dialog.getMailingDetails().subscribe(mailingDetails => {
-      if (mailingDetails) {
-        this.api.sendMail(receipt, mailingDetails).subscribe(data => {
-          if (data.success) {
-            this.notifications.show("Sent Successfully");
-          }
-          else {
-            console.log(data);
-
-            this.notifications.show(data.msg);
-          }
-        });
-      }
-    });
+    receiptGen.sendMsg(receipt, this.api, this.notifications, this.dialog);
   }
 
   private get editionName() {
@@ -213,5 +185,9 @@ export class ReceiptListComponent implements OnInit {
     this.router.navigate(['/receipts/list/', pageNo], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
+  }
+
+  cancel(receipt: PaymentReceipt) {
+    receiptGen.cancel(receipt, this.api, this.notifications, this.dialog);
   }
 }

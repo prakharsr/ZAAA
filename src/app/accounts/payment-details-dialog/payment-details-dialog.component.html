@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Payment Details</h2>
+
+<mat-dialog-content>
+  <form #paymentForm="ngForm">
+    <mat-form-field>
+        <mat-select name="paymentType" placeholder="Type" [(ngModel)]="details.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+          <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item | paymentMode}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <ng-container *ngIf="details.paymentType != 'Cash' && details.paymentType != 'Credit'">
+        <div class="row">
+          <mat-form-field class="col-lg col-md-6">
+            <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="details.paymentDate" required disabled>
+            <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
+            <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
+            <mat-error *ngIf="paymentDateField.errors?.required">
+              Date is required.
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field class="col-lg col-md-6">
+            <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="details.paymentNo" required #paymentChequeField="ngModel">
+            <mat-error *ngIf="paymentChequeField.errors?.required">
+              No is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col-lg col-md-6">
+            <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="details.paymentAmount" required #paymentAmountField="ngModel">
+            <mat-error *ngIf="paymentAmountField.errors?.required">
+              Amount is required.
+            </mat-error>
+          </mat-form-field>
+    
+          <ng-container *ngIf="details.paymentType == 'Cheque'">
+            <mat-form-field class="col-lg col-md-6">
+              <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="details.paymentBankName" required #bankNameField="ngModel">
+              <mat-error *ngIf="bankNameField.errors?.required">
+                Bank Name is required.
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </ng-container>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [disabled]="!paymentForm.form.valid" [mat-dialog-close]="details">Save</button>  
+  <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>  
+</mat-dialog-actions>

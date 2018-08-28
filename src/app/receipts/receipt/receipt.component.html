@@ -1,78 +1,140 @@
-<mat-toolbar>  
-    <mat-toolbar-row>
-      <div class="container">Create Payment Receipt</div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
-  <br>
-  
-  <div class="container">
-  
-      <mat-card>
-        <form (ngSubmit)="submit()" #receiptForm="ngForm">
-          <p><strong>Pending Amount:</strong> ₹ {{invoice.pendingAmount}}</p>
-      
-        <br>
-      
-        <mat-form-field class="col-lg-4 col-md-6">
-          <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-          <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
-              Amount is required.
-          </mat-error>
-        </mat-form-field>
-    
-        <br>
-  
-        <strong>Payment Details</strong>
-        <br><br>
-  
-        <mat-form-field class="col-lg-4 col-md-6">
-          <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
-            <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
+<div class="container">
+  <button *ngIf="!invoice" type="button" mat-raised-button color="primary" (click)="selectInvoice()">Select Invoice</button>
+
+  <div class="row" *ngIf="invoice">
+    <div class="col-md">
+      <form (ngSubmit)="submit()" #receiptForm="ngForm">
+        <mat-card class="mat-elevation-z3">
           <div class="row">
-            <mat-form-field  class="col-lg col-md-6">
-              <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="receipt.paymentDate" required disabled>
-              <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
-              <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
-              <mat-error *ngIf="paymentDateField.errors && paymentDateField.errors.required">
-                Date is required.
-              </mat-error>
-            </mat-form-field>
-      
-            <mat-form-field  class="col-lg col-md-6">
-              <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
-              <mat-error *ngIf="paymentChequeField.errors && paymentChequeField.errors.required">
-                No is required.
-              </mat-error>
-            </mat-form-field>
+            <div class="col">
+              <div class="text-muted small">Total Amount</div>
+              <div class="mb-2">₹ {{invoice.FinalAmount}}</div>
+            </div>
+            <div class="col-auto">
+              <div class="text-muted small">Pending Amount</div>
+              <div class="mb-2">₹ {{invoice.pendingAmount}}</div>
+            </div>
           </div>
-          <div class="row">
-            <mat-form-field  class="col-lg col-md-6">
-              <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-              <mat-error *ngIf="paymentAmountField.errors && paymentAmountField.errors.required">
-                Amount is required.
-              </mat-error>
-            </mat-form-field>
+
+          <br>
+
+          <mat-form-field>
+            <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required [verify-max]="invoice.pendingAmount" [verify-min]="0" #paymentAmountField="ngModel">
+            <mat-error *ngIf="paymentAmountField.errors?.required">
+              Amount is required.
+            </mat-error>
+          </mat-form-field>
       
-            <ng-container *ngIf="receipt.paymentType == 'Cheque'">
-              <mat-form-field  class="col-lg col-md-6">
-                <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
-                <mat-error *ngIf="bankNameField.errors && bankNameField.errors.required">
-                  Bank Name is required.
+          <br><br>
+    
+          <h5>Payment Details</h5>
+          <br>
+    
+          <mat-form-field>
+            <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
+              <mat-option *ngFor="let item of paymentTypes" [value]="item">{{item | paymentMode}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <ng-container *ngIf="receipt.paymentType != 'Cash' && receipt.paymentType != 'Credit'">
+            <div class="row">
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput [matDatepicker]="paymentDateField" name="paymentDate" placeholder="Date" [(ngModel)]="receipt.paymentDate" required disabled>
+                <mat-datepicker-toggle matSuffix [for]="paymentDateField"></mat-datepicker-toggle>
+                <mat-datepicker #paymentDateField disabled="false"></mat-datepicker>
+                <mat-error *ngIf="paymentDateField.errors?.required">
+                  Date is required.
                 </mat-error>
               </mat-form-field>
-            </ng-container>
+        
+              <mat-form-field class="col-lg col-md-6">
+                <input matInput type="text" id="paymentCheque" name="paymentCheque" placeholder="No" [(ngModel)]="receipt.paymentNo" required #paymentChequeField="ngModel">
+                <mat-error *ngIf="paymentChequeField.errors?.required">
+                  No is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-lg col-md-6">
+                <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+                <mat-error *ngIf="paymentAmountField.errors?.required">
+                  Amount is required.
+                </mat-error>
+              </mat-form-field>
+        
+              <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+                <mat-form-field class="col-lg col-md-6">
+                  <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
+                  <mat-error *ngIf="bankNameField.errors?.required">
+                    Bank Name is required.
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+            </div>
+          </ng-container>
+        </mat-card>
+
+        <br>
+      
+        <div class="d-none d-md-block">
+          <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!receiptForm.form.valid">
+            <mat-icon>check</mat-icon> Save
+          </button>
+    
+          <button type="button" mat-raised-button color="warn" (click)="cancel()">
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+        </div>
+
+        <br><br>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!receiptForm.form.valid" color="primary">
+                  <mat-icon>check</mat-icon>
+                  <div class="small">Save</div>
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar>
+      </form>
+    </div>
+    <div class="col-md">
+      <mat-card class="mat-elevation-z3">
+        <div class="text-muted small">Invoice No</div>
+        <div class="mb-2">{{invoice.invoiceNO}}</div>
+
+        <div class="text-muted small">Publication</div>
+        <div>{{invoice.publicationName}} - {{invoice.publicationEdition}}</div>
+
+        <div class="text-muted small">Client</div>
+        <div>{{invoice.clientName}}</div>
+
+        <ng-container *ngIf="pastReceipts.length != 0">
+          <br>
+
+          <h5>Past Receipts</h5>
+
+          <div class="card mb-3" *ngFor="let item of pastReceipts">
+            <div class="card-body">
+              <div class="row">
+                <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
+                <div class="col-auto text-muted small">{{item.createdAt | date}}</div>
+              </div>
+              <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
+            </div>
           </div>
         </ng-container>
-  
-      <br><br>
-  
-      <button type="submit" class="btn btn-success" [disabled]="!receiptForm.form.valid">Save</button>
-      <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
-    </form>
-  </mat-card>
+      </mat-card>
+    </div>
   </div>
+</div>
