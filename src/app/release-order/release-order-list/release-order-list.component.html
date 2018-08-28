@@ -99,6 +99,7 @@
               <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
             </div>
             <div *ngIf="element.generated" class="col-auto text-muted">{{element.generatedAt | date}}</div>
+            <div *ngIf="!element.generated" class="col-auto text-muted">{{element.createdAt | date}}</div>
           </div>
 
           <ng-container *ngIf="element.cancelled">
