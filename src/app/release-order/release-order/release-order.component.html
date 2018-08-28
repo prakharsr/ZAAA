@@ -128,7 +128,7 @@
                         <mat-option [value]="others">{{others}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="pullOutNameField.errors?.required">
-                          Pullout Name is required.
+                        Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -208,7 +208,7 @@
         </div>
 
         <br>
-          
+
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
@@ -553,7 +553,7 @@
                 <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br>
               </ng-container>
 
-              <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>
+              <button type="button" mat-raised-button [color]="checkInsertionCount ? 'primary' : 'warn'" (click)="getInsertions()">Insertions *</button>
             </mat-card>
           </div>
         </div>

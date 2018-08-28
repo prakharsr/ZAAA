@@ -197,6 +197,10 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
 
+  get checkInsertionCount() {
+    return this.releaseorder.insertions.length == this.availableAds;
+  }
+
   genPreview() {
     if (this.releaseorder.insertions.length < this.availableAds) {
       this.notifications.show(`Please select ${this.availableAds} insertion(s)`);
