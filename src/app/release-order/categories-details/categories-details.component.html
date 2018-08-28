@@ -16,49 +16,54 @@
     <form #categoriesForm="ngForm">
       <div class="form-row">
         <div class="form-group col">
-          <select class="form-control" name="category1" [(ngModel)]="category1" id="category1" #category1Field="ngModel" [disabled]="fixedCategoriesLevel >= 0">
-            <option *ngFor="let item of categories[0]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 1" name="category1" [(ngModel)]="category1" id="category1" #category1Field="ngModel" [disabled]="fixedCategoriesLevel >= 0">
+            <mat-option *ngFor="let item of categories[0]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>
     
         <div class="w-100 d-block d-sm-none"></div>
     
         <div class="form-group col" *ngIf="category1 && categories[1]?.length">
-          <select class="form-control" name="category2" [(ngModel)]="category2" id="category2" [disabled]="fixedCategoriesLevel >= 1">
-            <option *ngFor="let item of categories[1]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 2" name="category2" [(ngModel)]="category2" id="category2" [disabled]="fixedCategoriesLevel >= 1">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of categories[1]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>
 
         <div class="w-100 d-block d-md-none"></div>
     
         <div class="form-group col" *ngIf="category2 && categories[2]?.length">
-          <select class="form-control" name="category3" [(ngModel)]="category3" id="category3" [disabled]="fixedCategoriesLevel >= 2">
-            <option *ngFor="let item of categories[2]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 3" name="category3" [(ngModel)]="category3" id="category3" [disabled]="fixedCategoriesLevel >= 2">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of categories[2]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>
     
         <div class="w-100 d-block d-sm-none d-md-block d-xl-none"></div>
     
         <div class="form-group col" *ngIf="category3 && categories[3]?.length">
-          <select class="form-control" name="category4" [(ngModel)]="category4" id="category4" [disabled]="fixedCategoriesLevel >= 3">
-            <option *ngFor="let item of categories[3]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 4" name="category4" [(ngModel)]="category4" id="category4" [disabled]="fixedCategoriesLevel >= 3">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of categories[3]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>
     
         <div class="w-100 d-block d-md-none"></div>
     
         <div class="form-group col" *ngIf="category4 && categories[4]?.length">
-          <select class="form-control" name="category5" [(ngModel)]="category5" id="category5" [disabled]="fixedCategoriesLevel >= 4">
-            <option *ngFor="let item of categories[4]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 5" name="category5" [(ngModel)]="category5" id="category5" [disabled]="fixedCategoriesLevel >= 4">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of categories[4]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>
     
         <div class="w-100 d-block d-sm-none"></div>
     
         <div class="form-group col" *ngIf="category5 && categories[5]?.length">
-          <select class="form-control" name="category6" [(ngModel)]="category6" id="category6" [disabled]="fixedCategoriesLevel >= 5">
-            <option *ngFor="let item of categories[5]" [ngValue]="item">{{item.name}}</option>
-          </select>
+          <mat-select class="form-control" placeholder="Category 6" name="category6" [(ngModel)]="category6" id="category6" [disabled]="fixedCategoriesLevel >= 5">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of categories[5]" [value]="item">{{item.name}}</mat-option>
+          </mat-select>
         </div>      
       </div>
     </form>
