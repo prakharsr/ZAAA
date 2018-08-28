@@ -96,12 +96,12 @@
               
               <div class="my-3">
                 <div class="text-muted small">Category</div>
-                <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</span>
-                <span *ngIf="releaseOrder.adCategory2">, {{releaseOrder.adCategory2}}</span>
-                <span *ngIf="releaseOrder.adCategory3">, {{releaseOrder.adCategory3}}</span>
-                <span *ngIf="releaseOrder.adCategory4">, {{releaseOrder.adCategory4}}</span>
-                <span *ngIf="releaseOrder.adCategory5">, {{releaseOrder.adCategory5}}</span>
-                <span *ngIf="releaseOrder.adCategory6">, {{releaseOrder.adCategory6}}</span>
+                <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1 || '--'}}</span>
+                <span *ngIf="releaseOrder.adCategory2">&gt; {{releaseOrder.adCategory2}}</span>
+                <span *ngIf="releaseOrder.adCategory3">&gt; {{releaseOrder.adCategory3}}</span>
+                <span *ngIf="releaseOrder.adCategory4">&gt; {{releaseOrder.adCategory4}}</span>
+                <span *ngIf="releaseOrder.adCategory5">&gt; {{releaseOrder.adCategory5}}</span>
+                <span *ngIf="releaseOrder.adCategory6">&gt; {{releaseOrder.adCategory6}}</span>
               </div>
 
               <div class="mb-3">
