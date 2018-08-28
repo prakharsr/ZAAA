@@ -98,18 +98,15 @@
           </div>
         </mat-toolbar>
       </div>
-      <div class="col-md-5">
-        <div class="small text-muted mt-2">Tax Amount</div>
-        <div>{{taxDisplay}}</div>
-        
+      <div class="col-md-5">        
         <div class="small text-muted mt-2">Ad Gross Amount</div>
         <div>₹ {{releaseOrder.adGrossAmount}}</div>
         
         <div class="small text-muted mt-2">Net Amount</div>
-        <div>₹ {{releaseOrder.netAmountFigures}}</div>
+        <div>₹ {{releaseOrder.netAmountFigures}} ({{taxDisplay}})</div>
         <div>Rupees {{releaseOrder.netAmountWords}}</div>
         
-        <div class="small text-muted mt-2">Client Payment</div>
+        <div class="small text-muted mt-2">Client Payment (without Tax)</div>
         <div>₹ {{releaseOrder.clientPayment}}</div>
       </div>
     </div>

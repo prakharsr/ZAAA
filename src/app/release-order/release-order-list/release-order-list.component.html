@@ -103,10 +103,11 @@
           </div>
 
           <ng-container *ngIf="element.cancelled">
-            <span class="text-danger">CANCELLED</span>
+            <span class="text-danger">CANCELLED</span><br>
           </ng-container>
 
           <br>
+          <span class="text-muted">Net Amount:</span> ₹ {{element.netAmountFigures}}<br>
           <span class="text-muted">Publication:</span> {{element.publicationName}} - {{element.publicationEdition}}<br>
           <span class="text-muted">Client:</span> {{element.clientName}}
           <br><br>
