@@ -22,6 +22,7 @@ import {
 } from 'app/release-order';
 import { SelectReleaseOrderComponent } from '../select-release-order/select-release-order.component';
 import { PreviewComponent } from '../../components/preview/preview.component';
+import { of } from 'rxjs/observable/of';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -33,6 +34,9 @@ class AvailableInsertion {
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
+
+  // Dummy variable
+  submitted = false;
 
   invoice = new Invoice();
   releaseOrder: ReleaseOrder;
@@ -124,7 +128,9 @@ export class InvoiceComponent implements OnInit {
   }
 
   genPreview() {
-    this.presave();
+    if (!this.presave()) {
+      return;
+    }
 
     this.api.previewInvoicehtml(this.invoice).subscribe(data => {
       this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
@@ -144,7 +150,6 @@ export class InvoiceComponent implements OnInit {
       });
     });
   }
-
 
   gen(invoice: Invoice, preview = false) {
     this.api.generate(invoice).subscribe(data => {
@@ -249,11 +254,11 @@ export class InvoiceComponent implements OnInit {
     this.router.navigateByUrl('/invoices');
   }
 
-  presave() {
+  presave(): boolean {
     if (!this.availableInsertions.some(val => val.checked)) {
       this.notifications.show('No Insertions selected');
 
-      return;
+      return false;
     }
     
     this.invoice.adGrossAmount = this.grossAmount;
@@ -264,15 +269,18 @@ export class InvoiceComponent implements OnInit {
     this.invoice.insertions = this.availableInsertions.filter(insertion => insertion.checked).map(insertion => insertion.insertion);
     this.invoice.paymentDate = new Date();
     this.invoice.paymentDate.setDate(this.invoice.paymentDate.getDate() + this.creditDays);
+
+    return true;
   }
 
   submit() : Observable<any> {
     
     this.submitting = true;
 
-    this.presave();
-
-    return this.createInvoice();
+    if (this.presave()) {
+      return this.createInvoice();
+    }
+    else return of({});
   }
 
   private createInvoice() {
@@ -383,5 +391,28 @@ export class InvoiceComponent implements OnInit {
 
   selectAllInsertions() {
     this.availableInsertions.forEach(insertion => insertion.checked = true);
+  }
+  
+  handleSubmit(valid: boolean, callbackName: string) {
+    if (valid) {
+      switch (callbackName) {
+        case 'save':
+          this.save();
+          break;
+        
+        case 'dl':
+          this.saveAndGen();
+          break;
+        
+        case 'preview':
+          this.genPreview();
+          break;
+
+        case 'mail':
+          this.saveAndSendMsg();
+          break;
+      }
+    }
+    else this.notifications.show('Fix errors before submitting');
   }
 }
