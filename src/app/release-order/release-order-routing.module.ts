@@ -21,7 +21,8 @@ const routes: Routes = [
     path: 'releaseorders',
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      { path: '', redirectTo: 'generated', pathMatch: 'full' },
+      { path: 'list', redirectTo: 'list/1', pathMatch: 'full' },
       {
         path: 'check',
         children: [

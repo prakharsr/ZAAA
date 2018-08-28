@@ -96,12 +96,12 @@
               
               <div class="my-3">
                 <div class="text-muted small">Category</div>
-                <span *ngIf="releaseOrder.adCategory1">{{releaseOrder.adCategory1}}</span>
-                <span *ngIf="releaseOrder.adCategory2">, {{releaseOrder.adCategory2}}</span>
-                <span *ngIf="releaseOrder.adCategory3">, {{releaseOrder.adCategory3}}</span>
-                <span *ngIf="releaseOrder.adCategory4">, {{releaseOrder.adCategory4}}</span>
-                <span *ngIf="releaseOrder.adCategory5">, {{releaseOrder.adCategory5}}</span>
-                <span *ngIf="releaseOrder.adCategory6">, {{releaseOrder.adCategory6}}</span>
+                <span>{{releaseOrder.adCategory1 || '--'}}</span>
+                <span *ngIf="releaseOrder.adCategory2">&gt; {{releaseOrder.adCategory2}}</span>
+                <span *ngIf="releaseOrder.adCategory3">&gt; {{releaseOrder.adCategory3}}</span>
+                <span *ngIf="releaseOrder.adCategory4">&gt; {{releaseOrder.adCategory4}}</span>
+                <span *ngIf="releaseOrder.adCategory5">&gt; {{releaseOrder.adCategory5}}</span>
+                <span *ngIf="releaseOrder.adCategory6">&gt; {{releaseOrder.adCategory6}}</span>
               </div>
 
               <div class="mb-3">
@@ -177,6 +177,8 @@
 
               <div class="row">
                 <mat-form-field class="col">
+                  <span matPrefix>{{invoice.extraCharges.percentage ? '' : '₹&nbsp;'}}</span>
+                  <span matSuffix>{{invoice.extraCharges.percentage ? '%' : ''}}</span>
                   <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
                   <mat-error *ngIf="commissionField.errors?.required">
                     Commission is required.
@@ -189,6 +191,8 @@
 
               <div class="row">
                 <mat-form-field class="col">
+                  <span matPrefix>{{invoice.additionalCharges.percentage ? '' : '₹&nbsp;'}}</span>
+                  <span matSuffix>{{invoice.additionalCharges.percentage ? '%' : ''}}</span>
                   <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
                   <mat-error *ngIf="additionalChargesField.errors?.required">
                     Additional Charges is required.
@@ -209,6 +213,8 @@
             
               <div class="row">
                 <mat-form-field class="col">
+                  <span matPrefix>{{invoice.publicationDiscount.percentage ? '' : '₹&nbsp;'}}</span>
+                  <span matSuffix>{{invoice.publicationDiscount.percentage ? '%' : ''}}</span>
                   <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
                   <mat-error *ngIf="pubDiscountField.errors?.required">
                     Publication Discount is required.
@@ -221,6 +227,8 @@
 
               <div class="row">
                 <mat-form-field class="col">
+                  <span matPrefix>{{invoice.agencyDiscount1.percentage ? '' : '₹&nbsp;'}}</span>
+                  <span matSuffix>{{invoice.agencyDiscount1.percentage ? '%' : ''}}</span>
                   <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
                   <mat-error *ngIf="agencyDiscountField.errors?.required">
                     Agency Discount is required.
@@ -258,6 +266,7 @@
                   </div>
                   <div class="col">
                     <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
                       <input type="number" matInput placeholder="Amount" name="otherCharges-{{i}}" [(ngModel)]="item.amount" required #otherChargesField="ngModel">
                       <mat-error *ngIf="otherChargesField.errors?.required">
                         Amount is required.

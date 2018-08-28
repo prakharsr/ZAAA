@@ -54,6 +54,9 @@
             <div class="col">
               <div class="text-muted small">Publication</div>
               {{item._id.publicationName}} - {{item._id.publicationEdition}}
+              <div class="mt-1">
+                <span class="text-muted">Release Order No:</span> {{item._id.releaseOrderNO}}
+              </div>
             </div>
             <div class="col-auto text-right">
               <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>

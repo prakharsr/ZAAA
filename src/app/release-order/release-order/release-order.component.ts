@@ -197,7 +197,17 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
 
+  get checkInsertionCount() {
+    return this.releaseorder.insertions.length == this.availableAds;
+  }
+
   genPreview() {
+    if (this.releaseorder.insertions.length < this.availableAds) {
+      this.notifications.show(`Please select ${this.availableAds} insertion(s)`);
+
+      return of({});
+    }
+
     this.presave();
 
     this.api.previewROhtml(this.releaseorder).subscribe(data => {
@@ -459,8 +469,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.adTotal = this.availableAds;
     this.releaseorder.adTotalSpace = this.totalSpace;
     this.releaseorder.adGrossAmount = this.grossAmount;
-    this.releaseorder.netAmountFigures = this.netAmount;
-    this.releaseorder.netAmountWords = this.options.amountToWords(this.netAmount);
+    this.releaseorder.netAmountFigures = this.displayTotal;
+    this.releaseorder.netAmountWords = this.options.amountToWords(this.displayTotal);
     this.releaseorder.clientPayment = this.releaseorder.paymentAmount = this.clientPayment;
 
     this.releaseorder.taxAmount = this.selectedTax;
