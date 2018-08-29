@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
-import { ReleaseOrderModule } from 'app/release-order/release-order.module';
-
 import {
   InvoiceApiService,
   InvoiceResolver,
@@ -17,8 +15,7 @@ import { SelectReleaseOrderComponent } from './select-release-order/select-relea
 
 @NgModule({
   imports: [
-    BaseModule,
-    ReleaseOrderModule
+    BaseModule
   ],
   declarations: [
     InvoiceComponent,

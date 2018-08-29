@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
-import { DirectoryModule } from 'app/directory/directory.module';
-import { RateCardModule } from 'app/rate-card/rate-card.module';
-
 import {
   InsertionListResolver,
   ReleaseOrderListResolver,
@@ -18,9 +15,7 @@ import {
 
 @NgModule({
   imports: [
-    BaseModule,
-    DirectoryModule,
-    RateCardModule
+    BaseModule
   ],
   providers: [
     ReleaseOrderApiService,
