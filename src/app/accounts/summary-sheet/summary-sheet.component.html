@@ -80,7 +80,14 @@
               <td>
                 <mat-checkbox name="checked-{{i}}-{{j}}" [(ngModel)]="entry.checked"></mat-checkbox>
               </td>
-              <td style="white-space: nowrap;">{{entry.insertionDate | date}}</td>
+              <td style="white-space: nowrap;"
+                  [class.text-danger]="entry.state == 1"
+                  [class.text-success]="entry.state == 2"
+                  [class.text-warning]="entry.state == 3">
+                <span [matTooltip]="getInsertionStateText(entry.state)">
+                  {{entry.insertionDate | date:'dd-MMM-y'}}
+                </span>
+              </td>
               <td style="white-space: nowrap;">₹ {{entry.Amount}}</td>
               <td style="white-space: nowrap;">₹ {{entry.collectedAmount}}</td>
               <td style="white-space: nowrap;">₹ {{entry.pendingAmount}}</td>

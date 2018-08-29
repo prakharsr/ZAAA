@@ -65,7 +65,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col"><span class="text-muted">No:</span> {{item.MHINo}}</div>
-        <div class="col-auto text-muted">{{item.MHIDate | date}}</div>
+        <div class="col-auto text-muted">{{item.MHIDate | date:'dd-MMM-y'}}</div>
       </div>
       <span class="text-muted">Gross Amount:</span> ₹ {{item.MHIGrossAmount}}<br>
       <span class="text-muted">Tax Amount:</span> ₹ {{item.MHITaxAmount}}<br>
@@ -90,7 +90,13 @@
           <th>Pending</th>
         </tr>
         <tr *ngFor="let insertion of item.insertions">
-          <td>{{insertion.insertionDate | date}}</td>
+          <td [class.text-danger]="insertion.state == 1"
+              [class.text-success]="insertion.state == 2"
+              [class.text-warning]="insertion.state == 3">
+            <span [matTooltip]="getInsertionStateText(insertion.state)">
+              {{insertion.insertionDate | date:'dd-MMM-y'}}
+            </span>
+          </td>
           <td>₹ {{insertion.Amount | number}}</td>
           <td>₹ {{insertion.collectedAmount}}</td>
           <td>₹ {{insertion.Amount - insertion.collectedAmount}}</td>

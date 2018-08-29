@@ -13,10 +13,11 @@ import {
 } from '.';
 
 import { ReleaseOrderDirResolver } from 'app/release-order';
+import { FirmResolver } from '../services';
 
 const routes: Routes = [
   {
-    path: 'invoices',
+    path: '',
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
@@ -32,12 +33,16 @@ const routes: Routes = [
         path: 'new/:id',
         component: InvoiceComponent,
         resolve: {
-          resolved: ReleaseOrderDirResolver
+          resolved: ReleaseOrderDirResolver,
+          firm: FirmResolver
         }
       },
       {
         path: 'new',
-        component: InvoiceComponent
+        component: InvoiceComponent,
+        resolve: {
+          firm: FirmResolver
+        }
       },
       {
         path: ':id',

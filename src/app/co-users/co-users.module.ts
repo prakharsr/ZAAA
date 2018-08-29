@@ -6,8 +6,6 @@ import {
   CoUsersComponent,
   RoleControlComponent,
   RoleEditComponent,
-  CoUserApiService,
-  CoUsersResolver
 } from '.';
 import { CoUsersRoutingModule } from './co-users-routing.module';
 
@@ -21,10 +19,6 @@ import { CoUsersRoutingModule } from './co-users-routing.module';
     CoUserComponent,
     RoleControlComponent,
     RoleEditComponent
-  ],
-  providers: [
-    CoUserApiService,
-    CoUsersResolver
   ]
 })
 export class CoUsersModule { }

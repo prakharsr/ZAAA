@@ -98,8 +98,8 @@
             <div class="col">
               <a [routerLink]="['/releaseorders', element.id]">{{element.releaseOrderNO}}</a>
             </div>
-            <div *ngIf="element.generated" class="col-auto text-muted">{{element.generatedAt | date}}</div>
-            <div *ngIf="!element.generated" class="col-auto text-muted">{{element.createdAt | date}}</div>
+            <div *ngIf="element.generated" class="col-auto text-muted">{{element.generatedAt | date:'dd-MMM-y'}}</div>
+            <div *ngIf="!element.generated" class="col-auto text-muted">{{element.createdAt | date:'dd-MMM-y'}}</div>
           </div>
 
           <ng-container *ngIf="element.cancelled">
@@ -155,7 +155,7 @@
           <th></th>
         </tr>
         <tr *ngFor="let insertion of element.insertions">
-          <td>{{toDate(insertion.date) | date}}</td>
+          <td>{{toDate(insertion.date) | date:'dd-MMM-y'}}</td>
           <td class="text-right">
             <span *ngIf="insertion.marked" class="text-success">
               <mat-icon>check</mat-icon>

@@ -201,4 +201,17 @@ export class ReleaseOrderDetailsComponent implements OnInit {
       }
     });
   }
+
+  getInsertionStateText(state: number) {
+    switch (state) {
+      case 1:
+        return 'Not Published';
+
+      case 2:
+        return 'Published';
+
+      case 3:
+        return 'Disputed';
+    }
+  }
 }

@@ -24,7 +24,7 @@
                   <div class="text-muted small">Release Order No</div>
                   <div>{{releaseOrder.releaseOrderNO}}</div>
                 </div>
-                <div class="col-auto text-muted">{{releaseOrder.date | date}}</div>
+                <div class="col-auto text-muted">{{releaseOrder.date | date:'dd-MMM-y'}}</div>
               </div>
 
               <br>
@@ -145,14 +145,19 @@
               <div class="col">
                 <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
                   <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
-                    {{toDate(item.insertion.date) | date}}
+                    <span [class.text-danger]="item.insertion.state == 1"
+                          [class.text-success]="item.insertion.state == 2"
+                          [class.text-warning]="item.insertion.state == 3"
+                          [matTooltip]="getInsertionStateText(item.insertion.state)">
+                      {{toDate(item.insertion.date) | date:'dd-MMM-y'}}
+                    </span>
                   </mat-checkbox>
                 </span>
 
                 <br>
 
                 <span class="mr-3 mb-3 text-muted" *ngFor="let item of markedInsertions">
-                  {{item | date}}
+                  {{item | date:'dd-MMM-y'}}
                 </span>
               </div>
             </div>
@@ -291,7 +296,9 @@
                 <div class="col">
                   <mat-form-field>
                     <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
-                      <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></mat-option>
+                      <mat-option *ngFor="let item of taxes" [value]="item">
+                        {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
+                      </mat-option>
                     </mat-select>
                     <mat-error *ngIf="taxField.errors?.required">
                       Tax is required.

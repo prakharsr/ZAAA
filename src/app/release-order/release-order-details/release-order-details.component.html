@@ -7,10 +7,10 @@
         <h5 style="font-weight: lighter">Release Order: {{releaseOrder.releaseOrderNO}}</h5>
 
         <ng-container *ngIf="releaseOrder.generated">
-          <div class="text-info">Generated on {{releaseOrder.generatedAt | date}}</div>
+          <div class="text-info">Generated on {{releaseOrder.generatedAt | date:'dd-MMM-y'}}</div>
         </ng-container>
         <ng-container *ngIf="!releaseOrder.generated">
-          <div class="text-info">Created on {{releaseOrder.createdAt | date}}</div>
+          <div class="text-info">Created on {{releaseOrder.createdAt | date:'dd-MMM-y'}}</div>
         </ng-container>
         <ng-container *ngIf="releaseOrder.cancelled">
           <div class="text-danger">CANCELLED</div>
@@ -292,13 +292,17 @@
 
         <label class="text-muted">Insertions</label>
         <div class="row" *ngFor="let item of releaseOrder.insertions">
-          <div class="col small">{{toDate(item.date) | date:'dd-MMM-y'}}</div>
+          <div class="col"
+               [class.text-danger]="item.state == 1"
+               [class.text-success]="item.state == 2"
+               [class.text-warning]="item.state == 3">
+            <span [matTooltip]="getInsertionStateText(item.state)">
+              {{toDate(item.date) | date:'dd-MMM-y'}}
+            </span>
+          </div>
           <div class="col-auto text-success" matTooltip="Invoice Created" *ngIf="item.marked">
             <mat-icon>check</mat-icon>
           </div>
-          <!-- <span *ngIf="insertion.insertions.state == 1" class="text-danger">Not Published</span>
-          <span *ngIf="insertion.insertions.state == 2" class="text-success">Published</span>
-          <span *ngIf="insertion.insertions.state == 3" class="text-warning">Disputed</span> -->
         </div>
       </mat-card>
     </div>
@@ -342,7 +346,7 @@
           <div class="row">
             <div class="col">
               <div class="small text-muted mt-2">Date</div>
-              <div>{{releaseOrder.paymentDate | date}}</div>
+              <div>{{releaseOrder.paymentDate | date:'dd-MMM-y'}}</div>
             </div>
             <div class="col">
               <div class="small text-muted mt-2">Number</div>

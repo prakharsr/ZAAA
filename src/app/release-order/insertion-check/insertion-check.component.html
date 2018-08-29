@@ -91,7 +91,7 @@
             <strong>Executive:</strong> {{insertion.executiveName}} - {{insertion.executiveOrg}}
           </div>
           <div class="col-auto">
-            {{toDate(insertion.insertions.date) | date}}
+            {{toDate(insertion.insertions.date) | date:'dd-MMM-y'}}
           </div>
           <div class="col-auto">
             <span *ngIf="insertion.insertions.state == 0" class="text-muted">None</span>
