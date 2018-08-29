@@ -57,7 +57,7 @@
         <li class="list-group-item py-1">
           <div class="row">
             <span *ngFor="let item of releaseorder.insertions; last as isLast" class="col-4">
-              {{toDate(item.date) | date:'dd-MMM-y'}}}<span *ngIf="!isLast">,</span>
+              {{toDate(item.date) | date:'dd-MMM-y'}}<span *ngIf="!isLast">,</span>
             </span>
           </div>
         </li>
