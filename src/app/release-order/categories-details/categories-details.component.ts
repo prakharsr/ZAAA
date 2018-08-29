@@ -112,10 +112,6 @@ export class CategoriesDetailsComponent implements OnInit {
 
   categoryResultFormatter = (result: AdCategory[]) => this.format(result);
 
-  getCategory(index: number) {
-    return this.details.selectedCategories[index];
-  }
-
   setCategory(index: number, category: AdCategory) {
     this.details.selectedCategories[index] = category;
 
@@ -135,18 +131,4 @@ export class CategoriesDetailsComponent implements OnInit {
       }
     }
   }
-
-  get category1() { return this.getCategory(0); }
-  get category2() { return this.getCategory(1); }
-  get category3() { return this.getCategory(2); }
-  get category4() { return this.getCategory(3); }
-  get category5() { return this.getCategory(4); }
-  get category6() { return this.getCategory(5); }
-
-  set category1(category: AdCategory) { this.setCategory(0, category); }
-  set category2(category: AdCategory) { this.setCategory(1, category); }
-  set category3(category: AdCategory) { this.setCategory(2, category); }
-  set category4(category: AdCategory) { this.setCategory(3, category); }
-  set category5(category: AdCategory) { this.setCategory(4, category); }
-  set category6(category: AdCategory) { this.setCategory(5, category); }
 }

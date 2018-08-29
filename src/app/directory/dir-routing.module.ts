@@ -25,7 +25,7 @@ import { FirmResolver } from 'app/services';
 
 const routes: Routes = [
   {
-    path: 'dir',
+    path: '',
     component: DirComponent,
     canActivate: [AuthGuard],
     children: [

@@ -20,29 +20,29 @@
 
 <mat-sidenav-container class="mt-1">
   <mat-sidenav #sidenav mode="side" opened="true" position="end">
-    <div class="card sticky-top" style="top: 50px; width: 365px; background-color: #2196f3">
-      <div class="card-header text-light small">
+    <div class="card sticky-top rounded-0 calc-card">
+      <div class="card-header text-light small py-1">
         Final Calculations
       </div>
       <ul class="list-group list-group-flush small">
-        <li class="list-group-item">
+        <li class="list-group-item py-1">
           <div class="small text-muted">Net Amount = Amount + Tax</div>
           <div>₹ {{displayTotal || '0'}} = {{displayAmount || '0'}} + {{displayTax || '0'}}</div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item py-1">
           <div class="small text-muted">Net Amount in Words</div>
           <div>Rupees {{options.amountToWords(displayTotal)}} <span *ngIf="selectedTax.primary">({{taxDisplay}})</span></div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item py-1">
           <div class="small text-muted">Client Payment (without Tax)</div>
           <div>₹ {{clientPayment || '0'}}</div>
         </li>
       </ul>
-      <div class="card-header text-light small d-none d-lg-block" *ngIf="selectedCategories[0]">
+      <div class="card-header text-light small py-1" *ngIf="selectedCategories[0]">
         Categories
       </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block" *ngIf="selectedCategories[0]">
-        <li class="list-group-item">
+      <ul class="list-group list-group-flush small" *ngIf="selectedCategories[0]">
+        <li class="list-group-item py-1">
           <ng-container *ngFor="let cat of selectedCategories; index as i">
             <span *ngIf="cat">
               <span *ngIf="i != 0">&gt; </span>{{cat}}
@@ -50,14 +50,14 @@
           </ng-container>
         </li>
       </ul>
-      <div class="card-header text-light small d-none d-lg-block" *ngIf="releaseorder.insertions.length">
+      <div class="card-header text-light small py-1" *ngIf="releaseorder.insertions.length">
         Insertions
       </div>
-      <ul class="list-group list-group-flush small d-none d-lg-block"  *ngIf="releaseorder.insertions.length">
-        <li class="list-group-item">
+      <ul class="list-group list-group-flush small"  *ngIf="releaseorder.insertions.length">
+        <li class="list-group-item py-1">
           <div class="row">
             <span *ngFor="let item of releaseorder.insertions; last as isLast" class="col-4">
-              {{toDate(item.date) | date:'d-MMM-y'}}<span *ngIf="!isLast">,</span>
+              {{toDate(item.date) | date:'dd-MMM-y'}}<span *ngIf="!isLast">,</span>
             </span>
           </div>
         </li>
@@ -128,7 +128,7 @@
                         <mat-option [value]="others">{{others}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="pullOutNameField.errors?.required">
-                          Pullout Name is required.
+                        Pullout Name is required.
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -208,7 +208,7 @@
         </div>
 
         <br>
-          
+
         <div class="row">
           <div class="col-lg col-md-6">
             <br>
@@ -553,7 +553,7 @@
                 <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="releaseorder.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox><br><br>
               </ng-container>
 
-              <button type="button" mat-raised-button color="primary" (click)="getInsertions()">Insertions *</button>
+              <button type="button" mat-raised-button [color]="checkInsertionCount ? 'primary' : 'warn'" (click)="getInsertions()">Insertions *</button>
             </mat-card>
           </div>
         </div>
@@ -634,7 +634,9 @@
                       <div class="form-row">
                         <div class="col-12">
                           <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                            <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
+                            <mat-option *ngFor="let item of taxes" [value]="item">
+                              {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
+                            </mat-option>
                           </mat-select>
                           <hr style="margin-top: 0; border-bottom: 1px solid #333333">
                         </div>
@@ -804,14 +806,14 @@
 
           <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'mail')" class="mb-2 bg-info">
             <mat-icon>mail</mat-icon> Send Mail
-          </button>          
+          </button>
         </div>
 
         <mat-toolbar class="d-md-none fixed-bottom">
           <div class="container-fluid">
             <div class="form-row">
               <div class="col">
-                <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'save')" color="primary">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(roForm.form.valid, 'save')">
                   <mat-icon>check</mat-icon>
                   <div class="small">Save</div>
                 </button>

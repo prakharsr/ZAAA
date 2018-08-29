@@ -128,7 +128,7 @@
             <div class="card-body">
               <div class="row">
                 <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
-                <div class="col-auto text-muted small">{{item.createdAt | date}}</div>
+                <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
               </div>
               <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
             </div>

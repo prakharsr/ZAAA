@@ -3,8 +3,7 @@ import 'rxjs/add/operator/take';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { PageData } from 'app/models';
-import { PaymentTotalResponse, AccountsApiService } from '.';
+import { AccountsApiService, PaymentTotalResponse } from './accounts-api.service';
 
 class Result {
   total: PaymentTotalResponse;

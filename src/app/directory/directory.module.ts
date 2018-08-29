@@ -6,28 +6,20 @@ import {
 
   ClientListComponent,
   ClientComponent,
-  ClientResolver,
-  ClientListResolver,
-  ClientApiService,
 
   ExecutiveListComponent,
   ExecutiveComponent,
-  ExecutiveResolver,
-  ExecutiveListResolver,
-  ExecutiveApiService,
 
   MediaHouseListComponent,
   MediaHouseComponent,
-  MediaHouseResolver,
-  MediaHouseListResolver,
-  MediaHouseApiService
 } from '.';
 
-import { RouterModule } from '@angular/router';
+import { DirRoutingModule } from './dir-routing.module';
 
 @NgModule({
   imports: [
-    BaseModule
+    BaseModule,
+    DirRoutingModule
   ],
   declarations: [
     ClientComponent,
@@ -37,17 +29,6 @@ import { RouterModule } from '@angular/router';
     ClientListComponent,
     ExecutiveListComponent,
     MediaHouseListComponent
-  ],
-  providers: [
-    ClientApiService,
-    ExecutiveApiService,
-    MediaHouseApiService,
-    ClientResolver,
-    ExecutiveResolver,
-    MediaHouseResolver,
-    ClientListResolver,
-    ExecutiveListResolver,
-    MediaHouseListResolver
   ]
 })
 export class DirectoryModule { }

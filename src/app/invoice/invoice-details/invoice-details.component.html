@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <div class="small text-muted">{{invoice.date | date}}</div>
+      <div class="small text-muted">{{invoice.date | date:'dd-MMM-y'}}</div>
 
       <div class="card my-3">
         <ul class="list-group list-group-flush">
@@ -123,7 +123,7 @@
       <div class="card my-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let item of invoice.insertions">
-            {{toDate(item.date) | date}}
+            {{toDate(item.date) | date:'dd-MMM-y'}}
           </li>
         </ul>
       </div>
@@ -137,7 +137,7 @@
           <div class="card-body">
             <div class="row">
               <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
-              <div class="col-auto text-muted small">{{item.createdAt | date}}</div>
+              <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
             </div>
             <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
           </div>

@@ -1,29 +1,112 @@
 <br>
 
 <div class="container">
-  <button *ngIf="!releaseOrder.generated" class="fab bg-info" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
-    <mat-icon>edit</mat-icon>
-  </button>
-
   <mat-card class="mat-elevation-z3">
     <div class="row">
-      <div class="col-md">
+      <div class="col-md-7">
         <h5 style="font-weight: lighter">Release Order: {{releaseOrder.releaseOrderNO}}</h5>
 
+        <ng-container *ngIf="releaseOrder.generated">
+          <div class="text-info">Generated on {{releaseOrder.generatedAt | date:'dd-MMM-y'}}</div>
+        </ng-container>
+        <ng-container *ngIf="!releaseOrder.generated">
+          <div class="text-info">Created on {{releaseOrder.createdAt | date:'dd-MMM-y'}}</div>
+        </ng-container>
+        <ng-container *ngIf="releaseOrder.cancelled">
+          <div class="text-danger">CANCELLED</div>
+        </ng-container>
 
+        <br>
+
+        <div class="d-none d-md-block">
+          <button mat-raised-button color="primary" class="mb-2 bg-success" (click)="generate()" *ngIf="!releaseOrder.generated">Generate</button>
+
+          <button mat-raised-button color="primary" class="mb-2 bg-primary" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" (click)="pdf()">
+            <mat-icon>get_app</mat-icon> Download
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-info" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" (click)="sendMsg()">
+            <mat-icon>mail</mat-icon> Send Email
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCreateInvoice" [routerLink]="['/invoices/new', releaseOrder.id]">
+            <mat-icon>add</mat-icon> Create Invoice
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-primary" [routerLink]="['/releaseorders/new', releaseOrder.id]">
+            <mat-icon>content_copy</mat-icon> Copy into New
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-info" *ngIf="!releaseOrder.generated" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button mat-raised-button color="warn" class="mb-2" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCancel" (click)="cancel()">
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+          <button mat-raised-button color="warn" class="mb-2" *ngIf="!releaseOrder.generated" (click)="deleteReleaseOrder()">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </div>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col" *ngIf="!releaseOrder.generated">
+                <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" (click)="generate()">
+                  <div class="small">Generate</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="releaseOrder.generated && !releaseOrder.cancelled">
+                <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="pdf()">
+                  <mat-icon>get_app</mat-icon>
+                  <div class="small">Download</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="releaseOrder.generated && !releaseOrder.cancelled">
+                <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" (click)="sendMsg()">
+                  <mat-icon>mail</mat-icon>
+                  <div class="small">Send Email</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCreateInvoice">
+                <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" [routerLink]="['/invoices/new', releaseOrder.id]">
+                  <mat-icon>add</mat-icon>
+                  <div class="small">Create Invoice</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" [routerLink]="['/releaseorders/new', releaseOrder.id]">
+                  <mat-icon>content_copy</mat-icon>
+                  <div class="small">Copy into New</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="!releaseOrder.generated">
+                <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
+                  <mat-icon>edit</mat-icon>
+                  <div class="small">Edit</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCancel">
+                <button color="primary" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+              <div class="col" *ngIf="!releaseOrder.generated">
+                <button color="primary" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="deleteReleaseOrder()">
+                  <mat-icon>delete</mat-icon>
+                  <div class="small">Delete</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar>
       </div>
-      <div class="col-md">
-        <div class="small text-muted mt-2">Tax Amount</div>
-        <div>{{taxDisplay}}</div>
-        
+      <div class="col-md-5">        
         <div class="small text-muted mt-2">Ad Gross Amount</div>
         <div>₹ {{releaseOrder.adGrossAmount}}</div>
         
-        <div class="small text-muted mt-2">Net Amount in Figures</div>
-        <div>₹ {{releaseOrder.netAmountFigures}}</div>
-        <div>Rupees {{releaseOrder.netAmountWords}}</div>
+        <div class="small text-muted mt-2">Net Amount</div>
+        <div>₹ {{releaseOrder.netAmountFigures}} <small>({{taxDisplay}})</small></div>
+        <div class="small">Rupees {{releaseOrder.netAmountWords}}</div>
         
-        <div class="small text-muted mt-2">Client Payment</div>
+        <div class="small text-muted mt-2">Client Payment (without Tax)</div>
         <div>₹ {{releaseOrder.clientPayment}}</div>
       </div>
     </div>
@@ -209,7 +292,14 @@
 
         <label class="text-muted">Insertions</label>
         <div class="row" *ngFor="let item of releaseOrder.insertions">
-          <div class="col small">{{toDate(item.date) | date:'dd-MMM-y'}}</div>
+          <div class="col"
+               [class.text-danger]="item.state == 1"
+               [class.text-success]="item.state == 2"
+               [class.text-warning]="item.state == 3">
+            <span [matTooltip]="getInsertionStateText(item.state)">
+              {{toDate(item.date) | date:'dd-MMM-y'}}
+            </span>
+          </div>
           <div class="col-auto text-success" matTooltip="Invoice Created" *ngIf="item.marked">
             <mat-icon>check</mat-icon>
           </div>
@@ -256,7 +346,7 @@
           <div class="row">
             <div class="col">
               <div class="small text-muted mt-2">Date</div>
-              <div>{{releaseOrder.paymentDate | date}}</div>
+              <div>{{releaseOrder.paymentDate | date:'dd-MMM-y'}}</div>
             </div>
             <div class="col">
               <div class="small text-muted mt-2">Number</div>
@@ -319,4 +409,6 @@
       </mat-card>
     </div>
   </div>
+
+  <br><br>
 </div>

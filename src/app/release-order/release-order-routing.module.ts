@@ -18,10 +18,11 @@ import { UserProfileResolver, FirmResolver } from '../services';
 
 const routes: Routes = [
   {
-    path: 'releaseorders',
+    path: '',
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+      { path: '', redirectTo: 'generated', pathMatch: 'full' },
+      { path: 'list', redirectTo: 'list/1', pathMatch: 'full' },
       {
         path: 'check',
         children: [

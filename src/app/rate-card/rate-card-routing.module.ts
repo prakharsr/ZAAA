@@ -13,7 +13,7 @@ import {
 
 const routes: Routes = [
   {
-    path: 'ratecards',
+    path: '',
     canActivate: [AuthGuard],
     data: {
       global: false
