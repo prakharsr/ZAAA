@@ -16,7 +16,7 @@ import { ReleaseOrderDirResolver } from 'app/release-order';
 
 const routes: Routes = [
   {
-    path: 'invoices',
+    path: '',
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },

@@ -4,11 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BaseModule } from './base.module';
 import { AdminModule } from './admin/admin.module';
-import { DirectoryModule } from './directory/directory.module';
-import { RateCardModule } from './rate-card/rate-card.module';
-import { ReleaseOrderModule } from './release-order/release-order.module';
-import { InvoiceModule } from './invoice/invoice.module';
-import { ReceiptsModule } from './receipts/receipts.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -58,11 +53,6 @@ import { TncComponent } from './components/tnc/tnc.component';
     BrowserAnimationsModule,
     BaseModule,
     AdminModule,
-    DirectoryModule,
-    RateCardModule,
-    ReleaseOrderModule,
-    InvoiceModule,
-    ReceiptsModule,
     ReportsModule,
     AppRoutingModule
   ],

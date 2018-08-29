@@ -18,7 +18,7 @@ import { CreateReceiptComponent } from './create-receipt/create-receipt.componen
 
 const routes: Routes = [
   {
-    path: 'receipts',
+    path: '',
     canActivate: [AuthGuard],
     data: {
       advance: false

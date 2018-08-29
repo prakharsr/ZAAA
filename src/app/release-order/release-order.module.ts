@@ -2,27 +2,18 @@ import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
 
 import {
-  InsertionListResolver,
-  ReleaseOrderListResolver,
-  ReleaseOrderResolver,
-  ReleaseOrderApiService,
-  ReleaseOrderDirResolver,
   InsertionCheckComponent,
   ReleaseOrderComponent,
   ReleaseOrderDetailsComponent,
   ReleaseOrderListComponent,
 } from '.';
 
+import { ReleaseOrderRoutingModule } from './release-order-routing.module';
+
 @NgModule({
   imports: [
-    BaseModule
-  ],
-  providers: [
-    ReleaseOrderApiService,
-    ReleaseOrderResolver,
-    ReleaseOrderListResolver,
-    InsertionListResolver,
-    ReleaseOrderDirResolver
+    BaseModule,
+    ReleaseOrderRoutingModule
   ],
   declarations: [
     ReleaseOrderComponent,

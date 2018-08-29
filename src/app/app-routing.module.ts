@@ -33,12 +33,6 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { TestimonialComponent } from './components/testimonial/testimonial.component';
 import { TncComponent } from './components/tnc/tnc.component';
-import { DirRoutingModule } from './directory/dir-routing.module';
-import { RateCardRoutingModule } from './rate-card/rate-card-routing.module';
-import { ReleaseOrderRoutingModule } from './release-order/release-order-routing.module';
-import { InvoiceRoutingModule } from './invoice/invoice-routing.module';
-import { ReceiptsRoutingModule } from './receipts/receipts-routing.module';
-import { ReportsRoutingModule } from './reports/reports-routing.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -53,6 +47,26 @@ const routes: Routes = [
   {
     path: 'coUsers',
     loadChildren: 'app/co-users/co-users.module#CoUsersModule'
+  },
+  {
+    path: 'dir',
+    loadChildren: 'app/directory/directory.module#DirectoryModule'
+  },
+  {
+    path: 'ratecards',
+    loadChildren: 'app/rate-card/rate-card.module#RateCardModule'
+  },
+  {
+    path: 'releaseorders',
+    loadChildren: 'app/release-order/release-order.module#ReleaseOrderModule'
+  },
+  {
+    path: 'invoices',
+    loadChildren: 'app/invoice/invoice.module#InvoiceModule'
+  },
+  {
+    path: 'receipts',
+    loadChildren: 'app/receipts/receipts.module#ReceiptsModule'
   },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
@@ -130,12 +144,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    DirRoutingModule,
-    RateCardRoutingModule,
-    ReleaseOrderRoutingModule,
-    InvoiceRoutingModule,
-    ReceiptsRoutingModule,
-    ReportsRoutingModule,
     RouterModule.forRoot(routes, {
       preloadingStrategy: PreloadAllModules
     })
