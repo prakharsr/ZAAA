@@ -278,7 +278,7 @@
               <td matTooltip="View Payment Receipt">
                 <a [routerLink]="['/receipts', item._id]">{{item.paymentNo}}</a>
               </td>
-              <td>{{item.paymentDate | date:'dd-MMM-y'}</td>
+              <td>{{item.paymentDate | date:'dd-MMM-y'}}</td>
               <td>₹ {{item.paymentAmount}}</td>
               <td>{{item.paymentBankName}}</td>
             </tr>
@@ -323,7 +323,7 @@
             </tr>
             <tr *ngFor="let item of mhiCheques">
               <td>{{item._id.ChequeNo}}</td>
-              <td>{{item._id.ChequeDate | date:'dd-MMM-y'}</td>
+              <td>{{item._id.ChequeDate | date:'dd-MMM-y'}}</td>
               <td>₹ {{item._id.ChequeAmount}}</td>
               <td>{{item._id.ChequeBank}}</td>
             </tr>

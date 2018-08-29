@@ -36,7 +36,7 @@
       <h6>Insertions</h6>
 
       <div *ngFor="let insertion of details.insertions" class="small">
-        {{insertion.insertionDate | date:'dd-MMM-y'}
+        {{insertion.insertionDate | date:'dd-MMM-y'}}
       </div>
 
       <br><br>
@@ -51,7 +51,7 @@
     </div>
     <div class="col-3">
       <div class="mb-2"><div class="text-muted small">RO No:</div> {{data.ro.releaseOrderNO}}</div>
-      <div class="mb-2"><div class="text-muted small">Date:</div> {{data.ro.date | date:'dd-MMM-y'}</div>
+      <div class="mb-2"><div class="text-muted small">Date:</div> {{data.ro.date | date:'dd-MMM-y'}}</div>
       <div class="mb-2"><div class="text-muted small">Payment Type:</div> {{data.ro.paymentType | paymentMode}}</div>
       <div class="mb-2"><div class="text-muted small">Client:</div> {{data.ro.clientName}}</div>
       <div class="mb-2"><div class="text-muted small">Media House:</div> {{data.ro.publicationName}} - {{data.ro.publicationEdition}}</div>

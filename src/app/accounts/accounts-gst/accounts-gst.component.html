@@ -63,7 +63,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let invoice of list">
-        <td class="text-muted">{{invoice.date | date:'dd-MMM-y'}</td>
+        <td class="text-muted">{{invoice.date | date:'dd-MMM-y'}}</td>
         <td>{{invoice.invoiceNO}}</td>
         <td>{{invoice.clientName}}</td>
         <ng-container *ngIf="invoice.taxType == 'IGST'">

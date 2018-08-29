@@ -46,7 +46,7 @@
     
       <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
         <div class="text-muted small mt-2">Date</div>
-        <div>{{receipt.paymentDate | date:'dd-MMM-y'}</div>
+        <div>{{receipt.paymentDate | date:'dd-MMM-y'}}</div>
       
         <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
         <div>{{receipt.paymentNo}}</div>
