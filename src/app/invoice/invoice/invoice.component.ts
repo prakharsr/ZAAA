@@ -415,4 +415,17 @@ export class InvoiceComponent implements OnInit {
     }
     else this.notifications.show('Fix errors before submitting');
   }
+
+  getInsertionStateText(state: number) {
+    switch (state) {
+      case 1:
+        return 'Not Published';
+
+      case 2:
+        return 'Published';
+
+      case 3:
+        return 'Disputed';
+    }
+  }
 }

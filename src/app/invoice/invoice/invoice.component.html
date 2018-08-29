@@ -145,7 +145,12 @@
               <div class="col">
                 <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
                   <mat-checkbox name="item-checked" [(ngModel)]="item.checked">
-                    {{toDate(item.insertion.date) | date}}
+                    <span [class.text-danger]="item.insertion.state == 1"
+                          [class.text-success]="item.insertion.state == 2"
+                          [class.text-warning]="item.insertion.state == 3"
+                          [matTooltip]="getInsertionStateText(item.insertion.state)">
+                      {{toDate(item.insertion.date) | date:'dd-MM-y'}}
+                    </span>
                   </mat-checkbox>
                 </span>
 

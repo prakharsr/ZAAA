@@ -292,13 +292,17 @@
 
         <label class="text-muted">Insertions</label>
         <div class="row" *ngFor="let item of releaseOrder.insertions">
-          <div class="col small">{{toDate(item.date) | date:'dd-MMM-y'}}</div>
+          <div class="col"
+               [class.text-danger]="item.state == 1"
+               [class.text-success]="item.state == 2"
+               [class.text-warning]="item.state == 3">
+            <span [matTooltip]="getInsertionStateText(item.state)">
+              {{toDate(item.date) | date:'dd-MMM-y'}}
+            </span>
+          </div>
           <div class="col-auto text-success" matTooltip="Invoice Created" *ngIf="item.marked">
             <mat-icon>check</mat-icon>
           </div>
-          <!-- <span *ngIf="insertion.insertions.state == 1" class="text-danger">Not Published</span>
-          <span *ngIf="insertion.insertions.state == 2" class="text-success">Published</span>
-          <span *ngIf="insertion.insertions.state == 3" class="text-warning">Disputed</span> -->
         </div>
       </mat-card>
     </div>
