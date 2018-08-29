@@ -132,4 +132,17 @@ export class SummarySheetComponent implements OnInit {
   toDate(date: NgbDate) {
     return new Date(date.year, date.month - 1, date.day);
   }
+
+  getInsertionStateText(state: number) {
+    switch (state) {
+      case 1:
+        return 'Not Published';
+
+      case 2:
+        return 'Published';
+
+      case 3:
+        return 'Disputed';
+    }
+  }
 }

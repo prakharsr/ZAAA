@@ -53,6 +53,8 @@ export class SummarySheetResponse {
     insertionDate: Date,
     pendingAmount: number,
 
+    state: number,
+
     SheetAmount: number, // will be filled in summary sheet view
     checked: boolean,
 
