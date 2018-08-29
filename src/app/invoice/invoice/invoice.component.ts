@@ -20,9 +20,11 @@ import {
   ReleaseOrderDir,
   ReleaseOrderApiService
 } from 'app/release-order';
+
 import { SelectReleaseOrderComponent } from '../select-release-order/select-release-order.component';
-import { PreviewComponent } from '../../components/preview/preview.component';
+import { PreviewComponent } from 'app/components/preview/preview.component';
 import { of } from 'rxjs/observable/of';
+import { Firm } from 'app/models';
 
 class AvailableInsertion {
   constructor(public insertion: Insertion, public checked = false) { }
@@ -60,9 +62,20 @@ export class InvoiceComponent implements OnInit {
     private roApi: ReleaseOrderApiService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: ReleaseOrderDir }) => {
+    this.route.data.subscribe((data: { resolved: ReleaseOrderDir, firm: Firm }) => {
       if (data.resolved) {
         this.init(data.resolved);
+      }
+
+      switch (data.firm.GSTIN.GSTType) {
+        case 'URD':
+        case 'CRD':
+          this.invoice.taxAmount = this.taxes[0];
+          break;
+        
+        default:
+          this.invoice.taxAmount = this.taxes[1];
+          break;
       }
     });
   }
@@ -80,13 +93,13 @@ export class InvoiceComponent implements OnInit {
 
     this.invoice.GSTIN = this.client.GSTIN;
 
-    this.taxes.forEach(element => {
-      if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
-        this.invoice.taxAmount = element;
-      }
-    });
+    // this.taxes.forEach(element => {
+    //   if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
+    //     this.invoice.taxAmount = element;
+    //   }
+    // });
     
-    this.invoice.taxIncluded = this.releaseOrder.taxIncluded;
+    // this.invoice.taxIncluded = this.releaseOrder.taxIncluded;
 
     this.invoice.taxType = this.mediaHouse.address.state == this.client.address.state ? 'SGST + CGST' : 'IGST';
 
@@ -314,8 +327,8 @@ export class InvoiceComponent implements OnInit {
   }
 
   taxes: TaxValues[] = [
+    new TaxValues(0),
     new TaxValues(5),
-    new TaxValues(10),
     new TaxValues(18)
   ];
 

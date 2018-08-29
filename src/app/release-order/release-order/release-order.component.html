@@ -634,7 +634,9 @@
                       <div class="form-row">
                         <div class="col-12">
                           <mat-select name="tax" [(ngModel)]="selectedTax" id="tax" #taxField="ngModel" required>
-                            <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span></mat-option>
+                            <mat-option *ngFor="let item of taxes" [value]="item">
+                              {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
+                            </mat-option>
                           </mat-select>
                           <hr style="margin-top: 0; border-bottom: 1px solid #333333">
                         </div>

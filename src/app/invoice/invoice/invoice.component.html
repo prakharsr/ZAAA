@@ -296,7 +296,9 @@
                 <div class="col">
                   <mat-form-field>
                     <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
-                      <mat-option *ngFor="let item of taxes" [value]="item">{{item.primary}}% <span *ngIf="item.secondary">+ {{item.secondary}}%</span></mat-option>
+                      <mat-option *ngFor="let item of taxes" [value]="item">
+                        {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
+                      </mat-option>
                     </mat-select>
                     <mat-error *ngIf="taxField.errors?.required">
                       Tax is required.
