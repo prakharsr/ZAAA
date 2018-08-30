@@ -101,11 +101,11 @@ export class DashboardComponent implements OnInit {
       if (data.success) {
         this.roChartResults = [
           {
-            name: 'Generated',
+            name: 'Last Year',
             series: []
           },
           {
-            name: 'Total',
+            name: 'Current Year',
             series: []
           }
         ];
