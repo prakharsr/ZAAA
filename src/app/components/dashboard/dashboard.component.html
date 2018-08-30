@@ -308,6 +308,8 @@
               <td>{{item.paymentBankName}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="receiptCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>
@@ -353,6 +355,8 @@
               <td>{{item._id.ChequeBank}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="mhiCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>
