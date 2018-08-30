@@ -9,6 +9,7 @@ import { ReleaseOrderDir } from './release-order-dir-resolver.service';
 import { InsertionCheckItem } from './insertion-check-item';
 import { ReleaseOrderSearchParams } from './release-order-search-params';
 import { PageData, MailingDetails } from 'app/models';
+import { Invoice } from '../invoice';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -206,5 +207,21 @@ export class ReleaseOrderApiService {
     return this.api.post('/user/releaseorder/generate', {
       id: releaseOrder.id
     });
+  }
+
+  getInvoices(releaseOrder: ReleaseOrder): Observable<Invoice[]> {
+    return this.api.post('/user/invoice/pre', {
+      releaseOrderId: releaseOrder.id
+    }).pipe(
+      map(data => {
+        let result : Invoice[] = [];
+
+        if (data.success) {
+          result = data.invoices;
+        }
+
+        return result;
+      })
+    );
   }
 }
