@@ -1,25 +1,17 @@
 import { NgModule } from "@angular/core";
 
-import {
-  NgbRatingModule,
-  NgbDatepickerModule,
-  NgbTypeaheadModule,
-  NgbCollapseModule
-} from '@ng-bootstrap/ng-bootstrap';
+import * as ngb from '@ng-bootstrap/ng-bootstrap';
+
+const modules = [
+  ngb.NgbRatingModule,
+  ngb.NgbDatepickerModule,
+  ngb.NgbTypeaheadModule,
+  ngb.NgbCollapseModule
+]
 
 @NgModule({
-  imports: [
-    NgbRatingModule.forRoot(),
-    NgbDatepickerModule.forRoot(),
-    NgbTypeaheadModule.forRoot(),
-    NgbCollapseModule.forRoot()
-  ],
-  exports: [
-    NgbRatingModule,
-    NgbDatepickerModule,
-    NgbTypeaheadModule,
-    NgbCollapseModule
-  ],
+  imports: modules.map(M => M.forRoot()),
+  exports: modules,
   declarations: []
 })
 export class NgBootstrapModule { }  
