@@ -13,6 +13,7 @@ import {
   ReleaseOrderListComponent
 } from '.';
 import { UserProfileResolver, FirmResolver } from '../services';
+import { CreateRoGuard } from './create-ro-guard.service';
 
 const routes: Routes = [
   {
@@ -68,21 +69,24 @@ const routes: Routes = [
         resolve: {
           user: UserProfileResolver,
           firm: FirmResolver
-        }
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: 'new/:copy',
         component: ReleaseOrderComponent,
         resolve: {
           releaseOrder: ReleaseOrderResolver
-        }
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: 'fromRateCard/:rateCard',
         component: ReleaseOrderComponent,
         resolve: {
           rateCard: RateCardResolver
-        }
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: "edit/:id",
