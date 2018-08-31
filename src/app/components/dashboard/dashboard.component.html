@@ -103,7 +103,32 @@
             <ngx-charts-line-chart [results]="roChartResults"
               [xAxis]="true"
               [yAxis]="true"
-              [autoScale]="true">
+              [autoScale]="true"
+              [roundDomains]="true"
+              [xAxisTickFormatting]="xAxisTick"
+              [yAxisTickFormatting]="yAxisTick">
+
+              <ng-template #tooltipTemplate let-model="model">
+                <div class="text-light px-3 py-2">
+                  <b>{{model.series}}</b><br>
+                  {{xAxisTick(model.name)}}<br>
+                  {{yAxisTick(model.value)}}
+                </div>
+              </ng-template>
+
+              <ng-template #seriesTooltipTemplate let-model="model">
+                <div class="text-light text-left px-3 py-2">
+                  <table>
+                    <tr *ngFor="let item of model">
+                      <td>
+                        <span class="p-1 d-inline-block rounded-circle" [style.background-color]="item.color"></span>
+                      </td>
+                      <td class="px-1">{{item.series}}:</td>
+                      <td>{{yAxisTick(item.value)}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
             </ngx-charts-line-chart>
           </div>
         </div>
@@ -283,6 +308,8 @@
               <td>{{item.paymentBankName}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="receiptCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>
@@ -328,6 +355,8 @@
               <td>{{item._id.ChequeBank}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="mhiCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>

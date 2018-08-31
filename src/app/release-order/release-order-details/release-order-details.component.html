@@ -112,6 +112,18 @@
     </div>
   </mat-card>
 
+  <ng-container *ngIf="invoices.length">
+    <br>
+    <mat-card class="mat-elevation-z3">
+      <label class="text-muted">Invoices</label>
+
+      <div *ngFor="let invoice of invoices">
+        <a [routerLink]="['/invoices', invoice._id]">{{invoice.invoiceNO}}</a>
+        <span class="text-muted">({{invoice.insertions.length}} insertion(s))</span>
+      </div>
+    </mat-card>
+  </ng-container>
+
   <div class="row">
     <div class="col-lg-6">
       <br>

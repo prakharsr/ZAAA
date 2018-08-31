@@ -4,7 +4,7 @@ import { UserProfile } from 'app/models';
 import { DashboardApiService } from 'app/services/dashboard-api.service';
 
 export class ChartDataItem {
-  name = "";
+  name: Date;
   value = 0;
 }
 
@@ -101,20 +101,20 @@ export class DashboardComponent implements OnInit {
       if (data.success) {
         this.roChartResults = [
           {
-            name: 'Generated',
+            name: 'Last Year',
             series: []
           },
           {
-            name: 'Total',
+            name: 'Current Year',
             series: []
           }
         ];
 
         let d : {
           _id: {
-            day: string,
-            month: string,
-            year: string
+            day: number,
+            month: number,
+            year: number
           },
           count: number,
           totalAmount: number,
@@ -122,11 +122,29 @@ export class DashboardComponent implements OnInit {
         }[] = data.releaseOrders;
 
         d.forEach(element => {
-          this.roChartResults[0].series.push({ name: element._id.day, value: element.generated });
-          this.roChartResults[1].series.push({ name: element._id.day, value: element.totalAmount });
+          this.roChartResults[0].series.push({ name: this.toChartKey(element._id), value: element.generated });
+          this.roChartResults[1].series.push({ name: this.toChartKey(element._id), value: element.totalAmount });
         });
       }
     });
+  }
+
+  toChartKey(date: { year: number, month: number, day: number }) {
+    // keep the year same
+    return new Date(2018, date.month - 1, date.day);
+  }
+
+  xAxisTick(val: Date) {
+    if (val.getHours() || val.getMinutes() || val.getSeconds() || val.getMilliseconds())
+      return '';
+
+    return val.getDate().toString().padStart(2, '0')
+      + '-'
+      + (val.getMonth() + 1).toString().padStart(2, '0');
+  }
+
+  yAxisTick(val) {
+    return '₹ ' + val;
   }
   //#endregion
 

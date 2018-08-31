@@ -16,6 +16,8 @@ export class ReleaseOrderDetailsComponent implements OnInit {
 
   releaseOrder = new ReleaseOrder();
 
+  invoices = [];
+
   constructor(private api: ReleaseOrderApiService,
     private route: ActivatedRoute,
     private router: Router,
@@ -25,6 +27,8 @@ export class ReleaseOrderDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
       this.releaseOrder = data.releaseOrder;
+
+      this.api.getInvoices(this.releaseOrder).subscribe(data => this.invoices = data);
     });
   }
 
