@@ -8,6 +8,8 @@ export class UserProfile {
     email: string;
     contact: string;
 
+    mobileVerified: boolean;
+
     isAdmin: boolean;
 
     id: string;

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'app/guards';
-
 import { InvoiceResolver, InvoiceDirResolver } from 'app/invoice';
 
 import {
@@ -10,8 +8,6 @@ import {
   ReceiptResolver,
   ReceiptListComponent,
   LinkAdvanceComponent,
-  AdvanceReceiptComponent,
-  ReceiptComponent,
   ReceiptDetailsComponent
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
@@ -20,7 +16,6 @@ import { UserProfileResolver, FirmResolver } from '../services';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     data: {
       advance: false
     },

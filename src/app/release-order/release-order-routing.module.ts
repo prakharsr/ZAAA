@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'app/guards';
-
 import { RateCardResolver } from 'app/rate-card';
 
 import {
@@ -19,7 +17,6 @@ import { UserProfileResolver, FirmResolver } from '../services';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'generated', pathMatch: 'full' },
       { path: 'list', redirectTo: 'list/1', pathMatch: 'full' },

@@ -150,10 +150,8 @@ const overlays = [
     serv.OptionsService,
     serv.FirmUsersResolver,
 
-    guards.AuthGuard,
-    guards.PhoneVerifyGuard,
-    guards.AdminGuard,
-    guards.PlanGuard,
+    guards.UserCache,
+    guards.Guard,
 
     CoUserApiService,
     CoUsersResolver,

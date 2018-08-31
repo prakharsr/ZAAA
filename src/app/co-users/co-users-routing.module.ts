@@ -1,12 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {
-  AuthGuard,
-  PhoneVerifyGuard,
-  PlanGuard
-} from 'app/guards';
-
 import { UserProfileResolver } from 'app/services';
 
 import {
@@ -19,11 +13,6 @@ import {
 const routes: Routes = [
   {
     path: '',
-    canActivate: [
-      AuthGuard,
-      PhoneVerifyGuard,
-      PlanGuard
-    ],
     children: [
       {
         path: '',

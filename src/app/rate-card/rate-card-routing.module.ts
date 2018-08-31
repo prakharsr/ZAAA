@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'app/guards';
-
 import {
   RateCardListResolver,
   RateCardResolver,
@@ -14,7 +12,6 @@ import {
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     data: {
       global: false
     },
