@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -99,6 +99,11 @@ import { SuperAdminGuard } from './super-admin/super-admin-guard.service';
 
 import * as val from './validators';
 
+import { MediaHouseInvoiceDialogComponent } from './accounts';
+import { PaymentDetailsDialogComponent } from './accounts/payment-details-dialog/payment-details-dialog.component';
+import { SelectReleaseOrderComponent } from './invoice/select-release-order/select-release-order.component';
+import { SelectInvoiceComponent } from './receipts/select-invoice/select-invoice.component';
+
 const validators = [
   val.VerifyEmailDirective,
   val.VerifyMinDirective,
@@ -120,51 +125,23 @@ const overlays = [
   BillingDetailsComponent,
   ro.InsertionDetailsComponent,
   PreviewComponent,
-  NotificationsComponent
+  NotificationsComponent,
+  MediaHouseInvoiceDialogComponent,
+  PaymentDetailsDialogComponent,
+  SelectReleaseOrderComponent,
+  SelectInvoiceComponent
 ]
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    NgBootstrapModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    NgBootstrapModule.forRoot(),
     LivechatWidgetModule,
     LineChartModule
-  ],
-  providers: [
-    AuthTokenManager,
-
-    serv.ApiService,
-    serv.WindowService,
-    serv.RazorPayService,
-    serv.IfscService,
-    serv.DialogService,
-    serv.StateApiService,
-    serv.LoaderService,
-    serv.NotificationService,
-    serv.FirmResolver,
-    serv.UserProfileResolver,
-    serv.OptionsService,
-    serv.FirmUsersResolver,
-
-    guards.UserCache,
-    guards.Guard,
-
-    CoUserApiService,
-    CoUsersResolver,
-
-    accountsProviders,
-    dirProviders,
-    invoiceProviders,
-    ratecardProviders,
-    receiptsProviders,
-    roProviders,
-
-    SuperAdminApiService,
-    SuperAdminGuard
   ],
   declarations: [
     overlays,
@@ -186,10 +163,49 @@ const overlays = [
     PaginationComponent,
     LivechatWidgetModule,
     LineChartModule,
+    overlays,
     pipes
   ],
   entryComponents: [
     overlays
   ]
 })
-export class BaseModule { }
+export class BaseModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: BaseModule,
+      providers: [
+        AuthTokenManager,
+
+        guards.UserCache,
+        guards.Guard,
+
+        serv.ApiService,
+        serv.WindowService,
+        serv.RazorPayService,
+        serv.IfscService,
+        serv.DialogService,
+        serv.StateApiService,
+        serv.LoaderService,
+        serv.NotificationService,
+        serv.FirmResolver,
+        serv.UserProfileResolver,
+        serv.OptionsService,
+        serv.FirmUsersResolver,
+    
+        CoUserApiService,
+        CoUsersResolver,
+    
+        dirProviders,
+        ratecardProviders,
+        roProviders,
+        invoiceProviders,
+        receiptsProviders,
+        accountsProviders,
+    
+        SuperAdminApiService,
+        SuperAdminGuard
+      ]
+    };
+  }
+}

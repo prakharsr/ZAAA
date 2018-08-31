@@ -37,7 +37,7 @@ import { TncComponent } from './components/tnc/tnc.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    BaseModule,
+    BaseModule.forRoot(),
     AdminModule,
     ReportsModule,
     AppRoutingModule

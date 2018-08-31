@@ -6,7 +6,6 @@ import {
   InvoiceDetailsComponent,
   InvoiceListComponent
 } from '.';
-import { SelectReleaseOrderComponent } from './select-release-order/select-release-order.component';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 
 @NgModule({
@@ -17,11 +16,7 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
   declarations: [
     InvoiceComponent,
     InvoiceDetailsComponent,
-    InvoiceListComponent,
-    SelectReleaseOrderComponent
-  ],
-  entryComponents: [
-    SelectReleaseOrderComponent
+    InvoiceListComponent
   ]
 })
 export class InvoiceModule { }
