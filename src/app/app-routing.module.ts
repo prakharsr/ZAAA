@@ -79,7 +79,6 @@ const routes: Routes = [
         component: PlanSelectorComponent,
         data: { plan: true }
       },
-      { path: 'forgotPassword', component: ForgotPswComponent },
       {
         path: "profile",
         component: ProfileViewComponent,
@@ -143,6 +142,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'forgotPassword', component: ForgotPswComponent },
   { path: 'testimonial', component: TestimonialComponent },
   { path: '**', component: NotFoundComponent }
 ];
