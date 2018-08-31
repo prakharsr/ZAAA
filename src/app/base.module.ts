@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from './material.module';
-import { NgBootstrapModule } from './ng-bootstrap.module';
 import { LivechatWidgetModule } from '@livechat/angular-widget';
 import { LineChartModule } from '@swimlane/ngx-charts';
 
@@ -132,6 +131,8 @@ const overlays = [
   SelectInvoiceComponent
 ]
 
+import * as ngb from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -139,7 +140,10 @@ const overlays = [
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    NgBootstrapModule.forRoot(),
+    ngb.NgbRatingModule.forRoot(),
+    ngb.NgbDatepickerModule.forRoot(),
+    ngb.NgbTypeaheadModule.forRoot(),
+    ngb.NgbCollapseModule.forRoot(),
     LivechatWidgetModule,
     LineChartModule
   ],
@@ -158,7 +162,10 @@ const overlays = [
     FormsModule,
     HttpClientModule,
     MaterialModule,
-    NgBootstrapModule,
+    ngb.NgbRatingModule,
+    ngb.NgbDatepickerModule,
+    ngb.NgbTypeaheadModule,
+    ngb.NgbCollapseModule,
     validators,
     PaginationComponent,
     LivechatWidgetModule,
