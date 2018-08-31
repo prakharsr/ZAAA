@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { AdvanceReceipt } from '../payment-receipt';
@@ -14,6 +14,7 @@ import {
   MediaHouseApiService,
   ExecutiveApiService
 } from 'app/directory';
+import { Firm, UserProfile } from '../../models';
 
 @Component({
   selector: 'app-advance-receipt',
@@ -25,6 +26,7 @@ export class AdvanceReceiptComponent implements OnInit {
   receipt = new AdvanceReceipt();
 
   constructor(private router: Router,
+    private route: ActivatedRoute,
     private api: ReceiptsApiService,
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
@@ -34,6 +36,14 @@ export class AdvanceReceiptComponent implements OnInit {
 
   ngOnInit() {
     this.receipt.paymentType = this.paymentTypes[0];
+
+    this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
+      let exe = new Executive();
+      exe.executiveName = data.user.name;
+      exe.orgName = data.firm.name;
+
+      this.executive = exe;
+    });
   }
 
   private goBack() {
@@ -41,7 +51,7 @@ export class AdvanceReceiptComponent implements OnInit {
   }
 
   submit() {
-    this.receipt.publicationName = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
+    this.receipt.publicationName = this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null;
     this.receipt.clientName = this.client.orgName ? this.client.orgName : this.client;
     this.receipt.executiveName = this.executive.executiveName ? this.executive.executiveName : this.executive;
 

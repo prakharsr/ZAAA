@@ -10,8 +10,6 @@
   <mat-checkbox [(ngModel)]="advance">Advance</mat-checkbox>
 </div>
 
-<br>
-
 <app-advance-receipt *ngIf="advance"></app-advance-receipt>
 
 <app-receipt *ngIf="!advance" [invoiceDir]="invoiceDir" (invoiceSelected)="allowAdvance = false"></app-receipt>

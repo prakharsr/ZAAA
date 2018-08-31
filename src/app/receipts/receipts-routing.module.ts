@@ -15,6 +15,7 @@ import {
   ReceiptDetailsComponent
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
+import { UserProfileResolver, FirmResolver } from '../services';
 
 const routes: Routes = [
   {
@@ -39,7 +40,14 @@ const routes: Routes = [
               resolved: ReceiptListResolver
             }
           },
-          { path: 'new', component: CreateReceiptComponent },
+          {
+            path: 'new',
+            component: CreateReceiptComponent,
+            resolve: {
+              user: UserProfileResolver,
+              firm: FirmResolver
+            }
+          },
           {
             path: 'link/:id',
             children: [
@@ -66,7 +74,14 @@ const routes: Routes = [
           resolved: ReceiptListResolver
         }
       },
-      { path: 'new', component: CreateReceiptComponent },
+      {
+        path: 'new',
+        component: CreateReceiptComponent,
+        resolve: {
+          user: UserProfileResolver,
+          firm: FirmResolver
+        }
+      },
       {
         path: 'new/:id',
         component: CreateReceiptComponent,
