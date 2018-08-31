@@ -86,12 +86,20 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/invoices', invoice.id]">{{invoice.invoiceNO}}</a>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/invoices', invoice.id]">{{invoice.invoiceNO}}</a>
+            </div>
+            <div class="col-auto text-muted">
+              {{invoice.createdAt | date:'dd-MMM-y'}}
+            </div>
+          </div>
           
-          <br><br>
+          <br>
+          <span class="text-muted">Amount:</span> ₹ {{invoice.FinalTaxAmount}}<br>
           <span class="text-muted">Publication:</span> {{invoice.publicationName}} - {{invoice.publicationEdition}}<br>
           <span class="text-muted">Client:</span> {{invoice.clientName}}
-          <br><br>
+          <br>
         </div>
         <div class="col-auto">
           <mat-menu #invoiceMenu="matMenu">

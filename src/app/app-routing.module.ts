@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import {
-  AuthGuard,
-  AdminGuard,
-  PhoneVerifyGuard,
-  PlanGuard
-} from 'app/guards';
+import { Guard } from 'app/guards';
 
 import { FirmResolver, UserProfileResolver } from 'app/services';
 
@@ -36,93 +31,102 @@ import { TncComponent } from './components/tnc/tnc.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  {
-    path: 'superadmin',
-    loadChildren: 'app/super-admin/super-admin.module#SuperAdminModule'
-  },
-  {
-    path: 'accounts',
-    loadChildren: 'app/accounts/accounts.module#AccountsModule'
-  },
-  {
-    path: 'coUsers',
-    loadChildren: 'app/co-users/co-users.module#CoUsersModule'
-  },
-  {
-    path: 'dir',
-    loadChildren: 'app/directory/directory.module#DirectoryModule'
-  },
-  {
-    path: 'ratecards',
-    loadChildren: 'app/rate-card/rate-card.module#RateCardModule'
-  },
-  {
-    path: 'releaseorders',
-    loadChildren: 'app/release-order/release-order.module#ReleaseOrderModule'
-  },
-  {
-    path: 'invoices',
-    loadChildren: 'app/invoice/invoice.module#InvoiceModule'
-  },
-  {
-    path: 'receipts',
-    loadChildren: 'app/receipts/receipts.module#ReceiptsModule'
-  },
   { path: 'login', component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: 'forgotPassword', component: ForgotPswComponent },
-  { path: "verify/mobile", component: PhoneVerifyComponent, canActivate: [AuthGuard] },
   {
-    path: "profile",
-    component: ProfileViewComponent,
-    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      user: UserProfileResolver
-    }
+    path: '',
+    canActivateChild: [Guard],
+    children: [
+      {
+        path: 'superadmin',
+        loadChildren: 'app/super-admin/super-admin.module#SuperAdminModule'
+      },
+      {
+        path: 'accounts',
+        loadChildren: 'app/accounts/accounts.module#AccountsModule'
+      },
+      {
+        path: 'coUsers',
+        loadChildren: 'app/co-users/co-users.module#CoUsersModule'
+      },
+      {
+        path: 'dir',
+        loadChildren: 'app/directory/directory.module#DirectoryModule'
+      },
+      {
+        path: 'ratecards',
+        loadChildren: 'app/rate-card/rate-card.module#RateCardModule'
+      },
+      {
+        path: 'releaseorders',
+        loadChildren: 'app/release-order/release-order.module#ReleaseOrderModule'
+      },
+      {
+        path: 'invoices',
+        loadChildren: 'app/invoice/invoice.module#InvoiceModule'
+      },
+      {
+        path: 'receipts',
+        loadChildren: 'app/receipts/receipts.module#ReceiptsModule'
+      },
+      {
+        path: "verify/mobile",
+        component: PhoneVerifyComponent,
+        data: { verifyMobile: true }
+      },
+      {
+        path: 'plan',
+        component: PlanSelectorComponent,
+        data: { plan: true }
+      },
+      {
+        path: "profile",
+        component: ProfileViewComponent,
+        resolve: {
+          user: UserProfileResolver
+        }
+      },
+      {
+        path: "profile/edit",
+        component: ProfileEditComponent,
+        data: { admin: true },
+        resolve: {
+          user: UserProfileResolver
+        }
+      },
+      {
+        path: "firm",
+        component: BusinessDetailsComponent,
+        resolve: {
+          firm: FirmResolver,
+          user: UserProfileResolver
+        }
+      },
+      {
+        path: "account",
+        component: AccountDetailsComponent,
+        resolve: {
+          user: UserProfileResolver
+        }
+      },
+      {
+        path: 'tnc',
+        component: TncComponent,
+        data: { admin: true },
+        resolve: {
+          firm: FirmResolver
+        }
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        resolve: {
+          user: UserProfileResolver
+        }
+      },
+      { path: 'changePassword', component: ChangePswComponent },
+    ]
   },
-  {
-    path: "profile/edit",
-    component: ProfileEditComponent,
-    canActivate: [AdminGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      user: UserProfileResolver
-    }
-  },
-  {
-    path: "firm",
-    component: BusinessDetailsComponent,
-    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      firm: FirmResolver,
-      user: UserProfileResolver
-    }
-  },
-  {
-    path: "account",
-    component: AccountDetailsComponent,
-    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      user: UserProfileResolver
-    }
-  },
-  {
-    path: 'tnc',
-    component: TncComponent,
-    canActivate: [AdminGuard],
-    resolve: {
-      firm: FirmResolver
-    }
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard, PhoneVerifyGuard, PlanGuard],
-    resolve: {
-      user: UserProfileResolver
-    }
-  },
-  { path: 'plan', component: PlanSelectorComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'changePassword', component: ChangePswComponent, canActivate: [AuthGuard] },
   { path: 'reset_password/:token', component: ResetPasswordComponent },
   {
     path: 'tickets',
@@ -138,15 +142,14 @@ const routes: Routes = [
       }
     ]
   },
+  { path: 'forgotPassword', component: ForgotPswComponent },
   { path: 'testimonial', component: TestimonialComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [ RouterModule ]
 })
