@@ -1,148 +1,133 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container">Invoice {{invoice.invoiceNO}}</div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <br>
 
 <div class="container">
+  <mat-card>
+    <div class="row">
+      <div class="col-md-7">
+        <label class="text-muted">Invoice {{invoice.invoiceNO}}</label>
+        <div class="text-muted small">{{invoice.date | date:'dd-MMM-y'}}</div>
+
+        <br>
+
+        <button [routerLink]="['/releaseorders', invoice.releaseOrderId]" class="btn btn-outline-primary">View Release Order</button>
+      </div>
+      <div class="col-md-5">
+        <div class="small text-muted mt-2">Final Amount (Net Amount + Tax)</div>
+        <div>₹ {{invoice.FinalTaxAmount}}</div>
+    
+        <div class="small text-muted mt-2">Cleared Amount</div>
+        <div>₹ {{invoice.clearedAmount}}</div>
+        
+        <div class="small text-muted mt-2">Pending Amount</div>
+        <div>₹ {{invoice.pendingAmount}}</div>
+      </div>
+    </div>
+  </mat-card>
+  
+  <br>
+
   <div class="row">
     <div class="col-lg-6">
-      <div class="small text-muted">{{invoice.date | date:'dd-MMM-y'}}</div>
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Calculations</label>
+    
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Commission</div>
+            <div *ngIf="invoice.extraCharges.percentage">{{invoice.extraCharges.amount}} %</div>
+            <div *ngIf="!invoice.extraCharges.percentage">₹ {{invoice.extraCharges.amount}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Additional Charges</div>
+            <div *ngIf="invoice.additionalCharges.percentage">{{invoice.additionalCharges.amount}} %</div>
+            <div *ngIf="!invoice.additionalCharges.percentage">₹ {{invoice.additionalCharges.amount}}</div>
+          </div>
+        </div>
+    
+        <div class="small text-muted mt-2">Ad Gross Amount</div>
+        <div>₹ {{invoice.adGrossAmount}}</div>
+    
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Publication Discount</div>
+            <div *ngIf="invoice.publicationDiscount.percentage">{{invoice.publicationDiscount.amount}} %</div>
+            <div *ngIf="!invoice.publicationDiscount.percentage">₹ {{invoice.publicationDiscount.amount}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Agency Discount</div>
+            <div *ngIf="invoice.agencyDiscount1.percentage">{{invoice.agencyDiscount1.amount}} %</div>
+            <div *ngIf="!invoice.agencyDiscount1.percentage">₹ {{invoice.agencyDiscount1.amount}}</div>
+          </div>
+        </div>
+    
+        <hr>
+    
+        <label class="text-muted small">Other Charges</label>
+        <table>
+          <tr *ngFor="let item of invoice.otherCharges">
+            <td class="text-muted pr-5">{{item.chargeType}}:</td>
+            <td>₹ {{item.amount}}</td>
+          </tr>
+        </table>
+    
+        <div *ngIf="invoice.otherCharges.length == 0" class="text-muted small">
+          No Other Charges
+        </div>
+    
+        <hr>
 
-      <div class="card my-3">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Gross Amount</div>
-              <div class="col-md-8">₹ {{invoice.adGrossAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Tax</div>
-              <div class="col-md-8">{{taxDisplay}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div>Other Charges</div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item" *ngFor="let item of invoice.otherCharges">
-                <div class="row">
-                    <div class="col-md-8">{{item.chargeType}}</div>
-                  <div class="col-md-4">₹ {{item.amount}}</div>                  
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Extra Charges</div>
-              <div class="col-md-8" *ngIf="invoice.extraCharges.percentage">{{invoice.extraCharges.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.extraCharges.percentage">₹ {{invoice.extraCharges.amount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Publication Discount</div>
-              <div class="col-md-8" *ngIf="invoice.publicationDiscount.percentage">{{invoice.publicationDiscount.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.publicationDiscount.percentage">₹ {{invoice.publicationDiscount.amount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Agency Discount</div>
-              <div class="col-md-8" *ngIf="invoice.agencyDiscount1.percentage">{{invoice.agencyDiscount1.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.agencyDiscount1.percentage">₹ {{invoice.agencyDiscount1.amount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Additional Charges</div>
-              <div class="col-md-8" *ngIf="invoice.additionalCharges.percentage">{{invoice.additionalCharges.amount}} %</div>
-              <div class="col-md-8" *ngIf="!invoice.additionalCharges.percentage">₹ {{invoice.additionalCharges.amount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Net Amount</div>
-              <div class="col-md-8">
-                ₹ {{invoice.netAmountFigures}}<br>
-                Rupees {{invoice.netAmountWords}}
-              </div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Final Amount</div>
-              <div class="col-md-8">₹ {{invoice.FinalTaxAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Cleared Amount</div>
-              <div class="col-md-8">₹ {{invoice.clearedAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Pending Amount</div>
-              <div class="col-md-8">₹ {{invoice.pendingAmount}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Caption</div>
-              <div class="col-md-8">{{invoice.caption}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Remark</div>
-              <div class="col-md-8">{{invoice.remark}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Other Remark</div>
-              <div class="col-md-8">{{invoice.otherRemark}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Net Amount</div>
+            <div>₹ {{invoice.netAmountFigures}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Tax</div>
+            <div>{{taxDisplay}}</div>
+          </div>
+        </div>
+      </mat-card>
+    
+      <br>
+    
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Remarks</label>
+        
+        <div class="small text-muted mt-2">For Invoice</div>
+        <div>{{invoice.remark || '--'}}</div>
+    
+        <div class="small text-muted mt-2">For Internal Use</div>
+        <div>{{invoice.otherRemark || '--'}}</div>
+      </mat-card>
     </div>
 
     <div class="col-lg-6">
-      <button [routerLink]="['/releaseorders', invoice.releaseOrderId]" class="btn btn-outline-primary">View Release Order</button>
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Insertions</label>
 
-      <br><br>
-
-      <h5>Insertions</h5>
-
-      <div class="card my-3">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let item of invoice.insertions">
-            {{toDate(item.date) | date:'dd-MMM-y'}}
-          </li>
-        </ul>
-      </div>
-
-      <ng-container *ngIf="receipts.length != 0">
-        <br>
-
-        <h5>Receipts</h5>
-
-        <div class="card mb-3" *ngFor="let item of receipts">
-          <div class="card-body">
-            <div class="row">
-              <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
-              <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
-            </div>
-            <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
-          </div>
+        <div *ngFor="let item of invoice.insertions">
+          {{toDate(item.date) | date:'dd-MMM-y'}}
         </div>
-      </ng-container>
+      </mat-card>
+
+      <br>
+
+      <mat-card class="mat-elevation-z3" *ngIf="receipts.length != 0">
+        <label class="text-muted">Receipts</label>
+
+        <ng-container *ngFor="let item of receipts; index as i">
+          <hr *ngIf="i">
+          
+          <div class="row">
+            <a class="col" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
+            <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
+          </div>
+          
+          <div>
+            <span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}} <span class="text-muted small">({{item.paymentType | paymentMode}})</span>
+          </div>
+        </ng-container>
+      </mat-card>
     </div>
   </div>
 </div>
