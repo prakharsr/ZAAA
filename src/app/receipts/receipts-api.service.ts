@@ -83,6 +83,18 @@ export class ReceiptsApiService {
     }, { responseType: 'blob' });
   }
 
+  previewReceipthtml(receipt: PaymentReceipt) {
+    return this.api.post('/user/receipt/previewHtml', {
+      receipt: receipt
+    });
+  }
+
+  previewAdvanceReceipthtml(receipt: PaymentReceipt) {
+    return this.api.post('/user/receipt/advanced/previewHtml', {
+      receipt: receipt
+    });
+  }
+
   cancel(receipt: PaymentReceipt) {
     return this.api.post('/user/receipt/cancel', {
       id: receipt.id

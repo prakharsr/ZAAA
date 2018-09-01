@@ -194,9 +194,9 @@
                 </div>
               </div>
 
-              <div class="d-none d-lg-block my-2">
-                <br><br>
-              </div>
+              <mat-form-field>
+                <input [disabled]="edit" matInput type="number" placeholder="SAC (9983)" [(ngModel)]="releaseorder.sac" name="sac">
+              </mat-form-field>
 
               <div class="text-right">
                 <button mat-mini-fab type="button" *ngIf="!edit" color="primary" (click)="addClient()" matTooltip="Add to Directory">

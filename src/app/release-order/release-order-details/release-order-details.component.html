@@ -19,8 +19,9 @@
         <br>
 
         <div class="d-none d-md-block">
-          <button mat-raised-button color="primary" class="mb-2 bg-success" (click)="generate()" *ngIf="!releaseOrder.generated">Generate</button>
-
+          <button mat-raised-button color="primary" class="mb-2 bg-success" (click)="generate()" *ngIf="!releaseOrder.generated">
+            <mat-icon>done</mat-icon> Generate
+          </button>
           <button mat-raised-button color="primary" class="mb-2 bg-primary" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" (click)="pdf()">
             <mat-icon>get_app</mat-icon> Download
           </button>
@@ -49,6 +50,7 @@
             <div class="form-row">
               <div class="col" *ngIf="!releaseOrder.generated">
                 <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" (click)="generate()">
+                  <mat-icon>done</mat-icon>
                   <div class="small">Generate</div>
                 </button>
               </div>
@@ -178,6 +180,9 @@
             <div>{{releaseOrder.clientGSTIN.GSTType}} {{releaseOrder.clientGSTIN.GSTNo}}</div>
           </div>
         </div>
+
+        <div class="small text-muted mt-2">SAC</div>
+        <div>{{releaseOrder.sac || '--'}}</div>
       </mat-card>
     </div>
   </div>

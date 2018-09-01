@@ -1,11 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators';
 import { PaymentReceipt } from '../payment-receipt';
 import { Invoice, InvoiceDir, InvoiceApiService } from 'app/invoice';
 import { MediaHouse, Client, Executive } from 'app/directory';
 import { ReceiptsApiService } from '../receipts-api.service';
 import { NotificationService, OptionsService, DialogService } from 'app/services';
 import { SelectInvoiceComponent } from '../select-invoice/select-invoice.component';
+import { PreviewComponent } from '../../components/preview/preview.component';
 
 @Component({
   selector: 'app-receipt',
@@ -19,6 +27,8 @@ export class ReceiptComponent implements OnInit {
   mediaHouse: MediaHouse;
   client: Client;
   executive: Executive;
+
+  submitting = false;
 
   pastReceipts: PaymentReceipt[] = [];
 
@@ -54,19 +64,163 @@ export class ReceiptComponent implements OnInit {
     private options: OptionsService,
     private dialog: DialogService) { }
 
-  submit () {
-    this.receipt.paymentAmountWords = this.options.amountToWords(this.receipt.paymentAmount);
+  submit () : Observable<any> {
 
-    this.api.createReceipt(this.receipt).subscribe(data => {
+    this.submitting = true;
+
+    this.presave()
+    return this.createReceipt();
+
+  }
+
+  private presave() {
+    this.receipt.paymentAmountWords = this.options.amountToWords(this.receipt.paymentAmount);
+  }
+
+  save() {
+    this.submit().subscribe(data => {
       if (data.success) {
         this.goBack();
       }
-      else {
-        console.log(data);
+      else this.submitting = false;
+    });
+  }
 
-        this.notifications.show(data.msg);
+  saveAndGen() {
+    this.confirmGeneration().subscribe(confirm=> {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.gen(this.receipt);
+          }
+          else this.submitting = false;
+        });
       }
     });
+  }
+
+  saveAndSendMsg() {
+    this.confirmGeneration().subscribe(confirm => {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.sendMsg(this.receipt);
+          }
+          else this.submitting = false;
+        });
+      }
+    });
+  }
+
+  genPreview() {
+    if (!this.presave()) {
+      return;
+    }
+
+    this.api.previewReceipthtml(this.receipt).subscribe(data => {
+      this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
+        switch (response) {
+          case 'save':
+            this.save();
+            break;
+
+          case 'dl':
+            this.saveAndGen();
+            break;
+
+          case 'mail':
+            this.saveAndSendMsg();
+            break;
+        }
+      });
+    });
+  }
+
+  private createReceipt() {
+    return this.api.createReceipt(this.receipt).pipe(
+      map(data => {
+        if (data.success) {
+          this.receipt.id = data.msg;
+        }
+        else {
+          this.notifications.show(data.msg);
+        }
+
+        return data;
+      })
+    );
+  }
+
+  gen(receipt: PaymentReceipt, preview = false) {
+    this.api.createReceipt(this.receipt).subscribe(data => {
+      if (data.msg) {
+        this.notifications.show(data.msg);
+      }
+      else {
+        console.log(data);
+        
+        let blob = new Blob([data], { type: 'application/pdf' });
+        let url = URL.createObjectURL(blob);
+
+        let a = document.createElement('a');
+        a.setAttribute('style', 'display:none;');
+        document.body.appendChild(a);
+        a.href = url;
+        if (preview) {
+          a.setAttribute("target", "_blank");
+        }
+        else {
+          a.download = 'receipt.pdf';
+        }
+        a.click();
+      }
+    });
+  }
+
+  sendMsg(receipt: PaymentReceipt) {
+    this.dialog.getMailingDetails().subscribe(mailingDetails => {
+      if (mailingDetails) {
+        this.api.sendMail(receipt, mailingDetails).subscribe(data => {
+          if (data.success) {
+            this.notifications.show("Sent Successfully");
+          }
+          else {
+            console.log(data);
+
+            this.notifications.show(data.msg);
+          }
+        });
+      }
+    });
+  }
+
+  handleSubmit(valid: boolean, callbackName: string) {
+    if (valid) {
+      switch (callbackName) {
+        case 'save':
+          this.save();
+          break;
+        
+        case 'dl':
+          this.saveAndGen();
+          break;
+        
+        case 'preview':
+          this.genPreview();
+          break;
+
+        case 'mail':
+          this.saveAndSendMsg();
+          break;
+      }
+    }
+    else this.notifications.show('Fix errors before submitting');
+  }
+
+
+  private confirmGeneration() : Observable<boolean> {
+
+    return this.dialog.showYesNo('Confirm Generation', "Payment Receipt will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
   }
 
   private goBack() {

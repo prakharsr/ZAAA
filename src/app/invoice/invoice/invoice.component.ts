@@ -123,20 +123,28 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveAndGen() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.invoice);
+    this.confirmGeneration().subscribe(confirm=> {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.gen(this.invoice);
+          }
+          else this.submitting = false;
+        });
       }
-      else this.submitting = false;
     });
   }
 
   saveAndSendMsg() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.sendMsg(this.invoice);
+    this.confirmGeneration().subscribe(confirm => {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.sendMsg(this.invoice);
+          }
+          else this.submitting = false;
+        });
       }
-      else this.submitting = false;
     });
   }
 
@@ -162,6 +170,11 @@ export class InvoiceComponent implements OnInit {
         }
       });
     });
+  }
+
+  private confirmGeneration() : Observable<boolean> {
+
+    return this.dialog.showYesNo('Confirm Generation', "Invoice will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
   }
 
   gen(invoice: Invoice, preview = false) {
