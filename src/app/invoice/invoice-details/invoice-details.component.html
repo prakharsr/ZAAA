@@ -9,7 +9,61 @@
 
         <br>
 
-        <button [routerLink]="['/releaseorders', invoice.releaseOrderId]" class="btn btn-outline-primary">View Release Order</button>
+        <div class="d-none d-md-block">
+          <button mat-raised-button color="primary" class="mb-2 bg-primary" [routerLink]="['/releaseorders', invoice.releaseOrderId]">
+            <mat-icon>call_made</mat-icon> View Release Order
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-primary" (click)="gen(invoice)">
+            <mat-icon>get_app</mat-icon> Download
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-info" (click)="sendMsg(invoice)">
+            <mat-icon>mail</mat-icon> Send Email
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-success" (click)="createPaymentReceipt(invoice)">
+            <mat-icon>add</mat-icon> Create Payment Receipt
+          </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-primary" (click)="linkAdvanceReceipt(invoice)">
+            <mat-icon>content_copy</mat-icon> Link Advance Receipt
+          </button>
+        </div>
+
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" [routerLink]="['/releaseorders', invoice.releaseOrderId]">
+                  <mat-icon>call_made</mat-icon>
+                  <div class="small">View R.O.</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="gen(invoice)">
+                  <mat-icon>get_app</mat-icon>
+                  <div class="small">Downl.</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" (click)="sendMsg(invoice)">
+                  <mat-icon>mail</mat-icon>
+                  <div class="small">Email</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" (click)="createPaymentReceipt(invoice)">
+                  <mat-icon>add</mat-icon>
+                  <div class="small">Create Rcpt</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="linkAdvanceReceipt(invoice)">
+                  <mat-icon>content_copy</mat-icon>
+                  <div class="small">Link Adv. Rcpt</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-toolbar>
+
       </div>
       <div class="col-md-5">
         <div class="small text-muted mt-2">Final Amount (Net Amount + Tax)</div>
