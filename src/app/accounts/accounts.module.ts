@@ -4,7 +4,6 @@ import { AccountsRoutingModule } from './accounts-routing.module';
 
 import {
   MediaHouseInvoiceComponent,
-  MediaHouseInvoiceDialogComponent,
   AccountsHomeComponent,
   ClientReceiptsComponent,
   ClientInvoicePaymentsComponent,
@@ -17,7 +16,6 @@ import { CreateNoteComponent } from './create-note/create-note.component';
 import { SummarySheetComponent } from './summary-sheet/summary-sheet.component';
 import { MediaHouseInvoiceListComponent } from './media-house-invoice-list/media-house-invoice-list.component';
 import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
-import { PaymentDetailsDialogComponent } from './payment-details-dialog/payment-details-dialog.component';
 
 @NgModule({
   imports: [
@@ -26,7 +24,6 @@ import { PaymentDetailsDialogComponent } from './payment-details-dialog/payment-
   ],
   declarations: [
     MediaHouseInvoiceComponent,
-    MediaHouseInvoiceDialogComponent,
     AccountsHomeComponent,
     ClientReceiptsComponent,
     ClientInvoicePaymentsComponent,
@@ -36,12 +33,7 @@ import { PaymentDetailsDialogComponent } from './payment-details-dialog/payment-
     CreateNoteComponent,
     SummarySheetComponent,
     MediaHouseInvoiceListComponent,
-    MediaHouseReceiptComponent,
-    PaymentDetailsDialogComponent
-  ],
-  entryComponents: [
-    MediaHouseInvoiceDialogComponent,
-    PaymentDetailsDialogComponent
+    MediaHouseReceiptComponent
   ]
 })
 export class AccountsModule { }
