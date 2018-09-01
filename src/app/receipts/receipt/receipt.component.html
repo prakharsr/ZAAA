@@ -113,29 +113,39 @@
     </div>
     <div class="col-md">
       <mat-card class="mat-elevation-z3">
-        <div class="text-muted small">Invoice No</div>
-        <div class="mb-2">{{invoice.invoiceNO}}</div>
-
-        <div class="text-muted small">Publication</div>
-        <div>{{invoice.publicationName}} - {{invoice.publicationEdition}}</div>
-
-        <div class="text-muted small">Client</div>
-        <div>{{invoice.clientName}}</div>
+        <div class="row">
+          <div class="col-md">
+            <div class="text-muted small mt-2">Invoice No</div>
+            <div class="mb-2">{{invoice.invoiceNO}}</div>
+          </div>
+          <div class="col-md">
+            <div class="text-muted small mt-2">Publication</div>
+            <div>{{invoice.publicationName}} - {{invoice.publicationEdition}}</div>
+    
+            <div class="text-muted small mt-2">Client</div>
+            <div>{{invoice.clientName}}</div>
+          </div>
+        </div>
 
         <ng-container *ngIf="pastReceipts.length != 0">
+          <hr>
+
+          <h5 class="text-muted">Past Receipts</h5>
+
           <br>
 
-          <h5>Past Receipts</h5>
-
-          <div class="card mb-3" *ngFor="let item of pastReceipts">
-            <div class="card-body">
-              <div class="row">
-                <a class="col text-muted" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
-                <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
-              </div>
-              <div><span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}}</div>
+          <ng-container *ngFor="let item of pastReceipts; index as i">
+            <hr *ngIf="i">
+            
+            <div class="row">
+              <a class="col" [routerLink]="['/receipts', item._id]">{{item.receiptNO}}</a>
+              <div class="col-auto text-muted small">{{item.createdAt | date:'dd-MMM-y'}}</div>
             </div>
-          </div>
+            
+            <div>
+              <span class="text-muted">Amount:</span> ₹ {{item.paymentAmount}} <span class="text-muted small">({{item.paymentType | paymentMode}})</span>
+            </div>
+          </ng-container>
         </ng-container>
       </mat-card>
     </div>
