@@ -1,0 +1,9 @@
+label.text-muted {
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .card-h100 {
+        height: calc(100% - 15px);
+    }
+}
