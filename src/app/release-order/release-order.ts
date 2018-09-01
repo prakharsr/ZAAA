@@ -19,6 +19,8 @@ export class ReleaseOrder {
     id: string;
 
     date: Date;
+
+    sac: number;
     
     releaseOrderNO = "";
     
