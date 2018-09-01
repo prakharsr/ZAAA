@@ -9,7 +9,6 @@ import {
   ReceiptDetailsComponent
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
-import { SelectInvoiceComponent } from './select-invoice/select-invoice.component';
 import { ReceiptsRoutingModule } from './receipts-routing.module';
 
 @NgModule({
@@ -23,11 +22,7 @@ import { ReceiptsRoutingModule } from './receipts-routing.module';
     ReceiptDetailsComponent,
     AdvanceReceiptComponent,
     LinkAdvanceComponent,
-    CreateReceiptComponent,
-    SelectInvoiceComponent
-  ],
-  entryComponents: [
-    SelectInvoiceComponent
+    CreateReceiptComponent
   ]
 })
 export class ReceiptsModule { }
