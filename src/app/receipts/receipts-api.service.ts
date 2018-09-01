@@ -89,12 +89,6 @@ export class ReceiptsApiService {
     });
   }
 
-  previewAdvanceReceipthtml(receipt: PaymentReceipt) {
-    return this.api.post('/user/receipt/advanced/previewHtml', {
-      receipt: receipt
-    });
-  }
-
   cancel(receipt: PaymentReceipt) {
     return this.api.post('/user/receipt/cancel', {
       id: receipt.id

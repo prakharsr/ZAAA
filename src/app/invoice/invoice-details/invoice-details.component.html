@@ -10,7 +10,7 @@
         <br>
 
         <div class="d-none d-md-block">
-          <button mat-raised-button color="primary" class="mb-2 bg-primary" [routerLink]="['/releaseorders', invoice.releaseOrderId]">
+          <button mat-raised-button color="primary" class="mb-2 bg-info" [routerLink]="['/releaseorders', invoice.releaseOrderId]">
             <mat-icon>call_made</mat-icon> View Release Order
           </button>
           <button mat-raised-button color="primary" class="mb-2 bg-primary" (click)="gen(invoice)">
@@ -23,7 +23,7 @@
             <mat-icon>add</mat-icon> Create Payment Receipt
           </button>
           <button mat-raised-button color="primary" class="mb-2 bg-primary" (click)="linkAdvanceReceipt(invoice)">
-            <mat-icon>content_copy</mat-icon> Link Advance Receipt
+            <mat-icon>link</mat-icon> Link Advance Receipt
           </button>
         </div>
 
@@ -39,7 +39,7 @@
               <div class="col">
                 <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="gen(invoice)">
                   <mat-icon>get_app</mat-icon>
-                  <div class="small">Downl.</div>
+                  <div class="small">Download</div>
                 </button>
               </div>
               <div class="col">
@@ -51,12 +51,12 @@
               <div class="col">
                 <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" (click)="createPaymentReceipt(invoice)">
                   <mat-icon>add</mat-icon>
-                  <div class="small">Create Rcpt</div>
+                  <div class="small">Receipt</div>
                 </button>
               </div>
               <div class="col">
                 <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="linkAdvanceReceipt(invoice)">
-                  <mat-icon>content_copy</mat-icon>
+                  <mat-icon>link</mat-icon>
                   <div class="small">Link Adv. Rcpt</div>
                 </button>
               </div>

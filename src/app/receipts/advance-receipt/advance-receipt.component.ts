@@ -133,7 +133,7 @@ export class AdvanceReceiptComponent implements OnInit {
       return;
     }
 
-    this.api.previewAdvanceReceipthtml(this.receipt).subscribe(data => {
+    this.api.previewReceipthtml(this.receipt).subscribe(data => {
       this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
         switch (response) {
           case 'save':
