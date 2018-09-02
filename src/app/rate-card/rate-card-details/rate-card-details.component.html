@@ -1,15 +1,55 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container">Rate Cards</div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<br>
-
 <div class="container">
-  <button *ngIf="!ratecard.global" class="fab bg-info" [routerLink]="['/ratecards/edit', ratecard.id]">
-    <mat-icon>edit</mat-icon>
-  </button>
+  <br>
+
+  <mat-card class="mat-elevation-z3">
+    <h5 style="font-weight: lighter">Rate Card</h5>
+    <ng-container *ngIf="ratecard.global">
+      <div class="text-info">GLOBAL</div>
+    </ng-container>
+
+    <div class="d-none d-md-block mt-3">
+      <button *ngIf="!isSuperAdmin" mat-raised-button color="primary" class="mb-2" (click)="createReleaseOrder(ratecard)">
+        <mat-icon>add</mat-icon> Create Release Order
+      </button>
+      <ng-container *ngIf="!global || (global && isSuperAdmin)">
+        <button mat-raised-button color="primary" class="mb-2 bg-info" [routerLink]="[isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'edit', ratecard.id]">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-raised-button color="warn" class="mb-2" (click)="deleteRateCard(ratecard)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </ng-container>
+    </div>
+
+    <mat-toolbar class="d-md-none fixed-bottom">
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="col" *ngIf="!isSuperAdmin">
+            <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="createReleaseOrder(ratecard)">
+              <mat-icon>add</mat-icon>
+              <div class="small">Create R.O.</div>
+            </button>
+          </div>
+          <ng-container *ngIf="!global || (global && isSuperAdmin)">
+            <div class="col">
+              <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" [routerLink]="[isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'edit', ratecard.id]">
+                <mat-icon>edit</mat-icon>
+                <div class="small">Edit</div>
+              </button>
+            </div>
+            <div class="col">
+              <button color="primary" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="deleteRateCard(ratecard)">
+                <mat-icon>delete</mat-icon>
+                <div class="small">Delete</div>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-toolbar>
+  </mat-card>
+
+  <br>
 
   <div class="row">
     <div class="col-lg-6">
@@ -26,12 +66,6 @@
             <div class="row">
               <div class="col-md-4">Ad Type</div>
               <div class="col-md-8">{{ratecard.adType}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate Card Type</div>
-              <div class="col-md-8">{{ratecard.rateCardType}}</div>
             </div>
           </li>
         </ul>
