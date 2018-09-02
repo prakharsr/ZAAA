@@ -117,4 +117,20 @@ export class RateCardDetailsComponent implements OnInit {
     }
     else this.navigateToReleaseOrder(ratecard);
   }
+
+  get rateText() {
+    if (this.isTypeLen) {
+      //return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
+
+      return "Rate per sqcm";
+    }
+
+    if (this.isTypeWords) {
+      return "Rate per insertion";
+    }
+
+    if (this.isTypeTime) {
+      return "Rate per sec";
+    }
+  }
 }
