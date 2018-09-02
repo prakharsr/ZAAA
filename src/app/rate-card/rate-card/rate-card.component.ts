@@ -123,8 +123,7 @@ export class RateCardComponent implements OnInit {
   searchEdition = (text: Observable<string>) => {
     return text.debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => this.mediaHouseApi.searchMediaHousesByEdition(term,
-        this.mediaHouse ? (this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse) : null))
+      .switchMap(term => this.mediaHouseApi.searchMediaHousesByEdition(term, this.mediaHouseName))
       .catch(() => of([]));
   }
 
@@ -283,11 +282,8 @@ export class RateCardComponent implements OnInit {
   copyCovered() {
     let covered = new Covered();
 
-    if (this.mediaHouse) {
-      covered.covMediaHouse = this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
-    }
-
-    covered.covEdition = this.rateCard.bookingEdition;
+    covered.covMediaHouse = this.mediaHouseName;
+    covered.covEdition = this.editionName;
 
     this.rateCard.covered.push(covered);
   }
@@ -354,13 +350,21 @@ export class RateCardComponent implements OnInit {
     )
   }
 
+  private get editionName() {
+    return this.edition && this.edition.address && this.edition.address.edition
+    ? this.edition.address.edition : this.edition;
+  }
+
+  private get mediaHouseName() {
+    return this.mediaHouse && this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
+  }
+
   submit () {
     this.rateCard.categories = [];
 
-    this.rateCard.mediaHouseName = this.mediaHouse && this.mediaHouse.pubName ? this.mediaHouse.pubName : this.mediaHouse;
+    this.rateCard.mediaHouseName = this.mediaHouseName;
 
-    this.rateCard.bookingEdition = this.edition && this.edition.address && this.edition.address.edition
-      ? this.edition.address.edition : this.edition;
+    this.rateCard.bookingEdition = this.editionName;
 
     this.selectedCategories.forEach(element => {
       if (element) {
