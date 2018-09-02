@@ -69,23 +69,25 @@
       <br>
 
       <mat-card class="mat-elevation-z3 card-h100">
-        <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', receipt.mediahouseID]">Media Houses Details</a>
+        <ng-container *ngIf="receipt.mediahouseID">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', receipt.mediahouseID]">Media Houses Details</a>
 
-        <div class="row">
-          <div class="col">
-            <div class="small text-muted mt-1">Name</div>
-            <div>{{receipt.publicationName}}</div>
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-1">Name</div>
+              <div>{{receipt.publicationName}}</div>
+            </div>
+            <div class="col">
+              <div class="small text-muted mt-1">Edition</div>
+              <div>{{receipt.publicationEdition}}</div>
+            </div>
           </div>
-          <div class="col">
-            <div class="small text-muted mt-1">Edition</div>
-            <div>{{receipt.publicationEdition}}</div>
-          </div>
-        </div>
 
-        <div class="small text-muted mt-1">State</div>
-        <div>{{receipt.publicationState}}</div>
-        
-        <hr>
+          <div class="small text-muted mt-1">State</div>
+          <div>{{receipt.publicationState}}</div>
+          
+          <hr>
+        </ng-container>
         
         <a matTooltip="View in Directory" [routerLink]="['/dir/clients', receipt.clientID]">Client Details</a>
 

@@ -6,11 +6,10 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import { map } from 'rxjs/operators';
 import { RateCardApiService } from '../rate-card-api.service';
 import { MediaHouseApiService, MediaHouse, Pullout } from 'app/directory';
-import { NotificationService, OptionsService } from 'app/services';
-import { RateCard, Category, FixSize, Scheme, Covered, Remark, Tax } from '../rate-card';
+import { NotificationService, OptionsService, DialogService } from 'app/services';
+import { RateCard, FixSize, Scheme, Covered, Remark, Tax } from '../rate-card';
 import { SuperAdminApiService } from '../../super-admin/super-admin-api.service';
 
 @Component({
@@ -37,10 +36,11 @@ export class RateCardComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService,
     private notifications: NotificationService,
     private options: OptionsService,
-    private superAdminApi: SuperAdminApiService) { }
+    private superAdminApi: SuperAdminApiService,
+    private dialog: DialogService) { }
 
   rateCard = new RateCard();
-  selectedCategories: Category[] = [null, null, null, null, null, null];
+  selectedCategories: string[] = [null, null, null, null, null, null];
 
   get isTypeWords() {
 
@@ -102,67 +102,12 @@ export class RateCardComponent implements OnInit {
       this.dropdownPullOutName = this.others;
       this.customPullOutName = this.rateCard.pullOutName;
 
-      this.buildCategoryTree();
-    }
-  }
-
-  private buildCategoryTree() {
-    let c : Category = this.categories.find(p => p.name == this.rateCard.categories[0]);
-
-    if (c) {
-      this.category1 = c;
-
-      let i = 1;
-
-      while (i < this.rateCard.categories.length && c.subcategories.length > 0) {
-        c = c.subcategories.find(p => p.name == this.rateCard.categories[i]);
-
-        if (c) {
-          this.setCategory(i, c);
-
-          ++i;
+      if (this.rateCard.categories) {
+        for (let i = 0; i < this.selectedCategories.length && i < this.rateCard.categories.length; ++i) {
+          this.selectedCategories[i] = this.rateCard.categories[i];
         }
-        else break;
       }
     }
-  }
-
-  findSubCategories(category: Category, query: string): Category[] {
-    let result : Category[] = [];
-
-    if (category.name.toLowerCase().indexOf(query.toLowerCase()) != -1) {
-      result.push(category);
-    }
-
-    if (category.subcategories) {
-      category.subcategories.forEach(subCategory => {
-        this.findSubCategories(subCategory, query).forEach(a => result.push(a));
-      });
-    }
-
-    return result;
-  }
-
-  findCategories(query: string): Category[]  {
-    let result : Category[] = [];
-
-    if (query) {
-      this.categories.forEach(element => {
-        this.findSubCategories(element, query).forEach(a => result.push(a));
-      });
-    }
-
-    return result;
-
-  }
-
-  searchCategories = (text: Observable<string>) => {
-    return text.debounceTime(300)
-      .distinctUntilChanged()
-      .pipe(
-        map(term => this.findCategories(term))
-      )
-      .catch(() => of([]));
   }
 
   mediaHouse;
@@ -207,43 +152,7 @@ export class RateCardComponent implements OnInit {
   
   editionResultFormatter = (result: MediaHouse) => result.address.edition;
 
-  categoryInputFormatter = (result: Category) => {
-    let stack : Category[] = [];
-
-    while (result) {
-      stack.push(result);
-      result = result.parent;
-    }
-
-    let i = 0;
-
-    while (stack.length) {
-      this.setCategory(i, stack.pop());
-
-      ++i;
-    }
-  }
-
-  categoryResultFormatter = (result: Category) => {
-    let stack : Category[] = [];
-
-    while (result) {
-      stack.push(result);
-      result = result.parent;
-    }
-
-    let formatted = stack.pop().name;
-
-    while (stack.length) {
-      formatted += " > " + stack.pop().name;
-    }
-
-    return formatted;
-  }
-
   ngOnInit() {
-    this.categories = this.options.categories;
-
     this.route.paramMap.subscribe(params => {
       if (params.has('id')) {
         this.id = params.get('id');
@@ -337,38 +246,17 @@ export class RateCardComponent implements OnInit {
       return "Rate per sec";
     }
   }
-  
-  categories: Category[];
 
-  getCategory(index: number) {
-    return this.selectedCategories[index];
+  getCategories() {
+    this.dialog.getCategoriesDetails({
+      categories: this.selectedCategories,
+      fixedLevel: -1
+    }).subscribe(data => {
+      if (data) {
+        this.selectedCategories = data.selectedCategories.map(M => M ? M.name : null);
+      }
+    });
   }
-
-  setCategory(index: number, category: Category) {
-    if (this.selectedCategories[index] == category) {
-      return;
-    }
-
-    this.selectedCategories[index] = category;
-
-    for (let i = index + 1; i < this.selectedCategories.length; ++i) {
-      this.setCategory(i, null);
-    }
-  }
-
-  get category1() { return this.getCategory(0); }
-  get category2() { return this.getCategory(1); }
-  get category3() { return this.getCategory(2); }
-  get category4() { return this.getCategory(3); }
-  get category5() { return this.getCategory(4); }
-  get category6() { return this.getCategory(5); }
-
-  set category1(category: Category) { this.setCategory(0, category); }
-  set category2(category: Category) { this.setCategory(1, category); }
-  set category3(category: Category) { this.setCategory(2, category); }
-  set category4(category: Category) { this.setCategory(3, category); }
-  set category5(category: Category) { this.setCategory(4, category); }
-  set category6(category: Category) { this.setCategory(5, category); }
 
   addFixSize() {
     this.rateCard.fixSizes.push(new FixSize());
@@ -476,7 +364,7 @@ export class RateCardComponent implements OnInit {
 
     this.selectedCategories.forEach(element => {
       if (element) {
-        this.rateCard.categories.push(element.name);
+        this.rateCard.categories.push(element);
       }
     });
 

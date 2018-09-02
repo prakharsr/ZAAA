@@ -13,11 +13,9 @@ import { ReleaseOrderApiService } from '../release-order-api.service';
 import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
 
 import {
-  Category,
   RateCard,
   FixSize,
   Scheme,
-  RateCardApiService
 } from 'app/rate-card';
 
 import {
@@ -63,7 +61,6 @@ export class ReleaseOrderComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
     private executiveApi: ExecutiveApiService,
-    private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
     private notifications: NotificationService,
     public options: OptionsService,

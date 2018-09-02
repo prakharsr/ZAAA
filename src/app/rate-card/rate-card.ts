@@ -74,11 +74,3 @@ export class Tax {
     included = true;
     rate = 0;
 }
-
-export class Category {
-    constructor(public name: string, public subcategories: Category[] = []) {
-        subcategories.forEach(elememt => elememt.parent = this);
-    }
-
-    parent: Category;
-}
