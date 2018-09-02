@@ -68,7 +68,7 @@
     <div [class.container-fluid]="sidenav.opened" [class.container]="!sidenav.opened">
       <form (ngSubmit)="submitted = true" #roForm="ngForm">
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Publication Details</mat-card-title>
@@ -151,7 +151,7 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Client Details</mat-card-title>
@@ -210,7 +210,7 @@
         <br>
 
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Ad Details</mat-card-title>
@@ -409,7 +409,7 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Premiums</mat-card-title>
@@ -533,13 +533,13 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="!isTypeWords">
-                <div class="row">
-                  <div class="col">
+                <div class="form-row">
+                  <div class="col-sm-7">
                     <mat-form-field>
                       <input matInput placeholder="Type" name="premiumType" [(ngModel)]="releaseorder.PremiumCustom.PremiumType" #premiumTypeField="ngModel">
                     </mat-form-field>
                   </div>
-                  <div class="col">
+                  <div class="col-sm-5">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                       <span matPrefix>{{releaseorder.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
@@ -561,7 +561,7 @@
         <br>
 
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>
@@ -703,7 +703,7 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Additional Details (for Agency use)</mat-card-title>

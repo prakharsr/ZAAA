@@ -14,50 +14,58 @@
 <div class="container">
   <form (ngSubmit)="submit()" #rateCardForm="ngForm">
     <div class="row">
-      <div class="col-lg col-md-6">
+      <div class="col-lg-6">
         <br>
         <mat-card>
           <mat-card-title>Booking Center</mat-card-title>
-          <mat-form-field>
-            <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
-            <mat-error *ngIf="mediaHouseNameField.errors?.required">
-              Media House Name is required.
-            </mat-error>
-          </mat-form-field>
+
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field>
+                <input matInput type="text" [ngbTypeahead]="searchMediaHouse" id="mediaHouseName" placeholder="Media House Name" [(ngModel)]="mediaHouse" name="mediaHouseName" required #mediaHouseNameField="ngModel" [resultFormatter]="mediaHouseResultFormatter" [inputFormatter]="mediaHouseInputFormatter">
+                <mat-error *ngIf="mediaHouseNameField.errors?.required">
+                  Media House Name is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field>
+                <input matInput type="text" id="bookingEdition" [ngbTypeahead]="searchEdition" placeholder="Edition" [(ngModel)]="edition" name="bookingEdition" required #bookingEditionField="ngModel" [resultFormatter]="editionResultFormatter" [inputFormatter]="editionInputFormatter">
+                <mat-error *ngIf="bookingEditionField.errors?.required">
+                  Booking Edition is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
   
-          <div class="row">
-          <mat-form-field class="col-md">
-            <input matInput type="text" id="bookingEdition" [ngbTypeahead]="searchEdition" placeholder="Edition" [(ngModel)]="edition" name="bookingEdition" required #bookingEditionField="ngModel" [resultFormatter]="editionResultFormatter" [inputFormatter]="editionInputFormatter">
-            <mat-error *ngIf="bookingEditionField.errors?.required">
-              Booking Edition is required.
-            </mat-error>
-          </mat-form-field>
-          <div class="col-md">
-            <mat-form-field>
-              <mat-select name="mediaType" placeholder="Media Type" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
-                <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+          <div class="form-row">   
+            <div class="col">
+              <mat-form-field>
+                <mat-select name="mediaType" placeholder="Media Type" [(ngModel)]="mediaType" id="mediaType" #mediaTypeField="ngModel" required>
+                  <mat-option *ngFor="let item of mediaTypes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-          <div class="col-md">
-            <mat-form-field>
-              <mat-select name="adType" placeholder="Ad Type" [(ngModel)]="rateCard.adType" id="adType" #adTypeField="ngModel" required>
-                <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div class="col">
+              <mat-form-field>
+                <mat-select name="adType" placeholder="Ad Type" [(ngModel)]="rateCard.adType" id="adType" #adTypeField="ngModel" required>
+                  <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-          <!-- Will be used in future -->
-          <div class="col-md" *ngIf="false">
+          </div>
+
+          <!-- <div class="col-md">
             <mat-form-field>
               <mat-select name="rateCardType" placeholder="Rate Card Type" [(ngModel)]="rateCard.rateCardType" id="rateCardType" #rateCardTypeField="ngModel" required>
                 <mat-option *ngFor="let item of rateCardTypes" [value]="item">{{item}}</mat-option>
               </mat-select>
             </mat-form-field>
-            </div>
-          </div>
-  
+          </div> -->
+
           <ng-container *ngIf="mediaType == 'Print'">
-            <label>Pullout Name</label>
+            <hr>
+            <label class="text-muted">Pullout Name</label>
   
             <div class="form-row">
               <div class="col">
@@ -82,7 +90,8 @@
             </div>
           </ng-container>
 
-          <label>Enter Covered</label>
+          <hr>
+          <label class="text-muted">Covered</label>
           <div class="text-muted" *ngIf="rateCard.covered.length == 0">
             No Covered
           </div>
@@ -90,20 +99,24 @@
           <div *ngFor="let item of rateCard.covered; index as i" class="mb-1">
             <div class="form-row">
               <div class="col">
-                <mat-form-field>
-                  <input matInput placeholder="Media House" name="covMediaHouse-{{i}}" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
-                  <mat-error *ngIf="covMediaHouseField.errors?.required">
-                    Media House is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field>
-                  <input matInput placeholder="Edition" name="covEdition-{{i}}" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
-                  <mat-error *ngIf="covEditionField.errors?.required">
-                    Edition is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="form-row">
+                  <div class="col">
+                    <mat-form-field>
+                      <input matInput placeholder="Media House" name="covMediaHouse-{{i}}" [(ngModel)]="item.covMediaHouse" required #covMediaHouseField="ngModel">
+                      <mat-error *ngIf="covMediaHouseField.errors?.required">
+                        Media House is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field>
+                      <input matInput placeholder="Edition" name="covEdition-{{i}}" [(ngModel)]="item.covEdition" required #covEditionField="ngModel">
+                      <mat-error *ngIf="covEditionField.errors?.required">
+                        Edition is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
               </div>
               <div class="col-auto col-form-label">
                 <button mat-icon-button color="warn" type="button" (click)="removeCovered(i)">
@@ -113,64 +126,80 @@
             </div>
           </div>
   
-          <mat-action-row>
-            <button mat-button type="button" color="primary" (click)="copyCovered()">Copy from Above</button>
-            <button mat-button type="button" color="primary" (click)="addCovered()">Add More</button>
-          </mat-action-row>
-
+          <br>
+          <button mat-raised-button type="button" color="primary" (click)="copyCovered()">Copy from Above</button>
+          <button mat-raised-button type="button" color="primary" (click)="addCovered()">
+            <mat-icon>add</mat-icon> Add More
+          </button>
         </mat-card>
       </div>
 
-      <div class="col-lg col-md-6">
+      <div class="col-lg-6">
         <br>
         <mat-card>
           <mat-card-title>Premiums and Categories</mat-card-title>
           <ng-container *ngIf="isTypeWords">
             <!-- <p class="text-muted">Enter Amounts for the following Premiums</p> -->
   
-            <div class="row">
-              <mat-form-field class="col-md">
-                <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="rateCard.PremiumBox" required #premiumBoxField="ngModel">
-                <mat-error *ngIf="premiumBoxField.errors?.required">
-                  Box Premium Amount is required.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field class="col-md">
-                <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="rateCard.PremiumBaseColour" required #premiumBaseColourField="ngModel">
-                <mat-error *ngIf="premiumBaseColourField.errors?.required">
-                  Base Colour Premium Amount is required.
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field class="col-md">
-                <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="rateCard.PremiumCheckMark" required #premiumCheckMarkField="ngModel">
-                <mat-error *ngIf="premiumCheckMarkField.errors?.required">
-                  Check Mark Premium Amount is required.
-                </mat-error>
-              </mat-form-field>
+            <div class="form-row">
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="rateCard.PremiumBox" required #premiumBoxField="ngModel">
+                  <mat-error *ngIf="premiumBoxField.errors?.required">
+                    Box Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="rateCard.PremiumBaseColour" required #premiumBaseColourField="ngModel">
+                  <mat-error *ngIf="premiumBaseColourField.errors?.required">
+                    Base Colour Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="rateCard.PremiumCheckMark" required #premiumCheckMarkField="ngModel">
+                  <mat-error *ngIf="premiumCheckMarkField.errors?.required">
+                    Check Mark Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="rateCard.PremiumEmailId" required #premiumEmailIdField="ngModel">
+                  <mat-error *ngIf="premiumEmailIdField.errors?.required">
+                    Email Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="rateCard.PremiumWebsite" required #premiumWebsiteField="ngModel">
+                  <mat-error *ngIf="premiumWebsiteField.errors?.required">
+                    Website Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col col-sm-6 col-md-4">
+                <mat-form-field>
+                  <span matPrefix>₹&nbsp;</span>
+                  <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
+                  <mat-error *ngIf="premiumExtraWordsField.errors?.required">
+                    Extra Words / Lines Premium Amount is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
             </div>
-          <div class="row">
-            <mat-form-field class="col-md">
-              <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="rateCard.PremiumEmailId" required #premiumEmailIdField="ngModel">
-              <mat-error *ngIf="premiumEmailIdField.errors?.required">
-                Email Premium Amount is required.
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-md">
-              <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="rateCard.PremiumWebsite" required #premiumWebsiteField="ngModel">
-              <mat-error *ngIf="premiumWebsiteField.errors?.required">
-                Website Premium Amount is required.
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-md">
-              <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="rateCard.PremiumExtraWords" required #premiumExtraWordsField="ngModel">
-              <mat-error *ngIf="premiumExtraWordsField.errors?.required">
-                Extra Words / Lines Premium Amount is required.
-              </mat-error>
-            </mat-form-field>
-          </div>
           </ng-container>
           <ng-container *ngIf="!isTypeWords">
-            <div class="row">
+            <div class="form-ow">
               <div class="col">
                 <mat-form-field>
                   <input matInput placeholder="Type" name="premiumType" [(ngModel)]="rateCard.PremiumCustom.PremiumType" #premiumTypeField="ngModel">
@@ -188,7 +217,10 @@
             </div>
             <mat-checkbox class="my-2" name="premiumPercent" [(ngModel)]="rateCard.PremiumCustom.Percentage">Amount in Percentage</mat-checkbox>
           </ng-container>
-          <label>Categories</label>
+
+          <hr>
+
+          <label class="text-muted">Categories</label>
   
           <div class="input-group">
             <div class="input-group-prepend">
@@ -261,7 +293,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg col-md-6">
+      <div class="col-lg-6">
         <br>
         <mat-card>
           <mat-card-title>Ad and Tax Details</mat-card-title>
@@ -292,7 +324,7 @@
               <mat-form-field class="col-md">
                 <input matInput type="number" id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
                 <mat-error *ngIf="maxWordsField.errors?.required">
-                    Maximum Words / Lines is required.
+                  Maximum Words / Lines is required.
                 </mat-error>
               </mat-form-field>
             </div>
@@ -467,7 +499,7 @@
           </mat-card>
       </div>
   
-      <div class="col-lg col-md-6">
+      <div class="col-lg-6">
         <br>
         <mat-card>
           <mat-card-title>Schemes and Remarks</mat-card-title>
