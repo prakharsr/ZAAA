@@ -136,9 +136,7 @@
         <br>
         <mat-card>
           <mat-card-title>Premiums and Categories</mat-card-title>
-          <ng-container *ngIf="isTypeWords">
-            <!-- <p class="text-muted">Enter Amounts for the following Premiums</p> -->
-  
+          <ng-container *ngIf="isTypeWords">  
             <div class="form-row">
               <div class="col col-sm-6 col-md-4">
                 <mat-form-field>
@@ -197,7 +195,7 @@
             </div>
           </ng-container>
           <ng-container *ngIf="!isTypeWords">
-            <div class="form-ow">
+            <div class="form-row">
               <div class="col">
                 <mat-form-field>
                   <input matInput placeholder="Type" name="premiumType" [(ngModel)]="rateCard.PremiumCustom.PremiumType" #premiumTypeField="ngModel">
@@ -205,6 +203,7 @@
               </div>
               <div class="col">
                 <mat-form-field>
+                  <span matPrefix>{{rateCard.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
                   <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="rateCard.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                   <span matSuffix>{{rateCard.PremiumCustom.Percentage ? '%' : ''}}</span>
                   <mat-error *ngIf="premiumAmountField.errors?.required">
