@@ -98,6 +98,7 @@
   
           <div *ngFor="let item of rateCard.covered; index as i" class="mb-1">
             <div class="form-row">
+              <div class="col-auto text-muted align-self-center">#{{i + 1}}</div>
               <div class="col">
                 <div class="form-row">
                   <div class="col">
@@ -370,8 +371,7 @@
                     <mat-error *ngIf="minWidthField.errors?.required">
                       Minimum Width is required.
                     </mat-error>
-                  </mat-form-field>
-          
+                  </mat-form-field>          
                 </div>
               </div>
             </div>
@@ -385,8 +385,7 @@
                     <mat-error *ngIf="maxLengthField.errors?.required">
                       Maximum Length is required.
                     </mat-error>
-                  </mat-form-field>
-          
+                  </mat-form-field>          
                 </div>
                 <div class="col-auto form-text">&times;</div>
                 <div class="col">
@@ -395,8 +394,7 @@
                     <mat-error *ngIf="maxWidthField.errors?.required">
                       Maximum Width is required.
                     </mat-error>
-                  </mat-form-field>
-          
+                  </mat-form-field>          
                 </div>
               </div>
             </div>
@@ -412,7 +410,6 @@
                 <mat-datepicker #validFrom disabled="false"></mat-datepicker>    
               </mat-form-field>
             </div>
-            <label class="col-auto align-self-center">to</label>
             <div class="col-sm">
               <mat-form-field>
                 <input matInput [matDatepicker]="validTill" placeholder="Valid Till" [(ngModel)]="rateCard.validTill" name="validTill" disabled>
@@ -422,7 +419,7 @@
             </div>
           </div>
 
-          <div  *ngIf="isTypeLen">
+          <div *ngIf="isTypeLen">
             <div class="text-muted" *ngIf="rateCard.fixSizes.length == 0">
               No Fix Sizes
             </div>
@@ -461,78 +458,83 @@
               </div>
             </div>
 
-              <mat-action-row>
-                <button mat-button type="button" color="primary" (click)="addFixSize()">Add More</button>
-              </mat-action-row>
-            </div>
+            <mat-action-row>
+              <button mat-button type="button" color="primary" (click)="addFixSize()">Add More</button>
+            </mat-action-row>
+          </div>
 
-            <label>Enter Taxes</label>
-            <div class="text-muted" *ngIf="rateCard.taxes.length == 0">
-              No Taxes
-            </div>
+          <label>Enter Taxes</label>
+          <div class="text-muted" *ngIf="rateCard.taxes.length == 0">
+            No Taxes
+          </div>
 
-            <div *ngFor="let item of rateCard.taxes; index as i" class="mb-1">
-              <div class="form-row">
-                <div class="col-auto align-self-center">
-                  <mat-checkbox name="taxIncluded-{{i}}" [(ngModel)]="item.included">Included</mat-checkbox>
-                </div>
-                <div class="col-auto">&nbsp;</div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
-                    <mat-error *ngIf="rateField.errors?.required">
-                      Rate is required.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-auto col-form-label">
-                  <button mat-icon-button color="warn" type="button" (click)="removeTax(i)">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </div>
+          <div *ngFor="let item of rateCard.taxes; index as i" class="mb-1">
+            <div class="form-row">
+              <div class="col-auto align-self-center">
+                <mat-checkbox name="taxIncluded-{{i}}" [(ngModel)]="item.included">Included</mat-checkbox>
+              </div>
+              <div class="col-auto">&nbsp;</div>
+              <div class="col">
+                <mat-form-field>
+                  <input type="number" matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
+                  <mat-error *ngIf="rateField.errors?.required">
+                    Rate is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-auto col-form-label">
+                <button mat-icon-button color="warn" type="button" (click)="removeTax(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </div>
+          </div>
 
-            <mat-action-row>
-              <button mat-button type="button" color="primary" (click)="addTax()">Add More</button>
-            </mat-action-row>
-          </mat-card>
+          <mat-action-row>
+            <button mat-button type="button" color="primary" (click)="addTax()">Add More</button>
+          </mat-action-row>
+        </mat-card>
       </div>
   
       <div class="col-lg-6">
         <br>
         <mat-card>
           <mat-card-title>Schemes and Remarks</mat-card-title>
-          <label>Enter Schemes</label>
-          <div class="text-muted" *ngIf="rateCard.schemes.length == 0">
+          
+          <label class="text-muted">Schemes</label>
+          <div class="text-muted mb-1" *ngIf="rateCard.schemes.length == 0">
             No Schemes
           </div>
   
           <div *ngFor="let item of rateCard.schemes; index as i" class="mb-1">
             <div class="form-row">
               <div class="col">
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Paid" name="paid-{{i}}" [(ngModel)]="item.paid" required #paidField="ngModel">
-                  <mat-error *ngIf="paidField.errors?.required">
-                    Paid is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Free" name="free-{{i}}" [(ngModel)]="item.Free" required #freeField="ngModel">
-                  <mat-error *ngIf="freeField.errors?.required">
-                    Free is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col">
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Time Limit" name="timeLimit-{{i}}" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
-                  <mat-error *ngIf="timeLimitField.errors?.required">
-                    Time Limit is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="form-row">
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input type="number" matInput placeholder="Paid" name="paid-{{i}}" [(ngModel)]="item.paid" required #paidField="ngModel">
+                      <mat-error *ngIf="paidField.errors?.required">
+                        Paid is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input type="number" matInput placeholder="Free" name="free-{{i}}" [(ngModel)]="item.Free" required #freeField="ngModel">
+                      <mat-error *ngIf="freeField.errors?.required">
+                        Free is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input type="number" matInput placeholder="Time Limit" name="timeLimit-{{i}}" [(ngModel)]="item.timeLimit" required #timeLimitField="ngModel">
+                      <mat-error *ngIf="timeLimitField.errors?.required">
+                        Time Limit is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
               </div>
               <div class="col-auto col-form-label">
                 <button mat-icon-button color="warn" type="button" (click)="removeScheme(i)">
@@ -541,18 +543,22 @@
               </div>
             </div>
           </div>
-  
-          <mat-action-row>
-            <button mat-button type="button" color="primary" (click)="addScheme()">Add More</button>
-          </mat-action-row>
-          <br>
-          <label>Enter Remarks</label>
-          <div class="text-muted" *ngIf="rateCard.remarks.length == 0">
+
+          <button class="mt-2" mat-raised-button type="button" color="primary" (click)="addScheme()">
+            <mat-icon>add</mat-icon> Add More
+          </button>
+          
+          <hr>
+
+          <label class="text-muted">Remarks</label>
+
+          <div class="text-muted mb-1" *ngIf="rateCard.remarks.length == 0">
             No Remarks
           </div>
   
           <div *ngFor="let item of rateCard.remarks; index as i" class="mb-1">
             <div class="form-row">
+              <div class="col-auto text-muted align-self-center">#{{i + 1}}</div>
               <div class="col">
                 <mat-form-field>
                   <input matInput placeholder="Remark" name="remark-{{i}}" [(ngModel)]="item.remark" required #remarkField="ngModel">
@@ -569,9 +575,9 @@
             </div>
           </div>
   
-          <mat-action-row>
-            <button mat-button type="button" color="primary" (click)="addRemark()">Add More</button>
-          </mat-action-row>
+          <button class="mt-2" mat-raised-button type="button" color="primary" (click)="addRemark()">
+            <mat-icon>add</mat-icon> Add More
+          </button>
 
         </mat-card>
       </div>
