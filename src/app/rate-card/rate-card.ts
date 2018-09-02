@@ -56,7 +56,7 @@ export class FixSize {
 }
 
 export class Scheme {
-    paid = 0;
+    paid = 1;
     Free = 0;
     timeLimit = 0;
 }

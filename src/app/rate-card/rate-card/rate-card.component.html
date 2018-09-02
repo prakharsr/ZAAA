@@ -480,12 +480,17 @@
               </div>
               <div class="col-auto">&nbsp;</div>
               <div class="col">
-                <mat-form-field>
-                  <input type="number" matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
-                  <mat-error *ngIf="rateField.errors?.required">
-                    Rate is required.
-                  </mat-error>
-                </mat-form-field>
+                <div class="form-row">
+                  <div class="col-12">
+                    <mat-form-field>
+                      <input type="number" matInput placeholder="Rate" name="taxRate-{{i}}" [(ngModel)]="item.rate" required #rateField="ngModel">
+                      <span matSuffix>%</span>
+                      <mat-error *ngIf="rateField.errors?.required">
+                        Rate is required.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
               </div>
               <div class="col-auto col-form-label">
                 <button mat-icon-button color="warn" type="button" (click)="removeTax(i)">
