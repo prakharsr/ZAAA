@@ -294,30 +294,31 @@
         <br>
         <mat-card>
           <mat-card-title>Ad and Tax Details</mat-card-title>
-          <div class="row">
-            <mat-form-field class="col-md">
-              <input matInput type="number" id="rate" placeholder="Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
+          <div class="form-row">
+            <mat-form-field class="col-6">
+              <span matPrefix>₹&nbsp;</span>
+              <input matInput type="number" id="rate" [placeholder]="rateText" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
               <mat-error *ngIf="rateField.errors?.required">
                 Rate is empty or invalid.
               </mat-error>
             </mat-form-field>
       
-            <mat-form-field class="col-md">
+            <!-- <mat-form-field class="col-md">
               <mat-select placeholder="Unit" name="unit" [(ngModel)]="rateCard.unit" id="unit" #unitField="ngModel" required>
                 <mat-option *ngFor="let item of units" [value]="item">{{item}}</mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
           
-            <div *ngIf="isTypeTime">
-              <mat-form-field class="col-md">
+            <div *ngIf="isTypeTime" class="col-6">
+              <mat-form-field>
                 <mat-select placeholder="Ad Time" name="adTime" [(ngModel)]="rateCard.AdTime" id="adTime" #adTimeField="ngModel" required>
                   <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
 
-            <div *ngIf="isTypeWords">
-              <mat-form-field class="col-md">
+            <div *ngIf="isTypeWords" class="col-6">
+              <mat-form-field>
                 <input matInput type="number" id="maxWords" placeholder="Maximum Words / Lines" [(ngModel)]="rateCard.AdWordsMax" name="maxWords" required #maxWordsField="ngModel">
                 <mat-error *ngIf="maxWordsField.errors?.required">
                   Maximum Words / Lines is required.
@@ -325,8 +326,8 @@
               </mat-form-field>
             </div>
 
-            <div *ngIf="isTypeLen">
-              <mat-form-field class="col-md">
+            <div *ngIf="isTypeLen" class="col-6">
+              <mat-form-field>
                 <mat-select placeholder="Position" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
                   <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
                 </mat-select>
@@ -335,8 +336,10 @@
                 </mat-error>
               </mat-form-field>
             </div>
+          </div>
 
-            <mat-form-field class="col-md">
+          <div *ngIf="isTypeLen">
+            <mat-form-field>
               <mat-select placeholder="Hue" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
                 <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
               </mat-select>
@@ -344,9 +347,7 @@
                 Hue is required.
               </mat-error>
             </mat-form-field>
-          </div>
 
-          <div *ngIf="isTypeLen">
             <hr>
 
             <label class="text-muted">Minimum Size Limit</label>

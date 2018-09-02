@@ -80,11 +80,13 @@ export class RateCardComponent implements OnInit {
   private initNew() {
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
-    this.rateCard.unit = this.units[0];
+    // this.rateCard.unit = this.units[0];
     this.rateCard.position = this.positions[0];
     this.rateCard.hue = this.hues[0];
     this.rateCard.AdTime = this.adTimes[0];
     this.dropdownPullOutName = this.others;
+
+    this.rateCard.rate = null;
   }
 
   private initEdit(data: RateCard) {
@@ -281,7 +283,7 @@ export class RateCardComponent implements OnInit {
     this.rateCard.mediaType = mediaType;
 
     this.rateCard.adType = this.adTypes[0];
-    this.rateCard.unit = this.units[0];
+    // this.rateCard.unit = this.units[0];
   }
 
   get adTypes() {
@@ -301,23 +303,39 @@ export class RateCardComponent implements OnInit {
 
   rateCardTypes = ['Local', 'Regional', 'Corporate'];
 
-  get units() {
-    let result = [];
+  // get units() {
+  //   let result = [];
 
+  //   if (this.isTypeLen) {
+  //     result.push('Sqcm');
+  //   }
+
+  //   if (this.isTypeWords) {
+  //     result.push('Words');
+  //     result.push('Lines');
+  //   }
+
+  //   if (this.isTypeTime) {
+  //     result.push('sec');
+  //   }
+
+  //   return result;
+  // }
+
+  get rateText() {
     if (this.isTypeLen) {
-      result.push('Sqcm');
+      //return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
+
+      return "Rate per sqcm";
     }
 
     if (this.isTypeWords) {
-      result.push('Words');
-      result.push('Lines');
+      return "Rate per insertion";
     }
 
     if (this.isTypeTime) {
-      result.push('sec');
+      return "Rate per sec";
     }
-
-    return result;
   }
 
   get positions() {
