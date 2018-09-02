@@ -64,13 +64,10 @@
           </div> -->
 
           <ng-container *ngIf="mediaType == 'Print'">
-            <hr>
-            <label class="text-muted">Pullout Name</label>
-  
             <div class="form-row">
               <div class="col">
                 <mat-form-field>
-                  <mat-select name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
+                  <mat-select placeholder="Pullout Name" name="pullOutName" [(ngModel)]="dropdownPullOutName" id="pullOutName" #pullOutNameField="ngModel" required>
                     <mat-option *ngFor="let item of pullouts" [value]="item.Name">{{item.Name}}</mat-option>
                     <mat-option [value]="others">{{others}}</mat-option>
                   </mat-select>
@@ -298,7 +295,6 @@
         <br>
         <mat-card>
           <mat-card-title>Ad and Tax Details</mat-card-title>
-          <label>Rate</label>
           <div class="row">
             <mat-form-field class="col-md">
               <input matInput type="number" id="rate" placeholder="Rate" [(ngModel)]="rateCard.rate" name="rate" required #rateField="ngModel">
@@ -351,56 +347,54 @@
             </mat-form-field>
           </div>
 
-          <div class="row">
-            <div class="col-md">
-              <label>Minimum Size Limit</label>
-              <div class="form-row">
-                <div class="col">
-                  <mat-form-field>
-                    <input matInput type="number" id="minLength" placeholder="Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
-                    <mat-error *ngIf="minLengthField.errors?.required">
-                      Minimum Length is required.
-                    </mat-error>
-                  </mat-form-field>
-          
-                </div>
-                <div class="col-auto form-text">&times;</div>
-                <div class="col">
-                  <mat-form-field>
-                    <input matInput type="number" id="minWidth" placeholder="Minimum Width" [(ngModel)]="rateCard.minWidth" name="minWidth" required #minWidthField="ngModel">
-                    <mat-error *ngIf="minWidthField.errors?.required">
-                      Minimum Width is required.
-                    </mat-error>
-                  </mat-form-field>          
-                </div>
+          <div *ngIf="isTypeLen">
+            <hr>
+
+            <label class="text-muted">Minimum Size Limit</label>
+            <div class="form-row">
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" id="minLength" placeholder="Minimum Length" [(ngModel)]="rateCard.minLength" name="minLength" required #minLengthField="ngModel">
+                  <mat-error *ngIf="minLengthField.errors?.required">
+                    Minimum Length is required.
+                  </mat-error>
+                </mat-form-field>
+        
+              </div>
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" id="minWidth" placeholder="Minimum Width" [(ngModel)]="rateCard.minWidth" name="minWidth" required #minWidthField="ngModel">
+                  <mat-error *ngIf="minWidthField.errors?.required">
+                    Minimum Width is required.
+                  </mat-error>
+                </mat-form-field>          
               </div>
             </div>
-            
-            <div class="col-md">
-              <label>Maximum Size Limit</label>
-              <div class="form-row">
-                <div class="col">
-                  <mat-form-field>
-                    <input matInput type="number" id="maxLength" placeholder="Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
-                    <mat-error *ngIf="maxLengthField.errors?.required">
-                      Maximum Length is required.
-                    </mat-error>
-                  </mat-form-field>          
-                </div>
-                <div class="col-auto form-text">&times;</div>
-                <div class="col">
-                  <mat-form-field>
-                    <input matInput type="number" id="maxWidth" placeholder="Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
-                    <mat-error *ngIf="maxWidthField.errors?.required">
-                      Maximum Width is required.
-                    </mat-error>
-                  </mat-form-field>          
-                </div>
+
+            <label class="text-muted">Maximum Size Limit</label>
+            <div class="form-row">
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" id="maxLength" placeholder="Maximum Length" [(ngModel)]="rateCard.maxLength" name="maxLength" required #maxLengthField="ngModel">
+                  <mat-error *ngIf="maxLengthField.errors?.required">
+                    Maximum Length is required.
+                  </mat-error>
+                </mat-form-field>          
+              </div>
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" id="maxWidth" placeholder="Maximum Width" [(ngModel)]="rateCard.maxWidth" name="maxWidth" required #maxWidthField="ngModel">
+                  <mat-error *ngIf="maxWidthField.errors?.required">
+                    Maximum Width is required.
+                  </mat-error>
+                </mat-form-field>          
               </div>
             </div>
           </div>
 
-          <label>Validity</label>
+          <hr>
+
+          <label class="text-muted my-0">Validity</label>
 
           <div class="form-row">
             <div class="col-sm">
@@ -420,7 +414,11 @@
           </div>
 
           <div *ngIf="isTypeLen">
-            <div class="text-muted" *ngIf="rateCard.fixSizes.length == 0">
+            <hr>
+
+            <label class="text-muted">Fix Sizes</label>
+
+            <div class="text-muted mb-2" *ngIf="rateCard.fixSizes.length == 0">
               No Fix Sizes
             </div>
     
@@ -458,13 +456,15 @@
               </div>
             </div>
 
-            <mat-action-row>
-              <button mat-button type="button" color="primary" (click)="addFixSize()">Add More</button>
-            </mat-action-row>
+            <button mat-raised-button class="mt-1" type="button" color="primary" (click)="addFixSize()">
+              <mat-icon>add</mat-icon> Add More
+            </button>
           </div>
 
-          <label>Enter Taxes</label>
-          <div class="text-muted" *ngIf="rateCard.taxes.length == 0">
+          <hr>
+
+          <label class="text-muted">Taxes</label>
+          <div class="text-muted mb-2" *ngIf="rateCard.taxes.length == 0">
             No Taxes
           </div>
 
@@ -490,9 +490,9 @@
             </div>
           </div>
 
-          <mat-action-row>
-            <button mat-button type="button" color="primary" (click)="addTax()">Add More</button>
-          </mat-action-row>
+          <button mat-raised-button class="mt-1" type="button" color="primary" (click)="addTax()">
+            <mat-icon>add</mat-icon> Add More
+          </button>
         </mat-card>
       </div>
   
@@ -502,7 +502,7 @@
           <mat-card-title>Schemes and Remarks</mat-card-title>
           
           <label class="text-muted">Schemes</label>
-          <div class="text-muted mb-1" *ngIf="rateCard.schemes.length == 0">
+          <div class="text-muted mb-2" *ngIf="rateCard.schemes.length == 0">
             No Schemes
           </div>
   
@@ -544,7 +544,7 @@
             </div>
           </div>
 
-          <button class="mt-2" mat-raised-button type="button" color="primary" (click)="addScheme()">
+          <button class="mt-1" mat-raised-button type="button" color="primary" (click)="addScheme()">
             <mat-icon>add</mat-icon> Add More
           </button>
           
@@ -552,7 +552,7 @@
 
           <label class="text-muted">Remarks</label>
 
-          <div class="text-muted mb-1" *ngIf="rateCard.remarks.length == 0">
+          <div class="text-muted mb-2" *ngIf="rateCard.remarks.length == 0">
             No Remarks
           </div>
   
@@ -575,7 +575,7 @@
             </div>
           </div>
   
-          <button class="mt-2" mat-raised-button type="button" color="primary" (click)="addRemark()">
+          <button class="mt-1" mat-raised-button type="button" color="primary" (click)="addRemark()">
             <mat-icon>add</mat-icon> Add More
           </button>
 
