@@ -107,7 +107,49 @@
       <mat-card class="mat-elevation-z3">
         <label class="text-muted">Premiums</label>
 
-        <p class="text-muted">PREMIUMS NOT DONE</p>
+        <table *ngIf="isTypeWords">
+          <tr>
+            <td class="text-muted pr-5">Box:</td>
+            <td>₹ {{ratecard.PremiumBox}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Base Colour:</td>
+            <td>₹ {{ratecard.PremiumBaseColour}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Check Mark:</td>
+            <td>₹ {{ratecard.PremiumCheckMark}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Email:</td>
+            <td>₹ {{ratecard.PremiumEmailId}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Website:</td>
+            <td>₹ {{ratecard.PremiumWebsite}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Extra Words:</td>
+            <td>₹ {{ratecard.PremiumExtraWords}}</td>
+          </tr>
+        </table>
+
+        <div *ngIf="!isTypeWords">
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-2">Name</div>
+              <div>{{ratecard.PremiumCustom.PremiumType}}</div>
+            </div>
+            <div class="col">
+              <div class="small text-muted mt-2">Amount</div>
+              <div>
+                <span *ngIf="!ratecard.PremiumCustom.Percentage">₹</span>
+                {{ratecard.PremiumCustom.Amount}}
+                <span *ngIf="ratecard.PremiumCustom.Percentage">%</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <hr>
 
