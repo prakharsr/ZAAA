@@ -425,28 +425,33 @@
             <div *ngFor="let item of rateCard.fixSizes; index as i" class="mb-1">
               <div class="form-row">
                 <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Length" name="length-{{i}}" [(ngModel)]="item.length" required #lengthField="ngModel">
-                    <mat-error *ngIf="lengthField.errors?.required">
-                      Length is required.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Width" name="width-{{i}}" [(ngModel)]="item.width" required #widthField="ngModel">
-                    <mat-error *ngIf="widthField.errors?.required">
-                      Width is required.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field>
-                    <input type="number" matInput placeholder="Amount" name="amount-{{i}}" [(ngModel)]="item.amount" required #amountField="ngModel">
-                    <mat-error *ngIf="amountField.errors?.required">
-                      Amount is required.
-                    </mat-error>
-                  </mat-form-field>
+                  <div class="form-row">
+                    <div class="col-4">
+                      <mat-form-field>
+                        <input type="number" matInput placeholder="Length" name="length-{{i}}" [(ngModel)]="item.length" required #lengthField="ngModel">
+                        <mat-error *ngIf="lengthField.errors?.required">
+                          Length is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                      <mat-form-field>
+                        <input type="number" matInput placeholder="Width" name="width-{{i}}" [(ngModel)]="item.width" required #widthField="ngModel">
+                        <mat-error *ngIf="widthField.errors?.required">
+                          Width is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                      <mat-form-field>
+                        <span matPrefix>₹&nbsp;</span>
+                        <input type="number" matInput placeholder="Amount" name="amount-{{i}}" [(ngModel)]="item.amount" required #amountField="ngModel">
+                        <mat-error *ngIf="amountField.errors?.required">
+                          Amount is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
                 </div>
                 <div class="col-auto col-form-label">
                   <button mat-icon-button color="warn" type="button" (click)="removeFixSize(i)">
