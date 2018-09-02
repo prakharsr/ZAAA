@@ -328,26 +328,26 @@
 
             <div *ngIf="isTypeLen" class="col-6">
               <mat-form-field>
-                <mat-select placeholder="Position" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
-                  <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
+                <mat-select placeholder="Hue" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
+                  <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="positionField.errors?.required">
-                  Position is required.
+                <mat-error *ngIf="hueField.errors?.required">
+                  Hue is required.
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
 
-          <div *ngIf="isTypeLen">
-            <mat-form-field>
-              <mat-select placeholder="Hue" name="hue" [(ngModel)]="rateCard.hue" id="hue" #hueField="ngModel" required>
-                <mat-option *ngFor="let hue of hues" [value]="hue">{{hue}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="hueField.errors?.required">
-                Hue is required.
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field *ngIf="mediaType == 'Print'">
+            <mat-select placeholder="Position" name="position" [(ngModel)]="rateCard.position" id="position" #positionField="ngModel" required>
+              <mat-option *ngFor="let item of options.positions" [value]="item">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="positionField.errors?.required">
+              Position is required.
+            </mat-error>
+          </mat-form-field>
 
+          <div *ngIf="isTypeLen">
             <hr>
 
             <label class="text-muted">Minimum Size Limit</label>

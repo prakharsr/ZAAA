@@ -280,7 +280,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.mediaType = this.mediaTypes[0];
     this.releaseorder.adHue = this.hues[0];
     // this.releaseorder.unit = this.units[0];
-    this.releaseorder.adPosition = this.positions[0];
+    this.releaseorder.adPosition = this.options.positions[0];
     this.selectedTax = this.taxes[1];
     this.releaseorder.paymentType = 'Credit';
 
@@ -598,12 +598,6 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   adTimes = ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-
-  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
-             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
-             'Entertainment','Automobile','Education','Health','Editorial','World','National',
-             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
-             'Right Hand Side','Left Hand Side' ];
 
   // get units() {
   //   let result = [];

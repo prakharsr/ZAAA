@@ -81,7 +81,7 @@ export class RateCardComponent implements OnInit {
     this.mediaType = this.mediaTypes[0];
     this.rateCard.rateCardType = this.rateCardTypes[0];
     // this.rateCard.unit = this.units[0];
-    this.rateCard.position = this.positions[0];
+    this.rateCard.position = this.options.positions[0];
     this.rateCard.hue = this.hues[0];
     this.rateCard.AdTime = this.adTimes[0];
     this.dropdownPullOutName = this.others;
@@ -336,16 +336,6 @@ export class RateCardComponent implements OnInit {
     if (this.isTypeTime) {
       return "Rate per sec";
     }
-  }
-
-  get positions() {
-    let result = ['Classified', 'Back Page', 'Jacket', 'Prime Time'];
-
-    for (let i = 1; i <= 8; ++i) {
-      result.push('Page ' + i);
-    }
-
-    return result;
   }
   
   categories: Category[];

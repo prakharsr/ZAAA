@@ -217,14 +217,14 @@
 
               <div class="form-row">
                 <mat-form-field class="col">
-                  <mat-select matInput name="adType" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
+                  <mat-select matInput name="adType" placeholder="Ad Type" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="col" *ngIf="mediaType == 'Print'">
-                  <mat-select matInput name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
-                    <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
+                  <mat-select matInput name="position" placeholder="Position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+                    <mat-option *ngFor="let item of options.positions" [value]="item">{{item}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="positionField.errors?.required">
                     Position is required.
@@ -232,7 +232,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="col" *ngIf="isTypeTime">
-                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
+                  <mat-select matInput name="adTime" placeholder="Ad Time" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
                     <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
