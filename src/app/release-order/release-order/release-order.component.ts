@@ -229,6 +229,18 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
 
+  initExecutive() {
+    this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
+      this.releaseorder.paymentBankName = data.firm.bankName;
+
+      let exe = new Executive();
+      exe.executiveName = data.user.name;
+      exe.orgName = data.firm.name;
+
+      this.executive = exe;
+    });
+  }
+
   ngOnInit() {
     this.dropdownPullOutName = this.others;
 
@@ -256,16 +268,6 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.initNew();
-
-        this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
-          this.releaseorder.paymentBankName = data.firm.bankName;
-
-          let exe = new Executive();
-          exe.executiveName = data.user.name;
-          exe.orgName = data.firm.name;
-
-          this.executive = exe;
-        });
       }
     });
   }
@@ -283,6 +285,8 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.paymentType = 'Credit';
 
     this.releaseorder.rate = null;
+
+    this.initExecutive();
   }
 
   private initFromReleaseOrder() {
@@ -399,13 +403,15 @@ export class ReleaseOrderComponent implements OnInit {
 
       this.buildCategoryTree(rateCard.categories);
 
-      this.mediaHouseApi.searchMediaHouses(rateCard.mediaHouseName).subscribe(data => {
+      this.mediaHouseApi.searchMediaHousesByEdition(rateCard.bookingEdition, rateCard.mediaHouseName).subscribe(data => {
         if (data && data.length > 0) {
           this.mediaHouse = data[0];
 
           this.initMediaHouse(this.mediaHouse);
         }
       });
+
+      this.initExecutive();
     }
   }
 

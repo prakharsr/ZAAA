@@ -96,7 +96,9 @@ const routes: Routes = [
         path: 'fromRateCard/:rateCard',
         component: ReleaseOrderComponent,
         resolve: {
-          rateCard: RateCardResolver
+          rateCard: RateCardResolver,
+          user: UserProfileResolver,
+          firm: FirmResolver
         },
         canActivate: [CreateRoGuard]
       },
