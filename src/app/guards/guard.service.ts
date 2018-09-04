@@ -53,6 +53,14 @@ export class UserCache {
   private user: UserProfile;
   private firm: Firm;
   private plan: Plan;
+
+  get current(): UserCacheDetails {
+    return {
+      user: this.user,
+      firm: this.firm,
+      plan: this.plan
+    }
+  }
 }
 
 @Injectable()
