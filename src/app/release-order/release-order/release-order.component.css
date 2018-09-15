@@ -19,7 +19,7 @@ mat-card {
     padding: 15px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     mat-card {
         height: 100%;
     }

@@ -13,11 +13,9 @@ import { ReleaseOrderApiService } from '../release-order-api.service';
 import { StateApiService, NotificationService, OptionsService, DialogService } from 'app/services';
 
 import {
-  Category,
   RateCard,
   FixSize,
   Scheme,
-  RateCardApiService
 } from 'app/rate-card';
 
 import {
@@ -63,7 +61,6 @@ export class ReleaseOrderComponent implements OnInit {
     private mediaHouseApi: MediaHouseApiService,
     private clientApi: ClientApiService,
     private executiveApi: ExecutiveApiService,
-    private rateCardApi: RateCardApiService,
     public stateApi: StateApiService,
     private notifications: NotificationService,
     public options: OptionsService,
@@ -229,6 +226,18 @@ export class ReleaseOrderComponent implements OnInit {
     });
   }
 
+  initExecutive() {
+    this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
+      this.releaseorder.paymentBankName = data.firm.bankName;
+
+      let exe = new Executive();
+      exe.executiveName = data.user.name;
+      exe.orgName = data.firm.name;
+
+      this.executive = exe;
+    });
+  }
+
   ngOnInit() {
     this.dropdownPullOutName = this.others;
 
@@ -256,16 +265,6 @@ export class ReleaseOrderComponent implements OnInit {
       }
       else {
         this.initNew();
-
-        this.route.data.subscribe((data: { user: UserProfile, firm: Firm }) => {
-          this.releaseorder.paymentBankName = data.firm.bankName;
-
-          let exe = new Executive();
-          exe.executiveName = data.user.name;
-          exe.orgName = data.firm.name;
-
-          this.executive = exe;
-        });
       }
     });
   }
@@ -278,11 +277,13 @@ export class ReleaseOrderComponent implements OnInit {
     this.mediaType = this.mediaTypes[0];
     this.releaseorder.adHue = this.hues[0];
     // this.releaseorder.unit = this.units[0];
-    this.releaseorder.adPosition = this.positions[0];
+    this.releaseorder.adPosition = this.options.positions[0];
     this.selectedTax = this.taxes[1];
     this.releaseorder.paymentType = 'Credit';
 
     this.releaseorder.rate = null;
+
+    this.initExecutive();
   }
 
   private initFromReleaseOrder() {
@@ -399,13 +400,15 @@ export class ReleaseOrderComponent implements OnInit {
 
       this.buildCategoryTree(rateCard.categories);
 
-      this.mediaHouseApi.searchMediaHouses(rateCard.mediaHouseName).subscribe(data => {
+      this.mediaHouseApi.searchMediaHousesByEdition(rateCard.bookingEdition, rateCard.mediaHouseName).subscribe(data => {
         if (data && data.length > 0) {
           this.mediaHouse = data[0];
 
           this.initMediaHouse(this.mediaHouse);
         }
       });
+
+      this.initExecutive();
     }
   }
 
@@ -592,12 +595,6 @@ export class ReleaseOrderComponent implements OnInit {
   }
 
   adTimes = ['Any Time', 'Prime Time ', 'Evening', 'Morning'];
-
-  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
-             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
-             'Entertainment','Automobile','Education','Health','Editorial','World','National',
-             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
-             'Right Hand Side','Left Hand Side' ];
 
   // get units() {
   //   let result = [];

@@ -3,7 +3,7 @@
   <button *ngIf="!invoice" type="button" mat-raised-button color="primary" (click)="selectInvoice()">Select Invoice</button>
 
   <div class="row" *ngIf="invoice">
-    <div class="col-md">
+    <div class="col-md-7">
       <form (ngSubmit)="submit()" #receiptForm="ngForm">
         <mat-card class="mat-elevation-z3">
           <div class="row">
@@ -101,45 +101,45 @@
           </button>
         </div>
   
-    <mat-toolbar class="d-md-none fixed-bottom">
-      <div class="container-fluid">
-        <div class="form-row">
-          <div class="col">
-            <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'save')" color="primary">
-              <mat-icon>check</mat-icon>
-              <div class="small">Save</div>
-            </button>
+        <mat-toolbar class="d-md-none fixed-bottom">
+          <div class="container-fluid">
+            <div class="form-row">
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'save')" color="primary">
+                  <mat-icon>check</mat-icon>
+                  <div class="small">Save</div>
+                </button>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                  <mat-icon>cancel</mat-icon>
+                  <div class="small">Cancel</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'preview')">
+                  <mat-icon>assignment</mat-icon>
+                  <div class="small">Preview</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'dl')">
+                  <mat-icon>get_app</mat-icon>
+                  <div class="small">Download</div>
+                </button>
+              </div>
+              <div class="col">
+                <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'mail')">
+                  <mat-icon>mail</mat-icon>
+                  <div class="small">Send Mail</div>
+                </button>
+              </div>    
+            </div>
           </div>
-          <div class="col">
-            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              <div class="small">Cancel</div>
-            </button>
-          </div>
-          <div class="col">
-            <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'preview')">
-              <mat-icon>assignment</mat-icon>
-              <div class="small">Preview</div>
-            </button>
-          </div>
-          <div class="col">
-            <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'dl')">
-              <mat-icon>get_app</mat-icon>
-              <div class="small">Download</div>
-            </button>
-          </div>
-          <div class="col">
-            <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'mail')">
-              <mat-icon>mail</mat-icon>
-              <div class="small">Send Mail</div>
-            </button>
-          </div>    
-        </div>
-      </div>
-    </mat-toolbar>
-  </form>
-</div>
-    <div class="col-md">
+        </mat-toolbar>
+      </form>
+    </div>
+    <div class="col-md-5">
       <mat-card class="mat-elevation-z3">
         <div class="row">
           <div class="col-md">

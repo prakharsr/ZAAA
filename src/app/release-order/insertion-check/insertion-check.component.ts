@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import { Observable } from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import { MatTableDataSource } from '@angular/material';
 import { InsertionCheckItem } from '../insertion-check-item';
 import { ReleaseOrderApiService } from '../release-order-api.service';
 import { NotificationService, DialogService } from 'app/services';
@@ -26,6 +25,8 @@ import {
 })
 export class InsertionCheckComponent implements OnInit {
 
+  collapsed = true;
+
   insertions: InsertionCheckItem[] = [];
 
   page: number;
@@ -39,6 +40,8 @@ export class InsertionCheckComponent implements OnInit {
   executive;
   executiveOrg;
 
+  pageState: number;
+
   constructor(private dialog: DialogService,
     private route: ActivatedRoute,
     private api: ReleaseOrderApiService,
@@ -49,6 +52,10 @@ export class InsertionCheckComponent implements OnInit {
     private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.pageState = +params.get('state');
+    });
+
     this.route.data.subscribe((data: { resolved: { list: PageData<InsertionCheckItem>, search: ReleaseOrderSearchParams }}) => {
       this.init(data.resolved.list);
 
@@ -196,7 +203,7 @@ export class InsertionCheckComponent implements OnInit {
   }
 
   search(pageNo: number) {
-    this.router.navigate(['/releaseorders/check/list/', pageNo], {
+    this.router.navigate(['/releaseorders/check/list/', this.pageState, pageNo], {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     })
   }

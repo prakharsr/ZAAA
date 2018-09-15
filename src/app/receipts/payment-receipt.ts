@@ -22,9 +22,8 @@ export class PaymentReceipt {
     }
 
     advanced = false;
-}
 
-export class AdvanceReceipt extends PaymentReceipt {
+    mediahouseID = "";
     publicationName = "";
     publicationEdition = "";
     publicationState = "";
@@ -33,6 +32,7 @@ export class AdvanceReceipt extends PaymentReceipt {
         GSTNo: ""
     }
 
+    clientID = "";
     clientName = "";
     clientState = "";
     clientGSTIN = {
@@ -40,6 +40,9 @@ export class AdvanceReceipt extends PaymentReceipt {
         GSTNo: ""
     }
 
+    executiveID = "";
     executiveName = "";
     executiveOrg = "";
 }
+
+export class AdvanceReceipt extends PaymentReceipt { }

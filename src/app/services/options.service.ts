@@ -1,37 +1,15 @@
 import { Injectable } from '@angular/core';
 
-// Prevent circular dependency
-import { Category } from 'app/rate-card/rate-card';
-
 @Injectable()
 export class OptionsService {
 
   constructor() { }
 
-  categories = [
-    new Category('Property', [
-      new Category('Sale')
-    ]),
-    new Category('Education'),
-    new Category('Medical', [
-      new Category('Surgery', [
-        new Category('C', [
-          new Category('Heart Surgery', [
-            new Category('Transplant', [
-              new Category('Deepest')
-            ])
-          ])
-        ]),
-        new Category('R', [
-          new Category('S', [
-            new Category('Deepest')
-          ])
-        ])
-      ])
-    ]),
-    new Category('Women'),
-    new Category('Real Estate')
-  ];
+  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
+             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
+             'Entertainment','Automobile','Education','Health','Editorial','World','National',
+             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
+             'Right Hand Side','Left Hand Side' ];
 
   amountToWords(num) {
     if (!num) {

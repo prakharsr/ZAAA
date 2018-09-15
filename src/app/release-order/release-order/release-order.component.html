@@ -68,7 +68,7 @@
     <div [class.container-fluid]="sidenav.opened" [class.container]="!sidenav.opened">
       <form (ngSubmit)="submitted = true" #roForm="ngForm">
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Publication Details</mat-card-title>
@@ -151,7 +151,7 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Client Details</mat-card-title>
@@ -210,21 +210,21 @@
         <br>
 
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Ad Details</mat-card-title>
 
               <div class="form-row">
                 <mat-form-field class="col">
-                  <mat-select matInput name="adType" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
+                  <mat-select matInput name="adType" placeholder="Ad Type" [(ngModel)]="adType" id="adType" #adTypeField="ngModel" required>
                     <mat-option *ngFor="let item of adTypes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="col" *ngIf="mediaType == 'Print'">
-                  <mat-select matInput name="position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
-                    <mat-option *ngFor="let item of positions" [value]="item">{{item}}</mat-option>
+                  <mat-select matInput name="position" placeholder="Position" [(ngModel)]="releaseorder.adPosition" id="position" #positionField="ngModel" required>
+                    <mat-option *ngFor="let item of options.positions" [value]="item">{{item}}</mat-option>
                   </mat-select>
                   <mat-error *ngIf="positionField.errors?.required">
                     Position is required.
@@ -232,7 +232,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="col" *ngIf="isTypeTime">
-                  <mat-select matInput name="adTime" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
+                  <mat-select matInput name="adTime" placeholder="Ad Time" [(ngModel)]="releaseorder.AdTime" id="adTime" #adTimeField="ngModel" required>
                     <mat-option *ngFor="let item of adTimes" [value]="item">{{item}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -409,13 +409,13 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Premiums</mat-card-title>
               <ng-container *ngIf="isTypeWords">
-                <div class="row">
-                  <div class="col-lg col-md-6">
+                <div class="form-row">
+                  <div class="col-lg-6">
                     <div class="form-row">
                       <div class="col-auto align-self-center">
                         <mat-checkbox name="cBox" [(ngModel)]="releaseorder.PremiumBox.Included"></mat-checkbox>
@@ -431,7 +431,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg col-md-6">
+                  <div class="col-lg-6">
                     <div class="form-row">
                       <div class="col-auto align-self-center">
                         <mat-checkbox name="cBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Included"></mat-checkbox>
@@ -447,21 +447,20 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg col-md-6">
-                    <div class="form-row">
-                      <div class="col-auto align-self-center">
-                        <mat-checkbox name="cCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Included"></mat-checkbox>
-                      </div>
-                      <div class="col">
-                        <mat-form-field>
-                          <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
-                          <mat-error *ngIf="premiumCheckMarkField.errors?.required">
-                            Check Mark Premium Amount is required.
-                          </mat-error>
-                        </mat-form-field>
-                      </div>
-                    </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-auto align-self-center">
+                    <mat-checkbox name="cCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Included"></mat-checkbox>
+                  </div>
+                  <div class="col">
+                    <mat-form-field>
+                      <span matPrefix>₹&nbsp;</span>
+                      <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
+                      <mat-error *ngIf="premiumCheckMarkField.errors?.required">
+                        Check Mark Premium Amount is required.
+                      </mat-error>
+                    </mat-form-field>
                   </div>
                 </div>
                 
@@ -470,21 +469,25 @@
                     <mat-checkbox name="cEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Included"></mat-checkbox>
                   </div>
                   <div class="col">
-                    <mat-form-field>
-                      <span matPrefix>₹&nbsp;</span>
-                      <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdField.errors?.required">
-                        Email Premium Amount is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field>
-                      <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
-                      <mat-error *ngIf="premiumEmailIdQuantityField.errors?.errors.required">
-                        No. of Emails is required.
-                      </mat-error>
-                    </mat-form-field>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
+                          <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
+                          <mat-error *ngIf="premiumEmailIdField.errors?.required">
+                            Email Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field>
+                          <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
+                          <mat-error *ngIf="premiumEmailIdQuantityField.errors?.errors.required">
+                            No. of Emails is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-row">
@@ -492,21 +495,25 @@
                     <mat-checkbox name="cWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Included"></mat-checkbox>
                   </div>
                   <div class="col">
-                    <mat-form-field>
-                      <span matPrefix>₹&nbsp;</span>
-                      <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteField.errors?.required">
-                        Website Premium Amount is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field>
-                      <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
-                      <mat-error *ngIf="premiumWebsiteQuantityField.errors?.errors.required">
-                        No. of Website is required.
-                      </mat-error>
-                    </mat-form-field>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
+                          <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
+                          <mat-error *ngIf="premiumWebsiteField.errors?.required">
+                            Website Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field>
+                          <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
+                          <mat-error *ngIf="premiumWebsiteQuantityField.errors?.errors.required">
+                            No. of Website is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-row">
@@ -514,32 +521,36 @@
                     <mat-checkbox name="cExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Included"></mat-checkbox>
                   </div>
                   <div class="col">
-                    <mat-form-field>
-                      <span matPrefix>₹&nbsp;</span>
-                      <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsField.errors?.required">
-                        Extra Words / Lines Premium Amount is required.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  <div class="col">
-                    <mat-form-field>
-                      <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
-                      <mat-error *ngIf="premiumExtraWordsQuantityField.errors?.required">
-                        No. Extra Words / Lines is required.
-                      </mat-error>
-                    </mat-form-field>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <mat-form-field>
+                          <span matPrefix>₹&nbsp;</span>
+                          <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
+                          <mat-error *ngIf="premiumExtraWordsField.errors?.required">
+                            Extra Words / Lines Premium Amount is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-6">
+                        <mat-form-field>
+                          <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
+                          <mat-error *ngIf="premiumExtraWordsQuantityField.errors?.required">
+                            No. Extra Words / Lines is required.
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </ng-container>
               <ng-container *ngIf="!isTypeWords">
-                <div class="row">
-                  <div class="col">
+                <div class="form-row">
+                  <div class="col-sm-7">
                     <mat-form-field>
                       <input matInput placeholder="Type" name="premiumType" [(ngModel)]="releaseorder.PremiumCustom.PremiumType" #premiumTypeField="ngModel">
                     </mat-form-field>
                   </div>
-                  <div class="col">
+                  <div class="col-sm-5">
                     <mat-form-field>
                       <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                       <span matPrefix>{{releaseorder.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
@@ -561,7 +572,7 @@
         <br>
 
         <div class="row">
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>
@@ -703,7 +714,7 @@
             </mat-card>
           </div>
 
-          <div class="col-lg col-md-6">
+          <div class="col-lg-6">
             <br>
             <mat-card class="mat-elevation-z4">
               <mat-card-title>Additional Details (for Agency use)</mat-card-title>

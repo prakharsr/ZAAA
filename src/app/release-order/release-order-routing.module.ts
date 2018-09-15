@@ -24,14 +24,26 @@ const routes: Routes = [
       {
         path: 'check',
         children: [
-          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
           {
-            path: 'list/:page',
-            component: InsertionCheckComponent,
-            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-            resolve: {
-              resolved: InsertionListResolver
-            }
+            path: 'list',
+            children: [
+              { path: '', redirectTo: '0', pathMatch: 'full' },
+              {
+                path: ':state',
+                children: [
+                  { path: '', redirectTo: '1', pathMatch: 'full' },
+                  {
+                    path: ':page',
+                    component: InsertionCheckComponent,
+                    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                    resolve: {
+                      resolved: InsertionListResolver
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -84,7 +96,9 @@ const routes: Routes = [
         path: 'fromRateCard/:rateCard',
         component: ReleaseOrderComponent,
         resolve: {
-          rateCard: RateCardResolver
+          rateCard: RateCardResolver,
+          user: UserProfileResolver,
+          firm: FirmResolver
         },
         canActivate: [CreateRoGuard]
       },

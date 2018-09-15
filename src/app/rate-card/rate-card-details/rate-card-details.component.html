@@ -1,221 +1,285 @@
-<mat-toolbar>  
-  <mat-toolbar-row>
-    <div class="container">Rate Cards</div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<br>
-
 <div class="container">
-  <button *ngIf="!ratecard.global" class="fab bg-info" [routerLink]="['/ratecards/edit', ratecard.id]">
-    <mat-icon>edit</mat-icon>
-  </button>
+  <br>
+
+  <mat-card class="mat-elevation-z3">
+    <h5 style="font-weight: lighter">Rate Card</h5>
+    <ng-container *ngIf="ratecard.global">
+      <div class="text-info">GLOBAL</div>
+    </ng-container>
+
+    <div class="d-none d-md-block mt-3">
+      <button *ngIf="!isSuperAdmin" mat-raised-button color="primary" class="mb-2" (click)="createReleaseOrder(ratecard)">
+        <mat-icon>add</mat-icon> Create Release Order
+      </button>
+      <ng-container *ngIf="!global || (global && isSuperAdmin)">
+        <button mat-raised-button color="primary" class="mb-2 bg-info" [routerLink]="[isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'edit', ratecard.id]">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-raised-button color="warn" class="mb-2" (click)="deleteRateCard(ratecard)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </ng-container>
+    </div>
+
+    <mat-toolbar class="d-md-none fixed-bottom">
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="col" *ngIf="!isSuperAdmin">
+            <button color="primary" class="btn btn-block btn-outline-primary border-0 btn-sm" (click)="createReleaseOrder(ratecard)">
+              <mat-icon>add</mat-icon>
+              <div class="small">Create R.O.</div>
+            </button>
+          </div>
+          <ng-container *ngIf="!global || (global && isSuperAdmin)">
+            <div class="col">
+              <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" [routerLink]="[isSuperAdmin ? '/superadmin/ratecards' : '/ratecards', 'edit', ratecard.id]">
+                <mat-icon>edit</mat-icon>
+                <div class="small">Edit</div>
+              </button>
+            </div>
+            <div class="col">
+              <button color="primary" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="deleteRateCard(ratecard)">
+                <mat-icon>delete</mat-icon>
+                <div class="small">Delete</div>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-toolbar>
+  </mat-card>
 
   <div class="row">
     <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Rate Card</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Media Type</div>
-              <div class="col-md-8">{{ratecard.mediaType}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Ad Type</div>
-              <div class="col-md-8">{{ratecard.adType}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate Card Type</div>
-              <div class="col-md-8">{{ratecard.rateCardType}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <br>
+      
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Booking Center</label>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Media House Name</div>
+            <div>{{ratecard.mediaHouseName}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Edition</div>
+            <div>{{ratecard.bookingEdition}}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Media Type</div>
+            <div>{{ratecard.mediaType}}</div>                
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Ad Type</div>
+            <div>{{ratecard.adType}}</div>
+          </div>
+        </div>
+
+        <div class="small text-muted mt-2">Pullout Name</div>
+        <div>{{ratecard.pullOutName}}</div>
+
+        <hr>
+
+        <label class="text-muted">Covered</label>
+
+        <div *ngIf="ratecard.covered.length == 0">No Covered</div>
+
+        <table class="table table-sm" *ngIf="ratecard.covered.length">
+          <tr class="text-muted">
+            <td></td>
+            <td>Media House</td>
+            <td>Edition</td>
+          </tr>
+          <tr *ngFor="let cov of ratecard.covered; index as i">
+            <td>#{{i + 1}}</td>
+            <td>{{cov.covMediaHouse}}</td>
+            <td>{{cov.covEdition}}</td>
+          </tr>
+        </table>
+      </mat-card>
     </div>
     <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Booking Center</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Media House Name</div>
-              <div class="col-md-8">{{ratecard.mediaHouseName}}</div>
+      <br>
+
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Premiums</label>
+
+        <table *ngIf="isTypeWords">
+          <tr>
+            <td class="text-muted pr-5">Box:</td>
+            <td>₹ {{ratecard.PremiumBox}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Base Colour:</td>
+            <td>₹ {{ratecard.PremiumBaseColour}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Check Mark:</td>
+            <td>₹ {{ratecard.PremiumCheckMark}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Email:</td>
+            <td>₹ {{ratecard.PremiumEmailId}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Website:</td>
+            <td>₹ {{ratecard.PremiumWebsite}}</td>
+          </tr>
+          <tr>
+            <td class="text-muted pr-5">Extra Words:</td>
+            <td>₹ {{ratecard.PremiumExtraWords}}</td>
+          </tr>
+        </table>
+
+        <div *ngIf="!isTypeWords">
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-2">Name</div>
+              <div>{{ratecard.PremiumCustom.PremiumType}}</div>
             </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Edition</div>
-              <div class="col-md-8">{{ratecard.bookingEdition}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Pullout Name</div>
-              <div class="col-md-8">{{ratecard.pullOutName}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Categories</div>
-        <ul class="list-group list-group-flush">
-          <ng-container *ngFor="let category of ratecard.categories">
-            <li class="list-group-item" *ngIf="category">
-              {{category}}
-            </li>
-          </ng-container>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card mb-3">
-        <div class="card-header">Rate Card</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Rate</div>
-              <div class="col-md-8">₹ {{ratecard.rate}} per {{ratecard.unit}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeTime">
-            <div class="row">
-              <div class="col-md-4">Time</div>
-              <div class="col-md-8">{{ratecard.AdTime}}</div>
-            </div>
-          </li>
-          <li class="list-group-item" *ngIf="isTypeWords">
-            <div class="row">
-              <div class="col-md-4">Maximum Words</div>
-              <div class="col-md-8">{{ratecard.AdWordsMax}}</div>
-            </div>
-          </li>
-          <ng-container *ngIf="isTypeLen">
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Position</div>
-                <div class="col-md-8">{{ratecard.position}}</div>
+            <div class="col">
+              <div class="small text-muted mt-2">Amount</div>
+              <div>
+                <span *ngIf="!ratecard.PremiumCustom.Percentage">₹</span>
+                {{ratecard.PremiumCustom.Amount}}
+                <span *ngIf="ratecard.PremiumCustom.Percentage">%</span>
               </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Hue</div>
-                <div class="col-md-8">{{ratecard.hue}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Minimum Size</div>
-                <div class="col-md-8">{{ratecard.minLength}} x {{ratecard.minWidth}}</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="row">
-                <div class="col-md-4">Maximum Size</div>
-                <div class="col-md-8">{{ratecard.maxLength}} x {{ratecard.maxWidth}}</div>
-              </div>
-            </li>
-          </ng-container>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Validity</div>
-              <div class="col-md-8">{{(ratecard.validFrom | date:'dd-MMM-y') || '--'}} to {{(ratecard.validTill | date:'dd-MMM-y') || '--'}}</div>
             </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6" *ngIf="isTypeLen && ratecard.fixSizes.length">
-      <div class="card mb-3">
-        <div class="card-header">Fix Sizes</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let fixSize of ratecard.fixSizes; index as i">
-            <div class="row">
-              <div class="col-md-4">Width</div>
-              <div class="col-md-8">{{fixSize.width}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Length</div>
-              <div class="col-md-8">{{fixSize.length}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Amount</div>
-              <div class="col-md-8">₹ {{fixSize.amount}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6" *ngIf="ratecard.schemes.length">
-      <div class="card mb-3">
-        <div class="card-header">Schemes</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let scheme of ratecard.schemes; index as i">
-            <div class="row">
-              <div class="col-md-4">Paid</div>
-              <div class="col-md-8">{{scheme.paid}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Free</div>
-              <div class="col-md-8">{{scheme.Free}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Time Limit</div>
-              <div class="col-md-8">{{scheme.timeLimit}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6" *ngIf="ratecard.taxes.length">
-      <div class="card mb-3">
-        <div class="card-header">Taxes</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let tax of ratecard.taxes; index as i">
-            <div class="row">
-              <div class="col-md-4">Included</div>
-              <div class="col-md-8">{{tax.included}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Rate</div>
-              <div class="col-md-8">{{tax.rate}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6" *ngIf="ratecard.covered.length">
-      <div class="card mb-3">
-        <div class="card-header">Covered</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let cov of ratecard.covered; index as i">
-            <div class="row">
-              <div class="col-md-4">Media House</div>
-              <div class="col-md-8">{{cov.covMediaHouse}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">Edition</div>
-              <div class="col-md-8">{{cov.covEdition}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-lg-6" *ngIf="ratecard.remarks.length">
-      <div class="card mb-3">
-        <div class="card-header">Remarks</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let remark of ratecard.remarks">
-            {{remark.remark}}
-          </li>
-        </ul>
-      </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <label class="text-muted">Categories</label>
+
+        <div *ngFor="let category of ratecard.categories; index as i">
+          <span *ngIf="category">
+            <span class="text-muted" *ngIf="i">&gt; </span>{{category}}
+          </span>
+        </div>
+      </mat-card>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <br>
+
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Ad and Tax Details</label>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">{{rateText}}</div>
+            <div>₹ {{ratecard.rate}}</div>
+          </div>
+          <div class="col" *ngIf="isTypeTime">
+            <div class="small text-muted mt-2">Time</div>
+            <div>{{ratecard.AdTime}}</div>
+          </div>
+          <div class="col" *ngIf="isTypeWords">
+            <div class="small text-muted mt-2">Maximum Words</div>
+            <div>{{ratecard.AdWordsMax}}</div>
+          </div>
+          <div class="col" *ngIf="isTypeLen">
+            <div class="small text-muted mt-2">Hue</div>
+            <div>{{ratecard.hue}}</div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="ratecard.mediaType == 'Print'">
+          <div class="small text-muted mt-2">Position</div>
+          <div>{{ratecard.position}}</div>
+        </ng-container>
+
+        <ng-container *ngIf="isTypeLen">
+          <hr>
+
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-2">Minimum Size</div>
+              <div>{{ratecard.minLength}} cm x {{ratecard.minWidth}} cm</div>
+            </div>
+            <div class="col">
+              <div class="small text-muted mt-2">Maximum Size</div>
+              <div>{{ratecard.maxLength}} cm x {{ratecard.maxWidth}} cm</div>
+            </div>
+          </div>
+        </ng-container>
+
+        <hr>
+
+        <div class="small text-muted mt-2">Validity</div>
+        <div>{{(ratecard.validFrom | date:'dd-MMM-y') || '--'}} to {{(ratecard.validTill | date:'dd-MMM-y') || '--'}}</div>
+
+        <ng-container *ngIf="isTypeLen">
+          <hr>
+
+          <label class="text-muted">Fix Sizes</label>
+          <div *ngIf="ratecard.fixSizes.length == 0">No Fix Sizes</div>
+          
+          <table class="table table-sm" *ngIf="ratecard.fixSizes.length">
+            <tr class="text-muted">
+              <td></td>
+              <td>Width</td>
+              <td>Length</td>
+              <td>Amount</td>
+            </tr>
+            <tr *ngFor="let fixSize of ratecard.fixSizes; index as i">
+              <td>#{{i + 1}}</td>
+              <td>{{fixSize.width}}</td>
+              <td>{{fixSize.length}}</td>
+              <td>₹ {{fixSize.amount}}</td>
+            </tr>
+          </table>
+        </ng-container>
+
+        <hr>
+
+        <label class="text-muted">Taxes</label>
+        <div *ngIf="ratecard.taxes.length == 0">No Taxes</div>
+
+        <div *ngFor="let tax of ratecard.taxes; index as i">
+          <span class="text-muted">#{{i + 1}}</span> {{tax.rate}}% {{tax.included ? 'Included' : 'Excluded'}}
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <br>
+
+      <mat-card class="mat-elevation-z3">
+        <label class="text-muted">Schemes</label>
+        <div *ngIf="ratecard.schemes.length == 0">No Schemes</div>
+
+        <table class="table table-sm" *ngIf="ratecard.schemes.length">
+          <tr class="text-muted">
+            <td></td>
+            <td>Paid</td>
+            <td>Free</td>
+            <td>Time Limit (Days)</td>
+          </tr>
+          <tr *ngFor="let scheme of ratecard.schemes; index as i">
+            <td>#{{i + 1}}</td>
+            <td>{{scheme.paid}}</td>
+            <td>{{scheme.Free}}</td>
+            <td>{{scheme.timeLimit}}</td>
+          </tr>
+        </table>
+
+        <hr>
+
+        <label class="text-muted">Remarks</label>
+        <div *ngIf="ratecard.remarks.length == 0">No Remarks</div>
+
+        <div *ngFor="let remark of ratecard.remarks; index as i">
+          <span class="text-muted">#{{i + 1}}</span> {{remark.remark}}
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <br>
 </div>
