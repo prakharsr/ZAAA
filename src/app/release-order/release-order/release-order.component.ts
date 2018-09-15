@@ -282,6 +282,7 @@ export class ReleaseOrderComponent implements OnInit {
     this.releaseorder.paymentType = 'Credit';
 
     this.releaseorder.rate = null;
+    this.releaseorder.sac = 9983;
 
     this.initExecutive();
   }
@@ -617,15 +618,15 @@ export class ReleaseOrderComponent implements OnInit {
 
   get rateText() {
     if (this.isTypeLen) {
-      return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
+      return this.releaseorder.fixRate ? "Rate per insertion (IAT)" : "Rate per sqcm (IAT)";
     }
 
     if (this.isTypeWords) {
-      return "Rate per insertion";
+      return "Rate per insertion (IAT)";
     }
 
     if (this.isTypeTime) {
-      return "Rate per sec";
+      return "Rate per sec (IAT)";
     }
   }
 
