@@ -163,11 +163,8 @@
                [class.text-danger]="item.state == 1"
                [class.text-success]="item.state == 2"
                [class.text-warning]="item.state == 3">
+               {{toDate(item.date) | date:'dd-MMM-y'}}
           </div>
-        </div>
-
-        <div *ngFor="let item of invoice.insertions">
-          {{toDate(item.date) | date:'dd-MMM-y'}}
         </div>
       </mat-card>
 
