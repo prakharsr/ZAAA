@@ -101,11 +101,11 @@ export class DashboardComponent implements OnInit {
       if (data.success) {
         this.roChartResults = [
           {
-            name: 'Last Year',
+            name: 'Current Year',
             series: []
           },
           {
-            name: 'Current Year',
+            name: 'Last Year',
             series: []
           }
         ];
@@ -122,8 +122,8 @@ export class DashboardComponent implements OnInit {
         }[] = data.releaseOrders;
 
         d.forEach(element => {
-          this.roChartResults[0].series.push({ name: this.toChartKey(element._id), value: element.generated });
-          this.roChartResults[1].series.push({ name: this.toChartKey(element._id), value: element.totalAmount });
+          this.roChartResults[0].series.push({ name: this.toChartKey(element._id), value: element.totalAmount });
+          this.roChartResults[1].series.push({ name: this.toChartKey(element._id), value: element.generated });
         });
       }
     });
