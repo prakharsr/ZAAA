@@ -43,6 +43,7 @@ export class PaymentReceipt {
     executiveID = "";
     executiveName = "";
     executiveOrg = "";
+    remark = "";
 }
 
 export class AdvanceReceipt extends PaymentReceipt { }
