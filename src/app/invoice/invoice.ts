@@ -46,6 +46,8 @@ export class Invoice {
     /*for payment reciept */
     clearedAmount = 0;
     pendingAmount = 0;
+    shadowAmount = 0;
+    collectedAmount = 0;
 
     insertions: Insertion[] = [];
 

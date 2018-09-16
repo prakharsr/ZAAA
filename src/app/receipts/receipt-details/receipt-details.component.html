@@ -63,6 +63,13 @@
             <div>{{receipt.paymentBankName}}</div>
           </ng-container>
         </ng-container>
+         
+        <div class="text-muted small mt-3">Status</div>
+        <span *ngIf="receipt.status == 0">Collected</span>
+        <span *ngIf="receipt.status == 1" class="text-success">Completed</span>
+        <span *ngIf="receipt.status == 2" class="text-danger">Cancelled</span>
+        <span *ngIf="receipt.status == 3" class="text-warning">Shadow</span>
+
       </mat-card>
     </div>
     <div class="col-md">

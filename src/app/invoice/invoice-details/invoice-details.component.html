@@ -69,8 +69,8 @@
         <div class="small text-muted mt-2">Final Amount (Net Amount + Tax)</div>
         <div>₹ {{invoice.FinalTaxAmount}}</div>
     
-        <div class="small text-muted mt-2">Cleared Amount</div>
-        <div>₹ {{invoice.clearedAmount}}</div>
+        <div class="small text-muted mt-2">Received Amount</div>
+        <div>₹ {{invoice.clearedAmount + invoice.collectedAmount + invoice.shadowAmount}} (Collected: {{invoice.collectedAmount}}, Shadow: {{invoice.shadowAmount}})</div>
         
         <div class="small text-muted mt-2">Pending Amount</div>
         <div>₹ {{invoice.pendingAmount}}</div>
@@ -147,7 +147,7 @@
       <mat-card class="mat-elevation-z3">
         <label class="text-muted">Remarks</label>
         
-        <div class="small text-muted mt-2">For Invoice</div>
+        <div class="small text-muted mt-2">For Invoice (to be printed on Invoice)</div>
         <div>{{invoice.remark || '--'}}</div>
     
         <div class="small text-muted mt-2">For Internal Use</div>
@@ -158,9 +158,13 @@
     <div class="col-lg-6">
       <mat-card class="mat-elevation-z3">
         <label class="text-muted">Insertions</label>
-
-        <div *ngFor="let item of invoice.insertions">
-          {{toDate(item.date) | date:'dd-MMM-y'}}
+        <div class="row" *ngFor="let item of invoice.insertions">
+          <div class="col"
+               [class.text-danger]="item.state == 1"
+               [class.text-success]="item.state == 2"
+               [class.text-warning]="item.state == 3">
+               {{toDate(item.date) | date:'dd-MMM-y'}}
+          </div>
         </div>
       </mat-card>
 

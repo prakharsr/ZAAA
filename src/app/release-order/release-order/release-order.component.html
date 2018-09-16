@@ -195,7 +195,7 @@
               </div>
 
               <mat-form-field>
-                <input [disabled]="edit" matInput type="number" placeholder="SAC (9983)" [(ngModel)]="releaseorder.sac" name="sac">
+                <input [disabled]="edit" matInput type="number" placeholder="SAC" [(ngModel)]="releaseorder.sac" maxlength="8" name="sac">
               </mat-form-field>
 
               <div class="text-right">
@@ -385,7 +385,7 @@
               <br>
 
               <mat-form-field hintLabel="Max 100 characters"> 
-                <input type="text" matInput id="remark" maxlength="100" name="remark" placeholder="Remark for Release Order" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
+                <input type="text" matInput id="remark" maxlength="100" name="remark" placeholder="Remark (to be printed on Release Order)" [(ngModel)]="releaseorder.remark" #remarkField="ngModel">
                 <mat-hint align="end">{{releaseorder.remark?.length || 0}}/100</mat-hint>
               </mat-form-field>
 
@@ -789,7 +789,7 @@
               <hr>
               
               <mat-form-field hintLabel="Max 100 characters">
-                <input matInput placeholder="Remark" maxlength="100" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
+                <input matInput placeholder="Remark (for agency use only)" maxlength="100" name="otherRemark" [(ngModel)]="releaseorder.otherRemark">
                 <mat-hint align="end">{{releaseorder.otherRemark?.length || 0}}/100</mat-hint>
               </mat-form-field>
             </mat-card>
