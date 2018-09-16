@@ -57,7 +57,7 @@
                 <div class="col-auto text-muted col-form-label" style="margin-right: 9px;">GST:</div>
                 <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
                   <mat-form-field>
-                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="clientGSTType">
                       <mat-option value="URD">URD</mat-option>
                       <mat-option value="RD">RD</mat-option>
                     </mat-select>
@@ -295,7 +295,7 @@
                 </div>
                 <div class="col">
                   <mat-form-field>
-                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
+                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required [disabled]="clientGSTType == 'URD'">
                       <mat-option *ngFor="let item of taxes" [value]="item">
                         {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
                       </mat-option>

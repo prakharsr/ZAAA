@@ -272,7 +272,7 @@ export class ReleaseOrderListComponent implements OnInit {
     }
 
     url.push('list');
-    url.push(pageNo);
+    url.push(String(pageNo));
 
     this.router.navigate(url, {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
