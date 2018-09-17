@@ -90,6 +90,19 @@ export class InvoiceDetailsComponent implements OnInit {
     this.router.navigate(['/receipts/advance/link', invoice.id]);
   }
 
+  getInsertionStateText(state: number) {
+    switch (state) {
+      case 1:
+        return 'Not Published';
+
+      case 2:
+        return 'Published';
+
+      case 3:
+        return 'Disputed';
+    }
+  }
+
   get taxDisplay() {
     let tax = this.invoice.taxAmount.primary + "%";
 
@@ -101,6 +114,6 @@ export class InvoiceDetailsComponent implements OnInit {
       tax += " (" + this.invoice.taxType + ") ";
     }
 
-    return tax + (this.invoice.taxIncluded ? " Included" : " Excluded");
+    return tax + (this.invoice.taxIncluded ? " Included" : "");
   }
 }

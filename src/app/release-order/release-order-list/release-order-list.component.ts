@@ -43,6 +43,7 @@ export class ReleaseOrderListComponent implements OnInit {
   pastDays = 0;
 
   collapsed = true;
+  generated = false;
 
   constructor(private api: ReleaseOrderApiService,
     private dialog: DialogService,
@@ -54,7 +55,9 @@ export class ReleaseOrderListComponent implements OnInit {
     private executiveApi: ExecutiveApiService) { }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { resolved: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }}) => {
+    this.route.data.subscribe((data: { generated: boolean, resolved: { list: PageData<ReleaseOrder>, search: ReleaseOrderSearchParams }}) => {
+      this.generated = data.generated;
+
       this.init(data.resolved.list);
 
       let pub = new MediaHouse();
@@ -262,7 +265,16 @@ export class ReleaseOrderListComponent implements OnInit {
   }
 
   search(pageNo: number) {
-    this.router.navigate(['/releaseorders/list/', pageNo], {
+    let url = ['/releaseorders'];
+
+    if (this.generated) {
+      url.push('generated');
+    }
+
+    url.push('list');
+    url.push(String(pageNo));
+
+    this.router.navigate(url, {
       queryParams: new ReleaseOrderSearchParams(this.mediaHouseName, this.editionName, this.clientName, this.executiveName, this.exeOrg, this.pastDays)
     });
   }

@@ -37,13 +37,17 @@ export class ReleaseOrderDetailsComponent implements OnInit {
   }
 
   get taxDisplay() {
-    let tax = this.releaseOrder.taxAmount.primary + "%";
+    // let tax = this.releaseOrder.taxAmount.primary + "%";
 
-    if (this.releaseOrder.taxAmount.secondary != 0) {
-      tax += " + " + this.releaseOrder.taxAmount.secondary + "%"
-    }
+    // if (this.releaseOrder.taxAmount.secondary != 0) {
+    //   tax += " + " + this.releaseOrder.taxAmount.secondary + "%"
+    // }
 
-    return tax + (this.releaseOrder.taxIncluded ? " Tax Included" : " Tax Excluded");
+    // return tax + (this.releaseOrder.taxIncluded ? " Tax Included" : " Tax Excluded");
+
+    let tax = this.releaseOrder.taxAmount.primary;
+    
+    return tax ? `(Inclusive of ${this.releaseOrder.taxAmount.primary}% tax)` : '';
   }
 
   get isTypeWords() {

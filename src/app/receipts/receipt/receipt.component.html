@@ -8,8 +8,12 @@
         <mat-card class="mat-elevation-z3">
           <div class="row">
             <div class="col">
-              <div class="text-muted small">Total Amount</div>
+              <div class="text-muted small">Invoice Amount</div>
               <div class="mb-2">₹ {{invoice.FinalTaxAmount}}</div>
+            </div>
+            <div class="col">
+              <div class="text-muted small">Received Amount</div>
+              <div class="mb-2">₹ {{invoice.collectedAmount + invoice.shadowAmount + invoice.clearedAmount}}</div>
             </div>
             <div class="col-auto">
               <div class="text-muted small">Pending Amount</div>
@@ -58,13 +62,6 @@
               </mat-form-field>
             </div>
             <div class="row">
-              <mat-form-field class="col-lg col-md-6">
-                <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
-                <mat-error *ngIf="paymentAmountField.errors?.required">
-                  Amount is required.
-                </mat-error>
-              </mat-form-field>
-        
               <ng-container *ngIf="receipt.paymentType == 'Cheque'">
                 <mat-form-field class="col-lg col-md-6">
                   <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="receipt.paymentBankName" required #bankNameField="ngModel">
@@ -75,6 +72,11 @@
               </ng-container>
             </div>
           </ng-container>
+
+          <mat-form-field hintLabel="Max 30 characters">
+            <input matInput placeholder="Remark" maxlength="30" name="remark" [(ngModel)]="receipt.remark">
+            <mat-hint align="end">{{receipt.remark?.length || 0}}/30</mat-hint>
+          </mat-form-field>
         </mat-card>
 
         <br>
@@ -145,11 +147,14 @@
           <div class="col-md">
             <div class="text-muted small mt-2">Invoice No</div>
             <div class="mb-2">{{invoice.invoiceNO}}</div>
+
+            <div class="text-muted small mt-2">Invoice Date</div>
+            <div class="mb-2">{{invoice.date | date:'dd-MMM-y'}}</div>
           </div>
           <div class="col-md">
             <div class="text-muted small mt-2">Publication</div>
             <div>{{invoice.publicationName}} - {{invoice.publicationEdition}}</div>
-    
+            
             <div class="text-muted small mt-2">Client</div>
             <div>{{invoice.clientName}}</div>
           </div>

@@ -57,7 +57,7 @@
                 <div class="col-auto text-muted col-form-label" style="margin-right: 9px;">GST:</div>
                 <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
                   <mat-form-field>
-                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="clientGSTType">
                       <mat-option value="URD">URD</mat-option>
                       <mat-option value="RD">RD</mat-option>
                     </mat-select>
@@ -73,6 +73,15 @@
                       GSTIN should be 15 characters long.
                     </mat-error>
                   </mat-form-field>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-row">
+                <div class="col-auto text-muted" style="margin-right: 13px">SAC</div>
+                <div class="col">
+                  {{releaseOrder.sac}}
                 </div>
               </div>
             </div>
@@ -295,7 +304,7 @@
                 </div>
                 <div class="col">
                   <mat-form-field>
-                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
+                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required [disabled]="clientGSTType == 'URD'">
                       <mat-option *ngFor="let item of taxes" [value]="item">
                         {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
                       </mat-option>
@@ -336,10 +345,10 @@
             </div>
             <div class="card-body">
               <mat-form-field>
-                <textarea matInput id="remark" name="remark" placeholder="For Invoice" [(ngModel)]="invoice.remark" #remarkField="ngModel"></textarea>
+                <textarea matInput id="remark" name="remark" placeholder="For Invoice (to be printed)" [(ngModel)]="invoice.remark" #remarkField="ngModel"></textarea>
               </mat-form-field>
               <mat-form-field>
-                <textarea matInput placeholder="For External Use" name="otherRemark" [(ngModel)]="invoice.otherRemark"></textarea>
+                <textarea matInput placeholder="For External Use (not showed on Invoice)" name="otherRemark" [(ngModel)]="invoice.otherRemark"></textarea>
               </mat-form-field>
             </div>
           </div>

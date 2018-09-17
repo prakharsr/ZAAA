@@ -105,7 +105,7 @@
         <div>₹ {{releaseOrder.adGrossAmount}}</div>
         
         <div class="small text-muted mt-2">Net Amount</div>
-        <div>₹ {{releaseOrder.netAmountFigures}} <small>({{taxDisplay}})</small></div>
+        <div>₹ {{releaseOrder.netAmountFigures}} <small>{{taxDisplay}}</small></div>
         <div class="small">Rupees {{releaseOrder.netAmountWords}}</div>
         
         <div class="small text-muted mt-2">Client Payment (without Tax)</div>
@@ -241,11 +241,11 @@
 
         <div class="row" *ngIf="isTypeLen">
           <div class="col">
-            <div class="small text-muted mt-2">Size</div>
+            <div class="small text-muted mt-2">Size in cm (l x b)</div>
             <div>{{releaseOrder.adSizeL}} x {{releaseOrder.adSizeW}}</div>
           </div>
           <div class="col">
-            <div class="small text-muted mt-2">Total Space</div>
+            <div class="small text-muted mt-2">Total Space per insertion (sq cm)</div>
             <div>{{releaseOrder.adTotalSpace}}</div>
           </div>
         </div>
@@ -261,7 +261,7 @@
           </div>
         </div>
 
-        <div class="small text-muted mt-2">Remark (for Release Order)</div>
+        <div class="small text-muted mt-2">Remark (to be printed on Release Order)</div>
         <div>{{releaseOrder.remark || '--'}}</div>
       </mat-card>
     </div>
@@ -421,7 +421,7 @@
 
         <hr>
 
-        <div class="small text-muted mt-3">Remark</div>
+        <div class="small text-muted mt-3">Remark (for agency use only)</div>
         <div>{{releaseOrder.otherRemark || '--'}}</div>
       </mat-card>
     </div>
