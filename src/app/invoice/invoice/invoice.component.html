@@ -319,7 +319,7 @@
             <div class="card-footer">
               <div>
                 Final Amount:  ₹ {{finalAmount}} /-
-                <span>({{netAmount}} + {{finalTaxAmount - netAmount}})</span>
+                <span>({{netAmount}} + {{round2(finalTaxAmount - netAmount)}})</span>
               </div>
               <div>
                 <small>(Net Amount + Tax)</small>

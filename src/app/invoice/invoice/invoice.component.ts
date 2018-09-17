@@ -293,6 +293,10 @@ export class InvoiceComponent implements OnInit {
     this.router.navigateByUrl('/invoices');
   }
 
+  round2(num: number) {
+    return Math.round(num * 100) / 100
+  }
+
   presave(): boolean {
     if (!this.availableInsertions.some(val => val.checked)) {
       this.notifications.show('No Insertions selected');
