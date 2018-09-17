@@ -618,15 +618,15 @@ export class ReleaseOrderComponent implements OnInit {
 
   get rateText() {
     if (this.isTypeLen) {
-      return this.releaseorder.fixRate ? "Rate per insertion (IAT)" : "Rate per sqcm (IAT)";
+      return this.releaseorder.fixRate ? "Rate per insertion" : "Rate per sqcm";
     }
 
     if (this.isTypeWords) {
-      return "Rate per insertion (IAT)";
+      return "Rate per insertion";
     }
 
     if (this.isTypeTime) {
-      return "Rate per sec (IAT)";
+      return "Rate per sec";
     }
   }
 

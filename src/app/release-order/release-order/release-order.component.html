@@ -658,10 +658,10 @@
                 <div class="col-6">
                   <ng-container *ngIf="isTypeLen && totalSpace && availableAds">
                     <div *ngIf="releaseorder.fixRate && perSqcmRate">
-                      <span class="text-muted">Per sqcm Rate:</span> ₹ {{perSqcmRate}}
+                      <span class="text-muted">Per sqcm Rate:</span><br/> ₹ {{perSqcmRate}} (IAT)
                     </div>
                     <div *ngIf="!releaseorder.fixRate && perInsertionRate">
-                      <span class="text-muted">Per insertion Rate:</span> ₹ {{perInsertionRate}}
+                      <span class="text-muted">Per insertion Rate:</span><br/> ₹ {{perInsertionRate}} (IAT)
                     </div>
                   </ng-container>
                 </div>
