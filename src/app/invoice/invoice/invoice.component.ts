@@ -433,7 +433,14 @@ export class InvoiceComponent implements OnInit {
   }
 
   selectAllInsertions() {
-    this.availableInsertions.forEach(insertion => insertion.checked = true);
+    let target = !this.areAllSelected;
+
+    this.availableInsertions.forEach(insertion => insertion.checked = target);
+  }
+
+  get areAllSelected()
+  {
+    return this.availableInsertions.every(insertion => insertion.checked);
   }
   
   handleSubmit(valid: boolean, callbackName: string) {
