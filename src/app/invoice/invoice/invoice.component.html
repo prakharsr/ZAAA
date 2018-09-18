@@ -149,7 +149,11 @@
               <div class="col-auto">
                 <h6>Select Insertions</h6>
                 
-                <button mat-raised-button color="primary" type="button" class="mb-3" (click)="selectAllInsertions()">Select All</button>
+                <button mat-raised-button color="primary" type="button" class="mb-3" (click)="selectAllInsertions()">
+                  <span *ngIf="areAllSelected else select">Unselect</span>
+                  <ng-template #select>Select</ng-template>
+                  All
+                </button>
               </div>
               <div class="col">
                 <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
