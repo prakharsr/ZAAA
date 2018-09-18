@@ -240,7 +240,7 @@
 
               <div class="form-row">
                 <mat-form-field class="col" *ngIf="isTypeTime">
-                  <input type="number" matInput id="duration" placeholder="Duration" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
+                  <input type="number" matInput id="duration" placeholder="Duration" min="0" [verify-min]="0" [(ngModel)]="releaseorder.AdDuration" name="duration" required #durationField="ngModel">
                   <mat-error *ngIf="durationField.errors?.required">
                     Duration is required.
                   </mat-error>
@@ -298,7 +298,7 @@
                       <div class="form-row">
                         <div class="col-6">
                           <mat-form-field>
-                            <input matInput type="number" id="customL" placeholder="Length in cm" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
+                            <input matInput type="number" id="customL" placeholder="Length in cm" min="0" [verify-min]="0" [(ngModel)]="customSizeL" name="customL" required #customLField="ngModel">
                             <mat-error *ngIf="customLField.errors?.required">
                               Length is required.
                             </mat-error>
@@ -307,7 +307,7 @@
                         
                         <div class="col-6">
                           <mat-form-field>
-                            <input matInput type="number" id="customW" placeholder="Width in cm" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
+                            <input matInput type="number" id="customW" placeholder="Width in cm" min="0" [verify-min]="0" [(ngModel)]="customSizeW" name="customW" required #customWField="ngModel">
                             <mat-error *ngIf="customWField.errors?.required">
                               Width is required.
                             </mat-error>
@@ -343,7 +343,7 @@
                   <div class="form-row">
                     <div class="col-6">
                       <mat-form-field>
-                        <input matInput type="number" id="customPaid" placeholder="Paid" [(ngModel)]="customPaid" name="customPaid" required #customPaidField="ngModel">
+                        <input matInput type="number" id="customPaid" placeholder="Paid" [(ngModel)]="customPaid" min="1" [verify-min]="1" name="customPaid" required #customPaidField="ngModel">
                         <mat-error *ngIf="customPaidField.errors?.required">
                           Paid is required.
                         </mat-error>
@@ -352,7 +352,7 @@
     
                     <div class="col-6">
                       <mat-form-field>
-                        <input matInput type="number" id="customFree" placeholder="Free" [(ngModel)]="customFree" name="customFree" required #customFreeField="ngModel">
+                        <input matInput type="number" id="customFree" placeholder="Free" [(ngModel)]="customFree" min="0" [verify-min]="0" name="customFree" required #customFreeField="ngModel">
                         <mat-error *ngIf="customFreeField.errors?.required">
                           Free is required.
                         </mat-error>
@@ -365,7 +365,7 @@
                   <div class="form-row">
                     <div class="col-6">
                       <mat-form-field> 
-                        <input matInput type="number" id="adCountPaid" name="adCountPaid" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
+                        <input matInput type="number" id="adCountPaid" name="adCountPaid" min="1" [verify-min]="1" [verify-multiple-of]="customScheme ? customPaid : selectedScheme.paid" placeholder="No of Paid Ads" [(ngModel)]="adCountPaid" required #adCountPaidField="ngModel">
                         <mat-error *ngIf="adCountPaidField.errors?.required">
                           No of Paid Ads is required.
                         </mat-error>
@@ -423,7 +423,7 @@
                       <div class="col">
                         <mat-form-field>
                           <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Box" name="premiumBox" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
+                          <input type="number" matInput placeholder="Box" name="premiumBox" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumBox.Amount" required #premiumBoxField="ngModel">
                           <mat-error *ngIf="premiumBoxField.errors?.required">
                             Box Premium Amount is required.
                           </mat-error>
@@ -439,7 +439,7 @@
                       <div class="col">
                         <mat-form-field>
                           <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
+                          <input type="number" matInput placeholder="Base Colour" name="premiumBaseColour" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumBaseColour.Amount" required #premiumBaseColourField="ngModel">
                           <mat-error *ngIf="premiumBaseColourField.errors?.required">
                             Base Colour Premium Amount is required.
                           </mat-error>
@@ -456,7 +456,7 @@
                   <div class="col">
                     <mat-form-field>
                       <span matPrefix>₹&nbsp;</span>
-                      <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
+                      <input type="number" matInput placeholder="Check Mark" name="premiumCheckMark" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumCheckMark.Amount" required #premiumCheckMarkField="ngModel">
                       <mat-error *ngIf="premiumCheckMarkField.errors?.required">
                         Check Mark Premium Amount is required.
                       </mat-error>
@@ -473,7 +473,7 @@
                       <div class="col-6">
                         <mat-form-field>
                           <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Email" name="premiumEmailId" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
+                          <input type="number" matInput placeholder="Email" name="premiumEmailId" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumEmailId.Amount" required #premiumEmailIdField="ngModel">
                           <mat-error *ngIf="premiumEmailIdField.errors?.required">
                             Email Premium Amount is required.
                           </mat-error>
@@ -481,7 +481,7 @@
                       </div>
                       <div class="col-6">
                         <mat-form-field>
-                          <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
+                          <input type="number" matInput placeholder="No. of Emails" name="premiumEmailIdQuantity" min="1" [verify-min]="1" [(ngModel)]="releaseorder.PremiumEmailId.Quantity" required #premiumEmailIdQuantityField="ngModel">
                           <mat-error *ngIf="premiumEmailIdQuantityField.errors?.errors.required">
                             No. of Emails is required.
                           </mat-error>
@@ -499,7 +499,7 @@
                       <div class="col-6">
                         <mat-form-field>
                           <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Website" name="premiumWebsite" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
+                          <input type="number" matInput placeholder="Website" name="premiumWebsite" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumWebsite.Amount" required #premiumWebsiteField="ngModel">
                           <mat-error *ngIf="premiumWebsiteField.errors?.required">
                             Website Premium Amount is required.
                           </mat-error>
@@ -507,7 +507,7 @@
                       </div>
                       <div class="col-6">
                         <mat-form-field>
-                          <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
+                          <input type="number" matInput placeholder="No. of Websites" name="premiumWebsiteQuantity" min="1" [verify-min]="1" [(ngModel)]="releaseorder.PremiumWebsite.Quantity" required #premiumWebsiteQuantityField="ngModel">
                           <mat-error *ngIf="premiumWebsiteQuantityField.errors?.errors.required">
                             No. of Website is required.
                           </mat-error>
@@ -525,7 +525,7 @@
                       <div class="col-6">
                         <mat-form-field>
                           <span matPrefix>₹&nbsp;</span>
-                          <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
+                          <input type="number" matInput placeholder="Extra Words / Lines" name="premiumExtraWords" min="0" [verify-min]="0" [(ngModel)]="releaseorder.PremiumExtraWords.Amount" required #premiumExtraWordsField="ngModel">
                           <mat-error *ngIf="premiumExtraWordsField.errors?.required">
                             Extra Words / Lines Premium Amount is required.
                           </mat-error>
@@ -533,7 +533,7 @@
                       </div>
                       <div class="col-6">
                         <mat-form-field>
-                          <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
+                          <input type="number" matInput placeholder="No. of Extra Words / Lines" name="premiumExtraWordsQuantity" min="1" [verify-min]="1" [(ngModel)]="releaseorder.PremiumExtraWords.Quantity" required #premiumExtraWordsQuantityField="ngModel">
                           <mat-error *ngIf="premiumExtraWordsQuantityField.errors?.required">
                             No. Extra Words / Lines is required.
                           </mat-error>
@@ -552,7 +552,7 @@
                   </div>
                   <div class="col-sm-5">
                     <mat-form-field>
-                      <input type="number" matInput placeholder="Amount" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
+                      <input type="number" matInput placeholder="Amount" min="0" [verify-min]="0" name="premiumAmount" [(ngModel)]="releaseorder.PremiumCustom.Amount" required #premiumAmountField="ngModel">
                       <span matPrefix>{{releaseorder.PremiumCustom.Percentage ? '' : '₹&nbsp;'}}</span>
                       <span matSuffix>{{releaseorder.PremiumCustom.Percentage ? '%' : ''}}</span>
                       <mat-error *ngIf="premiumAmountField.errors?.required">
@@ -590,7 +590,7 @@
                 <div class="col-6">
                   <mat-form-field>
                     <span matPrefix>₹&nbsp;</span>
-                    <input type="number" matInput id="rate" [placeholder]="rateText" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
+                    <input type="number" matInput id="rate" [placeholder]="rateText" min="0" [verify-min]="0" [(ngModel)]="releaseorder.rate" name="rate" required #rateField="ngModel">
                     <mat-error *ngIf="rateField.errors?.required">
                       Rate is required.
                     </mat-error>
@@ -599,7 +599,7 @@
                 <div class="col-6">
                   <mat-form-field>
                     <span matSuffix>%</span>
-                    <input matInput type="number" id="publicationDiscount" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
+                    <input matInput type="number" id="publicationDiscount" min="0" [verify-min]="0" name="publicationDiscount" placeholder="Media House Discount" [(ngModel)]="releaseorder.publicationDiscount" required #publicationDiscountField="ngModel">
                     <mat-error *ngIf="publicationDiscountField?.required">
                       Media House Discount is required.
                     </mat-error>
@@ -616,7 +616,7 @@
               <div class="form-row">                
                 <mat-form-field class="col-6">
                   <span matSuffix>%</span>
-                  <input matInput type="number" id="agencyDiscount1" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
+                  <input matInput type="number" id="agencyDiscount1" min="0" [verify-min]="0" name="agencyDiscount1" placeholder="Agency Discount" [(ngModel)]="releaseorder.agencyDiscount1" required #agencyDiscount1Field="ngModel">
                   <mat-error *ngIf="agencyDiscount1Field?.required">
                     Agency Discount is required.
                   </mat-error>
@@ -624,7 +624,7 @@
             
                 <mat-form-field class="col-6">
                   <span matSuffix>%</span>
-                  <input matInput type="number" id="agencyDiscount2" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
+                  <input matInput type="number" id="agencyDiscount2" min="0" [verify-min]="0" name="agencyDiscount2" placeholder="Additional Agency Discount" [(ngModel)]="releaseorder.agencyDiscount2" required #agencyDiscount2Field="ngModel">
                   <mat-error *ngIf="agencyDiscount2Field.errors?.required">
                     Additional Agency Discount is required.
                   </mat-error>

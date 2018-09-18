@@ -55,7 +55,7 @@
     </ng-container>
 
     <mat-form-field>
-      <input matInput type="number" id="amount" placeholder="Enter Amount" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
+      <input matInput type="number" id="amount" placeholder="Enter Amount" min="0" [verify-min]="0" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
       <mat-error *ngIf="amountField.errors?.required">
         Amount is required.
       </mat-error>

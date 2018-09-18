@@ -197,7 +197,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.extraCharges.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.extraCharges.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
+                  <input type="number" matInput placeholder="Commission" name="commission" min="0" [verify-min]="0" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
                   <mat-error *ngIf="commissionField.errors?.required">
                     Commission is required.
                   </mat-error>
@@ -211,7 +211,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.additionalCharges.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.additionalCharges.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
+                  <input type="number" matInput placeholder="Additional Charges" min="0" [verify-min]="0" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
                   <mat-error *ngIf="additionalChargesField.errors?.required">
                     Additional Charges is required.
                   </mat-error>
@@ -233,7 +233,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.publicationDiscount.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.publicationDiscount.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
+                  <input type="number" matInput placeholder="Publication Discount" min="0" [verify-min]="0" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
                   <mat-error *ngIf="pubDiscountField.errors?.required">
                     Publication Discount is required.
                   </mat-error>
@@ -247,7 +247,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.agencyDiscount1.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.agencyDiscount1.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
+                  <input type="number" matInput placeholder="Agency Discount" min="0" [verify-min]="0" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
                   <mat-error *ngIf="agencyDiscountField.errors?.required">
                     Agency Discount is required.
                   </mat-error>
@@ -338,7 +338,7 @@
               </div>
             <div class="card-body">
               <mat-form-field>
-                <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
+                <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" min="0" [verify-min]="0" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
                 <mat-error *ngIf="creditDaysField.errors?.required">
                   Credit Days is required.
                 </mat-error>
