@@ -32,6 +32,7 @@ export class AdvanceReceiptComponent implements OnInit {
   receipt = new AdvanceReceipt();
 
   submitting = false;
+  submitted = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -129,9 +130,7 @@ export class AdvanceReceiptComponent implements OnInit {
   }
 
   genPreview() {
-    if (!this.presave()) {
-      return;
-    }
+    this.presave();
 
     this.api.previewReceipthtml(this.receipt).subscribe(data => {
       this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
