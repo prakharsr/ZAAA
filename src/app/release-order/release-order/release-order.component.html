@@ -267,7 +267,7 @@
 
               <div class="form-row">
                 <mat-form-field class="col">
-                  <input type="text" matInput id="caption" name="caption" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
+                  <input type="text" matInput id="caption" name="caption" maxlength="50" placeholder="Caption" [(ngModel)]="releaseorder.caption" #captionField="ngModel">
                 </mat-form-field>
 
                 <div class="col-auto">
@@ -658,10 +658,10 @@
                 <div class="col-6">
                   <ng-container *ngIf="isTypeLen && totalSpace && availableAds">
                     <div *ngIf="releaseorder.fixRate && perSqcmRate">
-                      <span class="text-muted">Per sqcm Rate:</span> ₹ {{perSqcmRate}}
+                      <span class="text-muted">Per sqcm Rate:</span><br/> ₹ {{perSqcmRate}} (IAT)
                     </div>
                     <div *ngIf="!releaseorder.fixRate && perInsertionRate">
-                      <span class="text-muted">Per insertion Rate:</span> ₹ {{perInsertionRate}}
+                      <span class="text-muted">Per insertion Rate:</span><br/> ₹ {{perInsertionRate}} (IAT)
                     </div>
                   </ng-container>
                 </div>
@@ -707,7 +707,7 @@
 
                   <div class="col-6 small">
                     <span class="text-muted">Amount</span><br>
-                    ₹ {{clientPayment || '0'}}
+                    ₹ {{displayTotal || '0'}}
                   </div>            
                 </div>
               </ng-container>
