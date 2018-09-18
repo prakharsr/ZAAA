@@ -47,6 +47,17 @@
 
       <mat-card class="mat-elevation-z3 card-h100">
         <label class="text-muted">Payment Details</label>
+
+        <div class="text-muted small mt-3">Original Amount</div>
+        <div>{{receipt.originalAmount }}</div>
+
+        <ng-container *ngIf="receipt.linked">
+          <div class="text-muted small mt-3">Original Reciept Number</div>
+          <div>{{receipt.originalReceiptNo }}</div>
+
+          <div class="text-muted small mt-3">Original Reciept Date</div>
+          <div>{{receipt.originalReceiptDate | date:'dd-MMM-y'}}</div>
+        </ng-container>
       
         <div class="text-muted small mt-3">Type</div>
         <div>{{receipt.paymentType | paymentMode}}</div>
