@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -29,6 +28,7 @@ export class ReceiptComponent implements OnInit {
   executive: Executive;
 
   submitting = false;
+  submitted = false;
 
   pastReceipts: PaymentReceipt[] = [];
 
@@ -113,9 +113,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   genPreview() {
-    if (!this.presave()) {
-      return;
-    }
+    this.presave();
 
     this.api.previewReceipthtml(this.receipt).subscribe(data => {
       this.dialog.show(PreviewComponent, { data: data.content }).subscribe(response => {
