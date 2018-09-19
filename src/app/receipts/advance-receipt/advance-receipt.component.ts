@@ -46,6 +46,7 @@ export class AdvanceReceiptComponent implements OnInit {
 
   ngOnInit() {
     this.receipt.paymentType = this.paymentTypes[0];
+    this.receipt.advanced = true;
 
     this.route.data.subscribe((data: { firm: Firm, user: UserProfile }) => {
       let exe = new Executive();
