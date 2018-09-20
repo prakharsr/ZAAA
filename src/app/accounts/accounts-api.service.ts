@@ -93,6 +93,7 @@ export class MhReceiptResponse {
     _id: string,
     MHIDate: Date,
     MHIGrossAmount: number
+    batchID: string
   } []
 }
 
