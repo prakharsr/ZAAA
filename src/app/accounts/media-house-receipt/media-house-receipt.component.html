@@ -78,11 +78,17 @@
           <td>{{entry.batchID || '--'}}</td>
           <td style="white-space: nowrap;">{{entry.insertionDate | date:'dd-MMM-y'}}</td>
           <td>{{entry.paymentMode | paymentMode}}</td>
-          <td>
-            <input type="text" name="rno-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptNumber" placeholder="Receipt No">
+          <td *ngIf="entry.receiptNumber == null || entry.receiptDate  == null">
+            <input type="text"  name="rno-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptNumber" placeholder="Receipt No">
           </td>
-          <td>
+          <td *ngIf="entry.receiptNumber == null || entry.receiptDate == null">
             <input type="date" name="rdate-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptDate" placeholder="Receipt Date">
+          </td>
+          <td *ngIf="entry.receiptNumber!= null && entry.receiptDate != null">
+            {{entry.receiptNumber}}
+          </td>
+          <td *ngIf="entry.receiptNumber != null && entry.receiptDate != null">
+            {{entry.receiptDate | date:'dd-MMM-y'}}
           </td>
         </tr>
       </table>
