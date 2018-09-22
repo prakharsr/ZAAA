@@ -38,6 +38,10 @@
       <input type="text" class="form-control" [(ngModel)]="edition" [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
     </div>
 
+    <div class="form-group col">
+      <input type="text" class="form-control" [(ngModel)]="batchID" [ngbTypeahead]="searchBatchID" placeholder="Batch ID"/>
+    </div>
+
     <div class="col-auto">
       <button class="btn btn-info" (click)="search()">
         <mat-icon>search</mat-icon>
@@ -78,17 +82,11 @@
           <td>{{entry.batchID || '--'}}</td>
           <td style="white-space: nowrap;">{{entry.insertionDate | date:'dd-MMM-y'}}</td>
           <td>{{entry.paymentMode | paymentMode}}</td>
-          <td *ngIf="entry.receiptNumber == null || entry.receiptDate  == null">
+          <td>
             <input type="text"  name="rno-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptNumber" placeholder="Receipt No">
           </td>
-          <td *ngIf="entry.receiptNumber == null || entry.receiptDate == null">
+          <td>
             <input type="date" name="rdate-{{i}}-{{j}}" class="form-control form-control-sm" [(ngModel)]="entry.receiptDate" placeholder="Receipt Date">
-          </td>
-          <td *ngIf="entry.receiptNumber!= null && entry.receiptDate != null">
-            {{entry.receiptNumber}}
-          </td>
-          <td *ngIf="entry.receiptNumber != null && entry.receiptDate != null">
-            {{entry.receiptDate | date:'dd-MMM-y'}}
           </td>
         </tr>
       </table>

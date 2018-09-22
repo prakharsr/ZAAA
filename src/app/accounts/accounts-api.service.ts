@@ -120,11 +120,12 @@ export class AccountsApiService {
     );
   }
 
-  searchMediaHouseReceipts(params: ReleaseOrderSearchParams) : Observable<MhReceiptResponse[]> {
+  searchMediaHouseReceipts(params: ReleaseOrderSearchParams, batchID?: string) : Observable<MhReceiptResponse[]> {
     return this.api.post('/user/mediahouseReceipts/search', {
       publicationName: params.mediaHouse,
       publicationEdition: params.edition,
-      insertionPeriod: params.past
+      insertionPeriod: params.past,
+      batchID: batchID
     }).pipe(
       map(data => {
         let result: MhReceiptResponse[] = [];
@@ -334,5 +335,13 @@ export class AccountsApiService {
     return this.api.post('/user/mediahouseReceipts', {
       mhis: insertions
     })
+  }
+
+  searchBatchIDs(term: string): Observable<string[]> {
+    return this.api.post('/user/batchID', {
+      batchID: term
+    }).pipe(
+      map(data => data.success ? data.batchIDs : [])
+    );
   }
 }
