@@ -82,6 +82,66 @@
 
   <div class="row">
     <div class="col-lg-6">
+      <br>
+      <mat-card class="mat-elevation-z3">
+        <label>
+          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', invoice.mediahouseID]">Media House Details</a>
+        </label>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">Name</div>
+            <div>{{invoice.publicationName}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">Edition</div>
+            <div>{{invoice.publicationEdition}}</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">State</div>
+            <div>{{invoice.publicationState}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">GSTIN</div>
+            <div>{{invoice.publicationGSTIN.GSTNo}}</div>
+          </div>
+        </div>
+
+        <div class="small text-muted mt-2">Media Type</div>
+        <div>{{invoice.mediaType}}</div>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <br>
+      <mat-card class="mat-elevation-z3">
+        <label>
+          <a matTooltip="View in Directory" [routerLink]="['/dir/clients', invoice.clientID]">Client Details</a>
+        </label>
+
+        <div class="small text-muted mt-2">Name</div>
+        <div>{{invoice.clientName}}</div>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-2">State</div>
+            <div>{{invoice.clientState}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-2">GSTIN</div>
+            <div>{{invoice.clientGSTIN.GSTType}} {{invoice.clientGSTIN.GSTNo}}</div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-lg-6">
       <mat-card class="mat-elevation-z3">
         <label class="text-muted">Calculations</label>
     

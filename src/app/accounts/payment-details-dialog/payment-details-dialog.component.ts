@@ -17,7 +17,7 @@ export class PaymentDetailsDialogComponent implements OnInit {
 
   details = new PaymentDetails();
 
-  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+  paymentTypes = ['Cash', 'Cheque', 'NEFT'];
 
   constructor() { }
 
