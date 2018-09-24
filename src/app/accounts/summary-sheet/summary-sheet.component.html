@@ -92,7 +92,7 @@
               <td style="white-space: nowrap;">₹ {{entry.collectedAmount}}</td>
               <td style="white-space: nowrap;">₹ {{entry.pendingAmount}}</td>
               <td>
-                <input type="number" name="amount-{{i}}-{{j}}" class="form-control form-control-sm" min="0" [verify-min]="0" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
+                <input type="number" name="amount-{{i}}-{{j}}" [disabled]="!entry.checked" class="form-control form-control-sm" min="0" [verify-min]="0" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>
               <td style="white-space: nowrap;">₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
             </tr>
