@@ -52,4 +52,25 @@ export class Invoice {
     insertions: Insertion[] = [];
 
     paymentDate: Date;
+
+    mediahouseID = "";
+    clientID = "";
+    executiveID = "";
+
+    publicationName = "";
+    publicationEdition = "";
+    publicationState = "";
+    publicationGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
+
+    mediaType = "";
+    
+    clientName = "";
+    clientState = "";
+    clientGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
 }
