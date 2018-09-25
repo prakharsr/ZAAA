@@ -58,9 +58,13 @@
           <div class="text-muted small">MHI No</div>
           {{item._id.MHINo}}
         </div>
-        <div class="col">
+        <div class="col-auto">
           <div class="text-muted small">Publication</div>
           {{item._id.publicationName}} - {{item._id.publicationEdition}}
+        </div>
+        <div class="col">
+          <div class="text-muted small">R.O. No.</div>
+          <a [routerLink]="['/releaseorders/', item._id.roId]">{{item._id.releaseOrderNO}}</a>
         </div>
         <div class="col-auto text-right">
           <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>
