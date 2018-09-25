@@ -45,6 +45,13 @@
       <mat-icon>check</mat-icon>
     </button>
 
+    <div *ngIf="summarySheet.length == 0" class="text-muted">
+      <br>No more Media House Invoices are pending.
+    </div>
+    <div *ngIf="summarySheet.length != 0" class="text-danger">
+      <br>Summary Sheet once created cannot be edited. Do not fill partial amounts for insertions.
+    </div>
+
     <br>
 
     <div *ngFor="let item of summarySheet; index as i">
