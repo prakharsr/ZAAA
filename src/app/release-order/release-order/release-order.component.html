@@ -51,7 +51,10 @@
         </li>
       </ul>
       <div class="card-header text-light small py-1" *ngIf="releaseorder.insertions.length">
-        Insertions
+        <div class="row">
+          <div class="col">Insertions</div>
+          <div class="col-auto">({{releaseorder.insertions.length}})</div>
+        </div>
       </div>
       <ul class="list-group list-group-flush small"  *ngIf="releaseorder.insertions.length">
         <li class="list-group-item py-1">
