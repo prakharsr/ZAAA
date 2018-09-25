@@ -1,0 +1,3 @@
+.form-control.ng-invalid {
+  border-color: red;
+}

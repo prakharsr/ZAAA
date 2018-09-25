@@ -41,7 +41,7 @@
   </div>
 
   <form #ssForm="ngForm" (ngSubmit)="submit()">
-    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid">
+    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid" *ngIf="ssForm.form.valid">
       <mat-icon>check</mat-icon>
     </button>
 
@@ -99,7 +99,7 @@
               <td style="white-space: nowrap;">₹ {{round2(entry.collectedAmount)}}</td>
               <td style="white-space: nowrap;">₹ {{round2(entry.pendingAmount)}}</td>
               <td>
-                <input type="number" name="amount-{{i}}-{{j}}" [disabled]="!entry.checked" class="form-control form-control-sm" min="0" [verify-min]="0" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
+                <input type="number" name="amount-{{i}}-{{j}}" [disabled]="!entry.checked" class="form-control form-control-sm" min="0" [verify-min]="0" [max]="entry.pendingAmount" [verify-max]="entry.pendingAmount" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>
               <td style="white-space: nowrap;">₹ {{round2(entry.pendingAmount - entry.SheetAmount)}}</td>
             </tr>

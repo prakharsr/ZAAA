@@ -154,6 +154,9 @@ export class SummarySheetComponent implements OnInit {
   }
 
   private round2(num: number) {
+    if (num < 0)
+      return 0;
+
     return Math.round(num * 100) / 100
   }
 }
