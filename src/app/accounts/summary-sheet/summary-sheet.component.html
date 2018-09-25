@@ -71,7 +71,7 @@
               <th></th>
               <th>Date</th>
               <th>Total Amount</th>
-              <th>Collected Amount</th>
+              <th>Paid Amount</th>
               <th>Pending Amount</th>
               <th>Amount</th>
               <th>Balance</th>
@@ -88,13 +88,13 @@
                   {{entry.insertionDate | date:'dd-MMM-y'}}
                 </span>
               </td>
-              <td style="white-space: nowrap;">₹ {{entry.Amount}}</td>
-              <td style="white-space: nowrap;">₹ {{entry.collectedAmount}}</td>
-              <td style="white-space: nowrap;">₹ {{entry.pendingAmount}}</td>
+              <td style="white-space: nowrap;">₹ {{round2(entry.Amount)}}</td>
+              <td style="white-space: nowrap;">₹ {{round2(entry.collectedAmount)}}</td>
+              <td style="white-space: nowrap;">₹ {{round2(entry.pendingAmount)}}</td>
               <td>
                 <input type="number" name="amount-{{i}}-{{j}}" [disabled]="!entry.checked" class="form-control form-control-sm" min="0" [verify-min]="0" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>
-              <td style="white-space: nowrap;">₹ {{entry.pendingAmount - entry.SheetAmount}}</td>
+              <td style="white-space: nowrap;">₹ {{round2(entry.pendingAmount - entry.SheetAmount)}}</td>
             </tr>
           </table>
         </div>

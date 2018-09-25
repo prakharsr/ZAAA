@@ -152,4 +152,8 @@ export class SummarySheetComponent implements OnInit {
         return 'Disputed';
     }
   }
+
+  private round2(num: number) {
+    return Math.round(num * 100) / 100
+  }
 }

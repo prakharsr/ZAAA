@@ -16,12 +16,15 @@ export class PaymentDetails {
 })
 export class PaymentDetailsDialogComponent implements OnInit {
 
+  totalAmount = 0;
+
   details = new PaymentDetails();
 
   paymentTypes = ['Cash', 'Cheque', 'NEFT'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: { amount: number }) {
     if (data.amount) {
+      this.totalAmount = data.amount;
       this.details.paymentAmount = data.amount;
     }
   }
