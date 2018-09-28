@@ -229,7 +229,7 @@ export class ReceiptComponent implements OnInit {
     this.goBack();
   }
 
-  paymentTypes = ['Cash', 'Cheque', 'NEFT'];
+  paymentTypes = ['Cash', 'Cheque', 'NEFT', 'Debit Note'];
 
   selectInvoice() {
     this.dialog.show(SelectInvoiceComponent).subscribe((data: Invoice) => {
