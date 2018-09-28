@@ -34,6 +34,9 @@
           <button mat-raised-button color="primary" class="mb-2 bg-primary" [routerLink]="['/releaseorders/new', releaseOrder.id]">
             <mat-icon>content_copy</mat-icon> Copy into New
           </button>
+          <button mat-raised-button color="primary" class="mb-2 bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" [routerLink]="['/accounts/notes/mediahouse/new', releaseOrder.id]">
+            <mat-icon>add</mat-icon> Create Note
+          </button>
           <button mat-raised-button color="primary" class="mb-2 bg-info" *ngIf="!releaseOrder.generated" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
             <mat-icon>edit</mat-icon> Edit
           </button>

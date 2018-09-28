@@ -224,7 +224,7 @@ export class AdvanceReceiptComponent implements OnInit {
   }
 
 
-  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT', 'Debit Note'];
 
   searchMediaHouse = (text: Observable<string>) => {
     return text.debounceTime(300)
