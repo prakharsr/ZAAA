@@ -97,12 +97,22 @@
     <div class="card-body">
       <div class="row">
         <div class="col">
-          <a [routerLink]="['/receipts', receipt.id]">{{receipt.receiptNO}}</a>
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/receipts', receipt.id]">{{receipt.receiptNO}}</a>
+            </div>
+            <div class="col-auto text-muted">
+              {{receipt.createdAt | date:'dd-MMM-y'}}
+            </div>
+          </div>
 
           <ng-container *ngIf="receipt.isCancelled">
-            <br>
             <span class="text-danger">CANCELLED</span>
           </ng-container>
+
+          <br>
+          <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}} <span class="text-muted">({{receipt.paymentType}})</span><br>
+          <span class="text-muted">Client:</span> {{receipt.clientName}}
         </div>
         <div class="col-auto">
           <mat-menu #receiptMenu="matMenu">

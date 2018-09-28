@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'app/guards';
-
 import {
   InvoiceResolver,
   InvoiceListResolver,
@@ -18,7 +16,6 @@ import { FirmResolver } from '../services';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
       {

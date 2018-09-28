@@ -45,7 +45,7 @@
 
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + invoicesData.genAmount" [style.width]="invoicesData.generated + '%'"></div>
-            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + invoicesData.pendingAmount" [style.width]="invoicesData.pending + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + invoicesData.pendingAmount" [style.width]="invoicesData.pending + '%'"></div>
           </div>
 
           <div class="row">
@@ -56,7 +56,7 @@
           <br>
 
           <div class="progress">
-            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + dueOverdue.dueAmount" [style.width]="dueOverdue.due + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + dueOverdue.dueAmount" [style.width]="dueOverdue.due + '%'"></div>
             <div class="progress-bar progress-bar-striped bg-danger" [matTooltip]="'₹ ' + dueOverdue.overdueAmount" [style.width]="dueOverdue.overdue + '%'"></div>
           </div>
 
@@ -103,7 +103,32 @@
             <ngx-charts-line-chart [results]="roChartResults"
               [xAxis]="true"
               [yAxis]="true"
-              [autoScale]="true">
+              [autoScale]="true"
+              [roundDomains]="true"
+              [xAxisTickFormatting]="xAxisTick"
+              [yAxisTickFormatting]="yAxisTick">
+
+              <ng-template #tooltipTemplate let-model="model">
+                <div class="text-light px-3 py-2">
+                  <b>{{model.series}}</b><br>
+                  {{xAxisTick(model.name)}}<br>
+                  {{yAxisTick(model.value)}}
+                </div>
+              </ng-template>
+
+              <ng-template #seriesTooltipTemplate let-model="model">
+                <div class="text-light text-left px-3 py-2">
+                  <table>
+                    <tr *ngFor="let item of model">
+                      <td>
+                        <span class="p-1 d-inline-block rounded-circle" [style.background-color]="item.color"></span>
+                      </td>
+                      <td class="px-1">{{item.series}}:</td>
+                      <td>{{yAxisTick(item.value)}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </ng-template>
             </ngx-charts-line-chart>
           </div>
         </div>
@@ -148,7 +173,7 @@
           <ng-container>
             <div class="progress">
               <div class="progress-bar progress-bar-striped" [matTooltip]="'₹ ' + paymentsData.collectedAmount" [style.width]="paymentsData.collected + '%'"></div>
-              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.shadowAmount" [style.width]="paymentsData.shadow + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + paymentsData.shadowAmount" [style.width]="paymentsData.shadow + '%'"></div>
               <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.completedAmount" [style.width]="paymentsData.completed + '%'"></div>
             </div>
 
@@ -163,7 +188,7 @@
 
           <ng-container>
             <div class="progress">
-              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paymentsData.pendingAmount" [style.width]="paymentsData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + paymentsData.pendingAmount" [style.width]="paymentsData.pending + '%'"></div>
               <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paymentsData.receivedAmount" [style.width]="paymentsData.received + '%'"></div>
             </div>
           </ng-container>
@@ -208,7 +233,7 @@
 
           <ng-container>
             <div class="progress">
-              <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + mhiData.pendingAmount" [style.width]="mhiData.pending + '%'"></div>
+              <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + mhiData.pendingAmount" [style.width]="mhiData.pending + '%'"></div>
               <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + mhiData.receivedAmount" [style.width]="mhiData.received + '%'"></div>
             </div>
 
@@ -224,7 +249,7 @@
 
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-success" [matTooltip]="'₹ ' + paidUnpaid.paidAmount" [style.width]="paidUnpaid.paid + '%'"></div>
-            <div class="progress-bar bg-warning" [matTooltip]="'₹ ' + paidUnpaid.unpaidAmount" [style.width]="paidUnpaid.unpaid + '%'"></div>
+            <div class="progress-bar progress-bar-striped bg-warning" [matTooltip]="'₹ ' + paidUnpaid.unpaidAmount" [style.width]="paidUnpaid.unpaid + '%'"></div>
           </div>
 
           <div class="row">
@@ -283,6 +308,8 @@
               <td>{{item.paymentBankName}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="receiptCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>
@@ -328,6 +355,8 @@
               <td>{{item._id.ChequeBank}}</td>
             </tr>
           </table>
+
+          <p class="text-muted small ml-1" *ngIf="mhiCheques.length == 0">No Cheques</p>
         </div>
       </div>
     </div>

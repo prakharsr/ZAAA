@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 export class PaymentDetails {
   paymentType = "Cash";
@@ -15,11 +16,18 @@ export class PaymentDetails {
 })
 export class PaymentDetailsDialogComponent implements OnInit {
 
+  totalAmount = 0;
+
   details = new PaymentDetails();
 
-  paymentTypes = ['Cash', 'Credit', 'Cheque', 'NEFT'];
+  paymentTypes = ['Cash', 'Cheque', 'NEFT'];
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { amount: number }) {
+    if (data.amount) {
+      this.totalAmount = data.amount;
+      this.details.paymentAmount = data.amount;
+    }
+  }
 
   ngOnInit() {
   }

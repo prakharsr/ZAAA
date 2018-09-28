@@ -10,90 +10,87 @@
   {{r.orgName}}
 </ng-template>
 
-<ng-template #rtMediaHouse let-r="result">
-  {{r.pubName}} - {{r.address.edition}}
-</ng-template>
-
-<ng-template #rtEdition let-r="result">
-  {{r.address.edition}}
-</ng-template>
-
 <div class="container">
-  <form (ngSubmit)="submit()" #noteForm="ngForm">
-    <ng-container *ngIf="clientNote">
-      <mat-form-field>
-        <input matInput type="text" name="client" required [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="text" id="invoiceNo" placeholder="Enter Invoice No" [(ngModel)]="note.invoiceNO" name="invoiceNo" required #invoiceNoField="ngModel">
-        <mat-error *ngIf="invoiceNoField.errors?.required">
-          Invoice No is required.
-        </mat-error>
-      </mat-form-field>
-
-    </ng-container>
-
-    <ng-container *ngIf="mediaHouseNote">
-      <div class="form-row">
-        <mat-form-field class="col-md">
-          <input matInput type="text" name="publication" required [(ngModel)]="mediaHouse" [ngbTypeahead]="searchMediaHouse" placeholder="Media House" [resultTemplate]="rtMediaHouse" [inputFormatter]="mediaHouseNameFormatter"/>
-        </mat-form-field>
-    
-        <mat-form-field class="col-md">
-          <input matInput type="text" [(ngModel)]="edition" name="edition" required [ngbTypeahead]="searchEdition" placeholder="Edition" [resultTemplate]="rtEdition" [inputFormatter]="editionFormatter"/>
-        </mat-form-field>
-      </div>
-
-      <mat-form-field>
-        <input matInput type="text" id="releaseOrderNo" placeholder="Enter Release Order No" [(ngModel)]="note.releaseOrderNO" name="releaseOrderNo" required #releaseOrderNoField="ngModel">
-        <mat-error *ngIf="releaseOrderNoField.errors?.required">
-          Release Order No is required.
-        </mat-error>
-      </mat-form-field>
-
-    </ng-container>
-
-    <mat-form-field>
-      <input matInput type="number" id="amount" placeholder="Enter Amount" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
-      <mat-error *ngIf="amountField.errors?.required">
-        Amount is required.
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput type="text" id="remark" name="remark" placeholder="Enter Remark" [(ngModel)]="note.remark" #remarkField="ngModel">
-    </mat-form-field>
-
-    <br><br>
-
-    <div class="d-none d-md-block">
-      <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!noteForm.form.valid">
-        <mat-icon>check</mat-icon> Submit
-      </button>
-
-      <button type="button" mat-raised-button color="warn" (click)="cancel()">
-        <mat-icon>cancel</mat-icon> Cancel
-      </button>
-    </div>
-
-    <mat-toolbar class="d-md-none fixed-bottom">
-      <div class="container-fluid">
-        <div class="form-row">
-          <div class="col">
-            <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!noteForm.form.valid" color="primary">
-              <mat-icon>check</mat-icon>
-              <div class="small">Submit</div>
-            </button>
-          </div>
-          <div class="col">
-            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              <div class="small">Cancel</div>
-            </button>
-          </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <form (ngSubmit)="submit()" #noteForm="ngForm">
+            <ng-container *ngIf="clientNote">
+              <mat-form-field>
+                <input matInput type="text" name="client" required [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
+              </mat-form-field>
+        
+              <mat-form-field>
+                <input matInput type="text" id="invoiceNo" placeholder="Enter Invoice No" [(ngModel)]="note.invoiceNO" name="invoiceNo" required #invoiceNoField="ngModel">
+                <mat-error *ngIf="invoiceNoField.errors?.required">
+                  Invoice No is required.
+                </mat-error>
+              </mat-form-field>
+            </ng-container>
+        
+            <mat-form-field>
+              <span matPrefix>₹ &nbsp;</span>
+              <input matInput type="number" id="amount" placeholder="Amount" min="0" [verify-min]="0" [(ngModel)]="note.amount" name="amount" required #amountField="ngModel">
+              <mat-error *ngIf="amountField.errors?.required">
+                Amount is required.
+              </mat-error>
+            </mat-form-field>
+        
+            <mat-form-field>
+              <input matInput type="text" id="remark" name="remark" placeholder="Remark" [(ngModel)]="note.remark" #remarkField="ngModel">
+            </mat-form-field>
+        
+            <br><br>
+        
+            <div class="d-none d-md-block">
+              <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!noteForm.form.valid">
+                <mat-icon>check</mat-icon> Submit
+              </button>
+        
+              <button type="button" mat-raised-button color="warn" (click)="cancel()">
+                <mat-icon>cancel</mat-icon> Cancel
+              </button>
+            </div>
+        
+            <mat-toolbar class="d-md-none fixed-bottom">
+              <div class="container-fluid">
+                <div class="form-row">
+                  <div class="col">
+                    <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!noteForm.form.valid" color="primary">
+                      <mat-icon>check</mat-icon>
+                      <div class="small">Submit</div>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+                      <mat-icon>cancel</mat-icon>
+                      <div class="small">Cancel</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </mat-toolbar>
+          </form>
         </div>
       </div>
-    </mat-toolbar>
-  </form>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <ng-container *ngIf="mediaHouseNote">
+            <div class="text-muted small">Media House</div>
+            <div class="mb-2">
+              <a [routerLink]="['/dir/media_houses', releaseOrder.mediaHouseID]">{{note.publicationName}} - {{note.publicationEdition}}</a>
+            </div>
+            
+            <div class="text-muted small">Release Order No.</div>
+            <div>
+              <a [routerLink]="['/releaseorders', releaseOrder.id]">{{releaseOrder.releaseOrderNO}}</a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

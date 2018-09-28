@@ -22,6 +22,8 @@
     </div>
   </div>
 
+  <p class="text-muted" *ngIf="receipts.length == 0">No Advanced Receipts</p>
+
   <br>
 
   <app-pagination [pageCount]="pageCount" [page]="page" (navigate)="navigate($event)"></app-pagination>

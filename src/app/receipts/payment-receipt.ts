@@ -12,6 +12,7 @@ export class PaymentReceipt {
     paymentAmount = 0;
     paymentAmountWords = "";
     paymentBankName = "";
+    originalAmount = 0;
 
     get isCancelled() {
         return this.status == 2;
@@ -22,9 +23,8 @@ export class PaymentReceipt {
     }
 
     advanced = false;
-}
 
-export class AdvanceReceipt extends PaymentReceipt {
+    mediahouseID = "";
     publicationName = "";
     publicationEdition = "";
     publicationState = "";
@@ -33,6 +33,7 @@ export class AdvanceReceipt extends PaymentReceipt {
         GSTNo: ""
     }
 
+    clientID = "";
     clientName = "";
     clientState = "";
     clientGSTIN = {
@@ -40,6 +41,14 @@ export class AdvanceReceipt extends PaymentReceipt {
         GSTNo: ""
     }
 
+    executiveID = "";
     executiveName = "";
     executiveOrg = "";
+    remark = "";
+
+    linked = false;
+    originalReceiptNo = "";
+    originalReceiptDate: Date;
 }
+
+export class AdvanceReceipt extends PaymentReceipt { }

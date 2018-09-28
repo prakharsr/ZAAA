@@ -98,12 +98,16 @@ export class SummarySheetComponent implements OnInit {
   submit() {
     let mapped: SummarySheetInsertion[] = [];
 
+    let totalAmount = 0;
+
     this.summarySheet.forEach(item => {
       item.entries.filter(entry => entry.checked).forEach(entry => {
         mapped.push({
           _id: entry._id,
           amount: entry.SheetAmount
         });
+
+        totalAmount += entry.SheetAmount;
       })
     });
 
@@ -113,7 +117,10 @@ export class SummarySheetComponent implements OnInit {
       return;
     }
 
-    this.dialog.show(PaymentDetailsDialogComponent, { width: '400px' }).subscribe((data: PaymentDetails) => {
+    this.dialog.show(PaymentDetailsDialogComponent, {
+      width: '400px',
+      data: { amount: totalAmount }
+    }).subscribe((data: PaymentDetails) => {
       if (data) {
         this.api.generateSummarySheet(data, mapped).subscribe(data => {
           if (data.success) {
@@ -144,5 +151,12 @@ export class SummarySheetComponent implements OnInit {
       case 3:
         return 'Disputed';
     }
+  }
+
+  private round2(num: number) {
+    if (num < 0)
+      return 0;
+
+    return Math.round(num * 100) / 100
   }
 }

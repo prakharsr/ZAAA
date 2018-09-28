@@ -1,147 +1,140 @@
 <br>
 
 <div class="container">
-  <h3 style="font-weight: lighter">Payment Receipt: {{receipt.receiptNO}}</h3>
-
-  <ng-container *ngIf="receipt.advanced">
-    <div class="text-info">ADVANCE</div>
-  </ng-container>
-  <ng-container *ngIf="receipt.isCancelled">
-    <div class="text-danger">CANCELLED</div>
-  </ng-container>
-
-  <br>
-
-  <div class="d-none d-md-block">
-    <button mat-raised-button color="primary" class="bg-primary" *ngIf="!receipt.advanced" [routerLink]="['/invoices', receipt.invoiceID]">View Invoice</button>
-
-    <button mat-raised-button color="primary" (click)="gen()" class="bg-success">
-      <mat-icon>get_app</mat-icon> Download
-    </button>
-    <button mat-raised-button color="primary" (click)="sendMsg()" class="bg-info">
-      <mat-icon>mail</mat-icon> Send Mail
-    </button>
+  <mat-card class="mat-elevation-z3">
+    <div class="row">
+      <div class="col-md-7">
+        <label class="text-muted">Payment Receipt: {{receipt.receiptNO}}</label><br>
+        <ng-container *ngIf="receipt.advanced">
+          <div class="text-info">ADVANCE</div>
+        </ng-container>
+        <ng-container *ngIf="receipt.isCancelled">
+          <div class="text-danger">CANCELLED</div>
+        </ng-container>
     
-    <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!receipt.isCancelled && !receipt.advanced">
-      <mat-icon>cancel</mat-icon> Cancel
-    </button>
-  </div>
-
-  <br>
+        <br>
+    
+        <div class="d-none d-md-block">
+          <button mat-raised-button color="primary" class="bg-primary" *ngIf="!receipt.advanced" [routerLink]="['/invoices', receipt.invoiceID]">View Invoice</button>
+      
+          <button mat-raised-button color="primary" (click)="gen()" class="bg-success">
+            <mat-icon>get_app</mat-icon> Download
+          </button>
+          <button mat-raised-button color="primary" (click)="sendMsg()" class="bg-info">
+            <mat-icon>mail</mat-icon> Send Mail
+          </button>
+          
+          <button mat-raised-button color="warn" (click)="cancel()" *ngIf="!receipt.isCancelled && !receipt.advanced">
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+        </div>
+    
+        <br>
+      </div>
+      <div class="col-md-5">
+        <div class="small text-muted mt-2">Amount</div>
+        <div>₹ {{receipt.paymentAmount}}</div>
+        
+        <div class="small text-muted mt-2">Amount in words</div>
+        <div>Rupees {{receipt.paymentAmountWords}}</div>
+      </div>
+    </div>
+  </mat-card>
 
   <div class="row">
-    <div class="col-lg-6">
-      <div>
-        <span class="text-muted">Amount:</span> ₹ {{receipt.paymentAmount}}
-      </div>
-    
-      <div class="mb-4">
-        <span class="text-muted">Amount in words:</span> Rupees {{receipt.paymentAmountWords}}
-      </div>
-    
-      <h5>Payment Details</h5>
-    
-      <div class="text-muted small mt-3">Type</div>
-      <div>{{receipt.paymentType | paymentMode}}</div>
-    
-      <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
-        <div class="text-muted small mt-2">Date</div>
-        <div>{{receipt.paymentDate | date:'dd-MMM-y'}}</div>
-      
-        <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
-        <div>{{receipt.paymentNo}}</div>
-      
-        <ng-container *ngIf="receipt.paymentType == 'Cheque'">
-          <div class="text-muted small mt-2">Bank Name</div>
-          <div>{{receipt.paymentBankName}}</div>
-        </ng-container>
-      </ng-container>
+    <div class="col-md">
+      <br>
 
-      <br><br>
+      <mat-card class="mat-elevation-z3 card-h100">
+        <label class="text-muted">Payment Details</label>
+
+        <div class="text-muted small mt-3">Original Amount</div>
+        <div>{{receipt.originalAmount }}</div>
+
+        <ng-container *ngIf="receipt.linked">
+          <div class="text-muted small mt-3">Original Reciept Number</div>
+          <div>{{receipt.originalReceiptNo }}</div>
+
+          <div class="text-muted small mt-3">Original Reciept Date</div>
+          <div>{{receipt.originalReceiptDate | date:'dd-MMM-y'}}</div>
+        </ng-container>
+      
+        <div class="text-muted small mt-3">Type</div>
+        <div>{{receipt.paymentType | paymentMode}}</div>
+      
+        <ng-container *ngIf="receipt.paymentType == 'Cheque' || receipt.paymentType == 'NEFT'">
+          <div class="text-muted small mt-2">Date</div>
+          <div>{{receipt.paymentDate | date:'dd-MMM-y'}}</div>
+        
+          <div class="text-muted small mt-2">{{receipt.paymentType}} Number</div>
+          <div>{{receipt.paymentNo}}</div>
+        
+          <ng-container *ngIf="receipt.paymentType == 'Cheque'">
+            <div class="text-muted small mt-2">Bank Name</div>
+            <div>{{receipt.paymentBankName}}</div>
+          </ng-container>
+        </ng-container>
+         
+        <div class="text-muted small mt-3">Status</div>
+        <span *ngIf="receipt.status == 0">Collected</span>
+        <span *ngIf="receipt.status == 1" class="text-success">Completed</span>
+        <span *ngIf="receipt.status == 2" class="text-danger">Cancelled</span>
+        <span *ngIf="receipt.status == 3" class="text-warning">Shadow</span>
+
+      </mat-card>
     </div>
-    <div class="col-lg-6" *ngIf="receipt.advanced">
-      <div class="card mb-3">
-        <div class="card-header">
-          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', receipt.mediahouseID]">Publication Details</a>
+    <div class="col-md">
+      <br>
+
+      <mat-card class="mat-elevation-z3 card-h100">
+        <ng-container *ngIf="receipt.mediahouseID">
+          <a matTooltip="View in Directory" [routerLink]="['/dir/media_houses', receipt.mediahouseID]">Media Houses Details</a>
+
+          <div class="row">
+            <div class="col">
+              <div class="small text-muted mt-1">Name</div>
+              <div>{{receipt.publicationName}}</div>
+            </div>
+            <div class="col">
+              <div class="small text-muted mt-1">Edition</div>
+              <div>{{receipt.publicationEdition}}</div>
+            </div>
+          </div>
+
+          <div class="small text-muted mt-1">State</div>
+          <div>{{receipt.publicationState}}</div>
+          
+          <hr>
+        </ng-container>
+        
+        <a matTooltip="View in Directory" [routerLink]="['/dir/clients', receipt.clientID]">Client Details</a>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-1">Name</div>
+            <div>{{receipt.clientName}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-1">State</div>
+            <div>{{receipt.clientState}}</div>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Name</div>
-              <div class="col-md-8">{{receipt.publicationName}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Edition</div>
-              <div class="col-md-8">{{receipt.publicationEdition}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">State</div>
-              <div class="col-md-8">{{receipt.publicationState}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">GSTIN</div>
-              <div class="col-md-8">{{receipt.publicationGSTIN.GSTNo}}</div>
-            </div>
-          </li>          
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Media Type</div>
-              <div class="col-md-8">{{receipt.mediaType}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    
-      <div class="card mb-3">
-        <div class="card-header">
-          <a matTooltip="View in Directory" [routerLink]="['/dir/clients', receipt.clientID]">Client Details</a>
+            
+        <hr>
+        
+        <a matTooltip="View in Directory" [routerLink]="['/dir/executives', receipt.executiveID]">Executive Details</a>
+
+        <div class="row">
+          <div class="col">
+            <div class="small text-muted mt-1">Name</div>
+            <div>{{receipt.executiveName}}</div>
+          </div>
+          <div class="col">
+            <div class="small text-muted mt-1">Organization</div>
+            <div>{{receipt.executiveOrg}}</div>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Name</div>
-              <div class="col-md-8">{{receipt.clientName}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">State</div>
-              <div class="col-md-8">{{receipt.clientState}}</div>
-            </div>
-          </li>          
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">GSTIN</div>
-              <div class="col-md-8">{{receipt.clientGSTIN.GSTType}} {{receipt.clientGSTIN.GSTNo}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="card mb-3">
-        <div class="card-header">
-          <a matTooltip="View in Directory" [routerLink]="['/dir/executives', receipt.executiveID]">Executive Details</a>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Name</div>
-              <div class="col-md-8">{{receipt.executiveName}}</div>
-            </div>
-          </li>
-          <li class="list-group-item">
-            <div class="row">
-              <div class="col-md-4">Organization</div>
-              <div class="col-md-8">{{receipt.executiveOrg}}</div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      </mat-card>
     </div>
   </div>
 </div>

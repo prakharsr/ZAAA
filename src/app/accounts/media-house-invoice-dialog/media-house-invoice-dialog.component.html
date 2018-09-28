@@ -18,14 +18,14 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input type="number" matInput placeholder="Amount" [(ngModel)]="details.MHIGrossAmount" name="amount" required #amountField="ngModel">
+          <input type="number" matInput placeholder="Amount" [(ngModel)]="details.MHIGrossAmount" min="0" [verify-min]="0" name="amount" required #amountField="ngModel">
           <mat-error *ngIf="amountField.errors?.required">
             Amount is required.
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.MHITaxAmount" name="taxAmount" required #taxAmountField="ngModel">
+          <input type="number" matInput placeholder="Tax Amount" [(ngModel)]="details.MHITaxAmount" min="0" [verify-min]="0" name="taxAmount" required #taxAmountField="ngModel">
           <mat-error *ngIf="taxAmountField.errors?.required">
             Tax Amount is required.
           </mat-error>

@@ -171,6 +171,7 @@ export class ApiService {
     profile.designation = data.designation;
     profile.contact = data.phone;
     profile.email = data.email;
+    profile.mobileVerified = data.mobile_verified;
 
     if (data.photo) {
       profile.photo = environment.uploadsBaseUrl + data.photo;
@@ -189,6 +190,23 @@ export class ApiService {
   getUserProfile() : Observable<UserProfile> {
     return this.get('/user/profile').pipe(
       map(data => data.success ? this.bodyToUser(data.user) : new UserProfile())
+    );
+  }
+
+  getUserCheck() {
+    return this.get('/user/check').pipe(
+      map(data => {
+        if (!data.success) {
+          return data;
+        }
+        
+        return {
+          success: true,
+          user: this.bodyToUser(data.user),
+          firm: this.bodyToFirm(data.firm),
+          plan: data.plan
+        }
+      })
     );
   }
 
@@ -230,63 +248,63 @@ export class ApiService {
     return this.get('/firm/profile');
   }
 
+  private bodyToFirm(data: any) {
+    let profile = new Firm();
+
+    profile.name = data.FirmName;
+    profile.tagline = data.TagLine;
+    profile.nickname = data.DisplayName;
+    profile.fax = data.Fax;
+    profile.landlineNo = data.Landline;
+    profile.stdNo = data.stdNo;
+    profile.website = data.Website;
+    profile.panNo = data.PanNo;
+
+    if (data.GSTIN)
+      profile.GSTIN = data.GSTIN;
+    
+    profile.OtherMobile = data.OtherMobile;
+
+    if (data.RegisteredAddress)
+      profile.registeredAddress = data.RegisteredAddress;
+    
+    if (data.OfficeAddress)
+      profile.officeAddress = data.OfficeAddress;
+
+    profile.phone = data.Mobile;
+    profile.email = data.Email;
+
+    profile.incDate = data.IncorporationDate;
+
+    if (data.LogoURL) {
+      profile.logo = environment.uploadsBaseUrl + data.LogoURL;
+    }
+
+    if (data.BankDetails) {
+      let bank = data.BankDetails;
+
+      profile.bankAccountName = bank.AccountName;
+      profile.bankAccountNo = bank.AccountNo;
+      profile.bankName = bank.BankName;
+      profile.bankIfsc = bank.IFSC;
+      profile.bankBranchAddress = bank.BranchAddress;
+      profile.bankAccountType = bank.AccountType;
+    }
+
+    if (data.Socials) {
+      profile.facebook = data.Socials.fb;
+      profile.twitter = data.Socials.twitter;
+      profile.other = data.Socials.Others;
+    }
+
+    return profile;
+  }
+
   getFirmProfile() : Observable<Firm> {
     let base = this.get('/firm/profile');
 
     let result = base.pipe(
-      map(data => {
-        let profile = new Firm();
-
-        if (data.success) {
-          profile.name = data.firm.FirmName;
-          profile.tagline = data.firm.TagLine;
-          profile.nickname = data.firm.DisplayName;
-          profile.fax = data.firm.Fax;
-          profile.landlineNo = data.firm.Landline;
-          profile.stdNo = data.firm.stdNo;
-          profile.website = data.firm.Website;
-          profile.panNo = data.firm.PanNo;
-
-          if (data.firm.GSTIN)
-            profile.GSTIN = data.firm.GSTIN;
-          
-          profile.OtherMobile = data.firm.OtherMobile;
-
-          if (data.firm.RegisteredAddress)
-            profile.registeredAddress = data.firm.RegisteredAddress;
-          
-          if (data.firm.OfficeAddress)
-            profile.officeAddress = data.firm.OfficeAddress;
-
-          profile.phone = data.firm.Mobile;
-          profile.email = data.firm.Email;
-
-          profile.incDate = data.firm.IncorporationDate;
-
-          if (data.firm.LogoURL) {
-            profile.logo = environment.uploadsBaseUrl + data.firm.LogoURL;
-          }
-
-          if (data.firm.BankDetails) {
-            let bank = data.firm.BankDetails;
-
-            profile.bankAccountName = bank.AccountName;
-            profile.bankAccountNo = bank.AccountNo;
-            profile.bankName = bank.BankName;
-            profile.bankIfsc = bank.IFSC;
-            profile.bankBranchAddress = bank.BranchAddress;
-            profile.bankAccountType = bank.AccountType;
-          }
-
-          if (data.firm.Socials) {
-            profile.facebook = data.firm.Socials.fb;
-            profile.twitter = data.firm.Socials.twitter;
-            profile.other = data.firm.Socials.Others;
-          }
-        }
-
-        return profile;
-      })
+      map(data => data.success ? this.bodyToFirm(data.firm) : new Firm())
     );
 
     return result;

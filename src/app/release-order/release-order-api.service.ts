@@ -9,6 +9,7 @@ import { ReleaseOrderDir } from './release-order-dir-resolver.service';
 import { InsertionCheckItem } from './insertion-check-item';
 import { ReleaseOrderSearchParams } from './release-order-search-params';
 import { PageData, MailingDetails } from 'app/models';
+import { Invoice } from '../invoice';
 
 @Injectable()
 export class ReleaseOrderApiService {
@@ -158,7 +159,7 @@ export class ReleaseOrderApiService {
     );
   }
 
-  searchInsertions(page: number, params: ReleaseOrderSearchParams, releaseOrderNO?: string) : Observable<PageData<InsertionCheckItem>> {
+  searchInsertions(page: number, insertionStatus: number, params: ReleaseOrderSearchParams, releaseOrderNO?: string) : Observable<PageData<InsertionCheckItem>> {
     return this.api.post('/user/releaseorders/insertions/search', {
       page: page,
       publicationName: params.mediaHouse,
@@ -168,7 +169,8 @@ export class ReleaseOrderApiService {
       executiveOrg: params.executiveOrg,
       insertionPeriod: params.past,
       releaseOrderNO: releaseOrderNO,
-      generated: true
+      generated: true,
+      insertionStatus: insertionStatus
     }).pipe(
       map(data => {
         let insertions : InsertionCheckItem[] = [];
@@ -206,5 +208,21 @@ export class ReleaseOrderApiService {
     return this.api.post('/user/releaseorder/generate', {
       id: releaseOrder.id
     });
+  }
+
+  getInvoices(releaseOrder: ReleaseOrder): Observable<Invoice[]> {
+    return this.api.post('/user/invoice/pre', {
+      releaseOrderId: releaseOrder.id
+    }).pipe(
+      map(data => {
+        let result : Invoice[] = [];
+
+        if (data.success) {
+          result = data.invoices;
+        }
+
+        return result;
+      })
+    );
   }
 }

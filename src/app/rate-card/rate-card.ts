@@ -56,7 +56,7 @@ export class FixSize {
 }
 
 export class Scheme {
-    paid = 0;
+    paid = 1;
     Free = 0;
     timeLimit = 0;
 }
@@ -73,12 +73,4 @@ export class Remark {
 export class Tax {
     included = true;
     rate = 0;
-}
-
-export class Category {
-    constructor(public name: string, public subcategories: Category[] = []) {
-        subcategories.forEach(elememt => elememt.parent = this);
-    }
-
-    parent: Category;
 }

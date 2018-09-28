@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from 'app/guards';
-
 import { RateCardResolver } from 'app/rate-card';
 
 import {
@@ -15,25 +13,37 @@ import {
   ReleaseOrderListComponent
 } from '.';
 import { UserProfileResolver, FirmResolver } from '../services';
+import { CreateRoGuard } from './create-ro-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'generated', pathMatch: 'full' },
       { path: 'list', redirectTo: 'list/1', pathMatch: 'full' },
       {
         path: 'check',
         children: [
-          { path: '', redirectTo: 'list/1', pathMatch: 'full' },
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
           {
-            path: 'list/:page',
-            component: InsertionCheckComponent,
-            runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-            resolve: {
-              resolved: InsertionListResolver
-            }
+            path: 'list',
+            children: [
+              { path: '', redirectTo: '0', pathMatch: 'full' },
+              {
+                path: ':state',
+                children: [
+                  { path: '', redirectTo: '1', pathMatch: 'full' },
+                  {
+                    path: ':page',
+                    component: InsertionCheckComponent,
+                    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+                    resolve: {
+                      resolved: InsertionListResolver
+                    }
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -71,21 +81,26 @@ const routes: Routes = [
         resolve: {
           user: UserProfileResolver,
           firm: FirmResolver
-        }
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: 'new/:copy',
         component: ReleaseOrderComponent,
         resolve: {
           releaseOrder: ReleaseOrderResolver
-        }
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: 'fromRateCard/:rateCard',
         component: ReleaseOrderComponent,
         resolve: {
-          rateCard: RateCardResolver
-        }
+          rateCard: RateCardResolver,
+          user: UserProfileResolver,
+          firm: FirmResolver
+        },
+        canActivate: [CreateRoGuard]
       },
       {
         path: "edit/:id",

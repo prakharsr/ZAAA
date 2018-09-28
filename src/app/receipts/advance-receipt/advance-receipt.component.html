@@ -1,5 +1,11 @@
+<ng-template #addPersonSvg>
+  <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="#fff" d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z" />
+  </svg>
+</ng-template>
+
 <div class="container">
-  <form (ngSubmit)="submit()" #receiptForm="ngForm">
+  <form (ngSubmit)="submitted = true" #receiptForm="ngForm">
     <div class="row">
       <div class="col-lg col-md-6">
         <br>
@@ -13,40 +19,39 @@
             </mat-error> -->
           </mat-form-field>
               
-          <div class="row">
-            <mat-form-field class="col-md">
+          <div class="form-row">
+            <mat-form-field class="col-6">
               <input matInput type="text" id="publicationEdition" name="publicationEdition" placeholder="Edition" [(ngModel)]="receipt.publicationEdition" #publicationEditionField="ngModel">
               <!-- <mat-error *ngIf="publicationEditionField.errors?.required">
                 Edition Name is required.
               </mat-error> -->
             </mat-form-field>
-        
-          </div>
-          
-          <div class="row">
-            <mat-form-field class="col-md">
+
+            <mat-form-field class="col-6">
               <mat-select id="publicationState" name="publicationState" placeholder="State" [(ngModel)]="receipt.publicationState" #publicationStateField="ngModel">
                 <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
               </mat-select>
               <!-- <mat-error *ngIf="publicationStateField.errors?.required">
                 State is required.
               </mat-error> -->
-            </mat-form-field>
-
-            <mat-form-field class="col-md">
-              <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="receipt.publicationGSTIN.GSTNo" minlength="15" maxlength="15" #publicationGSTINField="ngModel">
-              <!-- <mat-error *ngIf="publicationGSTINField.errors?.required">
-                GSTIN is required.
-              </mat-error>
-              <mat-error *ngIf="publicationGSTINField.errors?.minlength || publicationGSTINField.errors.maxlength)">
-                GSTIN should be 15 characters long.
-              </mat-error> -->
-            </mat-form-field>
+            </mat-form-field>        
           </div>
+          
+          <mat-form-field>
+            <input matInput type="text" id="publicationGSTIN" name="publicationGSTIN" placeholder="GST" [(ngModel)]="receipt.publicationGSTIN.GSTNo" minlength="15" maxlength="15" #publicationGSTINField="ngModel">
+            <!-- <mat-error *ngIf="publicationGSTINField.errors?.required">
+              GSTIN is required.
+            </mat-error>
+            <mat-error *ngIf="publicationGSTINField.errors?.minlength || publicationGSTINField.errors.maxlength)">
+              GSTIN should be 15 characters long.
+            </mat-error> -->
+          </mat-form-field>
 
-          <mat-card-actions>
-            <button mat-button type="button" color="primary" (click)="addMediaHouse()">Add to Directory</button>
-          </mat-card-actions>
+          <div class="text-right">
+            <button mat-mini-fab type="button" color="primary" (click)="addMediaHouse()" matTooltip="Add to Directory">
+              <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+            </button>
+          </div>
         </mat-card>
       </div>
       <div class="col-lg col-md-6">
@@ -61,15 +66,16 @@
             </mat-error>
           </mat-form-field>
 
-          <div class="row">
-            <mat-form-field class="col">
-              <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="receipt.clientState" required #clientStateField="ngModel">
-                <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="clientStateField.errors?.required">
-                State is required.
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field>
+            <mat-select id="clientState" name="clientState" placeholder="State" [(ngModel)]="receipt.clientState" required #clientStateField="ngModel">
+              <mat-option *ngFor="let state of stateApi.states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="clientStateField.errors?.required">
+              State is required.
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-row">
             <div class="{{receipt.clientGSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
               <mat-form-field>
                 <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="receipt.clientGSTIN.GSTType">
@@ -91,9 +97,11 @@
             </div>
           </div>
 
-          <mat-card-actions>
-            <button mat-button type="button" color="primary" (click)="addClient()">Add to Directory</button>
-          </mat-card-actions>
+          <div class="text-right">
+            <button mat-mini-fab type="button" color="primary" (click)="addClient()" matTooltip="Add to Directory">
+              <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+            </button>
+          </div>
         </mat-card>
       </div>
     </div>
@@ -118,24 +126,25 @@
             </mat-error>
           </mat-form-field>
 
-          <button mat-button type="button" color="primary" (click)="addExecutive()">Add to Directory</button>
+          <div class="text-right">
+            <button mat-mini-fab type="button" color="primary" (click)="addExecutive()" matTooltip="Add to Directory">
+              <ng-container *ngTemplateOutlet="addPersonSvg"></ng-container>
+            </button>
+          </div>
+
+          <br>
         </mat-card>
       </div>
       <div class="col-lg col-md-6">
         <mat-card class="mat-elevation-z5">
-          <label>Enter Amount</label>
-          <br>
+          <mat-card-title>Payment Details</mat-card-title>
+          
           <mat-form-field>
-            <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
+            <input matInput type="number" id="paymentAmount" name="paymentAmount" placeholder="Amount" min="0" [verify-min]="0" [(ngModel)]="receipt.paymentAmount" required #paymentAmountField="ngModel">
             <mat-error *ngIf="paymentAmountField.errors?.required">
-                Amount is required.
+              Amount is required.
             </mat-error>
           </mat-form-field>
-          
-          <br>
-            
-          <label>Payment Details</label>
-          <br>
         
           <mat-form-field>
             <mat-select name="paymentType" placeholder="Type" [(ngModel)]="receipt.paymentType" id="paymentType" #paymentTypeField="ngModel" required>
@@ -179,6 +188,8 @@
               </ng-container>
             </div>
           </ng-container>
+
+          <br>
         </mat-card>
       </div>
     </div>
@@ -186,32 +197,62 @@
     <br><br>
 
     <div class="d-none d-md-block">
-      <button type="submit" mat-raised-button color="primary" class="bg-success" [disabled]="!receiptForm.form.valid">
+      <button color="primary" type="submit" mat-raised-button class="mb-2 bg-success"  (click)="handleSubmit(receiptForm.form.valid, 'save')" [disabled]="submitting">
         <mat-icon>check</mat-icon> Save
       </button>
-
-      <button type="button" mat-raised-button color="warn" (click)="cancel()">
+  
+      <button type="button" class="mb-2" mat-raised-button color="warn" (click)="cancel()">
         <mat-icon>cancel</mat-icon> Cancel
+      </button>
+
+      <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'preview')" class="mb-2 bg-warning">
+        <mat-icon>assignment</mat-icon> Preview
+      </button>
+
+      <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'dl')" class="mb-2 bg-primary">
+        <mat-icon>get_app</mat-icon> Download
+      </button>
+
+      <button color="primary" type="submit" mat-raised-button [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'mail')" class="mb-2 bg-info">
+        <mat-icon>mail</mat-icon> Send Mail
       </button>
     </div>
 
-    <mat-toolbar class="d-md-none fixed-bottom">
-      <div class="container-fluid">
-        <div class="form-row">
-          <div class="col">
-            <button type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="!receiptForm.form.valid" color="primary">
-              <mat-icon>check</mat-icon>
-              <div class="small">Save</div>
-            </button>
-          </div>
-          <div class="col">
-            <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
-              <mat-icon>cancel</mat-icon>
-              <div class="small">Cancel</div>
-            </button>
-          </div>
+  <mat-toolbar class="d-md-none fixed-bottom">
+    <div class="container-fluid">
+      <div class="form-row">
+        <div class="col">
+          <button color="primary" type="submit" class="btn btn-block btn-outline-success border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'save')" color="primary">
+            <mat-icon>check</mat-icon>
+            <div class="small">Save</div>
+          </button>
         </div>
+        <div class="col">
+          <button type="button" class="btn btn-block btn-outline-danger border-0 btn-sm" (click)="cancel()">
+            <mat-icon>cancel</mat-icon>
+            <div class="small">Cancel</div>
+          </button>
+        </div>
+        <div class="col">
+          <button color="primary" type="submit" class="btn btn-block btn-outline-warning border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'preview')">
+            <mat-icon>assignment</mat-icon>
+            <div class="small">Preview</div>
+          </button>
+        </div>
+        <div class="col">
+          <button color="primary" type="submit" class="btn btn-block btn-outline-primary border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'dl')">
+            <mat-icon>get_app</mat-icon>
+            <div class="small">Download</div>
+          </button>
+        </div>
+        <div class="col">
+          <button color="primary" type="submit" class="btn btn-block btn-outline-info border-0 btn-sm" [disabled]="submitting" (click)="handleSubmit(receiptForm.form.valid, 'mail')">
+            <mat-icon>mail</mat-icon>
+            <div class="small">Send Mail</div>
+          </button>
+        </div>    
       </div>
-    </mat-toolbar>
-  </form>
+    </div>
+  </mat-toolbar>
+</form>
 </div>

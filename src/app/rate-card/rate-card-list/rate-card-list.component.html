@@ -46,7 +46,7 @@
         </div>
         <div class="col-auto">
           <mat-menu #dirMenu="matMenu">
-            <button mat-menu-item (click)="createReleaseOrder(ratecard)">
+            <button mat-menu-item *ngIf="!isSuperAdmin" (click)="createReleaseOrder(ratecard)">
               <mat-icon>add</mat-icon> Create Release Order
             </button>
             <ng-container *ngIf="!global || (global && isSuperAdmin)">

@@ -26,7 +26,9 @@ export class InsertionListResolver implements Resolve<Result> {
       route.queryParamMap.get('executiveOrg'),
       +route.queryParamMap.get('past'));
 
-    return this.api.searchInsertions(page, searchParams).map(insertion => {
+    let status = +route.paramMap.get('state');
+
+    return this.api.searchInsertions(page, status, searchParams).map(insertion => {
       if (insertion) {
         return {
           list: insertion,

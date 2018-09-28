@@ -57,7 +57,7 @@
                 <div class="col-auto text-muted col-form-label" style="margin-right: 9px;">GST:</div>
                 <div class="{{invoice.GSTIN.GSTType != 'URD' ? 'col-auto' : 'col'}}">
                   <mat-form-field>
-                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="invoice.GSTIN.GSTType">
+                    <mat-select placeholder="GST Type" name="gstType" [(ngModel)]="clientGSTType">
                       <mat-option value="URD">URD</mat-option>
                       <mat-option value="RD">RD</mat-option>
                     </mat-select>
@@ -73,6 +73,15 @@
                       GSTIN should be 15 characters long.
                     </mat-error>
                   </mat-form-field>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-row">
+                <div class="col-auto text-muted" style="margin-right: 13px">SAC</div>
+                <div class="col">
+                  {{releaseOrder.sac}}
                 </div>
               </div>
             </div>
@@ -140,7 +149,11 @@
               <div class="col-auto">
                 <h6>Select Insertions</h6>
                 
-                <button mat-raised-button color="primary" type="button" class="mb-3" (click)="selectAllInsertions()">Select All</button>
+                <button mat-raised-button color="primary" type="button" class="mb-3" (click)="selectAllInsertions()">
+                  <span *ngIf="areAllSelected else select">Unselect</span>
+                  <ng-template #select>Select</ng-template>
+                  All
+                </button>
               </div>
               <div class="col">
                 <span class="mr-3 mb-3" *ngFor="let item of availableInsertions">
@@ -184,7 +197,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.extraCharges.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.extraCharges.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Commission" name="commission" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
+                  <input type="number" matInput placeholder="Commission" name="commission" min="0" [verify-min]="0" [(ngModel)]="invoice.extraCharges.amount" required #commissionField="ngModel">
                   <mat-error *ngIf="commissionField.errors?.required">
                     Commission is required.
                   </mat-error>
@@ -198,7 +211,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.additionalCharges.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.additionalCharges.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Additional Charges" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
+                  <input type="number" matInput placeholder="Additional Charges" min="0" [verify-min]="0" name="additionalCharges" [(ngModel)]="invoice.additionalCharges.amount" required #additionalChargesField="ngModel">
                   <mat-error *ngIf="additionalChargesField.errors?.required">
                     Additional Charges is required.
                   </mat-error>
@@ -220,7 +233,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.publicationDiscount.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.publicationDiscount.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Publication Discount" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
+                  <input type="number" matInput placeholder="Publication Discount" min="0" [verify-min]="0" name="pubDiscount" [(ngModel)]="invoice.publicationDiscount.amount" required #pubDiscountField="ngModel">
                   <mat-error *ngIf="pubDiscountField.errors?.required">
                     Publication Discount is required.
                   </mat-error>
@@ -234,7 +247,7 @@
                 <mat-form-field class="col">
                   <span matPrefix>{{invoice.agencyDiscount1.percentage ? '' : '₹&nbsp;'}}</span>
                   <span matSuffix>{{invoice.agencyDiscount1.percentage ? '%' : ''}}</span>
-                  <input type="number" matInput placeholder="Agency Discount" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
+                  <input type="number" matInput placeholder="Agency Discount" min="0" [verify-min]="0" name="agencyDiscount" [(ngModel)]="invoice.agencyDiscount1.amount" required #agencyDiscountField="ngModel">
                   <mat-error *ngIf="agencyDiscountField.errors?.required">
                     Agency Discount is required.
                   </mat-error>
@@ -295,7 +308,7 @@
                 </div>
                 <div class="col">
                   <mat-form-field>
-                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required>
+                    <mat-select name="tax" [(ngModel)]="invoice.taxAmount" id="tax" #taxField="ngModel" required [disabled]="clientGSTType == 'URD'">
                       <mat-option *ngFor="let item of taxes" [value]="item">
                         {{item.primary || 'NIL'}}<span *ngIf="item.primary">%</span>
                       </mat-option>
@@ -310,7 +323,7 @@
             <div class="card-footer">
               <div>
                 Final Amount:  ₹ {{finalAmount}} /-
-                <span>({{netAmount}} + {{finalTaxAmount - netAmount}})</span>
+                <span>({{netAmount}} + {{round2(finalTaxAmount - netAmount)}})</span>
               </div>
               <div>
                 <small>(Net Amount + Tax)</small>
@@ -325,7 +338,7 @@
               </div>
             <div class="card-body">
               <mat-form-field>
-                <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
+                <input type="number" matInput placeholder="Enter Credit Days" name="creditDays" min="0" [verify-min]="0" [(ngModel)]="creditDays" required #creditDaysField="ngModel">
                 <mat-error *ngIf="creditDaysField.errors?.required">
                   Credit Days is required.
                 </mat-error>
@@ -336,10 +349,10 @@
             </div>
             <div class="card-body">
               <mat-form-field>
-                <textarea matInput id="remark" name="remark" placeholder="For Invoice" [(ngModel)]="invoice.remark" #remarkField="ngModel"></textarea>
+                <textarea matInput id="remark" name="remark" placeholder="For Invoice (to be printed)" [(ngModel)]="invoice.remark" #remarkField="ngModel"></textarea>
               </mat-form-field>
               <mat-form-field>
-                <textarea matInput placeholder="For External Use" name="otherRemark" [(ngModel)]="invoice.otherRemark"></textarea>
+                <textarea matInput placeholder="For External Use (not showed on Invoice)" name="otherRemark" [(ngModel)]="invoice.otherRemark"></textarea>
               </mat-form-field>
             </div>
           </div>

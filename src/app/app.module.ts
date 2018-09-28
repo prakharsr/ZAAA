@@ -3,28 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BaseModule } from './base.module';
-import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
+
+import { AdminModule } from './admin/admin.module';
+import { ReportsModule } from './reports/reports.module';
 
 import { AppComponent } from './app.component';
 
-import {
-  HomeComponent,
-  RegisterComponent,
-  ForgotPswComponent,
-  PhoneVerifyComponent,
-  ProfileViewComponent,
-  AccountDetailsComponent,
-  BusinessDetailsComponent,
-  DashboardComponent,
-  ChangePswComponent,
-  ResetPasswordComponent,
-  NotFoundComponent,
-  NavbarComponent,
-  LoaderComponent
-} from './components';
-
-import { ReportsModule } from './reports/reports.module';
+import * as comp from './components';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import { DashboardApiService } from './services/dashboard-api.service';
 import { TncComponent } from './components/tnc/tnc.component';
@@ -32,26 +18,26 @@ import { TncComponent } from './components/tnc/tnc.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    PhoneVerifyComponent,
-    RegisterComponent,
-    ProfileViewComponent,
-    DashboardComponent,
-    AccountDetailsComponent,
-    BusinessDetailsComponent,
-    ChangePswComponent,
-    ForgotPswComponent,
-    NotFoundComponent,
-    ResetPasswordComponent,
-    LoaderComponent,
+    comp.NavbarComponent,
+    comp.HomeComponent,
+    comp.PhoneVerifyComponent,
+    comp.RegisterComponent,
+    comp.ProfileViewComponent,
+    comp.DashboardComponent,
+    comp.AccountDetailsComponent,
+    comp.BusinessDetailsComponent,
+    comp.ChangePswComponent,
+    comp.ForgotPswComponent,
+    comp.NotFoundComponent,
+    comp.ResetPasswordComponent,
+    comp.LoaderComponent,
     CreateTicketComponent,
     TncComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    BaseModule,
+    BaseModule.forRoot(),
     AdminModule,
     ReportsModule,
     AppRoutingModule

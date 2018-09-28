@@ -8,6 +8,7 @@ import { AccountsApiService, MhReceiptResponse } from './accounts-api.service';
 class Result {
   list: MhReceiptResponse[];
   search: ReleaseOrderSearchParams;
+  batchID: string;
 }
 
 @Injectable()
@@ -20,11 +21,14 @@ export class MhReceiptListResolver implements Resolve<Result> {
       null, null, null,
       +route.queryParamMap.get('past'));
 
+    let batchID = route.queryParamMap.get('batchID');
+
     return this.api.searchMediaHouseReceipts(searchParams).map(mhreceipts => {
       if (mhreceipts) {
         return {
           list: mhreceipts,
-          search: searchParams
+          search: searchParams,
+          batchID: batchID
         }
       }
       else {

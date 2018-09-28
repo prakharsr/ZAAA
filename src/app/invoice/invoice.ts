@@ -46,8 +46,31 @@ export class Invoice {
     /*for payment reciept */
     clearedAmount = 0;
     pendingAmount = 0;
+    shadowAmount = 0;
+    collectedAmount = 0;
 
     insertions: Insertion[] = [];
 
     paymentDate: Date;
+
+    mediahouseID = "";
+    clientID = "";
+    executiveID = "";
+
+    publicationName = "";
+    publicationEdition = "";
+    publicationState = "";
+    publicationGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
+
+    mediaType = "";
+    
+    clientName = "";
+    clientState = "";
+    clientGSTIN = {
+        GSTType: "URD",
+        GSTNo: ""
+    }
 }

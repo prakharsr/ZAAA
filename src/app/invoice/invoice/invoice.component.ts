@@ -80,6 +80,18 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
+  get clientGSTType() {
+    return this.invoice.GSTIN.GSTType;
+  }
+
+  set clientGSTType(GSTType: string) {
+    this.invoice.GSTIN.GSTType = GSTType;
+
+    if (GSTType == 'URD') {
+      this.invoice.taxAmount = this.taxes[0];
+    }
+  }
+
   init(resolved: ReleaseOrderDir) {
     this.releaseOrder = resolved.releaseorder;
     this.mediaHouse = resolved.mediaHouse;
@@ -92,6 +104,7 @@ export class InvoiceComponent implements OnInit {
     // this.invoice.agencyDiscount1.amount = this.releaseOrder.agencyDiscount1;
 
     this.invoice.GSTIN = this.client.GSTIN;
+    this.clientGSTType = this.client.GSTIN.GSTType;
 
     // this.taxes.forEach(element => {
     //   if (element.primary == this.releaseOrder.taxAmount.primary && element.secondary == this.releaseOrder.taxAmount.secondary) {
@@ -123,20 +136,28 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveAndGen() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.gen(this.invoice);
+    this.confirmGeneration().subscribe(confirm=> {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.gen(this.invoice);
+          }
+          else this.submitting = false;
+        });
       }
-      else this.submitting = false;
     });
   }
 
   saveAndSendMsg() {
-    this.submit().subscribe(data => {
-      if (data.success) {
-        this.sendMsg(this.invoice);
+    this.confirmGeneration().subscribe(confirm => {
+      if(confirm) {
+        this.submit().subscribe(data => {
+          if (data.success) {
+            this.sendMsg(this.invoice);
+          }
+          else this.submitting = false;
+        });
       }
-      else this.submitting = false;
     });
   }
 
@@ -162,6 +183,11 @@ export class InvoiceComponent implements OnInit {
         }
       });
     });
+  }
+
+  private confirmGeneration() : Observable<boolean> {
+
+    return this.dialog.showYesNo('Confirm Generation', "Invoice will be generated. Once generated it cannot be edited or deleted. Are you sure you want to continue?");
   }
 
   gen(invoice: Invoice, preview = false) {
@@ -265,6 +291,10 @@ export class InvoiceComponent implements OnInit {
 
   private goBack() {
     this.router.navigateByUrl('/invoices');
+  }
+
+  round2(num: number) {
+    return Math.round(num * 100) / 100
   }
 
   presave(): boolean {
@@ -403,7 +433,14 @@ export class InvoiceComponent implements OnInit {
   }
 
   selectAllInsertions() {
-    this.availableInsertions.forEach(insertion => insertion.checked = true);
+    let target = !this.areAllSelected;
+
+    this.availableInsertions.forEach(insertion => insertion.checked = target);
+  }
+
+  get areAllSelected()
+  {
+    return this.availableInsertions.every(insertion => insertion.checked);
   }
   
   handleSubmit(valid: boolean, callbackName: string) {

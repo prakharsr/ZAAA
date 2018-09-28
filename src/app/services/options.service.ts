@@ -1,37 +1,15 @@
 import { Injectable } from '@angular/core';
 
-// Prevent circular dependency
-import { Category } from 'app/rate-card/rate-card';
-
 @Injectable()
 export class OptionsService {
 
   constructor() { }
 
-  categories = [
-    new Category('Property', [
-      new Category('Sale')
-    ]),
-    new Category('Education'),
-    new Category('Medical', [
-      new Category('Surgery', [
-        new Category('C', [
-          new Category('Heart Surgery', [
-            new Category('Transplant', [
-              new Category('Deepest')
-            ])
-          ])
-        ]),
-        new Category('R', [
-          new Category('S', [
-            new Category('Deepest')
-          ])
-        ])
-      ])
-    ]),
-    new Category('Women'),
-    new Category('Real Estate')
-  ];
+  positions= ['Any Page', 'Front Page', 'Front Inside Page', 'Back Page', 'Back Inside Page',
+             'Fixed Page', '2nd Page', '3rd Page', '5th Page', 'Sports','Bussiness','Regional',
+             'Entertainment','Automobile','Education','Health','Editorial','World','National',
+             'City Page','Appointment','Classified Page','Obituary Page','Matrimonial','Tender/Notice',
+             'Right Hand Side','Left Hand Side' ];
 
   amountToWords(num) {
     if (!num) {
@@ -66,9 +44,9 @@ export class OptionsService {
       str += (n[i + 1] != 0) ? (a[Number(n[i + 1])] || b[n[i + 1][0]] + ' ' + a[n[i + 1][1]]) + c[i] : '';
     }
 
-    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) : '';
     
-    return str;
+    return str + "Only";
   }
 
 }
