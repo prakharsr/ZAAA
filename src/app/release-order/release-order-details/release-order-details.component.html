@@ -28,14 +28,8 @@
           <button mat-raised-button color="primary" class="mb-2 bg-info" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" (click)="sendMsg()">
             <mat-icon>mail</mat-icon> Send Email
           </button>
-          <button mat-raised-button color="primary" class="mb-2 bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCreateInvoice" [routerLink]="['/invoices/new', releaseOrder.id]">
-            <mat-icon>add</mat-icon> Create Invoice
-          </button>
           <button mat-raised-button color="primary" class="mb-2 bg-primary" [routerLink]="['/releaseorders/new', releaseOrder.id]">
             <mat-icon>content_copy</mat-icon> Copy into New
-          </button>
-          <button mat-raised-button color="primary" class="mb-2 bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" [routerLink]="['/accounts/notes/mediahouse/new', releaseOrder.id]">
-            <mat-icon>add</mat-icon> Create Note
           </button>
           <button mat-raised-button color="primary" class="mb-2 bg-info" *ngIf="!releaseOrder.generated" [routerLink]="['/releaseorders/edit', releaseOrder.id]">
             <mat-icon>edit</mat-icon> Edit
@@ -67,12 +61,6 @@
                 <button color="primary" class="btn btn-block btn-outline-info border-0 btn-sm" (click)="sendMsg()">
                   <mat-icon>mail</mat-icon>
                   <div class="small">Send Email</div>
-                </button>
-              </div>
-              <div class="col" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCreateInvoice">
-                <button color="primary" class="btn btn-block btn-outline-success border-0 btn-sm" [routerLink]="['/invoices/new', releaseOrder.id]">
-                  <mat-icon>add</mat-icon>
-                  <div class="small">Create Invoice</div>
                 </button>
               </div>
               <div class="col">
@@ -117,17 +105,52 @@
     </div>
   </mat-card>
 
-  <ng-container *ngIf="invoices.length">
-    <br>
-    <mat-card class="mat-elevation-z3">
-      <label class="text-muted">Invoices</label>
+  <div class="row">
+    <div class="col-lg-6">
+      <br>
+      <mat-card class="mat-elevation-z3">
+        <div class="row">
+          <div class="col">
+            <label class="text-muted">Invoices</label>
+          </div>
+          <div class="col-auto">
+            <button mat-mini-fab color="primary" class="bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled && canCreateInvoice" [routerLink]="['/invoices/new', releaseOrder.id]" matTooltip="Create Invoice">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
 
-      <div *ngFor="let invoice of invoices">
-        <a [routerLink]="['/invoices', invoice._id]">{{invoice.invoiceNO}}</a>
-        <span class="text-muted">({{invoice.insertions.length}} insertion(s))</span>
-      </div>
-    </mat-card>
-  </ng-container>
+        <div *ngIf="invoices.length == 0" class="text-muted">No Invoices</div>
+
+        <div *ngFor="let invoice of invoices">
+          <a [routerLink]="['/invoices', invoice._id]">{{invoice.invoiceNO}}</a>
+          <span class="text-muted">({{invoice.insertions.length}} insertion(s))</span>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <br>
+      <mat-card class="mat-elevation-z3">
+        <div class="row">
+          <div class="col">
+            <label class="text-muted">Notes</label>
+          </div>
+          <div class="col-auto">
+            <button mat-mini-fab color="primary" class="bg-success" *ngIf="releaseOrder.generated && !releaseOrder.cancelled" [routerLink]="['/accounts/notes/mediahouse/new', releaseOrder.id]" matTooltip="Create Note">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="notes.length == 0" class="text-muted">No Notes</div>
+
+        <!-- <div *ngFor="let note of notes">
+          <a [routerLink]="['/invoices', invoice._id]">{{invoice.invoiceNO}}</a>
+          <span class="text-muted">({{invoice.insertions.length}} insertion(s))</span>
+        </div> -->
+      </mat-card>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-lg-6">
@@ -300,7 +323,7 @@
           </tr>
         </table>
 
-        <table *ngIf="!isTypeWords">
+        <table *ngIf="!isTypeWords && (releaseOrder.PremiumCustom.PremiumType || releaseOrder.PremiumCustom.Amount)">
           <tr>
             <td class="text-muted pr-5">{{releaseOrder.PremiumCustom.PremiumType}}:</td>
             <td *ngIf="!releaseOrder.PremiumCustom.Percentage">₹ {{releaseOrder.PremiumCustom.Amount}}</td>

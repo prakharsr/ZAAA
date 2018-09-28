@@ -17,6 +17,7 @@ export class ReleaseOrderDetailsComponent implements OnInit {
   releaseOrder = new ReleaseOrder();
 
   invoices = [];
+  notes = [];
 
   constructor(private api: ReleaseOrderApiService,
     private route: ActivatedRoute,
