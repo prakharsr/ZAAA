@@ -144,10 +144,21 @@
 
         <div *ngIf="notes.length == 0" class="text-muted">No Notes</div>
 
-        <!-- <div *ngFor="let note of notes">
-          <a [routerLink]="['/invoices', invoice._id]">{{invoice.invoiceNO}}</a>
-          <span class="text-muted">({{invoice.insertions.length}} insertion(s))</span>
-        </div> -->
+        <br>
+        
+        <div *ngFor="let note of notes; index as i">
+          <hr *ngIf="i">
+
+          <div class="row">
+            <div class="col">
+              <div>₹ {{note.amount}}</div>
+              <div class="small">{{note.remark}}</div>
+            </div>
+            <div class="col-auto text-muted small">
+              {{note.createdAt | date:'dd-MMM-y'}}
+            </div>
+          </div>
+        </div>
       </mat-card>
     </div>
   </div>

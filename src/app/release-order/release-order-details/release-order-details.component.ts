@@ -6,6 +6,7 @@ import { ReleaseOrderApiService } from '../release-order-api.service';
 import { NotificationService, DialogService } from 'app/services';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
+import { AccountsApiService } from 'app/accounts/accounts-api.service';
 
 @Component({
   selector: 'app-release-order-details',
@@ -20,6 +21,7 @@ export class ReleaseOrderDetailsComponent implements OnInit {
   notes = [];
 
   constructor(private api: ReleaseOrderApiService,
+    private accountsApi: AccountsApiService,
     private route: ActivatedRoute,
     private router: Router,
     private notifications: NotificationService,
@@ -28,6 +30,8 @@ export class ReleaseOrderDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { releaseOrder: ReleaseOrder }) => {
       this.releaseOrder = data.releaseOrder;
+
+      this.accountsApi.notesForRO(this.releaseOrder).subscribe(data => this.notes = data);
 
       this.api.getInvoices(this.releaseOrder).subscribe(data => this.invoices = data);
     });
