@@ -48,9 +48,6 @@
     <div *ngIf="summarySheet.length == 0" class="text-muted">
       <br>No more Media House Invoices are pending.
     </div>
-    <div *ngIf="summarySheet.length != 0" class="text-danger">
-      <br>Summary Sheet once created cannot be edited. Do not fill partial amounts for insertions.
-    </div>
 
     <br>
 
@@ -66,7 +63,6 @@
               </div>
             </div>
             <div class="col-auto text-right">
-              <span class="text-muted">Collected Amount</span>: ₹ {{item.collectedAmount}}<br>
               <span class="text-muted">Pending Amount</span>: ₹ {{item.pendingAmount}}
             </div>
           </div>
@@ -76,11 +72,9 @@
           <table class="table table-sm table-responsive-md">
             <tr>
               <th></th>
-              <th>Date</th>
-              <th>Total Amount</th>
-              <th>Paid Amount</th>
-              <th>Pending Amount</th>
-              <th>Amount</th>
+              <th>Insertion Date</th>
+              <th>Invoice Amount</th>
+              <th>To be Paid</th>
               <th>Balance</th>
             </tr>
             <tr *ngFor="let entry of item.entries; index as j">
@@ -96,8 +90,6 @@
                 </span>
               </td>
               <td style="white-space: nowrap;">₹ {{round2(entry.Amount)}}</td>
-              <td style="white-space: nowrap;">₹ {{round2(entry.collectedAmount)}}</td>
-              <td style="white-space: nowrap;">₹ {{round2(entry.pendingAmount)}}</td>
               <td>
                 <input type="number" name="amount-{{i}}-{{j}}" [disabled]="!entry.checked" class="form-control form-control-sm" min="0" [verify-min]="0" [max]="entry.pendingAmount" [verify-max]="entry.pendingAmount" [(ngModel)]="entry.SheetAmount" placeholder="Amount" required>
               </td>

@@ -2,7 +2,7 @@
 
 <mat-dialog-content>
   <form #paymentForm="ngForm">
-    <div class="text-muted small">Total Amount + Tax</div>
+    <div class="text-muted small">Total Amount</div>
     <div>₹ {{totalAmount}}</div>
 
     <br>
@@ -32,15 +32,15 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <mat-form-field class="col-lg col-md-6">
+        <!-- <mat-form-field class="col-lg col-md-6">
           <input type="number" matInput id="paymentAmount" name="paymentAmount" placeholder="Enter Amount" [(ngModel)]="details.paymentAmount" required #paymentAmountField="ngModel">
           <mat-error *ngIf="paymentAmountField.errors?.required">
             Amount is required.
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
   
         <ng-container *ngIf="details.paymentType == 'Cheque'">
-          <mat-form-field class="col-lg col-md-6">
+          <mat-form-field class="col-lg">
             <input type="text" matInput id="bankName" name="bankName" placeholder="Bank Name" [(ngModel)]="details.paymentBankName" required #bankNameField="ngModel">
             <mat-error *ngIf="bankNameField.errors?.required">
               Bank Name is required.
@@ -49,10 +49,14 @@
         </ng-container>
       </div>
     </ng-container>
+
+    <div class="text-danger mt-2">
+      Summary Sheet once created cannot be edited. Do not fill partial amounts for insertions.
+    </div>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button [disabled]="!paymentForm.form.valid" [mat-dialog-close]="details">Save</button>  
+  <button mat-button [disabled]="!paymentForm.form.valid" [mat-dialog-close]="details">Generate</button>  
   <button mat-button color="warn" [mat-dialog-close]="null">Cancel</button>  
 </mat-dialog-actions>

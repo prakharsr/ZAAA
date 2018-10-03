@@ -86,8 +86,8 @@
         <tr>
           <th>Date</th>
           <th>Amount</th>
-          <th>Collected</th>
-          <th>Pending</th>
+          <th>Paid</th>
+          <th>Balance</th>
         </tr>
         <tr *ngFor="let insertion of item.insertions">
           <td [class.text-danger]="insertion.state == 1"

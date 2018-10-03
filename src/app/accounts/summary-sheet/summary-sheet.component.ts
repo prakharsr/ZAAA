@@ -37,7 +37,7 @@ export class SummarySheetComponent implements OnInit {
       if (this.summarySheet.entries) {
         this.summarySheet.forEach(item => {
           item.entries.forEach(entry => {
-            entry.SheetAmount = 0; // This will be filled here
+            entry.SheetAmount = null; // This will be filled here
             entry.checked = false;
           });
         });
