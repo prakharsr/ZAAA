@@ -41,7 +41,7 @@ export class ImportExportComponent implements OnInit {
     base.subscribe(
       data => {
         if (data.success) {
-          this.notifications.show('Imported successfully');
+          this.notifications.show('Imported successfully with '+data.errorline);
         }
         else {
           console.log(data);
