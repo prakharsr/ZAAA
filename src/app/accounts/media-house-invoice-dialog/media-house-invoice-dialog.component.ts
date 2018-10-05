@@ -19,7 +19,7 @@ export class MediaHouseInvoiceDialogComponent implements OnInit {
     this.details.releaseOrderId = data.ro.id;
     this.details.insertions = data.insertions;
 
-    this.totalAmount = this.details.insertions.reduce((a, b) => a + b.netAmount, 0);
+    this.totalAmount = this.details.insertions.reduce((a, b) => a + b.Amount, 0);
     this.totalTax = this.details.insertions.reduce((a, b) => a + b.taxAmount, 0);
 
     this.details.MHIGrossAmount = this.totalAmount;

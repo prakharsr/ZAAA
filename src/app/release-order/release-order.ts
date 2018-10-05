@@ -6,6 +6,7 @@ export class Insertion {
     mhimarked = false;
     _id = null;
 
+    Amount = 0;
     netAmount = 0;
     taxAmount = 0;
 }
