@@ -63,11 +63,6 @@ export class CreateNoteComponent implements OnInit {
   submit() {
     this.note.clientName = this.clientName;
 
-    let today = new Date();
-    this.note.date.day = today.getDate();
-    this.note.date.month = today.getMonth() + 1;
-    this.note.date.year = today.getFullYear();
-
     this.note.amountWords = this.options.amountToWords(this.note.amount);
 
     let obs: Observable<any>;

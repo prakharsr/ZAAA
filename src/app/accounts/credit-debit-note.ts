@@ -15,11 +15,8 @@ export class CreditDebitNote {
 
     remark = "";
     
-    date = {
-        day: 0,
-        month: 0,
-        year: 0
-    }
+    MHNDate: Date;
+    MHNNo = "";
     
     DocId = "";
     firm = "";

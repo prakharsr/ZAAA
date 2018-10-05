@@ -16,18 +16,18 @@
       <div class="card">
         <div class="card-body">
           <form (ngSubmit)="submit()" #noteForm="ngForm">
-            <ng-container *ngIf="clientNote">
-              <mat-form-field>
-                <input matInput type="text" name="client" required [(ngModel)]="client" [ngbTypeahead]="searchClient" placeholder="Client" [resultTemplate]="rtClient" [inputFormatter]="clientNameFormatter" />
-              </mat-form-field>
-        
-              <mat-form-field>
-                <input matInput type="text" id="invoiceNo" placeholder="Enter Invoice No" [(ngModel)]="note.invoiceNO" name="invoiceNo" required #invoiceNoField="ngModel">
-                <mat-error *ngIf="invoiceNoField.errors?.required">
-                  Invoice No is required.
-                </mat-error>
-              </mat-form-field>
-            </ng-container>
+            <mat-form-field>
+              <input matInput type="text" id="noteNo" placeholder="Enter Note No" [(ngModel)]="note.MHNNo" name="noteNo" required #noteNoField="ngModel">
+              <mat-error *ngIf="noteNoField.errors?.required">
+                Note No is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="mhnDateField" name="mhnDate" placeholder="Note Date" [(ngModel)]="note.MHNDate" disabled>
+              <mat-datepicker-toggle matSuffix [for]="mhnDateField"></mat-datepicker-toggle>
+              <mat-datepicker #mhnDateField disabled="false"></mat-datepicker>
+            </mat-form-field>
         
             <mat-form-field>
               <span matPrefix>₹ &nbsp;</span>
