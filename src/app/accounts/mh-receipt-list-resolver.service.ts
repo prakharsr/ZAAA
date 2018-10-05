@@ -23,7 +23,7 @@ export class MhReceiptListResolver implements Resolve<Result> {
 
     let batchID = route.queryParamMap.get('batchID');
 
-    return this.api.searchMediaHouseReceipts(searchParams).map(mhreceipts => {
+    return this.api.searchMediaHouseReceipts(searchParams, batchID).map(mhreceipts => {
       if (mhreceipts) {
         return {
           list: mhreceipts,
