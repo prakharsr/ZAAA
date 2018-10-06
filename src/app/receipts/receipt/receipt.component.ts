@@ -171,6 +171,8 @@ export class ReceiptComponent implements OnInit {
           a.download = 'receipt.pdf';
         }
         a.click();
+
+        this.goBack();
       }
     });
   }
@@ -181,6 +183,8 @@ export class ReceiptComponent implements OnInit {
         this.api.sendMail(receipt, mailingDetails).subscribe(data => {
           if (data.success) {
             this.notifications.show("Sent Successfully");
+
+            this.goBack();
           }
           else {
             console.log(data);

@@ -212,6 +212,8 @@ export class InvoiceComponent implements OnInit {
           a.download = 'invoice.pdf';
         }
         a.click();
+
+        this.goBack();
       }
     });
   }
@@ -222,6 +224,8 @@ export class InvoiceComponent implements OnInit {
         this.api.sendMail(invoice, mailingDetails).subscribe(data => {
           if (data.success) {
             this.notifications.show("Sent Successfully");
+
+            this.goBack();
           }
           else {
             console.log(data);
