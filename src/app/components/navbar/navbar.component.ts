@@ -96,4 +96,16 @@ export class NavbarComponent implements OnInit {
 
     this.overlayRef = null;
   }
+
+  logout() {
+    this.api.logout();
+
+    this.router.navigateByUrl('/login');
+  }
+
+  superAdminLogout() {
+    this.superAdminApi.logout();
+
+    this.router.navigateByUrl('/superadmin/login');
+  }
 }

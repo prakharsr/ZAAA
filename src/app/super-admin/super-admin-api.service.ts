@@ -67,6 +67,10 @@ export class SuperAdminApiService {
     return this.extractToken(base);
   }
 
+  logout() {
+    this.authTokenManager.setAuthToken(this.authTokenKey, '');
+  }
+
   private extractToken(base: Observable<any>) : Observable<any> {
     return base.pipe(
       map(data => {

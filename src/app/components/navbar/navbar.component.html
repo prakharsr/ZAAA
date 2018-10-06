@@ -36,10 +36,10 @@
               <button mat-menu-item routerLink="/tickets">Tickets</button>
               <button mat-menu-item routerLink="/import-export">Import Export</button>
               <button mat-menu-item routerLink="/testimonial">Testimonials</button>
-              <button mat-menu-item routerLink="/" (click)="api.logout();collapseNavbar()">Log Out</button>
+              <button mat-menu-item routerLink="/" (click)="logout();collapseNavbar()">Log Out</button>
             </mat-menu>
 
-            <a *ngIf="isSuperAdmin" class="nav-link" routerLink="/" (click)="superAdminApi.logout();collapseNavbar()">Log Out</a>
+            <a *ngIf="isSuperAdmin" class="nav-link" routerLink="/" (click)="superAdminLogout();collapseNavbar()">Log Out</a>
           </li>
         </ul>
 
