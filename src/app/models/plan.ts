@@ -6,4 +6,11 @@ export class Plan {
     }
 
     id: string
+    dur: {
+        from: Date,
+        upto: Date
+    }
+
+    createdOn: Date;
+    expiresOn: Date;
 }

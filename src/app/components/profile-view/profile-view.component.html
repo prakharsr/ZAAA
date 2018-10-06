@@ -58,6 +58,28 @@
     <div class="card-body">
       <div class="row">
         <div class="col-auto text-primary mr-5">
+          <mat-icon style="font-size: 300%">credit_card</mat-icon>
+        </div>
+        <div class="col">
+          <h5>Plan</h5>
+          <p>To change your current plan.</p>
+
+          <div *ngIf="plan">
+            <span class="text-muted">Current Plan:</span> {{plan.name}}<br>
+            <span class="text-muted">Valid Upto:</span> {{plan.expiresOn | date:'dd-MMM-y'}}
+          </div>
+
+        </div>
+        <div class="col-auto align-self-end">
+          <a class="btn btn-outline-info col-auto mr-3" routerLink="/plan">Change</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card mb-3 mat-elevation-z1" *ngIf="profile.isAdmin">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-auto text-primary mr-5">
           <mat-icon style="font-size: 300%">assignment</mat-icon>
         </div>
         <div class="col">

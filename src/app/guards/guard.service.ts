@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserProfile, Firm, Plan } from 'app/models';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
-import { DialogComponent } from '../components';
+import { DialogComponent } from '../components/dialog/dialog.component';
 
 export class UserCacheDetails {
   user: UserProfile;
