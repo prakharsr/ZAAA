@@ -38,6 +38,7 @@ export class PlanSelectorComponent implements OnInit {
 
       data.plans.forEach(element => {
         let plan = new Plan(element.name, element.cost, element.maxUsers, element.maxAdmins);
+        plan.dur = element.dur;
 
         plan.id = element._id;
 

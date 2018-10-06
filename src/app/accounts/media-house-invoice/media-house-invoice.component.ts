@@ -67,7 +67,6 @@ export class MediaHouseInvoiceComponent implements OnInit {
       return{
         ...item.insertion,
         insertionDate: this.toDate(item.insertion.date),
-        Amount: 0,
         collectedAmount: 0,
         pendingAmount: 0,
       }

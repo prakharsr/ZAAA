@@ -13,6 +13,9 @@
           <p>₹ {{plan.cost | number}} </p> <span>/ year</span>
         </div>
       </div>
+      <div class="bg-dark text-light py-2">
+        {{plan.dur.from | date:'dd-MMM-y'}} to {{plan.dur.upto | date:'dd-MMM-y'}}
+      </div>
       <div class="infoContainer">
         <ul class="features">
           <li><strong>{{plan.maxUsers}}</strong> Users</li>
