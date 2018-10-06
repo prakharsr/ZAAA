@@ -18,6 +18,8 @@ export class SummarySheetComponent implements OnInit {
 
   summarySheet: SummarySheetResponse[] = [];
 
+  submitting = false;
+
   mediaHouse;
   edition;
 
@@ -117,6 +119,8 @@ export class SummarySheetComponent implements OnInit {
       return;
     }
 
+    this.submitting = true;
+
     this.dialog.show(PaymentDetailsDialogComponent, {
       width: '400px',
       data: { amount: totalAmount }
@@ -125,8 +129,12 @@ export class SummarySheetComponent implements OnInit {
         this.api.generateSummarySheet(data, mapped).subscribe(data => {
           if (data.success) {
             this.notifications.show('Success');
+
+            window.location.reload();
           }
           else {
+            this.submitting = false;
+
             console.log(data);
     
             this.notifications.show(data.msg);

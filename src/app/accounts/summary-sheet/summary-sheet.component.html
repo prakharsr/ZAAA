@@ -41,7 +41,7 @@
   </div>
 
   <form #ssForm="ngForm" (ngSubmit)="submit()">
-    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid" *ngIf="ssForm.form.valid">
+    <button class="fab bg-success" type="submit" [disabled]="!ssForm.form.valid || submitting" *ngIf="ssForm.form.valid">
       <mat-icon>check</mat-icon>
     </button>
 
