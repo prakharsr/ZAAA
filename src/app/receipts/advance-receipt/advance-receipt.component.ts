@@ -153,7 +153,7 @@ export class AdvanceReceiptComponent implements OnInit {
   }
 
   gen(receipt: AdvanceReceipt, preview = false) {
-    this.api.createAdvanceReceipt(this.receipt).subscribe(data => {
+    this.api.generate(this.receipt).subscribe(data => {
       if (data.msg) {
         this.notifications.show(data.msg);
       }
@@ -174,6 +174,8 @@ export class AdvanceReceiptComponent implements OnInit {
           a.download = 'receipt.pdf';
         }
         a.click();
+
+        this.goBack();
       }
     });
   }
@@ -184,6 +186,8 @@ export class AdvanceReceiptComponent implements OnInit {
         this.api.sendMail(receipt, mailingDetails).subscribe(data => {
           if (data.success) {
             this.notifications.show("Sent Successfully");
+
+            this.goBack();
           }
           else {
             console.log(data);

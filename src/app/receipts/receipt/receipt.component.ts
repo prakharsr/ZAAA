@@ -87,7 +87,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   saveAndGen() {
-    this.confirmGeneration().subscribe(confirm=> {
+    this.confirmGeneration().subscribe(confirm => {
       if(confirm) {
         this.submit().subscribe(data => {
           if (data.success) {
@@ -150,7 +150,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   gen(receipt: PaymentReceipt, preview = false) {
-    this.api.createReceipt(this.receipt).subscribe(data => {
+    this.api.generate(this.receipt).subscribe(data => {
       if (data.msg) {
         this.notifications.show(data.msg);
       }
