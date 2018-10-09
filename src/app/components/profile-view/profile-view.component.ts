@@ -26,12 +26,10 @@ export class ProfileViewComponent implements OnInit {
       this.profile = data.user;
     });
 
-    this.api.getUserCheck().subscribe(data => {
-      this.plan = {
-        name: data.rawFirm.plan.name,
-        expiresOn: data.rawFirm.plan.expiresOn
-      };
-    });
+    this.plan = {
+      name: this.cache.current.rawFirm.plan.name,
+      expiresOn: this.cache.current.rawFirm.plan.expiresOn
+    };
   }
 
   uploadProfilePicture(files: FileList) {
