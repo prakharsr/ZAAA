@@ -107,7 +107,7 @@
           <mat-icon>home</mat-icon>
         </button>
 
-        <button mat-button [matMenuTriggerFor]="romenu">Release Order</button>
+        <button mat-button *ngIf="canRO" [matMenuTriggerFor]="romenu">Release Order</button>
 
         <mat-menu #romenu="matMenu">
           <button mat-menu-item routerLink="/releaseorders/new">Create Release Order</button>
@@ -115,14 +115,14 @@
           <button mat-menu-item routerLink="/releaseorders/check">Insertion Check</button>
         </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="invmenu">Invoice</button>
+        <button mat-button *ngIf="canInv" [matMenuTriggerFor]="invmenu">Invoice</button>
 
         <mat-menu #invmenu="matMenu">
           <button mat-menu-item routerLink="/invoices/new">Create Invoice</button>
           <button mat-menu-item routerLink="/invoices">View Invoices</button>
         </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="prcmenu">Payment Receipts</button>
+        <button mat-button *ngIf="canPR" [matMenuTriggerFor]="prcmenu">Payment Receipts</button>
 
         <mat-menu #prcmenu="matMenu">
           <button mat-menu-item routerLink="/receipts/new">Create Payment Receipt</button>

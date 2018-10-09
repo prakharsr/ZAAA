@@ -126,4 +126,34 @@ export class NavbarComponent implements OnInit {
 
     return false;
   }
+
+  get canRO() {
+    let current =  this.cache.current;
+
+    if (current) {
+      return current.roLevel > 0;
+    }
+
+    return false;
+  }
+
+  get canInv() {
+    let current =  this.cache.current;
+
+    if (current) {
+      return current.invLevel > 0;
+    }
+
+    return false;
+  }
+
+  get canPR() {
+    let current =  this.cache.current;
+
+    if (current) {
+      return current.prLevel > 0;
+    }
+
+    return false;
+  }
 }
