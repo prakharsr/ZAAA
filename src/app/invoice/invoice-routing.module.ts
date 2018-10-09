@@ -13,10 +13,12 @@ import {
 import { ReleaseOrderDirResolver } from 'app/release-order';
 import { FirmResolver } from '../services';
 import { CreateInvGuard } from './create-inv-guard.service';
+import { InvGuard } from './inv-guard.service';
 
 const routes: Routes = [
   {
     path: '',
+    canActivateChild: [InvGuard],
     children: [
       { path: '', redirectTo: 'list/1', pathMatch: 'full' },
       {
