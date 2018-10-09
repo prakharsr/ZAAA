@@ -28,6 +28,48 @@ export class UserCacheDetails {
 
     return false;
   }
+
+  get roLevel() : number {
+    if (this.rawUser) {
+      if (this.rawUser.isAdmin) {
+        return 5;
+      }
+
+      if (this.rawUser.roles) {
+        return this.rawUser.roles.Release_order;
+      }
+    }
+
+    return 0;
+  }
+
+  get invLevel() : number {
+    if (this.rawUser) {
+      if (this.rawUser.isAdmin) {
+        return 5;
+      }
+
+      if (this.rawUser.roles) {
+        return this.rawUser.roles.Invoice;
+      }
+    }
+
+    return 0;
+  }
+
+  get prLevel() : number {
+    if (this.rawUser) {
+      if (this.rawUser.isAdmin) {
+        return 5;
+      }
+
+      if (this.rawUser.roles) {
+        return this.rawUser.roles.Payment_receipts;
+      }
+    }
+
+    return 0;
+  }
 }
 
 @Injectable()

@@ -15,6 +15,7 @@ export class CreateRoGuard implements CanActivate {
 
     const data = this.cache.current;
 
+    // Firm profile needs to be filled
     if (!data.firm.name || !data.firm.registeredAddress) {
       this.dialog.showYesNo('Firm Profile not filled',
         'Firm profile needs to be filled before creating Release Order. Do you want to fill your Firm profile now?').subscribe(
@@ -28,6 +29,7 @@ export class CreateRoGuard implements CanActivate {
       return false;
     }
 
+    // Firm status must be approved
     if (data.rawFirm.FirmStatus) {
       let status = data.rawFirm.FirmStatus;
 
@@ -36,6 +38,19 @@ export class CreateRoGuard implements CanActivate {
           ok: true,
           title: status == 1 ? 'Firm on Hold' : 'Form Blocked',
           message: status == 1 ? 'Your Firm is on Hold' : 'Your Firm is Blocked. Contact Admin.'
+        }
+      }).subscribe();
+
+      return false;
+    }
+
+    // User should have RO create permission
+    if (data.roLevel < 2) {
+      this.dialog.show(DialogComponent, {
+        data: {
+          ok: true,
+          title: 'Access Denied',
+          message: 'You don\'t have permission to create Release Order.'
         }
       }).subscribe();
 
