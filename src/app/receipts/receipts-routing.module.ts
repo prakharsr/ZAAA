@@ -12,6 +12,7 @@ import {
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { UserProfileResolver, FirmResolver } from '../services';
+import { CreatePrGuard } from './create-pr-guard.service';
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
             resolve: {
               user: UserProfileResolver,
               firm: FirmResolver
-            }
+            },
+            canActivate: [CreatePrGuard]
           },
           {
             path: 'link/:id',
@@ -75,14 +77,16 @@ const routes: Routes = [
         resolve: {
           user: UserProfileResolver,
           firm: FirmResolver
-        }
+        },
+        canActivate: [CreatePrGuard]
       },
       {
         path: 'new/:id',
         component: CreateReceiptComponent,
         resolve: {
           resolved: InvoiceDirResolver
-        }
+        },
+        canActivate: [CreatePrGuard]
       },
       {
         path: ':id',

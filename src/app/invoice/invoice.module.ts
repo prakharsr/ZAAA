@@ -7,6 +7,7 @@ import {
   InvoiceListComponent
 } from '.';
 import { InvoiceRoutingModule } from './invoice-routing.module';
+import { CreateInvGuard } from './create-inv-guard.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
     InvoiceComponent,
     InvoiceDetailsComponent,
     InvoiceListComponent
-  ]
+  ],
+  providers: [CreateInvGuard]
 })
 export class InvoiceModule { }

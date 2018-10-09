@@ -12,6 +12,7 @@ import {
 
 import { ReleaseOrderDirResolver } from 'app/release-order';
 import { FirmResolver } from '../services';
+import { CreateInvGuard } from './create-inv-guard.service';
 
 const routes: Routes = [
   {
@@ -32,14 +33,16 @@ const routes: Routes = [
         resolve: {
           resolved: ReleaseOrderDirResolver,
           firm: FirmResolver
-        }
+        },
+        canActivate: [CreateInvGuard]
       },
       {
         path: 'new',
         component: InvoiceComponent,
         resolve: {
           firm: FirmResolver
-        }
+        },
+        canActivate: [CreateInvGuard]
       },
       {
         path: ':id',

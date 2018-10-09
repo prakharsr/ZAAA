@@ -10,6 +10,7 @@ import {
 } from '.';
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { ReceiptsRoutingModule } from './receipts-routing.module';
+import { CreatePrGuard } from './create-pr-guard.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ReceiptsRoutingModule } from './receipts-routing.module';
     AdvanceReceiptComponent,
     LinkAdvanceComponent,
     CreateReceiptComponent
-  ]
+  ],
+  providers: [CreatePrGuard]
 })
 export class ReceiptsModule { }
