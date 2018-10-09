@@ -13,10 +13,12 @@ import {
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { UserProfileResolver, FirmResolver } from '../services';
 import { CreatePrGuard } from './create-pr-guard.service';
+import { PrGuard } from './pr-guard.service';
 
 const routes: Routes = [
   {
     path: '',
+    canActivateChild: [PrGuard],
     data: {
       advance: false
     },

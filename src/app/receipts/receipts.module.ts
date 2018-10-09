@@ -11,6 +11,7 @@ import {
 import { CreateReceiptComponent } from './create-receipt/create-receipt.component';
 import { ReceiptsRoutingModule } from './receipts-routing.module';
 import { CreatePrGuard } from './create-pr-guard.service';
+import { PrGuard } from './pr-guard.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,9 @@ import { CreatePrGuard } from './create-pr-guard.service';
     LinkAdvanceComponent,
     CreateReceiptComponent
   ],
-  providers: [CreatePrGuard]
+  providers: [
+    CreatePrGuard,
+    PrGuard
+  ]
 })
 export class ReceiptsModule { }
