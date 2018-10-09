@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { DialogService } from 'app/services';
 import { UserCache } from 'app/guards/guard.service';
+import { DialogComponent } from '../components';
 
 @Injectable()
 export class CreateRoGuard implements CanActivate {
@@ -23,6 +24,20 @@ export class CreateRoGuard implements CanActivate {
             }
           }
         );
+
+      return false;
+    }
+
+    if (data.rawFirm.FirmStatus) {
+      let status = data.rawFirm.FirmStatus;
+
+      this.dialog.show(DialogComponent, {
+        data: {
+          ok: true,
+          title: status == 1 ? 'Firm on Hold' : 'Form Blocked',
+          message: status == 1 ? 'Your Firm is on Hold' : 'Your Firm is Blocked. Contact Admin.'
+        }
+      })
 
       return false;
     }

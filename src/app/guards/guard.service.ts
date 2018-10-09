@@ -11,6 +11,7 @@ export class UserCacheDetails {
   user: UserProfile;
   firm: Firm;
   plan: Plan;
+  rawFirm: any;
 }
 
 @Injectable()
@@ -31,17 +32,20 @@ export class UserCache {
             this.user = data.user;
             this.firm = data.firm;
             this.plan = data.plan;
+            this.rawFirm = data.rawFirm;
           }
           else {
             this.user = null;
             this.firm = null;
             this.plan = null;
+            this.rawFirm = null;
           }
 
           return {
             user: this.user,
             firm: this.firm,
-            plan: this.plan
+            plan: this.plan,
+            rawFirm: this.rawFirm
           };
         })
       );
@@ -52,13 +56,15 @@ export class UserCache {
   private timestamp?: Date;
   private user: UserProfile;
   private firm: Firm;
+  private rawFirm: any;
   private plan: Plan;
 
   get current(): UserCacheDetails {
     return {
       user: this.user,
       firm: this.firm,
-      plan: this.plan
+      plan: this.plan,
+      rawFirm: this.rawFirm
     }
   }
 }
