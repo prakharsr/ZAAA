@@ -201,18 +201,18 @@ export class SuperAdminApiService {
   }
 
   mediaHouseExport() {
-    return this.export('/excel/export/mediahouse');
+    return this.export('/export/mediahouse');
   }
 
   mediaHouseImport(file: File) {
-    return this.import('/excel/import/mediahouse', file);
+    return this.import('/import/mediahouse', file);
   }
 
   ratecardExport() {
-    return this.export('/excel/export/ratecard');
+    return this.export('/export/ratecard');
   }
 
   ratecardImport(file: File) {
-    return this.import('/excel/import/ratecard', file);
+    return this.import('/import/ratecard', file);
   }
 }
