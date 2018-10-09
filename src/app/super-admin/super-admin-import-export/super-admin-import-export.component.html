@@ -1,3 +1,24 @@
-<p>
-  super-admin-import-export works!
-</p>
+<div class="container">
+  <br><br>
+
+  <h3 style="font-weight: lighter">Excel Export</h3>
+  <br>
+
+  <button class="btn btn-outline-info" (click)="mhExport()">Global Media Houses</button>
+  <button class="btn btn-outline-info" (click)="rateCardExport()">Global Rate Cards</button>
+
+  <br><br><br>
+
+  <h3 style="font-weight: lighter">Excel Import</h3>
+  <br>
+
+  <label for="mh-upload" class="btn btn-outline-info">
+    Global Media Houses
+  </label>
+  <input type="file" id="mh-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="mhImport($event.target.files)"/>
+
+  <label for="rc-upload" class="btn btn-outline-info">
+    Global Rate Cards
+  </label>
+  <input type="file" id="rc-upload" class="hidden-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="rateCardImport($event.target.files)"/>
+</div>

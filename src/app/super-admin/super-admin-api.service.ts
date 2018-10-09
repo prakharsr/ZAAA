@@ -191,4 +191,28 @@ export class SuperAdminApiService {
       notifBody: body
     });
   }
+
+  private export(url: string) {
+    return this.post(url, { }, { responseType: 'blob' });
+  }
+
+  private import(url: string, file: File) {
+    return this.fileUpload(url, 'excelFile', file);
+  }
+
+  mediaHouseExport() {
+    return this.export('/excel/export/mediahouse');
+  }
+
+  mediaHouseImport(file: File) {
+    return this.import('/excel/import/mediahouse', file);
+  }
+
+  ratecardExport() {
+    return this.export('/excel/export/ratecard');
+  }
+
+  ratecardImport(file: File) {
+    return this.import('/excel/import/ratecard', file);
+  }
 }
