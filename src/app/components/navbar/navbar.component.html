@@ -36,10 +36,10 @@
               <button mat-menu-item routerLink="/tickets">Tickets</button>
               <button mat-menu-item routerLink="/import-export">Import Export</button>
               <button mat-menu-item routerLink="/testimonial">Testimonials</button>
-              <button mat-menu-item routerLink="/" (click)="logout();collapseNavbar()">Log Out</button>
+              <button mat-menu-item routerLink="/login" (click)="logout();collapseNavbar()">Log Out</button>
             </mat-menu>
 
-            <a *ngIf="isSuperAdmin" class="nav-link" routerLink="/" (click)="superAdminLogout();collapseNavbar()">Log Out</a>
+            <a *ngIf="isSuperAdmin" class="nav-link" routerLink="/superadmin/login" (click)="superAdminLogout();collapseNavbar()">Log Out</a>
           </li>
         </ul>
 
@@ -157,14 +157,14 @@
           <button mat-menu-item routerLink="/accounts/mediahousereceipts">Media House Receipts</button>
           <button mat-menu-item routerLink="/accounts/executiveinvoicepayments">Executive Invoice Payments</button>
           <!-- <button mat-menu-item routerLink="/accounts/notes/mediahouse">Credit/ Debit Notes</button> -->
-          <button mat-menu-item routerLink="/accounts/gst/month">GST</button>
+          <button mat-menu-item *ngIf="!isUrd" routerLink="/accounts/gst/month">GST</button>
         </mat-menu>
 
         <mat-menu #sale="matMenu">
           <button mat-menu-item routerLink="/accounts/clientreceipts">Client Receipts</button>
           <button mat-menu-item routerLink="/accounts/clientinvoicepayments">Client Invoice Payments</button>
           <!-- <button mat-menu-item routerLink="/accounts/notes/client">Credit/ Debit Notes</button> -->
-          <button mat-menu-item routerLink="/accounts/gst/client">GST</button>
+          <button mat-menu-item *ngIf="!isUrd" routerLink="/accounts/gst/client">GST</button>
         </mat-menu>
       </div>
     </div>

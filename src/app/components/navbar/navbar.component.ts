@@ -5,6 +5,7 @@ import { SuperAdminApiService } from 'app/super-admin/super-admin-api.service';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { NotificationsComponent } from '../notifications/notifications.component';
+import { UserCache } from '../../guards';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +32,8 @@ export class NavbarComponent implements OnInit {
     public superAdminApi: SuperAdminApiService,
     private router: Router,
     private notifications: NotificationService,
-    private overlay: Overlay) { }
+    private overlay: Overlay,
+    private cache: UserCache) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -99,13 +101,19 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.api.logout();
-
-    this.router.navigateByUrl('/login');
   }
 
   superAdminLogout() {
     this.superAdminApi.logout();
+  }
 
-    this.router.navigateByUrl('/superadmin/login');
+  get isUrd() {
+    let current = this.cache.current;
+
+    if (current && current.firm && current.firm.GSTIN)
+    {
+      return current.firm.GSTIN.GSTType == "URD";
+    }
+    else true;
   }
 }
