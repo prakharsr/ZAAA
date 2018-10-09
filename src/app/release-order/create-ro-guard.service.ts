@@ -37,7 +37,7 @@ export class CreateRoGuard implements CanActivate {
           title: status == 1 ? 'Firm on Hold' : 'Form Blocked',
           message: status == 1 ? 'Your Firm is on Hold' : 'Your Firm is Blocked. Contact Admin.'
         }
-      })
+      }).subscribe();
 
       return false;
     }

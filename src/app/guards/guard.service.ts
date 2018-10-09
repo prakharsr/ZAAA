@@ -132,6 +132,21 @@ export class Guard implements CanActivate, CanActivateChild {
 
           return false;
         }
+
+        if (data.rawFirm.FirmStatus == 2)
+        {
+          this.dialog.show(DialogComponent, {
+            data: {
+              title: 'Firm Blocked',
+              message: 'Your Firm is Blocked and you\'ve been logged out. Contact Admin',
+              ok: true
+            }
+          }).subscribe();
+
+          this.api.logout();
+
+          this.goToLogin();
+        }
     
         return true;
       }
