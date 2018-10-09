@@ -205,7 +205,8 @@ export class ApiService {
           user: this.bodyToUser(data.user),
           firm: this.bodyToFirm(data.firm),
           plan: data.plan,
-          rawFirm: data.firm
+          rawFirm: data.firm,
+          rawUser: data.user
         }
       })
     );

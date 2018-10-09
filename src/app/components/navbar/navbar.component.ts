@@ -116,4 +116,14 @@ export class NavbarComponent implements OnInit {
     }
     else true;
   }
+
+  get canAccounts() {
+    let current =  this.cache.current;
+
+    if (current) {
+      return current.canAccounts;
+    }
+
+    return false;
+  }
 }

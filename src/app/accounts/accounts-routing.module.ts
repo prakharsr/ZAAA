@@ -25,10 +25,12 @@ import { MediaHouseInvoiceListResolver } from './media-house-invoice-list-resolv
 import { MediaHouseReceiptComponent } from './media-house-receipt/media-house-receipt.component';
 import { MhReceiptListResolver } from './mh-receipt-list-resolver.service';
 import { ReleaseOrderResolver } from '../release-order';
+import { AccountsGuard } from './accounts-guard.service';
 
 const routes: Routes = [
   {
     path: '',
+    canActivateChild: [AccountsGuard],
     children: [
       {
         path: '',

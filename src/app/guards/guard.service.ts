@@ -8,10 +8,26 @@ import { map } from 'rxjs/operators';
 import { DialogComponent } from '../components/dialog/dialog.component';
 
 export class UserCacheDetails {
-  user: UserProfile;
-  firm: Firm;
-  plan: Plan;
-  rawFirm: any;
+
+  constructor(public user: UserProfile,
+    public firm: Firm,
+    public plan: Plan,
+    public rawFirm: any,
+    public rawUser: any) { }
+
+  get canAccounts() : boolean {
+    if (this.rawUser) {
+      if (this.rawUser.isAdmin) {
+        return true;
+      }
+
+      if (this.rawUser.roles && this.rawUser.roles.Accounts != 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 @Injectable()
@@ -33,20 +49,23 @@ export class UserCache {
             this.firm = data.firm;
             this.plan = data.plan;
             this.rawFirm = data.rawFirm;
+            this.rawUser = data.rawUser;
           }
           else {
             this.user = null;
             this.firm = null;
             this.plan = null;
             this.rawFirm = null;
+            this.rawUser = null;
           }
 
-          return {
-            user: this.user,
-            firm: this.firm,
-            plan: this.plan,
-            rawFirm: this.rawFirm
-          };
+          return new UserCacheDetails(
+            this.user,
+            this.firm,
+            this.plan,
+            this.rawFirm,
+            this.rawUser
+          );
         })
       );
     }
@@ -57,15 +76,17 @@ export class UserCache {
   private user: UserProfile;
   private firm: Firm;
   private rawFirm: any;
+  private rawUser: any;
   private plan: Plan;
 
   get current(): UserCacheDetails {
-    return {
-      user: this.user,
-      firm: this.firm,
-      plan: this.plan,
-      rawFirm: this.rawFirm
-    }
+    return new UserCacheDetails(
+      this.user,
+      this.firm,
+      this.plan,
+      this.rawFirm,
+      this.rawUser
+    );
   }
 }
 
