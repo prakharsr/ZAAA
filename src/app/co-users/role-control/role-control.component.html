@@ -1,7 +1,7 @@
 <div class="form-row">
   <div class="col-lg col-md-6">
     <mat-form-field>
-      <mat-select name="release_order" placeholder="Release Order" [(ngModel)]="roles.release_order">
+      <mat-select name="release_order" placeholder="Release Order" [(ngModel)]="release_order">
         <mat-option [value]="0">Block</mat-option>
         <mat-option [value]="1">View</mat-option>
         <mat-option [value]="2">Create</mat-option>
@@ -10,10 +10,10 @@
   </div>
   <div class="col-lg col-md-6">
     <mat-form-field>
-      <mat-select name="invoice" placeholder="Invoice" [(ngModel)]="roles.invoice">
+      <mat-select name="invoice" placeholder="Invoice" [(ngModel)]="invoice">
         <mat-option [value]="0">Block</mat-option>
-        <mat-option [value]="1">View</mat-option>
-        <mat-option [value]="2">Create</mat-option>
+        <mat-option *ngIf="release_order" [value]="1">View</mat-option>
+        <mat-option *ngIf="release_order" [value]="2">Create</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -21,8 +21,8 @@
     <mat-form-field>
       <mat-select name="payment_receipts" placeholder="Payment Receipts" [(ngModel)]="roles.payment_receipts">
         <mat-option [value]="0">Block</mat-option>
-        <mat-option [value]="1">View</mat-option>
-        <mat-option [value]="2">Create</mat-option>
+        <mat-option *ngIf="invoice" [value]="1">View</mat-option>
+        <mat-option *ngIf="invoice" [value]="2">Create</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -31,7 +31,6 @@
       <mat-select name="accounts" placeholder="Accounts" [(ngModel)]="roles.accounts">
         <mat-option [value]="0">Block</mat-option>
         <mat-option [value]="1">View</mat-option>
-        <mat-option [value]="2">Create</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

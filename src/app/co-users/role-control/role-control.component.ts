@@ -15,4 +15,27 @@ export class RoleControlComponent implements OnInit {
   ngOnInit() {
   }
 
+  get release_order() {
+    return this.roles.release_order;
+  }
+
+  set release_order(ro: number) {
+    this.roles.release_order = ro;
+
+    if (!ro) {
+      this.invoice = 0;
+    }
+  }
+
+  get invoice() {
+    return this.roles.invoice;
+  }
+
+  set invoice(inv: number) {
+    this.roles.invoice = inv;
+
+    if (!inv) {
+      this.roles.payment_receipts = inv;
+    }
+  }
 }
