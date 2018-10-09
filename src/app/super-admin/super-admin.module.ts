@@ -6,6 +6,27 @@ import { SuperAdminDashboardComponent } from './super-admin-dashboard/super-admi
 import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { SuperAdminImportExportComponent } from './super-admin-import-export/super-admin-import-export.component';
+
+import {
+  MediaHouseListComponent,
+  MediaHouseComponent
+} from 'app/directory';
+
+import {
+  RateCardListComponent,
+  RateCardComponent,
+  RateCardDetailsComponent
+} from 'app/rate-card';
+
+// Import components instead of modules or routing will suffer
+const superComponents = [  
+  MediaHouseComponent,
+  MediaHouseListComponent,
+  RateCardListComponent,
+  RateCardComponent,
+  RateCardDetailsComponent
+]
 
 @NgModule({
   imports: [
@@ -13,11 +34,13 @@ import { SendNotificationComponent } from './send-notification/send-notification
     SuperAdminRoutingModule
   ],
   declarations: [
+    superComponents,
     AdCategoriesComponent,
     SuperAdminDashboardComponent,
     CreateAdminComponent,
     AdminListComponent,
-    SendNotificationComponent
+    SendNotificationComponent,
+    SuperAdminImportExportComponent
   ]
 })
 export class SuperAdminModule { }

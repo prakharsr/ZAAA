@@ -23,6 +23,7 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { TicketListComponent } from '../components/ticket-list/ticket-list.component';
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
+import { SuperAdminImportExportComponent } from './super-admin-import-export/super-admin-import-export.component';
 
 const routes: Routes = [
   {
@@ -121,7 +122,8 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'notify', component: SendNotificationComponent }
+      { path: 'notify', component: SendNotificationComponent },
+      { path: 'import-export', component: SuperAdminImportExportComponent }
     ]
   },
   { path: 'login', component: LoginComponent, data: { superAdmin: true } }
