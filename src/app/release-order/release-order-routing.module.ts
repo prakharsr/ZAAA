@@ -14,10 +14,12 @@ import {
 } from '.';
 import { UserProfileResolver, FirmResolver } from '../services';
 import { CreateRoGuard } from './create-ro-guard.service';
+import { RoGuard } from './ro-guard.service';
 
 const routes: Routes = [
   {
     path: '',
+    canActivateChild: [RoGuard],
     children: [
       { path: '', redirectTo: 'generated', pathMatch: 'full' },
       { path: 'list', redirectTo: 'list/1', pathMatch: 'full' },

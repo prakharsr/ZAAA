@@ -10,13 +10,17 @@ import {
 
 import { ReleaseOrderRoutingModule } from './release-order-routing.module';
 import { CreateRoGuard } from './create-ro-guard.service';
+import { RoGuard } from './ro-guard.service';
 
 @NgModule({
   imports: [
     BaseModule,
     ReleaseOrderRoutingModule
   ],
-  providers: [CreateRoGuard],
+  providers: [
+    CreateRoGuard,
+    RoGuard
+  ],
   declarations: [
     ReleaseOrderComponent,
     ReleaseOrderListComponent,
