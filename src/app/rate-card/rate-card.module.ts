@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BaseModule } from '../base.module';
-
-import {
-  RateCardComponent,
-  RateCardListComponent,
-  RateCardDetailsComponent
-} from '.';
+import { RcCommonModule } from '../rc-common.module';
 
 import { RateCardRoutingModule } from './rate-card-routing.module';
 
 @NgModule({
   imports: [
     BaseModule,
+    RcCommonModule,
     RateCardRoutingModule
   ],
-  declarations: [
-    RateCardComponent,
-    RateCardListComponent,
-    RateCardDetailsComponent
-  ]
+  declarations: []
 })
 export class RateCardModule { }

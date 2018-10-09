@@ -8,33 +8,17 @@ import { AdminListComponent } from './admin-list/admin-list.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { SuperAdminImportExportComponent } from './super-admin-import-export/super-admin-import-export.component';
 
-import {
-  MediaHouseListComponent,
-  MediaHouseComponent
-} from 'app/directory';
-
-import {
-  RateCardListComponent,
-  RateCardComponent,
-  RateCardDetailsComponent
-} from 'app/rate-card';
-
-// Import components instead of modules or routing will suffer
-const superComponents = [  
-  MediaHouseComponent,
-  MediaHouseListComponent,
-  RateCardListComponent,
-  RateCardComponent,
-  RateCardDetailsComponent
-]
+import { RcCommonModule } from '../rc-common.module';
+import { MhCommonModule } from '../mh-common.module';
 
 @NgModule({
   imports: [
     BaseModule,
+    RcCommonModule,
+    MhCommonModule,
     SuperAdminRoutingModule
   ],
   declarations: [
-    superComponents,
     AdCategoriesComponent,
     SuperAdminDashboardComponent,
     CreateAdminComponent,

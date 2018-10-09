@@ -8,27 +8,24 @@ import {
   ClientComponent,
 
   ExecutiveListComponent,
-  ExecutiveComponent,
-
-  MediaHouseListComponent,
-  MediaHouseComponent,
+  ExecutiveComponent
 } from '.';
 
 import { DirRoutingModule } from './dir-routing.module';
+import { MhCommonModule } from '../mh-common.module';
 
 @NgModule({
   imports: [
     BaseModule,
+    MhCommonModule,
     DirRoutingModule
   ],
   declarations: [
     ClientComponent,
     ExecutiveComponent,
-    MediaHouseComponent,
     DirComponent,
     ClientListComponent,
-    ExecutiveListComponent,
-    MediaHouseListComponent
+    ExecutiveListComponent
   ]
 })
 export class DirectoryModule { }
