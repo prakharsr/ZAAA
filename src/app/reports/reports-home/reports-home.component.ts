@@ -20,7 +20,7 @@ export class ReportsHomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  private download(base: Observable<any>) {
+  private download(base: Observable<any>, fileName: string) {
     base.subscribe(data => {
       if (data.msg) {
         this.notifications.show(data.msg);
@@ -34,7 +34,7 @@ export class ReportsHomeComponent implements OnInit {
         let a = document.createElement('a');
         a.setAttribute('style', 'display:none;');
         document.body.appendChild(a);
-        a.download = 'report.xlsx';
+        a.download = `${fileName}.xlsx`;
         a.href = url;
         a.click();
       }
@@ -42,46 +42,46 @@ export class ReportsHomeComponent implements OnInit {
   }
 
   mediaHouse() {
-    this.download(this.api.mediaHouseReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.mediaHouseReport(this.creationPeriod, this.updationPeriod), 'media-houses');
   }
 
   client() {
-    this.download(this.api.clientReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.clientReport(this.creationPeriod, this.updationPeriod), 'clients');
   }
 
   executive() {
-    this.download(this.api.executiveReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.executiveReport(this.creationPeriod, this.updationPeriod), 'executives');
   }
 
   invoice() {
-    this.download(this.api.invoiceReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.invoiceReport(this.creationPeriod, this.updationPeriod), 'invoices');
   }
 
   ro() {
-    this.download(this.api.releaseOrderReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.releaseOrderReport(this.creationPeriod, this.updationPeriod), 'release-orders');
   }
 
   receipt() {
-    this.download(this.api.receiptReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.receiptReport(this.creationPeriod, this.updationPeriod), 'receipts');
   }
 
   mhi() {
-    this.download(this.api.mediaHouseInvoiceReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.mediaHouseInvoiceReport(this.creationPeriod, this.updationPeriod), 'media-house-invoices');
   }
 
   mhNote() {
-    this.download(this.api.mediaHouseNotesReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.mediaHouseNotesReport(this.creationPeriod, this.updationPeriod), 'media-house-notes');
   }
 
   clientNote() {
-    this.download(this.api.clientNotesReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.clientNotesReport(this.creationPeriod, this.updationPeriod), 'client-notes');
   }
 
   ratecard() {
-    this.download(this.api.ratecardReport(this.creationPeriod, this.updationPeriod));
+    this.download(this.api.ratecardReport(this.creationPeriod, this.updationPeriod), 'rate-cards');
   }
 
   insertions() {
-    this.download(this.api.insertionsReport(this.creationPeriod, this.updationPeriod, this.insertionPeriod));
+    this.download(this.api.insertionsReport(this.creationPeriod, this.updationPeriod, this.insertionPeriod), 'insertions');
   }
 }
