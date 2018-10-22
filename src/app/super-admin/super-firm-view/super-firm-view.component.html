@@ -1,3 +1,168 @@
-<p>
-  super-firm-view works!
-</p>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <a [routerLink]="['/superadmin', 'firms', firm._id]">
+                {{firm.FirmName || firm._id}}
+              </a>
+            </div>
+            <div class="col-auto small text-muted">
+              Joined on:<br>
+              {{firm.createdAt | date:'dd-MMM-y'}}
+            </div>
+          </div>
+          <div *ngIf="firm.Mobile">
+            <mat-icon>call_end</mat-icon> {{firm.Mobile}}
+          </div>
+          <div *ngIf="firm.Email">
+            <mat-icon>email</mat-icon> {{firm.Email}}
+          </div>
+          <div *ngIf="firm.Landline">
+            <mat-icon>business</mat-icon> {{firm.stdNo}}-{{firm.Landline}}
+          </div>
+          <div *ngIf="firm.Website">
+            <mat-icon>web</mat-icon> {{firm.Website}}
+          </div>
+
+          <br>
+
+          <div *ngIf="firm.PanNo">
+            <span class="text-muted">PAN:</span> {{firm.PanNo}}
+          </div>
+          <div *ngIf="firm.GSTIN">
+            <span class="text-muted">GST:</span>
+
+            {{firm.GSTIN.GSTType}}
+
+            <span *ngIf="firm.GSTIN.GSTType != 'URD'">- {{firm.GSTIN.GSTNo}}</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #addrTmpl let-addr="addr">
+        <div>{{addr.address}}</div>
+        <div>{{addr.city}}</div>
+        <div>{{addr.state}} - {{addr.pincode}}</div>        
+      </ng-template>
+
+      <div class="card mb-3" *ngIf="firm.RegisteredAddress">
+        <div class="card-body">
+          <strong>Registered Address</strong><br>
+
+          <ng-container *ngTemplateOutlet="addrTmpl; context: { addr: firm.RegisteredAddress }"></ng-container>
+        </div>
+      </div>
+
+      <div class="card mb-3" *ngIf="firm.OfficeAddress">
+        <div class="card-body">
+          <strong>Office Address</strong><br>
+
+          <ng-container *ngTemplateOutlet="addrTmpl; context: { addr: firm.OfficeAddress }"></ng-container>
+        </div>
+      </div>
+
+      <div class="card mb-3" *ngIf="firm.BankDetails">
+        <div class="card-body">
+          <strong>Bank Details</strong><br>
+
+          <div>
+            <span class="text-muted">Account Type:</span> {{firm.BankDetails.AccountType}}
+          </div>
+          <div>
+            <span class="text-muted">Account Name:</span> {{firm.BankDetails.AccountName}}
+          </div>
+          <div>
+            <span class="text-muted">Account No:</span> {{firm.BankDetails.AccountNo}}
+          </div>
+          <div>
+            <span class="text-muted">Bank Name:</span> {{firm.BankDetails.BankName}}
+          </div>
+          <div>
+            <span class="text-muted">Branch Address:</span> {{firm.BankDetails.BranchAddress}}
+          </div>
+          <div>
+            <span class="text-muted">IFSC:</span> {{firm.BankDetails.IFSC}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card mb-3">
+        <div class="card-body">
+          <strong>Plan</strong><br>
+
+          <div class="text-muted" *ngIf="firm.plan == null">Plan not selected.</div>
+          
+          <ng-container *ngIf="firm.plan">
+            <div>{{firm.plan.name || '--'}}</div>
+            <div>
+              <span class="text-muted">Expires on:</span> {{firm.plan.expiresOn | date:'dd-MMM-y'}}
+            </div>
+          </ng-container>
+
+          <br>
+
+          <div>
+            <span class="text-muted">Firm Status:</span>
+
+            <span *ngIf="firm.FirmStatus == 0" class="text-success">Approved</span>
+            <span *ngIf="firm.FirmStatus == 1" class="text-warning">Hold</span>
+            <span *ngIf="firm.FirmStatus == 2" class="text-danger">Blocked</span>
+          </div>
+
+          <br>
+
+          <div class="text-muted mb-1">Mark As:</div>
+          <div>
+            <button mat-raised-button color="primary" (click)="setFirmStatus(0)" class="bg-success" *ngIf="firm.FirmStatus != 0">Approve</button>
+            <button mat-raised-button color="primary" (click)="setFirmStatus(1)" class="bg-warning" *ngIf="firm.FirmStatus != 1">Hold</button>
+            <button mat-raised-button color="primary" (click)="setFirmStatus(2)" class="bg-danger" *ngIf="firm.FirmStatus != 2">Block</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #userTmpl let-user="user">
+        <div>{{user.name}}</div>
+        <div *ngIf="user.designation" class="small text-muted">{{user.designation}}</div>
+        <br>
+        <div *ngIf="user.phone">
+          <mat-icon>call_end</mat-icon> {{user.phone}}
+        </div>
+        <div *ngIf="user.email">
+          <mat-icon>email</mat-icon> {{user.email}}
+        </div>
+      </ng-template>
+
+      <div class="card mb-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Admins ({{admins.length}} / {{maxAdmins}})</strong>
+
+            <div class="text-muted mt-2" *ngIf="admins.length == 0">No Admins</div>
+          </li>
+          <li class="list-group-item" *ngFor="let admin of admins">
+            <ng-container *ngTemplateOutlet="userTmpl; context: { user: admin }"></ng-container>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card mb-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Co-Users ({{users.length}} / {{maxUsers}})</strong>
+
+            <div class="text-muted mt-2" *ngIf="users.length == 0">No Co-Users</div>
+          </li>
+          <li class="list-group-item" *ngFor="let user of users">
+            <ng-container *ngTemplateOutlet="userTmpl; context: { user: user }"></ng-container>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

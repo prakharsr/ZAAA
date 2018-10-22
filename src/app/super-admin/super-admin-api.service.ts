@@ -220,8 +220,15 @@ export class SuperAdminApiService {
     return this.post('/firms', { });
   }
 
-  setFirmStatus(status: number) {
+  firmData(id: string) {
+    return this.post('/firm', {
+      id: id
+    });
+  }
+
+  setFirmStatus(firm: string, status: number) {
     return this.post('/firm/status', {
+      id: firm,
       status: status
     });
   }
