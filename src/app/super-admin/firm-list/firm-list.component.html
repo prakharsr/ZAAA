@@ -1,0 +1,36 @@
+<div class="container">
+  <br>
+
+  <h2 style="font-weight: lighter">Firms</h2>
+  
+  <br>
+
+  <div *ngFor="let firm of firms" class="card mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="['/superadmin', 'firms', firm._id]">
+            {{firm.FirmName || firm._id}}
+          </a>
+        </div>
+        <div class="col-auto small text-muted">
+          Joined on:<br>
+          {{firm.createdAt | date:'dd-MMM-y'}}
+        </div>
+      </div>
+      <div *ngIf="firm.Mobile">
+        <mat-icon>call_end</mat-icon> {{firm.Mobile}}
+      </div>
+      <div *ngIf="firm.Email">
+        <mat-icon>email</mat-icon> {{firm.Email}}
+      </div>
+      <div *ngIf="firm.Landline">
+        <mat-icon>business</mat-icon> {{firm.stdNo}}-{{firm.Landline}}
+      </div>
+      <div *ngIf="firm.Website">
+        <mat-icon>web</mat-icon> {{firm.Website}}
+      </div>
+      <pre>{{firm | json}}</pre>
+    </div>
+  </div>
+</div>

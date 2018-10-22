@@ -215,4 +215,14 @@ export class SuperAdminApiService {
   ratecardImport(file: File) {
     return this.import('/import/ratecard', file);
   }
+
+  get firms() {
+    return this.post('/firms', { });
+  }
+
+  setFirmStatus(status: number) {
+    return this.post('/firm/status', {
+      status: status
+    });
+  }
 }

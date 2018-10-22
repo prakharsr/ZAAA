@@ -10,6 +10,8 @@ import { SuperAdminImportExportComponent } from './super-admin-import-export/sup
 
 import { RcCommonModule } from '../rc-common.module';
 import { MhCommonModule } from '../mh-common.module';
+import { FirmListComponent } from './firm-list/firm-list.component';
+import { SuperFirmViewComponent } from './super-firm-view/super-firm-view.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { MhCommonModule } from '../mh-common.module';
     CreateAdminComponent,
     AdminListComponent,
     SendNotificationComponent,
-    SuperAdminImportExportComponent
+    SuperAdminImportExportComponent,
+    FirmListComponent,
+    SuperFirmViewComponent
   ]
 })
 export class SuperAdminModule { }

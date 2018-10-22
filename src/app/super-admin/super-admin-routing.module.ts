@@ -24,6 +24,8 @@ import { TicketListComponent } from '../components/ticket-list/ticket-list.compo
 import { AdminListComponent } from './admin-list/admin-list.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { SuperAdminImportExportComponent } from './super-admin-import-export/super-admin-import-export.component';
+import { FirmListComponent } from './firm-list/firm-list.component';
+import { SuperFirmViewComponent } from './super-firm-view/super-firm-view.component';
 
 const routes: Routes = [
   {
@@ -98,6 +100,14 @@ const routes: Routes = [
           { path: '', redirectTo: 'list', pathMatch: 'full' },
           { path: 'list', component: AdminListComponent },
           { path: 'new', component: CreateAdminComponent }
+        ]
+      },
+      {
+        path: 'firms',
+        children: [
+          { path: '', redirectTo: 'list', pathMatch: 'full' },
+          { path: 'list', component: FirmListComponent },
+          { path: ':id', component: SuperFirmViewComponent }
         ]
       },
       {
