@@ -62,7 +62,7 @@ export class ApiService {
   }
 
   uploadProfilePicture(fileToUpload: File) : Observable<any> {
-    return this.fileUpload("/user/image", "user", fileToUpload);
+    return this.fileUpload("/user/image", "image", fileToUpload);
   }
 
   deleteProfilePicture() : Observable<any> {
@@ -70,7 +70,7 @@ export class ApiService {
   }
 
   uploadSign(fileToUpload: File) : Observable<any> {
-    return this.fileUpload("/user/sign", "sign", fileToUpload);
+    return this.fileUpload("/user/sign", "image", fileToUpload);
   }
 
   deleteSign() : Observable<any> {
@@ -78,7 +78,7 @@ export class ApiService {
   }
   
   uploadFirmLogo(fileToUpload: File) : Observable<any> {
-    return this.fileUpload("/firm/logo", "logo", fileToUpload);
+    return this.fileUpload("/firm/logo", "image", fileToUpload);
   }
 
   deleteFirmLogo() : Observable<any> {
