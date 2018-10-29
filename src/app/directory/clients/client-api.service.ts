@@ -167,6 +167,6 @@ export class ClientApiService {
   }
 
   uploadProfilePicture(id: string, fileToUpload: File) : Observable<any> {
-    return this.api.fileUpload("/user/client/picture/" + id, "client", fileToUpload);
+    return this.api.fileUpload("/user/client/picture/" + id, "image", fileToUpload);
   }
 }

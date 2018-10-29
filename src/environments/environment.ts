@@ -8,5 +8,5 @@ export const environment = {
   razorPay: "rzp_test_86QLf2LFy65g2j",
   apiUrl: "http://localhost:8080/api",
   adminApiUrl: "http://localhost:8080/adminapi",
-  uploadsBaseUrl: "http://localhost:8080"
+  uploadsBaseUrl: ""
 };
