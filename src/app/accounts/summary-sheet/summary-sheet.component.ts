@@ -120,16 +120,25 @@ export class SummarySheetComponent implements OnInit {
     this.dialog.show(PaymentDetailsDialogComponent, {
       width: '400px',
       data: { amount: totalAmount }
-    }).subscribe((data: PaymentDetails) => {
-      if (data) {
-        this.api.generateSummarySheet(data, mapped).subscribe(data => {
-          if (data.success) {
-            this.notifications.show('Success');
+    }).subscribe((PaymentDetails: PaymentDetails) => {
+      if (PaymentDetails) {
+        this.api.generateSummarySheet(PaymentDetails, mapped).subscribe(data => {
+
+          if (data.msg) {
+            this.notifications.show(data.msg);
           }
           else {
             console.log(data);
+            
+            let blob = new Blob([data], { type: 'application/pdf' });
+            let url = URL.createObjectURL(blob);
     
-            this.notifications.show(data.msg);
+            let a = document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            document.body.appendChild(a);
+            a.download = 'summary-sheet.pdf';
+            a.href = url;
+            a.click();
           }
         });
       }
