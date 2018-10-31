@@ -328,7 +328,7 @@ export class AccountsApiService {
     return this.api.post('/user/summarySheet', {
       mhis: insertions,
       ...paymentDetails
-    });
+    }, { responseType: 'blob' });
   }
 
   updateMhiReceipts(insertions: MhiReceiptInsertion[]) {
